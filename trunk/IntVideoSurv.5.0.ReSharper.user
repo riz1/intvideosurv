@@ -1,0 +1,95 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">True</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:SystemLogBusiness.cs" caret="264" fromTop="9" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:CameraBusiness.cs" caret="308" fromTop="11" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:OperateLogBusiness.cs" caret="920" fromTop="27" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DisplayChannelBusiness.cs" caret="511" fromTop="15" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/d:Properties/f:AssemblyInfo.cs" caret="930" fromTop="14" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:AlarmBusiness.cs" caret="325" fromTop="13" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:AlarmInfo.cs" caret="230" fromTop="8" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:AlarmDataAccess.cs" caret="0" fromTop="0" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:SynGroupDataAccess.cs" caret="445" fromTop="17" />
+      <File id="41A3C64D-F40A-421C-A8FC-5BF46EE5247C/f:IVideoSourcePage.cs" caret="280" fromTop="0" />
+      <File id="41A3C64D-F40A-421C-A8FC-5BF46EE5247C/f:IVideoSourceDescription.cs" caret="312" fromTop="0" />
+      <File id="41A3C64D-F40A-421C-A8FC-5BF46EE5247C/f:IVideoSource.cs" caret="2174" fromTop="92" />
+      <File id="41A3C64D-F40A-421C-A8FC-5BF46EE5247C/f:GeneratorFileInfo.cs" caret="527" fromTop="0" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DeviceDriver.cs" caret="0" fromTop="0" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/d:Properties/f:licenses.licx" caret="0" fromTop="0" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:App.config" caret="1089" fromTop="15" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="159" fromTop="7" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.cs" caret="598" fromTop="21" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.Designer.cs" caret="14528" fromTop="11" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:App.config" caret="3420" fromTop="17" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:App.config" caret="3420" fromTop="6" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:AlarmBusiness.cs" caret="377" fromTop="13" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:AlarmInfo.cs" caret="288" fromTop="8" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DeviceDriver.cs" caret="2263" fromTop="14" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/d:Properties/f:AssemblyInfo.cs" caret="363" fromTop="10" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/d:Properties/f:AssemblyInfo.cs" caret="200" fromTop="6" />
+      <File id="41A3C64D-F40A-421C-A8FC-5BF46EE5247C/f:IVideoSource.cs" caret="165" fromTop="8" />
+      <File id="41A3C64D-F40A-421C-A8FC-5BF46EE5247C/f:IVideoSourcePage.cs" caret="205" fromTop="3" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.cs" caret="165" fromTop="5" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="294" fromTop="8" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="294" fromTop="5" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="1069" fromTop="2" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.cs" caret="48" fromTop="0" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.cs" caret="248" fromTop="10" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.Designer.cs" caret="15038" fromTop="13" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="1069" fromTop="18" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.Designer.cs" caret="15058" fromTop="26" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="294" fromTop="15" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="985" fromTop="26" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/d:Properties/f:licenses.licx" caret="0" fromTop="0" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:App.config" caret="0" fromTop="0" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:App.config" caret="2444" fromTop="25" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:App.config" caret="2215" fromTop="13" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:Program.cs" caret="1069" fromTop="7" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.cs" caret="600" fromTop="15" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.cs" caret="517" fromTop="11" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.cs" caret="387" fromTop="13" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.Designer.cs" caret="14528" fromTop="11" />
+      <File id="C4CA1863-BBD5-4DE7-813B-A28190DC914E/f:MainForm.Designer.cs" caret="16160" fromTop="11" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Qualified:@IntVideoSurv.Business.UserBusiness">
+      <Item value="Instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Business.UserBusiness">
+      <Item value="GetAllUserInfo`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Default">
+      <Item value="ref" priority="0" />
+      <Item value="string" priority="0" />
+      <Item value="Dictionary" priority="0" />
+      <Item value="int" priority="0" />
+      <Item value="DevExpress" priority="1" />
+      <Item value="Utils" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:videosource.IVideoSource">
+      <Item value="Start`0" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
