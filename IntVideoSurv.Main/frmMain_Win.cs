@@ -1695,6 +1695,11 @@ namespace CameraViewer
         {
             this.Close();
         }
+
+        private void timerCurretnTime_Tick(object sender, EventArgs e)
+        {
+            barStaticItemCurrentTime.Caption = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
  
     }
 }

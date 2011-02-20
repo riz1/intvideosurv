@@ -14,7 +14,7 @@ namespace CameraViewer
 	/// <summary>
 	/// Summary description for PagedWizard.
 	/// </summary>
-	public class PagedWizard : System.Windows.Forms.Form
+    public class PagedWizard : DevExpress.XtraEditors.XtraForm
 	{
 		private Control currentControl = null;
 		private System.Windows.Forms.TabControl tabControl;

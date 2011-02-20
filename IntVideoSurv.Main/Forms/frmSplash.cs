@@ -3,17 +3,18 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace Splash
 {
 	/// <summary>
 	/// frmSplash 的摘要说明。
 	/// </summary>
-	public class frmSplash : System.Windows.Forms.Form
+	public class frmSplash : XtraForm
     {
-		private System.Windows.Forms.Label labStatus;
         private string _StatusInfo = "";
         private PictureBox pictureBox1;
+        private LabelControl labStatus;
 		/// <summary>
 		/// 必需的设计器变量。
 		/// </summary>
@@ -54,36 +55,34 @@ namespace Splash
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSplash));
-            this.labStatus = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labStatus = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // labStatus
-            // 
-            this.labStatus.AutoSize = true;
-            this.labStatus.BackColor = System.Drawing.Color.White;
-            this.labStatus.Location = new System.Drawing.Point(12, 181);
-            this.labStatus.Name = "labStatus";
-            this.labStatus.Size = new System.Drawing.Size(0, 12);
-            this.labStatus.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(428, 200);
+            this.pictureBox1.Size = new System.Drawing.Size(428, 169);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // labStatus
+            // 
+            this.labStatus.Location = new System.Drawing.Point(186, 175);
+            this.labStatus.Name = "labStatus";
+            this.labStatus.Size = new System.Drawing.Size(0, 14);
+            this.labStatus.TabIndex = 1;
+            // 
             // frmSplash
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
-            this.ClientSize = new System.Drawing.Size(428, 200);
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
+            this.ClientSize = new System.Drawing.Size(428, 198);
             this.Controls.Add(this.labStatus);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -6,7 +6,7 @@ using IntVideoSurv.Entity;
 
 namespace CameraViewer.Forms
 {
-    public partial class frmProgSwitchGroup : Form
+    public partial class frmProgSwitchGroup : DevExpress.XtraEditors.XtraForm
     {
         private string errMessage = "";
         public CameraViewer.Util.Operateion Opt
