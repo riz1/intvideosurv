@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
 using IntVideoSurv.Business;
 using IntVideoSurv.Entity;
 
 namespace CameraViewer.Forms
 {
-    public partial class FrmUser : Form
+    public partial class FrmUser : XtraForm
     {
         public enum UserMode
         {
