@@ -1,0 +1,11 @@
+D:\NewProject\luop\cv_src\stream\bin\Debug\stream.dll
+D:\NewProject\luop\cv_src\stream\bin\Debug\stream.pdb
+D:\NewProject\luop\cv_src\stream\bin\Debug\dshow.dll
+D:\NewProject\luop\cv_src\stream\bin\Debug\videosource.dll
+D:\NewProject\luop\cv_src\stream\bin\Debug\videosource.pdb
+D:\NewProject\luop\cv_src\stream\bin\Debug\dshow.pdb
+D:\NewProject\luop\cv_src\stream\obj\Debug\ResolveAssemblyReference.cache
+D:\NewProject\luop\cv_src\stream\obj\Debug\stream.VideoStreamSetupPage.resources
+D:\NewProject\luop\cv_src\stream\obj\Debug\stream.csproj.GenerateResource.Cache
+D:\NewProject\luop\cv_src\stream\obj\Debug\stream.dll
+D:\NewProject\luop\cv_src\stream\obj\Debug\stream.pdb

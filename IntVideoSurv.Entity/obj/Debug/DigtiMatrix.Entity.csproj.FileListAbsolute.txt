@@ -1,0 +1,9 @@
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\bin\Debug\DigtiMatrix.Entity.dll
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\bin\Debug\DigtiMatrix.Entity.pdb
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\bin\Debug\Com.SS.Framework.Entity.dll
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\obj\Debug\ResolveAssemblyReference.cache
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\obj\Debug\DigtiMatrix.Entity.dll
+E:\digtimatrix\SourceCode\DigtiMatrix.Entity\obj\Debug\DigtiMatrix.Entity.pdb

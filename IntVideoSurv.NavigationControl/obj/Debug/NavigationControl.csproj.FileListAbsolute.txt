@@ -1,0 +1,12 @@
+E:\digtimatrix\SourceCode\NavigationControl\bin\Debug\NavigationControl.dll
+E:\digtimatrix\SourceCode\NavigationControl\bin\Debug\NavigationControl.pdb
+E:\digtimatrix\SourceCode\NavigationControl\bin\Debug\Damany.Util.dll
+E:\digtimatrix\SourceCode\NavigationControl\obj\Debug\ResolveAssemblyReference.cache
+E:\digtimatrix\SourceCode\NavigationControl\obj\Debug\NavigationControl.dll
+E:\digtimatrix\SourceCode\NavigationControl\obj\Debug\NavigationControl.pdb
+E:\DM2IDS\NavigationControl\bin\Debug\NavigationControl.dll
+E:\DM2IDS\NavigationControl\bin\Debug\NavigationControl.pdb
+E:\DM2IDS\NavigationControl\bin\Debug\Damany.Util.dll
+E:\DM2IDS\NavigationControl\obj\Debug\ResolveAssemblyReference.cache
+E:\DM2IDS\NavigationControl\obj\Debug\NavigationControl.dll
+E:\DM2IDS\NavigationControl\obj\Debug\NavigationControl.pdb

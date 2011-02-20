@@ -1,0 +1,15 @@
+E:\DM2IDS\DMClient\bin\Debug\DMClient.exe.config
+E:\DM2IDS\DMClient\bin\Debug\DMClient.exe
+E:\DM2IDS\DMClient\bin\Debug\DMClient.pdb
+E:\DM2IDS\DMClient\bin\Debug\Com.SS.Framework.Entity.dll
+E:\DM2IDS\DMClient\bin\Debug\SMRemotingInterface.dll
+E:\DM2IDS\DMClient\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+E:\DM2IDS\DMClient\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\DM2IDS\DMClient\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\DM2IDS\DMClient\bin\Debug\SMRemotingInterface.pdb
+E:\DM2IDS\DMClient\obj\Debug\ResolveAssemblyReference.cache
+E:\DM2IDS\DMClient\obj\Debug\DMClient.Form1.resources
+E:\DM2IDS\DMClient\obj\Debug\DMClient.Properties.Resources.resources
+E:\DM2IDS\DMClient\obj\Debug\IntVideoSurv.DMClient.csproj.GenerateResource.Cache
+E:\DM2IDS\DMClient\obj\Debug\DMClient.exe
+E:\DM2IDS\DMClient\obj\Debug\DMClient.pdb

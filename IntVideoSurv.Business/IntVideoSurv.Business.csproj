@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{901DA7E9-24CA-4953-8746-A42C69D45575}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IntVideoSurv.Business</RootNamespace>
+    <AssemblyName>IntVideoSurv.Business</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Com.SS.Framework.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\Com.SS.Framework.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.SS.ProfileReader, Version=1.0.3725.25423, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\Com.SS.ProfileReader.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlarmBusiness.cs" />
+    <Compile Include="AlarmIconBusiness.cs" />
+    <Compile Include="CameraIconBusiness.cs" />
+    <Compile Include="DefaultCardOutBusiness.cs" />
+    <Compile Include="GroupSwitchDetailBusiness.cs" />
+    <Compile Include="GroupSwitchGroupBusiness.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DeviceBusiness.cs" />
+    <Compile Include="DeviceDriver.cs" />
+    <Compile Include="GroupBusiness.cs" />
+    <Compile Include="HiK\HCNetSDK.cs" />
+    <Compile Include="HiK\HikPlayer.cs" />
+    <Compile Include="HiK\HikVideoServerCameraDriver.cs" />
+    <Compile Include="HiK\HikVideoServerDeviceDriver.cs" />
+    <Compile Include="HiK\HikVisionSDK.cs" />
+    <Compile Include="MapBusiness.cs" />
+    <Compile Include="MonitorFolder.cs" />
+    <Compile Include="DisplayChannelBusiness.cs" />
+    <Compile Include="OperateLogBusiness.cs" />
+    <Compile Include="OutputTVDeviceDriver.cs" />
+    <Compile Include="ProgSwitchBusiness.cs" />
+    <Compile Include="ProgSwitchDetailBusiness.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CameraBusiness.cs" />
+    <Compile Include="HiK\HikStreamMediaServerSDK.cs" />
+    <Compile Include="SynGroupBusiness.cs" />
+    <Compile Include="SystemLogBusiness.cs" />
+    <Compile Include="UserBusiness.cs" />
+    <Compile Include="Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntVideoSurv.DataAccess\IntVideoSurv.DataAccess.csproj">
+      <Project>{ACD53762-AEFE-4599-A419-9C0C681157B4}</Project>
+      <Name>IntVideoSurv.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntVideoSurv.Interface\IntVideoSurv.Interface.csproj">
+      <Project>{BB30D2E9-DCF8-4436-901D-1514C26BCEF4}</Project>
+      <Name>IntVideoSurv.Interfce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntVideoSurv.Entity\IntVideoSurv.Entity.csproj">
+      <Project>{CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8}</Project>
+      <Name>IntVideoSurv.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntVideoSurv.RemotingInterface\IntVideoSurv.RemotingInterface.csproj">
+      <Project>{6F64ACC8-3C7C-43DB-B945-21AA4F18A1B4}</Project>
+      <Name>IntVideoSurv.RemotingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntVideoSurv.VideoSource\IntVideoSurv.VideoSource.csproj">
+      <Project>{41A3C64D-F40A-421C-A8FC-5BF46EE5247C}</Project>
+      <Name>IntVideoSurv.VideoSource</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
