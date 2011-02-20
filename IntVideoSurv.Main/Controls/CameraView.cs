@@ -413,7 +413,7 @@ namespace CameraViewer.Controls
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             TreeNode node;
-            tvGroupSwitch.Nodes.Clear();
+            //tvGroupSwitch.Nodes.Clear();
 
             foreach (KeyValuePair<int, GroupSwitchGroup> item in _listGroupSwitch)
             {
@@ -431,14 +431,14 @@ namespace CameraViewer.Controls
                     }
                 }
                 AppendGroupSwitchGroupNode(node);
-                tvGroupSwitch.Nodes.Add(node);
+                //tvGroupSwitch.Nodes.Add(node);
 
             }
 
-            tvGroupSwitch.ExpandAll();
+            //tvGroupSwitch.ExpandAll();
             if (selectedTreeNode != null)
             {
-                tvGroupSwitch.SelectedNode = selectedTreeNode;
+                //tvGroupSwitch.SelectedNode = selectedTreeNode;
             }
             Cursor.Current = currentCursor;
         }
@@ -477,7 +477,7 @@ namespace CameraViewer.Controls
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             TreeNode node;
-            tvProgSwitch.Nodes.Clear();
+            //tvProgSwitch.Nodes.Clear();
 
             foreach (KeyValuePair<int, ProgSwitchInfo> item in _listProgSwitch)
             {
@@ -495,14 +495,14 @@ namespace CameraViewer.Controls
                     }
                 }
                 AppendProgSwitchDetailNode(node);
-                tvProgSwitch.Nodes.Add(node);
+                //tvProgSwitch.Nodes.Add(node);
 
             }
 
-            tvProgSwitch.ExpandAll();
+            //tvProgSwitch.ExpandAll();
             if (selectedTreeNode != null)
             {
-                tvProgSwitch.SelectedNode = selectedTreeNode;
+                //tvProgSwitch.SelectedNode = selectedTreeNode;
             }
             Cursor.Current = currentCursor;
         }

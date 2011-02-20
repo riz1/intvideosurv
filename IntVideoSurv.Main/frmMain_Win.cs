@@ -903,6 +903,7 @@ namespace CameraViewer
             struCardPlayInfo.nHeight = 576;
             struCardPlayInfo.bToScreen = 0;
             struCardPlayInfo.bToVideoOut = 1;
+            if (_listDisplayChannelInfo==null) return;
             foreach (var displayChannelInfo in _listDisplayChannelInfo)
             {
                 InitDisplayRegion(displayChannelInfo.Key);

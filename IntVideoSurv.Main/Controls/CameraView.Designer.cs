@@ -46,15 +46,11 @@ namespace CameraViewer.Controls
             this.navBarItem6 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem7 = new DevExpress.XtraNavBar.NavBarItem();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageCameraList = new DevExpress.XtraTab.XtraTabPage();
             this.trCamera = new System.Windows.Forms.TreeView();
             this.imageListForTreeView = new System.Windows.Forms.ImageList(this.components);
-            this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageDecoderList = new DevExpress.XtraTab.XtraTabPage();
             this.tvSynGroup = new System.Windows.Forms.TreeView();
-            this.xtraTabPage5 = new DevExpress.XtraTab.XtraTabPage();
-            this.tvGroupSwitch = new System.Windows.Forms.TreeView();
-            this.xtraTabPage6 = new DevExpress.XtraTab.XtraTabPage();
-            this.tvProgSwitch = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -62,10 +58,8 @@ namespace CameraViewer.Controls
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
             this.xtraTabControl2.SuspendLayout();
-            this.xtraTabPage3.SuspendLayout();
-            this.xtraTabPage4.SuspendLayout();
-            this.xtraTabPage5.SuspendLayout();
-            this.xtraTabPage6.SuspendLayout();
+            this.xtraTabPageCameraList.SuspendLayout();
+            this.xtraTabPageDecoderList.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -114,7 +108,7 @@ namespace CameraViewer.Controls
             // 
             this.xtraTabPage1.Controls.Add(this.panNav1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(206, 158);
+            this.xtraTabPage1.Size = new System.Drawing.Size(207, 160);
             this.xtraTabPage1.Text = "云台";
             // 
             // panNav1
@@ -129,7 +123,7 @@ namespace CameraViewer.Controls
             // 
             this.xtraTabPage2.Controls.Add(this.cameraNav1);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(206, 158);
+            this.xtraTabPage2.Size = new System.Drawing.Size(207, 160);
             this.xtraTabPage2.Text = "相机";
             // 
             // cameraNav1
@@ -220,23 +214,21 @@ namespace CameraViewer.Controls
             this.xtraTabControl2.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabControl2.Name = "xtraTabControl2";
-            this.xtraTabControl2.SelectedTabPage = this.xtraTabPage3;
+            this.xtraTabControl2.SelectedTabPage = this.xtraTabPageCameraList;
             this.xtraTabControl2.Size = new System.Drawing.Size(213, 299);
             this.xtraTabControl2.TabIndex = 30;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage3,
-            this.xtraTabPage4,
-            this.xtraTabPage5,
-            this.xtraTabPage6});
+            this.xtraTabPageCameraList,
+            this.xtraTabPageDecoderList});
             this.xtraTabControl2.SelectedPageChanging += new DevExpress.XtraTab.TabPageChangingEventHandler(this.xtraTabControl2_SelectedPageChanging);
             // 
-            // xtraTabPage3
+            // xtraTabPageCameraList
             // 
-            this.xtraTabPage3.Controls.Add(this.trCamera);
-            this.xtraTabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(206, 269);
-            this.xtraTabPage3.Text = "列表";
+            this.xtraTabPageCameraList.Controls.Add(this.trCamera);
+            this.xtraTabPageCameraList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.xtraTabPageCameraList.Name = "xtraTabPageCameraList";
+            this.xtraTabPageCameraList.Size = new System.Drawing.Size(207, 271);
+            this.xtraTabPageCameraList.Text = "摄像头";
             // 
             // trCamera
             // 
@@ -246,7 +238,7 @@ namespace CameraViewer.Controls
             this.trCamera.Location = new System.Drawing.Point(0, 0);
             this.trCamera.Name = "trCamera";
             this.trCamera.SelectedImageKey = "selected.bmp";
-            this.trCamera.Size = new System.Drawing.Size(206, 269);
+            this.trCamera.Size = new System.Drawing.Size(207, 271);
             this.trCamera.TabIndex = 1;
             this.trCamera.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trCamera_NodeMouseDoubleClick);
             this.trCamera.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trCamera_NodeMouseClick);
@@ -267,13 +259,13 @@ namespace CameraViewer.Controls
             this.imageListForTreeView.Images.SetKeyName(9, "selected.bmp");
             this.imageListForTreeView.Images.SetKeyName(10, "Alarm_Host.bmp");
             // 
-            // xtraTabPage4
+            // xtraTabPageDecoderList
             // 
-            this.xtraTabPage4.Controls.Add(this.tvSynGroup);
-            this.xtraTabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.xtraTabPage4.Name = "xtraTabPage4";
-            this.xtraTabPage4.Size = new System.Drawing.Size(206, 269);
-            this.xtraTabPage4.Text = "同切";
+            this.xtraTabPageDecoderList.Controls.Add(this.tvSynGroup);
+            this.xtraTabPageDecoderList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.xtraTabPageDecoderList.Name = "xtraTabPageDecoderList";
+            this.xtraTabPageDecoderList.Size = new System.Drawing.Size(207, 271);
+            this.xtraTabPageDecoderList.Text = "解码器";
             // 
             // tvSynGroup
             // 
@@ -283,49 +275,11 @@ namespace CameraViewer.Controls
             this.tvSynGroup.Location = new System.Drawing.Point(0, 0);
             this.tvSynGroup.Name = "tvSynGroup";
             this.tvSynGroup.SelectedImageKey = "selected.bmp";
-            this.tvSynGroup.Size = new System.Drawing.Size(206, 269);
+            this.tvSynGroup.Size = new System.Drawing.Size(207, 271);
             this.tvSynGroup.TabIndex = 1;
             this.tvSynGroup.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSynGroup_NodeMouseDoubleClick);
             this.tvSynGroup.DoubleClick += new System.EventHandler(this.tvSynGroup_DoubleClick);
             this.tvSynGroup.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSynGroup_NodeMouseClick);
-            // 
-            // xtraTabPage5
-            // 
-            this.xtraTabPage5.Controls.Add(this.tvGroupSwitch);
-            this.xtraTabPage5.Name = "xtraTabPage5";
-            this.xtraTabPage5.Size = new System.Drawing.Size(206, 269);
-            this.xtraTabPage5.Text = "群切";
-            // 
-            // tvGroupSwitch
-            // 
-            this.tvGroupSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvGroupSwitch.ImageIndex = 0;
-            this.tvGroupSwitch.ImageList = this.imageListForTreeView;
-            this.tvGroupSwitch.Location = new System.Drawing.Point(0, 0);
-            this.tvGroupSwitch.Name = "tvGroupSwitch";
-            this.tvGroupSwitch.SelectedImageKey = "selected.bmp";
-            this.tvGroupSwitch.Size = new System.Drawing.Size(206, 269);
-            this.tvGroupSwitch.TabIndex = 2;
-            this.tvGroupSwitch.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvGroupSwitch_NodeMouseDoubleClick);
-            // 
-            // xtraTabPage6
-            // 
-            this.xtraTabPage6.Controls.Add(this.tvProgSwitch);
-            this.xtraTabPage6.Name = "xtraTabPage6";
-            this.xtraTabPage6.Size = new System.Drawing.Size(206, 269);
-            this.xtraTabPage6.Text = "程切";
-            // 
-            // tvProgSwitch
-            // 
-            this.tvProgSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvProgSwitch.ImageKey = "CAM2.BMP";
-            this.tvProgSwitch.ImageList = this.imageListForTreeView;
-            this.tvProgSwitch.Location = new System.Drawing.Point(0, 0);
-            this.tvProgSwitch.Name = "tvProgSwitch";
-            this.tvProgSwitch.SelectedImageKey = "selected.bmp";
-            this.tvProgSwitch.Size = new System.Drawing.Size(206, 269);
-            this.tvProgSwitch.TabIndex = 3;
-            this.tvProgSwitch.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvProgSwitch_NodeMouseDoubleClick);
             // 
             // CameraView
             // 
@@ -343,10 +297,8 @@ namespace CameraViewer.Controls
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
             this.xtraTabControl2.ResumeLayout(false);
-            this.xtraTabPage3.ResumeLayout(false);
-            this.xtraTabPage4.ResumeLayout(false);
-            this.xtraTabPage5.ResumeLayout(false);
-            this.xtraTabPage6.ResumeLayout(false);
+            this.xtraTabPageCameraList.ResumeLayout(false);
+            this.xtraTabPageDecoderList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -368,15 +320,11 @@ namespace CameraViewer.Controls
         private DevExpress.XtraNavBar.NavBarItem navBarItem4;
         private Damany.Controls.PanNav panNav1;
         private Damany.Controls.CameraNav cameraNav1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageDecoderList;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageCameraList;
         public System.Windows.Forms.TreeView tvSynGroup;
         public System.Windows.Forms.TreeView trCamera;
         public DevExpress.XtraTab.XtraTabControl xtraTabControl2;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage5;
-        public System.Windows.Forms.TreeView tvGroupSwitch;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage6;
-        public System.Windows.Forms.TreeView tvProgSwitch;
         private System.Windows.Forms.ImageList imageListForTreeView;
     }
 }
