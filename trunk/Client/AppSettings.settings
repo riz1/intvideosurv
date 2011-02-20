@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CameraViewer" GeneratedClassName="AppSettings">
-  <Profiles />
-  <Settings>
-    <Setting Name="StreamMediaServicePath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">d:\StreamMediaService</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>
