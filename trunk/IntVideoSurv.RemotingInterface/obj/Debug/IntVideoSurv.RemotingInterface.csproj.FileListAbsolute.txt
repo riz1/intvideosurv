@@ -1,0 +1,9 @@
+E:\DM2IDS\SMRemotingInterface\bin\Debug\SMRemotingInterface.dll
+E:\DM2IDS\SMRemotingInterface\bin\Debug\SMRemotingInterface.pdb
+E:\DM2IDS\SMRemotingInterface\bin\Debug\Com.SS.Framework.Entity.dll
+E:\DM2IDS\SMRemotingInterface\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\DM2IDS\SMRemotingInterface\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+E:\DM2IDS\SMRemotingInterface\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\DM2IDS\SMRemotingInterface\obj\Debug\ResolveAssemblyReference.cache
+E:\DM2IDS\SMRemotingInterface\obj\Debug\SMRemotingInterface.dll
+E:\DM2IDS\SMRemotingInterface\obj\Debug\SMRemotingInterface.pdb

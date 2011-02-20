@@ -1,0 +1,15 @@
+E:\DM2IDS\mjpeg\bin\Debug\mjpeg.dll
+E:\DM2IDS\mjpeg\bin\Debug\mjpeg.pdb
+E:\DM2IDS\mjpeg\bin\Debug\Com.SS.Framework.Entity.dll
+E:\DM2IDS\mjpeg\bin\Debug\DigtiMatrix.Entity.dll
+E:\DM2IDS\mjpeg\bin\Debug\videosource.dll
+E:\DM2IDS\mjpeg\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\DM2IDS\mjpeg\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+E:\DM2IDS\mjpeg\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\DM2IDS\mjpeg\bin\Debug\DigtiMatrix.Entity.pdb
+E:\DM2IDS\mjpeg\bin\Debug\videosource.pdb
+E:\DM2IDS\mjpeg\obj\Debug\ResolveAssemblyReference.cache
+E:\DM2IDS\mjpeg\obj\Debug\mjpeg.MJPEGSourcePage.resources
+E:\DM2IDS\mjpeg\obj\Debug\IntVideoSurv.MJpeg.csproj.GenerateResource.Cache
+E:\DM2IDS\mjpeg\obj\Debug\mjpeg.dll
+E:\DM2IDS\mjpeg\obj\Debug\mjpeg.pdb

@@ -1,0 +1,12 @@
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\DigitMatrix.DataAccess.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\DigitMatrix.DataAccess.pdb
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\Com.SS.Framework.Entity.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\DigtiMatrix.Entity.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\bin\Debug\DigtiMatrix.Entity.pdb
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\obj\Debug\DigitMatrix.DataAccess.dll
+E:\digtimatrix\SourceCode\DigitMatrix.DataAccess\obj\Debug\DigitMatrix.DataAccess.pdb
