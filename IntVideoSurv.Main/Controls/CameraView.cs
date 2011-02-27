@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraTreeList.Nodes;
 using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
 
@@ -212,9 +213,28 @@ namespace CameraViewer.Controls
                             node.ImageIndex = 0;
                             AppendNode(node, item.Key);
                             trCamera.Nodes.Add(node);
+                            //treeList
+                            
                         }
+                    }
+                    //≤‚ ‘TreeList
+                    tlCamera.Nodes.Clear();
+                    foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
+                    {
+                        TreeListNode treeListNodeGroup = tlCamera.AppendNode(new[] {item.Value.Name, item.Key +";G"}, -1,0,3,1,CheckState.Checked);
+                        foreach (var vDevice in item.Value.ListDevice)
+                        {
+                            TreeListNode treeListNodeDevice = tlCamera.AppendNode(new[] { vDevice.Value.Name, vDevice.Key + ";D" }, treeListNodeGroup.Id, 1, 3, 1, CheckState.Checked);
+                            foreach (var vCamera in vDevice.Value.ListCamera)
+                            {
+                                TreeListNode treeListNodeCamera = tlCamera.AppendNode(new[] { vCamera.Value.Name, vCamera.Key + ";C" }, treeListNodeDevice.Id, 2, 3, 1, CheckState.Checked);
 
-                    }                    
+                            }
+
+                        }
+                    }
+                    tlCamera.ExpandAll();
+
                     //ÃÌº”µÿÕº
                     if (_listMap!=null)
                     {
