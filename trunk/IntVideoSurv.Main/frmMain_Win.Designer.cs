@@ -45,6 +45,14 @@ namespace CameraViewer
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.bar4 = new DevExpress.XtraBars.Bar();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemCameraNo = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemDecoderNo = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemCurrentTime = new DevExpress.XtraBars.BarStaticItem();
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -215,14 +223,6 @@ namespace CameraViewer
             this.timerCheckAlarmSites = new System.Windows.Forms.Timer(this.components);
             this.timerUpdateIcon = new System.Windows.Forms.Timer(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemCameraNo = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemDecoderNo = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemCurrentTime = new DevExpress.XtraBars.BarStaticItem();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
@@ -525,6 +525,62 @@ namespace CameraViewer
             this.bar4.OptionsBar.UseWholeRow = true;
             this.bar4.Text = "Custom 4";
             // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "当前用户:";
+            this.barStaticItem1.Id = 19;
+            this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItemCurrentUser
+            // 
+            this.barStaticItemCurrentUser.Caption = "admin";
+            this.barStaticItemCurrentUser.Id = 20;
+            this.barStaticItemCurrentUser.Name = "barStaticItemCurrentUser";
+            this.barStaticItemCurrentUser.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem3
+            // 
+            this.barStaticItem3.Caption = "摄像头数:";
+            this.barStaticItem3.Id = 21;
+            this.barStaticItem3.Name = "barStaticItem3";
+            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItemCameraNo
+            // 
+            this.barStaticItemCameraNo.Caption = "20";
+            this.barStaticItemCameraNo.Id = 22;
+            this.barStaticItemCameraNo.Name = "barStaticItemCameraNo";
+            this.barStaticItemCameraNo.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "解码器数:";
+            this.barStaticItem2.Id = 23;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItemDecoderNo
+            // 
+            this.barStaticItemDecoderNo.Caption = "8";
+            this.barStaticItemDecoderNo.Id = 24;
+            this.barStaticItemDecoderNo.Name = "barStaticItemDecoderNo";
+            this.barStaticItemDecoderNo.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem4
+            // 
+            this.barStaticItem4.Caption = "当前时间:";
+            this.barStaticItem4.Id = 25;
+            this.barStaticItem4.Name = "barStaticItem4";
+            this.barStaticItem4.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItemCurrentTime
+            // 
+            this.barStaticItemCurrentTime.Caption = "2011-02-20 22:22:22";
+            this.barStaticItemCurrentTime.Id = 26;
+            this.barStaticItemCurrentTime.Name = "barStaticItemCurrentTime";
+            this.barStaticItemCurrentTime.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -536,7 +592,7 @@ namespace CameraViewer
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 841);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 732);
             this.barDockControlBottom.Size = new System.Drawing.Size(1251, 28);
             // 
             // barDockControlLeft
@@ -544,14 +600,14 @@ namespace CameraViewer
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 55);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 786);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 677);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1251, 55);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 786);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 677);
             // 
             // dockManager1
             // 
@@ -576,14 +632,14 @@ namespace CameraViewer
             this.dockPanelResult.Location = new System.Drawing.Point(1051, 55);
             this.dockPanelResult.Name = "dockPanelResult";
             this.dockPanelResult.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanelResult.Size = new System.Drawing.Size(200, 786);
+            this.dockPanelResult.Size = new System.Drawing.Size(200, 677);
             this.dockPanelResult.Text = "结果";
             // 
             // dockPanel2_Container
             // 
             this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(192, 759);
+            this.dockPanel2_Container.Size = new System.Drawing.Size(192, 650);
             this.dockPanel2_Container.TabIndex = 0;
             // 
             // dockPanel1
@@ -598,7 +654,7 @@ namespace CameraViewer
             this.dockPanel1.Options.ShowAutoHideButton = false;
             this.dockPanel1.Options.ShowCloseButton = false;
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(200, 786);
+            this.dockPanel1.Size = new System.Drawing.Size(200, 677);
             this.dockPanel1.Text = "导航";
             // 
             // dockPanel1_Container
@@ -606,7 +662,7 @@ namespace CameraViewer
             this.dockPanel1_Container.Controls.Add(this.cameraView1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 759);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 650);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // cameraView1
@@ -615,7 +671,7 @@ namespace CameraViewer
             this.cameraView1.Location = new System.Drawing.Point(0, 0);
             this.cameraView1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.cameraView1.Name = "cameraView1";
-            this.cameraView1.Size = new System.Drawing.Size(192, 759);
+            this.cameraView1.Size = new System.Drawing.Size(192, 650);
             this.cameraView1.TabIndex = 4;
             this.cameraView1.Load += new System.EventHandler(this.cameraView1_Load);
             // 
@@ -624,7 +680,7 @@ namespace CameraViewer
             this.dockPanelAlarm.Controls.Add(this.dockPanel3_Container);
             this.dockPanelAlarm.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
             this.dockPanelAlarm.ID = new System.Guid("a9616fb8-8c7a-42f6-8822-ac9022a24a64");
-            this.dockPanelAlarm.Location = new System.Drawing.Point(200, 652);
+            this.dockPanelAlarm.Location = new System.Drawing.Point(200, 543);
             this.dockPanelAlarm.Name = "dockPanelAlarm";
             this.dockPanelAlarm.OriginalSize = new System.Drawing.Size(200, 189);
             this.dockPanelAlarm.Size = new System.Drawing.Size(851, 189);
@@ -2472,7 +2528,7 @@ namespace CameraViewer
             this.mainMultiplexer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainMultiplexer.Location = new System.Drawing.Point(200, 55);
             this.mainMultiplexer.Name = "mainMultiplexer";
-            this.mainMultiplexer.Size = new System.Drawing.Size(851, 597);
+            this.mainMultiplexer.Size = new System.Drawing.Size(851, 488);
             this.mainMultiplexer.TabIndex = 5;
             this.mainMultiplexer.DoubleCamera += new CameraViewer.Multiplexer.MyCurrentCamera(this.multiplexer1_DoubleCamera);
             // 
@@ -2520,62 +2576,6 @@ namespace CameraViewer
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
-            // barStaticItem1
-            // 
-            this.barStaticItem1.Caption = "当前用户:";
-            this.barStaticItem1.Id = 19;
-            this.barStaticItem1.Name = "barStaticItem1";
-            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCurrentUser
-            // 
-            this.barStaticItemCurrentUser.Caption = "admin";
-            this.barStaticItemCurrentUser.Id = 20;
-            this.barStaticItemCurrentUser.Name = "barStaticItemCurrentUser";
-            this.barStaticItemCurrentUser.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem3
-            // 
-            this.barStaticItem3.Caption = "摄像头数:";
-            this.barStaticItem3.Id = 21;
-            this.barStaticItem3.Name = "barStaticItem3";
-            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCameraNo
-            // 
-            this.barStaticItemCameraNo.Caption = "20";
-            this.barStaticItemCameraNo.Id = 22;
-            this.barStaticItemCameraNo.Name = "barStaticItemCameraNo";
-            this.barStaticItemCameraNo.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem2
-            // 
-            this.barStaticItem2.Caption = "解码器数:";
-            this.barStaticItem2.Id = 23;
-            this.barStaticItem2.Name = "barStaticItem2";
-            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemDecoderNo
-            // 
-            this.barStaticItemDecoderNo.Caption = "8";
-            this.barStaticItemDecoderNo.Id = 24;
-            this.barStaticItemDecoderNo.Name = "barStaticItemDecoderNo";
-            this.barStaticItemDecoderNo.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem4
-            // 
-            this.barStaticItem4.Caption = "当前时间:";
-            this.barStaticItem4.Id = 25;
-            this.barStaticItem4.Name = "barStaticItem4";
-            this.barStaticItem4.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCurrentTime
-            // 
-            this.barStaticItemCurrentTime.Caption = "2011-02-20 22:22:22";
-            this.barStaticItemCurrentTime.Id = 26;
-            this.barStaticItemCurrentTime.Name = "barStaticItemCurrentTime";
-            this.barStaticItemCurrentTime.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
             // timerCurretnTime
             // 
             this.timerCurretnTime.Enabled = true;
@@ -2586,7 +2586,7 @@ namespace CameraViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1251, 869);
+            this.ClientSize = new System.Drawing.Size(1251, 760);
             this.Controls.Add(this.mainMultiplexer);
             this.Controls.Add(this.dockPanelAlarm);
             this.Controls.Add(this.dockPanel1);

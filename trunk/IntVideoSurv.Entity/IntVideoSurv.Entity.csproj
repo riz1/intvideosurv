@@ -58,6 +58,7 @@
     <Compile Include="CameraMonitorPairInfo.cs" />
     <Compile Include="CardOutType.cs" />
     <Compile Include="DecodeChannel.cs" />
+    <Compile Include="DecoderInfo.cs" />
     <Compile Include="DefaultCardOut.cs" />
     <Compile Include="DisplayHandlePair.cs" />
     <Compile Include="GroupSwitchDetailInfo.cs" />
@@ -79,6 +80,9 @@
     <Compile Include="UserInfo.cs" />
     <Compile Include="VideoOutputInfo.cs" />
     <Compile Include="VideoProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

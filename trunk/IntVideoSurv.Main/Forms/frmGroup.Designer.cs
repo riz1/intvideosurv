@@ -31,9 +31,9 @@ namespace CameraViewer.Forms
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOK = new DevExpress.XtraEditors.SimpleButton();
             this.txtDescription = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
+            this.btnOK = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -91,18 +91,6 @@ namespace CameraViewer.Forms
             this.btnCancel.TabStop = false;
             this.btnCancel.Text = "取消";
             // 
-            // btnOK
-            // 
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(293, 67);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(97, 22);
-            this.btnOK.StyleController = this.layoutControl1;
-            this.btnOK.TabIndex = 7;
-            this.btnOK.TabStop = false;
-            this.btnOK.Text = "确定";
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
             // txtDescription
             // 
             this.txtDescription.EditValue = "";
@@ -120,6 +108,18 @@ namespace CameraViewer.Forms
             this.txtName.Size = new System.Drawing.Size(288, 21);
             this.txtName.StyleController = this.layoutControl1;
             this.txtName.TabIndex = 4;
+            // 
+            // btnOK
+            // 
+            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOK.Location = new System.Drawing.Point(293, 67);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(97, 22);
+            this.btnOK.StyleController = this.layoutControl1;
+            this.btnOK.TabIndex = 7;
+            this.btnOK.TabStop = false;
+            this.btnOK.Text = "确定";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // layoutControlGroup1
             // 
