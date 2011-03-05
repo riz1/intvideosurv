@@ -78,6 +78,7 @@
     <Compile Include="AlarmBusiness.cs" />
     <Compile Include="AlarmIconBusiness.cs" />
     <Compile Include="CameraIconBusiness.cs" />
+    <Compile Include="DecoderBusiness.cs" />
     <Compile Include="DefaultCardOutBusiness.cs" />
     <Compile Include="GroupSwitchDetailBusiness.cs" />
     <Compile Include="GroupSwitchGroupBusiness.cs" />

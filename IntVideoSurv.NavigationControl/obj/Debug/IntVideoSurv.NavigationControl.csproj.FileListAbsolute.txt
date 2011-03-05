@@ -4,3 +4,15 @@ E:\DM2IDS\NavigationControl\bin\Debug\Damany.Util.dll
 E:\DM2IDS\NavigationControl\obj\Debug\ResolveAssemblyReference.cache
 E:\DM2IDS\NavigationControl\obj\Debug\NavigationControl.dll
 E:\DM2IDS\NavigationControl\obj\Debug\NavigationControl.pdb
+G:\intvideosurv\IntVideoSurv.NavigationControl\bin\Debug\IntVideoSurv.NavigationControl.dll
+G:\intvideosurv\IntVideoSurv.NavigationControl\bin\Debug\IntVideoSurv.NavigationControl.pdb
+G:\intvideosurv\IntVideoSurv.NavigationControl\bin\Debug\Damany.Util.dll
+G:\intvideosurv\IntVideoSurv.NavigationControl\obj\Debug\ResolveAssemblyReference.cache
+G:\intvideosurv\IntVideoSurv.NavigationControl\obj\Debug\IntVideoSurv.NavigationControl.dll
+G:\intvideosurv\IntVideoSurv.NavigationControl\obj\Debug\IntVideoSurv.NavigationControl.pdb
+G:\intvideosurv\intvideosurv\IntVideoSurv.NavigationControl\bin\Debug\IntVideoSurv.NavigationControl.dll
+G:\intvideosurv\intvideosurv\IntVideoSurv.NavigationControl\bin\Debug\IntVideoSurv.NavigationControl.pdb
+G:\intvideosurv\intvideosurv\IntVideoSurv.NavigationControl\bin\Debug\Damany.Util.dll
+G:\intvideosurv\intvideosurv\IntVideoSurv.NavigationControl\obj\Debug\ResolveAssemblyReference.cache
+G:\intvideosurv\intvideosurv\IntVideoSurv.NavigationControl\obj\Debug\IntVideoSurv.NavigationControl.dll
+G:\intvideosurv\intvideosurv\IntVideoSurv.NavigationControl\obj\Debug\IntVideoSurv.NavigationControl.pdb

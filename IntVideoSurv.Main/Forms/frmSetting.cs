@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
+using DevExpress.XtraTreeList;
+using DevExpress.XtraTreeList.Nodes;
 using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
 
@@ -21,7 +23,7 @@ namespace CameraViewer.Forms
         Dictionary<int, SynGroup> _listSynGroup;
         Dictionary<int, DisplayChannelInfo> _listDisplayChannel;
         Dictionary<int, MapInfo> _listMapInfo;
-        
+        Dictionary<int, DecoderInfo> listDecoder;
 
         private DisplayTypes _displaytype = DisplayTypes.DeviceManagement;
 
@@ -31,12 +33,14 @@ namespace CameraViewer.Forms
             BuildDeviceTree();
             BuildCameraTreeInSynGroupManagement();
             BuildCameraTreeInLogManagement();
+            //显示DecoderTree
+            BuildDecoderTree();
             LoadUsers();
             BuildDisplayChannelTreeInSynGroupManagement();
             BuildDisplayChannelTreeInDisplayChannelManagement();
             dateEditEndDate.DateTime = DateTime.Now;
             DisplayRightPanel();
-
+           
 
         }
         private void BuildDeviceTree()
@@ -61,6 +65,40 @@ namespace CameraViewer.Forms
             treeViewDevice.ExpandAll();
             contextMenuStripGroupAndDevice.Visible = false;
             Cursor.Current = currentCursor;
+        }
+        /// <summary>
+        /// 显示解码器的树形
+        /// </summary>
+        private void BuildDecoderTree()
+        {
+            listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref errMessage);
+            Cursor currentCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            TreeListNode node;
+            TreeListNode camnode;
+
+            treeListShowDecoder.Nodes.Clear();
+            TreeListNode treeListNodeRoot = treeListShowDecoder.AppendNode(new[] { "解码器管理", 0 + ";A" }, -1, 0, 3, 1, CheckState.Checked);
+            treeListNodeRoot.Tag = 0 + ";A";
+            if (listDecoder != null)
+            {
+
+                foreach (KeyValuePair<int, DecoderInfo> item in listDecoder)
+                {
+                    TreeListNode treeListNodeDecoder = treeListShowDecoder.AppendNode(new[] { item.Value.Name, item.Key + ";B" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeDecoder.Tag = item.Key + ";B";
+                    foreach (KeyValuePair<int, CameraInfo> cam in item.Value.ListCameras)
+                    {
+                        camnode = treeListShowDecoder.AppendNode(new[] { cam.Value.Name, item.Key + ";C" }, treeListNodeDecoder.Id, 1, 3, 1, CheckState.Checked);
+                        camnode.Tag = cam.Key.ToString() + ";C";
+                    }
+                }
+            }
+            treeListShowDecoder.Columns[1].Visible = false;
+            treeListShowDecoder.ExpandAll();
+            Cursor.Current = currentCursor;
+
+         
         }
 
         private void AppendNode(TreeNode aNode, int ParentId)
@@ -257,6 +295,8 @@ namespace CameraViewer.Forms
             gcDisplayChannelManagement.Visible = false;
             gcMap.Visible = false;
             gcSkin.Visible = false;
+            //解码器
+            DecoderManagement.Visible = false;            
             switch (_displaytype)
             {
                 case DisplayTypes.DeviceManagement:
@@ -299,6 +339,12 @@ namespace CameraViewer.Forms
                 case DisplayTypes.SkinManagement:
                     gcSkin.Visible = true;
                     gcSkin.Dock = DockStyle.Fill;
+                    break;
+                    //解码器
+                case DisplayTypes.DecoderManagement:
+                    DecoderManagement.Visible = true;
+                    DecoderManagement.Dock = DockStyle.Fill;
+                    gridView1.OptionsView.ShowGroupPanel = false;
                     break;
             }
 
@@ -939,6 +985,264 @@ namespace CameraViewer.Forms
             cbeChangeSkin.Properties.Items.AddRange(listSkinName);
             cbeChangeSkin.EditValue = Properties.Settings.Default.DefaultSkinName;
         }
+
+        private void nbdecoder_click(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            _displaytype = DisplayTypes.DecoderManagement;
+            DisplayRightPanel();
+
+        }
+
+        private void DecoderManagement_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void frmSetting_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip2_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+      //  private void treeViewDecoder_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+       // {
+           // string tag = e.Node.Tag.ToString();
+          //  SetDecodermenu();
+          //  ShowDecoderAndCameraDataInGridView();
+
+       // }
+        //GridControl显示解码器信息
+        private void ShowDecoderAndCameraDataInGridView(object sender, EventArgs e)
+        {     
+            listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref errMessage);    
+            var dataTable = new System.Data.DataTable("DecoderInfo");
+            dataTable.Columns.Add("编号", typeof(int));
+            dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("Name", typeof(string));
+            dataTable.Columns.Add("Port", typeof(int));
+            dataTable.Columns.Add("Ip", typeof(string));
+            dataTable.Columns.Add("MaxChannelNo", typeof(int));
+            int i = 0;
+            foreach (var node in listDecoder)
+            {
+           
+                dataTable.Rows.Add(i++,node.Value.id, node.Value.Name, node.Value.Port, node.Value.Ip, node.Value.MaxDecodeChannelNo);
+            }
+            
+            gridControl1.DataSource = dataTable;
+            gridControl1.MainView.PopulateColumns();
+            gridView1.Columns["编号"].Width = 10;
+            gridView1.Columns["id"].Width = 20;
+            gridView1.Columns["Name"].Width = 30;
+            gridView1.Columns["Port"].Width = 10;
+            gridView1.Columns["Ip"].Width = 30;
+            gridView1.Columns["MaxChannelNo"].Width = 10;
+            BuildDecoderTree();
+
+        }
+      
+
+        private void AddDecoderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            
+        }
+
+        private void EditDecoderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteDecoderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddCameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditCameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteCameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowDecoderAndCameraDataInGridView()
+        {
+
+        }
+        //treelist右键单击
+        private void TreeListDecoder_Right(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                treeListShowDecoder.ContextMenuStrip = null;
+
+                TreeListHitInfo hInfo = treeListShowDecoder.CalcHitInfo(new Point(e.X, e.Y));
+                TreeListNode node = hInfo.Node;
+                treeListShowDecoder.FocusedNode = node;
+                if (node != null && node.ParentNode == null)
+                {
+                    popupMenuDecoder.ShowPopup(Cursor.Position);
+                    /*treeListShowDecoder.ContextMenuStrip = contextMenuStrip1DecoderAndCamera;
+                    AddDecoderToolStripMenuItem.Visible = true;
+                    EditDecoderToolStripMenuItem.Visible = true;
+                    DeleteDecoderToolStripMenuItem.Visible = true;
+                    AddCameraToolStripMenuItem.Visible = false;
+                    DeleteCameraToolStripMenuItem.Visible = false;*/
+                }
+                else 
+                {
+                    if (node != null && node.ParentNode.ParentNode == null)
+                    {
+                        popupMenuCamera.ShowPopup(Cursor.Position);
+                        /*treeListShowDecoder.ContextMenuStrip = contextMenuStrip1DecoderAndCamera;
+                        AddDecoderToolStripMenuItem.Visible = false;
+                        EditDecoderToolStripMenuItem.Visible = false;
+                        DeleteDecoderToolStripMenuItem.Visible = false;
+                        AddCameraToolStripMenuItem.Visible = true;
+                        DeleteCameraToolStripMenuItem.Visible = true;*/
+                    }
+                    else
+                    {
+                        popupMenu1.ShowPopup(Cursor.Position);
+
+                    }
+                }
+
+            }
+
+
+        }
+
+        private void treeListShowDecoder_MouseUp(object sender, MouseEventArgs e)
+        {
+           /* if (treeListShowDecoder.FocusedNode != null && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if(treeListShowDecoder.FocusedNode.Tag.ToString().IndexOf("A")>0)
+                {
+                    popupMenuDecoder.ShowPopup(Cursor.Position);
+
+                }
+                else if(treeListShowDecoder.FocusedNode.Tag.ToString().IndexOf("B")>0)
+                {
+                    popupMenuCamera.ShowPopup(Cursor.Position);
+                    
+                }
+                
+            }*/
+        }
+        //添加解码器
+        private void barButtonItem1AddDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddXtraForm addDecoder = new AddXtraForm();
+            addDecoder.Opt = Util.Operateion.Add;
+            addDecoder.ShowDialog(this);
+            BuildDecoderTree();
+        }
+        
+        private void barButtonItem2EditDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddXtraForm addDecoder = new AddXtraForm();
+            addDecoder.Opt = Util.Operateion.Update;
+            //addDecoder.Id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
+            addDecoder.ShowDialog(this);
+        }
+        //修改解码器
+        private void barButtonItem5EditDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddXtraForm addDecoder = new AddXtraForm();
+            addDecoder.Opt = Util.Operateion.Update;
+            addDecoder.Id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
+            addDecoder.ShowDialog(this);
+            BuildDecoderTree();
+        }
+        //添加摄像头
+        private void barButtonItem4AddCamera_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddCameraInDecoder addCamera = new AddCameraInDecoder();
+            addCamera.DecoderID = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
+            addCamera.ShowDialog(this);
+            BuildDecoderTree();
+        }
+        //删除解码器
+        private void barButtonItem6DeleteDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            TreeListNode tn = treeListShowDecoder.FocusedNode;
+            if (tn == null)
+            {
+                return;
+            }
+            if ((tn.Tag.ToString().IndexOf("B") >= 0))
+            {
+                if (MessageBox.Show("确定要删除该解码器?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    string[] strs = tn.Tag.ToString().Split(';');
+                    int decoderid = int.Parse(strs[0]);
+                    DecoderInfo di = DecoderBusiness.Instance.GetDecoderInfoByDecoderId(ref errMessage, decoderid);
+                    DecoderBusiness.Instance.DeleteByDecoderId(ref errMessage, decoderid);
+                    DecoderBusiness.Instance.Delete(ref errMessage, decoderid);
+                    OperateLogBusiness.Instance.Insert(ref errMessage, new OperateLog
+                    {
+                        DeviceId = di.id,
+                        ClientUserId = MainForm.CurrentUser.UserId,
+                        ClientUserName =MainForm.CurrentUser.UserName,
+                        Content = di.ToString(),
+                        HappenTime = DateTime.Now,
+                        OperateTypeId =(int)(OperateLogTypeId.DecoderDelete),
+                        OperateTypeName =OperateLogTypeName.DecoderDelete,
+                        OperateUserName =MainForm.CurrentUser.UserName
+                    });
+                    BuildDecoderTree();
+
+                }
+
+            }
+        }
+        //删除摄像头
+        private void barButtonItemDeleteCamera_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            TreeListNode tn = treeListShowDecoder.FocusedNode;
+            if (tn == null)
+            {
+                return;
+            }
+            if ((tn.Tag.ToString().IndexOf("C") >= 0))
+            {
+                if (MessageBox.Show("确定要删除该摄像头?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    string[] strs = tn.Tag.ToString().Split(';');
+                    int cameraid = int.Parse(strs[0]);
+                    CameraInfo di = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, cameraid);
+                    DecoderBusiness.Instance.DeleteCamera(ref errMessage, cameraid);
+                    OperateLogBusiness.Instance.Insert(ref errMessage, new OperateLog
+                    {
+                        DeviceId = di.CameraId,
+                        ClientUserId = MainForm.CurrentUser.UserId,
+                        ClientUserName = MainForm.CurrentUser.UserName,
+                        Content = di.ToString(),
+                        HappenTime = DateTime.Now,
+                        OperateTypeId = (int)(OperateLogTypeId.CameraDeleteInDecoder),
+                        OperateTypeName = OperateLogTypeName.CameraDeleteInDecoder,
+                        OperateUserName = MainForm.CurrentUser.UserName
+                    });
+                    BuildDecoderTree();
+
+                }
+
+            }
+        }
+
     }
     public enum DisplayTypes
     {
@@ -950,7 +1254,8 @@ namespace CameraViewer.Forms
         ProSwitchManagement = 64,
         DisplayChannelManagement = 128,
         MapManagement = 256,
-        SkinManagement = 512
+        SkinManagement = 512,
+        DecoderManagement=1024
 
     }
 }

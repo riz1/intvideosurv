@@ -70,6 +70,7 @@
     <Compile Include="CameraDataAccess.cs" />
     <Compile Include="CameraIconDataAccess.cs" />
     <Compile Include="CameraMonitorPairDataAccess.cs" />
+    <Compile Include="DecoderDataAccess.cs" />
     <Compile Include="DefaultCardOutDataAccess.cs" />
     <Compile Include="GroupSwitchDetailDataAccess.cs" />
     <Compile Include="GroupSwitchGroupDataAccess.cs" />

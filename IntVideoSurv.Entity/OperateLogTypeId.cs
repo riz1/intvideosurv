@@ -39,7 +39,16 @@ namespace IntVideoSurv.Entity
 
         CameraAdd = 1801,
         CameraUpdate,
-        CameraDelete
+        CameraDelete,
+        //解码器
+        DecoderAdd=1901,
+        DecoderUpdate,
+        DecoderDelete,
+        //摄像头
+        CameraAddInDecoder = 2001,
+        CameraUpdateInDecoder,
+        CameraDeleteInDecoder
+
 
     }
 }

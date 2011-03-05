@@ -175,6 +175,18 @@
     <Compile Include="Controls\ViewGrid.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\AddCameraInDecoder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCameraInDecoder.Designer.cs">
+      <DependentUpon>AddCameraInDecoder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddXtraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddXtraForm.Designer.cs">
+      <DependentUpon>AddXtraForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CameraDescription.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -378,6 +390,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ViewGrid.resx">
       <DependentUpon>ViewGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddCameraInDecoder.resx">
+      <DependentUpon>AddCameraInDecoder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddXtraForm.resx">
+      <DependentUpon>AddXtraForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CameraDescription.resx">
