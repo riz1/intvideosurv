@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data;
 using IntVideoSurv.Entity;
@@ -203,7 +204,19 @@ namespace IntVideoSurv.Business
                 {
                     return null;
                 }
-                return new DecoderInfo(ds.Tables[0].Rows[0]);
+                DecoderInfo decoderInfo = new DecoderInfo(ds.Tables[0].Rows[0]);
+                DataSet dsCamera;
+                CameraInfo oCamera;
+                dsCamera = DecoderDataAccess.GetCameraInfoByDecoderId(db, decoderInfo.id);
+                //DecoderDataAccess.GetCamInfoByCameraId(db,dsCamera.Tables[0].Rows[i].)
+                decoderInfo.ListCameras = new Dictionary<int, CameraInfo>();
+                foreach (DataRow dr in dsCamera.Tables[0].Rows)
+                {
+
+                    oCamera = new CameraInfo(dr);
+                    decoderInfo.ListCameras.Add(oCamera.CameraId, oCamera);
+                }
+                return decoderInfo;
 
             }
             catch (Exception ex)
@@ -213,21 +226,33 @@ namespace IntVideoSurv.Business
                 return null;
             }
         }
-        public Dictionary<int, CameraInfo> GetDecoderInfoByName(ref string errMessage, string Name)
+        public Dictionary<int, DecoderInfo> GetDecoderInfoByName(ref string errMessage, string Name)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, CameraInfo> mylist = new Dictionary<int, CameraInfo>();
+            Dictionary<int, DecoderInfo> mylist = new Dictionary<int, DecoderInfo>();
             try
             {
 
                 DataSet ds = DecoderDataAccess.GetDecoderInfoByName(db, Name);
 
-                CameraInfo oCamera;
+                DecoderInfo decoderInfo;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    oCamera = new CameraInfo(ds.Tables[0].Rows[i]);
-                    mylist.Add(oCamera.CameraId, oCamera);
+                    decoderInfo = new DecoderInfo(ds.Tables[0].Rows[i]);
+                    DataSet dsCamera;
+                    CameraInfo oCamera;
+                    dsCamera = DecoderDataAccess.GetCameraInfoByDecoderId(db, decoderInfo.id);
+                    //DecoderDataAccess.GetCamInfoByCameraId(db,dsCamera.Tables[0].Rows[i].)
+                    decoderInfo.ListCameras = new Dictionary<int, CameraInfo>();
+                    foreach (DataRow dr in dsCamera.Tables[0].Rows)
+                    {
+
+                        oCamera = new CameraInfo(dr);
+                        decoderInfo.ListCameras.Add(oCamera.CameraId, oCamera);
+                    }
+
+                    mylist.Add(decoderInfo.id, decoderInfo);
                 }
                 return mylist;
 
@@ -238,6 +263,96 @@ namespace IntVideoSurv.Business
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
                 return null;
             }
+        }
+        public string GetDecoderXMLString(int decoderid)
+        {
+            string ret = "",errMessage="";
+            DecoderInfo decoderInfo = GetDecoderInfoByDecoderId(ref errMessage, decoderid);
+            if (decoderInfo != null)
+            {
+                //头,版本，编码信息
+                XmlDocument doc = new XmlDocument();
+                XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+                doc.AppendChild(docNode);
+
+                //decoder
+                XmlNode decoderNode = doc.CreateElement("Decoder");
+                XmlAttribute decoderAttribute = doc.CreateAttribute("id");
+                decoderAttribute.Value = decoderid.ToString();
+                decoderNode.Attributes.Append(decoderAttribute);
+                doc.AppendChild(decoderNode);
+
+                //cameras
+                XmlNode camerasNode = doc.CreateElement("Cameras");
+                decoderNode.AppendChild(camerasNode);
+                if (decoderInfo.ListCameras!=null)
+                {
+                    foreach (var VARIABLE in decoderInfo.ListCameras)
+                    {
+                        //camera
+                        XmlNode cameraNode = doc.CreateElement("Camera");
+                        camerasNode.AppendChild(cameraNode);
+
+                        //id
+                        XmlElement idNode = doc.CreateElement("id");
+                        idNode.InnerText = VARIABLE.Value.CameraId.ToString();
+                        cameraNode.AppendChild(idNode);
+                        //name
+                        XmlElement nameNode = doc.CreateElement("Name");
+                        nameNode.InnerText = VARIABLE.Value.Name;
+                        cameraNode.AppendChild(nameNode);
+
+                        //获取设备信息
+
+                        DeviceInfo deviceInfo = DeviceBusiness.Instance.GetDeviceInfoByDeviceId(ref errMessage, VARIABLE.Value.DeviceId);
+
+                        //ip
+                        XmlElement ipNode = doc.CreateElement("ip");
+                        ipNode.InnerText = deviceInfo.source;
+                        cameraNode.AppendChild(ipNode);
+
+
+                        //ip
+                        XmlElement portNode = doc.CreateElement("port");
+                        portNode.InnerText = deviceInfo.Port.ToString();
+                        cameraNode.AppendChild(portNode);
+
+
+                        //user
+                        XmlElement userNode = doc.CreateElement("username");
+                        userNode.InnerText = deviceInfo.login;
+                        cameraNode.AppendChild(userNode);
+
+                        //password
+                        XmlElement pwdNode = doc.CreateElement("password");
+                        pwdNode.InnerText = deviceInfo.pwd;
+                        cameraNode.AppendChild(pwdNode);
+                        
+                        
+                        //channel
+                        XmlElement channelNode = doc.CreateElement("channel");
+                        channelNode.InnerText = VARIABLE.Value.ChannelNo.ToString();
+                        cameraNode.AppendChild(channelNode);
+
+                        //width
+                        XmlElement widthNode = doc.CreateElement("width");
+                        widthNode.InnerText = VARIABLE.Value.Width.ToString();
+                        cameraNode.AppendChild(widthNode);
+
+                        //channel
+                        XmlElement heightNode = doc.CreateElement("height");
+                        heightNode.InnerText = VARIABLE.Value.Height.ToString();
+                        cameraNode.AppendChild(heightNode);
+
+
+
+                    }                    
+                }
+
+                ret = doc.InnerXml;
+            }
+
+            return ret;
         }
     }
 }
