@@ -45,6 +45,14 @@ namespace CameraViewer
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.bar4 = new DevExpress.XtraBars.Bar();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemCameraNo = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemDecoderNo = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItemCurrentTime = new DevExpress.XtraBars.BarStaticItem();
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -215,15 +223,8 @@ namespace CameraViewer
             this.timerCheckAlarmSites = new System.Windows.Forms.Timer(this.components);
             this.timerUpdateIcon = new System.Windows.Forms.Timer(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemCameraNo = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemDecoderNo = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItemCurrentTime = new DevExpress.XtraBars.BarStaticItem();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -407,9 +408,10 @@ namespace CameraViewer
             this.barStaticItem2,
             this.barStaticItemDecoderNo,
             this.barStaticItem4,
-            this.barStaticItemCurrentTime});
+            this.barStaticItemCurrentTime,
+            this.barButtonItem8});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 27;
+            this.barManager1.MaxItemId = 28;
             this.barManager1.StatusBar = this.bar4;
             // 
             // barMenu
@@ -493,7 +495,8 @@ namespace CameraViewer
             this.bar3.DockRow = 1;
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8)});
             this.bar3.Offset = 4;
             this.bar3.Text = "Custom 3";
             // 
@@ -584,62 +587,6 @@ namespace CameraViewer
             // barAndDockingController1
             // 
             this.barAndDockingController1.PropertiesBar.AllowLinkLighting = false;
-            // 
-            // barStaticItem1
-            // 
-            this.barStaticItem1.Caption = "当前用户:";
-            this.barStaticItem1.Id = 19;
-            this.barStaticItem1.Name = "barStaticItem1";
-            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCurrentUser
-            // 
-            this.barStaticItemCurrentUser.Caption = "admin";
-            this.barStaticItemCurrentUser.Id = 20;
-            this.barStaticItemCurrentUser.Name = "barStaticItemCurrentUser";
-            this.barStaticItemCurrentUser.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem3
-            // 
-            this.barStaticItem3.Caption = "摄像头数:";
-            this.barStaticItem3.Id = 21;
-            this.barStaticItem3.Name = "barStaticItem3";
-            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCameraNo
-            // 
-            this.barStaticItemCameraNo.Caption = "20";
-            this.barStaticItemCameraNo.Id = 22;
-            this.barStaticItemCameraNo.Name = "barStaticItemCameraNo";
-            this.barStaticItemCameraNo.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem2
-            // 
-            this.barStaticItem2.Caption = "解码器数:";
-            this.barStaticItem2.Id = 23;
-            this.barStaticItem2.Name = "barStaticItem2";
-            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemDecoderNo
-            // 
-            this.barStaticItemDecoderNo.Caption = "8";
-            this.barStaticItemDecoderNo.Id = 24;
-            this.barStaticItemDecoderNo.Name = "barStaticItemDecoderNo";
-            this.barStaticItemDecoderNo.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem4
-            // 
-            this.barStaticItem4.Caption = "当前时间:";
-            this.barStaticItem4.Id = 25;
-            this.barStaticItem4.Name = "barStaticItem4";
-            this.barStaticItem4.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCurrentTime
-            // 
-            this.barStaticItemCurrentTime.Caption = "2011-02-20 22:22:22";
-            this.barStaticItemCurrentTime.Id = 26;
-            this.barStaticItemCurrentTime.Name = "barStaticItemCurrentTime";
-            this.barStaticItemCurrentTime.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barDockControlTop
             // 
@@ -2636,67 +2583,18 @@ namespace CameraViewer
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
-            // barStaticItem1
-            // 
-            this.barStaticItem1.Caption = "当前用户:";
-            this.barStaticItem1.Id = 19;
-            this.barStaticItem1.Name = "barStaticItem1";
-            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCurrentUser
-            // 
-            this.barStaticItemCurrentUser.Caption = "admin";
-            this.barStaticItemCurrentUser.Id = 20;
-            this.barStaticItemCurrentUser.Name = "barStaticItemCurrentUser";
-            this.barStaticItemCurrentUser.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem3
-            // 
-            this.barStaticItem3.Caption = "摄像头数:";
-            this.barStaticItem3.Id = 21;
-            this.barStaticItem3.Name = "barStaticItem3";
-            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCameraNo
-            // 
-            this.barStaticItemCameraNo.Caption = "20";
-            this.barStaticItemCameraNo.Id = 22;
-            this.barStaticItemCameraNo.Name = "barStaticItemCameraNo";
-            this.barStaticItemCameraNo.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem2
-            // 
-            this.barStaticItem2.Caption = "解码器数:";
-            this.barStaticItem2.Id = 23;
-            this.barStaticItem2.Name = "barStaticItem2";
-            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemDecoderNo
-            // 
-            this.barStaticItemDecoderNo.Caption = "8";
-            this.barStaticItemDecoderNo.Id = 24;
-            this.barStaticItemDecoderNo.Name = "barStaticItemDecoderNo";
-            this.barStaticItemDecoderNo.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem4
-            // 
-            this.barStaticItem4.Caption = "当前时间:";
-            this.barStaticItem4.Id = 25;
-            this.barStaticItem4.Name = "barStaticItem4";
-            this.barStaticItem4.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItemCurrentTime
-            // 
-            this.barStaticItemCurrentTime.Caption = "2011-02-20 22:22:22";
-            this.barStaticItemCurrentTime.Id = 26;
-            this.barStaticItemCurrentTime.Name = "barStaticItemCurrentTime";
-            this.barStaticItemCurrentTime.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
             // timerCurretnTime
             // 
             this.timerCurretnTime.Enabled = true;
             this.timerCurretnTime.Interval = 500;
             this.timerCurretnTime.Tick += new System.EventHandler(this.timerCurretnTime_Tick);
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "测试窗口";
+            this.barButtonItem8.Id = 27;
+            this.barButtonItem8.Name = "barButtonItem8";
+            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick);
             // 
             // MainForm
             // 
@@ -3066,6 +2964,7 @@ namespace CameraViewer
         private DevExpress.XtraBars.BarStaticItem barStaticItem4;
         private DevExpress.XtraBars.BarStaticItem barStaticItemCurrentTime;
         private Timer timerCurretnTime;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
         
     }
 }
