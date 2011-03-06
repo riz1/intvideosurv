@@ -12,13 +12,15 @@ namespace IntVideoSurv.Entity
     public class DecoderInfo : EntityObject
     {  
         public DecoderInfo() { }
+        
         public DecoderInfo(IDataReader dataReader) : base(dataReader) { }
+        
         public DecoderInfo(DataRow dataRow) : base(dataRow) { }
 
         [ColumnMapping()]
         public int id { get; set; }
         [ColumnMapping()]
-        public string Name { get; set; }
+        public string Name { get; set;}
         [ColumnMapping()]
         public string Ip { get; set; }
 
