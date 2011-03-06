@@ -1,7 +1,0 @@
-D:\Downloads\GoogleTalkWindowsForm_demo\StyledForm\bin\Debug (MDIForm)\StyledForms.dll
-D:\Downloads\GoogleTalkWindowsForm_demo\StyledForm\bin\Debug (MDIForm)\StyledForms.pdb
-D:\Downloads\GoogleTalkWindowsForm_demo\StyledForm\obj\Debug (MDIForm)\ResolveAssemblyReference.cache
-D:\Downloads\GoogleTalkWindowsForm_demo\StyledForm\obj\Debug (MDIForm)\StyledForms.GoogleTalkForm.resources
-D:\Downloads\GoogleTalkWindowsForm_demo\StyledForm\obj\Debug (MDIForm)\StyledForms.csproj.GenerateResource.Cache
-D:\Downloads\GoogleTalkWindowsForm_demo\StyledForm\obj\Debug (MDIForm)\StyledForms.dll
-D:\Downloads\GoogleTalkWindowsForm_demo\StyledForm\obj\Debug (MDIForm)\StyledForms.pdb
