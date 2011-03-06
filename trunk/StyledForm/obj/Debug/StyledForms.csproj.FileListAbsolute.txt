@@ -1,7 +1,0 @@
-D:\NewProject\luop\Digti_Matrix\SourceCode\StyledForm\bin\Debug\StyledForms.dll
-D:\NewProject\luop\Digti_Matrix\SourceCode\StyledForm\bin\Debug\StyledForms.pdb
-D:\NewProject\luop\Digti_Matrix\SourceCode\StyledForm\obj\Debug\ResolveAssemblyReference.cache
-D:\NewProject\luop\Digti_Matrix\SourceCode\StyledForm\obj\Debug\StyledForms.GoogleTalkForm.resources
-D:\NewProject\luop\Digti_Matrix\SourceCode\StyledForm\obj\Debug\StyledForms.csproj.GenerateResource.Cache
-D:\NewProject\luop\Digti_Matrix\SourceCode\StyledForm\obj\Debug\StyledForms.dll
-D:\NewProject\luop\Digti_Matrix\SourceCode\StyledForm\obj\Debug\StyledForms.pdb

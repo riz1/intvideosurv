@@ -1129,7 +1129,7 @@ namespace CameraViewer.Forms
             this.DecoderManagement.Controls.Add(this.splitContainerControl7);
             this.DecoderManagement.Location = new System.Drawing.Point(103, 225);
             this.DecoderManagement.Name = "DecoderManagement";
-            this.DecoderManagement.Size = new System.Drawing.Size(145, 148);
+            this.DecoderManagement.Size = new System.Drawing.Size(798, 230);
             this.DecoderManagement.TabIndex = 34;
             this.DecoderManagement.Text = "解码器管理";
             this.DecoderManagement.Paint += new System.Windows.Forms.PaintEventHandler(this.DecoderManagement_Paint);
@@ -1143,7 +1143,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.gridControl1);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(141, 123);
+            this.splitContainerControl7.Size = new System.Drawing.Size(794, 205);
             this.splitContainerControl7.SplitterPosition = 115;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
@@ -1156,7 +1156,8 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListShowDecoder.Location = new System.Drawing.Point(0, 0);
             this.treeListShowDecoder.Name = "treeListShowDecoder";
-            this.treeListShowDecoder.Size = new System.Drawing.Size(115, 123);
+            this.treeListShowDecoder.OptionsBehavior.Editable = false;
+            this.treeListShowDecoder.Size = new System.Drawing.Size(115, 205);
             this.treeListShowDecoder.TabIndex = 0;
             this.treeListShowDecoder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TreeListDecoder_Right);
             this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
@@ -1167,6 +1168,7 @@ namespace CameraViewer.Forms
             this.treeListColumn1.Caption = "解码器管理";
             this.treeListColumn1.FieldName = "解码器管理";
             this.treeListColumn1.Name = "treeListColumn1";
+            this.treeListColumn1.OptionsColumn.AllowEdit = false;
             this.treeListColumn1.Visible = true;
             this.treeListColumn1.VisibleIndex = 0;
             // 
@@ -1175,6 +1177,7 @@ namespace CameraViewer.Forms
             this.treeListColumn2.Caption = "tag";
             this.treeListColumn2.FieldName = "tag";
             this.treeListColumn2.Name = "treeListColumn2";
+            this.treeListColumn2.OptionsColumn.AllowEdit = false;
             this.treeListColumn2.Visible = true;
             this.treeListColumn2.VisibleIndex = 1;
             // 
@@ -1184,7 +1187,7 @@ namespace CameraViewer.Forms
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(21, 123);
+            this.gridControl1.Size = new System.Drawing.Size(674, 205);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
