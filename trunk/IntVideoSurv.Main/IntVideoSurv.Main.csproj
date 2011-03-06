@@ -9,7 +9,7 @@
     <ApplicationIcon>..\icons\videocamera.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>cv</AssemblyName>
+    <AssemblyName>IntVideoSurv</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
