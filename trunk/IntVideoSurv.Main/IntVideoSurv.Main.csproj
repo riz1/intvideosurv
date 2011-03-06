@@ -101,6 +101,7 @@
     <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraWizard.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RefDll\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -307,12 +308,23 @@
     <Compile Include="IWizardPage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="JustForTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JustForTest.Designer.cs">
+      <DependentUpon>JustForTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Multiplayer.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Multiplexer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="NetWorking\CameraStateHandle.cs" />
+    <Compile Include="NetWorking\DataChangeEventArgs.cs" />
+    <Compile Include="NetWorking\GetTransPacket.cs" />
+    <Compile Include="NetWorking\IPacketHandler.cs" />
+    <Compile Include="NetWorking\LivePacketHandle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -478,6 +490,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain_Win.resx">
       <DependentUpon>frmMain_Win.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JustForTest.resx">
+      <DependentUpon>JustForTest.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Multiplayer.resx">

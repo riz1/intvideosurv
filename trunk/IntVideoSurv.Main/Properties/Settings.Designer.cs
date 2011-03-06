@@ -25,7 +25,7 @@ namespace CameraViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\StreamMediaServicePath")]
         public string StreamMediaServicePath {
             get {
                 return ((string)(this["StreamMediaServicePath"]));
@@ -41,6 +41,30 @@ namespace CameraViewer.Properties {
             }
             set {
                 this["DefaultSkinName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\DirectPath")]
+        public string DirectPath {
+            get {
+                return ((string)(this["DirectPath"]));
+            }
+            set {
+                this["DirectPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int AutoConnectTime {
+            get {
+                return ((int)(this["AutoConnectTime"]));
+            }
+            set {
+                this["AutoConnectTime"] = value;
             }
         }
     }

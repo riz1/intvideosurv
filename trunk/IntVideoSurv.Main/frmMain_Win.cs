@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Windows.Forms;
 using CameraViewer.Controls;
+using CameraViewer.NetWorking;
 using CameraViewer.Remoting;
 using DevExpress.XtraEditors;
 using IntVideoSurv.Business;
@@ -22,6 +23,8 @@ namespace CameraViewer
 {
     public partial class MainForm : XtraForm
     {
+        public delegate void ImageDataChangeHandle(object sender, DataChangeEventArgs e);
+
         Dictionary<int, HikVideoServerDeviceDriver> _runningDeviceList;
         Dictionary<int, HikVideoServerCameraDriver> _runningCameraList;
         Dictionary<int, GroupInfo> _listGroup;
@@ -1700,6 +1703,12 @@ namespace CameraViewer
         private void timerCurretnTime_Tick(object sender, EventArgs e)
         {
             barStaticItemCurrentTime.Caption = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            JustForTest justForTest = new JustForTest();
+            justForTest.ShowDialog();
         }
  
     }
