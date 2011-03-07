@@ -16,11 +16,11 @@
       <Item value="DockStyle`0" priority="0" />
       <Item value="break" priority="3" />
       <Item value="private" priority="4" />
-      <Item value="void" priority="1" />
+      <Item value="void" priority="2" />
       <Item value="listGroup" priority="0" />
       <Item value="ref" priority="2" />
       <Item value="Dictionary" priority="1" />
-      <Item value="int" priority="12" />
+      <Item value="int" priority="13" />
       <Item value="listDecoder" priority="2" />
       <Item value="if" priority="5" />
       <Item value="treeList1_TreeListMenuItemClick`0" priority="0" />
@@ -45,7 +45,7 @@
       <Item value="string" priority="5" />
       <Item value="typeof" priority="1" />
       <Item value="dataTable" priority="0" />
-      <Item value="gridView1" priority="0" />
+      <Item value="gridView1" priority="1" />
       <Item value="tag" priority="1" />
       <Item value="Dictionary&lt;int,DecoderInfo&gt;" priority="0" />
       <Item value="errMessage" priority="1" />
@@ -65,7 +65,7 @@
       <Item value="textEditmax" priority="0" />
       <Item value="Decoder`0" priority="0" />
       <Item value="DecoderBusiness`0" priority="1" />
-      <Item value="public" priority="2" />
+      <Item value="public" priority="3" />
       <Item value="const" priority="0" />
       <Item value="AddXtraForm`0" priority="1" />
       <Item value="TreeListNode`0" priority="0" />
@@ -103,6 +103,9 @@
       <Item value="DecoderID" priority="1" />
       <Item value="cameraid" priority="2" />
       <Item value="sb" priority="1" />
+      <Item value="gridControl1" priority="3" />
+      <Item value="for" priority="0" />
+      <Item value="j" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:DevExpress.XtraEditors.GroupControl">
       <Item value="Visible" priority="1" />
@@ -129,7 +132,7 @@
     <ItemStatistics item="Qualified:DevExpress.XtraTreeList.TreeList">
       <Item value="Nodes" priority="1" />
       <Item value="ExpandAll`0" priority="0" />
-      <Item value="FocusedNode" priority="2" />
+      <Item value="FocusedNode" priority="3" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.KeyValuePair`2">
       <Item value="Value" priority="8" />
@@ -150,7 +153,7 @@
       <Item value="Width" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:DevExpress.XtraGrid.Views.Grid.GridView">
-      <Item value="Columns" priority="1" />
+      <Item value="Columns" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:DevExpress.XtraEditors.TextEdit">
       <Item value="EditValue" priority="1" />
@@ -179,7 +182,7 @@
       <Item value="Clear`0" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:DevExpress.XtraTreeList.Nodes.TreeListNode">
-      <Item value="ParentNode" priority="1" />
+      <Item value="ParentNode" priority="2" />
       <Item value="Tag" priority="4" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.MouseEventArgs">
@@ -222,10 +225,12 @@
     <ItemStatistics item="Qualified:System.Text.StringBuilder">
       <Item value="AppendFormat`0" priority="1" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraGrid.Columns.GridColumnCollection">
+      <Item value="Count" priority="0" />
+    </ItemStatistics>
   </CompletionStatisticsManager>
   <RecentFiles>
     <RecentFiles>
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSettingLog.cs" caret="433" fromTop="18" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSettingSynGroup.cs" caret="1673" fromTop="22" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:DeviceInfo.cs" caret="2321" fromTop="63" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:DecoderInfo.cs" caret="897" fromTop="25" />
@@ -246,47 +251,48 @@
       <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:GroupDataAccess.cs" caret="981" fromTop="27" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:UserBusiness.cs" caret="925" fromTop="2" />
       <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:UserDataAccess.cs" caret="938" fromTop="0" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmUser.cs" caret="3007" fromTop="3" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="1495" fromTop="13" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmGroup.cs" caret="2187" fromTop="6" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:GroupBusiness.cs" caret="5423" fromTop="26" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddXtraForm.cs" caret="2566" fromTop="17" />
       <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:CameraDataAccess.cs" caret="4225" fromTop="0" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="4604" fromTop="15" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="2192" fromTop="11" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="45348" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSettingLog.cs" caret="0" fromTop="0" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="1017" fromTop="12" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="1695" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmUser.cs" caret="0" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddXtraForm.cs" caret="588" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="45763" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="694" fromTop="0" />
     </RecentFiles>
     <RecentEdits>
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="45924" fromTop="15" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="2031" fromTop="22" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="1964" fromTop="22" />
-      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeName.cs" caret="1851" fromTop="17" />
-      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeId.cs" caret="1008" fromTop="17" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="1676" fromTop="14" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="1217" fromTop="7" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="642" fromTop="15" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="467" fromTop="9" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="1118" fromTop="11" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="700" fromTop="5" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="877" fromTop="8" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="1097" fromTop="14" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="1371" fromTop="7" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="3158" fromTop="9" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="6533" fromTop="9" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddXtraForm.cs" caret="1075" fromTop="15" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="44779" fromTop="10" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="44918" fromTop="11" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="45314" fromTop="11" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="5863" fromTop="7" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="3968" fromTop="25" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="3968" fromTop="25" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="3968" fromTop="9" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="3982" fromTop="5" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="4785" fromTop="12" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddXtraForm.cs" caret="2231" fromTop="17" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="4604" fromTop="18" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="5761" fromTop="11" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="46322" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="47958" fromTop="12" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="5827" fromTop="12" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="7255" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSettingLog.cs" caret="0" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="44761" fromTop="5" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="8500" fromTop="7" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddXtraForm.cs" caret="2051" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="41528" fromTop="10" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="39376" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="40559" fromTop="17" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="46824" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="48877" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="3850" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="45943" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="1388" fromTop="10" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="40177" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="41412" fromTop="17" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="40729" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="42118" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="39894" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="50885" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="44930" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="45763" fromTop="161" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="0" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="560" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="927" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="1254" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="1918" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="3245" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="2348" fromTop="8" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
