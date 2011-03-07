@@ -272,7 +272,7 @@ namespace IntVideoSurv.Business
             {
                 //头,版本，编码信息
                 XmlDocument doc = new XmlDocument();
-                XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+                XmlNode docNode = doc.CreateXmlDeclaration("1.0","gb2312",null);
                 doc.AppendChild(docNode);
 
                 //decoder
@@ -348,7 +348,6 @@ namespace IntVideoSurv.Business
 
                     }                    
                 }
-
                 ret = doc.InnerXml;
             }
 
