@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
+using DevExpress.XtraEditors;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using IntVideoSurv.Entity;
@@ -78,15 +79,15 @@ namespace CameraViewer.Forms
             TreeListNode camnode;
 
             treeListShowDecoder.Nodes.Clear();
-            TreeListNode treeListNodeRoot = treeListShowDecoder.AppendNode(new[] { "解码器管理", 0 + ";A" }, -1, 0, 3, 1, CheckState.Checked);
-            treeListNodeRoot.Tag = 0 + ";A";
+            TreeListNode treeListNodeRoot = treeListShowDecoder.AppendNode(new[] { "解码器管理", 0 + ";T" }, -1, 0, 3, 1, CheckState.Checked);
+            treeListNodeRoot.Tag = 0 + ";T";
             if (listDecoder != null)
             {
 
                 foreach (KeyValuePair<int, DecoderInfo> item in listDecoder)
                 {
-                    TreeListNode treeListNodeDecoder = treeListShowDecoder.AppendNode(new[] { item.Value.Name, item.Key + ";B" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
-                    treeListNodeDecoder.Tag = item.Key + ";B";
+                    TreeListNode treeListNodeDecoder = treeListShowDecoder.AppendNode(new[] { item.Value.Name, item.Key + ";D" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeDecoder.Tag = item.Key + ";D";
                     foreach (KeyValuePair<int, CameraInfo> cam in item.Value.ListCameras)
                     {
                         DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, cam.Value.CameraId);
@@ -513,7 +514,7 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (MessageBox.Show("确实要删除用户?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                if (XtraMessageBox.Show("确实要删除用户?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
                     int userid = Convert.ToInt32(dataGridViewUser.SelectedRows[0].Cells["索引号"].Value);
                     UserInfo ui = UserBusiness.Instance.GetUserInfo(ref errMessage, userid);
@@ -782,7 +783,7 @@ namespace CameraViewer.Forms
             }
             if ((tn.Tag.ToString().IndexOf("D") >= 0))
             {
-                if (MessageBox.Show("确定要删除该设备?","提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                if (XtraMessageBox.Show("确定要删除该设备?","提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
                     string[] strs = tn.Tag.ToString().Split(';');
                     int deviceid = int.Parse(strs[0]);
@@ -828,7 +829,7 @@ namespace CameraViewer.Forms
             catch (Exception)
             {
 
-                MessageBox.Show("时间间隔必须是正整数!");
+                XtraMessageBox.Show("时间间隔必须是正整数!");
             }
 
         }
@@ -844,7 +845,7 @@ namespace CameraViewer.Forms
             catch (Exception)
             {
 
-                MessageBox.Show("时间间隔必须是正整数!");
+                XtraMessageBox.Show("时间间隔必须是正整数!");
             }
         }
 
@@ -1042,7 +1043,6 @@ namespace CameraViewer.Forms
             gridView1.Columns["解码器端口"].Width = 10;
             gridView1.Columns["Ip地址"].Width = 30;
             gridView1.Columns["最大解码数"].Width = 10;
-            BuildDecoderTree();
             
         }
         private void ShowDecoderAndCameraDataInGridView(object sender, EventArgs e)
@@ -1050,103 +1050,26 @@ namespace CameraViewer.Forms
             showDecoderInfo();
         }
       
-
-        private void AddDecoderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            
-        }
-
-        private void EditDecoderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DeleteDecoderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddCameraToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void EditCameraToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DeleteCameraToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ShowDecoderAndCameraDataInGridView()
-        {
-
-        }
-        //treelist右键单击
-        private void TreeListDecoder_Right(object sender, MouseEventArgs e)
+       
+        private void treeListShowDecoder_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                treeListShowDecoder.ContextMenuStrip = null;
-
-                TreeListHitInfo hInfo = treeListShowDecoder.CalcHitInfo(new Point(e.X, e.Y));
-                TreeListNode node = hInfo.Node;
-                treeListShowDecoder.FocusedNode = node;
-                if (node != null && node.ParentNode == null)
-                {
-                    popupMenuDecoder.ShowPopup(Cursor.Position);
-                    /*treeListShowDecoder.ContextMenuStrip = contextMenuStrip1DecoderAndCamera;
-                    AddDecoderToolStripMenuItem.Visible = true;
-                    EditDecoderToolStripMenuItem.Visible = true;
-                    DeleteDecoderToolStripMenuItem.Visible = true;
-                    AddCameraToolStripMenuItem.Visible = false;
-                    DeleteCameraToolStripMenuItem.Visible = false;*/
-                }
-                else 
-                {
-                    if (node != null && node.ParentNode.ParentNode == null)
-                    {
-                        popupMenuCamera.ShowPopup(Cursor.Position);
-                        /*treeListShowDecoder.ContextMenuStrip = contextMenuStrip1DecoderAndCamera;
-                        AddDecoderToolStripMenuItem.Visible = false;
-                        EditDecoderToolStripMenuItem.Visible = false;
-                        DeleteDecoderToolStripMenuItem.Visible = false;
-                        AddCameraToolStripMenuItem.Visible = true;
-                        DeleteCameraToolStripMenuItem.Visible = true;*/
-                    }
-                    else
-                    {
-                        if (node != null && node.ParentNode.ParentNode.ParentNode== null)
-                        popupMenu1.ShowPopup(Cursor.Position);
-
-                    }
-                }
-
-            }
-
-
-        }
-
-        private void treeListShowDecoder_MouseUp(object sender, MouseEventArgs e)
-        {
-           /* if (treeListShowDecoder.FocusedNode != null && e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                if(treeListShowDecoder.FocusedNode.Tag.ToString().IndexOf("A")>0)
+                TreeListNode node = treeListShowDecoder.FocusedNode;
+                if ((node.Tag.ToString()).IndexOf("T") >= 0)
                 {
                     popupMenuDecoder.ShowPopup(Cursor.Position);
 
                 }
-                else if(treeListShowDecoder.FocusedNode.Tag.ToString().IndexOf("B")>0)
+                else if ((node.Tag.ToString()).IndexOf("D") >= 0)
                 {
                     popupMenuCamera.ShowPopup(Cursor.Position);
-                    
                 }
-                
-            }*/
+                else if ((node.Tag.ToString()).IndexOf("C") >= 0)
+                {
+                    popupMenu1.ShowPopup(Cursor.Position);
+                }
+            }
         }
         //添加解码器
         private void barButtonItem1AddDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1193,7 +1116,7 @@ namespace CameraViewer.Forms
             }
             if ((tn.Tag.ToString().IndexOf("B") >= 0))
             {
-                if (MessageBox.Show("确定要删除该解码器?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                if (XtraMessageBox.Show("确定要删除该解码器?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
                     string[] strs = tn.Tag.ToString().Split(';');
                     int decoderid = int.Parse(strs[0]);
@@ -1227,7 +1150,7 @@ namespace CameraViewer.Forms
             }
             if ((tn.Tag.ToString().IndexOf("C") >= 0))
             {
-                if (MessageBox.Show("确定要删除该摄像头?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                if (XtraMessageBox.Show("确定要删除该摄像头?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
                     string[] strs = tn.Tag.ToString().Split(';');
                     int cameraid = int.Parse(strs[0]);

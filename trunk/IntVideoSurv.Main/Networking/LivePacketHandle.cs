@@ -21,8 +21,7 @@ namespace CameraViewer.NetWorking
 
         public bool CanHandle(byte[] bytes)
         {
-            logger.Info("判断是否是图像数据" + bytes[8].ToString()+"\t"+bytes[9].ToString());
-            return (bytes[8] == 1) && (bytes[9] == 1);
+            return BitConverter.ToInt32(bytes, 0) ==7;
         }
         public static string FromASCIIByteArray(byte[] characters)
         {
@@ -37,14 +36,17 @@ namespace CameraViewer.NetWorking
             {
                 logger.Info("开始解析图像数据");
 
-                int length = ToInt32Reverse(bytes, 4);//数据长度
-                if (length + 8 == bytes.Length)
+                int datalength = BitConverter.ToInt32(bytes, 4);//数据长度
+                int width = BitConverter.ToInt32(bytes, 8);//图像宽度
+                int height = BitConverter.ToInt32(bytes, 12);//图像宽度
+                int picType = BitConverter.ToInt32(bytes, 16);//图像宽度
+                int decoderId = BitConverter.ToInt32(bytes, 20);//图像宽度
+
+                if (datalength + 8 == bytes.Length)
                 {
-                    //取得通道号
-                    LaneId = bytes[10];
                     //获取图像数据的真实长度
-                    var imgLen = BitConverter.ToInt32(bytes, 12);
-                    var ms = new MemoryStream(bytes, 16, imgLen);
+                    var imgLen = datalength - 16;
+                    var ms = new MemoryStream(bytes, 24, imgLen);
                     CurrentImage = Image.FromStream(ms);
                     ms.Close();
                     ms.Dispose();

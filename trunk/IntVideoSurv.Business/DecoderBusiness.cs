@@ -38,7 +38,7 @@ namespace IntVideoSurv.Business
             {
                 if (DecoderDataAccess.GetTheCamera(db, ocamera).Tables[0].Rows.Count!=0)
                 {
-                    MessageBox.Show("对不起，您添加的摄像头已经被其他的解码器使用，请另选");
+                    
                     return -1;
 
                 }
@@ -358,8 +358,6 @@ namespace IntVideoSurv.Business
                         heightNode.InnerText = VARIABLE.Value.Height.ToString();
                         cameraNode.AppendChild(heightNode);
 
-
-
                     }                    
                 }
                 ret = doc.InnerXml;
@@ -388,6 +386,8 @@ namespace IntVideoSurv.Business
                 return null;
             }
 
-        }
+        }
+
+
     }
 }

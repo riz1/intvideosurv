@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
 using IntVideoSurv.Business.HiK;
@@ -912,7 +913,7 @@ namespace CameraViewer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                XtraMessageBox.Show(ex.ToString());
             }
 
         }

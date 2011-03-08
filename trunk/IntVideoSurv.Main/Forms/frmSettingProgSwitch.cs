@@ -195,7 +195,7 @@ namespace CameraViewer.Forms
             }
             catch (Exception)
             {
-                MessageBox.Show("请填入正确的间隔时间!");
+                XtraMessageBox.Show("请填入正确的间隔时间!");
                 return;
             }
 

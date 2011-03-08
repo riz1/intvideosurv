@@ -67,5 +67,29 @@ namespace CameraViewer.Properties {
                 this["AutoConnectTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.111")]
+        public string DecoderIp {
+            get {
+                return ((string)(this["DecoderIp"]));
+            }
+            set {
+                this["DecoderIp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9999")]
+        public int DecoderPort {
+            get {
+                return ((int)(this["DecoderPort"]));
+            }
+            set {
+                this["DecoderPort"] = value;
+            }
+        }
     }
 }

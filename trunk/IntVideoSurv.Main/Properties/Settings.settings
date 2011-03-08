@@ -14,5 +14,11 @@
     <Setting Name="AutoConnectTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="DecoderIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.1.111</Value>
+    </Setting>
+    <Setting Name="DecoderPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">9999</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

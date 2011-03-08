@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace CameraViewer
 {
@@ -249,7 +250,7 @@ namespace CameraViewer
 					// highligh name edit box
 					this.nameBox.BackColor = Color.LightCoral;
 					// error message
-					MessageBox.Show(this, "A camera with such name is already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+					XtraMessageBox.Show(this, "A camera with such name is already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 					// restore & focus name edit box
 					this.nameBox.BackColor = tmp;
 					this.nameBox.Focus();

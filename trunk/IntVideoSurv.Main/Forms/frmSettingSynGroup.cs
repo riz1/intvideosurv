@@ -194,7 +194,7 @@ namespace CameraViewer.Forms
             }
             if (cbDisplayScreenNo.Text=="")
             {
-                MessageBox.Show("请正确选择输出通道!");
+                XtraMessageBox.Show("请正确选择输出通道!");
                 return;
             }
             alCameras.Clear();
@@ -214,7 +214,7 @@ namespace CameraViewer.Forms
                         CameraInfo ci = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, camid);
                         SynGroup sg = SynGroupBusiness.Instance.GetSynGroupBySynGroupId(ref errMessage, synGroupToAdd);
                         DisplayChannelInfo mi = DisplayChannelBusiness.Instance.GetDisplayChannelInfoById(ref errMessage, dc);
-                        MessageBox.Show(ci.DeviceName + "_" + ci.Name + "_" + mi.DisplayChannelName + " 在 " + sg.Name + " 组中已存在!");
+                        XtraMessageBox.Show(ci.DeviceName + "_" + ci.Name + "_" + mi.DisplayChannelName + " 在 " + sg.Name + " 组中已存在!");
                     }                    
                 }
 
@@ -424,7 +424,7 @@ namespace CameraViewer.Forms
         {
             if (treeViewSynGroup.SelectedNode.Nodes.Count != 0)
             {
-                MessageBox.Show("要删除的节点的子节点必须为空!");
+                XtraMessageBox.Show("要删除的节点的子节点必须为空!");
                 return;
             }
             string nodeText = treeViewSynGroup.SelectedNode.Tag.ToString();

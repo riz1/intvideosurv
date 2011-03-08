@@ -60,18 +60,25 @@ namespace CameraViewer.Forms
             int cameraid;
             cameraid = int.Parse(treeList1DecoderCamera.FocusedNode.Tag.ToString().Split(';')[0]);
             int id= DecoderBusiness.Instance.InsertCamera(ref errMessage, DecoderID, cameraid);
-
-            OperateLog ol = new OperateLog
+            if (-1==id)
             {
-                HappenTime = DateTime.Now,
-                OperateTypeId = (int)(OperateLogTypeId.CameraAddInDecoder),
-                OperateTypeName = OperateLogTypeName.CameraAddInDecoder,
-                Content = id.ToString(),
-                OperateUserName = MainForm.CurrentUser.UserName,
-                ClientUserName = MainForm.CurrentUser.UserName,
-                ClientUserId = MainForm.CurrentUser.UserId
-            };
-            OperateLogBusiness.Instance.Insert(ref errMessage, ol);
+                XtraMessageBox.Show("对不起，您添加的摄像头已经被其他的解码器使用，请另选");
+            }
+            else
+            {
+                OperateLog ol = new OperateLog
+                {
+                    HappenTime = DateTime.Now,
+                    OperateTypeId = (int)(OperateLogTypeId.CameraAddInDecoder),
+                    OperateTypeName = OperateLogTypeName.CameraAddInDecoder,
+                    Content = id.ToString(),
+                    OperateUserName = MainForm.CurrentUser.UserName,
+                    ClientUserName = MainForm.CurrentUser.UserName,
+                    ClientUserId = MainForm.CurrentUser.UserId
+                };
+                OperateLogBusiness.Instance.Insert(ref errMessage, ol);                
+            }
+
             Close();
             Dispose();
         }

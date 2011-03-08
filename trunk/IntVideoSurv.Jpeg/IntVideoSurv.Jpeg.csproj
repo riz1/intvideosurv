@@ -74,11 +74,11 @@
     </Reference>
     <Reference Include="Damany.Cameras, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\refdll\Damany.Cameras.dll</HintPath>
+      <HintPath>bin\Debug\Damany.Cameras.dll</HintPath>
     </Reference>
     <Reference Include="Damany.Imaging.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\refdll\Damany.Imaging.Common.dll</HintPath>
+      <HintPath>bin\Debug\Damany.Imaging.Common.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using IntVideoSurv.Entity;
 using log4net;
 using Microsoft.Practices.EnterpriseLibrary.Data;
@@ -385,7 +386,7 @@ namespace IntVideoSurv.Business.HiK
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                XtraMessageBox.Show(ex.ToString());
             }
         }
 
@@ -548,7 +549,7 @@ namespace IntVideoSurv.Business.HiK
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                XtraMessageBox.Show(ex.ToString());
             }
         }
 
@@ -713,7 +714,7 @@ namespace IntVideoSurv.Business.HiK
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                XtraMessageBox.Show(ex.ToString());
             }
         }
 
@@ -878,7 +879,7 @@ namespace IntVideoSurv.Business.HiK
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                XtraMessageBox.Show(ex.ToString());
             }
         }
 
@@ -1042,7 +1043,7 @@ namespace IntVideoSurv.Business.HiK
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                XtraMessageBox.Show(ex.ToString());
             }
         }
 
