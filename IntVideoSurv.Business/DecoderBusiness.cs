@@ -367,5 +367,27 @@ namespace IntVideoSurv.Business
 
             return ret;
         }
+        public DeviceInfo GetDeviceInfoByCameraId(ref string errMessage, int Id)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = DecoderDataAccess.GetDeviceInfoByCameraId(db, Id);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    return null;
+                }
+                return new DeviceInfo(ds.Tables[0].Rows[0]);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+
+        }
     }
 }
