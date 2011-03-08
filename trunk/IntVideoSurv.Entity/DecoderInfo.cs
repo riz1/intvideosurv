@@ -10,7 +10,7 @@ namespace IntVideoSurv.Entity
 {
     [Serializable]
     public class DecoderInfo : EntityObject
-    {  
+    {
         public DecoderInfo() { }
         
         public DecoderInfo(IDataReader dataReader) : base(dataReader) { }
@@ -19,8 +19,9 @@ namespace IntVideoSurv.Entity
 
         [ColumnMapping()]
         public int id { get; set; }
+
         [ColumnMapping()]
-        public string Name { get; set;}
+        public string Name { set; get; }
         [ColumnMapping()]
         public string Ip { get; set; }
 
