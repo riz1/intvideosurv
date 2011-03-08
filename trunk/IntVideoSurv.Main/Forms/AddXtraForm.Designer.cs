@@ -137,7 +137,9 @@
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
+            this.MaximizeBox = false;
             this.Name = "AddXtraForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "新增解码器";
             ((System.ComponentModel.ISupportInitialize)(this.textEditname.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditIp.Properties)).EndInit();
