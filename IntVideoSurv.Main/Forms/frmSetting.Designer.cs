@@ -40,10 +40,6 @@ namespace CameraViewer.Forms
             this.nbDevice = new DevExpress.XtraNavBar.NavBarItem();
             this.nbUser = new DevExpress.XtraNavBar.NavBarItem();
             this.nbLog = new DevExpress.XtraNavBar.NavBarItem();
-            this.nbSynGroup = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItemGroupSwitch = new DevExpress.XtraNavBar.NavBarItem();
-            this.nbProgSwitch = new DevExpress.XtraNavBar.NavBarItem();
-            this.nbDisplayChannel = new DevExpress.XtraNavBar.NavBarItem();
             this.nbMap = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
@@ -364,10 +360,6 @@ namespace CameraViewer.Forms
             this.nbLog,
             this.navBarItem6,
             this.navBarItem7,
-            this.nbSynGroup,
-            this.navBarItemGroupSwitch,
-            this.nbProgSwitch,
-            this.nbDisplayChannel,
             this.nbMap,
             this.navBarItem1,
             this.navBarItem2});
@@ -390,10 +382,6 @@ namespace CameraViewer.Forms
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbDevice),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbUser),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbLog),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.nbSynGroup),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemGroupSwitch),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.nbProgSwitch),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.nbDisplayChannel),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbMap),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2)});
@@ -422,38 +410,6 @@ namespace CameraViewer.Forms
             this.nbLog.Name = "nbLog";
             this.nbLog.SmallImageIndex = 2;
             this.nbLog.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbLog_LinkClicked);
-            // 
-            // nbSynGroup
-            // 
-            this.nbSynGroup.Caption = "同步群组";
-            this.nbSynGroup.LargeImageIndex = 0;
-            this.nbSynGroup.Name = "nbSynGroup";
-            this.nbSynGroup.SmallImageIndex = 0;
-            this.nbSynGroup.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbSynGroup_LinkClicked);
-            // 
-            // navBarItemGroupSwitch
-            // 
-            this.navBarItemGroupSwitch.Caption = "群组切换";
-            this.navBarItemGroupSwitch.LargeImageIndex = 4;
-            this.navBarItemGroupSwitch.Name = "navBarItemGroupSwitch";
-            this.navBarItemGroupSwitch.SmallImageIndex = 4;
-            this.navBarItemGroupSwitch.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemGroupSwitch_LinkClicked);
-            // 
-            // nbProgSwitch
-            // 
-            this.nbProgSwitch.Caption = "程序切换";
-            this.nbProgSwitch.LargeImageIndex = 8;
-            this.nbProgSwitch.Name = "nbProgSwitch";
-            this.nbProgSwitch.SmallImageIndex = 8;
-            this.nbProgSwitch.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbProgSwitch_LinkClicked);
-            // 
-            // nbDisplayChannel
-            // 
-            this.nbDisplayChannel.Caption = "输出管理";
-            this.nbDisplayChannel.LargeImageIndex = 7;
-            this.nbDisplayChannel.Name = "nbDisplayChannel";
-            this.nbDisplayChannel.SmallImageIndex = 7;
-            this.nbDisplayChannel.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbDisplayChannel_LinkClicked);
             // 
             // nbMap
             // 
@@ -496,9 +452,9 @@ namespace CameraViewer.Forms
             // gcDeviceManagement
             // 
             this.gcDeviceManagement.Controls.Add(this.splitContainerControl1);
-            this.gcDeviceManagement.Location = new System.Drawing.Point(317, 248);
+            this.gcDeviceManagement.Location = new System.Drawing.Point(317, 216);
             this.gcDeviceManagement.Name = "gcDeviceManagement";
-            this.gcDeviceManagement.Size = new System.Drawing.Size(113, 75);
+            this.gcDeviceManagement.Size = new System.Drawing.Size(440, 290);
             this.gcDeviceManagement.TabIndex = 31;
             this.gcDeviceManagement.Text = "设备管理";
             this.gcDeviceManagement.Visible = false;
@@ -512,7 +468,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.dgvDevice);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(109, 50);
+            this.splitContainerControl1.Size = new System.Drawing.Size(436, 265);
             this.splitContainerControl1.SplitterPosition = 198;
             this.splitContainerControl1.TabIndex = 7;
             this.splitContainerControl1.Text = "splitContainerControl1";
@@ -523,7 +479,7 @@ namespace CameraViewer.Forms
             this.treeViewDevice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDevice.Location = new System.Drawing.Point(0, 0);
             this.treeViewDevice.Name = "treeViewDevice";
-            this.treeViewDevice.Size = new System.Drawing.Size(104, 50);
+            this.treeViewDevice.Size = new System.Drawing.Size(198, 265);
             this.treeViewDevice.TabIndex = 6;
             this.treeViewDevice.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
@@ -596,15 +552,15 @@ namespace CameraViewer.Forms
             this.dgvDevice.RowHeadersVisible = false;
             this.dgvDevice.RowTemplate.Height = 23;
             this.dgvDevice.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDevice.Size = new System.Drawing.Size(0, 0);
+            this.dgvDevice.Size = new System.Drawing.Size(233, 265);
             this.dgvDevice.TabIndex = 1;
             // 
             // gcUserManagement
             // 
             this.gcUserManagement.Controls.Add(this.splitContainerControl6);
-            this.gcUserManagement.Location = new System.Drawing.Point(5, 12);
+            this.gcUserManagement.Location = new System.Drawing.Point(317, 12);
             this.gcUserManagement.Name = "gcUserManagement";
-            this.gcUserManagement.Size = new System.Drawing.Size(53, 99);
+            this.gcUserManagement.Size = new System.Drawing.Size(99, 99);
             this.gcUserManagement.TabIndex = 8;
             this.gcUserManagement.Text = "用户管理";
             // 
@@ -620,7 +576,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl6.Panel2.Controls.Add(this.buttonUserDelete);
             this.splitContainerControl6.Panel2.Controls.Add(this.buttonUserAdd);
             this.splitContainerControl6.Panel2.Text = "Panel2";
-            this.splitContainerControl6.Size = new System.Drawing.Size(49, 74);
+            this.splitContainerControl6.Size = new System.Drawing.Size(95, 74);
             this.splitContainerControl6.SplitterPosition = 181;
             this.splitContainerControl6.TabIndex = 0;
             this.splitContainerControl6.Text = "splitContainerControl6";
@@ -640,7 +596,7 @@ namespace CameraViewer.Forms
             this.dataGridViewUser.RowHeadersVisible = false;
             this.dataGridViewUser.RowTemplate.Height = 23;
             this.dataGridViewUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewUser.Size = new System.Drawing.Size(49, 69);
+            this.dataGridViewUser.Size = new System.Drawing.Size(95, 69);
             this.dataGridViewUser.TabIndex = 1;
             // 
             // buttonUserUpdate
@@ -1129,7 +1085,7 @@ namespace CameraViewer.Forms
             this.DecoderManagement.Controls.Add(this.splitContainerControl7);
             this.DecoderManagement.Location = new System.Drawing.Point(103, 225);
             this.DecoderManagement.Name = "DecoderManagement";
-            this.DecoderManagement.Size = new System.Drawing.Size(798, 230);
+            this.DecoderManagement.Size = new System.Drawing.Size(173, 179);
             this.DecoderManagement.TabIndex = 34;
             this.DecoderManagement.Text = "解码器管理";
             this.DecoderManagement.Paint += new System.Windows.Forms.PaintEventHandler(this.DecoderManagement_Paint);
@@ -1143,7 +1099,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.gridControl1);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(794, 205);
+            this.splitContainerControl7.Size = new System.Drawing.Size(169, 154);
             this.splitContainerControl7.SplitterPosition = 158;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
@@ -1163,7 +1119,7 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.OptionsView.ShowHorzLines = false;
             this.treeListShowDecoder.OptionsView.ShowIndicator = false;
             this.treeListShowDecoder.OptionsView.ShowVertLines = false;
-            this.treeListShowDecoder.Size = new System.Drawing.Size(158, 205);
+            this.treeListShowDecoder.Size = new System.Drawing.Size(158, 154);
             this.treeListShowDecoder.TabIndex = 0;
             this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
             this.treeListShowDecoder.Click += new System.EventHandler(this.ShowDecoderAndCameraDataInGridView);
@@ -1192,7 +1148,7 @@ namespace CameraViewer.Forms
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(631, 205);
+            this.gridControl1.Size = new System.Drawing.Size(6, 154);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
@@ -1252,7 +1208,7 @@ namespace CameraViewer.Forms
             // 
             this.gcDisplayChannelManagement.Controls.Add(this.dgvDisplayChannel);
             this.gcDisplayChannelManagement.Controls.Add(this.groupControl6);
-            this.gcDisplayChannelManagement.Location = new System.Drawing.Point(222, 7);
+            this.gcDisplayChannelManagement.Location = new System.Drawing.Point(965, 10);
             this.gcDisplayChannelManagement.Name = "gcDisplayChannelManagement";
             this.gcDisplayChannelManagement.Size = new System.Drawing.Size(81, 49);
             this.gcDisplayChannelManagement.TabIndex = 8;
@@ -1327,9 +1283,9 @@ namespace CameraViewer.Forms
             this.gcProgSwitchManagement.Controls.Add(this.pcProgSwitchDisplay);
             this.gcProgSwitchManagement.Controls.Add(this.gcDeviceInProSwitchManagement);
             this.gcProgSwitchManagement.Controls.Add(this.groupControl5);
-            this.gcProgSwitchManagement.Location = new System.Drawing.Point(339, 89);
+            this.gcProgSwitchManagement.Location = new System.Drawing.Point(880, 89);
             this.gcProgSwitchManagement.Name = "gcProgSwitchManagement";
-            this.gcProgSwitchManagement.Size = new System.Drawing.Size(118, 98);
+            this.gcProgSwitchManagement.Size = new System.Drawing.Size(62, 48);
             this.gcProgSwitchManagement.TabIndex = 14;
             this.gcProgSwitchManagement.Text = "程序切换管理";
             this.gcProgSwitchManagement.Resize += new System.EventHandler(this.gcProgSwitchManagement_Resize);
@@ -1473,7 +1429,7 @@ namespace CameraViewer.Forms
             this.gcDeviceInProSwitchManagement.Dock = System.Windows.Forms.DockStyle.Left;
             this.gcDeviceInProSwitchManagement.Location = new System.Drawing.Point(2, 23);
             this.gcDeviceInProSwitchManagement.Name = "gcDeviceInProSwitchManagement";
-            this.gcDeviceInProSwitchManagement.Size = new System.Drawing.Size(237, 73);
+            this.gcDeviceInProSwitchManagement.Size = new System.Drawing.Size(237, 23);
             this.gcDeviceInProSwitchManagement.TabIndex = 21;
             this.gcDeviceInProSwitchManagement.Text = "设备";
             // 
@@ -1481,9 +1437,9 @@ namespace CameraViewer.Forms
             // 
             this.groupControl5.Controls.Add(this.tvProgSwitch);
             this.groupControl5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupControl5.Location = new System.Drawing.Point(-102, 23);
+            this.groupControl5.Location = new System.Drawing.Point(-158, 23);
             this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(218, 73);
+            this.groupControl5.Size = new System.Drawing.Size(218, 23);
             this.groupControl5.TabIndex = 20;
             this.groupControl5.Text = "程序切换";
             // 
@@ -1493,7 +1449,7 @@ namespace CameraViewer.Forms
             this.tvProgSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvProgSwitch.Location = new System.Drawing.Point(2, 23);
             this.tvProgSwitch.Name = "tvProgSwitch";
-            this.tvProgSwitch.Size = new System.Drawing.Size(214, 48);
+            this.tvProgSwitch.Size = new System.Drawing.Size(214, 0);
             this.tvProgSwitch.TabIndex = 8;
             this.tvProgSwitch.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvProgSwitch_AfterSelect);
             this.tvProgSwitch.Leave += new System.EventHandler(this.tvProgSwitch_Leave);
@@ -1518,9 +1474,9 @@ namespace CameraViewer.Forms
             this.gcGroupSwitchManagement.Controls.Add(this.pcGroupSwitchDisplay);
             this.gcGroupSwitchManagement.Controls.Add(this.gcSynGroup);
             this.gcGroupSwitchManagement.Controls.Add(this.gcGroupSwitchGroup);
-            this.gcGroupSwitchManagement.Location = new System.Drawing.Point(339, 7);
+            this.gcGroupSwitchManagement.Location = new System.Drawing.Point(961, 70);
             this.gcGroupSwitchManagement.Name = "gcGroupSwitchManagement";
-            this.gcGroupSwitchManagement.Size = new System.Drawing.Size(129, 70);
+            this.gcGroupSwitchManagement.Size = new System.Drawing.Size(88, 50);
             this.gcGroupSwitchManagement.TabIndex = 13;
             this.gcGroupSwitchManagement.Text = "群组切换管理";
             this.gcGroupSwitchManagement.Resize += new System.EventHandler(this.gcGroupSwitchManagement_Resize);
@@ -1648,7 +1604,7 @@ namespace CameraViewer.Forms
             this.gcSynGroup.Dock = System.Windows.Forms.DockStyle.Left;
             this.gcSynGroup.Location = new System.Drawing.Point(2, 23);
             this.gcSynGroup.Name = "gcSynGroup";
-            this.gcSynGroup.Size = new System.Drawing.Size(237, 45);
+            this.gcSynGroup.Size = new System.Drawing.Size(237, 25);
             this.gcSynGroup.TabIndex = 14;
             this.gcSynGroup.Text = "同步群组";
             // 
@@ -1657,7 +1613,7 @@ namespace CameraViewer.Forms
             this.tvSynGroupTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvSynGroupTop.Location = new System.Drawing.Point(2, 23);
             this.tvSynGroupTop.Name = "tvSynGroupTop";
-            this.tvSynGroupTop.Size = new System.Drawing.Size(233, 20);
+            this.tvSynGroupTop.Size = new System.Drawing.Size(233, 0);
             this.tvSynGroupTop.TabIndex = 8;
             this.tvSynGroupTop.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSynGroupTop_AfterSelect);
             this.tvSynGroupTop.Leave += new System.EventHandler(this.tvSynGroupTop_Leave);
@@ -1666,9 +1622,9 @@ namespace CameraViewer.Forms
             // 
             this.gcGroupSwitchGroup.Controls.Add(this.tvGroupSwitchGroup);
             this.gcGroupSwitchGroup.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gcGroupSwitchGroup.Location = new System.Drawing.Point(-91, 23);
+            this.gcGroupSwitchGroup.Location = new System.Drawing.Point(-132, 23);
             this.gcGroupSwitchGroup.Name = "gcGroupSwitchGroup";
-            this.gcGroupSwitchGroup.Size = new System.Drawing.Size(218, 45);
+            this.gcGroupSwitchGroup.Size = new System.Drawing.Size(218, 25);
             this.gcGroupSwitchGroup.TabIndex = 13;
             this.gcGroupSwitchGroup.Text = "群组切换";
             // 
@@ -1678,7 +1634,7 @@ namespace CameraViewer.Forms
             this.tvGroupSwitchGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvGroupSwitchGroup.Location = new System.Drawing.Point(2, 23);
             this.tvGroupSwitchGroup.Name = "tvGroupSwitchGroup";
-            this.tvGroupSwitchGroup.Size = new System.Drawing.Size(214, 20);
+            this.tvGroupSwitchGroup.Size = new System.Drawing.Size(214, 0);
             this.tvGroupSwitchGroup.TabIndex = 8;
             this.tvGroupSwitchGroup.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvGroupSwitchGroup_AfterSelect);
             this.tvGroupSwitchGroup.Leave += new System.EventHandler(this.tvGroupSwitchGroup_Leave);
@@ -1705,7 +1661,7 @@ namespace CameraViewer.Forms
             this.gcMap.Controls.Add(this.pcMapTreeview);
             this.gcMap.Location = new System.Drawing.Point(66, 79);
             this.gcMap.Name = "gcMap";
-            this.gcMap.Size = new System.Drawing.Size(212, 115);
+            this.gcMap.Size = new System.Drawing.Size(248, 123);
             this.gcMap.TabIndex = 32;
             this.gcMap.Text = "地图管理";
             // 
@@ -1716,7 +1672,7 @@ namespace CameraViewer.Forms
             this.pcMapPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pcMapPreview.Location = new System.Drawing.Point(188, 23);
             this.pcMapPreview.Name = "pcMapPreview";
-            this.pcMapPreview.Size = new System.Drawing.Size(22, 90);
+            this.pcMapPreview.Size = new System.Drawing.Size(58, 98);
             this.pcMapPreview.TabIndex = 1;
             // 
             // pictureBoxMap
@@ -1724,7 +1680,7 @@ namespace CameraViewer.Forms
             this.pictureBoxMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxMap.Location = new System.Drawing.Point(2, 2);
             this.pictureBoxMap.Name = "pictureBoxMap";
-            this.pictureBoxMap.Size = new System.Drawing.Size(18, 61);
+            this.pictureBoxMap.Size = new System.Drawing.Size(54, 69);
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxMap.TabIndex = 4;
             this.pictureBoxMap.TabStop = false;
@@ -1735,9 +1691,9 @@ namespace CameraViewer.Forms
             this.panelControl2.Controls.Add(this.btnAddMap);
             this.panelControl2.Controls.Add(this.teMapName);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(2, 63);
+            this.panelControl2.Location = new System.Drawing.Point(2, 71);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(18, 25);
+            this.panelControl2.Size = new System.Drawing.Size(54, 25);
             this.panelControl2.TabIndex = 3;
             // 
             // btnBrowserMap
@@ -1772,7 +1728,7 @@ namespace CameraViewer.Forms
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(188, 23);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(22, 90);
+            this.panelControl1.Size = new System.Drawing.Size(58, 98);
             this.panelControl1.TabIndex = 3;
             // 
             // pcMapTreeview
@@ -1781,7 +1737,7 @@ namespace CameraViewer.Forms
             this.pcMapTreeview.Dock = System.Windows.Forms.DockStyle.Left;
             this.pcMapTreeview.Location = new System.Drawing.Point(2, 23);
             this.pcMapTreeview.Name = "pcMapTreeview";
-            this.pcMapTreeview.Size = new System.Drawing.Size(186, 90);
+            this.pcMapTreeview.Size = new System.Drawing.Size(186, 98);
             this.pcMapTreeview.TabIndex = 0;
             // 
             // tvMap
@@ -1790,7 +1746,7 @@ namespace CameraViewer.Forms
             this.tvMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvMap.Location = new System.Drawing.Point(2, 2);
             this.tvMap.Name = "tvMap";
-            this.tvMap.Size = new System.Drawing.Size(182, 86);
+            this.tvMap.Size = new System.Drawing.Size(182, 94);
             this.tvMap.TabIndex = 0;
             this.tvMap.DoubleClick += new System.EventHandler(this.tvMap_DoubleClick);
             // 
@@ -1940,6 +1896,7 @@ namespace CameraViewer.Forms
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSetting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "系统配置";
@@ -2078,8 +2035,6 @@ namespace CameraViewer.Forms
         private System.Windows.Forms.ToolStripMenuItem EditDeviceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteDeviceToolStripMenuItem;
         private System.Windows.Forms.TreeView treeViewDevice;
-
-        private DevExpress.XtraNavBar.NavBarItem nbSynGroup;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSynGroup;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemAddSynGroup;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDeleteSynGroup;
@@ -2117,9 +2072,7 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.GroupControl gcDevice;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private DevExpress.XtraNavBar.NavBarItem navBarItemGroupSwitch;
         private DevExpress.XtraEditors.GroupControl gcGroupSwitchManagement;
-        private DevExpress.XtraNavBar.NavBarItem nbProgSwitch;
         private DevExpress.XtraEditors.GroupControl gcProgSwitchManagement;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.TextEdit teGroupSwitchTick;
@@ -2155,7 +2108,6 @@ namespace CameraViewer.Forms
         private System.Windows.Forms.DataGridView dgvProgSwitchDetail;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvDevice;
-        private DevExpress.XtraNavBar.NavBarItem nbDisplayChannel;
         private DevExpress.XtraEditors.GroupControl gcDisplayChannelManagement;
         private DevExpress.XtraEditors.GroupControl groupControl6;
         private System.Windows.Forms.TreeView tvDisplayChannel;
