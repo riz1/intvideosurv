@@ -40,7 +40,7 @@ namespace CameraViewer.Forms
             BuildDisplayChannelTreeInDisplayChannelManagement();
             dateEditEndDate.DateTime = DateTime.Now;
             DisplayRightPanel();
-           
+            showDecoderInfo();
 
         }
         private void BuildDeviceTree()
@@ -89,7 +89,8 @@ namespace CameraViewer.Forms
                     treeListNodeDecoder.Tag = item.Key + ";B";
                     foreach (KeyValuePair<int, CameraInfo> cam in item.Value.ListCameras)
                     {
-                        camnode = treeListShowDecoder.AppendNode(new[] { cam.Value.Name, item.Key + ";C" }, treeListNodeDecoder.Id, 1, 3, 1, CheckState.Checked);
+                        DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, cam.Value.CameraId);
+                        camnode = treeListShowDecoder.AppendNode(new[] { di.Name+":"+cam.Value.Name, item.Key + ";C" }, treeListNodeDecoder.Id, 1, 3, 1, CheckState.Checked);
                         camnode.Tag = cam.Key.ToString() + ";C";
                     }
                 }
@@ -1016,33 +1017,37 @@ namespace CameraViewer.Forms
 
        // }
         //GridControl显示解码器信息
-        private void ShowDecoderAndCameraDataInGridView(object sender, EventArgs e)
-        {     
-            listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref errMessage);    
+        void showDecoderInfo()
+        {
+            listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref errMessage);
             var dataTable = new System.Data.DataTable("DecoderInfo");
             dataTable.Columns.Add("编号", typeof(int));
-            dataTable.Columns.Add("id", typeof(int));
-            dataTable.Columns.Add("Name", typeof(string));
-            dataTable.Columns.Add("Port", typeof(int));
-            dataTable.Columns.Add("Ip", typeof(string));
-            dataTable.Columns.Add("MaxChannelNo", typeof(int));
-            int i = 0;
+            // dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("解码器名称", typeof(string));
+            dataTable.Columns.Add("解码器端口", typeof(int));
+            dataTable.Columns.Add("Ip地址", typeof(string));
+            dataTable.Columns.Add("最大解码数", typeof(int));
+            int i = 1;
             foreach (var node in listDecoder)
             {
-           
-                dataTable.Rows.Add(i++,node.Value.id, node.Value.Name, node.Value.Port, node.Value.Ip, node.Value.MaxDecodeChannelNo);
+
+                dataTable.Rows.Add(i++, node.Value.Name, node.Value.Port, node.Value.Ip, node.Value.MaxDecodeChannelNo);
             }
-            
+
             gridControl1.DataSource = dataTable;
             gridControl1.MainView.PopulateColumns();
             gridView1.Columns["编号"].Width = 10;
-            gridView1.Columns["id"].Width = 20;
-            gridView1.Columns["Name"].Width = 30;
-            gridView1.Columns["Port"].Width = 10;
-            gridView1.Columns["Ip"].Width = 30;
-            gridView1.Columns["MaxChannelNo"].Width = 10;
+            //gridView1.Columns["id"].Width = 20;
+            gridView1.Columns["解码器名称"].Width = 30;
+            gridView1.Columns["解码器端口"].Width = 10;
+            gridView1.Columns["Ip地址"].Width = 30;
+            gridView1.Columns["最大解码数"].Width = 10;
             BuildDecoderTree();
-
+            
+        }
+        private void ShowDecoderAndCameraDataInGridView(object sender, EventArgs e)
+        {
+            showDecoderInfo();
         }
       
 
@@ -1115,6 +1120,7 @@ namespace CameraViewer.Forms
                     }
                     else
                     {
+                        if (node != null && node.ParentNode.ParentNode.ParentNode== null)
                         popupMenu1.ShowPopup(Cursor.Position);
 
                     }
@@ -1149,6 +1155,7 @@ namespace CameraViewer.Forms
             addDecoder.Opt = Util.Operateion.Add;
             addDecoder.ShowDialog(this);
             BuildDecoderTree();
+            showDecoderInfo();
         }
         
         private void barButtonItem2EditDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1166,6 +1173,7 @@ namespace CameraViewer.Forms
             addDecoder.Id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
             addDecoder.ShowDialog(this);
             BuildDecoderTree();
+            showDecoderInfo();
         }
         //添加摄像头
         private void barButtonItem4AddCamera_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1204,7 +1212,7 @@ namespace CameraViewer.Forms
                         OperateUserName =MainForm.CurrentUser.UserName
                     });
                     BuildDecoderTree();
-
+                    showDecoderInfo();
                 }
 
             }
