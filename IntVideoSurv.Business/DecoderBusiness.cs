@@ -29,13 +29,24 @@ namespace IntVideoSurv.Business
                 return instance;
             }
         }
+        //向decodercamera中添加摄像头信息
         public int InsertCamera(ref string errMessage, int odecoder, int ocamera)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             try
-            { 
-                    return DecoderDataAccess.InsertCamera(db, odecoder, ocamera);  
+            {
+                if (DecoderDataAccess.GetTheCamera(db, ocamera).Tables[0].Rows.Count!=0)
+                {
+                    MessageBox.Show("对不起，您添加的摄像头已经被其他的解码器使用，请另选");
+                    return -1;
+
+                }
+                else
+                {
+                    return DecoderDataAccess.InsertCamera(db, odecoder, ocamera);
+                }
+                //return DecoderDataAccess.InsertCamera(db, odecoder, ocamera);  
                     
             }
             catch (Exception ex)
@@ -46,6 +57,7 @@ namespace IntVideoSurv.Business
             }
             
         }
+       
         public int Insert(ref string errMessage, DecoderInfo decoder)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -98,6 +110,7 @@ namespace IntVideoSurv.Business
             }
 
         }
+        //删除解码器
         public int DeleteByDecoderId(ref string errMessage, int DecoderId)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -115,6 +128,7 @@ namespace IntVideoSurv.Business
             }
 
         }
+        //据摄像头id删除摄像头
         public int DeleteCamera(ref string errMessage, int CameraId)
         {
             Database db = DatabaseFactory.CreateDatabase();
