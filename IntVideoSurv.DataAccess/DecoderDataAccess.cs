@@ -245,10 +245,40 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static DataSet GetDeviceInfoByCameraId(Database db, int Id)
+        {
+
+            string cmdText = string.Format("select * from DeviceInfo where DeviceId in (select DeviceId from CameraInfo where CameraId={0})", Id);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public static DataSet GetCamInfoByCameraId(Database db, int CameraId)
         {
 
             string cmdText = string.Format("select * from CameraInfo where CameraId={0} order by CameraId", CameraId);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static DataSet GetTheCamera(Database db,int CameraId)
+        {
+
+            string cmdText = string.Format("select * from DecoderCamera where camera={0}", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
