@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using IntVideoSurv.DMClient;
 using SMRemotingInterface;
 
@@ -33,7 +34,7 @@ namespace DMClient
                     string.Format("tcp://{0}:8085/SMUserService", SMClientSetting.Default.RemotingServerIP));
                 if (obj1 == null)
                 {
-                    MessageBox.Show("连接Remoting服务器失败!");
+                    XtraMessageBox.Show("连接Remoting服务器失败!");
                 }
 
                 //注册
@@ -47,7 +48,7 @@ namespace DMClient
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.ToString());
+                XtraMessageBox.Show(ex.ToString());
             }
 
         }

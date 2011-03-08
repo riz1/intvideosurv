@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using DevExpress.XtraEditors;
 using IntVideoSurv.Business.HiK;
 
 namespace IntVideoSurv.Business
@@ -104,7 +105,7 @@ namespace IntVideoSurv.Business
             if (iRtn < 0)
             {
                 errMessage = "设备初始化失败";
-                MessageBox.Show(errMessage);
+                XtraMessageBox.Show(errMessage);
                 return;
             }
             TotalDSP = totalDSP;
@@ -112,7 +113,7 @@ namespace IntVideoSurv.Business
             if (TotalDSP == 0)
             {
                 errMessage = "没有可用的通道！！您是否已经启动服务器端？";
-                MessageBox.Show(errMessage);
+                XtraMessageBox.Show(errMessage);
                 return;
             }
 
@@ -120,7 +121,7 @@ namespace IntVideoSurv.Business
             //if (iRtn < 0)
             //{
             //    errMessage = "设置视频制式失败";
-            //    MessageBox.Show(errMessage);
+            //    XtraMessageBox.Show(errMessage);
             //    return;
             //}
             IsValid = true;

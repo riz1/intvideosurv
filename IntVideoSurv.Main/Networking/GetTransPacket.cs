@@ -13,8 +13,8 @@ namespace CameraViewer.NetWorking
         public GetTransPacket()
         {
             LivePacketHandle = new LivePacketHandle();
-            CameraStateHandle = new CameraStateHandle();
-            _handlers = new IPacketHandler[] { LivePacketHandle};
+            DecoderStateHandle = new DecoderStateHandle();
+            _handlers = new IPacketHandler[] { LivePacketHandle, DecoderStateHandle };
         }
 
         private readonly IPacketHandler[] _handlers;
@@ -24,7 +24,7 @@ namespace CameraViewer.NetWorking
         private NetworkStream _networkStream;
 
         public LivePacketHandle LivePacketHandle;
-        public CameraStateHandle CameraStateHandle;
+        public DecoderStateHandle DecoderStateHandle;
         public event MainForm.ImageDataChangeHandle ConnectionServerHandle;
         private bool _connectState;
 
@@ -88,14 +88,12 @@ namespace CameraViewer.NetWorking
         //发送心跳信号
         public void SendHbTrade()
         {
-            byte[] bytes = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(1));
-            byte[] bytet = BitConverter.GetBytes(0x00010100);
             byte[] byteHb = new byte[16] { 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa };
-
+            byte[] byteToSend = BuildPackte(99, byteHb, 0, 16);
             try
             {
                 if (_networkStream != null)
-                    _networkStream.Write(byteHb, 0, byteHb.Length);
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
             }
             catch (IOException ex)
             {
@@ -112,23 +110,21 @@ namespace CameraViewer.NetWorking
 
         private byte[] BuildPackte(int type,  byte[] data, int pos, int length)
         {
-            byte[] byteHb = new byte[length+8];
-            
+            int dataLength = (length + 8);
+            byte[] byteHb = new byte[dataLength + 8];
+
             //包头（格式+包长）
             byteHb[0] = byteHb[2] = 0xaa; byteHb[1] = byteHb[3] = 0x55;
-            byteHb[4] = (byte)(((length + 8) & 0xff000000) >> 6); byteHb[5] = (byte)(((length + 8) & 0x00ff0000) >> 4);
-            byteHb[6] = (byte)(((length + 8) & 0x0000ff00) >> 2); byteHb[7] = (byte)(((length + 8) & 0x000000ff));
+            Array.Copy(BitConverter.GetBytes(dataLength), 0, byteHb, 4, 4);
 
             //数据类型
-            byteHb[8] = byteHb[9] = byteHb[10] = 0;
-            byteHb[11] = (byte)(type & 0x000000ff);
+
+            Array.Copy(BitConverter.GetBytes(type), 0, byteHb, 8, 4);
 
             //数据长度
+            Array.Copy(BitConverter.GetBytes(length), 0, byteHb, 12, 4);
 
-            byteHb[12] = (byte)(((length) & 0xff000000) >> 6); byteHb[13] = (byte)(((length) & 0x00ff0000) >> 4);
-            byteHb[14] = (byte)(((length) & 0x0000ff00) >> 2); byteHb[15] = (byte)(((length) & 0x000000ff));
-            
-            //
+            //真实数据
             Array.Copy(data, pos, byteHb, 16, length);
 
             return byteHb;
@@ -141,12 +137,12 @@ namespace CameraViewer.NetWorking
             
             byte[] byteArray = System.Text.Encoding.Default.GetBytes(DecoderBusiness.Instance.GetDecoderXMLString(decoderid));
 
-            byte[] byteHb = BuildPackte(1, byteArray, 0, byteArray.Length);
+            byte[] byteToSend = BuildPackte(1, byteArray, 0, byteArray.Length);
 
             try
             {
                 if (_networkStream != null)
-                    _networkStream.Write(byteHb, 0, byteHb.Length);
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
             }
             catch (IOException ex)
             {
@@ -161,6 +157,82 @@ namespace CameraViewer.NetWorking
             }
         }
 
+        //发送解码器启动指令
+
+        public void SendDecoderStartCommand()
+        {
+            byte[] bytes = new byte[0];
+            byte[] byteToSend = BuildPackte(2, bytes, 0, 0);
+
+            try
+            {
+                if (_networkStream != null)
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
+            }
+            catch (IOException ex)
+            {
+                _connectState = false;
+                ConnetSever(this, new DataChangeEventArgs("false", Ip));
+                return;
+            }
+            catch (ObjectDisposedException ode)
+            {
+                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
+                return;
+            }
+        }
+
+        //发送解码器停止指令
+
+        public void SendDecoderStopCommand()
+        {
+            byte[] bytes = new byte[0];
+            byte[] byteToSend = BuildPackte(3, bytes, 0, 0);
+
+            try
+            {
+                if (_networkStream != null)
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
+            }
+            catch (IOException ex)
+            {
+                _connectState = false;
+                ConnetSever(this, new DataChangeEventArgs("false", Ip));
+                return;
+            }
+            catch (ObjectDisposedException ode)
+            {
+                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
+                return;
+            }
+        }
+        //设置图片长宽
+
+        public void SetPicWidthHeight(int width, int height)
+        {
+            byte[] bytes = new byte[8];
+            Array.Copy(BitConverter.GetBytes(width),0,bytes,0,4);
+            Array.Copy(BitConverter.GetBytes(height), 0, bytes, 4, 4);
+
+            byte[] byteToSend = BuildPackte(5, bytes, 0, 8);
+
+            try
+            {
+                if (_networkStream != null)
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
+            }
+            catch (IOException ex)
+            {
+                _connectState = false;
+                ConnetSever(this, new DataChangeEventArgs("false", Ip));
+                return;
+            }
+            catch (ObjectDisposedException ode)
+            {
+                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
+                return;
+            }
+        }
         
 
         static bool IsHeader(byte[] hdr)
@@ -184,7 +256,7 @@ namespace CameraViewer.NetWorking
                     if (IsHeader(header))
                     {
 
-                        int lenInHeader = ToInt32Reverse(header,4);
+                        int lenInHeader = BitConverter.ToInt32(header, 4);
                         int packetLen = lenInHeader;
 
                         var pack = new byte[packetLen + header.Length];

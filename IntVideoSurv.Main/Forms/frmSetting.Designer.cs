@@ -1157,13 +1157,14 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.Location = new System.Drawing.Point(0, 0);
             this.treeListShowDecoder.Name = "treeListShowDecoder";
             this.treeListShowDecoder.OptionsBehavior.Editable = false;
+            this.treeListShowDecoder.OptionsSelection.InvertSelection = true;
+            this.treeListShowDecoder.OptionsSelection.UseIndicatorForSelection = true;
             this.treeListShowDecoder.OptionsView.ShowColumns = false;
             this.treeListShowDecoder.OptionsView.ShowHorzLines = false;
             this.treeListShowDecoder.OptionsView.ShowIndicator = false;
             this.treeListShowDecoder.OptionsView.ShowVertLines = false;
             this.treeListShowDecoder.Size = new System.Drawing.Size(158, 205);
             this.treeListShowDecoder.TabIndex = 0;
-            this.treeListShowDecoder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TreeListDecoder_Right);
             this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
             this.treeListShowDecoder.Click += new System.EventHandler(this.ShowDecoderAndCameraDataInGridView);
             // 
@@ -1201,6 +1202,8 @@ namespace CameraViewer.Forms
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.InvertSelection = true;
             // 
             // gridView2
             // 

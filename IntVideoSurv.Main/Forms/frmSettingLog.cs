@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using CameraViewer.Properties;
+using DevExpress.XtraEditors;
 using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
 
@@ -44,18 +45,18 @@ namespace CameraViewer.Forms
         {
             if (comboBoxEditLogType.Text == "")
             {
-                MessageBox.Show(Resources.frmSetting_buttonSearchLog_Click_日志类型不能为空_);
+                XtraMessageBox.Show(Resources.frmSetting_buttonSearchLog_Click_日志类型不能为空_);
                 return;
             }
             if (dateEditBeginDate.Text == "")
             {
-                MessageBox.Show(Resources.frmSetting_buttonSearchLog_Click_起始时间不能为空_);
+                XtraMessageBox.Show(Resources.frmSetting_buttonSearchLog_Click_起始时间不能为空_);
                 return;
             }
 
             if (dateEditEndDate.Text == "")
             {
-                MessageBox.Show(Resources.frmSetting_buttonSearchLog_Click_结束时间不能为空_);
+                XtraMessageBox.Show(Resources.frmSetting_buttonSearchLog_Click_结束时间不能为空_);
                 return;
             }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 
 namespace DMClient
@@ -30,7 +31,7 @@ namespace DMClient
              ok= HikSMClientSDK.InitStreamClientLib();
              if (ok == -1)
              {
-                 MessageBox.Show("初始化失败！");
+                 XtraMessageBox.Show("初始化失败！");
              }
 
         }
@@ -53,7 +54,7 @@ namespace DMClient
 
             if (playSession == -1)
             {
-                MessageBox.Show("创建play句柄失败！");
+                XtraMessageBox.Show("创建play句柄失败！");
             }
 
             return playSession;
@@ -74,7 +75,7 @@ namespace DMClient
 
             if (ok == -1)
             {
-                MessageBox.Show("连接服务器失败！");
+                XtraMessageBox.Show("连接服务器失败！");
 
             }
             else
@@ -143,7 +144,7 @@ namespace DMClient
 
             if (ok == -1)
             {
-                MessageBox.Show("播放失败！");
+                XtraMessageBox.Show("播放失败！");
 
 
             }
@@ -172,7 +173,7 @@ namespace DMClient
 
             if (ok == -1)
             {
-                MessageBox.Show("恢复播放失败！");
+                XtraMessageBox.Show("恢复播放失败！");
 
 
             }
@@ -192,7 +193,7 @@ namespace DMClient
 
             if (ok == -1)
             {
-                MessageBox.Show("停止播放失败！");
+                XtraMessageBox.Show("停止播放失败！");
 
 
             }
@@ -211,7 +212,7 @@ namespace DMClient
 
             if (ok == -1)
             {
-                MessageBox.Show("获取播放时间失败！");
+                XtraMessageBox.Show("获取播放时间失败！");
 
 
             }
@@ -235,7 +236,7 @@ namespace DMClient
 
             if (ok == -1)
             {
-                MessageBox.Show("改变速度失败！");
+                XtraMessageBox.Show("改变速度失败！");
 
 
             }
@@ -258,7 +259,7 @@ namespace DMClient
 
             if (ok == -1)
             {
-                MessageBox.Show("销毁失败！");
+                XtraMessageBox.Show("销毁失败！");
 
 
             }

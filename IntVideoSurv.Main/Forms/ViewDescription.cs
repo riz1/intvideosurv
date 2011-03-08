@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace CameraViewer
 {
@@ -321,7 +322,7 @@ namespace CameraViewer
 					// highlight name edit box
 					this.nameBox.BackColor = Color.LightCoral;
 					// error message
-					MessageBox.Show(this, "A view with such name is already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+					XtraMessageBox.Show(this, "A view with such name is already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 					// restore & focus name edit box
 					this.nameBox.BackColor = tmp;
 					this.nameBox.Focus();
