@@ -1144,7 +1144,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl7.Panel2.Controls.Add(this.gridControl1);
             this.splitContainerControl7.Panel2.Text = "Panel2";
             this.splitContainerControl7.Size = new System.Drawing.Size(794, 205);
-            this.splitContainerControl7.SplitterPosition = 115;
+            this.splitContainerControl7.SplitterPosition = 158;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
             // 
@@ -1157,7 +1157,11 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.Location = new System.Drawing.Point(0, 0);
             this.treeListShowDecoder.Name = "treeListShowDecoder";
             this.treeListShowDecoder.OptionsBehavior.Editable = false;
-            this.treeListShowDecoder.Size = new System.Drawing.Size(115, 205);
+            this.treeListShowDecoder.OptionsView.ShowColumns = false;
+            this.treeListShowDecoder.OptionsView.ShowHorzLines = false;
+            this.treeListShowDecoder.OptionsView.ShowIndicator = false;
+            this.treeListShowDecoder.OptionsView.ShowVertLines = false;
+            this.treeListShowDecoder.Size = new System.Drawing.Size(158, 205);
             this.treeListShowDecoder.TabIndex = 0;
             this.treeListShowDecoder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TreeListDecoder_Right);
             this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
@@ -1187,7 +1191,7 @@ namespace CameraViewer.Forms
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(674, 205);
+            this.gridControl1.Size = new System.Drawing.Size(631, 205);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
