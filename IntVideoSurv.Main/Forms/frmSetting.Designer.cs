@@ -30,7 +30,7 @@ namespace CameraViewer.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetting));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -1583,9 +1583,9 @@ namespace CameraViewer.Forms
             // 
             // Tick
             // 
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Tick.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Tick.DefaultCellStyle = dataGridViewCellStyle2;
             this.Tick.HeaderText = "时间间隔(秒)";
             this.Tick.Name = "Tick";
             // 
@@ -1661,7 +1661,7 @@ namespace CameraViewer.Forms
             this.gcMap.Controls.Add(this.pcMapTreeview);
             this.gcMap.Location = new System.Drawing.Point(66, 79);
             this.gcMap.Name = "gcMap";
-            this.gcMap.Size = new System.Drawing.Size(248, 123);
+            this.gcMap.Size = new System.Drawing.Size(316, 123);
             this.gcMap.TabIndex = 32;
             this.gcMap.Text = "地图管理";
             // 
@@ -1672,7 +1672,7 @@ namespace CameraViewer.Forms
             this.pcMapPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pcMapPreview.Location = new System.Drawing.Point(188, 23);
             this.pcMapPreview.Name = "pcMapPreview";
-            this.pcMapPreview.Size = new System.Drawing.Size(58, 98);
+            this.pcMapPreview.Size = new System.Drawing.Size(126, 98);
             this.pcMapPreview.TabIndex = 1;
             // 
             // pictureBoxMap
@@ -1680,7 +1680,7 @@ namespace CameraViewer.Forms
             this.pictureBoxMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxMap.Location = new System.Drawing.Point(2, 2);
             this.pictureBoxMap.Name = "pictureBoxMap";
-            this.pictureBoxMap.Size = new System.Drawing.Size(54, 69);
+            this.pictureBoxMap.Size = new System.Drawing.Size(122, 69);
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxMap.TabIndex = 4;
             this.pictureBoxMap.TabStop = false;
@@ -1693,7 +1693,7 @@ namespace CameraViewer.Forms
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl2.Location = new System.Drawing.Point(2, 71);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(54, 25);
+            this.panelControl2.Size = new System.Drawing.Size(122, 25);
             this.panelControl2.TabIndex = 3;
             // 
             // btnBrowserMap
@@ -1728,7 +1728,7 @@ namespace CameraViewer.Forms
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(188, 23);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(58, 98);
+            this.panelControl1.Size = new System.Drawing.Size(126, 98);
             this.panelControl1.TabIndex = 3;
             // 
             // pcMapTreeview
