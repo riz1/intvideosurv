@@ -1808,40 +1808,21 @@ namespace CameraViewer
         private bool done = false;
         private IPEndPoint ipep ;
         private Socket server;
-        private IPacketHandler[] _handlers;
-        public LivePacketHandle LivePacketHandle;
-        public DecoderStateHandle DecoderStateHandle;
-        NetworkStream _networkStream;
-
-       
 
         public void StartServer()
         {
-            LivePacketHandle = new LivePacketHandle();
-            DecoderStateHandle = new DecoderStateHandle();
-            _handlers = new IPacketHandler[] { LivePacketHandle, DecoderStateHandle };
-            
             try{
                 server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                server.Bind(new IPEndPoint(new IPAddress(new byte[]{127,0,0,1}), 9999));
+                server.Bind(new IPEndPoint(new IPAddress(new byte[]{192,168,1,108}), 9999));
                 server.Listen(500);
                 // 开始侦听
-                //确认连接   
-                Socket client = server.Accept();
-                //获得客户端节点对象   
-                IPEndPoint clientep = (IPEndPoint)client.RemoteEndPoint;
-                _networkStream = new NetworkStream(client);
                 while (!done)
                 {
-                    if (client == null)
-                    {
-                        client = server.Accept();
-                        _networkStream = new NetworkStream(client);
-                    }
-                    byte[] recb = new byte[10000];
-                    _networkStream.Read(recb, 0, recb.Length);
-                    AnalysisData(recb);
-
+                    Socket client = server.Accept();
+                    //start tcp server
+                    var parStart = new ParameterizedThreadStart(SocketThread);
+                    var myThread = new Thread(parStart);
+                    myThread.Start(client);
                 }
             }
             catch (Exception e)
@@ -1855,175 +1836,24 @@ namespace CameraViewer
                 server.Close();
             }
         }
-        //分析数据
-        protected void AnalysisData(byte[] byteBuf)
+
+        //处理socket连接的线程
+        public void SocketThread(object socket)
         {
-            foreach (var handler in _handlers)
+            //获得客户端节点对象   
+            var clientConnection = new ClientConnection((Socket)socket);
+            if (!listRunningClient.ContainsKey(clientConnection.DecoderInfo.id))
             {
-                if (handler.CanHandle(byteBuf))
-                {
-                    handler.Handle(byteBuf);
-                }
+                listRunningClient.Add(clientConnection.DecoderInfo.id, clientConnection);
             }
+            else
+            {
+                listRunningClient[clientConnection.DecoderInfo.id] = clientConnection;
+            }
+            clientConnection.SendDecoderXML();
+            clientConnection.GetData();
         }
-        //发送心跳信号
-        public void SendHbTrade()
-        {
-            byte[] byteHb = new byte[16] { 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa };
-            byte[] byteToSend = BuildPackte(99, byteHb, 0, 16);
-            try
-            {
-                if (_networkStream != null)
-                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
-            }
-            catch (IOException ex)
-            {
-                //_connectState = false;
-                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
-                return;
-            }
-            catch (ObjectDisposedException ode)
-            {
-                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
-                return;
-            }
-        }
+        private Dictionary<int, ClientConnection> listRunningClient = new Dictionary<int, ClientConnection>();
 
-        private byte[] BuildPackte(int type, byte[] data, int pos, int length)
-        {
-            int dataLength = (length + 8);
-            byte[] byteHb = new byte[dataLength + 8];
-
-            //包头（格式+包长）
-            byteHb[0] = byteHb[2] = 0xaa; byteHb[1] = byteHb[3] = 0x55;
-            Array.Copy(BitConverter.GetBytes(dataLength), 0, byteHb, 4, 4);
-
-            //数据类型
-
-            Array.Copy(BitConverter.GetBytes(type), 0, byteHb, 8, 4);
-
-            //数据长度
-            Array.Copy(BitConverter.GetBytes(length), 0, byteHb, 12, 4);
-
-            //真实数据
-            Array.Copy(data, pos, byteHb, 16, length);
-
-            return byteHb;
-
-        }
-
-        //发送解码器配置XML
-        public void SendDecoderXML(int decoderid)
-        {
-
-            byte[] byteArray = System.Text.Encoding.Default.GetBytes(DecoderBusiness.Instance.GetDecoderXMLString(decoderid));
-
-            byte[] byteToSend = BuildPackte(1, byteArray, 0, byteArray.Length);
-
-            try
-            {
-                if (_networkStream != null)
-                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
-            }
-            catch (IOException ex)
-            {
-                //_connectState = false;
-                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
-                return;
-            }
-            catch (ObjectDisposedException ode)
-            {
-                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
-                return;
-            }
-        }
-
-        //发送解码器启动指令
-
-        public void SendDecoderStartCommand()
-        {
-            byte[] bytes = new byte[0];
-            byte[] byteToSend = BuildPackte(2, bytes, 0, 0);
-
-            try
-            {
-                if (_networkStream != null)
-                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
-            }
-            catch (IOException ex)
-            {
-                //_connectState = false;
-                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
-                return;
-            }
-            catch (ObjectDisposedException ode)
-            {
-                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
-                return;
-            }
-        }
-
-        //发送解码器停止指令
-
-        public void SendDecoderStopCommand()
-        {
-            byte[] bytes = new byte[0];
-            byte[] byteToSend = BuildPackte(3, bytes, 0, 0);
-
-            try
-            {
-                if (_networkStream != null)
-                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
-            }
-            catch (IOException ex)
-            {
-                //_connectState = false;
-                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
-                return;
-            }
-            catch (ObjectDisposedException ode)
-            {
-                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
-                return;
-            }
-        }
-        //设置图片长宽
-
-        public void SetPicWidthHeight(int width, int height)
-        {
-            byte[] bytes = new byte[8];
-            Array.Copy(BitConverter.GetBytes(width), 0, bytes, 0, 4);
-            Array.Copy(BitConverter.GetBytes(height), 0, bytes, 4, 4);
-
-            byte[] byteToSend = BuildPackte(5, bytes, 0, 8);
-
-            try
-            {
-                if (_networkStream != null)
-                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
-            }
-            catch (IOException ex)
-            {
-                //_connectState = false;
-                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
-                return;
-            }
-            catch (ObjectDisposedException ode)
-            {
-                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
-                return;
-            }
-        }
-
-
-        static bool IsHeader(byte[] hdr)
-        {
-            int i = 0;
-            if (hdr[i++] == 0xaa && hdr[i++] == 0x55 && hdr[i++] == 0xaa && hdr[i++] == 0x55)
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }

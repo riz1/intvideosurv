@@ -365,6 +365,7 @@ namespace IntVideoSurv.Business
 
             return ret;
         }
+        
         public DeviceInfo GetDeviceInfoByCameraId(ref string errMessage, int Id)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -388,6 +389,38 @@ namespace IntVideoSurv.Business
 
         }
 
+        public DecoderInfo GetDecoderInfoByDecoderIP(ref string errMessage, string IP)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = DecoderDataAccess.GetDecoderInfoByDecoderIP(db, IP);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    return null;
+                }
+                DecoderInfo decoderInfo = new DecoderInfo(ds.Tables[0].Rows[0]);
+                DataSet dsCamera;
+                CameraInfo oCamera;
+                dsCamera = DecoderDataAccess.GetCameraInfoByDecoderId(db, decoderInfo.id);
+                //DecoderDataAccess.GetCamInfoByCameraId(db,dsCamera.Tables[0].Rows[i].)
+                decoderInfo.ListCameras = new Dictionary<int, CameraInfo>();
+                foreach (DataRow dr in dsCamera.Tables[0].Rows)
+                {
 
+                    oCamera = new CameraInfo(dr);
+                    decoderInfo.ListCameras.Add(oCamera.CameraId, oCamera);
+                }
+                return decoderInfo;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
     }
 }
