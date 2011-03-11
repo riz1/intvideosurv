@@ -63,5 +63,10 @@ namespace CameraViewer
             byte[] byteHb = BuildPackte(3, bytes, 0, 0);
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = YUV2RGB.GetBitmapFromYUVFile(@"C:\Users\Administrator.ltyong-win7.000\Desktop\yv12.yuv", 176, 144);
+        }
     }
 }

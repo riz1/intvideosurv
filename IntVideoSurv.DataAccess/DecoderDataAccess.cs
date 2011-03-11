@@ -216,6 +216,23 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+
+        public static DataSet GetDecoderInfoByDecoderIP(Database db, string IP)
+        {
+            string cmdText = string.Format("select * from DecoderInfo where IP='{0}'", IP);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+
         public static DataSet GetDecoderInfoByName(Database db, string Name)
         {
             string cmdText = string.Format("select * from DecoderInfo where Name='{0}' order by id", Name);
