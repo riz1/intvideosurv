@@ -48,6 +48,10 @@ namespace CameraViewer.Forms
             this.gcDeviceManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeViewDevice = new System.Windows.Forms.TreeView();
+            this.treeListDevice = new DevExpress.XtraTreeList.TreeList();
+            this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.dgvDevice = new System.Windows.Forms.DataGridView();
             this.contextMenuStripGroupAndDevice = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +59,6 @@ namespace CameraViewer.Forms
             this.AddDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvDevice = new System.Windows.Forms.DataGridView();
             this.gcUserManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl6 = new DevExpress.XtraEditors.SplitContainerControl();
             this.dataGridViewUser = new System.Windows.Forms.DataGridView();
@@ -102,6 +105,18 @@ namespace CameraViewer.Forms
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.treeViewMonitor = new System.Windows.Forms.TreeView();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gcMap = new DevExpress.XtraEditors.GroupControl();
+            this.pcMapPreview = new DevExpress.XtraEditors.PanelControl();
+            this.pictureBoxMap = new System.Windows.Forms.PictureBox();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnBrowserMap = new System.Windows.Forms.Button();
+            this.btnAddMap = new System.Windows.Forms.Button();
+            this.teMapName = new DevExpress.XtraEditors.TextEdit();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.pcMapTreeview = new DevExpress.XtraEditors.PanelControl();
+            this.tvMap = new DevExpress.XtraTreeList.TreeList();
+            this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.DecoderManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeListShowDecoder = new DevExpress.XtraTreeList.TreeList();
@@ -161,16 +176,6 @@ namespace CameraViewer.Forms
             this.tvGroupSwitchGroup = new System.Windows.Forms.TreeView();
             this.cmAddGroupSwitchGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.添加群组切换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gcMap = new DevExpress.XtraEditors.GroupControl();
-            this.pcMapPreview = new DevExpress.XtraEditors.PanelControl();
-            this.pictureBoxMap = new System.Windows.Forms.PictureBox();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.btnBrowserMap = new System.Windows.Forms.Button();
-            this.btnAddMap = new System.Windows.Forms.Button();
-            this.teMapName = new DevExpress.XtraEditors.TextEdit();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.pcMapTreeview = new DevExpress.XtraEditors.PanelControl();
-            this.tvMap = new System.Windows.Forms.TreeView();
             this.cmDeleteMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openMapFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -194,8 +199,9 @@ namespace CameraViewer.Forms
             this.gcDeviceManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
-            this.contextMenuStripGroupAndDevice.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.treeListDevice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDevice)).BeginInit();
+            this.contextMenuStripGroupAndDevice.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcUserManagement)).BeginInit();
             this.gcUserManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).BeginInit();
@@ -232,6 +238,18 @@ namespace CameraViewer.Forms
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcMap)).BeginInit();
+            this.gcMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcMapPreview)).BeginInit();
+            this.pcMapPreview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.teMapName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcMapTreeview)).BeginInit();
+            this.pcMapTreeview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tvMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecoderManagement)).BeginInit();
             this.DecoderManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).BeginInit();
@@ -275,17 +293,6 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gcGroupSwitchGroup)).BeginInit();
             this.gcGroupSwitchGroup.SuspendLayout();
             this.cmAddGroupSwitchGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcMap)).BeginInit();
-            this.gcMap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcMapPreview)).BeginInit();
-            this.pcMapPreview.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.teMapName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcMapTreeview)).BeginInit();
-            this.pcMapTreeview.SuspendLayout();
             this.cmDeleteMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDecoder)).BeginInit();
@@ -452,9 +459,9 @@ namespace CameraViewer.Forms
             // gcDeviceManagement
             // 
             this.gcDeviceManagement.Controls.Add(this.splitContainerControl1);
-            this.gcDeviceManagement.Location = new System.Drawing.Point(317, 216);
+            this.gcDeviceManagement.Location = new System.Drawing.Point(362, 229);
             this.gcDeviceManagement.Name = "gcDeviceManagement";
-            this.gcDeviceManagement.Size = new System.Drawing.Size(440, 290);
+            this.gcDeviceManagement.Size = new System.Drawing.Size(383, 126);
             this.gcDeviceManagement.TabIndex = 31;
             this.gcDeviceManagement.Text = "设备管理";
             this.gcDeviceManagement.Visible = false;
@@ -464,24 +471,65 @@ namespace CameraViewer.Forms
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl1.Location = new System.Drawing.Point(2, 23);
             this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.treeViewDevice);
+            this.splitContainerControl1.Panel1.Controls.Add(this.treeListDevice);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.dgvDevice);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(436, 265);
+            this.splitContainerControl1.Size = new System.Drawing.Size(379, 101);
             this.splitContainerControl1.SplitterPosition = 198;
             this.splitContainerControl1.TabIndex = 7;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
-            // treeViewDevice
+            // treeListDevice
             // 
-            this.treeViewDevice.ContextMenuStrip = this.contextMenuStripGroupAndDevice;
-            this.treeViewDevice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewDevice.Location = new System.Drawing.Point(0, 0);
-            this.treeViewDevice.Name = "treeViewDevice";
-            this.treeViewDevice.Size = new System.Drawing.Size(198, 265);
-            this.treeViewDevice.TabIndex = 6;
-            this.treeViewDevice.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
+            this.treeListDevice.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumn5,
+            this.treeListColumn6});
+            this.treeListDevice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeListDevice.Location = new System.Drawing.Point(0, 0);
+            this.treeListDevice.Name = "treeListDevice";
+            this.treeListDevice.OptionsBehavior.Editable = false;
+            this.treeListDevice.OptionsSelection.InvertSelection = true;
+            this.treeListDevice.OptionsSelection.UseIndicatorForSelection = true;
+            this.treeListDevice.OptionsView.ShowColumns = false;
+            this.treeListDevice.OptionsView.ShowHorzLines = false;
+            this.treeListDevice.OptionsView.ShowIndicator = false;
+            this.treeListDevice.Size = new System.Drawing.Size(198, 101);
+            this.treeListDevice.TabIndex = 0;
+            this.treeListDevice.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TreeListDeviceRightClick);
+            // 
+            // treeListColumn5
+            // 
+            this.treeListColumn5.Caption = "设备管理";
+            this.treeListColumn5.FieldName = "设备管理";
+            this.treeListColumn5.Name = "treeListColumn5";
+            this.treeListColumn5.Visible = true;
+            this.treeListColumn5.VisibleIndex = 0;
+            // 
+            // treeListColumn6
+            // 
+            this.treeListColumn6.Caption = "Tag";
+            this.treeListColumn6.FieldName = "Tag";
+            this.treeListColumn6.Name = "treeListColumn6";
+            this.treeListColumn6.Visible = true;
+            this.treeListColumn6.VisibleIndex = 1;
+            // 
+            // dgvDevice
+            // 
+            this.dgvDevice.AllowUserToAddRows = false;
+            this.dgvDevice.AllowUserToDeleteRows = false;
+            this.dgvDevice.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvDevice.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvDevice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDevice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDevice.Location = new System.Drawing.Point(0, 0);
+            this.dgvDevice.Name = "dgvDevice";
+            this.dgvDevice.ReadOnly = true;
+            this.dgvDevice.RowHeadersVisible = false;
+            this.dgvDevice.RowTemplate.Height = 23;
+            this.dgvDevice.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDevice.Size = new System.Drawing.Size(176, 101);
+            this.dgvDevice.TabIndex = 1;
             // 
             // contextMenuStripGroupAndDevice
             // 
@@ -537,23 +585,6 @@ namespace CameraViewer.Forms
             this.DeleteDeviceToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
             this.DeleteDeviceToolStripMenuItem.Text = "删除设备";
             this.DeleteDeviceToolStripMenuItem.Click += new System.EventHandler(this.DeleteDeviceToolStripMenuItem_Click);
-            // 
-            // dgvDevice
-            // 
-            this.dgvDevice.AllowUserToAddRows = false;
-            this.dgvDevice.AllowUserToDeleteRows = false;
-            this.dgvDevice.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgvDevice.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvDevice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDevice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDevice.Location = new System.Drawing.Point(0, 0);
-            this.dgvDevice.Name = "dgvDevice";
-            this.dgvDevice.ReadOnly = true;
-            this.dgvDevice.RowHeadersVisible = false;
-            this.dgvDevice.RowTemplate.Height = 23;
-            this.dgvDevice.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDevice.Size = new System.Drawing.Size(233, 265);
-            this.dgvDevice.TabIndex = 1;
             // 
             // gcUserManagement
             // 
@@ -1063,16 +1094,16 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Name = "splitContainerControl2";
             this.splitContainerControl2.Panel1.Controls.Add(this.navBarControl1);
             this.splitContainerControl2.Panel1.Text = "Panel1";
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcMap);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcUserManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.DecoderManagement);
-            this.splitContainerControl2.Panel2.Controls.Add(this.gcDeviceManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcSkin);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcDisplayChannelManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcSynGroupManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcLogManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcProgSwitchManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcGroupSwitchManagement);
-            this.splitContainerControl2.Panel2.Controls.Add(this.gcMap);
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcDeviceManagement);
             this.splitContainerControl2.Panel2.Text = "Panel2";
             this.splitContainerControl2.Size = new System.Drawing.Size(1182, 575);
             this.splitContainerControl2.SplitterPosition = 128;
@@ -1080,12 +1111,132 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Text = "splitContainerControl2";
             this.splitContainerControl2.Resize += new System.EventHandler(this.splitContainerControl2_Resize);
             // 
+            // gcMap
+            // 
+            this.gcMap.Controls.Add(this.pcMapPreview);
+            this.gcMap.Controls.Add(this.panelControl1);
+            this.gcMap.Controls.Add(this.pcMapTreeview);
+            this.gcMap.Location = new System.Drawing.Point(81, 94);
+            this.gcMap.Name = "gcMap";
+            this.gcMap.Size = new System.Drawing.Size(357, 98);
+            this.gcMap.TabIndex = 32;
+            this.gcMap.Text = "地图管理";
+            // 
+            // pcMapPreview
+            // 
+            this.pcMapPreview.Controls.Add(this.pictureBoxMap);
+            this.pcMapPreview.Controls.Add(this.panelControl2);
+            this.pcMapPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pcMapPreview.Location = new System.Drawing.Point(188, 23);
+            this.pcMapPreview.Name = "pcMapPreview";
+            this.pcMapPreview.Size = new System.Drawing.Size(167, 73);
+            this.pcMapPreview.TabIndex = 1;
+            // 
+            // pictureBoxMap
+            // 
+            this.pictureBoxMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxMap.Location = new System.Drawing.Point(2, 2);
+            this.pictureBoxMap.Name = "pictureBoxMap";
+            this.pictureBoxMap.Size = new System.Drawing.Size(163, 44);
+            this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxMap.TabIndex = 4;
+            this.pictureBoxMap.TabStop = false;
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Controls.Add(this.btnBrowserMap);
+            this.panelControl2.Controls.Add(this.btnAddMap);
+            this.panelControl2.Controls.Add(this.teMapName);
+            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControl2.Location = new System.Drawing.Point(2, 46);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(163, 25);
+            this.panelControl2.TabIndex = 3;
+            // 
+            // btnBrowserMap
+            // 
+            this.btnBrowserMap.Location = new System.Drawing.Point(5, 2);
+            this.btnBrowserMap.Name = "btnBrowserMap";
+            this.btnBrowserMap.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowserMap.TabIndex = 3;
+            this.btnBrowserMap.Text = "浏览...";
+            this.btnBrowserMap.UseVisualStyleBackColor = true;
+            this.btnBrowserMap.Click += new System.EventHandler(this.btnBrowserMap_Click);
+            // 
+            // btnAddMap
+            // 
+            this.btnAddMap.Location = new System.Drawing.Point(226, 2);
+            this.btnAddMap.Name = "btnAddMap";
+            this.btnAddMap.Size = new System.Drawing.Size(75, 23);
+            this.btnAddMap.TabIndex = 2;
+            this.btnAddMap.Text = "添加地图";
+            this.btnAddMap.UseVisualStyleBackColor = true;
+            this.btnAddMap.Click += new System.EventHandler(this.btnAddMap_Click);
+            // 
+            // teMapName
+            // 
+            this.teMapName.Location = new System.Drawing.Point(108, 3);
+            this.teMapName.Name = "teMapName";
+            this.teMapName.Size = new System.Drawing.Size(100, 21);
+            this.teMapName.TabIndex = 1;
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl1.Location = new System.Drawing.Point(188, 23);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(167, 73);
+            this.panelControl1.TabIndex = 3;
+            // 
+            // pcMapTreeview
+            // 
+            this.pcMapTreeview.Controls.Add(this.tvMap);
+            this.pcMapTreeview.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pcMapTreeview.Location = new System.Drawing.Point(2, 23);
+            this.pcMapTreeview.Name = "pcMapTreeview";
+            this.pcMapTreeview.Size = new System.Drawing.Size(186, 73);
+            this.pcMapTreeview.TabIndex = 0;
+            // 
+            // tvMap
+            // 
+            this.tvMap.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumn3,
+            this.treeListColumn4});
+            this.tvMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvMap.Location = new System.Drawing.Point(2, 2);
+            this.tvMap.Name = "tvMap";
+            this.tvMap.OptionsBehavior.Editable = false;
+            this.tvMap.OptionsSelection.InvertSelection = true;
+            this.tvMap.OptionsSelection.UseIndicatorForSelection = true;
+            this.tvMap.OptionsView.ShowColumns = false;
+            this.tvMap.OptionsView.ShowHorzLines = false;
+            this.tvMap.OptionsView.ShowIndicator = false;
+            this.tvMap.OptionsView.ShowVertLines = false;
+            this.tvMap.Size = new System.Drawing.Size(182, 69);
+            this.tvMap.TabIndex = 0;
+            // 
+            // treeListColumn3
+            // 
+            this.treeListColumn3.Caption = "地图";
+            this.treeListColumn3.FieldName = "地图";
+            this.treeListColumn3.Name = "treeListColumn3";
+            this.treeListColumn3.Visible = true;
+            this.treeListColumn3.VisibleIndex = 0;
+            // 
+            // treeListColumn4
+            // 
+            this.treeListColumn4.Caption = "名称";
+            this.treeListColumn4.FieldName = "名称";
+            this.treeListColumn4.Name = "treeListColumn4";
+            this.treeListColumn4.Visible = true;
+            this.treeListColumn4.VisibleIndex = 1;
+            // 
             // DecoderManagement
             // 
             this.DecoderManagement.Controls.Add(this.splitContainerControl7);
-            this.DecoderManagement.Location = new System.Drawing.Point(103, 225);
+            this.DecoderManagement.Location = new System.Drawing.Point(81, 216);
             this.DecoderManagement.Name = "DecoderManagement";
-            this.DecoderManagement.Size = new System.Drawing.Size(173, 179);
+            this.DecoderManagement.Size = new System.Drawing.Size(233, 127);
             this.DecoderManagement.TabIndex = 34;
             this.DecoderManagement.Text = "解码器管理";
             this.DecoderManagement.Paint += new System.Windows.Forms.PaintEventHandler(this.DecoderManagement_Paint);
@@ -1099,8 +1250,8 @@ namespace CameraViewer.Forms
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.gridControl1);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(169, 154);
-            this.splitContainerControl7.SplitterPosition = 158;
+            this.splitContainerControl7.Size = new System.Drawing.Size(229, 102);
+            this.splitContainerControl7.SplitterPosition = 146;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
             // 
@@ -1119,7 +1270,7 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.OptionsView.ShowHorzLines = false;
             this.treeListShowDecoder.OptionsView.ShowIndicator = false;
             this.treeListShowDecoder.OptionsView.ShowVertLines = false;
-            this.treeListShowDecoder.Size = new System.Drawing.Size(158, 154);
+            this.treeListShowDecoder.Size = new System.Drawing.Size(146, 102);
             this.treeListShowDecoder.TabIndex = 0;
             this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
             this.treeListShowDecoder.Click += new System.EventHandler(this.ShowDecoderAndCameraDataInGridView);
@@ -1148,7 +1299,7 @@ namespace CameraViewer.Forms
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(6, 154);
+            this.gridControl1.Size = new System.Drawing.Size(78, 102);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
@@ -1654,7 +1805,7 @@ namespace CameraViewer.Forms
             this.添加群组切换ToolStripMenuItem.Text = "添加群组切换";
             this.添加群组切换ToolStripMenuItem.Click += new System.EventHandler(this.添加群组切换ToolStripMenuItem_Click);
             // 
-            // gcMap
+<<<<<<< .mine=======            // gcMap
             // 
             this.gcMap.Controls.Add(this.pcMapPreview);
             this.gcMap.Controls.Add(this.panelControl1);
@@ -1750,7 +1901,7 @@ namespace CameraViewer.Forms
             this.tvMap.TabIndex = 0;
             this.tvMap.DoubleClick += new System.EventHandler(this.tvMap_DoubleClick);
             // 
-            // cmDeleteMap
+>>>>>>> .theirs            // cmDeleteMap
             // 
             this.cmDeleteMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.删除ToolStripMenuItem});
@@ -1906,8 +2057,9 @@ namespace CameraViewer.Forms
             this.gcDeviceManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
-            this.contextMenuStripGroupAndDevice.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.treeListDevice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDevice)).EndInit();
+            this.contextMenuStripGroupAndDevice.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcUserManagement)).EndInit();
             this.gcUserManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).EndInit();
@@ -1945,6 +2097,18 @@ namespace CameraViewer.Forms
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcMap)).EndInit();
+            this.gcMap.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pcMapPreview)).EndInit();
+            this.pcMapPreview.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.teMapName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcMapTreeview)).EndInit();
+            this.pcMapTreeview.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tvMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecoderManagement)).EndInit();
             this.DecoderManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).EndInit();
@@ -1993,17 +2157,6 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gcGroupSwitchGroup)).EndInit();
             this.gcGroupSwitchGroup.ResumeLayout(false);
             this.cmAddGroupSwitchGroup.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gcMap)).EndInit();
-            this.gcMap.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pcMapPreview)).EndInit();
-            this.pcMapPreview.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.teMapName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcMapTreeview)).EndInit();
-            this.pcMapTreeview.ResumeLayout(false);
             this.cmDeleteMap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDecoder)).EndInit();
@@ -2034,7 +2187,6 @@ namespace CameraViewer.Forms
         private System.Windows.Forms.ToolStripMenuItem AddDeviceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditDeviceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteDeviceToolStripMenuItem;
-        private System.Windows.Forms.TreeView treeViewDevice;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSynGroup;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemAddSynGroup;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDeleteSynGroup;
@@ -2136,7 +2288,6 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.PanelControl pcMapTreeview;
         private System.Windows.Forms.Button btnAddMap;
         private DevExpress.XtraEditors.TextEdit teMapName;
-        private System.Windows.Forms.TreeView tvMap;
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private System.Windows.Forms.Button btnBrowserMap;
         private DevExpress.XtraEditors.PanelControl panelControl1;
@@ -2173,5 +2324,11 @@ namespace CameraViewer.Forms
         private DevExpress.XtraBars.BarButtonItem barButtonItem6DeleteDecoder;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDeleteCamera;
         private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraTreeList.TreeList tvMap;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
+        private DevExpress.XtraTreeList.TreeList treeListDevice;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn5;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
     }
 }
