@@ -154,6 +154,53 @@ namespace IntVideoSurv.Business
                 return null;
             }
         }
+        public Dictionary<int, CameraInfo> GetCamInfoByDeviceId(ref string errMessage, int DeviceId)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, CameraInfo> list = new Dictionary<int, CameraInfo>();
+            try
+            {
+
+                DataSet ds = CameraDataAccess.GetCamInfoByDeviceId(db,DeviceId);
+
+                CameraInfo oCamera;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    oCamera = new CameraInfo(ds.Tables[0].Rows[i]);
+                    list.Add(oCamera.CameraId, oCamera);
+
+
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+            /*Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = CameraDataAccess.GetCamInfoByDeviceId(db, DeviceId);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    return null;
+                }
+                return new CameraInfo(ds.Tables[0].Rows[0]);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }*/
+        }
+
         /// <summary>
         /// 
         /// </summary>
