@@ -49,27 +49,28 @@ namespace CameraViewer.Forms
             listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref errMessage);
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            //TreeNode node;
+            TreeListNode node;
             treeListDevice.Nodes.Clear();
-            /*foreach (KeyValuePair<int, GroupInfo> item in listGroup)
+            foreach (KeyValuePair<int, GroupInfo> item in listGroup)
             {
                 if (item.Value.ParentId == 0)
                 {
-                    node = new TreeNode(item.Value.Name);
-                    node.Tag = item.Key.ToString() + ";T";
-                    AppendNode(node, item.Key);
-                    treeListDevice.Nodes.Add(node);
+                    node = treeListDevice.AppendNode(new[] { item.Value.Name, 0 + ";R" }, -1, 1, 3, 1, CheckState.Checked);
+                    node.Tag = item.Key.ToString() + ";R";
+                    AppendDeviceNode(node, item.Key);
+                    //treeListDevice.Nodes.Add(node);
 
                 }
 
             }
             treeListDevice.ExpandAll();
+            treeListDevice.Columns[1].Visible = false;
             contextMenuStripGroupAndDevice.Visible = false;
             Cursor.Current = currentCursor;
-             */
+             
 
             
-            TreeListNode Rootnode;
+            /*TreeListNode Rootnode;
             TreeListNode Gnode;
             TreeListNode devicenode;
             TreeListNode camnode;
@@ -97,7 +98,7 @@ namespace CameraViewer.Forms
             treeListDevice.Columns[1].Visible = false;
             treeListDevice.ExpandAll();
             Cursor.Current = currentCursor;
-            contextMenuStripGroupAndDevice.Visible = false;
+            contextMenuStripGroupAndDevice.Visible = false;*/
         }
 
         /// <summary>
@@ -135,7 +136,51 @@ namespace CameraViewer.Forms
 
          
         }
-        
+
+        private void AppendDeviceNode(TreeListNode aNode, int ParentId)
+        {
+            try
+            {
+                TreeListNode node;
+                TreeListNode devicenode;
+                TreeListNode camnode;
+                foreach (KeyValuePair<int, GroupInfo> item in listGroup)
+                {
+                    if (item.Value.ParentId == ParentId)
+                    {
+                        
+                        node = treeListDevice.AppendNode(new[] { item.Value.Name, item.Key + ";G" }, aNode.Id, 1, 3, 1, CheckState.Checked);
+                        node.Tag = item.Key.ToString() + ";G";
+                        
+                        foreach (KeyValuePair<int, DeviceInfo> device in item.Value.ListDevice)
+                        {
+                            devicenode = treeListDevice.AppendNode(new[] { device.Value.Name, device.Key + ";D" }, node.Id, 1, 3, 1, CheckState.Checked);
+                            devicenode.Tag = device.Key.ToString() + ";D";
+
+
+                            foreach (KeyValuePair<int, CameraInfo> cam in device.Value.ListCamera)
+                            {
+                                camnode = treeListDevice.AppendNode(new[] { cam.Value.Name, cam.Key + ";C" }, devicenode.Id, 1, 3, 1, CheckState.Checked);
+                                camnode.Tag = cam.Key.ToString() + ";C";
+                            }
+
+                        }
+                        AppendDeviceNode(node, item.Key);
+                        if(aNode==null)
+                        {
+                            return;
+
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+        }
         private void AppendNode(TreeNode aNode, int ParentId)
         {
             try
@@ -410,7 +455,44 @@ namespace CameraViewer.Forms
             //dataGridViewUser.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //dataGridViewUser.Columns[3].Width = 160;
             //dataGridViewUser.Columns[3].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss ";
-            ShowDataInGridView(dataGridViewUser,UserBusiness.Instance.GetUserDataSet(ref errMessage));
+            ShowUserDataInGridControl();
+        }
+        //GRIDCONTROL显示用户信息
+        private void ShowUserDataInGridControl()
+        {
+
+            Dictionary<int, UserInfo> listuser = UserBusiness.Instance.GetAllUserInfo(ref errMessage);
+            var dataTable1 = new System.Data.DataTable("UserInfo");
+            dataTable1.Columns.Add("编号", typeof(int));
+            dataTable1.Columns.Add("索引号", typeof(int));
+            dataTable1.Columns.Add("用户名", typeof(string));
+            dataTable1.Columns.Add("用户类型", typeof(int));
+            dataTable1.Columns.Add("创建时间", typeof(DateTime));
+
+            int i = 1;
+            foreach (var node in listuser)
+                dataTable1.Rows.Add(i++, node.Value.UserId, node.Value.UserName, node.Value.UserTypeId, node.Value.CreateDateTime);
+            gridControlUserData.DataSource = dataTable1;
+            gridControl1.MainView.PopulateColumns();
+            try
+            {
+                //编号的宽度为40
+                gridView3.Columns["编号"].Width = 10;
+                gridView3.Columns["用户名"].Width = 40;
+                gridView3.Columns["用户类型"].Width = 10;
+                //gridView3.Columns[].Width = 40;
+                //编号右对齐
+                // gridView3.Columns["编号"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                //索引号不显示
+                gridView3.Columns["索引号"].Visible = false;
+                //gridView3.Columns[gridView3.Columns.Count - 1] = DataGridViewAutoSizeColumnMode.Fill;
+
+            }
+            catch (Exception ex)
+            {
+                ;
+            }
+
         }
 
         private void ShowDataInGridView(DataGridView dataGridView, DataTable dataTable)
@@ -557,7 +639,7 @@ namespace CameraViewer.Forms
             {
                 if (XtraMessageBox.Show("确实要删除用户?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
-                    int userid = Convert.ToInt32(dataGridViewUser.SelectedRows[0].Cells["索引号"].Value);
+                    int userid = Convert.ToInt32(gridView3.GetFocusedRowCellValue("索引号").ToString());
                     UserInfo ui = UserBusiness.Instance.GetUserInfo(ref errMessage, userid);
                     String cnt = ui.ToString();
                     UserBusiness.Instance.Delete(ref errMessage, userid);
@@ -587,7 +669,7 @@ namespace CameraViewer.Forms
         {
             try
             {
-                var userInfo = UserBusiness.Instance.GetUserInfo(ref errMessage, Convert.ToInt32(dataGridViewUser.SelectedRows[0].Cells["索引号"].Value));
+                var userInfo = UserBusiness.Instance.GetUserInfo(ref errMessage, Convert.ToInt32(gridView3.GetFocusedRowCellValue("索引号").ToString()));
                 var frmUser = new FrmUser(userInfo);
                 frmUser.ShowDialog();
                 LoadUsers();
@@ -924,49 +1006,25 @@ namespace CameraViewer.Forms
             tvMap.Nodes.Clear();
             MapInfo LastMapInfo = null;
             TreeListNode treeListNodeRoot = tvMap.AppendNode(new[] { "地图管理", 0 + ";T" }, -1, 0, 3, 1, CheckState.Checked);
-            treeListNodeRoot.Tag = 0 + ";T";
+            treeListNodeRoot.Tag = 0 + ";t";
             if (_listMapInfo != null)
             {
 
                 foreach (KeyValuePair<int, MapInfo> item in _listMapInfo)
                 {
                     TreeListNode treeListNodeMap = tvMap.AppendNode(new[] { item.Value.Name, item.Key + ";D" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
-                    tvMap.Tag = item.Key + ";D";
+                    treeListNodeMap.Tag = item.Key + ";d";
                     LastMapInfo = item.Value;
                 }
             }
             tvMap.Columns[1].Visible = false;
             tvMap.ExpandAll();
-            if (LastMapInfo!=null)
+            if (LastMapInfo != null)
             {
                 pictureBoxMap.Image = Image.FromFile(Path.Combine(Application.StartupPath, LastMapInfo.FileName));
-                teMapName.Text = LastMapInfo.Name;                
+                teMapName.Text = LastMapInfo.Name;
             }
             Cursor.Current = currentCursor;
-            //添加地图
-            /*TreeNode node;
-            MapInfo LastMapInfo = null;
-            tvMap.Nodes.Clear();
-            if (_listMapInfo != null)
-            {
-                node = new TreeNode("地图");
-                node.Tag = -1 + ";a";
-                foreach (KeyValuePair<int, MapInfo> item in _listMapInfo)
-                {
-                    TreeNode mapNode = new TreeNode(item.Value.Name);
-                    mapNode.Tag = item.Key + ";m";
-                    node.Nodes.Add(mapNode);
-                    LastMapInfo = item.Value;
-                }
-
-                tvMap.Nodes.Add(node);
-            }
-            tvMap.ExpandAll();
-            if (LastMapInfo!=null)
-            {
-                pictureBoxMap.Image = Image.FromFile(Path.Combine(Application.StartupPath, LastMapInfo.FileName));
-                teMapName.Text = LastMapInfo.Name;                
-            }*/
 
         }
 
@@ -1236,7 +1294,7 @@ namespace CameraViewer.Forms
 
             }
         }
-
+        //右键单击出现删除、更新、增加设备信息
         private void TreeListDeviceRightClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -1245,6 +1303,142 @@ namespace CameraViewer.Forms
                 Setmenu(node.Tag.ToString());
             }
         }
+        //增加地图
+        private void tvMap_DoubleClick_1(object sender, EventArgs e)
+        {
+            string str = tvMap.FocusedNode.Tag.ToString();
+            if (str.IndexOf("d") >= 0)
+            {
+                string[] strs = str.Split(';');
+                CurrentMapInfo = _listMapInfo[int.Parse(strs[0])];
+                pictureBoxMap.Image = Image.FromFile(Path.Combine(Application.StartupPath, CurrentMapInfo.FileName));
+                teMapName.Text = CurrentMapInfo.Name;
+
+            }
+        }
+        //右键单击出现删除地图按钮
+        private void tvMap_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                TreeListNode node = tvMap.FocusedNode;
+                if ((node.Tag.ToString()).IndexOf("d") >= 0)
+                {
+                    popupMenuDeleteMap.ShowPopup(Cursor.Position);
+
+                }
+            }
+        }
+        //删除地图
+        private void barButtonItemDeleteMap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                string str = tvMap.FocusedNode.Tag.ToString();
+                if (str.IndexOf("d") >= 0)
+                {
+                    string[] strs = str.Split(';');
+                    MapBusiness.Instance.Delete(ref errMessage, int.Parse(strs[0]));
+                    BuildMapTree();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //单击不同的节点显示不同的信息
+        private void treeListDevice_Click(object sender, EventArgs e)
+        {
+            
+            string str = treeListDevice.FocusedNode.Tag.ToString();
+            if(str.IndexOf("R") >= 0)
+            {
+                showAllDeviceInfo(DeviceBusiness.Instance.GetAllDeviceInfo(ref errMessage));
+            }
+            else if(str.IndexOf("G") >= 0)
+            {
+                int groupId = int.Parse(str.Split(';')[0]);
+                showAllDeviceInfo(DeviceBusiness.Instance.GetDeviceInfoByGroupId(ref errMessage,groupId));
+
+            }
+            else if(str.IndexOf("D") >= 0)
+            {
+                int DeviceId = int.Parse(str.Split(';')[0]);
+                showAllCameraInfo(DeviceId);
+
+            }
+        }
+        void showAllDeviceInfo(Dictionary<int, DeviceInfo> listDevice)
+        {
+            if(listDevice==null)
+            {
+                return;
+
+            }
+            //Dictionary<int, DeviceInfo> listDevice = DeviceBusiness.Instance.GetAllDeviceInfo(ref errMessage);
+            var dataTable = new System.Data.DataTable("DeviceInfo");
+            dataTable.Columns.Add("编号", typeof(int));
+            // dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("设备号", typeof(int));
+            dataTable.Columns.Add("设备名称", typeof(string));
+            dataTable.Columns.Add("设备IP地址", typeof(string));
+            dataTable.Columns.Add("设备端口号", typeof(int));
+            int i = 1;
+            foreach (var node in listDevice)
+            {
+
+                dataTable.Rows.Add(i++, node.Value.DeviceId, node.Value.Name, node.Value.source, node.Value.Port);
+            }
+
+            gridControlShowDevice.DataSource = dataTable;
+            gridControlShowDevice.MainView.PopulateColumns();
+            gridView4.Columns["编号"].Width = 10;
+            //gridView1.Columns["id"].Width = 20;
+            //gridView4.Columns["设备号"].Width = 30;
+            gridView4.Columns["设备名称"].Width = 10;
+            gridView4.Columns["设备IP地址"].Width = 30;
+            gridView4.Columns["设备端口号"].Width = 10;
+            gridView4.Columns["设备号"].Visible = false;
+
+        }
+
+        void showAllCameraInfo(int DeviceId)
+        {
+            Dictionary<int,CameraInfo> cameraList = CameraBusiness.Instance.GetCamInfoByDeviceId(ref errMessage, DeviceId);
+            if(cameraList==null)
+            {
+                return;
+
+            }
+            var dataTable = new System.Data.DataTable("CameraInfo");
+            dataTable.Columns.Add("编号", typeof(int));
+            //dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("摄像头号", typeof(int));
+            dataTable.Columns.Add("摄像头名称", typeof(string));
+            dataTable.Columns.Add("设备名称", typeof(string));
+            dataTable.Columns.Add("描述", typeof(string));
+            int i = 1;
+            foreach (var node in cameraList)
+            {
+                DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, node.Value.CameraId);
+                dataTable.Rows.Add(i++, node.Value.CameraId, node.Value.Name, di.Name,node.Value.Description);
+            }
+
+            gridControlShowDevice.DataSource = dataTable;
+            gridControlShowDevice.MainView.PopulateColumns();
+            gridView4.Columns["编号"].Width = 10;
+            //gridView1.Columns["id"].Width = 20;
+            //gridView4.Columns["设备号"].Width = 30;
+            gridView4.Columns["摄像头名称"].Width = 10;
+            gridView4.Columns["设备名称"].Width = 20;
+            gridView4.Columns["描述"].Width = 30;
+            gridView4.Columns["摄像头号"].Visible = false;
+
+        }
+
+
 
     }
     public enum DisplayTypes
