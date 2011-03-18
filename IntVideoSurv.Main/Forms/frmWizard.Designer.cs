@@ -180,9 +180,9 @@ namespace CameraViewer.Forms
             // deviceDescription1
             // 
             this.deviceDescription1.DeviceEntity = ((IntVideoSurv.Entity.DeviceInfo)(resources.GetObject("deviceDescription1.DeviceEntity")));
-            this.deviceDescription1.Location = new System.Drawing.Point(2, 2);
+            this.deviceDescription1.Location = new System.Drawing.Point(6, 0);
             this.deviceDescription1.Name = "deviceDescription1";
-            this.deviceDescription1.Size = new System.Drawing.Size(450, 169);
+            this.deviceDescription1.Size = new System.Drawing.Size(449, 171);
             this.deviceDescription1.TabIndex = 0;
             this.deviceDescription1.VideoProviders = null;
             // 
@@ -226,9 +226,9 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnNext;
         private DevExpress.XtraEditors.PanelControl pnTop;
-        private DeviceDescription deviceDescription1;
         private System.Windows.Forms.Button btnBack;
         private DevExpress.XtraEditors.PanelControl pbBtContainer;
+        private DeviceDescription deviceDescription1;
 
     }
 }

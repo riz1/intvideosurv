@@ -1,18 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using IntVideoSurv.Business;
 using IntVideoSurv.Entity;
+using IntVideoSurv.Business;
 using videosource;
-using System.Reflection;
+
 namespace CameraViewer.Forms
 {
-    public partial class frmWizard : DevExpress.XtraEditors.XtraForm
+    public partial class frmWizard : XtraForm
     {
         private int nPageIndex = 0;
         IVideoSourcePage sourcePage;
