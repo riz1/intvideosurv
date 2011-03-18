@@ -43,6 +43,11 @@ namespace CameraViewer
             return GetDataPicture(width, height, byteRGB);
         }
 
+        public static Bitmap GetBitmapFromRGBStream(int width, int height, byte[] pRgbBuf)
+        {
+            return GetDataPicture(width, height, pRgbBuf);
+        }
+
         private static byte[] YUV420ToRGB (int width, int height, byte[] pYuvBuf)
         {
             int rgbSize = width*height*3;
