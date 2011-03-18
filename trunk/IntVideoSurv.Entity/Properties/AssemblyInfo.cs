@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DigtiMatrix.Entity")]
+[assembly: AssemblyTitle("IntVideoSurv.Entity")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("cf")]
-[assembly: AssemblyProduct("DigtiMatrix.Entity")]
+[assembly: AssemblyProduct("IntVideoSurv.Entity")]
 [assembly: AssemblyCopyright("Copyright © cf 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
