@@ -35,24 +35,24 @@ namespace CameraViewer.Forms
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.btnOK = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // emptySpaceItem1
@@ -61,7 +61,7 @@ namespace CameraViewer.Forms
             this.emptySpaceItem1.Location = new System.Drawing.Point(0, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
             this.emptySpaceItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.emptySpaceItem1.Size = new System.Drawing.Size(78, 62);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(93, 62);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -76,16 +76,16 @@ namespace CameraViewer.Forms
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsView.AllowItemSkinning = false;
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(506, 101);
+            this.layoutControl1.Size = new System.Drawing.Size(594, 99);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(400, 67);
+            this.btnCancel.Location = new System.Drawing.Point(469, 67);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(101, 22);
+            this.btnCancel.Size = new System.Drawing.Size(120, 22);
             this.btnCancel.StyleController = this.layoutControl1;
             this.btnCancel.TabIndex = 8;
             this.btnCancel.TabStop = false;
@@ -94,27 +94,27 @@ namespace CameraViewer.Forms
             // txtDescription
             // 
             this.txtDescription.EditValue = "";
-            this.txtDescription.Location = new System.Drawing.Point(127, 36);
+            this.txtDescription.Location = new System.Drawing.Point(142, 36);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(288, 21);
+            this.txtDescription.Size = new System.Drawing.Size(346, 21);
             this.txtDescription.StyleController = this.layoutControl1;
             this.txtDescription.TabIndex = 5;
             // 
             // txtName
             // 
             this.txtName.EditValue = "";
-            this.txtName.Location = new System.Drawing.Point(127, 5);
+            this.txtName.Location = new System.Drawing.Point(142, 5);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(288, 21);
+            this.txtName.Size = new System.Drawing.Size(346, 21);
             this.txtName.StyleController = this.layoutControl1;
             this.txtName.TabIndex = 4;
             // 
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(293, 67);
+            this.btnOK.Location = new System.Drawing.Point(331, 67);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(97, 22);
+            this.btnOK.Size = new System.Drawing.Size(128, 22);
             this.btnOK.StyleController = this.layoutControl1;
             this.btnOK.TabIndex = 7;
             this.btnOK.TabStop = false;
@@ -126,70 +126,49 @@ namespace CameraViewer.Forms
             this.layoutControlGroup1.CustomizationFormText = "MainGroup";
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2,
             this.layoutControlItem3,
             this.emptySpaceItem1,
             this.emptySpaceItem2,
             this.emptySpaceItem3,
             this.layoutControlItem5,
-            this.layoutControlItem6});
+            this.layoutControlItem6,
+            this.layoutControlItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(506, 101);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(594, 99);
             this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "MainGroup";
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.txtName;
-            this.layoutControlItem2.CustomizationFormText = "靡備:   ";
-            this.layoutControlItem2.Location = new System.Drawing.Point(78, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlItem2.Size = new System.Drawing.Size(342, 31);
-            this.layoutControlItem2.Text = "靡備:   ";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(40, 14);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtDescription;
             this.layoutControlItem3.CustomizationFormText = "&Password:";
-            this.layoutControlItem3.Location = new System.Drawing.Point(78, 31);
+            this.layoutControlItem3.Location = new System.Drawing.Point(93, 31);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlItem3.Size = new System.Drawing.Size(342, 31);
+            this.layoutControlItem3.Size = new System.Drawing.Size(400, 31);
             this.layoutControlItem3.Text = "鏡扴";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(40, 14);
             // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(420, 0);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(493, 0);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
             this.emptySpaceItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.emptySpaceItem2.Size = new System.Drawing.Size(86, 62);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(101, 62);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // emptySpaceItem3
-            // 
-            this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
-            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 62);
-            this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.emptySpaceItem3.Size = new System.Drawing.Size(288, 39);
-            this.emptySpaceItem3.Text = "emptySpaceItem3";
-            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.btnOK;
             this.layoutControlItem5.CustomizationFormText = "OK";
-            this.layoutControlItem5.Location = new System.Drawing.Point(288, 62);
+            this.layoutControlItem5.Location = new System.Drawing.Point(326, 62);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlItem5.Size = new System.Drawing.Size(107, 39);
+            this.layoutControlItem5.Size = new System.Drawing.Size(138, 37);
             this.layoutControlItem5.Text = "OK";
             this.layoutControlItem5.TextLocation = DevExpress.Utils.Locations.Right;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
@@ -200,20 +179,41 @@ namespace CameraViewer.Forms
             // 
             this.layoutControlItem6.Control = this.btnCancel;
             this.layoutControlItem6.CustomizationFormText = "Cancel";
-            this.layoutControlItem6.Location = new System.Drawing.Point(395, 62);
+            this.layoutControlItem6.Location = new System.Drawing.Point(464, 62);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlItem6.Size = new System.Drawing.Size(111, 39);
+            this.layoutControlItem6.Size = new System.Drawing.Size(130, 37);
             this.layoutControlItem6.Text = "Cancel";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
             this.layoutControlItem6.TextVisible = false;
             // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.txtName;
+            this.layoutControlItem2.CustomizationFormText = "靡備:   ";
+            this.layoutControlItem2.Location = new System.Drawing.Point(93, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
+            this.layoutControlItem2.Size = new System.Drawing.Size(400, 31);
+            this.layoutControlItem2.Text = "靡備:   ";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(40, 14);
+            // 
+            // emptySpaceItem3
+            // 
+            this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
+            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 62);
+            this.emptySpaceItem3.Name = "emptySpaceItem3";
+            this.emptySpaceItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(326, 37);
+            this.emptySpaceItem3.Text = "emptySpaceItem3";
+            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // frmGroup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 101);
+            this.ClientSize = new System.Drawing.Size(594, 99);
             this.Controls.Add(this.layoutControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -226,12 +226,12 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -245,11 +245,11 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.TextEdit txtDescription;
         private DevExpress.XtraEditors.TextEdit txtName;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
     }
 }
