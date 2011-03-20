@@ -329,6 +329,7 @@
     <Compile Include="NetWorking\GetTransPacket.cs" />
     <Compile Include="NetWorking\IPacketHandler.cs" />
     <Compile Include="NetWorking\LivePacketHandle.cs" />
+    <Compile Include="NetWorking\NetImage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
