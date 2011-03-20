@@ -538,7 +538,8 @@ namespace CameraViewer.Forms
             this.gridView4.GridControl = this.gridControlShowDevice;
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsBehavior.Editable = false;
-            this.gridView4.OptionsSelection.InvertSelection = true;
+            this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
             // barManager1
             // 
@@ -740,7 +741,8 @@ namespace CameraViewer.Forms
             this.gridView3.GridControl = this.gridControlUserData;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsBehavior.Editable = false;
-            this.gridView3.OptionsSelection.InvertSelection = true;
+            this.gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // buttonUserUpdate
             // 
@@ -1302,7 +1304,7 @@ namespace CameraViewer.Forms
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsSelection.InvertSelection = true;
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             // 
             // gridView2
             // 

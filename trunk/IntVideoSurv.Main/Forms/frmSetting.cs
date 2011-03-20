@@ -241,6 +241,8 @@ namespace CameraViewer.Forms
                 }
                 else if (tag.IndexOf("D") >= 0)
                 {
+                    string[] str = tag.Split(';');
+                    CurrentParentId = int.Parse(str[0]);
                     contextMenuStripGroupAndDevice.Visible = true;
                     AddGroupToolStripMenuItem.Visible = false;
                     EditGroupToolStripMenuItem.Visible = false;
@@ -263,6 +265,8 @@ namespace CameraViewer.Forms
                 }
                 else if (tag.IndexOf("G") >= 0)
                 {
+                     string[] str = tag.Split(';');
+                     CurrentParentId = int.Parse(str[0]);
                     contextMenuStripGroupAndDevice.Visible = true;
                     AddGroupToolStripMenuItem.Visible = false;
                     EditGroupToolStripMenuItem.Visible = true;
@@ -283,11 +287,11 @@ namespace CameraViewer.Forms
 
         private void AddGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           // if (CurrentParentId == 0)
-            //{
-                //frmModifyDeviceInfo
-               // return;
-           // }
+            if (CurrentParentId == 0)
+            {
+                
+                return;
+            }
             frmGroup group = new frmGroup();
             group.Opt = Util.Operateion.Add;
             group.ParentGroupId = CurrentParentId;
@@ -307,16 +311,16 @@ namespace CameraViewer.Forms
         {
             string tag = e.Node.Tag.ToString();
             Setmenu(tag);
-
-           // string[] str = tag.Split(';');
-           // CurrentParentId = int.Parse(str[0]);
+            
+            // string[] str = tag.Split(';');
+            // CurrentParentId = int.Parse(str[0]);
 
             //alDevices.Clear();
             //getDevicess(e.Node);
             //ShowDataInGridView(dgvDevice, DeviceBusiness.Instance.GetDisplayDeviceByDeviceList(ref errMessage, makeDeviceList()));
 
         }
-        //有问题，因为一开始就是CurrentParent=0
+        
         private void AddDeviceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CurrentParentId == 0)
@@ -882,11 +886,12 @@ namespace CameraViewer.Forms
 
         private void EditGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (CurrentParentId == 0)
-           // {
+            
+             //if (CurrentParentId == 0)
+            //{
                 //frmModifyDeviceInfo
                // return;
-           // }
+            //}
             frmGroup group = new frmGroup();
             group.Opt = Util.Operateion.Update;
             group.GroupId = int.Parse(treeListDevice.FocusedNode.Tag.ToString().Split(';')[0]);
