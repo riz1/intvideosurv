@@ -105,6 +105,7 @@
     <Compile Include="SystemLogBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="WindowCameraBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntVideoSurv.DataAccess\IntVideoSurv.DataAccess.csproj">
