@@ -241,6 +241,8 @@ namespace CameraViewer.Forms
                 }
                 else if (tag.IndexOf("D") >= 0)
                 {
+                    string[] str = tag.Split(';');
+                    CurrentParentId = int.Parse(str[0]);
                     contextMenuStripGroupAndDevice.Visible = true;
                     AddGroupToolStripMenuItem.Visible = false;
                     EditGroupToolStripMenuItem.Visible = false;
@@ -252,6 +254,8 @@ namespace CameraViewer.Forms
                 }
                 else if (tag.IndexOf("R") >= 0)
                 {
+                    string[] str = tag.Split(';');
+                    CurrentParentId = int.Parse(str[0]);
                     contextMenuStripGroupAndDevice.Visible = true;
                     AddDeviceToolStripMenuItem.Visible = false;
                     EditDeviceToolStripMenuItem.Visible = false;
@@ -263,6 +267,8 @@ namespace CameraViewer.Forms
                 }
                 else if (tag.IndexOf("G") >= 0)
                 {
+                     string[] str = tag.Split(';');
+                     CurrentParentId = int.Parse(str[0]);
                     contextMenuStripGroupAndDevice.Visible = true;
                     AddGroupToolStripMenuItem.Visible = false;
                     EditGroupToolStripMenuItem.Visible = true;
@@ -283,14 +289,14 @@ namespace CameraViewer.Forms
 
         private void AddGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (CurrentParentId == 0)//currentParentId障碍？
-            //{
-                //frmModifyDeviceInfo
-               //return;
-            //}
+            if (CurrentParentId == 0)
+            {
+                
+                return;
+            }
             frmGroup group = new frmGroup();
             group.Opt = Util.Operateion.Add;
-            group.ParentGroupId = int.Parse(treeListDevice.FocusedNode.Tag.ToString().Split(';')[0]);
+            group.ParentGroupId = CurrentParentId;
             group.ShowDialog(this);
             treeListDevice.Nodes.Clear();
             BuildDeviceTree();
@@ -307,26 +313,26 @@ namespace CameraViewer.Forms
         {
             string tag = e.Node.Tag.ToString();
             Setmenu(tag);
-
-            string[] str = tag.Split(';');
-            CurrentParentId = int.Parse(str[0]);
+            
+            // string[] str = tag.Split(';');
+            // CurrentParentId = int.Parse(str[0]);
 
             //alDevices.Clear();
             //getDevicess(e.Node);
             //ShowDataInGridView(dgvDevice, DeviceBusiness.Instance.GetDisplayDeviceByDeviceList(ref errMessage, makeDeviceList()));
 
         }
-        //有问题，因为一开始就是CurrentParent=0
+        
         private void AddDeviceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (CurrentParentId == 0)
-            //{ 
-                //return;
-            //}
+            if (CurrentParentId == 0)
+           {
+                return;
+           }
 
             frmWizard group = new frmWizard();
 
-            group.GroupId = int.Parse(treeListDevice.FocusedNode.Tag.ToString().Split(';')[0]);
+            group.GroupId = CurrentParentId;
             group.ShowDialog(this);
             treeListDevice.Nodes.Clear();
             BuildDeviceTree();
@@ -466,12 +472,12 @@ namespace CameraViewer.Forms
             dataTable1.Columns.Add("编号", typeof(int));
             dataTable1.Columns.Add("索引号", typeof(int));
             dataTable1.Columns.Add("用户名", typeof(string));
-            dataTable1.Columns.Add("用户类型", typeof(string));
+            dataTable1.Columns.Add("用户类型", typeof(int));
             dataTable1.Columns.Add("创建时间", typeof(DateTime));
 
             int i = 1;
             foreach (var node in listuser)
-                dataTable1.Rows.Add(i++, node.Value.UserId, node.Value.UserName, node.Value.UserTypeName, node.Value.CreateDateTime);
+                dataTable1.Rows.Add(i++, node.Value.UserId, node.Value.UserName, node.Value.UserTypeId, node.Value.CreateDateTime);
             gridControlUserData.DataSource = dataTable1;
             gridControl1.MainView.PopulateColumns();
             try
@@ -859,7 +865,7 @@ namespace CameraViewer.Forms
                 return;
             }
             //此处由tn.FirstNode==null改为tn.FirstNode!=null
-            if ((tn.Tag.ToString().IndexOf("G") >= 0) && tn.FirstNode !=null)
+            if ((tn.Tag.ToString().IndexOf("G") >= 0))// && tn.FirstNode !=null)
             {
                 string[] strs = tn.Tag.ToString().Split(';');
                 int groupid = int.Parse(strs[0]);
@@ -882,11 +888,12 @@ namespace CameraViewer.Forms
 
         private void EditGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (CurrentParentId == 0)
-           // {
+            
+             //if (CurrentParentId == 0)
+            //{
                 //frmModifyDeviceInfo
                // return;
-           // }
+            //}
             frmGroup group = new frmGroup();
             group.Opt = Util.Operateion.Update;
             group.GroupId = int.Parse(treeListDevice.FocusedNode.Tag.ToString().Split(';')[0]);
@@ -1212,9 +1219,11 @@ namespace CameraViewer.Forms
         //修改解码器
         private void barButtonItem5EditDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddXtraForm addDecoder = new AddXtraForm();
+            int id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
+            DecoderInfo di = DecoderBusiness.Instance.GetDecoderInfoByDecoderId(ref errMessage, id);
+            AddXtraForm addDecoder = new AddXtraForm(di);
             addDecoder.Opt = Util.Operateion.Update;
-            addDecoder.Id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
+            addDecoder.Id = id;
             addDecoder.ShowDialog(this);
             BuildDecoderTree();
             showDecoderInfo();
@@ -1383,27 +1392,23 @@ namespace CameraViewer.Forms
             // dataTable.Columns.Add("id", typeof(int));
             dataTable.Columns.Add("设备号", typeof(int));
             dataTable.Columns.Add("设备名称", typeof(string));
-            dataTable.Columns.Add("用户名", typeof (string));
-            dataTable.Columns.Add("密码", typeof (string));
             dataTable.Columns.Add("设备IP地址", typeof(string));
             dataTable.Columns.Add("设备端口号", typeof(int));
-            dataTable.Columns.Add("通道数", typeof(int));
             int i = 1;
             foreach (var node in listDevice)
             {
 
-                dataTable.Rows.Add(i++, node.Value.DeviceId, node.Value.Name, node.Value.login, node.Value.pwd, node.Value.source, node.Value.Port);
+                dataTable.Rows.Add(i++, node.Value.DeviceId, node.Value.Name, node.Value.source, node.Value.Port);
             }
 
             gridControlShowDevice.DataSource = dataTable;
             gridControlShowDevice.MainView.PopulateColumns();
-            gridView4.Columns["编号"].Width = 5;
-            gridView4.Columns["用户名"].Width = 20;
-            gridView4.Columns["密码"].Width = 10;
+            gridView4.Columns["编号"].Width = 10;
+            //gridView1.Columns["id"].Width = 20;
+            //gridView4.Columns["设备号"].Width = 30;
             gridView4.Columns["设备名称"].Width = 10;
             gridView4.Columns["设备IP地址"].Width = 30;
             gridView4.Columns["设备端口号"].Width = 10;
-            gridView4.Columns["通道数"].Width = 5;
             gridView4.Columns["设备号"].Visible = false;
 
         }
