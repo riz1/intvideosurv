@@ -29,44 +29,47 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO CameraInfo(");
+            int i;
+            if (oCameraInfo.IsValid) i = 1;
+            else i = 0;
+            sbField.Append("INSERT INTO [CameraInfo](");
             sbValue.Append("values(");
-            sbField.Append("DeviceId");
+            sbField.Append("[DeviceId]");
             sbValue.AppendFormat("{0}", oCameraInfo.DeviceId);
-            sbField.Append(",Name");
+            sbField.Append(",[Name]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.Name);
-            sbField.Append(",Description");
+            sbField.Append(",[Description]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.Description);
-            sbField.Append(",IsValid");
-            sbValue.AppendFormat(",{0}", oCameraInfo.IsValid);
-            sbField.Append(",ChannelNo");
+            sbField.Append(",[IsValid]");
+            sbValue.AppendFormat(",{0}", i);
+            sbField.Append(",[ChannelNo]");
             sbValue.AppendFormat(",{0}", oCameraInfo.ChannelNo);
-            sbField.Append(",AddressID");
+            sbField.Append(",[AddressID]");
             sbValue.AppendFormat(",{0}", oCameraInfo.AddressID);
-            sbField.Append(",ConnURL");
+            sbField.Append(",[ConnURL]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.ConnURL);
-            sbField.Append(",Remark");
+            sbField.Append(",[Remark]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.Remark);
-            sbField.Append(",Oupputpath");
+            sbField.Append(",[Oupputpath]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.Oupputpath);
-            sbField.Append(",frameInterval");
+            sbField.Append(",[frameInterval]");
             sbValue.AppendFormat(",{0}", oCameraInfo.frameInterval);
 
-            sbField.Append(",resolution");
+            sbField.Append(",[resolution]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.resolution);
 
-            sbField.Append(",quality");
+            sbField.Append(",[quality]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.quality);
 
 
-            sbField.Append(",StreamType");
+            sbField.Append(",[StreamType]");
             sbValue.AppendFormat(",{0}", oCameraInfo.StreamType);
 
           
 
-            sbField.Append(",AddBy");
+            sbField.Append(",[AddBy]");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.AddBy);
-            sbField.Append(",AddTime)");
+            sbField.Append(",[AddTime])");
             sbValue.AppendFormat(",'{0}')", oCameraInfo.AddTime);
             string cmdText = sbField.ToString() + " " + sbValue.ToString()  ;
             try
