@@ -653,47 +653,47 @@ namespace CameraViewer.Forms
             this.DeleteDeviceToolStripMenuItem});
             this.contextMenuStripGroupAndDevice.Name = "contextMenuStrip1";
             this.contextMenuStripGroupAndDevice.ShowImageMargin = false;
-            this.contextMenuStripGroupAndDevice.Size = new System.Drawing.Size(100, 136);
+            this.contextMenuStripGroupAndDevice.Size = new System.Drawing.Size(128, 158);
             // 
             // AddGroupToolStripMenuItem
             // 
             this.AddGroupToolStripMenuItem.Name = "AddGroupToolStripMenuItem";
-            this.AddGroupToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.AddGroupToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.AddGroupToolStripMenuItem.Text = "新增群组";
             this.AddGroupToolStripMenuItem.Click += new System.EventHandler(this.AddGroupToolStripMenuItem_Click);
             // 
             // EditGroupToolStripMenuItem
             // 
             this.EditGroupToolStripMenuItem.Name = "EditGroupToolStripMenuItem";
-            this.EditGroupToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.EditGroupToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.EditGroupToolStripMenuItem.Text = "修改群组";
             this.EditGroupToolStripMenuItem.Click += new System.EventHandler(this.EditGroupToolStripMenuItem_Click);
             // 
             // DeleteGroupToolStripMenuItem
             // 
             this.DeleteGroupToolStripMenuItem.Name = "DeleteGroupToolStripMenuItem";
-            this.DeleteGroupToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.DeleteGroupToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.DeleteGroupToolStripMenuItem.Text = "删除群组";
             this.DeleteGroupToolStripMenuItem.Click += new System.EventHandler(this.DeleteGroupToolStripMenuItem_Click);
             // 
             // AddDeviceToolStripMenuItem
             // 
             this.AddDeviceToolStripMenuItem.Name = "AddDeviceToolStripMenuItem";
-            this.AddDeviceToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.AddDeviceToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.AddDeviceToolStripMenuItem.Text = "新增设备";
             this.AddDeviceToolStripMenuItem.Click += new System.EventHandler(this.AddDeviceToolStripMenuItem_Click);
             // 
             // EditDeviceToolStripMenuItem
             // 
             this.EditDeviceToolStripMenuItem.Name = "EditDeviceToolStripMenuItem";
-            this.EditDeviceToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.EditDeviceToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.EditDeviceToolStripMenuItem.Text = "修改设备";
             this.EditDeviceToolStripMenuItem.Click += new System.EventHandler(this.EditDeviceToolStripMenuItem_Click);
             // 
             // DeleteDeviceToolStripMenuItem
             // 
             this.DeleteDeviceToolStripMenuItem.Name = "DeleteDeviceToolStripMenuItem";
-            this.DeleteDeviceToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.DeleteDeviceToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.DeleteDeviceToolStripMenuItem.Text = "删除设备";
             this.DeleteDeviceToolStripMenuItem.Click += new System.EventHandler(this.DeleteDeviceToolStripMenuItem_Click);
             // 
