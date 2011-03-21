@@ -76,8 +76,8 @@ namespace CameraViewer
             _getTransPacket.LivePacketHandle.DataChange += LivePacketHandleDataChange;
 
             //start tcp server
-            var thread = new Thread(StartServer) { IsBackground = true };
-            thread.Start();
+            //var thread = new Thread(StartServer) { IsBackground = true };
+            //thread.Start();
 
             
         }
@@ -884,23 +884,15 @@ namespace CameraViewer
             Splash.Splash.Status = "载入摄像头...";
             LoadAllCamera();
             _listAlarm = AlarmBusiness.Instance.GetAllAlarmInfo(ref _errMessage);
-            SetDefaultAlarmSwitchPictureBox();
-            Splash.Splash.Status = "载入地图...";
             _listMap = MapBusiness.Instance.GetAllMapInfo(ref _errMessage);
             cameraView1.ListMap = _listMap;
             _listAllAlarmIcon = AlarmIconBusiness.Instance.GetAllAlarmIconInfo(ref _errMessage);
             _listAllCameraIcon = CameraIconBusiness.Instance.GetAllCameraIconInfo(ref _errMessage);
-            foreach (var VARIABLE in _listMap)
-            {
-                currentMapInfo = VARIABLE.Value; 
-                DrawIconInMap();
-                break;
-            }
+
 
             this.cameraView1.tvSynGroup.DoubleClick += this.tvSynGroup_DoubleClick;
             this.cameraView1.xtraTabControl2.SelectedPageChanged += this.xtraTabControl2_SelectedPageChanged;
             this.cameraView1.DoubleSynGroup += new CameraView.TouchCamera(CameraView1DoubleSynGroup);
-            this.cameraView1.DoubleDevCam += new CameraView.TouchCamera(cameraView1_DoubleDevCam);
 
             this.cameraView1.DoubleSynSwitch += new CameraView.TouchCamera(cameraView1_DoubleSynSwitch);
 
@@ -1021,383 +1013,14 @@ namespace CameraViewer
 
         }
 
-        private Point mouse_offset;
-        private void pcCreatedAlarm_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouse_offset = new Point(-e.X, -e.Y);//
-            targetCameraPictureBox = null;
-        }
 
-        private PictureBox targetCameraPictureBox;
-        private void pcCreatedAlarm_MouseMove(object sender, MouseEventArgs e)
-        {
-            pictureBoxMap.Refresh();
-            ((Control)sender).Cursor = Cursors.Arrow;//设置拖动时鼠标箭头
-            if (e.Button == MouseButtons.Left)
-            {
-                Point mousePos = Control.MousePosition;
-                mousePos.Offset(mouse_offset.X, mouse_offset.Y);//设置偏移
-                ((Control)sender).Location = ((Control)sender).Parent.PointToClient(mousePos);
-                double distance = double.MaxValue;
-                Point targetPotint = new Point(100,100);
-                for (int i = pictureBoxMap.Controls.Count - 1; i >= 0; i--)
-                {
-                    var VARIABLE = pictureBoxMap.Controls[i];
-                    if (VARIABLE is PictureBox)
-                    {
-                        if (VARIABLE.Name.StartsWith("pcCreatedCamera"))
-                        {
-                            double newDistance =
-                                Math.Sqrt(Math.Pow(((PictureBox) sender).Left - VARIABLE.Left, 2) +
-                                          Math.Pow(((PictureBox) sender).Top - VARIABLE.Top, 2));
-                            if (newDistance < distance)
-                            {
-                                targetPotint = new Point(VARIABLE.Left, VARIABLE.Top);
-                                distance = newDistance;
-                                targetCameraPictureBox = (PictureBox)VARIABLE;
-                            }
-                        }
-
-                    }
-                }
-                if (distance < pictureBoxMap.Width * 0.04)
-                {
-                    pictureBoxMap.Refresh();
-                    Graphics g = pictureBoxMap.CreateGraphics();
-                    g.DrawLine(new Pen(Color.Red), new Point(((PictureBox)sender).Left, ((PictureBox)sender).Top), targetPotint);
-
-                }
-                else
-                {
-                    targetCameraPictureBox = null; 
-                }
-            }
-        }
-        
-        private void pcCreatedAlarm_MouseUp(object sender, MouseEventArgs e)
-        {
-            AlarmIconInfo aii = (AlarmIconInfo)((PictureBox)sender).Tag;
-            aii.X = (double)((PictureBox)sender).Left / pictureBoxMap.Width;
-            aii.Y = (double)((PictureBox)sender).Top / pictureBoxMap.Height;
-            
-            if (targetCameraPictureBox != null)
-            {
-                int targetCameraId = (targetCameraPictureBox.Tag as CameraIconInfo).CameraId;
-                aii.MatchCameraId = targetCameraId;
-                _listCurrentCameraIcon[targetCameraId].MatchAlarmId = aii.AlarmId;
-                CameraIconBusiness.Instance.Update(ref _errMessage, _listCurrentCameraIcon[targetCameraId]);
-            }
-            _listCurrentAlarmIcon[aii.AlarmId] = aii;
-            _listAllAlarmIcon[aii.AlarmId] = aii;
-            AlarmIconBusiness.Instance.Update(ref _errMessage, aii);
-            pictureBoxMap.Refresh();
-            targetCameraPictureBox = null;
-        }
-
-        private void pcCreatedCamera_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouse_offset = new Point(-e.X, -e.Y);//
-        }
-        private void pcCreatedCamera_MouseMove(object sender, MouseEventArgs e)
-        {
-            pictureBoxMap.Refresh();
-            ((Control)sender).Cursor = Cursors.Arrow;//设置拖动时鼠标箭头
-            if (e.Button == MouseButtons.Left)
-            {
-                Point mousePos = Control.MousePosition;
-                mousePos.Offset(mouse_offset.X, mouse_offset.Y);//设置偏移
-                ((Control)sender).Location = ((Control)sender).Parent.PointToClient(mousePos);
-            }
-
-        }
+ 
 
 
-        private void pcCreatedCamera_MouseUp(object sender, MouseEventArgs e)
-        {
-            CameraIconInfo aii = (CameraIconInfo)((PictureBox)sender).Tag;
-            aii.X = (double)((PictureBox)sender).Left / pictureBoxMap.Width;
-            aii.Y = (double)((PictureBox)sender).Top / pictureBoxMap.Height;
-            aii.MatchAlarmId = -1;
-            _listCurrentCameraIcon[aii.CameraId] = aii;
-            CameraIconBusiness.Instance.Update(ref _errMessage, aii);
-            pictureBoxMap.Refresh();
-        }
 
-        void cameraView1_DoubleDevCam(string tag)
-        {
-            _isProgSwitchView = false;
-            //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
-            string[] strs = tag.Split(';');
 
-            if (switchmap)
-            {
-                if (strs[1] == "A")
-                {
-                    int alarmId = int.Parse(strs[0]);
-                    if (!_listAllAlarmIcon.ContainsKey(alarmId))
-                    {
-                        DrawAlarmIcon(alarmId);
-                    }
 
-                }
-                else if (strs[1] == "C")
-                {
-                    int cameraId = int.Parse(strs[0]);
-                    if (!_listAllCameraIcon.ContainsKey(cameraId))
-                    {
-                        DrawCameraIcon(cameraId);
-                    }
-                }
-                else if (strs[1] == "m")
-                {
-                    int mapId = int.Parse(strs[0]);
-                    currentMapInfo = _listMap[mapId];
-                    DrawIconInMap();
-                }
-            }
-            else
-            {
-                if (strs[1] == "D")
-                {
-                    isStop = true;
-                    ViewCameraByDeviceId(int.Parse(strs[0]));
-                }
-                else if (strs[1] == "C")
-                {
-                    isStop = true;
-                    ViewCameraByCameraId(int.Parse(strs[0]));
-                }
-            }
-        }
 
-        private void DrawAlarmIcon(int alarmId)
-        {
-            PictureBox pcCreatedAlarm = new PictureBox();
-            pcCreatedAlarm.Image = Image.FromFile(Application.StartupPath + @"\img\ALARM3.BMP");
-            pcCreatedAlarm.Parent = pictureBoxMap;
-            pcCreatedAlarm.Width = pcCreatedAlarm.Height = 12;
-            pcCreatedAlarm.SizeMode = PictureBoxSizeMode.StretchImage;
-            AlarmIconInfo alarmIconInfo = new AlarmIconInfo();
-            alarmIconInfo.AlarmId = alarmId;
-            alarmIconInfo.ToolTip = _listAlarm[alarmId].DeviceName + "_" + _listAlarm[alarmId].Name;
-            alarmIconInfo.Map = currentMapInfo.Id;
-            ToolTip tTip = new ToolTip();
-            tTip.SetToolTip(pcCreatedAlarm, alarmIconInfo.ToolTip);
-            pcCreatedAlarm.Tag = alarmIconInfo;
-            _listCurrentAlarmIcon.Add(alarmId, alarmIconInfo);
-            _listAllAlarmIcon.Add(alarmId, alarmIconInfo);
-            AlarmIconBusiness.Instance.Insert(ref _errMessage, alarmIconInfo);
-            pcCreatedAlarm.Name = "pcCreatedAlarm" + alarmId;
-            pcCreatedAlarm.ContextMenuStrip = cmIcon;
-            pcCreatedAlarm.MouseDown += pcCreatedAlarm_MouseDown;
-            pcCreatedAlarm.MouseMove += pcCreatedAlarm_MouseMove;
-            pcCreatedAlarm.MouseUp += pcCreatedAlarm_MouseUp;
-            pcCreatedAlarm.DoubleClick += pcCreatedAlarm_DoubleClick;
-            pcCreatedAlarm.Click += pcCreatedAlarm_Click;
-        }
-        private void DrawCameraIcon(int cameraId)
-        {
-            PictureBox pcCreatedCamera = new PictureBox();
-            pcCreatedCamera.Image = Image.FromFile(Application.StartupPath + @"\img\CAM2.BMP");
-            pcCreatedCamera.Parent = pictureBoxMap;
-            pcCreatedCamera.Width = pcCreatedCamera.Height = 12;
-            pcCreatedCamera.SizeMode = PictureBoxSizeMode.StretchImage;
-            CameraIconInfo cameraIconInfo = new CameraIconInfo();
-            cameraIconInfo.CameraId = cameraId;
-            cameraIconInfo.ToolTip = _listAllCam[cameraId].DeviceName + "_" + _listAllCam[cameraId].Name;
-            cameraIconInfo.Map = currentMapInfo.Id;
-            ToolTip tTip = new ToolTip();
-            tTip.SetToolTip(pcCreatedCamera, cameraIconInfo.ToolTip);
-            pcCreatedCamera.Tag = cameraIconInfo;
-            _listCurrentCameraIcon.Add(cameraId, cameraIconInfo);
-            _listAllCameraIcon.Add(cameraId, cameraIconInfo);
-            CameraIconBusiness.Instance.Insert(ref _errMessage, cameraIconInfo);
-            pcCreatedCamera.Name = "pcCreatedCamera" + cameraId;
-            pcCreatedCamera.ContextMenuStrip = cmIcon;
-            pcCreatedCamera.MouseDown += pcCreatedCamera_MouseDown;
-            pcCreatedCamera.MouseMove += pcCreatedCamera_MouseMove;
-            pcCreatedCamera.MouseUp += pcCreatedCamera_MouseUp;
-            pcCreatedCamera.DoubleClick += pcCreatedCamera_DoubleClick;
-            pcCreatedCamera.Click += pcCreatedCamera_Click;
-        }
-
-        private void DrawAlarmIcon(AlarmIconInfo alarmIconInfo)
-        {
-            PictureBox pcCreatedAlarm = new PictureBox();
-            pcCreatedAlarm.Image = Image.FromFile(Application.StartupPath + @"\img\ALARM3.BMP");
-            pcCreatedAlarm.Parent = pictureBoxMap;
-            pcCreatedAlarm.Width = pcCreatedAlarm.Height = 12;
-            pcCreatedAlarm.SizeMode = PictureBoxSizeMode.StretchImage;
-            ToolTip tTip = new ToolTip();
-            tTip.SetToolTip(pcCreatedAlarm, alarmIconInfo.ToolTip);
-            pcCreatedAlarm.Tag = alarmIconInfo;
-            pcCreatedAlarm.Top = (int)(alarmIconInfo.Y*pictureBoxMap.Height);
-            pcCreatedAlarm.Left = (int)(alarmIconInfo.X * pictureBoxMap.Width);
-            pcCreatedAlarm.Name = "pcCreatedAlarm" + alarmIconInfo.AlarmId;
-            pcCreatedAlarm.ContextMenuStrip = cmIcon;
-          
-            pcCreatedAlarm.MouseDown += pcCreatedAlarm_MouseDown;
-            pcCreatedAlarm.MouseMove += pcCreatedAlarm_MouseMove;
-            pcCreatedAlarm.MouseUp += pcCreatedAlarm_MouseUp;
-            pcCreatedAlarm.DoubleClick += pcCreatedAlarm_DoubleClick;
-            pcCreatedAlarm.Click += pcCreatedAlarm_Click;
-        }
-        private void DrawCameraIcon(CameraIconInfo cameraIconInfo)
-        {
-            PictureBox pcCreatedCamera = new PictureBox();
-            pcCreatedCamera.Image = Image.FromFile(Application.StartupPath + @"\img\CAM2.BMP");
-            pcCreatedCamera.Parent = pictureBoxMap;
-            pcCreatedCamera.Width = pcCreatedCamera.Height = 12;
-            pcCreatedCamera.SizeMode = PictureBoxSizeMode.StretchImage;
-            ToolTip tTip = new ToolTip();
-            tTip.SetToolTip(pcCreatedCamera, cameraIconInfo.ToolTip);
-            pcCreatedCamera.Tag = cameraIconInfo;
-            pcCreatedCamera.Top = (int)(cameraIconInfo.Y * pictureBoxMap.Height);
-            pcCreatedCamera.Left = (int)(cameraIconInfo.X * pictureBoxMap.Width);
-            pcCreatedCamera.Name = "pcCreatedCamera" + cameraIconInfo.CameraId;
-            pcCreatedCamera.ContextMenuStrip = cmIcon;
-            pcCreatedCamera.MouseDown += pcCreatedAlarm_MouseDown;
-            pcCreatedCamera.MouseMove += pcCreatedAlarm_MouseMove;
-            pcCreatedCamera.MouseUp += pcCreatedCamera_MouseUp;
-            pcCreatedCamera.DoubleClick += pcCreatedCamera_DoubleClick;
-            pcCreatedCamera.Click += pcCreatedCamera_Click;
-        }
-
-        private void pictureBoxMap_SizeChanged(object sender, EventArgs e)
-        {
-            for (int i = pictureBoxMap.Controls.Count-1; i >= 0;i-- )
-            {
-                var VARIABLE = pictureBoxMap.Controls[i];
-                if (VARIABLE is PictureBox)
-                {
-                    if (VARIABLE.Name.StartsWith("pcCreatedCamera")||VARIABLE.Name.StartsWith("pcCreatedAlarm"))
-                    {
-                        VARIABLE.Dispose();
-                    }
-                }
-            }
-
-            //DrawIconInMap();
-
-        }
-
-        private void pcCreatedAlarm_DoubleClick(object sender, EventArgs e)
-        {
-            AlarmIconInfo aii = (AlarmIconInfo) ((PictureBox) sender).Tag;
-            ViewCameraByIcon(aii.MatchCameraId);
-        }
-
-        private void pcCreatedCamera_DoubleClick(object sender, EventArgs e)
-        {
-            CameraIconInfo cii = (CameraIconInfo)((PictureBox)sender).Tag;
-            ViewCameraByIcon(cii.CameraId);
-        }
-
-        private void pcCreatedAlarm_Click(object sender, EventArgs e)
-        {
-            AlarmIconInfo aii = (AlarmIconInfo)((PictureBox)sender).Tag;
-            if (aii.AlarmId!=-1)
-            {
-                lblAlarmPosition.Text = aii.AlarmId.ToString();                
-            }
-            else
-            {
-                lblAlarmPosition.Text = "未关联";
-            }
-        }
-
-        private void pcCreatedCamera_Click(object sender, EventArgs e)
-        {
-            CameraIconInfo cii = (CameraIconInfo)((PictureBox)sender).Tag;
-            if (cii.MatchAlarmId!=-1)
-            {
-                lblAlarmPosition.Text = cii.MatchAlarmId.ToString();                
-            }
-            else
-            {
-                lblAlarmPosition.Text = "未关联";
-            }
-        }
-
-        private void ViewCameraByIcon(int carmeraId)
-        {
-            try
-            {
-                mainMultiplexer.CamerasVisible = true;
-                mainMultiplexer.CellWidth = 320;
-                mainMultiplexer.CellHeight = 240;
-                mainMultiplexer.FitToWindow = true;
-                mainMultiplexer.Cols = mainMultiplexer.Rows = 1;
-                HikVideoServerDeviceDriver deviceDriver;
-                HikVideoServerCameraDriver cameraDriver;
-                DeviceInfo oDevice;
-                CameraInfo camera = _listAllCam[carmeraId];
-                CameraWindow camwin = mainMultiplexer.GetFirstCameraWindow();
-                camera.Handle = camwin.Handle;
-                oDevice = _listDevice[camera.DeviceId];
-                oDevice.Handle = camwin.Handle;
-                if (!_runningDeviceList.ContainsKey(camera.DeviceId))
-                {
-                    deviceDriver = new HikVideoServerDeviceDriver();
-                    deviceDriver.Init(ref oDevice);
-                    _runningDeviceList.Add(camera.DeviceId, deviceDriver);
-                }
-
-                oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
-                if (!_runningCameraList.ContainsKey(camera.CameraId))
-                {
-                    cameraDriver = new HikVideoServerCameraDriver(oDevice);
-                    cameraDriver.Start(camera);
-                    _runningCameraList.Add(camera.CameraId, cameraDriver);
-                    mainMultiplexer.SetCamera(camwin, cameraDriver);
-                }
-                else
-                {
-                    cameraDriver = _runningCameraList[camera.CameraId];
-                    _runningCameraList.Remove(camera.CameraId);
-                    cameraDriver.Stop();
-                    cameraDriver.Close();
-                    cameraDriver.Start(camera);
-                    _runningCameraList.Add(camera.CameraId, cameraDriver);
-                    mainMultiplexer.SetCamera(camwin, cameraDriver);
-                }
-                mainMultiplexer.CamerasVisible = true;
-            }
-            catch (System.Exception ex)
-            {
-
-            }
-            finally
-            {
-            }
-
-        }
-
-        private void DrawIconInMap()
-        {
-            for (int i = pictureBoxMap.Controls.Count - 1; i >= 0; i--)
-            {
-                var VARIABLE = pictureBoxMap.Controls[i];
-                if (VARIABLE is PictureBox)
-                {
-                    VARIABLE.Dispose();
-                }
-            }
-            pictureBoxMap.Image = Image.FromFile(Path.Combine(Application.StartupPath, currentMapInfo.FileName));
-            //在地图上画摄像头图标
-            _listCurrentCameraIcon = CameraIconBusiness.Instance.GetCameraIconInfoByMapId(ref _errMessage, currentMapInfo.Id);
-            foreach (var cameraIconInfo in _listCurrentCameraIcon)
-            {
-                DrawCameraIcon(cameraIconInfo.Value);
-            }
-
-            //在地图上画报报警点图标
-            _listCurrentAlarmIcon = AlarmIconBusiness.Instance.GetAlarmIconInfoByMapId(ref _errMessage, currentMapInfo.Id);
-            foreach (var alarmIconInfo in _listCurrentAlarmIcon)
-            {
-                DrawAlarmIcon(alarmIconInfo.Value);
-            }
-        }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1419,64 +1042,6 @@ namespace CameraViewer
                 ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Dispose();
             }
         }
-
-        private void PCALarmSwithClick(object sender, EventArgs e)
-        {
-            if (((PictureBox)sender).Tag!=null)
-            {
-                int alarmid = (((PictureBox) sender).Tag as AlarmInfo).AlarmId;
-                lblAlarmPosition.Text = alarmid.ToString();
-                
-            }
-        }
-
-        private void PCALarmSwithDoubleClick(object sender, EventArgs e)
-        {
-            if (((PictureBox)sender).Tag != null)
-            {
-                int alarmid = (((PictureBox)sender).Tag as AlarmInfo).AlarmId;
-                if (_listAllAlarmIcon.ContainsKey(alarmid))
-                {
-                    ViewCameraByIcon(_listAllAlarmIcon[alarmid].MatchCameraId);
-                    currentMapInfo = _listMap[_listAllAlarmIcon[alarmid].Map];
-                    DrawIconInMap();
-                }
-
-            }
-        }
-
-        private void SetDefaultAlarmSwitchPictureBox()
-        {
-            foreach (var VARIABLE in tlpBottom.Controls)
-            {
-                if ((VARIABLE is PictureBox) && ((PictureBox)VARIABLE).Name.StartsWith("pcAlarmSwitch"))
-                {
-                    ((PictureBox)VARIABLE).Click += PCALarmSwithClick;
-                    ((PictureBox)VARIABLE).DoubleClick += PCALarmSwithDoubleClick;
-                    ((PictureBox)VARIABLE).Tag = null;
-                }
-            }
-
-            foreach (var alarmInfo in _listAlarm)
-            {
-                foreach (var VARIABLE in tlpBottom.Controls)
-                {
-                    if ((VARIABLE is PictureBox) && ((PictureBox)VARIABLE).Name.StartsWith("pcAlarmSwitch") && ((PictureBox)VARIABLE).Tag==null)
-                    {
-                        ((PictureBox)VARIABLE).Tag = alarmInfo.Value;
-                        ToolTip tt = new ToolTip();
-                        tt.SetToolTip((PictureBox)VARIABLE, alarmInfo.Value.DeviceName + "_" +alarmInfo.Value.Name);
-                        break;
-                    }
-                }
-            }
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            _runningCameraList[5].TestAlarm();
-        }
-
         private string CurrentAlarmSites;
         private Dictionary<int, AlarmInfo> _listAlarmSites = new Dictionary<int, AlarmInfo>();
         private void timerCheckAlarmSites_Tick(object sender, EventArgs e)
@@ -1509,95 +1074,9 @@ namespace CameraViewer
 
         private bool switchImage;
         
-        private void timerUpdateIcon_Tick(object sender, EventArgs e)
-        {
-            bool isNeedBeep = false;
-            switchImage = !switchImage;
-            foreach (var variable in _listAlarmSites)
-            {
-                foreach (var VARIABLE in tlpBottom.Controls)
-                {
-                    if ((VARIABLE is PictureBox) && ((PictureBox)VARIABLE).Name.StartsWith("pcAlarmSwitch") &&(((PictureBox)VARIABLE).Tag!=null)&& (((AlarmInfo)((PictureBox)VARIABLE).Tag).AlarmId == variable.Value.AlarmId))
-                    {
-                        if (switchImage==false)
-                        {
-                            ((PictureBox)VARIABLE).Image = Image.FromFile(Application.StartupPath + @"\img\AR1.BMP");
-                        }
-                        else
-                        {
-                            ((PictureBox)VARIABLE).Image = Image.FromFile(Application.StartupPath + @"\img\AR2.BMP");
-                          
-                        }
-                        isNeedBeep = true;
-                    }
-                }
-                foreach (var VARIABLE in pictureBoxMap.Controls)
-                {
-                    if ((VARIABLE is PictureBox) && ((PictureBox)VARIABLE).Name.StartsWith("pcCreatedAlarm") &&(((PictureBox)VARIABLE).Tag!=null)&& (((AlarmIconInfo)((PictureBox)VARIABLE).Tag).AlarmId == variable.Value.AlarmId))
-                    {
-                        if (switchImage == false)
-                        {
-                            ((PictureBox)VARIABLE).Image = Image.FromFile(Application.StartupPath + @"\img\ALARM3a.BMP");
-                        }
-                        else
-                        {
-                            ((PictureBox)VARIABLE).Image = Image.FromFile(Application.StartupPath + @"\img\ALARM3.BMP");
-                        }
-                        isNeedBeep = true;
-                    }
-                }
-            }
-            if (isNeedBeep)
-            {
-                MessageBeep(1);
-            }
-        }
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool MessageBeep(uint uType);
 
-        private void btnCancelAlarm_Click(object sender, EventArgs e)
-        {
-            if(lblAlarmPosition.Text=="未选择")
-            {
-                return;
-            }
-            int alarmid = int.Parse(lblAlarmPosition.Text);
-            if (_listAlarmSites.ContainsKey(alarmid))
-            {
-                AlarmInfo Alarm2Delete = _listAlarmSites[alarmid];
-                _listAlarmSites.Remove(alarmid);
-                //发送消警串口信息
-                ProtocolDataItem pdi = (new ProtocolDataBuilder()).ARM_CancelAlarm(alarmid);
-                SendSerialInfo(Alarm2Delete, pdi);
-                lblAlarmPosition.Text = "未选择";
-
-            }
-            foreach (var VARIABLE in tlpBottom.Controls)
-            {
-                if ((VARIABLE is PictureBox) && ((PictureBox)VARIABLE).Name.StartsWith("pcAlarmSwitch") && (((PictureBox)VARIABLE).Tag != null) && (((AlarmInfo)((PictureBox)VARIABLE).Tag).AlarmId == alarmid))
-                {
-                    ((PictureBox)VARIABLE).Image = Image.FromFile(Application.StartupPath + @"\img\AR3.BMP");
-                }
-            }
-            foreach (var VARIABLE in pictureBoxMap.Controls)
-            {
-                if ((VARIABLE is PictureBox) && ((PictureBox)VARIABLE).Name.StartsWith("pcCreatedAlarm") && (((PictureBox)VARIABLE).Tag != null) && (((AlarmIconInfo)((PictureBox)VARIABLE).Tag).AlarmId == alarmid))
-                {
-                    ((PictureBox)VARIABLE).Image = Image.FromFile(Application.StartupPath + @"\img\ALARM3.BMP");
-                }
-            }
-        }
-        private void SendSerialInfo(AlarmInfo Alarm2Delete , ProtocolDataItem pdi)
-        {
-            if (HikVideoServerCameraDriver.ListSerialHandle.ContainsKey(Alarm2Delete.DeviceId))
-            {
-                SendSerialThread sst = new SendSerialThread(Alarm2Delete, pdi);
-                Thread t = new Thread(new ThreadStart(sst.SendThreadProc));
-                t.Start();
-                t.Join();
-            }
-
-        }
         private class SendSerialThread
         {
             //要用到的属性，也就是我们要传递的参数
@@ -1620,73 +1099,7 @@ namespace CameraViewer
 
 
         }
-        //设防
-        private void Fortify_Click(object sender, EventArgs e)
-        {
-            if (lblAlarmPosition.Text == "未选择")
-            {
-                return;
-            }
-            int alarmid = int.Parse(lblAlarmPosition.Text);
-            if (_listAlarmSites.ContainsKey(alarmid))
-            {
-                AlarmInfo Alarm2Delete = _listAlarmSites[alarmid];
-                //发送设防串口信息
-                ProtocolDataItem pdi = (new ProtocolDataBuilder()).ARM_Fortify(alarmid);
-                SendSerialInfo(Alarm2Delete, pdi);
-            }
-        }
-        //撤防
-        private void FortifyDisable_Click(object sender, EventArgs e)
-        {
-            if (lblAlarmPosition.Text == "未选择")
-            {
-                return;
-            }
-            int alarmid = int.Parse(lblAlarmPosition.Text);
-            if (_listAlarmSites.ContainsKey(alarmid))
-            {
-                AlarmInfo Alarm2Delete = _listAlarmSites[alarmid];
-                //发送设防串口信息
-                ProtocolDataItem pdi = (new ProtocolDataBuilder()).ARM_Fortify_Disable(alarmid);
-                SendSerialInfo(Alarm2Delete, pdi);
 
-            }
-        }
-        //联动开
-        private void LinkageEnable_Click(object sender, EventArgs e)
-        {
-            if (lblAlarmPosition.Text == "未选择")
-            {
-                return;
-            }
-            int alarmid = int.Parse(lblAlarmPosition.Text);
-            if (_listAlarmSites.ContainsKey(alarmid))
-            {
-                AlarmInfo Alarm2Delete = _listAlarmSites[alarmid];
-                //发送设防串口信息
-                ProtocolDataItem pdi = (new ProtocolDataBuilder()).ARM_Linkage_Enable(alarmid);
-                SendSerialInfo(Alarm2Delete, pdi);
-
-            }
-        }
-        //联动关
-        private void LinkageDisable_Click(object sender, EventArgs e)
-        {
-            if (lblAlarmPosition.Text == "未选择")
-            {
-                return;
-            }
-            int alarmid = int.Parse(lblAlarmPosition.Text);
-            if (_listAlarmSites.ContainsKey(alarmid))
-            {
-                AlarmInfo Alarm2Delete = _listAlarmSites[alarmid];
-                //发送设防串口信息
-                ProtocolDataItem pdi = (new ProtocolDataBuilder()).ARM_Linkage_Disable(alarmid);
-                SendSerialInfo(Alarm2Delete, pdi);
-
-            }
-        }
 
         private void barButtonItemResultView_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -1731,9 +1144,20 @@ namespace CameraViewer
 
             var livePacketHandle = (LivePacketHandle)sender;
             if (livePacketHandle == null) return;
-            //处理视频 ShowLiveVideo(livePacketHandle);
-        }
+            //处理视频 
+            ShowLiveVideo(livePacketHandle);
 
+        }
+        protected void ShowLiveVideo(LivePacketHandle livePacketHandle)
+        {
+            CrossThreadOperationControl crossAdd = delegate()
+            {
+                CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+                if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
+                cameraWindow.CurrentImage = livePacketHandle.CurrentNetImage.Image;
+                cameraWindow.Refresh();
+            };
+        }
         #region Connect sever
         private delegate void CrossThreadOperationControl();
         private void ConnectionServer()
@@ -1813,7 +1237,7 @@ namespace CameraViewer
         {
             try{
                 server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                server.Bind(new IPEndPoint(new IPAddress(new byte[]{192,168,1,108}), 9999));
+                server.Bind(new IPEndPoint(new IPAddress(new byte[]{192,168,1,108}), 8888));
                 server.Listen(500);
                 // 开始侦听
                 while (!done)
@@ -1842,6 +1266,9 @@ namespace CameraViewer
         {
             //获得客户端节点对象   
             var clientConnection = new ClientConnection((Socket)socket);
+
+            clientConnection.LivePacketHandle.DataChange += LivePacketHandleDataChange; 
+
             if (!listRunningClient.ContainsKey(clientConnection.DecoderInfo.id))
             {
                 listRunningClient.Add(clientConnection.DecoderInfo.id, clientConnection);
@@ -1854,6 +1281,122 @@ namespace CameraViewer
             clientConnection.GetData();
         }
         private Dictionary<int, ClientConnection> listRunningClient = new Dictionary<int, ClientConnection>();
+
+        private void barButtonItem8_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            foreach (var v in listRunningClient)
+            {
+                v.Value.SendDecoderStartCommand();
+            }
+        }
+
+        private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            foreach (var v in listRunningClient)
+            {
+                v.Value.SendDecoderStopCommand();
+            }
+        }
+
+        private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            foreach (var v in listRunningClient)
+            {
+                v.Value.SetPicWidthHeight(352,288);
+            }
+        }
+
+        private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            foreach (var v in listRunningClient)
+            {
+                v.Value.SendDecoderXML();
+            }
+        }
+
+        private void barButtonItem12_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+            cameraWindow.CurrentImage = Image.FromFile(@"C:\fff1a7ef-43d7-46d9-ad61-d5c9f8fe4b53.bmp");
+        }
+
+        private bool testimage;
+        private void timerTest_Tick(object sender, EventArgs e)
+        {
+            testimage =!testimage;
+            if (testimage)
+            {
+                CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+                if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
+                cameraWindow.CurrentImage = Image.FromFile(@"C:\fff1a7ef-43d7-46d9-ad61-d5c9f8fe4b53.bmp");
+                cameraWindow.Refresh();
+
+            }
+            else
+            {
+                CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+                if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
+                cameraWindow.CurrentImage = Image.FromFile(@"C:\BKClientBmp.bmp");
+                cameraWindow.Refresh();
+        
+            }
+
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            int iRow = 1, iCol = 1;
+            Util.GetRowCol(1, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            int iRow = 2, iCol = 2;
+            Util.GetRowCol(4, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            int iRow = 3, iCol = 3;
+            Util.GetRowCol(9, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            int iRow = 4, iCol = 4;
+            Util.GetRowCol(16, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            int iRow = 5, iCol = 5;
+            Util.GetRowCol(25, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+        private void splitContainerControl1_Resize(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void splitContainerControl1_SplitterPositionChanged(object sender, EventArgs e)
+        {
+                splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
+        }
 
     }
 }
