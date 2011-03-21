@@ -67,38 +67,6 @@ namespace CameraViewer.Forms
             treeListDevice.Columns[1].Visible = false;
             contextMenuStripGroupAndDevice.Visible = false;
             Cursor.Current = currentCursor;
-             
-
-            
-            /*TreeListNode Rootnode;
-            TreeListNode Gnode;
-            TreeListNode devicenode;
-            TreeListNode camnode;
-            Rootnode = treeListDevice.AppendNode(new[] { "设备管理", 0 + ";R" }, -1, 1, 3, 1, CheckState.Checked);
-            Rootnode.Tag = 0+ ";R";
-            foreach (KeyValuePair<int, GroupInfo> item in listGroup)
-            {
-                //if (item.Value.ParentId == item.Key)
-                //{
-                Gnode = treeListDevice.AppendNode(new[] { item.Value.Name, item.Key + ";G" },Rootnode.Id, 1, 3, 1, CheckState.Checked);
-                Gnode.Tag = item.Key + ";G";
-                foreach (KeyValuePair<int, DeviceInfo> device in item.Value.ListDevice)
-                {
-                    devicenode = treeListDevice.AppendNode(new[] { device.Value.Name, device.Key + ";D" }, Gnode.Id, 1, 3, 1, CheckState.Checked);
-                    devicenode.Tag = device.Key + ";D";
-                    foreach (KeyValuePair<int, CameraInfo> cam in device.Value.ListCamera)
-                    {
-                        camnode = treeListDevice.AppendNode(new[] { cam.Value.Name, cam.Key + ";C" }, devicenode.Id, 1, 3, 1, CheckState.Checked);
-                        camnode.Tag = cam.Key + ";C";
-                     
-                    }
-                  
-                }
-            }
-            treeListDevice.Columns[1].Visible = false;
-            treeListDevice.ExpandAll();
-            Cursor.Current = currentCursor;
-            contextMenuStripGroupAndDevice.Visible = false;*/
         }
 
         /// <summary>
@@ -289,18 +257,17 @@ namespace CameraViewer.Forms
 
         private void AddGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CurrentParentId == 0)
-            {
+          //  if (CurrentParentId == 0)
+           // {
                 
-                return;
-            }
+                //return;
+           // }
             frmGroup group = new frmGroup();
             group.Opt = Util.Operateion.Add;
-            group.ParentGroupId = CurrentParentId;
+            group.ParentGroupId =CurrentParentId;//根目录的ID为1
             group.ShowDialog(this);
             treeListDevice.Nodes.Clear();
             BuildDeviceTree();
-
 
         }
 
@@ -332,7 +299,7 @@ namespace CameraViewer.Forms
 
             frmWizard group = new frmWizard();
 
-            group.GroupId = CurrentParentId;
+           group.GroupId = CurrentParentId;
             group.ShowDialog(this);
             treeListDevice.Nodes.Clear();
             BuildDeviceTree();
@@ -865,7 +832,7 @@ namespace CameraViewer.Forms
                 return;
             }
             //此处由tn.FirstNode==null改为tn.FirstNode!=null
-            if ((tn.Tag.ToString().IndexOf("G") >= 0))// && tn.FirstNode !=null)
+            if ((tn.Tag.ToString().IndexOf("G") >= 0) && tn.FirstNode !=null)
             {
                 string[] strs = tn.Tag.ToString().Split(';');
                 int groupid = int.Parse(strs[0]);
@@ -889,11 +856,11 @@ namespace CameraViewer.Forms
         private void EditGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-             //if (CurrentParentId == 0)
-            //{
+             if (CurrentParentId == 0)
+            {
                 //frmModifyDeviceInfo
-               // return;
-            //}
+                return;
+            }
             frmGroup group = new frmGroup();
             group.Opt = Util.Operateion.Update;
             group.GroupId = int.Parse(treeListDevice.FocusedNode.Tag.ToString().Split(';')[0]);
@@ -1219,11 +1186,9 @@ namespace CameraViewer.Forms
         //修改解码器
         private void barButtonItem5EditDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            int id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
-            DecoderInfo di = DecoderBusiness.Instance.GetDecoderInfoByDecoderId(ref errMessage, id);
-            AddXtraForm addDecoder = new AddXtraForm(di);
+            AddXtraForm addDecoder = new AddXtraForm();
             addDecoder.Opt = Util.Operateion.Update;
-            addDecoder.Id = id;
+            addDecoder.Id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
             addDecoder.ShowDialog(this);
             BuildDecoderTree();
             showDecoderInfo();
