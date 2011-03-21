@@ -44,19 +44,19 @@ namespace Damany.Controls
             // 
             // btnDefaultPos
             // 
-            this.btnDefaultPos.Location = new System.Drawing.Point(5, 119);
+            this.btnDefaultPos.Location = new System.Drawing.Point(6, 128);
             this.btnDefaultPos.LookAndFeel.SkinName = "Black";
             this.btnDefaultPos.Name = "btnDefaultPos";
-            this.btnDefaultPos.Size = new System.Drawing.Size(129, 23);
+            this.btnDefaultPos.Size = new System.Drawing.Size(150, 25);
             this.btnDefaultPos.TabIndex = 5;
             this.btnDefaultPos.Text = "设置预设位置";
             // 
             // up
             // 
             this.up.Image = global::Damany.Controls.Properties.Resources.Up;
-            this.up.Location = new System.Drawing.Point(52, 2);
+            this.up.Location = new System.Drawing.Point(61, 2);
             this.up.Name = "up";
-            this.up.Size = new System.Drawing.Size(38, 33);
+            this.up.Size = new System.Drawing.Size(44, 36);
             this.up.TabIndex = 4;
             this.up.Text = "聚焦-";
             this.up.ToolTip = "云台向上";
@@ -64,9 +64,9 @@ namespace Damany.Controls
             // leftUp
             // 
             this.leftUp.Image = global::Damany.Controls.Properties.Resources.LeftUp;
-            this.leftUp.Location = new System.Drawing.Point(5, 2);
+            this.leftUp.Location = new System.Drawing.Point(6, 2);
             this.leftUp.Name = "leftUp";
-            this.leftUp.Size = new System.Drawing.Size(41, 33);
+            this.leftUp.Size = new System.Drawing.Size(48, 36);
             this.leftUp.TabIndex = 3;
             this.leftUp.Text = "聚焦+";
             this.leftUp.ToolTip = "左上";
@@ -74,18 +74,18 @@ namespace Damany.Controls
             // rightUp
             // 
             this.rightUp.Image = global::Damany.Controls.Properties.Resources.RightUp;
-            this.rightUp.Location = new System.Drawing.Point(96, 2);
+            this.rightUp.Location = new System.Drawing.Point(112, 2);
             this.rightUp.Name = "rightUp";
-            this.rightUp.Size = new System.Drawing.Size(38, 33);
+            this.rightUp.Size = new System.Drawing.Size(44, 36);
             this.rightUp.TabIndex = 4;
             this.rightUp.Text = "云台右上位置移动";
             // 
             // left
             // 
             this.left.Image = global::Damany.Controls.Properties.Resources.left;
-            this.left.Location = new System.Drawing.Point(5, 41);
+            this.left.Location = new System.Drawing.Point(6, 44);
             this.left.Name = "left";
-            this.left.Size = new System.Drawing.Size(41, 33);
+            this.left.Size = new System.Drawing.Size(48, 36);
             this.left.TabIndex = 3;
             this.left.Text = "聚焦+";
             this.left.ToolTip = "云台向左移动";
@@ -93,9 +93,9 @@ namespace Damany.Controls
             // center
             // 
             this.center.Image = global::Damany.Controls.Properties.Resources.Stop;
-            this.center.Location = new System.Drawing.Point(52, 41);
+            this.center.Location = new System.Drawing.Point(61, 44);
             this.center.Name = "center";
-            this.center.Size = new System.Drawing.Size(38, 33);
+            this.center.Size = new System.Drawing.Size(44, 36);
             this.center.TabIndex = 4;
             this.center.Text = "聚焦-";
             this.center.ToolTip = "返回到预设位置";
@@ -103,9 +103,9 @@ namespace Damany.Controls
             // right
             // 
             this.right.Image = global::Damany.Controls.Properties.Resources.Right;
-            this.right.Location = new System.Drawing.Point(96, 41);
+            this.right.Location = new System.Drawing.Point(112, 44);
             this.right.Name = "right";
-            this.right.Size = new System.Drawing.Size(38, 33);
+            this.right.Size = new System.Drawing.Size(44, 36);
             this.right.TabIndex = 4;
             this.right.Text = "聚焦-";
             this.right.ToolTip = "云台向右移动";
@@ -113,9 +113,9 @@ namespace Damany.Controls
             // leftDown
             // 
             this.leftDown.Image = global::Damany.Controls.Properties.Resources.LeftDown;
-            this.leftDown.Location = new System.Drawing.Point(5, 80);
+            this.leftDown.Location = new System.Drawing.Point(6, 86);
             this.leftDown.Name = "leftDown";
-            this.leftDown.Size = new System.Drawing.Size(41, 33);
+            this.leftDown.Size = new System.Drawing.Size(48, 36);
             this.leftDown.TabIndex = 3;
             this.leftDown.Text = "聚焦+";
             this.leftDown.ToolTip = "云台左下移动";
@@ -123,24 +123,24 @@ namespace Damany.Controls
             // Down
             // 
             this.Down.Image = global::Damany.Controls.Properties.Resources.Down;
-            this.Down.Location = new System.Drawing.Point(52, 80);
+            this.Down.Location = new System.Drawing.Point(61, 86);
             this.Down.Name = "Down";
-            this.Down.Size = new System.Drawing.Size(38, 33);
+            this.Down.Size = new System.Drawing.Size(44, 36);
             this.Down.TabIndex = 4;
             this.Down.Text = "云台向下移动";
             // 
             // Rightdown
             // 
             this.Rightdown.Image = global::Damany.Controls.Properties.Resources.RightDown;
-            this.Rightdown.Location = new System.Drawing.Point(96, 80);
+            this.Rightdown.Location = new System.Drawing.Point(112, 86);
             this.Rightdown.Name = "Rightdown";
-            this.Rightdown.Size = new System.Drawing.Size(38, 33);
+            this.Rightdown.Size = new System.Drawing.Size(44, 36);
             this.Rightdown.TabIndex = 4;
             this.Rightdown.Text = "云台右下移动";
             // 
             // PanNav
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnDefaultPos);
             this.Controls.Add(this.Rightdown);
@@ -153,7 +153,7 @@ namespace Damany.Controls
             this.Controls.Add(this.up);
             this.Controls.Add(this.leftUp);
             this.Name = "PanNav";
-            this.Size = new System.Drawing.Size(145, 150);
+            this.Size = new System.Drawing.Size(169, 162);
             this.ResumeLayout(false);
 
         }

@@ -73,6 +73,7 @@ namespace CameraViewer
 			}
 		}
 
+	    public Image CurrentImage;
 		// Constructor
 		public CameraWindow()
 		{
@@ -99,7 +100,7 @@ namespace CameraViewer
 			// lock
 			Monitor.Enter(this);
 
-            Graphics	g = pe.Graphics;
+            Graphics g = pe.Graphics;
             Rectangle	rc = this.ClientRectangle;
             Pen pen;
             //if (ClickMe)
@@ -121,19 +122,28 @@ namespace CameraViewer
                 g.DrawRectangle(pen, rc.X, rc.Y, rc.Width - 1, rc.Height - 1);
             }
 			// draw rectangle
+            
+            //有图像的话画图像
+
+		    if (CurrentImage!=null)
+		    {
+                g.DrawImage(CurrentImage, rc.X, rc.Y, rc.Width, rc.Height);
+
+		    }
 			
-           // MyDrawReversibleRectangle(rc);
+           // MyDrawReversibleRectangle(rc););
 
             if (camera== null)
             {
-                Font drawFont = new Font("Arial", 12);
+                Font drawFont = new Font("Arial", 8);
                 SolidBrush drawBrush = new SolidBrush(Color.White);
 
-                g.DrawString("连接中 ...", drawFont, drawBrush, new PointF(5, 5));
+                g.DrawString("连接中 ...", drawFont, drawBrush, new PointF(3, 3));
 
                 drawBrush.Dispose();
                 drawFont.Dispose();
             }
+
 
 			pen.Dispose();
 
