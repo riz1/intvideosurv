@@ -80,6 +80,7 @@
     <Compile Include="UserInfo.cs" />
     <Compile Include="VideoOutputInfo.cs" />
     <Compile Include="VideoProvider.cs" />
+    <Compile Include="WindowCameraInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
