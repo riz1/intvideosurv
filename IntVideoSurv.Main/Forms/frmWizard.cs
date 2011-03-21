@@ -78,6 +78,7 @@ namespace CameraViewer.Forms
                 oDevice = DeviceBusiness.Instance.GetDeviceInfoByDeviceName(ref errMessage, oDevice.Name);
                 OperateLogBusiness.Instance.Insert(ref errMessage, new OperateLog
                    {
+                       //插入有问题，此处为给GroupId,CameraId赋值
                        ClientUserId = MainForm.CurrentUser.UserId,
                        ClientUserName = MainForm.CurrentUser.UserName,
                        Content = oDevice.ToString(),
