@@ -18,7 +18,14 @@ namespace CameraViewer.Forms
         {
             InitializeComponent();
         }
+        public AddXtraForm(DecoderInfo di)
+        {
+            InitializeComponent();
+            textEditname.Text = di.Name;
+            textEditname.Enabled = false;
+            this.Text = "修改解码器";
 
+        }
         private string errMessage = "";
         public CameraViewer.Util.Operateion Opt
         {
@@ -43,7 +50,7 @@ namespace CameraViewer.Forms
             switch(Opt)
             {
                 case Util.Operateion.Add:
-                    
+                    //di.Name = textEditname.Text;
                     DecoderBusiness.Instance.Insert(ref errMessage, di);
                     OperateLog ol = new OperateLog
                     {
@@ -60,7 +67,7 @@ namespace CameraViewer.Forms
                     break;
                 case Util.Operateion.Update:
                     di = DecoderBusiness.Instance.GetDecoderInfoByDecoderId(ref errMessage, Id);
-                    di.Name = textEditname.Text;
+                    //di.Name = textEditname.Text;
                     di.Port = int.Parse(textEditport.Text);
                     di.Ip = textEditIp.Text;
                     di.MaxDecodeChannelNo = int.Parse(textEditmax.Text);
