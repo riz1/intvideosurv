@@ -52,7 +52,7 @@ namespace CameraViewer.NetWorking
                                           {
                                               CameraId = cameraId,
                                               Image =
-                                                  picType == 0
+                                                  picType == 2
                                                       ? YUV2RGB.GetBitmapFromYUVStream(width, height, imageDetail)
                                                       : YUV2RGB.GetBitmapFromRGBStream(width, height, imageDetail)
                                           };

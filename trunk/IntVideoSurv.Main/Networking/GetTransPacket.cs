@@ -75,6 +75,7 @@ namespace CameraViewer.NetWorking
                 if (handler.CanHandle(byteBuf))
                 {
                     handler.Handle(byteBuf);
+                    break;
                 }
             }
         }
