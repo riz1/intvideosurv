@@ -48,6 +48,18 @@ namespace CameraViewer
                     rows = 4;
                     cols = 4;
                     break;
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                    rows = 5;
+                    cols = 5;
+                    break;
                 default:
                     break;
             }
