@@ -901,6 +901,7 @@ namespace CameraViewer
             Splash.Splash.Status = "³õÊ¼»¯Íê±Ï!";
             Splash.Splash.Close();
             //HikVideoServerCameraDriver.InitDecodeCard();
+            splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
             this.Visible = true;
         }
 
