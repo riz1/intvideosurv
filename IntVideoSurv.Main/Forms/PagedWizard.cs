@@ -84,7 +84,7 @@ namespace CameraViewer
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(832, 504);
+            this.tabControl.Size = new System.Drawing.Size(832, 501);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -93,9 +93,9 @@ namespace CameraViewer
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelButton.Location = new System.Drawing.Point(734, 513);
+            this.cancelButton.Location = new System.Drawing.Point(734, 511);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(90, 24);
+            this.cancelButton.Size = new System.Drawing.Size(90, 25);
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "&Cancel";
             // 
@@ -103,9 +103,9 @@ namespace CameraViewer
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.okButton.Location = new System.Drawing.Point(638, 513);
+            this.okButton.Location = new System.Drawing.Point(638, 511);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(90, 24);
+            this.okButton.Size = new System.Drawing.Size(90, 25);
             this.okButton.TabIndex = 2;
             this.okButton.Text = "&Ok";
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
@@ -114,16 +114,16 @@ namespace CameraViewer
             // 
             this.applyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.applyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.applyButton.Location = new System.Drawing.Point(532, 513);
+            this.applyButton.Location = new System.Drawing.Point(532, 511);
             this.applyButton.Name = "applyButton";
-            this.applyButton.Size = new System.Drawing.Size(90, 24);
+            this.applyButton.Size = new System.Drawing.Size(90, 25);
             this.applyButton.TabIndex = 1;
             this.applyButton.Text = "&Apply";
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
             // PagedWizard
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(832, 545);
             this.Controls.Add(this.applyButton);
