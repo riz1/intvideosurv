@@ -95,40 +95,45 @@ namespace CameraViewer.Controls
         }
 
         private TreeNode _lastSelectedTreeNode = null;
+        private TreeListNode _lastSelectedTreeListNode = null;
         private Color _treeNodeDefaultColor;
         private bool _isTreeNodeClicked = false;
         private TreeNode selectedTreeNode = null;
+        private TreeListNode selectedTreeListNode = null;
         private void BuildSynGroupTree()
         {
             //_listSynGroup = SynGroupBusiness.Instance.GetAllSynGroup(ref errMessage);
             if(_listSynGroup==null) return;
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            TreeNode node;
+           // TreeListNode node;
             tvSynGroup.Nodes.Clear();
 
             foreach (KeyValuePair<int, SynGroup> item in _listSynGroup)
             {
-                node = new TreeNode(item.Value.Name);
+
+                TreeListNode node = tvSynGroup.AppendNode(new[] { item.Value.Name, item.Key + ";S" }, -1, 1, 3, 1, CheckState.Checked);
+                //node = new TreeListNode(item.Value.Name);
                 node.Tag = item.Key + ";S";
                 node.ImageIndex = 5;
-                if (_lastSelectedTreeNode != null)
+                if (_lastSelectedTreeListNode != null)
                 {
-                    if (_lastSelectedTreeNode.Tag.ToString() == node.Tag.ToString())
+                    if (_lastSelectedTreeListNode.Tag.ToString() == node.Tag.ToString())
                     {
-                        node.BackColor = Color.Gray;
-                        selectedTreeNode = node;
+                        //node.BackColor = Color.Gray;
+                        selectedTreeListNode = node;
                     }
                 }
                 AppendSynGroupNode(node);
-                tvSynGroup.Nodes.Add(node);
+                //tvSynGroup.Nodes.Add(node);
+                tvSynGroup.Columns[1].Visible = false;
 
             }
 
             tvSynGroup.ExpandAll();
             if (selectedTreeNode != null)
             {
-                tvSynGroup.SelectedNode = selectedTreeNode;
+                tvSynGroup.FocusedNode = selectedTreeListNode;
             }
             Cursor.Current = currentCursor;
         }
@@ -138,16 +143,16 @@ namespace CameraViewer.Controls
             //listGroup = GroupBusiness.Instance.GetAllGroupInfo(ref errMessage);
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            TreeNode node;
+            TreeListNode node;
             tvSynGroup.Nodes.Clear();
             foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
             {
                 if (item.Value.ParentId == 0)
                 {
-                    node = new TreeNode(item.Value.Name);
+                    node = tvSynGroup.AppendNode(new[] { item.Value.Name, 0 + ";G" }, -1, 1, 3, 1, CheckState.Checked);
                     node.Tag = item.Key + ";G";
                     AppendNode(node, item.Key);
-                    tvSynGroup.Nodes.Add(node);
+                   // tvSynGroup.Nodes.Add(node);
 
                 }
 
@@ -157,8 +162,9 @@ namespace CameraViewer.Controls
             Cursor.Current = currentCursor;
         }
 
-        private void AppendSynGroupNode(TreeNode aNode)
+        private void AppendSynGroupNode(TreeListNode aNode)
         {
+            TreeListNode node;
             string[] str = aNode.Tag.ToString().Split(';');
             int key = int.Parse(str[0]);
             SynGroup synGroup = _listSynGroup[key];
@@ -168,19 +174,20 @@ namespace CameraViewer.Controls
             }
             foreach (KeyValuePair<int, CameraMonitorPairInfo> camPair in synGroup.ListCameraMonitorPair)
             {
-                var node = new TreeNode(camPair.Value.DeviceName + "_" + camPair.Value.Name + "_" + camPair.Value.DisplayChannelName);
+                node = tvSynGroup.AppendNode(new[] { camPair.Value.DeviceName + "_" + camPair.Value.Name + "_" + camPair.Value.DisplayChannelName, camPair.Key + ";P;" + key + ";G;" + camPair.Value.CameraId + ";C;" + camPair.Value.DisplayChannelId + ";M" }, aNode.Id, 1, 3, 1, CheckState.Checked);
+                
                 node.Tag = camPair.Key + ";P;" + key + ";G;" + camPair.Value.CameraId + ";C;" + camPair.Value.DisplayChannelId + ";M";
-                if (_lastSelectedTreeNode != null)
+                if (_lastSelectedTreeListNode != null)
                 {
-                    if (_lastSelectedTreeNode.Tag.ToString() == node.Tag.ToString())
+                    if (_lastSelectedTreeListNode.Tag.ToString() == node.Tag.ToString())
                     {
-                        node.BackColor = Color.Gray;
+                       // node.BackColor = Color.Gray;
                         node.ImageIndex = 2;
-                        selectedTreeNode = node;
+                        selectedTreeListNode = node;
                         //treeViewSynGroup.SelectedNode = node;
                     }
                 }
-                aNode.Nodes.Add(node);
+               // aNode.Nodes.Add(node);
 
             }
         }
@@ -198,7 +205,7 @@ namespace CameraViewer.Controls
             {
                 case EnumViewType.Normal:
 
-                    if (_listGroup == null)
+                /*    if (_listGroup == null)
                     {
                         return;
                     }
@@ -216,7 +223,7 @@ namespace CameraViewer.Controls
                             //treeList
                             
                         }
-                    }
+                    }*/
                     //测试TreeList
                     tlCamera.Nodes.Clear();
                     foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
@@ -236,7 +243,7 @@ namespace CameraViewer.Controls
                     tlCamera.ExpandAll();
 
                     //添加地图
-                    if (_listMap!=null)
+                    /*if (_listMap!=null)
                     {
                         node = new TreeNode("地图");
                         node.Tag = -1 + ";a";
@@ -249,10 +256,10 @@ namespace CameraViewer.Controls
                         }
 
                         trCamera.Nodes.Add(node);                        
-                    }
+                    }*/
 
 
-                    trCamera.ExpandAll();
+                    //trCamera.ExpandAll();
                     Cursor.Current = currentCursor;
                     break;
 
@@ -275,10 +282,11 @@ namespace CameraViewer.Controls
                     tvSynGroup.Nodes.Clear();
                     foreach (KeyValuePair<int, SynGroup> item in _listSynGroup)
                     {
-                        node = new TreeNode(item.Value.Name);
-                        node.Tag = item;
-                        AppendNode(node);
-                        tvSynGroup.Nodes.Add(node);
+                       // node = new TreeNode(item.Value.Name);
+                        TreeListNode mynode = tvSynGroup.AppendNode(new[] { item.Value.Name, item.Key + ";S" }, -1, 1, 3, 1, CheckState.Checked);
+                        mynode.Tag = item;
+                        AppendNode(mynode);
+                        //tvSynGroup.Nodes.Add(node);
 
                     }
                     tvSynGroup.ExpandAll();
@@ -295,65 +303,70 @@ namespace CameraViewer.Controls
 
 
         }
-        private void AppendNode(TreeNode aNode)
+        private void AppendNode(TreeListNode aNode)
         {
             foreach (KeyValuePair<int, CameraInfo> camPair in ((KeyValuePair<int, SynGroup>)(aNode.Tag)).Value.ListCamera)
             {
-                var node = new TreeNode(camPair.Value.Name);
+                TreeListNode node = tvSynGroup.AppendNode(new[] { camPair.Value.Name, camPair.Key + ";G" }, aNode.Id, 1, 3, 1, CheckState.Checked);
                 node.Tag = camPair.Value;
-                aNode.Nodes.Add(node);
+               // aNode.Nodes.Add(node);
 
             }
         }
-        private void AppendNode(TreeNode aNode, int ParentId)
+        private void AppendNode(TreeListNode aNode, int ParentId)
         {
             try
             {
-                TreeNode node;
-                TreeNode devicenode;
-                TreeNode camnode;
+                TreeListNode node;
+                TreeListNode devicenode;
+                TreeListNode camnode;
                 foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
                 {
                     if (item.Value.ParentId == ParentId)
                     {
-                        node = new TreeNode(item.Value.Name);
+                        /*
+                         * node = treeListDevice.AppendNode(new[] { item.Value.Name, item.Key + ";G" }, aNode.Id, 1, 3, 1, CheckState.Checked);
+                        node.Tag = item.Key.ToString() + ";G";
+                         */
+                        //node = new TreeNode(item.Value.Name);
+                        node=tvSynGroup.AppendNode(new[] { item.Value.Name, item.Key + ";G" }, aNode.Id, 1, 3, 1, CheckState.Checked);
                         node.Tag = item.Key.ToString() + ";G";
                         foreach (KeyValuePair<int, DeviceInfo> device in item.Value.ListDevice)
                         {
-                            devicenode = new TreeNode(device.Value.Name);
+                            devicenode = tvSynGroup.AppendNode(new[] { device.Value.Name, device.Key + ";D" }, node.Id, 1, 3, 1, CheckState.Checked);
                             devicenode.Tag = device.Key.ToString() + ";D";
                             devicenode.ImageIndex = 1;
                             //加载摄像头
-                            TreeNode tnCameraList = new TreeNode("摄像头列表");
+                            TreeListNode tnCameraList = tvSynGroup.AppendNode(new[] { "摄像头列表", "-1" + ";L" }, devicenode.Id, 1, 3, 1, CheckState.Checked);
                             tnCameraList.ImageIndex = 7;
                             tnCameraList.Tag = "-1" + ";L";
                             foreach (KeyValuePair<int, CameraInfo> cam in device.Value.ListCamera)
                             {
-                                camnode = new TreeNode(cam.Value.Name);
+                                camnode = tvSynGroup.AppendNode(new[] { cam.Value.Name, cam.Key + ";C" }, tnCameraList.Id, 1, 3, 1, CheckState.Checked);
                                 camnode.Tag = cam.Key.ToString() + ";C";
                                 camnode.ImageIndex = 2;
-                                tnCameraList.Nodes.Add(camnode);
+                                //tnCameraList.Nodes.Add(camnode);
                             }
-                            devicenode.Nodes.Add(tnCameraList);
+                            //devicenode.Nodes.Add(tnCameraList);
                             //加载报警器
-                            TreeNode tnAlarmList = new TreeNode("报警器列表");
+                            TreeListNode tnAlarmList = tvSynGroup.AppendNode(new[] { "报警器列表", "-1" + ";N" }, devicenode.Id, 1, 3, 1, CheckState.Checked);
                             tnAlarmList.ImageIndex = 10;
                             tnAlarmList.Tag = "-1" + ";N";
                             foreach (KeyValuePair<int, AlarmInfo> alarm in device.Value.ListAlarm)
                             {
-                                camnode = new TreeNode(alarm.Value.Name);
+                                camnode = tvSynGroup.AppendNode(new[] { alarm.Value.Name, alarm.Key + ";A" }, tnAlarmList.Id, 1, 3, 1, CheckState.Checked);
                                 camnode.Tag = alarm.Key.ToString() + ";A";
                                 camnode.ImageIndex = 10;
-                                tnAlarmList.Nodes.Add(camnode);
+                                //tnAlarmList.Nodes.Add(camnode);
                             }
-                            devicenode.Nodes.Add(tnAlarmList);
-                            node.Nodes.Add(devicenode);
+                            //devicenode.Nodes.Add(tnAlarmList);
+                            //node.Nodes.Add(devicenode);
 
                         }
                         AppendNode(node, item.Key);
-                        if (aNode != null)
+                        if (aNode == null)
                         {
-                            aNode.Nodes.Add(node);
+                            return;
                         }
 
                     }
@@ -441,7 +454,7 @@ namespace CameraViewer.Controls
                 //G:群组切换组
                 node.Tag = item.Key + ";G";
                 node.ImageIndex = 3;
-                if (_lastSelectedTreeNode != null)
+                if (_lastSelectedTreeListNode != null)
                 {
                     if (_lastSelectedTreeNode.Tag.ToString() == node.Tag.ToString())
                     {
@@ -578,6 +591,11 @@ namespace CameraViewer.Controls
                 DoubleProgSwitch(e.Node.Tag.ToString());
             }
             
+        }
+
+        private void trCamera_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
 
     }
