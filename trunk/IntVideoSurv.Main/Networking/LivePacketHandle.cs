@@ -35,26 +35,36 @@ namespace CameraViewer.NetWorking
             try
             {
                 logger.Info("开始解析图像数据");
+                
 
                 int datalength = BitConverter.ToInt32(bytes, 4);//数据长度
-                int cameraId = BitConverter.ToInt32(bytes, 8);//摄像头ID
-                int picType = BitConverter.ToInt32(bytes, 12);//图像类型
-                int width = BitConverter.ToInt32(bytes, 16);//图像宽度
-                int height = BitConverter.ToInt32(bytes, 20);//图像高度
+
+                long captureTicks = BitConverter.ToInt64(bytes, 8);//抓拍时间Ticks
+                DateTime captureTime = new DateTime(captureTicks);
+
+                int cameraId = BitConverter.ToInt32(bytes, 16);//摄像头ID
+                int picType = BitConverter.ToInt32(bytes, 20);//图像类型
+                int width = BitConverter.ToInt32(bytes, 24);//图像宽度
+                int height = BitConverter.ToInt32(bytes, 28);//图像高度
 
                 if (datalength + 8 == bytes.Length)
                 {
                     //获取图像数据的真实长度
-                    var imgLen = datalength - 16;
+                    var imgLen = datalength - 24;
                     var imageDetail=new byte[imgLen];
-                    Array.Copy(bytes, 24, imageDetail, 0, imgLen);
+                    Array.Copy(bytes, 32, imageDetail, 0, imgLen);
                     CurrentNetImage = new NetImage
                                           {
                                               CameraId = cameraId,
                                               Image =
                                                   picType == 2
                                                       ? YUV2RGB.GetBitmapFromYUVStream(width, height, imageDetail)
-                                                      : YUV2RGB.GetBitmapFromRGBStream(width, height, imageDetail)
+                                                      : YUV2RGB.GetBitmapFromRGBStream(width, height, imageDetail),
+                                              Width = width,
+                                              Height =height,
+                                              Format = picType,
+                                              CaptureTime = captureTime
+
                                           };
 
                     OnDataChanged(this, new DataChangeEventArgs(GetType().Name));

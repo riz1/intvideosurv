@@ -1398,5 +1398,12 @@ namespace CameraViewer
                 splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
         }
 
+        private void barButtonItem13_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            long date =DateTime.Now.Ticks;
+            DateTime theDate =new DateTime(date);¡¡¡¡
+
+        }
+
     }
 }
