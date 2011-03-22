@@ -51,10 +51,11 @@ namespace CameraViewer.Controls
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
-            this.trCamera = new System.Windows.Forms.TreeView();
             this.imageListForTreeView = new System.Windows.Forms.ImageList(this.components);
             this.xtraTabPageDecoderList = new DevExpress.XtraTab.XtraTabPage();
-            this.tvSynGroup = new System.Windows.Forms.TreeView();
+            this.tvSynGroup = new DevExpress.XtraTreeList.TreeList();
+            this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -66,6 +67,7 @@ namespace CameraViewer.Controls
             ((System.ComponentModel.ISupportInitialize)(this.tlCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.xtraTabPageDecoderList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tvSynGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -231,7 +233,6 @@ namespace CameraViewer.Controls
             // xtraTabPageCameraList
             // 
             this.xtraTabPageCameraList.Controls.Add(this.tlCamera);
-            this.xtraTabPageCameraList.Controls.Add(this.trCamera);
             this.xtraTabPageCameraList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabPageCameraList.Name = "xtraTabPageCameraList";
             this.xtraTabPageCameraList.Size = new System.Drawing.Size(207, 271);
@@ -243,7 +244,7 @@ namespace CameraViewer.Controls
             this.treeListColumn1,
             this.treeListColumn2});
             this.tlCamera.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlCamera.Location = new System.Drawing.Point(102, 0);
+            this.tlCamera.Location = new System.Drawing.Point(0, 0);
             this.tlCamera.Name = "tlCamera";
             this.tlCamera.OptionsBehavior.Editable = false;
             this.tlCamera.OptionsView.ShowColumns = false;
@@ -251,7 +252,7 @@ namespace CameraViewer.Controls
             this.tlCamera.OptionsView.ShowIndicator = false;
             this.tlCamera.OptionsView.ShowVertLines = false;
             this.tlCamera.SelectImageList = this.imageCollection1;
-            this.tlCamera.Size = new System.Drawing.Size(105, 271);
+            this.tlCamera.Size = new System.Drawing.Size(207, 271);
             this.tlCamera.TabIndex = 2;
             // 
             // treeListColumn1
@@ -275,19 +276,6 @@ namespace CameraViewer.Controls
             this.imageCollection1.Images.SetKeyName(1, "videosrv.bmp");
             this.imageCollection1.Images.SetKeyName(2, "cam3b.bmp");
             this.imageCollection1.Images.SetKeyName(3, "selected.bmp");
-            // 
-            // trCamera
-            // 
-            this.trCamera.Dock = System.Windows.Forms.DockStyle.Left;
-            this.trCamera.ImageIndex = 0;
-            this.trCamera.ImageList = this.imageListForTreeView;
-            this.trCamera.Location = new System.Drawing.Point(0, 0);
-            this.trCamera.Name = "trCamera";
-            this.trCamera.SelectedImageKey = "selected.bmp";
-            this.trCamera.Size = new System.Drawing.Size(102, 271);
-            this.trCamera.TabIndex = 1;
-            this.trCamera.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trCamera_NodeMouseDoubleClick);
-            this.trCamera.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trCamera_NodeMouseClick);
             // 
             // imageListForTreeView
             // 
@@ -315,17 +303,37 @@ namespace CameraViewer.Controls
             // 
             // tvSynGroup
             // 
+            this.tvSynGroup.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumn3,
+            this.treeListColumn4});
             this.tvSynGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvSynGroup.ImageKey = "CAM2.BMP";
-            this.tvSynGroup.ImageList = this.imageListForTreeView;
             this.tvSynGroup.Location = new System.Drawing.Point(0, 0);
             this.tvSynGroup.Name = "tvSynGroup";
-            this.tvSynGroup.SelectedImageKey = "selected.bmp";
+            this.tvSynGroup.OptionsBehavior.Editable = false;
+            this.tvSynGroup.OptionsSelection.InvertSelection = true;
+            this.tvSynGroup.OptionsSelection.UseIndicatorForSelection = true;
+            this.tvSynGroup.OptionsView.ShowColumns = false;
+            this.tvSynGroup.OptionsView.ShowHorzLines = false;
+            this.tvSynGroup.OptionsView.ShowIndicator = false;
             this.tvSynGroup.Size = new System.Drawing.Size(207, 271);
-            this.tvSynGroup.TabIndex = 1;
-            this.tvSynGroup.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSynGroup_NodeMouseDoubleClick);
-            this.tvSynGroup.DoubleClick += new System.EventHandler(this.tvSynGroup_DoubleClick);
-            this.tvSynGroup.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSynGroup_NodeMouseClick);
+            this.tvSynGroup.TabIndex = 0;
+            // 
+            // treeListColumn3
+            // 
+            this.treeListColumn3.Caption = "Ω‚¬Î∆˜π‹¿Ì";
+            this.treeListColumn3.FieldName = "treeListColumn3";
+            this.treeListColumn3.Name = "treeListColumn3";
+            this.treeListColumn3.OptionsColumn.AllowEdit = false;
+            this.treeListColumn3.Visible = true;
+            this.treeListColumn3.VisibleIndex = 0;
+            // 
+            // treeListColumn4
+            // 
+            this.treeListColumn4.Caption = "Tag";
+            this.treeListColumn4.FieldName = "Tag";
+            this.treeListColumn4.Name = "treeListColumn4";
+            this.treeListColumn4.Visible = true;
+            this.treeListColumn4.VisibleIndex = 1;
             // 
             // CameraView
             // 
@@ -347,6 +355,7 @@ namespace CameraViewer.Controls
             ((System.ComponentModel.ISupportInitialize)(this.tlCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             this.xtraTabPageDecoderList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tvSynGroup)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -370,13 +379,14 @@ namespace CameraViewer.Controls
         private Damany.Controls.CameraNav cameraNav1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageDecoderList;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageCameraList;
-        public System.Windows.Forms.TreeView tvSynGroup;
-        public System.Windows.Forms.TreeView trCamera;
         public DevExpress.XtraTab.XtraTabControl xtraTabControl2;
         private System.Windows.Forms.ImageList imageListForTreeView;
         private DevExpress.XtraTreeList.TreeList tlCamera;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
         private DevExpress.Utils.ImageCollection imageCollection1;
+       public DevExpress.XtraTreeList.TreeList tvSynGroup;
+       private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
+       private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
     }
 }
