@@ -103,7 +103,7 @@ namespace CameraViewer.Controls
         private void BuildSynGroupTree()
         {
             //_listSynGroup = SynGroupBusiness.Instance.GetAllSynGroup(ref errMessage);
-            if(_listSynGroup==null) return;
+           /* if(_listSynGroup==null) return;
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
            // TreeListNode node;
@@ -135,7 +135,38 @@ namespace CameraViewer.Controls
             {
                 tvSynGroup.FocusedNode = selectedTreeListNode;
             }
+            Cursor.Current = currentCursor;*/
+            Dictionary<int, DecoderInfo> listDecoder;
+            listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref errMessage);
+            Cursor currentCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            TreeListNode node;
+            TreeListNode camnode;
+
+            tvSynGroup.Nodes.Clear();
+            TreeListNode treeListNodeRoot = tvSynGroup.AppendNode(new[] { "Ω‚¬Î∆˜π‹¿Ì", 0 + ";T" }, -1, 0, 3, 1, CheckState.Checked);
+            treeListNodeRoot.Tag = 0 + ";T";
+            if (listDecoder != null)
+            {
+
+                foreach (KeyValuePair<int, DecoderInfo> item in listDecoder)
+                {
+                    TreeListNode treeListNodeDecoder = tvSynGroup.AppendNode(new[] { item.Value.Name, item.Key + ";D" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeDecoder.Tag = item.Key + ";D";
+                    foreach (KeyValuePair<int, CameraInfo> cam in item.Value.ListCameras)
+                    {
+                        DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, cam.Value.CameraId);
+                        camnode = tvSynGroup.AppendNode(new[] { di.Name + ":" + cam.Value.Name, item.Key + ";C" }, treeListNodeDecoder.Id, 1, 3, 1, CheckState.Checked);
+                        camnode.Tag = cam.Key.ToString() + ";C";
+                    }
+                }
+            }
+            tvSynGroup.Columns[1].Visible = false;
+            tvSynGroup.ExpandAll();
             Cursor.Current = currentCursor;
+
+         
+        
         }
 
         private void BuildCameraTreeInSynGroupManagement()
