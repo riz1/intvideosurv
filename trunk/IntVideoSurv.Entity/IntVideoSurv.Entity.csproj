@@ -73,6 +73,7 @@
     <Compile Include="ProgSwitchDetailInfo.cs" />
     <Compile Include="ProgSwitchInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecognizerInfo.cs" />
     <Compile Include="SynCameraInfo.cs" />
     <Compile Include="SynGroup.cs" />
     <Compile Include="SystemLog.cs" />
