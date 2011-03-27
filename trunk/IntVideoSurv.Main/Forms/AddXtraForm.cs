@@ -32,7 +32,7 @@ namespace CameraViewer.Forms
             set;
             get;
         }
-
+        
         public int Id
         {
             set; 
