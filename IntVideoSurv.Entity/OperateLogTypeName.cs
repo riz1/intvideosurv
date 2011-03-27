@@ -45,9 +45,17 @@ namespace IntVideoSurv.Entity
         public const string DecoderUpdate = "更新解码器";
         public const string DecoderDelete = "删除解码器";
         //摄像头在解码器中的添加，删除，更新
-        public const string CameraAddInDecoder = "添加解码器";
-        public const string CameraUpdateInDecoder = "更新解码器";
-        public const string CameraDeleteInDecoder = "删除解码器";
+        public const string CameraAddInDecoder = "添加摄像头";
+        public const string CameraUpdateInDecoder = "更新摄像头";
+        public const string CameraDeleteInDecoder = "删除摄像头";
+        //识别器添加、更新、删除
+        public const string RecognizerAdd = "添加识别器";
+        public const string RecognizerUpdate = "更新识别器";
+        public const string RecognizerDelete = "删除识别器";
+        //
+        public const string CameraAddInRecognizer = "添加摄像头";
+        public const string CameraUpdateInRecognizer = "更新摄像头";
+        public const string CameraDeleteInRecognizer = "删除摄像头";
 
     }
 }
