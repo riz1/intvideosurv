@@ -101,6 +101,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CameraBusiness.cs" />
     <Compile Include="HiK\HikStreamMediaServerSDK.cs" />
+    <Compile Include="RecognizerBusiness.cs" />
     <Compile Include="SynGroupBusiness.cs" />
     <Compile Include="SystemLogBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
