@@ -13,6 +13,11 @@ namespace CameraViewer
             Update=1,
             Delete=2,
         }
+        public enum OptionSelect
+        {
+            Decoder = 0,
+            Recognizer = 1,
+        }
         public static  void GetRowCol(int cameraCount, ref int rows, ref int cols)
         {
             rows = 1;
