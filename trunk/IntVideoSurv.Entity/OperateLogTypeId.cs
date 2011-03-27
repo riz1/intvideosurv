@@ -47,7 +47,15 @@ namespace IntVideoSurv.Entity
         //摄像头
         CameraAddInDecoder = 2001,
         CameraUpdateInDecoder,
-        CameraDeleteInDecoder
+        CameraDeleteInDecoder,
+        //识别器
+        RecognizerAdd = 2101,
+        RecognizerUpdate,
+        RecognizerDelete,
+        //shexiangtou;
+        CameraAddInRecognizer = 2201,
+        CameraUpdateInRecognizer,
+        CameraDeleteInRecognizer
 
 
     }
