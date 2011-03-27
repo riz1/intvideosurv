@@ -19,6 +19,7 @@ namespace CameraViewer.Forms
     {
         private string errMessage = "";
         Dictionary<int, GroupInfo> listGroup;
+        Dictionary<int, RecognizerInfo> listRecognizer;
         private int CurrentParentId = 0;
 
         Dictionary<int, SynGroup> _listSynGroup;
@@ -36,12 +37,49 @@ namespace CameraViewer.Forms
             BuildCameraTreeInLogManagement();
             //显示DecoderTree
             BuildDecoderTree();
+            //显示RecognizerTree
+            BuildRecognizerTree();
             LoadUsers();
             BuildDisplayChannelTreeInSynGroupManagement();
             BuildDisplayChannelTreeInDisplayChannelManagement();
             dateEditEndDate.DateTime = DateTime.Now;
             DisplayRightPanel();
             showDecoderInfo();
+            ShowRecognizerInfo();
+
+        }
+        /// <summary>
+        /// 显示识别器信息
+        /// </summary>
+        private void BuildRecognizerTree()
+        {
+            listRecognizer = RecognizerBusiness.Instance.GetAllRecognizerInfo(ref errMessage);
+            Cursor currentCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            TreeListNode node;
+            TreeListNode camnode;
+
+            treeListShowRecognizer.Nodes.Clear();
+            TreeListNode treeListNodeRoot = treeListShowRecognizer.AppendNode(new[] { "识别器管理", 0 + ";T" }, -1, 0, 3, 1, CheckState.Checked);
+            treeListNodeRoot.Tag = 0 + ";T";
+            if (listDecoder != null)
+            {
+
+                foreach (KeyValuePair<int, RecognizerInfo> item in listRecognizer)
+                {
+                    TreeListNode treeListNodeReconizer = treeListShowRecognizer.AppendNode(new[] { item.Value.Name, item.Key + ";D" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeReconizer.Tag = item.Key + ";D";
+                    foreach (KeyValuePair<int, CameraInfo> cam in item.Value.ListCameras)
+                    {
+                        DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, cam.Value.CameraId);
+                        camnode = treeListShowRecognizer.AppendNode(new[] { di.Name + ":" + cam.Value.Name, item.Key + ";C" }, treeListNodeReconizer.Id, 1, 3, 1, CheckState.Checked);
+                        camnode.Tag = cam.Key.ToString() + ";C";
+                    }
+                }
+            }
+            treeListShowRecognizer.Columns[1].Visible = false;
+            treeListShowDecoder.ExpandAll();
+            Cursor.Current = currentCursor;
 
         }
         private void BuildDeviceTree()
@@ -357,7 +395,9 @@ namespace CameraViewer.Forms
             gcMap.Visible = false;
             gcSkin.Visible = false;
             //解码器
-            DecoderManagement.Visible = false;            
+            DecoderManagement.Visible = false;
+            //识别器
+            RecognizerManagement.Visible = false;
             switch (_displaytype)
             {
                 case DisplayTypes.DeviceManagement:
@@ -406,6 +446,12 @@ namespace CameraViewer.Forms
                     DecoderManagement.Visible = true;
                     DecoderManagement.Dock = DockStyle.Fill;
                     gridView1.OptionsView.ShowGroupPanel = false;
+                    break;
+                //识别器管理
+                case DisplayTypes.RecognizerManagement:
+                    RecognizerManagement.Visible = true;
+                    RecognizerManagement.Dock = DockStyle.Fill;
+                    gridView5.OptionsView.ShowGroupPanel = false;
                     break;
             }
 
@@ -1198,6 +1244,7 @@ namespace CameraViewer.Forms
         {
             AddCameraInDecoder addCamera = new AddCameraInDecoder();
             addCamera.DecoderID = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
+            addCamera.Opt1 = Util.OptionSelect.Decoder;
             addCamera.ShowDialog(this);
             BuildDecoderTree();
         }
@@ -1411,7 +1458,163 @@ namespace CameraViewer.Forms
             gridView4.Columns["摄像头号"].Visible = false;
 
         }
+        //识别器显示
+        private void nbRecognizer_link(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            _displaytype = DisplayTypes.RecognizerManagement;
+            DisplayRightPanel();
+        }
+        /// <summary>
+        /// 显示识别器信息
+        /// </summary>
+        private void ShowRecognizerInfo()
+        {
+            listRecognizer = RecognizerBusiness.Instance.GetAllRecognizerInfo(ref errMessage);
+            var dataTable = new System.Data.DataTable("RecognizerInfo");
+            dataTable.Columns.Add("编号", typeof(int));
+            // dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("识别器名称", typeof(string));
+            dataTable.Columns.Add("识别器端口", typeof(int));
+            dataTable.Columns.Add("识别器Ip地址", typeof(string));
+            dataTable.Columns.Add("识别器最大解码数", typeof(int));
+            int i = 1;
+            foreach (var node in listRecognizer)
+            {
 
+                dataTable.Rows.Add(i++, node.Value.Name, node.Value.Port, node.Value.Ip, node.Value.MaxRecogNumber);
+            }
+
+            gridControlShowRecognizer.DataSource = dataTable;
+            gridControlShowRecognizer.MainView.PopulateColumns();
+            gridView5.Columns["编号"].Width = 10;
+            //gridView1.Columns["id"].Width = 20;
+            gridView5.Columns["识别器名称"].Width = 30;
+            gridView5.Columns["识别器端口"].Width = 10;
+            gridView5.Columns["识别器Ip地址"].Width = 30;
+            gridView5.Columns["识别器最大解码数"].Width = 10;
+        }
+        /// <summary>
+        /// 右键单击识别器管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeListShowRecognizer_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                TreeListNode node = treeListShowRecognizer.FocusedNode;
+                if ((node.Tag.ToString()).IndexOf("T") >= 0)
+                {
+                    popupMenuAddRecognizer.ShowPopup(Cursor.Position);
+
+                }
+                else if ((node.Tag.ToString()).IndexOf("D") >= 0)
+                {
+                    popupMenuAddCameraInRecognizer.ShowPopup(Cursor.Position);
+                }
+                else if ((node.Tag.ToString()).IndexOf("C") >= 0)
+                {
+                    popupMenuDeleteCamera.ShowPopup(Cursor.Position);
+                }
+            }
+        }
+        //新增识别器
+        private void barButtonItemRecognizer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddRecognizer addRecognizer = new AddRecognizer();
+            addRecognizer.Opt = Util.Operateion.Add;
+            addRecognizer.ShowDialog(this);
+            BuildRecognizerTree();
+            ShowRecognizerInfo();
+        }
+        //修改识别器
+        private void barButtonItemEditRecognizer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByRecognizerId(ref errMessage, int.Parse(treeListShowRecognizer.FocusedNode.Tag.ToString().Split(';')[0]));
+            AddRecognizer editRecognizer = new AddRecognizer(ri);
+            editRecognizer.Opt = Util.Operateion.Update;
+            editRecognizer.Id = int.Parse(treeListShowRecognizer.FocusedNode.Tag.ToString().Split(';')[0]);
+            editRecognizer.ShowDialog(this);
+            BuildRecognizerTree();
+            ShowRecognizerInfo();
+        }
+        //删除识别器
+        private void barButtonItemDeleteRecognizer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            TreeListNode tn = treeListShowRecognizer.FocusedNode;
+            if (tn == null)
+            {
+                return;
+            }
+            if ((tn.Tag.ToString().IndexOf("D") >= 0))
+            {
+                if (XtraMessageBox.Show("确定要删除该识别器吗?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    string[] strs = tn.Tag.ToString().Split(';');
+                    int Recognizerid = int.Parse(strs[0]);
+                    RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByRecognizerId(ref errMessage, Recognizerid);
+                    //DecoderBusiness.Instance.DeleteByDecoderId(ref errMessage, decoderid);
+                    RecognizerBusiness.Instance.Delete(ref errMessage, Recognizerid);
+                    OperateLogBusiness.Instance.Insert(ref errMessage, new OperateLog
+                    {
+                        DeviceId = ri.Id,
+                        ClientUserId = MainForm.CurrentUser.UserId,
+                        ClientUserName = MainForm.CurrentUser.UserName,
+                        Content = ri.ToString(),
+                        HappenTime = DateTime.Now,
+                        OperateTypeId = (int)(OperateLogTypeId.RecognizerDelete),
+                        OperateTypeName = OperateLogTypeName.RecognizerDelete,
+                        OperateUserName = MainForm.CurrentUser.UserName
+                    });
+                    BuildRecognizerTree();
+                    ShowRecognizerInfo();
+                }
+
+            }
+        }
+        //为识别器增加摄像头
+        private void barButtonItemAddCameraInRecognizer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddCameraInDecoder addCamera = new AddCameraInDecoder();
+            addCamera.RecognizerID = int.Parse(treeListShowRecognizer.FocusedNode.Tag.ToString().Split(';')[0]);
+            addCamera.Opt1 = Util.OptionSelect.Recognizer;
+            addCamera.ShowDialog(this);
+            BuildRecognizerTree();
+        }
+        //识别器删除摄像头
+        private void barButtonItemDeleteCameraInRecognizer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            TreeListNode tn = treeListShowRecognizer.FocusedNode;
+            if (tn == null)
+            {
+                return;
+            }
+            if ((tn.Tag.ToString().IndexOf("C") >= 0))
+            {
+                if (XtraMessageBox.Show("确定要删除该摄像头?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    string[] strs = tn.Tag.ToString().Split(';');
+                    int cameraid = int.Parse(strs[0]);
+                    CameraInfo di = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, cameraid);
+                    RecognizerBusiness.Instance.DeleteCamera(ref errMessage, cameraid);
+                    OperateLogBusiness.Instance.Insert(ref errMessage, new OperateLog
+                    {
+                        DeviceId = di.CameraId,
+                        ClientUserId = MainForm.CurrentUser.UserId,
+                        ClientUserName = MainForm.CurrentUser.UserName,
+                        Content = di.ToString(),
+                        HappenTime = DateTime.Now,
+                        OperateTypeId = (int)(OperateLogTypeId.CameraDeleteInRecognizer),
+                        OperateTypeName = OperateLogTypeName.CameraDeleteInRecognizer,
+                        OperateUserName = MainForm.CurrentUser.UserName
+                    });
+                    BuildRecognizerTree();
+
+                }
+
+            }
+        }
+        
 
 
     }
@@ -1426,7 +1629,8 @@ namespace CameraViewer.Forms
         DisplayChannelManagement = 128,
         MapManagement = 256,
         SkinManagement = 512,
-        DecoderManagement=1024
+        DecoderManagement = 1024,
+        RecognizerManagement = 2048
 
     }
 }
