@@ -51,11 +51,11 @@ namespace CameraViewer.Controls
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
-            this.imageListForTreeView = new System.Windows.Forms.ImageList(this.components);
             this.xtraTabPageDecoderList = new DevExpress.XtraTab.XtraTabPage();
             this.tvSynGroup = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.imageListForTreeView = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -247,6 +247,7 @@ namespace CameraViewer.Controls
             this.tlCamera.Location = new System.Drawing.Point(0, 0);
             this.tlCamera.Name = "tlCamera";
             this.tlCamera.OptionsBehavior.Editable = false;
+            this.tlCamera.OptionsSelection.InvertSelection = true;
             this.tlCamera.OptionsView.ShowColumns = false;
             this.tlCamera.OptionsView.ShowHorzLines = false;
             this.tlCamera.OptionsView.ShowIndicator = false;
@@ -254,6 +255,7 @@ namespace CameraViewer.Controls
             this.tlCamera.SelectImageList = this.imageCollection1;
             this.tlCamera.Size = new System.Drawing.Size(207, 271);
             this.tlCamera.TabIndex = 2;
+            this.tlCamera.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tlCamera_MouseDoubleClick);
             // 
             // treeListColumn1
             // 
@@ -276,22 +278,6 @@ namespace CameraViewer.Controls
             this.imageCollection1.Images.SetKeyName(1, "videosrv.bmp");
             this.imageCollection1.Images.SetKeyName(2, "cam3b.bmp");
             this.imageCollection1.Images.SetKeyName(3, "selected.bmp");
-            // 
-            // imageListForTreeView
-            // 
-            this.imageListForTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListForTreeView.ImageStream")));
-            this.imageListForTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListForTreeView.Images.SetKeyName(0, "tree.bmp");
-            this.imageListForTreeView.Images.SetKeyName(1, "videosrv.bmp");
-            this.imageListForTreeView.Images.SetKeyName(2, "CAM2.BMP");
-            this.imageListForTreeView.Images.SetKeyName(3, "GroupSwitch.bmp");
-            this.imageListForTreeView.Images.SetKeyName(4, "ProgSwitch.bmp");
-            this.imageListForTreeView.Images.SetKeyName(5, "SynSwitch.bmp");
-            this.imageListForTreeView.Images.SetKeyName(6, "cam2b.bmp");
-            this.imageListForTreeView.Images.SetKeyName(7, "CAM3.BMP");
-            this.imageListForTreeView.Images.SetKeyName(8, "cam3b.bmp");
-            this.imageListForTreeView.Images.SetKeyName(9, "selected.bmp");
-            this.imageListForTreeView.Images.SetKeyName(10, "Alarm_Host.bmp");
             // 
             // xtraTabPageDecoderList
             // 
@@ -334,6 +320,22 @@ namespace CameraViewer.Controls
             this.treeListColumn4.Name = "treeListColumn4";
             this.treeListColumn4.Visible = true;
             this.treeListColumn4.VisibleIndex = 1;
+            // 
+            // imageListForTreeView
+            // 
+            this.imageListForTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListForTreeView.ImageStream")));
+            this.imageListForTreeView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListForTreeView.Images.SetKeyName(0, "tree.bmp");
+            this.imageListForTreeView.Images.SetKeyName(1, "videosrv.bmp");
+            this.imageListForTreeView.Images.SetKeyName(2, "CAM2.BMP");
+            this.imageListForTreeView.Images.SetKeyName(3, "GroupSwitch.bmp");
+            this.imageListForTreeView.Images.SetKeyName(4, "ProgSwitch.bmp");
+            this.imageListForTreeView.Images.SetKeyName(5, "SynSwitch.bmp");
+            this.imageListForTreeView.Images.SetKeyName(6, "cam2b.bmp");
+            this.imageListForTreeView.Images.SetKeyName(7, "CAM3.BMP");
+            this.imageListForTreeView.Images.SetKeyName(8, "cam3b.bmp");
+            this.imageListForTreeView.Images.SetKeyName(9, "selected.bmp");
+            this.imageListForTreeView.Images.SetKeyName(10, "Alarm_Host.bmp");
             // 
             // CameraView
             // 

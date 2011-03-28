@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.simpleButtoncancle = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonOk = new DevExpress.XtraEditors.SimpleButton();
             this.textEditmax = new DevExpress.XtraEditors.TextEdit();
@@ -38,10 +39,12 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.textEditmax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditport.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditIp.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditname.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButtoncancle
@@ -143,6 +146,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEditport.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditIp.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditname.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,5 +164,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
     }
 }

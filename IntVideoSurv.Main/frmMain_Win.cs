@@ -35,6 +35,7 @@ namespace CameraViewer
         Dictionary<int, CameraInfo> _listCam;
         Dictionary<int, CameraInfo> _listAllCam;
         Dictionary<int, SynGroup> _listSynGroup;
+        Dictionary<int, DecoderInfo> _listDecoder;
         Dictionary<int, GroupSwitchGroup> _listGroupSwitchGroup;
         Dictionary<int, ProgSwitchInfo> _listProgSwitch;
         Dictionary<int, DisplayChannelInfo> _listDisplayChannelInfo;
@@ -113,7 +114,22 @@ namespace CameraViewer
                 DispalySynCamera(int.Parse(strs[0]));
             }
         }
-
+        void CameraView1DoubleDevCam(string tag)
+        {
+            _isProgSwitchView = false;
+            //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
+            string[] strs = tag.Split(';');
+            if (strs[1] == "D")
+            {
+                isStop = true;
+                ViewCameraByDeviceId(int.Parse(strs[0]));
+            }
+            else if (strs[1] == "C")
+            {
+                isStop = true;
+                ViewCameraByCameraId(int.Parse(strs[0]));
+            }
+        }
         void DispalyProgSwitch(int progSwitchId, int cameraId, int displayChannelId, int displaySplitScreenNo)
         {
             try
@@ -405,11 +421,6 @@ namespace CameraViewer
             _runningDeviceList.Clear();
         }
         
-        void CameraView1DoubleSynGroup(KeyValuePair<int, SynGroup> item)
-        {
-
-        }
-
         private void xtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             switch (e.Page.TabIndex)
@@ -421,8 +432,8 @@ namespace CameraViewer
                     cameraView1.ListMap = _listMap;
                     break;
                 case 1:
-                    _listSynGroup = SynGroupBusiness.Instance.GetAllSynGroups(ref _errMessage);
-                    cameraView1.ListSynGroup = _listSynGroup;
+                    _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
+                    cameraView1.ListDecoder = _listDecoder;
                     break;                    
                 case 2:
                     _listGroupSwitchGroup = GroupSwitchGroupBusiness.Instance.GetAllGroupSwitchGroups(ref _errMessage);
@@ -625,28 +636,6 @@ namespace CameraViewer
             this.FullScreen(isFullScreen);
         }
 
-        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            HikVideoServerCameraDriver driver = mainMultiplexer.GetCurrentCameraDriver;
-            if (driver == null)
-            {
-                XtraMessageBox.Show("请选择你要抓拍的摄象机!");
-                return;
-            }
-            byte[] imageBuf = new byte[704 * 576 * 2];
-            int Rtn = driver.GetJpegImage(ref imageBuf);
-            using (MemoryStream ms = new MemoryStream(imageBuf))
-            {
-                Image image = Image.FromStream(ms, true);
-                image.Save(string.Format("C:\\{0}_{1}.jpg", driver.CurrentCamera.Name, Guid.NewGuid().ToString()));
-            }
-
-        }
-
-        private void cameraView1_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void frmMain_Win_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -869,31 +858,32 @@ namespace CameraViewer
             _runningCameraList = new Dictionary<int, HikVideoServerCameraDriver>();
             _listAllCam = CameraBusiness.Instance.GetAllCameraInfo(ref _errMessage);
 
-            Splash.Splash.Status = "获取同步群组信息...";
-            _listSynGroup = SynGroupBusiness.Instance.GetAllSynGroups(ref _errMessage);
-            cameraView1.ListSynGroup = _listSynGroup;
-            Splash.Splash.Status = "获取群组切换信息...";
-            _listGroupSwitchGroup = GroupSwitchGroupBusiness.Instance.GetAllGroupSwitchGroups(ref _errMessage);
-            cameraView1.ListGroupSwitch = _listGroupSwitchGroup;
-            Splash.Splash.Status = "获取程序切换信息...";
-            _listProgSwitch = ProgSwitchBusiness.Instance.GetAllProgSwitchs(ref _errMessage);
-            cameraView1.ListProgSwitch = _listProgSwitch;
-            Splash.Splash.Status = "获取默认硬解码输出列表...";
-            _listDefaultCardOut = DefaultCardOutBusiness.Instance.GetAllDefaultCardOuts(ref _errMessage);
-            HikVideoServerCameraDriver.ListDefaultCardOut = _listDefaultCardOut;
-            Splash.Splash.Status = "载入摄像头...";
-            LoadAllCamera();
-            _listAlarm = AlarmBusiness.Instance.GetAllAlarmInfo(ref _errMessage);
-            _listMap = MapBusiness.Instance.GetAllMapInfo(ref _errMessage);
-            cameraView1.ListMap = _listMap;
-            _listAllAlarmIcon = AlarmIconBusiness.Instance.GetAllAlarmIconInfo(ref _errMessage);
-            _listAllCameraIcon = CameraIconBusiness.Instance.GetAllCameraIconInfo(ref _errMessage);
+            Splash.Splash.Status = "获取解码器信息...";
+            _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
+            cameraView1.ListDecoder = _listDecoder;
+            
+            //Splash.Splash.Status = "获取群组切换信息...";
+            //_listGroupSwitchGroup = GroupSwitchGroupBusiness.Instance.GetAllGroupSwitchGroups(ref _errMessage);
+            //cameraView1.ListGroupSwitch = _listGroupSwitchGroup;
+            //Splash.Splash.Status = "获取程序切换信息...";
+            //_listProgSwitch = ProgSwitchBusiness.Instance.GetAllProgSwitchs(ref _errMessage);
+            //cameraView1.ListProgSwitch = _listProgSwitch;
+            //Splash.Splash.Status = "获取默认硬解码输出列表...";
+            //_listDefaultCardOut = DefaultCardOutBusiness.Instance.GetAllDefaultCardOuts(ref _errMessage);
+            //HikVideoServerCameraDriver.ListDefaultCardOut = _listDefaultCardOut;
+            //Splash.Splash.Status = "载入摄像头...";
+            //LoadAllCamera();
+            //_listAlarm = AlarmBusiness.Instance.GetAllAlarmInfo(ref _errMessage);
+            //_listMap = MapBusiness.Instance.GetAllMapInfo(ref _errMessage);
+            //cameraView1.ListMap = _listMap;
+            //_listAllAlarmIcon = AlarmIconBusiness.Instance.GetAllAlarmIconInfo(ref _errMessage);
+            //_listAllCameraIcon = CameraIconBusiness.Instance.GetAllCameraIconInfo(ref _errMessage);
 
 
             this.cameraView1.tvSynGroup.DoubleClick += this.tvSynGroup_DoubleClick;
             this.cameraView1.xtraTabControl2.SelectedPageChanged += this.xtraTabControl2_SelectedPageChanged;
             this.cameraView1.DoubleSynGroup += new CameraView.TouchCamera(CameraView1DoubleSynGroup);
-
+            cameraView1.DoubleDevCam += new CameraView.TouchCamera(CameraView1DoubleDevCam);
             this.cameraView1.DoubleSynSwitch += new CameraView.TouchCamera(cameraView1_DoubleSynSwitch);
 
             this.cameraView1.DoubleProgSwitch += new CameraView.TouchCamera(cameraView1_DoubleProgSwitch);
@@ -1329,7 +1319,7 @@ namespace CameraViewer
             {
                 CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
                 if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
-                cameraWindow.CurrentImage = Image.FromFile(@"C:\fff1a7ef-43d7-46d9-ad61-d5c9f8fe4b53.bmp");
+                cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_212.JPG");
                 cameraWindow.Refresh();
 
             }
@@ -1337,7 +1327,7 @@ namespace CameraViewer
             {
                 CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
                 if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
-                cameraWindow.CurrentImage = Image.FromFile(@"C:\BKClientBmp.bmp");
+                cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_21.JPG");
                 cameraWindow.Refresh();
         
             }

@@ -62,13 +62,13 @@ namespace CameraViewer.Forms
             treeListShowRecognizer.Nodes.Clear();
             TreeListNode treeListNodeRoot = treeListShowRecognizer.AppendNode(new[] { "识别器管理", 0 + ";T" }, -1, 0, 3, 1, CheckState.Checked);
             treeListNodeRoot.Tag = 0 + ";T";
-            if (listDecoder != null)
+            if (listRecognizer != null)
             {
 
                 foreach (KeyValuePair<int, RecognizerInfo> item in listRecognizer)
                 {
-                    TreeListNode treeListNodeReconizer = treeListShowRecognizer.AppendNode(new[] { item.Value.Name, item.Key + ";D" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
-                    treeListNodeReconizer.Tag = item.Key + ";D";
+                    TreeListNode treeListNodeReconizer = treeListShowRecognizer.AppendNode(new[] { item.Value.Name, item.Key + ";R" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeReconizer.Tag = item.Key + ";R";
                     foreach (KeyValuePair<int, CameraInfo> cam in item.Value.ListCameras)
                     {
                         DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, cam.Value.CameraId);
@@ -901,15 +901,15 @@ namespace CameraViewer.Forms
 
         private void EditGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
              if (CurrentParentId == 0)
             {
                 //frmModifyDeviceInfo
                 return;
             }
+            int groupId = int.Parse(treeListDevice.FocusedNode.Tag.ToString().Split(';')[0]);
             frmGroup group = new frmGroup();
             group.Opt = Util.Operateion.Update;
-            group.GroupId = int.Parse(treeListDevice.FocusedNode.Tag.ToString().Split(';')[0]);
+            group.GroupId = groupId;
             group.ShowDialog(this);
             BuildDeviceTree();
         }
@@ -1212,10 +1212,10 @@ namespace CameraViewer.Forms
                 }
             }
         }
-        //添加解码器
+				//添加解码器
         private void barButtonItem1AddDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddXtraForm addDecoder = new AddXtraForm();
+            frmDecoder addDecoder = new frmDecoder();
             addDecoder.Opt = Util.Operateion.Add;
             addDecoder.ShowDialog(this);
             BuildDecoderTree();
@@ -1224,7 +1224,7 @@ namespace CameraViewer.Forms
         
         private void barButtonItem2EditDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddXtraForm addDecoder = new AddXtraForm();
+            frmDecoder addDecoder = new frmDecoder();
             addDecoder.Opt = Util.Operateion.Update;
             //addDecoder.Id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
             addDecoder.ShowDialog(this);
@@ -1232,7 +1232,8 @@ namespace CameraViewer.Forms
         //修改解码器
         private void barButtonItem5EditDecoder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddXtraForm addDecoder = new AddXtraForm();
+            int decoderId = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
+            frmDecoder addDecoder = new frmDecoder(listDecoder[decoderId]);
             addDecoder.Opt = Util.Operateion.Update;
             addDecoder.Id = int.Parse(treeListShowDecoder.FocusedNode.Tag.ToString().Split(';')[0]);
             addDecoder.ShowDialog(this);
@@ -1256,7 +1257,7 @@ namespace CameraViewer.Forms
             {
                 return;
             }
-            if ((tn.Tag.ToString().IndexOf("B") >= 0))
+            if ((tn.Tag.ToString().IndexOf("D") >= 0))
             {
                 if (XtraMessageBox.Show("确定要删除该解码器?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {

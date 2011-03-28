@@ -49,7 +49,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(32, 15);
+            this.labelControl1.Location = new System.Drawing.Point(37, 17);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(48, 14);
             this.labelControl1.TabIndex = 0;
@@ -57,14 +57,14 @@
             // 
             // textEditUserName
             // 
-            this.textEditUserName.Location = new System.Drawing.Point(97, 12);
+            this.textEditUserName.Location = new System.Drawing.Point(113, 14);
             this.textEditUserName.Name = "textEditUserName";
-            this.textEditUserName.Size = new System.Drawing.Size(100, 21);
+            this.textEditUserName.Size = new System.Drawing.Size(117, 21);
             this.textEditUserName.TabIndex = 1;
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(32, 52);
+            this.labelControl2.Location = new System.Drawing.Point(37, 61);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(36, 14);
             this.labelControl2.TabIndex = 0;
@@ -72,15 +72,15 @@
             // 
             // textEditPassword
             // 
-            this.textEditPassword.Location = new System.Drawing.Point(97, 88);
+            this.textEditPassword.Location = new System.Drawing.Point(113, 103);
             this.textEditPassword.Name = "textEditPassword";
             this.textEditPassword.Properties.PasswordChar = '*';
-            this.textEditPassword.Size = new System.Drawing.Size(100, 21);
+            this.textEditPassword.Size = new System.Drawing.Size(117, 21);
             this.textEditPassword.TabIndex = 2;
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(32, 91);
+            this.labelControl3.Location = new System.Drawing.Point(37, 106);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(60, 14);
             this.labelControl3.TabIndex = 0;
@@ -88,15 +88,15 @@
             // 
             // textEditPasswordConfirm
             // 
-            this.textEditPasswordConfirm.Location = new System.Drawing.Point(97, 49);
+            this.textEditPasswordConfirm.Location = new System.Drawing.Point(113, 57);
             this.textEditPasswordConfirm.Name = "textEditPasswordConfirm";
             this.textEditPasswordConfirm.Properties.PasswordChar = '*';
-            this.textEditPasswordConfirm.Size = new System.Drawing.Size(100, 21);
+            this.textEditPasswordConfirm.Size = new System.Drawing.Size(117, 21);
             this.textEditPasswordConfirm.TabIndex = 3;
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(32, 132);
+            this.labelControl4.Location = new System.Drawing.Point(37, 154);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(60, 14);
             this.labelControl4.TabIndex = 0;
@@ -104,7 +104,7 @@
             // 
             // comboBoxEditUserType
             // 
-            this.comboBoxEditUserType.Location = new System.Drawing.Point(97, 125);
+            this.comboBoxEditUserType.Location = new System.Drawing.Point(113, 146);
             this.comboBoxEditUserType.Name = "comboBoxEditUserType";
             this.comboBoxEditUserType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -112,14 +112,14 @@
             "管理员",
             "操作员"});
             this.comboBoxEditUserType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditUserType.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxEditUserType.Size = new System.Drawing.Size(117, 21);
             this.comboBoxEditUserType.TabIndex = 4;
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(32, 169);
+            this.buttonOK.Location = new System.Drawing.Point(37, 197);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.Size = new System.Drawing.Size(87, 27);
             this.buttonOK.TabIndex = 5;
             this.buttonOK.Text = "确定";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -128,18 +128,18 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(122, 169);
+            this.buttonCancel.Location = new System.Drawing.Point(142, 197);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.Size = new System.Drawing.Size(87, 27);
             this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "取消";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // FrmUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(228, 195);
+            this.ClientSize = new System.Drawing.Size(266, 227);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.comboBoxEditUserType);
