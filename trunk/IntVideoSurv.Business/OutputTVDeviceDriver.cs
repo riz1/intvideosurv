@@ -112,8 +112,8 @@ namespace IntVideoSurv.Business
             
             if (TotalDSP == 0)
             {
-                errMessage = "没有可用的通道！！您是否已经启动服务器端？";
-                XtraMessageBox.Show(errMessage);
+                //errMessage = "没有可用的通道！！您是否已经启动服务器端？";
+                //XtraMessageBox.Show(errMessage);
                 return;
             }
 

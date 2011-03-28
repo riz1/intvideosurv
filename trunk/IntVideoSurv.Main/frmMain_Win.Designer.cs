@@ -511,7 +511,6 @@ namespace CameraViewer
             this.cameraView1.Name = "cameraView1";
             this.cameraView1.Size = new System.Drawing.Size(188, 603);
             this.cameraView1.TabIndex = 4;
-            this.cameraView1.Load += new System.EventHandler(this.cameraView1_Load);
             // 
             // simpleButton5
             // 
@@ -634,9 +633,11 @@ namespace CameraViewer
             // 
             this.mainMultiplexer.CellHeight = 288;
             this.mainMultiplexer.CellWidth = 352;
+            this.mainMultiplexer.Cols = 4;
             this.mainMultiplexer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainMultiplexer.Location = new System.Drawing.Point(200, 55);
             this.mainMultiplexer.Name = "mainMultiplexer";
+            this.mainMultiplexer.Rows = 4;
             this.mainMultiplexer.Size = new System.Drawing.Size(851, 444);
             this.mainMultiplexer.TabIndex = 5;
             this.mainMultiplexer.DoubleCamera += new CameraViewer.Multiplexer.MyCurrentCamera(this.multiplexer1_DoubleCamera);
