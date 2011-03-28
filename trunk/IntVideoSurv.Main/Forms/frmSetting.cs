@@ -78,7 +78,7 @@ namespace CameraViewer.Forms
                 }
             }
             treeListShowRecognizer.Columns[1].Visible = false;
-            treeListShowDecoder.ExpandAll();
+            treeListShowRecognizer.ExpandAll();
             Cursor.Current = currentCursor;
 
         }
@@ -1492,7 +1492,7 @@ namespace CameraViewer.Forms
                     popupMenuAddRecognizer.ShowPopup(Cursor.Position);
 
                 }
-                else if ((node.Tag.ToString()).IndexOf("D") >= 0)
+                else if ((node.Tag.ToString()).IndexOf("R") >= 0)
                 {
                     popupMenuAddCameraInRecognizer.ShowPopup(Cursor.Position);
                 }

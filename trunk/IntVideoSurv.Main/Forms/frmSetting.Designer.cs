@@ -501,9 +501,9 @@ namespace CameraViewer.Forms
             // gcDeviceManagement
             // 
             this.gcDeviceManagement.Controls.Add(this.splitContainerControl1);
-            this.gcDeviceManagement.Location = new System.Drawing.Point(373, 89);
+            this.gcDeviceManagement.Location = new System.Drawing.Point(64, 87);
             this.gcDeviceManagement.Name = "gcDeviceManagement";
-            this.gcDeviceManagement.Size = new System.Drawing.Size(177, 170);
+            this.gcDeviceManagement.Size = new System.Drawing.Size(271, 170);
             this.gcDeviceManagement.TabIndex = 31;
             this.gcDeviceManagement.Text = "设备管理";
             this.gcDeviceManagement.Visible = false;
@@ -517,8 +517,8 @@ namespace CameraViewer.Forms
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gridControlShowDevice);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(173, 145);
-            this.splitContainerControl1.SplitterPosition = 132;
+            this.splitContainerControl1.Size = new System.Drawing.Size(267, 145);
+            this.splitContainerControl1.SplitterPosition = 221;
             this.splitContainerControl1.TabIndex = 7;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -536,7 +536,7 @@ namespace CameraViewer.Forms
             this.treeListDevice.OptionsView.ShowColumns = false;
             this.treeListDevice.OptionsView.ShowHorzLines = false;
             this.treeListDevice.OptionsView.ShowIndicator = false;
-            this.treeListDevice.Size = new System.Drawing.Size(132, 145);
+            this.treeListDevice.Size = new System.Drawing.Size(221, 145);
             this.treeListDevice.TabIndex = 0;
             this.treeListDevice.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TreeListDeviceRightClick);
             this.treeListDevice.Click += new System.EventHandler(this.treeListDevice_Click);
@@ -564,7 +564,7 @@ namespace CameraViewer.Forms
             this.gridControlShowDevice.MainView = this.gridView4;
             this.gridControlShowDevice.MenuManager = this.barManager1;
             this.gridControlShowDevice.Name = "gridControlShowDevice";
-            this.gridControlShowDevice.Size = new System.Drawing.Size(36, 145);
+            this.gridControlShowDevice.Size = new System.Drawing.Size(41, 145);
             this.gridControlShowDevice.TabIndex = 0;
             this.gridControlShowDevice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -1305,9 +1305,9 @@ namespace CameraViewer.Forms
             // RecognizerManagement
             // 
             this.RecognizerManagement.Controls.Add(this.splitContainerControl8);
-            this.RecognizerManagement.Location = new System.Drawing.Point(108, 188);
+            this.RecognizerManagement.Location = new System.Drawing.Point(64, 263);
             this.RecognizerManagement.Name = "RecognizerManagement";
-            this.RecognizerManagement.Size = new System.Drawing.Size(224, 153);
+            this.RecognizerManagement.Size = new System.Drawing.Size(269, 153);
             this.RecognizerManagement.TabIndex = 35;
             this.RecognizerManagement.Text = "识别器管理";
             // 
@@ -1320,8 +1320,8 @@ namespace CameraViewer.Forms
             this.splitContainerControl8.Panel1.Text = "Panel1";
             this.splitContainerControl8.Panel2.Controls.Add(this.gridControlShowRecognizer);
             this.splitContainerControl8.Panel2.Text = "Panel2";
-            this.splitContainerControl8.Size = new System.Drawing.Size(220, 128);
-            this.splitContainerControl8.SplitterPosition = 111;
+            this.splitContainerControl8.Size = new System.Drawing.Size(265, 128);
+            this.splitContainerControl8.SplitterPosition = 221;
             this.splitContainerControl8.TabIndex = 0;
             this.splitContainerControl8.Text = "splitContainerControl8";
             // 
@@ -1338,7 +1338,7 @@ namespace CameraViewer.Forms
             this.treeListShowRecognizer.OptionsView.ShowHorzLines = false;
             this.treeListShowRecognizer.OptionsView.ShowIndicator = false;
             this.treeListShowRecognizer.OptionsView.ShowVertLines = false;
-            this.treeListShowRecognizer.Size = new System.Drawing.Size(111, 128);
+            this.treeListShowRecognizer.Size = new System.Drawing.Size(221, 128);
             this.treeListShowRecognizer.TabIndex = 0;
             this.treeListShowRecognizer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowRecognizer_MouseUp);
             // 
@@ -1366,7 +1366,7 @@ namespace CameraViewer.Forms
             this.gridControlShowRecognizer.MainView = this.gridView5;
             this.gridControlShowRecognizer.MenuManager = this.barManager1;
             this.gridControlShowRecognizer.Name = "gridControlShowRecognizer";
-            this.gridControlShowRecognizer.Size = new System.Drawing.Size(104, 128);
+            this.gridControlShowRecognizer.Size = new System.Drawing.Size(39, 128);
             this.gridControlShowRecognizer.TabIndex = 0;
             this.gridControlShowRecognizer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
@@ -1381,7 +1381,7 @@ namespace CameraViewer.Forms
             // DecoderManagement
             // 
             this.DecoderManagement.Controls.Add(this.splitContainerControl7);
-            this.DecoderManagement.Location = new System.Drawing.Point(83, 100);
+            this.DecoderManagement.Location = new System.Drawing.Point(373, 263);
             this.DecoderManagement.Name = "DecoderManagement";
             this.DecoderManagement.Size = new System.Drawing.Size(249, 155);
             this.DecoderManagement.TabIndex = 34;
@@ -1398,7 +1398,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl7.Panel2.Controls.Add(this.gridControl1);
             this.splitContainerControl7.Panel2.Text = "Panel2";
             this.splitContainerControl7.Size = new System.Drawing.Size(245, 130);
-            this.splitContainerControl7.SplitterPosition = 146;
+            this.splitContainerControl7.SplitterPosition = 225;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
             // 
@@ -1417,7 +1417,7 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.OptionsView.ShowHorzLines = false;
             this.treeListShowDecoder.OptionsView.ShowIndicator = false;
             this.treeListShowDecoder.OptionsView.ShowVertLines = false;
-            this.treeListShowDecoder.Size = new System.Drawing.Size(146, 130);
+            this.treeListShowDecoder.Size = new System.Drawing.Size(225, 130);
             this.treeListShowDecoder.TabIndex = 0;
             this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
             this.treeListShowDecoder.Click += new System.EventHandler(this.ShowDecoderAndCameraDataInGridView);
@@ -1446,7 +1446,7 @@ namespace CameraViewer.Forms
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(94, 130);
+            this.gridControl1.Size = new System.Drawing.Size(15, 130);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,

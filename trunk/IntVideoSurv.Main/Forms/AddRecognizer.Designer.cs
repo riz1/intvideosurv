@@ -141,6 +141,7 @@
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
             this.Name = "AddRecognizer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "新增识别器";
             ((System.ComponentModel.ISupportInitialize)(this.textEditmax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditport.Properties)).EndInit();
