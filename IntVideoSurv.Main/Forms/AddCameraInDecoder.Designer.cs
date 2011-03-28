@@ -62,6 +62,7 @@
             this.treeList1DecoderCamera.Name = "treeList1DecoderCamera";
             this.treeList1DecoderCamera.OptionsBehavior.AutoFocusNewNode = true;
             this.treeList1DecoderCamera.OptionsBehavior.Editable = false;
+            this.treeList1DecoderCamera.OptionsSelection.InvertSelection = true;
             this.treeList1DecoderCamera.OptionsView.ShowColumns = false;
             this.treeList1DecoderCamera.OptionsView.ShowHorzLines = false;
             this.treeList1DecoderCamera.OptionsView.ShowIndicator = false;

@@ -87,7 +87,7 @@ namespace CameraViewer.Forms
                     break;
                 case Util.Operateion.Update:
                     ri = RecognizerBusiness.Instance.GetRecognizerInfoByRecognizerId(ref errMessage,Id);
-                    //di.Name = textEditname.Text;
+                    ri.Name = textEditname.Text;
                     ri.Port = int.Parse(textEditport.Text);
                     ri.Ip = textEditIp.Text;
                     ri.MaxRecogNumber = int.Parse(textEditmax.Text);
