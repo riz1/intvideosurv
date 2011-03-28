@@ -951,13 +951,6 @@ namespace CameraViewer.Forms
             }
         }
 
-        private void nbDisplayChannel_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
-        {
-            _displaytype = DisplayTypes.DisplayChannelManagement;
-            DisplayRightPanel();
-
-        }
-
         private void dgvGroupSwitchDetail_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -1106,11 +1099,6 @@ namespace CameraViewer.Forms
 
         }
 
-        private void navBarItem1_ItemChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cbeChangeSkin_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.DefaultSkinName = cbeChangeSkin.EditValue.ToString();
@@ -1146,12 +1134,7 @@ namespace CameraViewer.Forms
 
         }
 
-        private void contextMenuStrip2_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-      //  private void treeViewDecoder_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        //  private void treeViewDecoder_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
        // {
            // string tag = e.Node.Tag.ToString();
           //  SetDecodermenu();

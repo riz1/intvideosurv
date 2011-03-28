@@ -131,7 +131,6 @@ namespace CameraViewer.Forms
             this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn8 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.gridControlShowRecognizer = new DevExpress.XtraGrid.GridControl();
-            
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.DecoderManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
