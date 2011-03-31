@@ -729,47 +729,47 @@ namespace CameraViewer.Forms
             this.DeleteDeviceToolStripMenuItem});
             this.contextMenuStripGroupAndDevice.Name = "contextMenuStrip1";
             this.contextMenuStripGroupAndDevice.ShowImageMargin = false;
-            this.contextMenuStripGroupAndDevice.Size = new System.Drawing.Size(100, 136);
+            this.contextMenuStripGroupAndDevice.Size = new System.Drawing.Size(98, 136);
             // 
             // AddGroupToolStripMenuItem
             // 
             this.AddGroupToolStripMenuItem.Name = "AddGroupToolStripMenuItem";
-            this.AddGroupToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.AddGroupToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.AddGroupToolStripMenuItem.Text = "新增群组";
             this.AddGroupToolStripMenuItem.Click += new System.EventHandler(this.AddGroupToolStripMenuItem_Click);
             // 
             // EditGroupToolStripMenuItem
             // 
             this.EditGroupToolStripMenuItem.Name = "EditGroupToolStripMenuItem";
-            this.EditGroupToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.EditGroupToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.EditGroupToolStripMenuItem.Text = "修改群组";
             this.EditGroupToolStripMenuItem.Click += new System.EventHandler(this.EditGroupToolStripMenuItem_Click);
             // 
             // DeleteGroupToolStripMenuItem
             // 
             this.DeleteGroupToolStripMenuItem.Name = "DeleteGroupToolStripMenuItem";
-            this.DeleteGroupToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.DeleteGroupToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.DeleteGroupToolStripMenuItem.Text = "删除群组";
             this.DeleteGroupToolStripMenuItem.Click += new System.EventHandler(this.DeleteGroupToolStripMenuItem_Click);
             // 
             // AddDeviceToolStripMenuItem
             // 
             this.AddDeviceToolStripMenuItem.Name = "AddDeviceToolStripMenuItem";
-            this.AddDeviceToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.AddDeviceToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.AddDeviceToolStripMenuItem.Text = "新增设备";
             this.AddDeviceToolStripMenuItem.Click += new System.EventHandler(this.AddDeviceToolStripMenuItem_Click);
             // 
             // EditDeviceToolStripMenuItem
             // 
             this.EditDeviceToolStripMenuItem.Name = "EditDeviceToolStripMenuItem";
-            this.EditDeviceToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.EditDeviceToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.EditDeviceToolStripMenuItem.Text = "修改设备";
             this.EditDeviceToolStripMenuItem.Click += new System.EventHandler(this.EditDeviceToolStripMenuItem_Click);
             // 
             // DeleteDeviceToolStripMenuItem
             // 
             this.DeleteDeviceToolStripMenuItem.Name = "DeleteDeviceToolStripMenuItem";
-            this.DeleteDeviceToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.DeleteDeviceToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.DeleteDeviceToolStripMenuItem.Text = "删除设备";
             this.DeleteDeviceToolStripMenuItem.Click += new System.EventHandler(this.DeleteDeviceToolStripMenuItem_Click);
             // 
@@ -1206,19 +1206,19 @@ namespace CameraViewer.Forms
             this.ToolStripMenuItemDeleteSynGroup});
             this.contextMenuStripSynGroup.Name = "contextMenuStripSynGroup";
             this.contextMenuStripSynGroup.ShowImageMargin = false;
-            this.contextMenuStripSynGroup.Size = new System.Drawing.Size(124, 48);
+            this.contextMenuStripSynGroup.Size = new System.Drawing.Size(122, 48);
             // 
             // ToolStripMenuItemAddSynGroup
             // 
             this.ToolStripMenuItemAddSynGroup.Name = "ToolStripMenuItemAddSynGroup";
-            this.ToolStripMenuItemAddSynGroup.Size = new System.Drawing.Size(123, 22);
+            this.ToolStripMenuItemAddSynGroup.Size = new System.Drawing.Size(121, 22);
             this.ToolStripMenuItemAddSynGroup.Text = "添加同步群组";
             this.ToolStripMenuItemAddSynGroup.Click += new System.EventHandler(this.ToolStripMenuItemAddSynGroup_Click);
             // 
             // ToolStripMenuItemDeleteSynGroup
             // 
             this.ToolStripMenuItemDeleteSynGroup.Name = "ToolStripMenuItemDeleteSynGroup";
-            this.ToolStripMenuItemDeleteSynGroup.Size = new System.Drawing.Size(123, 22);
+            this.ToolStripMenuItemDeleteSynGroup.Size = new System.Drawing.Size(121, 22);
             this.ToolStripMenuItemDeleteSynGroup.Text = "删除同步群组";
             this.ToolStripMenuItemDeleteSynGroup.Click += new System.EventHandler(this.ToolStripMenuItemDeleteSynGroup_Click);
             // 
@@ -1880,12 +1880,12 @@ namespace CameraViewer.Forms
             this.toolStripMenuItem1});
             this.cmAddProgSwitch.Name = "cmAddGroupSwitchGroup";
             this.cmAddProgSwitch.ShowImageMargin = false;
-            this.cmAddProgSwitch.Size = new System.Drawing.Size(124, 26);
+            this.cmAddProgSwitch.Size = new System.Drawing.Size(122, 26);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
             this.toolStripMenuItem1.Text = "添加程序切换";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -2065,12 +2065,12 @@ namespace CameraViewer.Forms
             this.添加群组切换ToolStripMenuItem});
             this.cmAddGroupSwitchGroup.Name = "cmAddGroupSwitchGroup";
             this.cmAddGroupSwitchGroup.ShowImageMargin = false;
-            this.cmAddGroupSwitchGroup.Size = new System.Drawing.Size(124, 26);
+            this.cmAddGroupSwitchGroup.Size = new System.Drawing.Size(122, 26);
             // 
             // 添加群组切换ToolStripMenuItem
             // 
             this.添加群组切换ToolStripMenuItem.Name = "添加群组切换ToolStripMenuItem";
-            this.添加群组切换ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.添加群组切换ToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.添加群组切换ToolStripMenuItem.Text = "添加群组切换";
             this.添加群组切换ToolStripMenuItem.Click += new System.EventHandler(this.添加群组切换ToolStripMenuItem_Click);
             // 
@@ -2080,12 +2080,12 @@ namespace CameraViewer.Forms
             this.删除ToolStripMenuItem});
             this.cmDeleteMap.Name = "cmDeleteMap";
             this.cmDeleteMap.ShowImageMargin = false;
-            this.cmDeleteMap.Size = new System.Drawing.Size(76, 26);
+            this.cmDeleteMap.Size = new System.Drawing.Size(74, 26);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(75, 22);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(73, 22);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
