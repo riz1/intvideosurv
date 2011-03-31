@@ -1312,25 +1312,30 @@ namespace CameraViewer
         }
 
         private bool testimage;
+        private object lockerCurrentImage = new object();
         private void timerTest_Tick(object sender, EventArgs e)
         {
-            testimage =!testimage;
-            if (testimage)
+            lock (lockerCurrentImage)
             {
-                CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
-                if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
-                cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_212.JPG");
-                cameraWindow.Refresh();
+                testimage =!testimage;
+                if (testimage)
+                {
+                    CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+                    if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
+                    cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_212.JPG");
+                    cameraWindow.Refresh();
 
+                }
+                else
+                {
+                    CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+                    if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
+                    cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_21.JPG");
+                    cameraWindow.Refresh();
+            
+                }                
             }
-            else
-            {
-                CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
-                if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
-                cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_21.JPG");
-                cameraWindow.Refresh();
-        
-            }
+
 
         }
 
@@ -1393,6 +1398,67 @@ namespace CameraViewer
         {
             long date =DateTime.Now.Ticks;
             DateTime theDate =new DateTime(date);　　
+
+        }
+
+        Image[] _ImageSerias = new Image[5];
+        private int _currentImageIndex = 0;
+
+        //像素级比较两个Image对象是否相同
+        private bool Equals(Image a, Image b)
+        {
+            MemoryStream msa = new MemoryStream();
+            MemoryStream msb = new MemoryStream();
+            a.Save(msa, System.Drawing.Imaging.ImageFormat.Bmp);
+            b.Save(msb, System.Drawing.Imaging.ImageFormat.Bmp);
+            byte[] ima = msa.GetBuffer();
+            byte[] imb = msb.GetBuffer();
+            if (ima.Length != imb.Length) 
+                return false;
+            else
+            {
+                for (int i = 0; i < ima.Length; i++)
+                    if (ima[i] != imb[i]) 
+                        return false;
+            }
+            return true;
+        }
+        private void barButtonItemGetPics_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            lock (lockerCurrentImage)
+            {
+                CameraWindow camwin = mainMultiplexer.GetCurrentCameraWindow();
+                if (camwin == null)
+                {
+                    XtraMessageBox.Show("请选中一个窗格!");
+                    return;
+                }
+                _currentImageIndex = 0;
+                Image oldImage=null;
+                while (_currentImageIndex < 5)
+                {
+                    _ImageSerias[_currentImageIndex] = (Image)(camwin.CurrentImage.Clone());
+                    _currentImageIndex++;    
+                    Thread.Sleep(77);
+
+                }
+                try
+                {
+                    //_ImageSerias[0] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Desert.jpg");
+                    //_ImageSerias[1] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Penguins.jpg");
+                    //_ImageSerias[2] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Koala.jpg");
+                    //_ImageSerias[3] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Tulips.jpg");
+                    //_ImageSerias[4] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg");
+
+                    //仅作测试用，摄像头ID设置为1
+                    frmDrawing myfrmDrawing = new frmDrawing(_ImageSerias, 1);
+                    myfrmDrawing.ShowDialog(this);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString());
+                }
+            }
 
         }
 
