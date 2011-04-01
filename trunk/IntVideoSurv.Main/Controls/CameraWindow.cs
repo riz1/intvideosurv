@@ -73,7 +73,47 @@ namespace CameraViewer
 			}
 		}
 
-	    public Image CurrentImage;
+	    private Image _currentImage;
+	    public Image CurrentImage
+	    {
+	        set
+            {
+                _currentImage = value;
+            //实际使用时才打开
+                //    _currentImageGuid = Guid.NewGuid();
+            }
+            get
+            {
+                return _currentImage;
+            }
+	    }
+
+	    private int _cameraID;
+        public int CameraID
+        {
+            set
+            {
+                _cameraID = value;
+            }
+            get
+            {
+                return _cameraID;
+            }
+        }
+
+	    public Guid CurrentImageGuid
+	    {
+            set
+            {
+                //实际使用时关闭
+                _currentImageGuid = Guid.NewGuid();
+            }
+            get
+            {
+                return _currentImageGuid;
+            }	        
+	    }
+	    private Guid _currentImageGuid;
 		// Constructor
 		public CameraWindow()
 		{
@@ -125,16 +165,13 @@ namespace CameraViewer
             
             //有图像的话画图像
 
-		    if (CurrentImage!=null)
+		    if (_currentImage!=null)
 		    {
-                g.DrawImage(CurrentImage, rc.X, rc.Y, rc.Width, rc.Height);
+                g.DrawImage(_currentImage, rc.X, rc.Y, rc.Width, rc.Height);
 
 		    }
-			
-           // MyDrawReversibleRectangle(rc););
-
-            if (camera== null)
-            {
+		    if (camera==null)
+		    {
                 Font drawFont = new Font("Arial", 8);
                 SolidBrush drawBrush = new SolidBrush(Color.White);
 

@@ -1146,6 +1146,7 @@ namespace CameraViewer
                 CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
                 if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                 cameraWindow.CurrentImage = livePacketHandle.CurrentNetImage.Image;
+                cameraWindow.CameraID = livePacketHandle.CurrentNetImage.CameraId;
                 cameraWindow.Refresh();
             };
         }
@@ -1313,6 +1314,8 @@ namespace CameraViewer
 
         private bool testimage;
         private object lockerCurrentImage = new object();
+        private Guid guidA = Guid.NewGuid();
+        private Guid guidB = Guid.NewGuid();
         private void timerTest_Tick(object sender, EventArgs e)
         {
             lock (lockerCurrentImage)
@@ -1323,6 +1326,7 @@ namespace CameraViewer
                     CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_212.JPG");
+                    cameraWindow.CurrentImageGuid = guidA;
                     cameraWindow.Refresh();
 
                 }
@@ -1331,6 +1335,7 @@ namespace CameraViewer
                     CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_21.JPG");
+                    cameraWindow.CurrentImageGuid = guidB;
                     cameraWindow.Refresh();
             
                 }                
@@ -1423,27 +1428,47 @@ namespace CameraViewer
             }
             return true;
         }
+        Guid currentGuid;
         private void barButtonItemGetPics_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            lock (lockerCurrentImage)
+            ThreadStart threadStart = new ThreadStart(CaptureImageThread);
+            Thread thread = new Thread(threadStart);
+            thread.Start();
+        }
+        public delegate void DelShowDrawingForm(Image[] image,int cameraId);
+        private void ShowDrawingForm(Image[] image,int cameraId)
+        {
+            frmDrawing myfrmDrawing = new frmDrawing(image,cameraId);
+            myfrmDrawing.ShowDialog();
+        }
+        private void CaptureImageThread()
+        {
+            //lock (lockerCurrentImage)
             {
-                CameraWindow camwin = mainMultiplexer.GetCurrentCameraWindow();
-                if (camwin == null)
-                {
-                    XtraMessageBox.Show("请选中一个窗格!");
-                    return;
-                }
-                _currentImageIndex = 0;
-                Image oldImage=null;
-                while (_currentImageIndex < 5)
-                {
-                    _ImageSerias[_currentImageIndex] = (Image)(camwin.CurrentImage.Clone());
-                    _currentImageIndex++;    
-                    Thread.Sleep(77);
-
-                }
                 try
                 {
+                    CameraWindow camwin = mainMultiplexer.GetCurrentCameraWindow();
+                    if (camwin == null)
+                    {
+                        XtraMessageBox.Show("请选中一个窗格!");
+                        return;
+                    }
+                    _currentImageIndex = 0;
+                    currentGuid = camwin.CurrentImageGuid;
+                    _ImageSerias[_currentImageIndex++] = (Image)(camwin.CurrentImage.Clone());
+                    while (_currentImageIndex < 5)
+                    {
+                        lock (lockerCurrentImage)
+                        {
+                            if (currentGuid != camwin.CurrentImageGuid)
+                            {
+                                _ImageSerias[_currentImageIndex++] = (Image)(camwin.CurrentImage.Clone());
+                            }
+                            Thread.Sleep(77);                            
+                        }
+
+                    }
+
                     //_ImageSerias[0] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Desert.jpg");
                     //_ImageSerias[1] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Penguins.jpg");
                     //_ImageSerias[2] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Koala.jpg");
@@ -1451,16 +1476,16 @@ namespace CameraViewer
                     //_ImageSerias[4] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg");
 
                     //仅作测试用，摄像头ID设置为1
-                    frmDrawing myfrmDrawing = new frmDrawing(_ImageSerias, 1);
-                    myfrmDrawing.ShowDialog(this);
+                    DelShowDrawingForm delShowDrawingForm = new DelShowDrawingForm(ShowDrawingForm);
+                    this.Invoke(delShowDrawingForm, new object[] { _ImageSerias, camwin.CameraID });
+
+
                 }
                 catch (Exception ex)
                 {
                     XtraMessageBox.Show(ex.ToString());
                 }
             }
-
         }
-
     }
 }
