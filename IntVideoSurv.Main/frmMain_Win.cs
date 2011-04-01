@@ -1366,8 +1366,7 @@ namespace CameraViewer
         {
             int iRow = 3, iCol = 3;
             Util.GetRowCol(9, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.SetRowCol(iRow,iCol);
             mainMultiplexer.Refresh();
         }
 

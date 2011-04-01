@@ -202,6 +202,12 @@ namespace CameraViewer
         {
             get { return (lastClicked == null) ? null : lastClicked.Camera; }
         }
+        public void SetRowCol(int rows, int cols)
+        {
+            this.rows = rows;
+            this.cols = cols;
+            UpdateSize();
+        }
 
         // Constructors
         public Multiplexer()
@@ -838,6 +844,14 @@ namespace CameraViewer
                 startY = 0;
             }
             this.SuspendLayout();
+            for (int i = 0; i < MaxRows; i++)
+            {
+                for (int j = 0; j < MaxCols; j++)
+                {
+                    camWindows[i, j].Visible = false;
+                }
+                
+            }
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)

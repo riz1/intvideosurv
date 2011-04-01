@@ -170,7 +170,7 @@ namespace CameraViewer
                 g.DrawImage(_currentImage, rc.X, rc.Y, rc.Width, rc.Height);
 
 		    }
-		    if (camera==null)
+		    else
 		    {
                 Font drawFont = new Font("Arial", 8);
                 SolidBrush drawBrush = new SolidBrush(Color.White);
