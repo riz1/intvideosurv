@@ -121,6 +121,7 @@
       <Item value="while" priority="0" />
       <Item value="OnDragOver`0" priority="0" />
       <Item value="IDataAdapter`0" priority="1" />
+      <Item value="flag" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:DevExpress.XtraEditors.GroupControl">
       <Item value="Visible" priority="1" />
@@ -258,7 +259,6 @@
   </CompletionStatisticsManager>
   <RecentFiles>
     <RecentFiles>
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Controls/f:CameraView.Designer.cs" caret="20061" fromTop="12" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Controls/f:DeviceMaintain.cs" caret="330" fromTop="5" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLog.cs" caret="1105" fromTop="16" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeName.cs" caret="1899" fromTop="22" />
@@ -272,11 +272,9 @@
       <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DeviceDataAccess.cs" caret="0" fromTop="0" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Controls/f:CameraView.cs" caret="640" fromTop="0" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:GroupBusiness.cs" caret="2959" fromTop="0" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddXtraForm.cs" caret="871" fromTop="6" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Properties/f:Settings.Designer.cs" caret="977" fromTop="22" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.Designer.cs" caret="133672" fromTop="11" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.Designer.cs" caret="6664" fromTop="25" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Program.cs" caret="220" fromTop="12" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:CameraBusiness.cs" caret="3790" fromTop="10" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:GroupInfo.cs" caret="1813" fromTop="58" />
       <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:CameraDataAccess.cs" caret="6075" fromTop="171" />
@@ -288,26 +286,11 @@
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="14912" fromTop="0" />
       <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:RecognizerDataAccess.cs" caret="8497" fromTop="18" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="8917" fromTop="11" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Program.cs" caret="220" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Multiplexer.cs" caret="39639" fromTop="804" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2832" fromTop="66" />
     </RecentFiles>
     <RecentEdits>
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="2988" fromTop="8" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="3195" fromTop="14" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="3539" fromTop="8" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="3801" fromTop="14" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="4369" fromTop="11" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="5980" fromTop="10" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="6463" fromTop="13" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="5793" fromTop="13" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="6889" fromTop="14" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="4751" fromTop="3" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="7265" fromTop="9" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="7502" fromTop="15" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="8016" fromTop="13" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="8342" fromTop="11" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="8675" fromTop="6" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="8912" fromTop="10" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="9571" fromTop="15" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="9929" fromTop="11" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="10534" fromTop="12" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="10716" fromTop="7" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="11003" fromTop="16" />
@@ -320,6 +303,24 @@
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="15715" fromTop="15" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="16041" fromTop="16" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="14897" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="317" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="487" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2182" fromTop="4" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2329" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2479" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2505" fromTop="10" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2664" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5473" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5473" fromTop="14" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6747" fromTop="5" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5597" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6724" fromTop="16" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5473" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="613" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="3726" fromTop="13" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="781" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1309" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1850" fromTop="16" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
