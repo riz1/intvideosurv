@@ -32,8 +32,10 @@ namespace IntVideoSurv.Business
             errMessage = "";
             try
             {
-                return WindowCameraDataAccess.Insert(db, windowCameraInfo);
-
+                return WindowCameraDataAccess.IsWindowCameraExisted(db, windowCameraInfo.Row, windowCameraInfo.Col)
+                           ? WindowCameraDataAccess.Update(db, windowCameraInfo.Row, windowCameraInfo.Col,
+                                                           windowCameraInfo.CameraId)
+                           : WindowCameraDataAccess.Insert(db, windowCameraInfo);
             }
             catch (Exception ex)
             {
@@ -143,18 +145,21 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public WindowCameraInfo GetWindowCameraInfoByCamera(ref string errMessage, int camera)
+        public Dictionary<int, WindowCameraInfo> GetWindowCameraInfoByCamera(ref string errMessage, int camera)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
+            Dictionary<int, WindowCameraInfo> list = new Dictionary<int, WindowCameraInfo>();
             try
             {
                 DataSet ds = WindowCameraDataAccess.GetWindowCameraInfoByCamera(db, camera);
-                if (ds.Tables[0].Rows.Count == 0)
+                WindowCameraInfo windowCameraInfo;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    return null;
+                    windowCameraInfo = new WindowCameraInfo(ds.Tables[0].Rows[i]);
+                    list.Add(windowCameraInfo.Id, windowCameraInfo);
                 }
-                return new WindowCameraInfo(ds.Tables[0].Rows[0]);
+                return list;
 
             }
             catch (Exception ex)

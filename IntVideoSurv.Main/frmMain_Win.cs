@@ -9,7 +9,6 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Windows.Forms;
-using CameraViewer.Controls;
 using CameraViewer.NetWorking;
 using CameraViewer.Remoting;
 using DevExpress.XtraEditors;
@@ -19,7 +18,6 @@ using CameraViewer.Forms;
 using System.IO;
 using IntVideoSurv.Business.HiK;
 using System.Threading;
-using System.Diagnostics;
 
 namespace CameraViewer
 {
@@ -48,7 +46,6 @@ namespace CameraViewer
         Dictionary<int, MapInfo> _listMap;
         OutputTVDeviceDriver _outputTv;
         TcpChannel chan1;
-        private MapInfo currentMapInfo;
 
 
         private GetTransPacket _getTransPacket;
@@ -103,9 +100,8 @@ namespace CameraViewer
             iret = HikStreamMediaServerSDK.StartServer(AppSettings.Default.StreamMediaServicePath, 554);
             iret = HikStreamMediaServerSDK.RunServer();//未使用
         }
-        void CameraView1DoubleSynGroup(string tag)
+        void CameraView1DoubleDecoderCam(string tag)
         {
-            _isProgSwitchView = false;
             //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
             //XtraMessageBox.Show(tag);
             string[] strs = tag.Split(';');
@@ -116,86 +112,25 @@ namespace CameraViewer
         }
         void CameraView1DoubleDevCam(string tag)
         {
-            _isProgSwitchView = false;
             //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
             string[] strs = tag.Split(';');
             if (strs[1] == "D")
             {
-                isStop = true;
-                ViewCameraByDeviceId(int.Parse(strs[0]));
+                //ViewCameraByDeviceId(int.Parse(strs[0]));
             }
             else if (strs[1] == "C")
             {
-                isStop = true;
-                ViewCameraByCameraId(int.Parse(strs[0]));
-            }
-        }
-        void DispalyProgSwitch(int progSwitchId, int cameraId, int displayChannelId, int displaySplitScreenNo)
-        {
-            try
-            {
-                int iRow = 1;
-                int iCol = 1;
-                mainMultiplexer.CloseAll();
-                mainMultiplexer.CamerasVisible = true;
-                mainMultiplexer.CellWidth = 320;
-                mainMultiplexer.CellHeight = 240;
-                mainMultiplexer.FitToWindow = true;
-                CloseAll();
+                //ViewCameraByCameraId(int.Parse(strs[0]));
 
-                HikVideoServerDeviceDriver deviceDriver;
-                HikVideoServerCameraDriver cameraDriver = null;
-                HikVideoServerCameraDriver cameraDriver1;
-                DeviceInfo oDevice;
-
-                CameraInfo camera = _listAllCam[cameraId];
-                oDevice = _listDevice[camera.DeviceId];
-                if (!_runningDeviceList.ContainsKey(camera.DeviceId))
+                if (mainMultiplexer.GetCurrentCameraWindow()==null)
                 {
-                    deviceDriver = new HikVideoServerDeviceDriver();
-                    deviceDriver.Init(ref oDevice);
-                    _runningDeviceList.Add(camera.DeviceId, deviceDriver);
+                    return;
                 }
-
-                if (_runningDeviceList[camera.DeviceId].IsValidDevice)
-                {
-                    oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
-                    if (!_runningCameraList.ContainsKey(camera.CameraId))
-                    {
-                        camera.ListOutputTarget = new ArrayList();
-                        cameraDriver = new HikVideoServerCameraDriver(oDevice);
-                        cameraDriver.CurrentCamera = camera;
-                        camera.TotalDSP = _outputTv.TotalDSP;
-                        _runningCameraList.Add(camera.CameraId, cameraDriver);
-                    }
-
-                }
-
-
-
-                CameraWindow camwin = mainMultiplexer.GetCamera(0, 0);
-                cameraDriver1 = _runningCameraList[camera.CameraId];
-                cameraDriver1.CurrentCamera.ListOutputTarget.Add(new DisplayHandlePair { DisplayChannelId = displayChannelId, DisplaySplitScreenNo =displaySplitScreenNo,Handle=camwin.Handle });
-                _runningCameraList[camera.CameraId] = cameraDriver1;
-                mainMultiplexer.SetCamera(0, 0, cameraDriver);
-
-                foreach (KeyValuePair<int, HikVideoServerCameraDriver> item in _runningCameraList)
-                {
-                    item.Value.Start(item.Value.CurrentCamera, CardOutType.ProgSwitch, progSwitchId);
-                }
-
-                mainMultiplexer.Rows = iRow;
-                mainMultiplexer.Cols = iCol;
-                mainMultiplexer.SingleCameraMode = false;
-                mainMultiplexer.CamerasVisible = true;
+                string errMsg = "";
+                int row = 0, col = 0;
+                mainMultiplexer.GetCurrentCameraWindowPosition(ref row, ref col);
+                WindowCameraBusiness.Instance.Insert(ref errMsg,new WindowCameraInfo{CameraId = int.Parse(strs[0]),Row =row, Col = col});
             }
-            catch (Exception ex)
-            {
-
-            }
-
-
-
         }
 
         void DispalySynCamera(int synGroupId)
@@ -285,128 +220,7 @@ namespace CameraViewer
 
 
         }
-             
-        private void ViewCameraByDeviceId(int deviceId)
-        {
-            //18607550721
-            int iRow = 1;
-            int iCol = 1;
-            int iCount = 1;
-            mainMultiplexer.CloseAll();
-            mainMultiplexer.CamerasVisible = true;
-            mainMultiplexer.CellWidth = 320;
-            mainMultiplexer.CellHeight = 240;
-            mainMultiplexer.FitToWindow = true;
-            CloseAll();
 
-            HikVideoServerDeviceDriver deviceDriver;
-            HikVideoServerCameraDriver cameraDriver;
-            DeviceInfo oDevice;
-            oDevice = _listDevice[deviceId];
-            int i = 0;
-            int j = 0;
-            iCount = oDevice.ListCamera.Count;
-            Util.GetRowCol(iCount, ref iRow, ref iCol);
-            foreach (KeyValuePair<int, CameraInfo> item in oDevice.ListCamera)
-            {
-
-                CameraInfo camera = item.Value;
-                CameraWindow camwin = mainMultiplexer.GetCamera(i, j);
-                camera.Handle = camwin.Handle;
-
-                oDevice.Handle = camwin.Handle;
-                if (!_runningDeviceList.ContainsKey(camera.DeviceId))
-                {
-                    deviceDriver = new HikVideoServerDeviceDriver();
-                    deviceDriver.Init(ref oDevice);
-                    _runningDeviceList.Add(camera.DeviceId, deviceDriver);
-                }
-                if (!_runningDeviceList[camera.DeviceId].IsValidDevice)
-                {
-                    j = j + 1;
-                    continue;
-
-                }
-                oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
-                if (!_runningCameraList.ContainsKey(camera.CameraId))
-                {
-                    cameraDriver = new HikVideoServerCameraDriver(oDevice);
-                    cameraDriver.Start(camera);
-                    _runningCameraList.Add(camera.CameraId, cameraDriver);
-                    mainMultiplexer.SetCamera(i, j, cameraDriver);
-                    
-                }
-                j = j + 1;
-                if (j >= iCol)
-                {
-                    i = i + 1;
-                    j = 0;
-                }
-
-            }
-
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.SingleCameraMode = false;
-            mainMultiplexer.CamerasVisible = true;
-
-
-        }
-       
-        private void ViewCameraByCameraId(int carmeraId)
-        {
-
-            try
-            {
-	            mainMultiplexer.CamerasVisible = true;
-	            mainMultiplexer.CellWidth = 320;
-	            mainMultiplexer.CellHeight = 240;
-	            mainMultiplexer.FitToWindow = true;
-	            HikVideoServerDeviceDriver deviceDriver;
-	            HikVideoServerCameraDriver cameraDriver;
-	            DeviceInfo oDevice;
-	            CameraInfo camera = _listAllCam[carmeraId];
-                CameraWindow camwin = mainMultiplexer.GetCurrentCameraWindow();
-	            camera.Handle = camwin.Handle;
-	            oDevice = _listDevice[camera.DeviceId];
-	            oDevice.Handle = camwin.Handle;
-	            if (!_runningDeviceList.ContainsKey(camera.DeviceId))
-	            {
-	                deviceDriver = new HikVideoServerDeviceDriver();
-	                deviceDriver.Init(ref oDevice);
-	                _runningDeviceList.Add(camera.DeviceId, deviceDriver);
-	            }
-	
-	            oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
-	            if (!_runningCameraList.ContainsKey(camera.CameraId))
-	            {
-	                cameraDriver = new HikVideoServerCameraDriver(oDevice);
-	                cameraDriver.Start(camera);
-	                _runningCameraList.Add(camera.CameraId, cameraDriver);
-	                mainMultiplexer.SetCamera(camwin, cameraDriver);
-	            }
-	            else
-	            {
-	                cameraDriver = _runningCameraList[camera.CameraId];
-	                _runningCameraList.Remove(camera.CameraId);
-	                cameraDriver.Stop();
-	                cameraDriver.Close();
-	                cameraDriver.Start(camera);
-	                _runningCameraList.Add(camera.CameraId, cameraDriver);
-	                mainMultiplexer.SetCamera(camwin, cameraDriver);
-	            }
-	            mainMultiplexer.CamerasVisible = true;
-            }
-            catch (System.Exception ex)
-            {
-            	
-            }
-            finally
-            {
-            }
-
-        }
-        
         private void CloseAll()
         {
             foreach (KeyValuePair<int, HikVideoServerCameraDriver> item in _runningCameraList)
@@ -435,14 +249,6 @@ namespace CameraViewer
                     _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
                     cameraView1.ListDecoder = _listDecoder;
                     break;                    
-                case 2:
-                    _listGroupSwitchGroup = GroupSwitchGroupBusiness.Instance.GetAllGroupSwitchGroups(ref _errMessage);
-                    cameraView1.ListGroupSwitch = _listGroupSwitchGroup;
-                    break;
-                case 3:
-                    _listProgSwitch = ProgSwitchBusiness.Instance.GetAllProgSwitchs(ref _errMessage);
-                    cameraView1.ListProgSwitch = _listProgSwitch;
-                    break;   
                 default:
                     _listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref _errMessage);
                     cameraView1.ListGroup = _listGroup;
@@ -452,139 +258,8 @@ namespace CameraViewer
 
         private void tvSynGroup_DoubleClick(object sender, EventArgs e)
         {
-            _isProgSwitchView = false;
             //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
             //XtraMessageBox.Show(DateTime.Now.ToString());
-        }
-        /// <summary>
-        /// load all camera
-        /// </summary>
-        private void LoadAllCamera()
-        {
-            if (_listGroup == null) return;
-            int iRow = 2;
-            int iCol = 2;
-            int iCount = 0;
-            mainMultiplexer.CloseAll();
-            mainMultiplexer.CamerasVisible = true;
-            mainMultiplexer.CellWidth = 320;
-            mainMultiplexer.CellHeight = 240;
-            mainMultiplexer.FitToWindow = true;
-            _listCam = new Dictionary<int, CameraInfo>();
-            HikVideoServerDeviceDriver deviceDriver;
-            HikVideoServerCameraDriver cameraDriver;
-            switch (cameraView1.ViewType)
-            {
-                case EnumViewType.Normal:
-                    foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
-                    {
-                        if (item.Value.ListDevice != null)
-                        {
-                            foreach (KeyValuePair<int, DeviceInfo> device in item.Value.ListDevice)
-                            {
-                                if (device.Value.ListCamera != null)
-                                {
-                                    foreach (KeyValuePair<int, CameraInfo> camera in device.Value.ListCamera)
-                                    {
-                                        if (camera.Value.IsValid)
-                                        {
-
-                                            //runninPool.Add(device.Value, camera.Value);
-                                            _listCam.Add(iCount, camera.Value);
-                                            iCount = iCount + 1;
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                    break;
-
-                case EnumViewType.SynSwitch:
-                    foreach (KeyValuePair<int, SynGroup> item in _listSynGroup)
-                    {
-                        foreach (KeyValuePair<int, CameraInfo> camera in item.Value.ListCamera)
-                        {
-                            if (camera.Value.IsValid)
-                            {
-
-                                //runninPool.Add(device.Value, camera.Value);
-                                _listCam.Add(iCount, camera.Value);
-                                iCount = iCount + 1;
-                            }
-                        }
-                    }
-                    break;
-
-                default:
-                    break;
-
-            }
-
-            Util.GetRowCol(iCount, ref iRow, ref iCol);
-            iCount = 0;
-            VideoOutputInfo videoInfo;
-            //VideoOutputDriver videoDriver;
-            DeviceInfo oDevice;
-            DeviceInfo oDeviceHandle;
-            int OutputPort = 0;
-            for (int i = 0; i < iRow; i++)
-            {
-                for (int j = 0; j < iCol; j++)
-                {
-                    // get camera
-                    if (_listCam.ContainsKey(iCount))
-                    {
-                        CameraInfo camera = _listCam[iCount];
-                        CameraWindow camwin = mainMultiplexer.GetCamera(i, j);
-                        camera.Handle = camwin.Handle;
-                        oDevice = _listDevice[camera.DeviceId];
-                        // oDevice.Handle = camwin.Handle;
-                        oDevice.Handle = this.Handle;
-                        if (!_runningDeviceList.ContainsKey(camera.DeviceId))
-                        {
-                            deviceDriver = new HikVideoServerDeviceDriver();
-                            deviceDriver.Init(ref oDevice);
-                            _runningDeviceList.Add(camera.DeviceId, deviceDriver);
-                        }
-                        if (!_runningDeviceList[camera.DeviceId].IsValidDevice)
-                        {
-                            iCount = iCount + 1;
-                            continue;
-
-                        }
-                        oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
-                        if (!_runningCameraList.ContainsKey(camera.CameraId))
-                        {
-                            cameraDriver = new HikVideoServerCameraDriver(oDevice);
-                            cameraDriver.Start(camera,CardOutType.DefaultDisplay,1);
-                            _runningCameraList.Add(camera.CameraId, cameraDriver);
-                            mainMultiplexer.SetCamera(i, j, cameraDriver);
-                        }
-
-
-                        //runningPool.Add(camwin, oDevice, camera);
-                        if (OutputPort < 2)
-                        {
-                            videoInfo = new VideoOutputInfo();
-                            videoInfo.CameraId = camera.CameraId;
-                            videoInfo.OutputPort = OutputPort;
-
-                            OutputPort = OutputPort + 1;
-
-                        }
-                        iCount = iCount + 1;
-
-                    }
-
-                }
-            }
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.SingleCameraMode = false;
-            mainMultiplexer.CamerasVisible = true;
         }
 
         private bool _isFullScreen;
@@ -724,115 +399,6 @@ namespace CameraViewer
         }
 
         #endregion
-        #region prog switch
-        void cameraView1_DoubleProgSwitch(string tag)
-        {
-            _isProgSwitchView = true;
-            //splitContainerControl1.SplitterPosition = splitContainerControl1.Height + 2;
-            //  XtraMessageBox.Show(tag);
-            //XtraMessageBox.Show(tag);
-            string[] strs = tag.Split(';');
-            DateTime dt1;
-            DateTime dt2;
-            if (strs.Length == 2)
-            {
-
-                ProgSwitchInfo oProgSwitchInfo = ProgSwitchBusiness.Instance.GetProgSwitchById(ref _errMessage, int.Parse(strs[0]));
-                while (true)
-                {
-                    //DispalyProgSwitch
-                    foreach (KeyValuePair<int, ProgSwitchDetailInfo> item in oProgSwitchInfo.ListProgSwitchDetailInfo)
-                    {
-                        if (isStop)
-                        {
-                            break;
-                        }
-                        DispalyProgSwitch(oProgSwitchInfo.Id, item.Value.CameraId, oProgSwitchInfo.DisplayChannelId, oProgSwitchInfo.DisplaySplitScreenNo);
-                        dt1 = DateTime.Now.AddSeconds(item.Value.TickTime);
-                        while (true)
-                        {
-                            if (isStop)
-                            {
-                                break;
-                            }
-                            if (DateTime.Now.CompareTo(dt1) >= 0)
-                            {
-                                break;
-                            }
-                            Thread.Sleep(100);
-                            Application.DoEvents();
-
-                        }
-
-
-                    }
-                    if (isStop)
-                    {
-                        break;
-                    }
-                    Application.DoEvents();
-                }
-                isStop = false;
-
-            }
-        }
-        #endregion
-
-
-        bool isStop = false;
-        #region syn switch
-        void cameraView1_DoubleSynSwitch(string tag)
-        {
-            _isProgSwitchView = false;
-            //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
-            //XtraMessageBox.Show(tag);
-            string[] strs = tag.Split(';');
-            DateTime dt1;
-            DateTime dt2;
-            
-            if (strs.Length == 2)
-            {
-                List<GroupSwitchDetailInfo> list = GroupSwitchDetailBusiness.Instance.GetGroupSwitchDetailByGroupSwitchId(ref _errMessage, int.Parse(strs[0]));
-                if(list==null) return;
-                while (true)
-                {
-                    foreach (GroupSwitchDetailInfo item in list)
-                    {
-                        if (isStop)
-                        {
-                            break;
-                        }
-                        
-                        DispalySynCamera(item.SynGroupId);
-                        dt1 = DateTime.Now.AddSeconds(item.TickTime);
-                        while (true)
-                        {
-                            if (isStop)
-                            {
-                                break;
-                            }
-                            if (DateTime.Now.CompareTo(dt1) >= 0)
-                            {
-                                break;
-                            }
-                            Thread.Sleep(100);
-                            Application.DoEvents();
-
-                        }
-
-
-                    }
-                    if (isStop)
-                    {
-                        break;
-                    }
-                    Application.DoEvents();
-                }
-                isStop = false;
-
-            }
-        }
-        #endregion
 
         private void frmMain_Win_Load(object sender, EventArgs e)
         {
@@ -862,31 +428,12 @@ namespace CameraViewer
             _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
             cameraView1.ListDecoder = _listDecoder;
             
-            //Splash.Splash.Status = "获取群组切换信息...";
-            //_listGroupSwitchGroup = GroupSwitchGroupBusiness.Instance.GetAllGroupSwitchGroups(ref _errMessage);
-            //cameraView1.ListGroupSwitch = _listGroupSwitchGroup;
-            //Splash.Splash.Status = "获取程序切换信息...";
-            //_listProgSwitch = ProgSwitchBusiness.Instance.GetAllProgSwitchs(ref _errMessage);
-            //cameraView1.ListProgSwitch = _listProgSwitch;
-            //Splash.Splash.Status = "获取默认硬解码输出列表...";
-            //_listDefaultCardOut = DefaultCardOutBusiness.Instance.GetAllDefaultCardOuts(ref _errMessage);
-            //HikVideoServerCameraDriver.ListDefaultCardOut = _listDefaultCardOut;
-            //Splash.Splash.Status = "载入摄像头...";
-            //LoadAllCamera();
-            //_listAlarm = AlarmBusiness.Instance.GetAllAlarmInfo(ref _errMessage);
-            //_listMap = MapBusiness.Instance.GetAllMapInfo(ref _errMessage);
-            //cameraView1.ListMap = _listMap;
-            //_listAllAlarmIcon = AlarmIconBusiness.Instance.GetAllAlarmIconInfo(ref _errMessage);
-            //_listAllCameraIcon = CameraIconBusiness.Instance.GetAllCameraIconInfo(ref _errMessage);
-
 
             this.cameraView1.tvSynGroup.DoubleClick += this.tvSynGroup_DoubleClick;
             this.cameraView1.xtraTabControl2.SelectedPageChanged += this.xtraTabControl2_SelectedPageChanged;
-            this.cameraView1.DoubleSynGroup += new CameraView.TouchCamera(CameraView1DoubleSynGroup);
-            cameraView1.DoubleDevCam += new CameraView.TouchCamera(CameraView1DoubleDevCam);
-            this.cameraView1.DoubleSynSwitch += new CameraView.TouchCamera(cameraView1_DoubleSynSwitch);
+            this.cameraView1.DoubleDecoderCam += CameraView1DoubleDecoderCam;
+            this.cameraView1.DoubleDevCam += CameraView1DoubleDevCam;
 
-            this.cameraView1.DoubleProgSwitch += new CameraView.TouchCamera(cameraView1_DoubleProgSwitch);
             //Debug.WriteLine("End frmMain_Win_Load" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss fff"));
             Splash.Splash.Status = "初始化完毕!";
             Splash.Splash.Close();
@@ -929,88 +476,6 @@ namespace CameraViewer
             //tlpBottom.Left = splitContainerControl1.Panel2.Left;
             //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
         }
-
-        private bool _isProgSwitchView;
-        private void splitContainerControl1_Panel2_Resize(object sender, EventArgs e)
-        {
-/*
-            if ((_isFullScreen) || _isProgSwitchView)
-            {
-                splitContainerControl1.SplitterPosition = splitContainerControl1.Height + 2;
-
-            }
-            else
-            {
-                splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
-
-            }*/
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int iRow = 1, iCol = 1;
-            Util.GetRowCol(1, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.Refresh();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int iRow = 2, iCol = 2;
-            Util.GetRowCol(4, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.Refresh();
-            
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            int iRow = 3, iCol = 3;
-            Util.GetRowCol(9, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.Refresh();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            int iRow = 4, iCol = 4;
-            Util.GetRowCol(16, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.Refresh();
-        }
-
-        private bool switchmap;
-        private void pictureBoxMap_DoubleClick(object sender, EventArgs e)
-        {
-/*
-            if (!switchmap)
-            {
-                mainMultiplexer.Parent = pcMap;
-                pictureBoxMap.Parent = this;
-                pictureBoxMap.Dock = System.Windows.Forms.DockStyle.Fill;
-            }
-            else
-            {
-                mainMultiplexer.Parent = this;
-                mainMultiplexer.Dock = System.Windows.Forms.DockStyle.Fill;
-                pictureBoxMap.Parent = pcMap;      
-            }
-            switchmap = !switchmap;*/
-
-        }
-
-
- 
-
-
-
-
-
 
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1063,33 +528,8 @@ namespace CameraViewer
             }
         }
 
-        private bool switchImage;
-        
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool MessageBeep(uint uType);
-
-        private class SendSerialThread
-        {
-            //要用到的属性，也就是我们要传递的参数
-            private AlarmInfo AlarmInfo;
-            private ProtocolDataItem ProtocolDataItem;
-
-            //包含参数的构造函数
-            public SendSerialThread(AlarmInfo alarm2Delete, ProtocolDataItem pdi)
-            {
-                AlarmInfo = alarm2Delete;
-                ProtocolDataItem = pdi;
-            }
-            //要丢给线程执行的方法，本处无返回类型就是为了能让ThreadStart来调用
-            public void SendThreadProc()
-            {
-                //这里就是要执行的任务,本处只显示一下传入的参数
-                bool ret = HCNetSDK.NET_DVR_SerialSend(HikVideoServerCameraDriver.ListSerialHandle[AlarmInfo.DeviceId],
-            AlarmInfo.ChannelNo, ProtocolDataItem.StrData, ProtocolDataItem.DataLen);
-            }
-
-
-        }
 
 
         private void barButtonItemResultView_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1124,12 +564,6 @@ namespace CameraViewer
             barStaticItemCurrentTime.Caption = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
-        private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            JustForTest justForTest = new JustForTest();
-            justForTest.ShowDialog();
-        }
-
         private void LivePacketHandleDataChange(object sender, DataChangeEventArgs e)
         {
 
@@ -1143,11 +577,20 @@ namespace CameraViewer
         {
             CrossThreadOperationControl crossAdd = delegate()
             {
-                CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
-                if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
-                cameraWindow.CurrentImage = livePacketHandle.CurrentNetImage.Image;
-                cameraWindow.CameraID = livePacketHandle.CurrentNetImage.CameraId;
-                cameraWindow.Refresh();
+                string errMsg = "";
+                Dictionary<int, WindowCameraInfo> listWindowCamera =
+                    WindowCameraBusiness.Instance.GetWindowCameraInfoByCamera(ref errMsg,
+                                                                              livePacketHandle.CurrentNetImage.CameraId);
+
+                foreach (var windowCameraInfo in listWindowCamera)
+                {
+                    CameraWindow cameraWindow = mainMultiplexer.GetCamera(windowCameraInfo.Value.Row, windowCameraInfo.Value.Col);
+                    if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
+                    cameraWindow.CurrentImage = livePacketHandle.CurrentNetImage.Image;
+                    cameraWindow.CameraID = windowCameraInfo.Key;
+                    cameraWindow.Refresh();                   
+                }
+
             };
         }
         #region Connect sever
@@ -1475,7 +918,7 @@ namespace CameraViewer
                     //_ImageSerias[4] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg");
 
                     //仅作测试用，摄像头ID设置为1
-                    DelShowDrawingForm delShowDrawingForm = new DelShowDrawingForm(ShowDrawingForm);
+                    DelShowDrawingForm delShowDrawingForm = ShowDrawingForm;
                     this.Invoke(delShowDrawingForm, new object[] { _ImageSerias, camwin.CameraID });
 
 

@@ -774,6 +774,23 @@ namespace CameraViewer
            return CurrentCameraWindow;
         }
 
+        public void GetCurrentCameraWindowPosition(ref int row, ref int col)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (CurrentCameraWindow == camWindows[i,j])
+                    {
+                        row = i;
+                        col = j;
+                        return;
+                    }
+                }
+            }
+        }
+
+
         public CameraWindow GetFirstCameraWindow()
         {
             if (camWindows[0, 0].Camera!=null)

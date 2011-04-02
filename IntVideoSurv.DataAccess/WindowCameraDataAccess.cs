@@ -160,7 +160,7 @@ namespace IntVideoSurv.DataAccess
             string cmdText = string.Format("select count(*) from [WindowCameraInfo] where [row]={0} and [col]={1}", row, col);
             try
             {
-                return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString()) > 0 ? false : true;
+                return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString()) > 0 ? true : false;
             }
             catch (Exception ex)
             {
