@@ -42,23 +42,6 @@ namespace CameraViewer
         ArrayList count = new ArrayList();
         int tempk;
 
-        public frmDrawing()
-        {
-            mypen = new Pen(Color.Red, 1);
-            InitializeComponent();
-        }
-
-        public frmDrawing(Image[] images)
-        {
-            InitializeComponent();
-            for (int i = 0; i < images.Length; i++)
-            {
-                treeList1.AppendNode(new[] { images[i] }, -1);
-            }
-            pictureEdit1.Image = treeList1.Nodes[0].GetValue(0) as Image;
-            mypen = new Pen(Color.Red, 1);
-        }
-
         public frmDrawing(Image[] images, int cameraId)
         {
             tempk = 0;
@@ -122,11 +105,12 @@ namespace CameraViewer
             if ((ListShapes.Count>=1))
             {
                 ListShapes.RemoveAt(ListShapes.Count-1);
-                //DrawingShapes();
+                DrawingShapes();
             }
 
         }
 
+        //
         private void barButtonSave_ItemClick(object sender, ItemClickEventArgs e)
         {
             int i, j;
@@ -281,7 +265,9 @@ namespace CameraViewer
 
         private void DrawingShapes()
         {
+            pictureEdit1.Refresh();
             Graphics graphics = pictureEdit1.CreateGraphics();
+            //画完整的图
             foreach (var v in ListShapes)
             {
                 if (v is MyLine)
@@ -300,8 +286,16 @@ namespace CameraViewer
                 else
                 {
                     graphics.DrawPolygon(v.MyPen, (v as MyPoly).ListPoint.ToArray());
+                    
                 }
             }
+            //画最后一个不完整的多边形
+            if (currentMyPoly.ListPoint.Count>1)
+            {
+                graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());                
+            }
+
+
             graphics.Dispose();
         }
 
@@ -315,6 +309,11 @@ namespace CameraViewer
 
             if (_currentDrawingType == DrawingType.Polygon)
             {
+                if (currentMyPoly.IsFinished)
+                {
+                    currentMyPoly.ListPoint.Clear();
+                    currentMyPoly.IsFinished = false;
+                }
                 if (currentMyPoly.ListPoint.Count==0)
                 {
                     currentMyPoly.ListPoint.Add(StartPoint);                    
@@ -325,26 +324,47 @@ namespace CameraViewer
 
         private void pictureEdit1_MouseMove(object sender, MouseEventArgs e)
         {
+            if (isMouseUp)
+            {
+                return;
+            }
             if (_currentDrawingType!=DrawingType.None)
             {
-                
-                //DrawingShapes(); 
-                if ((isMouseDown)&&(StartPoint!=Point.Empty)&&(!isMouseUp))
+                DrawingShapes(); 
+                if (isMouseDown && !isMouseUp)
                 {
-                    if (_currentDrawingType==DrawingType.Rect)
+                    Graphics graphics = pictureEdit1.CreateGraphics();
+                    switch (_currentDrawingType)
                     {
-                        Graphics graphics = pictureEdit1.CreateGraphics();
-                        graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, e.Location.X - StartPoint.X, e.Location.Y - StartPoint.Y);
-                        graphics.Dispose(); 
-                    }
-                    else
-                    {
-                        Graphics graphics = pictureEdit1.CreateGraphics();
-                        graphics.DrawLine(mypen, StartPoint, e.Location);  
-                        graphics.Dispose();                        
-                    }
+                        case DrawingType.Rect:
+                            graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, e.Location.X - StartPoint.X, e.Location.Y - StartPoint.Y);
+                            
+                            break;
+                        case DrawingType.Polygon:
+                            if (currentMyPoly.ListPoint.Count>1)
+                            {
+                                graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
+                                Point LastValidPoint = currentMyPoly.ListPoint[currentMyPoly.ListPoint.Count - 1];
+                                graphics.DrawLine(mypen, LastValidPoint,e.Location);                                
+                            }
+                            else if(currentMyPoly.ListPoint.Count==1)
+                                graphics.DrawLine(mypen, StartPoint, e.Location); 
 
-                   
+                            break;
+
+                        case DrawingType.Line:
+                            graphics.DrawLine(mypen, StartPoint, e.Location); 
+                            break;
+
+                        case DrawingType.Arrow:
+                            //此处添加画箭头
+                            graphics.DrawLine(mypen, StartPoint, e.Location);
+                            break;
+                        default:
+                            graphics.DrawLine(mypen, StartPoint, e.Location); 
+                            break;
+                    }
+                    graphics.Dispose();
                 }
                
             }
@@ -361,43 +381,54 @@ namespace CameraViewer
             {
                 case DrawingType.Line:
                     ListShapes.Add(new MyLine { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
-                    graphics.DrawLine(mypen, StartPoint, EndPoint);
+                    //graphics.DrawLine(mypen, StartPoint, EndPoint);
                     break;
 
                 case DrawingType.Arrow:
                     ListShapes.Add(new MyArrow { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
-                    graphics.DrawLine(mypen, StartPoint, EndPoint);
+                    //graphics.DrawLine(mypen, StartPoint, EndPoint);
                     break;
 
                 case DrawingType.Rect:
                     ListShapes.Add(new MyRect { MyPen = mypen, P1 = StartPoint, Width = EndPoint.X - StartPoint.X, Height = EndPoint.Y - StartPoint.Y });
-                    graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
+                    //graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
                     break;
 
                 case DrawingType.Polygon:
                     currentMyPoly.ListPoint.Add(EndPoint);
-                    graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
+                    currentMyPoly.IsFinished = false;
+                    //graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
                     break;
             }
             StartPoint= EndPoint;
             EndPoint = Point.Empty;
             graphics.Dispose();
+            DrawingShapes();
         }
 
         private void pictureEdit1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (_currentDrawingType == DrawingType.Polygon)
+            if ((_currentDrawingType == DrawingType.Polygon)&&e.Button == MouseButtons.Left)
             {
-                currentMyPoly.ListPoint.Add(e.Location);                
+                if (currentMyPoly.IsFinished==false)
+                {
+                    currentMyPoly.ListPoint.Add(e.Location);
+                    currentMyPoly.IsFinished = true;
+                    //List是引用，不能直接赋值
+                    List<Point> newPoints = new List<Point>(currentMyPoly.ListPoint.Count);
+                    foreach (var newPoint in currentMyPoly.ListPoint)
+                    {
+                        newPoints.Add(newPoint);
+                    }
+                    MyPoly myPoly = new MyPoly { IsFinished = currentMyPoly.IsFinished, ListPoint = newPoints, MyPen = currentMyPoly.MyPen };
+                    ListShapes.Add(myPoly);
+                    currentMyPoly.ListPoint.Clear();
+                    currentMyPoly.IsFinished = false;
+                    DrawingShapes();                    
+                }
+
             }
         }
-
-        private void pictureEdit1_Paint(object sender, PaintEventArgs e)
-        {
-
-            DrawingShapes();
-        }
-
 
     }
     public class MyShape
@@ -426,5 +457,6 @@ namespace CameraViewer
     public class MyPoly : MyShape
     {
         public List<Point> ListPoint= new List<Point>();
+        public bool IsFinished;
     }
 }

@@ -50,7 +50,7 @@
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+            this.pictureEdit1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -59,7 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -256,14 +256,12 @@
             // 
             this.pictureEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureEdit1.Location = new System.Drawing.Point(2, 2);
-            this.pictureEdit1.MenuManager = this.barManager1;
             this.pictureEdit1.Name = "pictureEdit1";
-            this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.pictureEdit1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureEdit1.Size = new System.Drawing.Size(506, 337);
             this.pictureEdit1.TabIndex = 0;
             this.pictureEdit1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseUp);
             this.pictureEdit1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseDoubleClick);
-            this.pictureEdit1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureEdit1_Paint);
             this.pictureEdit1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseMove);
             this.pictureEdit1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseDown);
             // 
@@ -291,7 +289,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -317,7 +315,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonUndo;
         private DevExpress.XtraBars.BarButtonItem barButtonSave;
-        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private System.Windows.Forms.PictureBox pictureEdit1;
         private DevExpress.Utils.ImageCollection imageCollection1;
     }
 }
