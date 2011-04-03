@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using System.Xml;
 
@@ -11,15 +12,26 @@ namespace CameraViewer
 {
     public partial class frmDrawing : XtraForm
     {
+
+        private enum DrawingType
+        {
+            Line = 0,
+            Arrow = 1,
+            Rect = 2,
+            Polygon = 4,
+            None=8
+        }
+
+        private DrawingType _currentDrawingType = DrawingType.None;
+        private List<MyShape> ListShapes = new List<MyShape>();
+        private float xScale = 1.0f;
+        private float yScale = 1.0f;
+
+        private bool isMouseUp;
+        private bool isMouseDown;
+
         private int _cameraId;
-        private Pen mypen;
-        private int flag;
-        private Point point_start;
-        private Point point_end;
-        private ArrayList mylist;
-        private List<int> flaglist;
-        private Graphics g;
-        private List<Point> pointlist;
+        private Pen mypen = new Pen(Color.Black,2.0f);
 
         //private 
         Queue<Point> listLine = new Queue<Point>();
@@ -28,15 +40,10 @@ namespace CameraViewer
         Queue<Point> listPolygon = new Queue<Point>();
         //ArrayList Polygon = new ArrayList();
         ArrayList count = new ArrayList();
-        int count_p;
         int tempk;
-        Image myimage;
 
         public frmDrawing()
         {
-            mylist = new ArrayList();
-            pointlist = new List<Point>();
-            flaglist = new List<int>();
             mypen = new Pen(Color.Red, 1);
             InitializeComponent();
         }
@@ -46,18 +53,14 @@ namespace CameraViewer
             InitializeComponent();
             for (int i = 0; i < images.Length; i++)
             {
-                treeList1.AppendNode(new[] { images[i]}, -1);
+                treeList1.AppendNode(new[] { images[i] }, -1);
             }
-            pictureBox1.Image = treeList1.Nodes[0].GetValue(0) as Image;
-            mylist = new ArrayList();
-            pointlist = new List<Point>();
-            flaglist = new List<int>();
+            pictureEdit1.Image = treeList1.Nodes[0].GetValue(0) as Image;
             mypen = new Pen(Color.Red, 1);
         }
 
-        public frmDrawing(Image[] images,int cameraId)
+        public frmDrawing(Image[] images, int cameraId)
         {
-            count_p = 0;
             tempk = 0;
             InitializeComponent();
             _cameraId = cameraId;
@@ -65,164 +68,68 @@ namespace CameraViewer
             {
                 treeList1.AppendNode(new[] { images[i] }, -1);
             }
-            pictureBox1.Image = treeList1.Nodes[0].GetValue(0) as Image;
-            mylist = new ArrayList();
-            pointlist = new List<Point>();
-            flaglist = new List<int>();
+            pictureEdit1.Image = treeList1.Nodes[0].GetValue(0) as Image;
             mypen = new Pen(Color.Red, 1);
+            xScale = pictureEdit1.Image.Width/(float)(pictureEdit1.Width);
+            yScale = pictureEdit1.Image.Height / (float)(pictureEdit1.Height);
+
         }
 
         private void treeList1_MouseClick(object sender, MouseEventArgs e)
         {
-            pictureBox1.Image = treeList1.FocusedNode.GetValue(0) as Image;
-            pictureBox1.Image.Save(@"c:\tempjpg.jpg");
+            pictureEdit1.Image = treeList1.FocusedNode.GetValue(0) as Image;
+        }
+        private void ResetButtonStyle()
+        {
+            LineButton.ButtonStyle =
+                ButtonRect.ButtonStyle = barButtonDuoBX.ButtonStyle = ButtonJiantou.ButtonStyle = BarButtonStyle.Default;
+        }
+        private void LineButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _currentDrawingType = DrawingType.Line;
+            ResetButtonStyle();
+            LineButton.ButtonStyle = BarButtonStyle.Check;
         }
 
-        private void LineButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ButtonRect_ItemClick(object sender, ItemClickEventArgs e)
         {
-            flag = 1;//表示画直线
+            _currentDrawingType = DrawingType.Rect;
+            ResetButtonStyle();
+            ButtonRect.ButtonStyle = BarButtonStyle.Check;
         }
 
-        private void ButtonRect_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ButtonJiantou_ItemClick(object sender, ItemClickEventArgs e)
         {
-            flag = 2;
-        }
-
-        private void ButtonJiantou_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            flag = 3;
+            _currentDrawingType = DrawingType.Arrow;
+            ResetButtonStyle();
+            ButtonJiantou.ButtonStyle = BarButtonStyle.Check;
         }
         //多边形
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+
+        MyPoly currentMyPoly;
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
-            flag = 4;
+            _currentDrawingType = DrawingType.Polygon;
+            ResetButtonStyle();
+            barButtonDuoBX.ButtonStyle = BarButtonStyle.Check;
+            currentMyPoly = new MyPoly() { MyPen = mypen };
         }
-        public void DrawPicture_MouseDown(object sender, MouseEventArgs e)
+
+        private Point StartPoint= Point.Empty;
+        private Point EndPoint= Point.Empty;
+        private void Button_undo_Click(object sender, ItemClickEventArgs e)
         {
-            point_start = new Point(e.X, e.Y);
-            if (flag == 4)
+            if ((ListShapes.Count>=1))
             {
-                pointlist.Add(point_start);
-                listPolygon.Enqueue(point_start);
-                
+                ListShapes.RemoveAt(ListShapes.Count-1);
+                //DrawingShapes();
             }
+
         }
 
-        public void DrawPicture_MouseUp(object sender, MouseEventArgs e)
+        private void barButtonSave_ItemClick(object sender, ItemClickEventArgs e)
         {
-            point_end = new Point(e.X, e.Y);
-            if (e.Button == MouseButtons.Right && flag == 4)
-            {
-                g.DrawPolygon(mypen, pointlist.ToArray());
-                GraphicsPath path4 = new GraphicsPath();
-                if (pointlist.Count == 0) return;
-                path4.AddPolygon(pointlist.ToArray());
-                
-                count_p = listPolygon.Count-count_p;
-                count.Add(count_p);
-                //并清除polygon信息
-                //listPolygon.Clear();
-
-                mylist.Add(path4);
-                pointlist.Clear();
-                flaglist.Add(flag);
-            }
-            DrawPicture_action(sender, e);
-        }
-        public void DrawPicture_action(object sender, MouseEventArgs e)
-        {
-            pictureBox1.Refresh();
-            g = Graphics.FromImage(this.pictureBox1.Image);
-            //反锯齿
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            switch (flag)
-            {
-                case 1:
-                    g.DrawLine(mypen, point_start, point_end);
-                    //保存线点信息
-                    listLine.Enqueue(point_start);
-                    listLine.Enqueue(point_end);
-
-                    GraphicsPath path1 = new GraphicsPath();
-                    path1.AddLine(point_start, point_end);
-                    mylist.Add(path1);
-                    break;
-                case 2:
-                    int w, h;
-                    w = point_end.X - point_start.X;
-                    h = point_end.Y - point_start.Y;
-                    g.DrawRectangle(mypen, point_start.X, point_start.Y, w, h);
-                    Rectangle myrect = new Rectangle(point_start.X, point_start.Y, w, h);
-                    //保存矩形点信息
-                    listRectangle.Enqueue(point_start);
-                    listRectangle.Enqueue(point_end);
-                    GraphicsPath path2 = new GraphicsPath();
-
-                    path2.AddRectangle(myrect);
-                    mylist.Add(path2);
-                    break;
-                case 3:
-                    float arrowWidth = 6;
-                    float arrowHeight = 6;
-                    bool arrowFill = true;
-                    AdjustableArrowCap myArrow = new AdjustableArrowCap(arrowWidth, arrowHeight, arrowFill);
-                    CustomLineCap customArrow = myArrow;
-
-                    Pen p = new Pen(Color.Red, 1);
-                    p.EndCap = LineCap.Custom;
-                    p.CustomEndCap = customArrow;
-                    g.DrawLine(p, point_start, point_end);
-                    //箭头点信息
-                    listArrow.Enqueue(point_start);
-                    listArrow.Enqueue(point_end);
-                    GraphicsPath path3 = new GraphicsPath();
-                    path3.AddLine(point_start, point_end);
-                    mylist.Add(path3);
-                    break;
-            }
-            point_end = Point.Empty;
-            pictureBox1.Refresh();
-            flaglist.Add(flag);
-        }
-
-        private void Button_undo_Click(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            int count;
-            count = mylist.Count;
-            if (count == 0) return;
-            mylist.RemoveAt(count - 1);
-
-            pictureBox1.Image = Image.FromFile(@"c:\tempjpg.jpg");
-            Graphics myg;
-            myg = Graphics.FromImage(pictureBox1.Image);
-            myg.SmoothingMode = SmoothingMode.AntiAlias;
-            int j = 0;
-            foreach (GraphicsPath item in mylist)
-            {
-                if (flaglist.ToArray()[j] == 3)
-                {
-                    float arrowWidth = 6;
-                    float arrowHeight = 6;
-                    bool arrowFill = true;
-                    AdjustableArrowCap myArrow = new AdjustableArrowCap(arrowWidth, arrowHeight, arrowFill);
-                    CustomLineCap customArrow = myArrow;
-
-                    Pen p = new Pen(Color.Red, 1);
-                    p.EndCap = LineCap.Custom;
-                    p.CustomEndCap = customArrow;
-                    myg.DrawPath(p, item);
-                    continue;
-                }
-                myg.DrawPath(mypen, item);
-            }
-            pictureBox1.Image = myimage;
-            pictureBox1.Refresh();
-        }
-
-        private void barButtonSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            int i,j;
+            int i, j;
             XmlDocument drawXml = new XmlDocument();
             XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);
             drawXml.AppendChild(docNode);
@@ -334,10 +241,10 @@ namespace CameraViewer
                     XmlNode point = drawXml.CreateElement("point");
                     photyon1.AppendChild(point);
                     XmlAttribute x = drawXml.CreateAttribute("X");
-                    x.Value = listPolygon.ToArray()[i+tempk].X.ToString();
+                    x.Value = listPolygon.ToArray()[i + tempk].X.ToString();
                     point.Attributes.Append(x);
                     XmlAttribute y = drawXml.CreateAttribute("Y");
-                    y.Value = listPolygon.ToArray()[i+tempk].Y.ToString();
+                    y.Value = listPolygon.ToArray()[i + tempk].Y.ToString();
                     point.Attributes.Append(y);
                 }
                 tempk += countToArray[j];
@@ -368,8 +275,156 @@ namespace CameraViewer
             //}
             //System.IO.File.Delete(@"c:\tempjpg.jpg");
             String name;
-            name = @"c:\"+"1"+".xml";//1可换成识别器和摄像头的编号
+            name = @"c:\" + "1" + ".xml";//1可换成识别器和摄像头的编号
             drawXml.Save(@name);
         }
+
+        private void DrawingShapes()
+        {
+            Graphics graphics = pictureEdit1.CreateGraphics();
+            foreach (var v in ListShapes)
+            {
+                if (v is MyLine)
+                {
+                    graphics.DrawLine(v.MyPen,(v as MyLine).P1,(v as MyLine).P2);
+                }
+                else if (v is MyArrow)
+                {
+                    //画箭头
+                    graphics.DrawLine(v.MyPen, (v as MyArrow).P1, (v as MyArrow).P2);
+                }
+                else if (v is MyRect)
+                {
+                    graphics.DrawRectangle(v.MyPen, (v as MyRect).P1.X, (v as MyRect).P1.Y, (v as MyRect).Width, (v as MyRect).Height);
+                }
+                else
+                {
+                    graphics.DrawPolygon(v.MyPen, (v as MyPoly).ListPoint.ToArray());
+                }
+            }
+            graphics.Dispose();
+        }
+
+        private void pictureEdit1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.isMouseDown = true;
+            isMouseUp = false;
+            StartPoint = e.Location;
+            pictureEdit1.Cursor = Cursors.Cross;
+
+
+            if (_currentDrawingType == DrawingType.Polygon)
+            {
+                if (currentMyPoly.ListPoint.Count==0)
+                {
+                    currentMyPoly.ListPoint.Add(StartPoint);                    
+                }
+            }
+
+        }
+
+        private void pictureEdit1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_currentDrawingType!=DrawingType.None)
+            {
+                
+                //DrawingShapes(); 
+                if ((isMouseDown)&&(StartPoint!=Point.Empty)&&(!isMouseUp))
+                {
+                    if (_currentDrawingType==DrawingType.Rect)
+                    {
+                        Graphics graphics = pictureEdit1.CreateGraphics();
+                        graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, e.Location.X - StartPoint.X, e.Location.Y - StartPoint.Y);
+                        graphics.Dispose(); 
+                    }
+                    else
+                    {
+                        Graphics graphics = pictureEdit1.CreateGraphics();
+                        graphics.DrawLine(mypen, StartPoint, e.Location);  
+                        graphics.Dispose();                        
+                    }
+
+                   
+                }
+               
+            }
+
+        }
+
+        private void pictureEdit1_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseUp = true;
+            isMouseDown = false;
+            EndPoint = e.Location;
+            Graphics graphics = pictureEdit1.CreateGraphics();
+            switch (_currentDrawingType)
+            {
+                case DrawingType.Line:
+                    ListShapes.Add(new MyLine { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
+                    graphics.DrawLine(mypen, StartPoint, EndPoint);
+                    break;
+
+                case DrawingType.Arrow:
+                    ListShapes.Add(new MyArrow { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
+                    graphics.DrawLine(mypen, StartPoint, EndPoint);
+                    break;
+
+                case DrawingType.Rect:
+                    ListShapes.Add(new MyRect { MyPen = mypen, P1 = StartPoint, Width = EndPoint.X - StartPoint.X, Height = EndPoint.Y - StartPoint.Y });
+                    graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
+                    break;
+
+                case DrawingType.Polygon:
+                    currentMyPoly.ListPoint.Add(EndPoint);
+                    graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
+                    break;
+            }
+            StartPoint= EndPoint;
+            EndPoint = Point.Empty;
+            graphics.Dispose();
+        }
+
+        private void pictureEdit1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (_currentDrawingType == DrawingType.Polygon)
+            {
+                currentMyPoly.ListPoint.Add(e.Location);                
+            }
+        }
+
+        private void pictureEdit1_Paint(object sender, PaintEventArgs e)
+        {
+
+            DrawingShapes();
+        }
+
+
+    }
+    public class MyShape
+    {
+        public Pen MyPen; 
+    }
+    public class MyLine:MyShape
+    {
+        public Point P1;
+        public Point P2;
+
+    }
+    public class MyArrow : MyShape
+    {
+        public Point P1;
+        public Point P2;
+    }
+
+    public class MyRect : MyShape
+    {
+        public Point P1;
+        public int Width;
+        public int Height;
+    }
+
+    public class MyPoly : MyShape
+    {
+        public List<Point> ListPoint= new List<Point>();
     }
 }
