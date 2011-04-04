@@ -106,6 +106,7 @@
     <Compile Include="SystemLogBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="VideoBusiness.cs" />
     <Compile Include="WindowCameraBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
