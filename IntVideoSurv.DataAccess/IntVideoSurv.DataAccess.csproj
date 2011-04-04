@@ -87,6 +87,7 @@
     <Compile Include="SynGroupDataAccess.cs" />
     <Compile Include="SystemLogDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
+    <Compile Include="VideoDataAccess.cs" />
     <Compile Include="WindowCameraDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>

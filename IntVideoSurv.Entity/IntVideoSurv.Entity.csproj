@@ -79,12 +79,10 @@
     <Compile Include="SystemLog.cs" />
     <Compile Include="UsedDisplayChannelInfo.cs" />
     <Compile Include="UserInfo.cs" />
+    <Compile Include="VideoInfo.cs" />
     <Compile Include="VideoOutputInfo.cs" />
     <Compile Include="VideoProvider.cs" />
     <Compile Include="WindowCameraInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
