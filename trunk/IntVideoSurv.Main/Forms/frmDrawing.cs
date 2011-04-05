@@ -61,6 +61,7 @@ namespace CameraViewer
         private void treeList1_MouseClick(object sender, MouseEventArgs e)
         {
             pictureEdit1.Image = treeList1.FocusedNode.GetValue(0) as Image;
+            ListShapes.Clear();
         }
         private void ResetButtonStyle()
         {
@@ -265,145 +266,186 @@ namespace CameraViewer
 
         private void DrawingShapes()
         {
-            pictureEdit1.Refresh();
-            Graphics graphics = pictureEdit1.CreateGraphics();
-            //画完整的图
-            foreach (var v in ListShapes)
+            try
             {
-                if (v is MyLine)
+                if (ListShapes==null)
                 {
-                    graphics.DrawLine(v.MyPen,(v as MyLine).P1,(v as MyLine).P2);
+                    return;
                 }
-                else if (v is MyArrow)
+                pictureEdit1.Refresh();
+                Graphics graphics = pictureEdit1.CreateGraphics();
+                //画完整的图
+                foreach (var v in ListShapes)
                 {
-                    //画箭头
-                    graphics.DrawLine(v.MyPen, (v as MyArrow).P1, (v as MyArrow).P2);
+                    if (v is MyLine)
+                    {
+                        graphics.DrawLine(v.MyPen,(v as MyLine).P1,(v as MyLine).P2);
+                    }
+                    else if (v is MyArrow)
+                    {
+                        //画箭头
+                        graphics.DrawLine(v.MyPen, (v as MyArrow).P1, (v as MyArrow).P2);
+                    }
+                    else if (v is MyRect)
+                    {
+                        graphics.DrawRectangle(v.MyPen, (v as MyRect).P1.X, (v as MyRect).P1.Y, (v as MyRect).Width, (v as MyRect).Height);
+                    }
+                    else
+                    {
+                        graphics.DrawPolygon(v.MyPen, (v as MyPoly).ListPoint.ToArray());
+                        
+                    }
                 }
-                else if (v is MyRect)
+                //画最后一个不完整的多边形
+                if ((currentMyPoly!=null)&& (currentMyPoly.ListPoint.Count > 1))
                 {
-                    graphics.DrawRectangle(v.MyPen, (v as MyRect).P1.X, (v as MyRect).P1.Y, (v as MyRect).Width, (v as MyRect).Height);
+                    graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());                
                 }
-                else
-                {
-                    graphics.DrawPolygon(v.MyPen, (v as MyPoly).ListPoint.ToArray());
-                    
-                }
-            }
-            //画最后一个不完整的多边形
-            if (currentMyPoly.ListPoint.Count>1)
-            {
-                graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());                
-            }
 
 
-            graphics.Dispose();
+                graphics.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void pictureEdit1_MouseDown(object sender, MouseEventArgs e)
         {
-            this.isMouseDown = true;
-            isMouseUp = false;
-            StartPoint = e.Location;
-            pictureEdit1.Cursor = Cursors.Cross;
-
-
-            if (_currentDrawingType == DrawingType.Polygon)
+            try
             {
-                if (currentMyPoly.IsFinished)
+                isMouseUp = false;
+                StartPoint = e.Location;
+                pictureEdit1.Cursor = Cursors.Cross;
+
+
+                if (_currentDrawingType == DrawingType.Polygon)
                 {
-                    currentMyPoly.ListPoint.Clear();
-                    currentMyPoly.IsFinished = false;
+                    if (currentMyPoly.IsFinished)
+                    {
+                        currentMyPoly.ListPoint.Clear();
+                        currentMyPoly.IsFinished = false;
+                    }
+                    if (currentMyPoly.ListPoint.Count==0)
+                    {
+                        currentMyPoly.ListPoint.Add(StartPoint);                    
+                    }
                 }
-                if (currentMyPoly.ListPoint.Count==0)
-                {
-                    currentMyPoly.ListPoint.Add(StartPoint);                    
-                }
+                this.isMouseDown = true;
             }
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.ToString());
+            }
+
+
 
         }
 
         private void pictureEdit1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseUp)
+            try
             {
-                return;
-            }
-            if (_currentDrawingType!=DrawingType.None)
-            {
-                DrawingShapes(); 
-                if (isMouseDown && !isMouseUp)
+                if (isMouseUp)
                 {
-                    Graphics graphics = pictureEdit1.CreateGraphics();
-                    switch (_currentDrawingType)
-                    {
-                        case DrawingType.Rect:
-                            graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, e.Location.X - StartPoint.X, e.Location.Y - StartPoint.Y);
-                            
-                            break;
-                        case DrawingType.Polygon:
-                            if (currentMyPoly.ListPoint.Count>1)
-                            {
-                                graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
-                                Point LastValidPoint = currentMyPoly.ListPoint[currentMyPoly.ListPoint.Count - 1];
-                                graphics.DrawLine(mypen, LastValidPoint,e.Location);                                
-                            }
-                            else if(currentMyPoly.ListPoint.Count==1)
-                                graphics.DrawLine(mypen, StartPoint, e.Location); 
-
-                            break;
-
-                        case DrawingType.Line:
-                            graphics.DrawLine(mypen, StartPoint, e.Location); 
-                            break;
-
-                        case DrawingType.Arrow:
-                            //此处添加画箭头
-                            graphics.DrawLine(mypen, StartPoint, e.Location);
-                            break;
-                        default:
-                            graphics.DrawLine(mypen, StartPoint, e.Location); 
-                            break;
-                    }
-                    graphics.Dispose();
+                    return;
                 }
-               
+                if (_currentDrawingType!=DrawingType.None)
+                {
+                    DrawingShapes(); 
+                    if (isMouseDown && !isMouseUp)
+                    {
+                        Graphics graphics = pictureEdit1.CreateGraphics();
+                        switch (_currentDrawingType)
+                        {
+                            case DrawingType.Rect:
+                                graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, e.Location.X - StartPoint.X, e.Location.Y - StartPoint.Y);
+                                
+                                break;
+                            case DrawingType.Polygon:
+                                if (currentMyPoly.ListPoint.Count>1)
+                                {
+                                    graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
+                                    Point LastValidPoint = currentMyPoly.ListPoint[currentMyPoly.ListPoint.Count - 1];
+                                    graphics.DrawLine(mypen, LastValidPoint,e.Location);                                
+                                }
+                                else if(currentMyPoly.ListPoint.Count==1)
+                                    graphics.DrawLine(mypen, StartPoint, e.Location); 
+
+                                break;
+
+                            case DrawingType.Line:
+                                graphics.DrawLine(mypen, StartPoint, e.Location); 
+                                break;
+
+                            case DrawingType.Arrow:
+                                //此处添加画箭头
+                                graphics.DrawLine(mypen, StartPoint, e.Location);
+                                break;
+                            default:
+                                graphics.DrawLine(mypen, StartPoint, e.Location); 
+                                break;
+                        }
+                        graphics.Dispose();
+                    }
+                   
+                }
             }
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.ToString());
+            }
+
 
         }
 
         private void pictureEdit1_MouseUp(object sender, MouseEventArgs e)
         {
-            isMouseUp = true;
-            isMouseDown = false;
-            EndPoint = e.Location;
-            Graphics graphics = pictureEdit1.CreateGraphics();
-            switch (_currentDrawingType)
+            try
             {
-                case DrawingType.Line:
-                    ListShapes.Add(new MyLine { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
-                    //graphics.DrawLine(mypen, StartPoint, EndPoint);
-                    break;
+                isMouseUp = true;
+                isMouseDown = false;
+                EndPoint = e.Location;
+                Graphics graphics = pictureEdit1.CreateGraphics();
+                switch (_currentDrawingType)
+                {
+                    case DrawingType.Line:
+                        ListShapes.Add(new MyLine { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
+                        //graphics.DrawLine(mypen, StartPoint, EndPoint);
+                        break;
 
-                case DrawingType.Arrow:
-                    ListShapes.Add(new MyArrow { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
-                    //graphics.DrawLine(mypen, StartPoint, EndPoint);
-                    break;
+                    case DrawingType.Arrow:
+                        ListShapes.Add(new MyArrow { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
+                        //graphics.DrawLine(mypen, StartPoint, EndPoint);
+                        break;
 
-                case DrawingType.Rect:
-                    ListShapes.Add(new MyRect { MyPen = mypen, P1 = StartPoint, Width = EndPoint.X - StartPoint.X, Height = EndPoint.Y - StartPoint.Y });
-                    //graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
-                    break;
+                    case DrawingType.Rect:
+                        ListShapes.Add(new MyRect { MyPen = mypen, P1 = StartPoint, Width = EndPoint.X - StartPoint.X, Height = EndPoint.Y - StartPoint.Y });
+                        //graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
+                        break;
 
-                case DrawingType.Polygon:
-                    currentMyPoly.ListPoint.Add(EndPoint);
-                    currentMyPoly.IsFinished = false;
-                    //graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
-                    break;
+                    case DrawingType.Polygon:
+                        currentMyPoly.ListPoint.Add(EndPoint);
+                        currentMyPoly.IsFinished = false;
+                        //graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
+                        break;
+                }
+                StartPoint= EndPoint;
+                EndPoint = Point.Empty;
+                graphics.Dispose();
+                DrawingShapes();
             }
-            StartPoint= EndPoint;
-            EndPoint = Point.Empty;
-            graphics.Dispose();
-            DrawingShapes();
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void pictureEdit1_MouseDoubleClick(object sender, MouseEventArgs e)
