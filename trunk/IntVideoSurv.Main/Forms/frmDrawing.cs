@@ -26,6 +26,8 @@ namespace CameraViewer
 
         private DrawingType _currentDrawingType = DrawingType.None;
         private List<MyShape> ListShapes = new List<MyShape>();
+        private List<MyShape> ListRedo = new List<MyShape>();
+ 
         private float xScale = 1.0f;
         private float yScale = 1.0f;
 
@@ -43,6 +45,7 @@ namespace CameraViewer
         //ArrayList Polygon = new ArrayList();
         ArrayList count = new ArrayList();
         int tempk;
+        private Pen arrowpen;
         string errMessage = "";
         public frmDrawing(Image[] images, int cameraId)
         {
@@ -57,6 +60,24 @@ namespace CameraViewer
             mypen = new Pen(Color.Red, 1);
             xScale = pictureEdit1.Image.Width/(float)(pictureEdit1.Width);
             yScale = pictureEdit1.Image.Height / (float)(pictureEdit1.Height);
+
+            mypen = new Pen((Color)colorEdit1.EditValue, 1);
+            arrowpen = new Pen((Color)colorEdit1.EditValue, 1);
+            //画箭头的笔
+            float arrowWidth = 6;
+            float arrowHeight = 6;
+            bool arrowFill = true;
+            AdjustableArrowCap myArrow = new AdjustableArrowCap(arrowWidth, arrowHeight, arrowFill);
+            CustomLineCap customArrow = myArrow;
+            arrowpen.EndCap = LineCap.Custom;
+            arrowpen.CustomEndCap = customArrow;
+            xScale = pictureEdit1.Image.Width / (float)(pictureEdit1.Width);
+            yScale = pictureEdit1.Image.Height / (float)(pictureEdit1.Height);
+            //初始化画笔粗细
+            comboBoxEdit1.Properties.Items.Add("细");
+            comboBoxEdit1.Properties.Items.Add("中");
+            comboBoxEdit1.Properties.Items.Add("粗");
+            comboBoxEdit1.SelectedIndex = 0;
 
         }
 
@@ -272,7 +293,7 @@ namespace CameraViewer
                     else if (v is MyArrow)
                     {
                         //画箭头
-                        graphics.DrawLine(v.MyPen, (v as MyArrow).P1, (v as MyArrow).P2);
+                        graphics.DrawLine(arrowpen, (v as MyArrow).P1, (v as MyArrow).P2);
                     }
                     else if (v is MyRect)
                     {
@@ -372,7 +393,7 @@ namespace CameraViewer
 
                             case DrawingType.Arrow:
                                 //此处添加画箭头
-                                graphics.DrawLine(mypen, StartPoint, e.Location);
+                                graphics.DrawLine(arrowpen, StartPoint, e.Location);
                                 break;
                             default:
                                 graphics.DrawLine(mypen, StartPoint, e.Location); 
@@ -458,6 +479,43 @@ namespace CameraViewer
                 }
 
             }
+        }
+        private void ChosemyColor(object sender, EventArgs e)
+        {
+            mypen.Color = (Color)colorEdit1.EditValue;
+            arrowpen.Color = (Color)colorEdit1.EditValue;
+        }
+
+        private void Selectindex(object sender, EventArgs e)
+        {
+            switch (comboBoxEdit1.SelectedIndex)
+            {
+                case 0:
+                    mypen.Width = 1;
+                    arrowpen.Width = 1;
+                    break;
+                case 1:
+                    mypen.Width = 2;
+                    arrowpen.Width = 2;
+                    break;
+                case 2:
+                    mypen.Width = 4;
+                    arrowpen.Width = 4;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void Mouse_Redo(object sender, ItemClickEventArgs e)
+        {
+
+            if (ListRedo == null || ListRedo.Count <= 0)
+                return;
+            MyShape v = ListRedo.ToArray()[ListRedo.Count - 1];
+            ListRedo.RemoveAt(ListRedo.Count - 1);
+            ListShapes.Add(v);
+            DrawingShapes();
         }
 
     }
