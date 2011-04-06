@@ -422,5 +422,26 @@ namespace IntVideoSurv.Business
                 return null;
             }
         }
+        public RecognizerInfo GetRecognizerInfoByCameraId(ref string errMessage,int CameraId)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = RecognizerDataAccess.GetRecognizerInfoByCameraId(db, CameraId);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    return null;
+                }
+                return new RecognizerInfo(ds.Tables[0].Rows[0]);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
     }
 }

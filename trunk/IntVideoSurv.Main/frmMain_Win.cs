@@ -886,7 +886,7 @@ namespace CameraViewer
         private void CaptureImageThread()
         {
             //lock (lockerCurrentImage)
-            {
+            //{
                 try
                 {
                     CameraWindow camwin = mainMultiplexer.GetCurrentCameraWindow();
@@ -918,7 +918,7 @@ namespace CameraViewer
                     //_ImageSerias[4] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg");
 
                     //仅作测试用，摄像头ID设置为1
-                    DelShowDrawingForm delShowDrawingForm = ShowDrawingForm;
+                    DelShowDrawingForm delShowDrawingForm  = ShowDrawingForm;
                     this.Invoke(delShowDrawingForm, new object[] { _ImageSerias, camwin.CameraID });
 
 
@@ -927,7 +927,7 @@ namespace CameraViewer
                 {
                     XtraMessageBox.Show(ex.ToString());
                 }
-            }
+            //}
         }
     }
 }
