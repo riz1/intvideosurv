@@ -29,7 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDrawing));
+            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
@@ -38,6 +48,7 @@
             this.ButtonRect = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonDuoBX = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonUndo = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonSave = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -45,14 +56,22 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barEditColor = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemColorEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemColorEdit();
+            this.repositoryItemFontEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemFontEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.treeList1 = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.pictureEdit1 = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.colorEdit1 = new DevExpress.XtraEditors.ColorEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
@@ -60,6 +79,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -80,8 +101,13 @@
             this.barButtonDuoBX,
             this.barButtonItem2,
             this.barButtonUndo,
-            this.barButtonSave});
-            this.barManager1.MaxItemId = 9;
+            this.barButtonSave,
+            this.barEditColor,
+            this.barButtonItem1});
+            this.barManager1.MaxItemId = 12;
+            this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemFontEdit1,
+            this.repositoryItemColorEdit1});
             this.barManager1.StatusBar = this.bar3;
             // 
             // bar3
@@ -107,7 +133,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.ButtonJiantou),
             new DevExpress.XtraBars.LinkPersistInfo(this.ButtonRect),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonDuoBX),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonUndo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonUndo, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonSave)});
             this.bar1.Text = "Custom 4";
             // 
@@ -117,6 +144,9 @@
             this.LineButton.Id = 1;
             this.LineButton.ImageIndex = 0;
             this.LineButton.Name = "LineButton";
+            toolTipTitleItem6.Text = "直线";
+            superToolTip6.Items.Add(toolTipTitleItem6);
+            this.LineButton.SuperTip = superToolTip6;
             this.LineButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LineButton_ItemClick);
             // 
             // ButtonJiantou
@@ -125,6 +155,9 @@
             this.ButtonJiantou.Id = 3;
             this.ButtonJiantou.ImageIndex = 1;
             this.ButtonJiantou.Name = "ButtonJiantou";
+            toolTipTitleItem7.Text = "箭头";
+            superToolTip7.Items.Add(toolTipTitleItem7);
+            this.ButtonJiantou.SuperTip = superToolTip7;
             this.ButtonJiantou.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonJiantou_ItemClick);
             // 
             // ButtonRect
@@ -133,6 +166,9 @@
             this.ButtonRect.Id = 2;
             this.ButtonRect.ImageIndex = 2;
             this.ButtonRect.Name = "ButtonRect";
+            toolTipTitleItem8.Text = "矩形";
+            superToolTip8.Items.Add(toolTipTitleItem8);
+            this.ButtonRect.SuperTip = superToolTip8;
             this.ButtonRect.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonRect_ItemClick);
             // 
             // barButtonDuoBX
@@ -141,6 +177,9 @@
             this.barButtonDuoBX.Id = 4;
             this.barButtonDuoBX.ImageIndex = 3;
             this.barButtonDuoBX.Name = "barButtonDuoBX";
+            toolTipTitleItem9.Text = "多边形";
+            superToolTip9.Items.Add(toolTipTitleItem9);
+            this.barButtonDuoBX.SuperTip = superToolTip9;
             this.barButtonDuoBX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonUndo
@@ -149,6 +188,13 @@
             this.barButtonUndo.Id = 7;
             this.barButtonUndo.Name = "barButtonUndo";
             this.barButtonUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Button_undo_Click);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "恢复上一步";
+            this.barButtonItem1.Id = 11;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Mouse_Redo);
             // 
             // barButtonSave
             // 
@@ -198,6 +244,30 @@
             this.barButtonItem2.Caption = "撤销";
             this.barButtonItem2.Id = 5;
             this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barEditColor
+            // 
+            this.barEditColor.Caption = "画笔颜色";
+            this.barEditColor.Edit = this.repositoryItemColorEdit1;
+            this.barEditColor.Id = 10;
+            this.barEditColor.Name = "barEditColor";
+            toolTipTitleItem10.Text = "画笔颜色";
+            superToolTip10.Items.Add(toolTipTitleItem10);
+            this.barEditColor.SuperTip = superToolTip10;
+            // 
+            // repositoryItemColorEdit1
+            // 
+            this.repositoryItemColorEdit1.AutoHeight = false;
+            this.repositoryItemColorEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemColorEdit1.Name = "repositoryItemColorEdit1";
+            // 
+            // repositoryItemFontEdit1
+            // 
+            this.repositoryItemFontEdit1.AutoHeight = false;
+            this.repositoryItemFontEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemFontEdit1.Name = "repositoryItemFontEdit1";
             // 
             // panelControl1
             // 
@@ -266,11 +336,43 @@
             this.pictureEdit1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseDown);
             this.pictureEdit1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseUp);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.ShowAlways = true;
+            // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.EditValue = "";
+            this.comboBoxEdit1.Location = new System.Drawing.Point(331, 4);
+            this.comboBoxEdit1.MenuManager = this.barManager1;
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(80, 21);
+            this.comboBoxEdit1.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.comboBoxEdit1, "画笔粗细");
+            this.comboBoxEdit1.SelectedIndexChanged += new System.EventHandler(this.Selectindex);
+            // 
+            // colorEdit1
+            // 
+            this.colorEdit1.EditValue = System.Drawing.Color.Red;
+            this.colorEdit1.Location = new System.Drawing.Point(417, 4);
+            this.colorEdit1.MenuManager = this.barManager1;
+            this.colorEdit1.Name = "colorEdit1";
+            this.colorEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.colorEdit1.Size = new System.Drawing.Size(69, 21);
+            this.colorEdit1.TabIndex = 1;
+            this.colorEdit1.ToolTip = "画笔颜色";
+            this.colorEdit1.EditValueChanged += new System.EventHandler(this.ChosemyColor);
+            // 
             // frmDrawing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 395);
+            this.Controls.Add(this.comboBoxEdit1);
+            this.Controls.Add(this.colorEdit1);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.barDockControlLeft);
@@ -284,6 +386,8 @@
             this.Text = "绘图窗口";
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
@@ -291,6 +395,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -318,6 +424,13 @@
         private DevExpress.XtraBars.BarButtonItem barButtonSave;
         private System.Windows.Forms.PictureBox pictureEdit1;
         private DevExpress.Utils.ImageCollection imageCollection1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemFontEdit repositoryItemFontEdit1;
+        private DevExpress.XtraBars.BarEditItem barEditColor;
+        private DevExpress.XtraEditors.Repository.RepositoryItemColorEdit repositoryItemColorEdit1;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private DevExpress.XtraEditors.ColorEdit colorEdit1;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }
 
