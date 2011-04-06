@@ -280,6 +280,20 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static DataSet GetRecognizerInfoByCameraId(Database db,int CameraId)
+        {
+            string cmdText = string.Format("select * from RecognizerInfo where Id in (select Recognizer from RecognizerCamera where Camera = {0})", CameraId);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
     }
 }

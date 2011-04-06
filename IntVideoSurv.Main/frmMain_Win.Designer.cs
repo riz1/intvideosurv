@@ -712,9 +712,9 @@ namespace CameraViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 756);
             this.Controls.Add(this.mainMultiplexer);
-            this.Controls.Add(this.dockPanelResult);
             this.Controls.Add(this.dockPanelAlarm);
             this.Controls.Add(this.dockPanel1);
+            this.Controls.Add(this.dockPanelResult);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
