@@ -288,17 +288,9 @@
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="8917" fromTop="11" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Program.cs" caret="220" fromTop="12" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Multiplexer.cs" caret="39639" fromTop="804" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2832" fromTop="66" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="12609" fromTop="7" />
     </RecentFiles>
     <RecentEdits>
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="10534" fromTop="12" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="10716" fromTop="7" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="11003" fromTop="16" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="11420" fromTop="10" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="11725" fromTop="14" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="12373" fromTop="12" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="12599" fromTop="15" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="14378" fromTop="9" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="15194" fromTop="14" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="15715" fromTop="15" />
       <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="16041" fromTop="16" />
@@ -310,17 +302,25 @@
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2479" fromTop="8" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2505" fromTop="10" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2664" fromTop="9" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5473" fromTop="9" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5473" fromTop="14" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6747" fromTop="5" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5597" fromTop="12" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6724" fromTop="16" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5473" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="14" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6866" fromTop="5" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5716" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6843" fromTop="16" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="2" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="613" fromTop="2" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="3726" fromTop="13" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="781" fromTop="6" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1309" fromTop="15" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1850" fromTop="16" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="22052" fromTop="25" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21220" fromTop="4" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21482" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21220" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4648" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4927" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4648" fromTop="4" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="12609" fromTop="7" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
