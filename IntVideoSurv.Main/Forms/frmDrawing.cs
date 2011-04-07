@@ -342,10 +342,11 @@ namespace CameraViewer
                         currentMyPoly.ListPoint.Clear();
                         currentMyPoly.IsFinished = false;
                     }
-                    if (currentMyPoly.ListPoint.Count==0)
+                    else
                     {
-                        currentMyPoly.ListPoint.Add(StartPoint);                    
-                    }
+                        currentMyPoly.ListPoint.Add(StartPoint);  
+                    }                   
+                    
                 }
                 this.isMouseDown = true;
             }
@@ -443,7 +444,7 @@ namespace CameraViewer
                         break;
 
                     case DrawingType.Polygon:
-                        currentMyPoly.ListPoint.Add(EndPoint);
+                        //currentMyPoly.ListPoint.Add(EndPoint);
                         currentMyPoly.IsFinished = false;
                         //graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
                         break;
@@ -467,6 +468,10 @@ namespace CameraViewer
             {
                 if (currentMyPoly.IsFinished==false)
                 {
+                    //因为双击之前会先执行两次单击，因此在双击前先删除多余的两次点信息
+                    //
+                    currentMyPoly.ListPoint.RemoveAt(currentMyPoly.ListPoint.Count-1);
+                    currentMyPoly.ListPoint.RemoveAt(currentMyPoly.ListPoint.Count - 1);
                     currentMyPoly.ListPoint.Add(e.Location);
                     currentMyPoly.IsFinished = true;
                     //List是引用，不能直接赋值
