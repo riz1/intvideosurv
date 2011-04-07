@@ -63,14 +63,7 @@ namespace CameraViewer
 
             mypen = new Pen((Color)colorEdit1.EditValue, 1);
             arrowpen = new Pen((Color)colorEdit1.EditValue, 1);
-            //画箭头的笔
-            float arrowWidth = 6;
-            float arrowHeight = 6;
-            bool arrowFill = true;
-            AdjustableArrowCap myArrow = new AdjustableArrowCap(arrowWidth, arrowHeight, arrowFill);
-            CustomLineCap customArrow = myArrow;
-            arrowpen.EndCap = LineCap.Custom;
-            arrowpen.CustomEndCap = customArrow;
+
             xScale = pictureEdit1.Image.Width / (float)(pictureEdit1.Width);
             yScale = pictureEdit1.Image.Height / (float)(pictureEdit1.Height);
             //初始化画笔粗细
@@ -119,7 +112,7 @@ namespace CameraViewer
             _currentDrawingType = DrawingType.Polygon;
             ResetButtonStyle();
             barButtonDuoBX.ButtonStyle = BarButtonStyle.Check;
-            currentMyPoly = new MyPoly() { MyPen = mypen };
+            currentMyPoly = new MyPoly() { MyPen = (Pen)(mypen.Clone()) };
         }
 
         private Point StartPoint= Point.Empty;
@@ -296,6 +289,17 @@ namespace CameraViewer
                     }
                     else if (v is MyArrow)
                     {
+                        //画箭头的笔
+                        float arrowWidth = 6;
+                        float arrowHeight = 6;
+                        bool arrowFill = true;
+                        AdjustableArrowCap myArrow = new AdjustableArrowCap(arrowWidth, arrowHeight, arrowFill);
+                        CustomLineCap customArrow = myArrow;
+                        arrowpen.EndCap = LineCap.Custom;
+                        arrowpen.CustomEndCap = customArrow;
+                        arrowpen.Color = v.MyPen.Color;
+                        arrowpen.Width = v.MyPen.Width;
+
                         //画箭头
                         graphics.DrawLine(arrowpen, (v as MyArrow).P1, (v as MyArrow).P2);
                     }
@@ -429,17 +433,17 @@ namespace CameraViewer
                 switch (_currentDrawingType)
                 {
                     case DrawingType.Line:
-                        ListShapes.Add(new MyLine { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
+                        ListShapes.Add(new MyLine { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint });
                         //graphics.DrawLine(mypen, StartPoint, EndPoint);
                         break;
 
                     case DrawingType.Arrow:
-                        ListShapes.Add(new MyArrow { MyPen = mypen, P1 = StartPoint, P2 = EndPoint });
+                        ListShapes.Add(new MyArrow { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint });
                         //graphics.DrawLine(mypen, StartPoint, EndPoint);
                         break;
 
                     case DrawingType.Rect:
-                        ListShapes.Add(new MyRect { MyPen = mypen, P1 = StartPoint, Width = EndPoint.X - StartPoint.X, Height = EndPoint.Y - StartPoint.Y });
+                        ListShapes.Add(new MyRect { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, Width = EndPoint.X - StartPoint.X, Height = EndPoint.Y - StartPoint.Y });
                         //graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
                         break;
 
