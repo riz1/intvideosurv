@@ -126,9 +126,12 @@ namespace CameraViewer
         private Point EndPoint= Point.Empty;
         private void Button_undo_Click(object sender, ItemClickEventArgs e)
         {
-            if ((ListShapes.Count>=1))
+
+            if ((ListShapes.Count >= 1))
             {
-                ListShapes.RemoveAt(ListShapes.Count-1);
+                MyShape temp = ListShapes.ToArray()[ListShapes.Count - 1];
+                ListRedo.Add(temp);
+                ListShapes.RemoveAt(ListShapes.Count - 1);
                 DrawingShapes();
             }
 
@@ -283,6 +286,7 @@ namespace CameraViewer
                 }
                 pictureEdit1.Refresh();
                 Graphics graphics = pictureEdit1.CreateGraphics();
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 //画完整的图
                 foreach (var v in ListShapes)
                 {

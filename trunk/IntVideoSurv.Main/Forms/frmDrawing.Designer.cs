@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDrawing));
-            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
@@ -144,31 +144,31 @@
             this.LineButton.Id = 1;
             this.LineButton.ImageIndex = 0;
             this.LineButton.Name = "LineButton";
-            toolTipTitleItem6.Text = "直线";
-            superToolTip6.Items.Add(toolTipTitleItem6);
-            this.LineButton.SuperTip = superToolTip6;
+            toolTipTitleItem1.Text = "直线";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.LineButton.SuperTip = superToolTip1;
             this.LineButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LineButton_ItemClick);
             // 
             // ButtonJiantou
             // 
             this.ButtonJiantou.Caption = "箭头";
             this.ButtonJiantou.Id = 3;
-            this.ButtonJiantou.ImageIndex = 1;
+            this.ButtonJiantou.ImageIndex = 2;
             this.ButtonJiantou.Name = "ButtonJiantou";
-            toolTipTitleItem7.Text = "箭头";
-            superToolTip7.Items.Add(toolTipTitleItem7);
-            this.ButtonJiantou.SuperTip = superToolTip7;
+            toolTipTitleItem2.Text = "箭头";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            this.ButtonJiantou.SuperTip = superToolTip2;
             this.ButtonJiantou.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonJiantou_ItemClick);
             // 
             // ButtonRect
             // 
             this.ButtonRect.Caption = "矩形";
             this.ButtonRect.Id = 2;
-            this.ButtonRect.ImageIndex = 2;
+            this.ButtonRect.ImageIndex = 1;
             this.ButtonRect.Name = "ButtonRect";
-            toolTipTitleItem8.Text = "矩形";
-            superToolTip8.Items.Add(toolTipTitleItem8);
-            this.ButtonRect.SuperTip = superToolTip8;
+            toolTipTitleItem3.Text = "矩形";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            this.ButtonRect.SuperTip = superToolTip3;
             this.ButtonRect.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonRect_ItemClick);
             // 
             // barButtonDuoBX
@@ -177,15 +177,16 @@
             this.barButtonDuoBX.Id = 4;
             this.barButtonDuoBX.ImageIndex = 3;
             this.barButtonDuoBX.Name = "barButtonDuoBX";
-            toolTipTitleItem9.Text = "多边形";
-            superToolTip9.Items.Add(toolTipTitleItem9);
-            this.barButtonDuoBX.SuperTip = superToolTip9;
+            toolTipTitleItem4.Text = "多边形";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            this.barButtonDuoBX.SuperTip = superToolTip4;
             this.barButtonDuoBX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonUndo
             // 
             this.barButtonUndo.Caption = "撤销上一步";
             this.barButtonUndo.Id = 7;
+            this.barButtonUndo.ImageIndex = 5;
             this.barButtonUndo.Name = "barButtonUndo";
             this.barButtonUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Button_undo_Click);
             // 
@@ -193,6 +194,7 @@
             // 
             this.barButtonItem1.Caption = "恢复上一步";
             this.barButtonItem1.Id = 11;
+            this.barButtonItem1.ImageIndex = 6;
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Mouse_Redo);
             // 
@@ -200,6 +202,7 @@
             // 
             this.barButtonSave.Caption = "保存";
             this.barButtonSave.Id = 8;
+            this.barButtonSave.ImageIndex = 4;
             this.barButtonSave.Name = "barButtonSave";
             this.barButtonSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonSave_ItemClick);
             // 
@@ -234,10 +237,13 @@
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
-            this.imageCollection1.Images.SetKeyName(0, "LINE.bmp");
-            this.imageCollection1.Images.SetKeyName(1, "Arrow.bmp");
-            this.imageCollection1.Images.SetKeyName(2, "Rectangle.bmp");
-            this.imageCollection1.Images.SetKeyName(3, "Polygon.bmp");
+            this.imageCollection1.Images.SetKeyName(0, "1.png");
+            this.imageCollection1.Images.SetKeyName(1, "2.png");
+            this.imageCollection1.Images.SetKeyName(2, "3.png");
+            this.imageCollection1.Images.SetKeyName(3, "4.png");
+            this.imageCollection1.Images.SetKeyName(4, "5.png");
+            this.imageCollection1.Images.SetKeyName(5, "6.png");
+            this.imageCollection1.Images.SetKeyName(6, "66.png");
             // 
             // barButtonItem2
             // 
@@ -251,9 +257,9 @@
             this.barEditColor.Edit = this.repositoryItemColorEdit1;
             this.barEditColor.Id = 10;
             this.barEditColor.Name = "barEditColor";
-            toolTipTitleItem10.Text = "画笔颜色";
-            superToolTip10.Items.Add(toolTipTitleItem10);
-            this.barEditColor.SuperTip = superToolTip10;
+            toolTipTitleItem5.Text = "画笔颜色";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            this.barEditColor.SuperTip = superToolTip5;
             // 
             // repositoryItemColorEdit1
             // 
