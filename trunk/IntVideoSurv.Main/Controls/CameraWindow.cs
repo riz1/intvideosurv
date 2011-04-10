@@ -12,6 +12,11 @@ using System.Windows.Forms;
 using System.Threading;
 using IntVideoSurv.Business;
 using IntVideoSurv.Business.HiK;
+using System.Xml;
+using IntVideoSurv.Entity;
+using System.Collections.Generic;
+using System.Drawing.Drawing2D;
+using DevExpress.XtraEditors;
 
 namespace CameraViewer
 {
@@ -24,7 +29,8 @@ namespace CameraViewer
 		private bool	autosize = false;
 		private bool	needSizeUpdate = false;
 		private bool	firstFrame = true;
-
+        //private List<MyShape> ListXMLShapes = new List<MyShape>();
+        private Pen arrowpen;
 		// AutoSize property
 		[DefaultValue(false)]
 		public bool AutoSize
@@ -188,6 +194,9 @@ namespace CameraViewer
 			Monitor.Exit(this);
 
 			base.OnPaint(pe);
+
+            GetDrawingXmlInfo(g);//获取相应xml信息,并画图
+
 		}
 
 		// update position and size of the control
@@ -236,5 +245,100 @@ namespace CameraViewer
         {
             this.ClickMe = true;
         }
+
+        private void GetDrawingXmlInfo(Graphics g)
+        {
+            string errMessage = "";
+            //ListXMLShapes.Clear();
+            XmlNodeList xml_lines,xml_arrows,xml_rects,xml_regions;
+            XmlDocument xmlDoc = new XmlDocument();
+            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, 76);
+            if (ri==null)
+            {
+                if (XtraMessageBox.Show("对不起，您使用的照片没有对应的识别器，请另选", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            string name = @"c:\" + ri.Id.ToString() + "." + "0" + "admin" + ".xml";
+            xmlDoc.Load(@name);
+                //直线
+            xml_lines = xmlDoc.SelectSingleNode("/pr/cameras/camera/lines").ChildNodes;
+            foreach (XmlNode lineitem in xml_lines)
+            {
+
+                MyLine line = new MyLine();
+                line.MyPen = new Pen(Color.Red, 1);
+                XmlElement xe = (XmlElement)lineitem;
+                line.P1.X = Convert.ToInt32(xe.GetAttribute("X1"));
+                line.P1.Y = Convert.ToInt32(xe.GetAttribute("Y1"));
+                line.P2.X = Convert.ToInt32(xe.GetAttribute("X2"));
+                line.P2.Y = Convert.ToInt32(xe.GetAttribute("Y2"));
+                line.MyPen.Color = ColorTranslator.FromHtml(xe.GetAttribute("PenColor"));
+                line.MyPen.Width = Convert.ToInt32(xe.GetAttribute("PenWidth"));
+                g.DrawLine(line.MyPen, line.P1, line.P2);
+                //ListXMLShapes.Add(line);
+            }
+            //箭头
+            xml_arrows = xmlDoc.SelectSingleNode("/pr/cameras/camera/arrows").ChildNodes;
+            foreach (XmlNode arrowitem in xml_arrows)
+            {
+
+                MyArrow arrow = new MyArrow();
+                arrow.MyPen = new Pen(Color.Red, 1);
+                XmlElement xa = (XmlElement)arrowitem;
+                arrow.P1.X = Convert.ToInt32(xa.GetAttribute("X1"));
+                arrow.P1.Y = Convert.ToInt32(xa.GetAttribute("Y1"));
+                arrow.P2.X = Convert.ToInt32(xa.GetAttribute("X2"));
+                arrow.P2.Y = Convert.ToInt32(xa.GetAttribute("Y2"));
+                arrow.MyPen.Color = ColorTranslator.FromHtml(xa.GetAttribute("PenColor"));
+                arrow.MyPen.Width = Convert.ToInt32(xa.GetAttribute("PenWidth"));
+                g.DrawLine(arrow.MyPen, arrow.P1, arrow.P2);
+                //ListXMLShapes.Add(arrow);
+            }
+            //矩形
+            xml_rects = xmlDoc.SelectSingleNode("/pr/cameras/camera/rects").ChildNodes;
+            foreach (XmlNode rectitem in xml_rects)
+            {
+
+                MyRect rect = new MyRect();
+                rect.MyPen = new Pen(Color.Red, 1);
+                XmlElement xr = (XmlElement)rectitem;
+                rect.P1.X = Convert.ToInt32(xr.GetAttribute("X"));
+                rect.P1.Y = Convert.ToInt32(xr.GetAttribute("Y"));
+                rect.Width = Convert.ToInt32(xr.GetAttribute("W"));
+                rect.Height = Convert.ToInt32(xr.GetAttribute("H"));
+                rect.MyPen.Color = ColorTranslator.FromHtml(xr.GetAttribute("PenColor"));
+                rect.MyPen.Width = Convert.ToInt32(xr.GetAttribute("PenWidth"));
+                g.DrawRectangle(rect.MyPen,rect.P1.X,rect.P1.Y,rect.Width,rect.Height);
+                //ListXMLShapes.Add(rect);
+            }
+            //多边形
+            xml_regions = xmlDoc.SelectSingleNode("/pr/cameras/camera/regions").ChildNodes;
+            foreach (XmlNode regionitem in xml_regions)
+            {
+
+                MyPoly poly = new MyPoly();
+                poly.MyPen = new Pen(Color.Red, 1);
+                XmlElement xp = (XmlElement)regionitem;
+                poly.MyPen.Color = ColorTranslator.FromHtml(xp.GetAttribute("PenColor"));
+                poly.MyPen.Width = Convert.ToInt32(xp.GetAttribute("PenWidth"));
+                XmlNodeList pointlist = regionitem.ChildNodes;
+                foreach (XmlNode pitem in pointlist)
+                {
+                    Point p = new Point();
+                    XmlElement test = (XmlElement)pitem;
+                    p.X = Convert.ToInt32(test.GetAttribute("X"));
+                    p.Y = Convert.ToInt32(test.GetAttribute("Y"));
+                    poly.ListPoint.Add(p);
+                }
+                //IsFinished=true
+                poly.IsFinished = true;
+                g.DrawPolygon(poly.MyPen, poly.ListPoint.ToArray());
+                //ListXMLShapes.Add(poly);
+            }
+            
+        }
+        
 	}
 }
