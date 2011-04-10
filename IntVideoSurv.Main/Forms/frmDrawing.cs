@@ -138,7 +138,7 @@ namespace CameraViewer
             XmlDocument drawXml = new XmlDocument();
             XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);
             drawXml.AppendChild(docNode);
-            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, 76);
+            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
             if (ri==null)
             {
                 if (XtraMessageBox.Show("对不起，您使用的照片没有对应的识别器，请另选", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
@@ -185,19 +185,19 @@ namespace CameraViewer
                         XmlNode line = drawXml.CreateElement("line");
                         linesNode.AppendChild(line);
                         XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                        int x1 = (int)((v as MyLine).P1.X / (float)xScale);//化整
+                        int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
                         lineX1.Value = x1.ToString();
                         line.Attributes.Append(lineX1);
                         XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                        int y1 = (int)((v as MyLine).P1.Y / (float)yScale);
+                        int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
                         lineY1.Value = y1.ToString();
                         line.Attributes.Append(lineY1);
 
                         XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                        lineX2.Value = ((int)((v as MyLine).P2.X / (float)xScale)).ToString();
+                        lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
                         line.Attributes.Append(lineX2);
                         XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                        lineY2.Value = ((int)((v as MyLine).P2.Y / (float)yScale)).ToString();
+                        lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
                         line.Attributes.Append(lineY2);
                         //lineX.InnerText = listLine[i];
                     }
@@ -206,17 +206,17 @@ namespace CameraViewer
                         XmlNode rectangle = drawXml.CreateElement("rectangle");
                         rectanglesNode.AppendChild(rectangle);
                         XmlAttribute X1 = drawXml.CreateAttribute("X");
-                        X1.Value = ((int)((v as MyRect).P1.X / (float)xScale)).ToString();
+                        X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
                         rectangle.Attributes.Append(X1);
                         XmlAttribute Y1 = drawXml.CreateAttribute("Y");
-                        Y1.Value = ((int)((v as MyRect).P1.Y / (float)yScale)).ToString();
+                        Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
                         rectangle.Attributes.Append(Y1);
 
                         XmlAttribute w = drawXml.CreateAttribute("W");
-                        w.Value = ((int)((v as MyRect).Width / (float)xScale)).ToString();
+                        w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
                         rectangle.Attributes.Append(w);
                         XmlAttribute h = drawXml.CreateAttribute("H");
-                        h.Value = ((int)((v as MyRect).Height / (float)yScale)).ToString();
+                        h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
                         rectangle.Attributes.Append(h);
                     }
                     else if (v is MyArrow)
@@ -224,17 +224,17 @@ namespace CameraViewer
                         XmlNode arrow = drawXml.CreateElement("arrow");
                         arrowsNode.AppendChild(arrow);
                         XmlAttribute X1 = drawXml.CreateAttribute("X1");
-                        X1.Value = ((int)((v as MyArrow).P1.X / (float)xScale)).ToString();
+                        X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
                         arrow.Attributes.Append(X1);
                         XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
-                        Y1.Value = ((int)((v as MyArrow).P1.Y / (float)yScale)).ToString();
+                        Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
                         arrow.Attributes.Append(Y1);
 
                         XmlAttribute X2 = drawXml.CreateAttribute("X2");
-                        X2.Value = ((int)((v as MyArrow).P2.X / (float)xScale)).ToString();
+                        X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
                         arrow.Attributes.Append(X2);
                         XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
-                        Y2.Value = ((int)((v as MyArrow).P2.Y / (float)yScale)).ToString();
+                        Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
                         arrow.Attributes.Append(Y2);
                     }
                     else
@@ -249,10 +249,10 @@ namespace CameraViewer
                             XmlNode point = drawXml.CreateElement("point");
                             region.AppendChild(point);
                             XmlAttribute x = drawXml.CreateAttribute("X");
-                            x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X / (float)xScale)).ToString();
+                            x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X * (float)xScale)).ToString();
                             point.Attributes.Append(x);
                             XmlAttribute y = drawXml.CreateAttribute("Y");
-                            y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y / (float)yScale)).ToString();
+                            y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y * (float)yScale)).ToString();
                             point.Attributes.Append(y);
                         }
                     }
@@ -316,19 +316,19 @@ namespace CameraViewer
                         XmlNode line = drawXmlAdmin.CreateElement("line");
                         linesNodeAdmin.AppendChild(line);
                         XmlAttribute lineX1 = drawXmlAdmin.CreateAttribute("X1");
-                        int x1 = (int)((v as MyLine).P1.X / (float)xScale);//化整
+                        int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
                         lineX1.Value = x1.ToString();
                         line.Attributes.Append(lineX1);
                         XmlAttribute lineY1 = drawXmlAdmin.CreateAttribute("Y1");
-                        int y1 = (int)((v as MyLine).P1.Y / (float)yScale);
+                        int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
                         lineY1.Value = y1.ToString();
                         line.Attributes.Append(lineY1);
 
                         XmlAttribute lineX2 = drawXmlAdmin.CreateAttribute("X2");
-                        lineX2.Value = ((int)((v as MyLine).P2.X / (float)xScale)).ToString();
+                        lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
                         line.Attributes.Append(lineX2);
                         XmlAttribute lineY2 = drawXmlAdmin.CreateAttribute("Y2");
-                        lineY2.Value = ((int)((v as MyLine).P2.Y / (float)yScale)).ToString();
+                        lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
                         line.Attributes.Append(lineY2);
 
                         XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
@@ -346,17 +346,17 @@ namespace CameraViewer
                         XmlNode rectangle = drawXmlAdmin.CreateElement("rectangle");
                         rectsNodeAdmin.AppendChild(rectangle);
                         XmlAttribute X1 = drawXmlAdmin.CreateAttribute("X");
-                        X1.Value = ((int)((v as MyRect).P1.X / (float)xScale)).ToString();
+                        X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
                         rectangle.Attributes.Append(X1);
                         XmlAttribute Y1 = drawXmlAdmin.CreateAttribute("Y");
-                        Y1.Value = ((int)((v as MyRect).P1.Y / (float)yScale)).ToString();
+                        Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
                         rectangle.Attributes.Append(Y1);
 
                         XmlAttribute w = drawXmlAdmin.CreateAttribute("W");
-                        w.Value = ((int)((v as MyRect).Width / (float)xScale)).ToString();
+                        w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
                         rectangle.Attributes.Append(w);
                         XmlAttribute h = drawXmlAdmin.CreateAttribute("H");
-                        h.Value = ((int)((v as MyRect).Height / (float)yScale)).ToString();
+                        h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
                         rectangle.Attributes.Append(h);
 
                         XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
@@ -372,17 +372,17 @@ namespace CameraViewer
                         XmlNode arrow = drawXmlAdmin.CreateElement("arrow");
                         arrowsNodeAdmin.AppendChild(arrow);
                         XmlAttribute X1 = drawXmlAdmin.CreateAttribute("X1");
-                        X1.Value = ((int)((v as MyArrow).P1.X / (float)xScale)).ToString();
+                        X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
                         arrow.Attributes.Append(X1);
                         XmlAttribute Y1 = drawXmlAdmin.CreateAttribute("Y1");
-                        Y1.Value = ((int)((v as MyArrow).P1.Y / (float)yScale)).ToString();
+                        Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
                         arrow.Attributes.Append(Y1);
 
                         XmlAttribute X2 = drawXmlAdmin.CreateAttribute("X2");
-                        X2.Value = ((int)((v as MyArrow).P2.X / (float)xScale)).ToString();
+                        X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
                         arrow.Attributes.Append(X2);
                         XmlAttribute Y2 = drawXmlAdmin.CreateAttribute("Y2");
-                        Y2.Value = ((int)((v as MyArrow).P2.Y / (float)yScale)).ToString();
+                        Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
                         arrow.Attributes.Append(Y2);
 
                         XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
@@ -414,10 +414,10 @@ namespace CameraViewer
                             XmlNode point = drawXmlAdmin.CreateElement("point");
                             region.AppendChild(point);
                             XmlAttribute x = drawXmlAdmin.CreateAttribute("X");
-                            x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X / (float)xScale)).ToString();
+                            x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X * (float)xScale)).ToString();
                             point.Attributes.Append(x);
                             XmlAttribute y = drawXmlAdmin.CreateAttribute("Y");
-                            y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y / (float)yScale)).ToString();
+                            y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y * (float)yScale)).ToString();
                             point.Attributes.Append(y);
                         }
 
