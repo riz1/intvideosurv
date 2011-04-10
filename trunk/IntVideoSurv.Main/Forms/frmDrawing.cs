@@ -125,7 +125,7 @@ namespace CameraViewer
                 MyShape temp = ListShapes.ToArray()[ListShapes.Count - 1];
                 ListRedo.Add(temp);
                 ListShapes.RemoveAt(ListShapes.Count - 1);
-                DrawingShapes();
+                DrawingShapes(ListShapes);
             }
 
         }
@@ -134,12 +134,11 @@ namespace CameraViewer
         private void barButtonSave_ItemClick(object sender, ItemClickEventArgs e)
         {
             int i;
-  
+            //保存为用户的xml文件画笔，无pen信息
             XmlDocument drawXml = new XmlDocument();
             XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);
             drawXml.AppendChild(docNode);
-            //recognizer
-            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
+            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, 76);
             if (ri==null)
             {
                 if (XtraMessageBox.Show("对不起，您使用的照片没有对应的识别器，请另选", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
@@ -149,7 +148,7 @@ namespace CameraViewer
                 }
                     
             }
-            XmlNode recognizerNode = drawXml.CreateElement("recognizer");
+            XmlNode recognizerNode = drawXml.CreateElement("pr");
             XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
             recognizerAttribute.Value = ri.Id.ToString();
             recognizerNode.Attributes.Append(recognizerAttribute);
@@ -166,11 +165,11 @@ namespace CameraViewer
             //lines,rectangles,arrows,polygons
             XmlNode linesNode = drawXml.CreateElement("lines");
             cameraNode.AppendChild(linesNode);
-            XmlNode rectanglesNode = drawXml.CreateElement("rectangles");
+            XmlNode rectanglesNode = drawXml.CreateElement("rects");
             cameraNode.AppendChild(rectanglesNode);
             XmlNode arrowsNode = drawXml.CreateElement("arrows");
             cameraNode.AppendChild(arrowsNode);
-            XmlNode polygonsNode = drawXml.CreateElement("polygons");
+            XmlNode polygonsNode = drawXml.CreateElement("regions");
             cameraNode.AppendChild(polygonsNode);
 
             try
@@ -244,10 +243,11 @@ namespace CameraViewer
                         XmlAttribute pointnumber = drawXml.CreateAttribute("pointnumber");
                         pointnumber.Value = (v as MyPoly).ListPoint.Count.ToString();
                         region.Attributes.Append(pointnumber);
+                        polygonsNode.AppendChild(region);
                         for (i = 0; i < (v as MyPoly).ListPoint.Count; i++)
                         {
                             XmlNode point = drawXml.CreateElement("point");
-                            polygonsNode.AppendChild(point);
+                            region.AppendChild(point);
                             XmlAttribute x = drawXml.CreateAttribute("X");
                             x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X / (float)xScale)).ToString();
                             point.Attributes.Append(x);
@@ -262,14 +262,179 @@ namespace CameraViewer
             {
                 XtraMessageBox.Show(ex.ToString());
             }
-            
 
             String name;
             name = @"c:\" + ri.Id.ToString() + "." + _cameraId.ToString() + ".xml";//识别器和摄像头的编号
             drawXml.Save(@name);
+            //保存为管理员xml文件，有pen信息
+            XmlDocument drawXmlAdmin = new XmlDocument();
+            XmlNode docNodeAdmin = drawXmlAdmin.CreateXmlDeclaration("1.0", "gb2312", null);
+            drawXmlAdmin.AppendChild(docNodeAdmin);
+            XmlNode recognizerNodeAdmin = drawXmlAdmin.CreateElement("pr");
+            XmlAttribute recognizerAttributeAdmin = drawXmlAdmin.CreateAttribute("id");
+            recognizerAttributeAdmin.Value = ri.Id.ToString();
+            recognizerNodeAdmin.Attributes.Append(recognizerAttributeAdmin);
+            drawXmlAdmin.AppendChild(recognizerNodeAdmin);
+            XmlNode camerasNodeAdmin = drawXmlAdmin.CreateElement("cameras");
+            recognizerNodeAdmin.AppendChild(camerasNodeAdmin);
+            XmlNode cameraNodeAdmin = drawXmlAdmin.CreateElement("camera");
+            XmlAttribute cameraAttributeAdmin = drawXmlAdmin.CreateAttribute("id");
+            cameraAttributeAdmin.Value = _cameraId.ToString();
+            camerasNodeAdmin.AppendChild(cameraNodeAdmin);
+            cameraNodeAdmin.Attributes.Append(cameraAttributeAdmin);
+
+            XmlNode linesNodeAdmin = drawXmlAdmin.CreateElement("lines");
+            cameraNodeAdmin.AppendChild(linesNodeAdmin);
+            XmlNode rectsNodeAdmin = drawXmlAdmin.CreateElement("rects");
+            cameraNodeAdmin.AppendChild(rectsNodeAdmin);
+            XmlNode arrowsNodeAdmin = drawXmlAdmin.CreateElement("arrows");
+            cameraNodeAdmin.AppendChild(arrowsNodeAdmin);
+            XmlNode regionsNodeAdmin = drawXmlAdmin.CreateElement("regions");
+            cameraNodeAdmin.AppendChild(regionsNodeAdmin);
+            /*RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
+            if (ri == null)
+            {
+                if (XtraMessageBox.Show("对不起，您使用的照片没有对应的识别器，请另选", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    this.Close();
+                    return;
+                }
+
+            }*/
+            
+
+            try
+            {
+                if (ListShapes == null)
+                {
+                    return;
+                }
+                foreach (var v in ListShapes)
+                {
+                    if (v is MyLine)
+                    {
+                        XmlNode line = drawXmlAdmin.CreateElement("line");
+                        linesNodeAdmin.AppendChild(line);
+                        XmlAttribute lineX1 = drawXmlAdmin.CreateAttribute("X1");
+                        int x1 = (int)((v as MyLine).P1.X / (float)xScale);//化整
+                        lineX1.Value = x1.ToString();
+                        line.Attributes.Append(lineX1);
+                        XmlAttribute lineY1 = drawXmlAdmin.CreateAttribute("Y1");
+                        int y1 = (int)((v as MyLine).P1.Y / (float)yScale);
+                        lineY1.Value = y1.ToString();
+                        line.Attributes.Append(lineY1);
+
+                        XmlAttribute lineX2 = drawXmlAdmin.CreateAttribute("X2");
+                        lineX2.Value = ((int)((v as MyLine).P2.X / (float)xScale)).ToString();
+                        line.Attributes.Append(lineX2);
+                        XmlAttribute lineY2 = drawXmlAdmin.CreateAttribute("Y2");
+                        lineY2.Value = ((int)((v as MyLine).P2.Y / (float)yScale)).ToString();
+                        line.Attributes.Append(lineY2);
+
+                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
+                        //penColor.Value = (v as MyLine).MyPen.Color.ToString();
+                        penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
+
+                        line.Attributes.Append(penColor);
+                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
+                        penWidth.Value = (v as MyLine).MyPen.Width.ToString();
+                        line.Attributes.Append(penWidth);
+                        //lineX.InnerText = listLine[i];
+                    }
+                    else if (v is MyRect)
+                    {
+                        XmlNode rectangle = drawXmlAdmin.CreateElement("rectangle");
+                        rectsNodeAdmin.AppendChild(rectangle);
+                        XmlAttribute X1 = drawXmlAdmin.CreateAttribute("X");
+                        X1.Value = ((int)((v as MyRect).P1.X / (float)xScale)).ToString();
+                        rectangle.Attributes.Append(X1);
+                        XmlAttribute Y1 = drawXmlAdmin.CreateAttribute("Y");
+                        Y1.Value = ((int)((v as MyRect).P1.Y / (float)yScale)).ToString();
+                        rectangle.Attributes.Append(Y1);
+
+                        XmlAttribute w = drawXmlAdmin.CreateAttribute("W");
+                        w.Value = ((int)((v as MyRect).Width / (float)xScale)).ToString();
+                        rectangle.Attributes.Append(w);
+                        XmlAttribute h = drawXmlAdmin.CreateAttribute("H");
+                        h.Value = ((int)((v as MyRect).Height / (float)yScale)).ToString();
+                        rectangle.Attributes.Append(h);
+
+                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
+                        //penColor.Value = (v as MyRect).MyPen.Color.ToString();
+                        penColor.Value = ColorTranslator.ToHtml((v as MyRect).MyPen.Color);
+                        rectangle.Attributes.Append(penColor);
+                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
+                        penWidth.Value = (v as MyRect).MyPen.Width.ToString();
+                        rectangle.Attributes.Append(penWidth);
+                    }
+                    else if (v is MyArrow)
+                    {
+                        XmlNode arrow = drawXmlAdmin.CreateElement("arrow");
+                        arrowsNodeAdmin.AppendChild(arrow);
+                        XmlAttribute X1 = drawXmlAdmin.CreateAttribute("X1");
+                        X1.Value = ((int)((v as MyArrow).P1.X / (float)xScale)).ToString();
+                        arrow.Attributes.Append(X1);
+                        XmlAttribute Y1 = drawXmlAdmin.CreateAttribute("Y1");
+                        Y1.Value = ((int)((v as MyArrow).P1.Y / (float)yScale)).ToString();
+                        arrow.Attributes.Append(Y1);
+
+                        XmlAttribute X2 = drawXmlAdmin.CreateAttribute("X2");
+                        X2.Value = ((int)((v as MyArrow).P2.X / (float)xScale)).ToString();
+                        arrow.Attributes.Append(X2);
+                        XmlAttribute Y2 = drawXmlAdmin.CreateAttribute("Y2");
+                        Y2.Value = ((int)((v as MyArrow).P2.Y / (float)yScale)).ToString();
+                        arrow.Attributes.Append(Y2);
+
+                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
+                        //penColor.Value = (v as MyArrow).MyPen.Color.ToString();
+                        penColor.Value = ColorTranslator.ToHtml((v as MyArrow).MyPen.Color);
+                        arrow.Attributes.Append(penColor);
+                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
+                        penWidth.Value = (v as MyArrow).MyPen.Width.ToString();
+                        arrow.Attributes.Append(penWidth);
+                    }
+                    else
+                    {
+                        XmlNode region = drawXmlAdmin.CreateElement("region");
+                        XmlAttribute pointnumber = drawXmlAdmin.CreateAttribute("pointnumber");
+                        pointnumber.Value = (v as MyPoly).ListPoint.Count.ToString();
+                        region.Attributes.Append(pointnumber);
+                        regionsNodeAdmin.AppendChild(region);
+
+                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
+                        //penColor.Value = (v as MyPoly).MyPen.Color.ToString();
+                        penColor.Value = ColorTranslator.ToHtml((v as MyPoly).MyPen.Color);
+                        region.Attributes.Append(penColor);
+                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
+                        penWidth.Value = (v as MyPoly).MyPen.Width.ToString();
+                        region.Attributes.Append(penWidth);
+
+                        for (i = 0; i < (v as MyPoly).ListPoint.Count; i++)
+                        {
+                            XmlNode point = drawXmlAdmin.CreateElement("point");
+                            region.AppendChild(point);
+                            XmlAttribute x = drawXmlAdmin.CreateAttribute("X");
+                            x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X / (float)xScale)).ToString();
+                            point.Attributes.Append(x);
+                            XmlAttribute y = drawXmlAdmin.CreateAttribute("Y");
+                            y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y / (float)yScale)).ToString();
+                            point.Attributes.Append(y);
+                        }
+
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                XtraMessageBox.Show(ex.ToString());
+            } 
+            String nameadmin;
+            nameadmin = @"c:\" + ri.Id.ToString() + "." + _cameraId.ToString() + "admin" + ".xml";//识别器和摄像头的编号
+            drawXmlAdmin.Save(@nameadmin);//保存完之后再加pen信息，保存为另一个文件
+
         }
 
-        private void DrawingShapes()
+        private void DrawingShapes(List<MyShape> ListShapes)
         {
             try
             {
@@ -374,7 +539,7 @@ namespace CameraViewer
                 }
                 if (_currentDrawingType!=DrawingType.None)
                 {
-                    DrawingShapes(); 
+                    DrawingShapes(ListShapes); 
                     if (isMouseDown && !isMouseUp)
                     {
                         Graphics graphics = pictureEdit1.CreateGraphics();
@@ -456,7 +621,7 @@ namespace CameraViewer
                 StartPoint= EndPoint;
                 EndPoint = Point.Empty;
                 graphics.Dispose();
-                DrawingShapes();
+                DrawingShapes(ListShapes);
             }
             catch (Exception ex)
             {
@@ -488,7 +653,7 @@ namespace CameraViewer
                     ListShapes.Add(myPoly);
                     currentMyPoly.ListPoint.Clear();
                     currentMyPoly.IsFinished = false;
-                    DrawingShapes();                    
+                    DrawingShapes(ListShapes);                    
                 }
 
             }
@@ -528,7 +693,101 @@ namespace CameraViewer
             MyShape v = ListRedo.ToArray()[ListRedo.Count - 1];
             ListRedo.RemoveAt(ListRedo.Count - 1);
             ListShapes.Add(v);
-            DrawingShapes();
+            DrawingShapes(ListShapes);
+        }
+
+        private void pictureEdit1_Click(object sender, EventArgs e)
+        {
+
+        }
+        //读XML文件
+        private List<MyShape> ListXMLShapes = new List<MyShape>();
+        public void readxml()
+        {
+            XmlNodeList xml_lines,xml_arrows,xml_rects,xml_regions;
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(@"c:\1.0admin.xml");
+            //直线
+            xml_lines= xmlDoc.SelectSingleNode("/pr/cameras/camera/lines").ChildNodes;
+            foreach (XmlNode lineitem in xml_lines)
+            {
+
+                MyLine line=new MyLine();
+                line.MyPen = new Pen(Color.Red,1);
+                XmlElement xe=(XmlElement)lineitem;
+                line.P1.X = Convert.ToInt32(xe.GetAttribute("X1"));
+                line.P1.Y = Convert.ToInt32(xe.GetAttribute("Y1"));
+                line.P2.X = Convert.ToInt32(xe.GetAttribute("X2"));
+                line.P2.Y = Convert.ToInt32(xe.GetAttribute("Y2"));
+                line.MyPen.Color = ColorTranslator.FromHtml(xe.GetAttribute("PenColor"));
+                line.MyPen.Width = Convert.ToInt32(xe.GetAttribute("PenWidth"));
+                ListXMLShapes.Add(line);
+            }
+            //箭头
+            xml_arrows = xmlDoc.SelectSingleNode("/pr/cameras/camera/arrows").ChildNodes;
+            foreach (XmlNode arrowitem in xml_arrows)
+            {
+
+                MyArrow arrow = new MyArrow();
+                arrow.MyPen = new Pen(Color.Red, 1);
+                XmlElement xa = (XmlElement)arrowitem;
+                arrow.P1.X = Convert.ToInt32(xa.GetAttribute("X1"));
+                arrow.P1.Y = Convert.ToInt32(xa.GetAttribute("Y1"));
+                arrow.P2.X = Convert.ToInt32(xa.GetAttribute("X2"));
+                arrow.P2.Y = Convert.ToInt32(xa.GetAttribute("Y2"));
+                arrow.MyPen.Color = ColorTranslator.FromHtml(xa.GetAttribute("PenColor"));
+                arrow.MyPen.Width = Convert.ToInt32(xa.GetAttribute("PenWidth"));
+                ListXMLShapes.Add(arrow);
+            }
+            //矩形
+            xml_rects = xmlDoc.SelectSingleNode("/pr/cameras/camera/rects").ChildNodes;
+            foreach (XmlNode rectitem in xml_rects)
+            {
+
+                MyRect rect = new MyRect();
+                rect.MyPen = new Pen(Color.Red, 1);
+                XmlElement xr = (XmlElement)rectitem;
+                rect.P1.X = Convert.ToInt32(xr.GetAttribute("X"));
+                rect.P1.Y = Convert.ToInt32(xr.GetAttribute("Y"));
+                rect.Width = Convert.ToInt32(xr.GetAttribute("W"));
+                rect.Height = Convert.ToInt32(xr.GetAttribute("H"));
+                rect.MyPen.Color = ColorTranslator.FromHtml(xr.GetAttribute("PenColor"));
+                rect.MyPen.Width = Convert.ToInt32(xr.GetAttribute("PenWidth"));
+                ListXMLShapes.Add(rect);
+            }
+            //多边形
+            xml_regions = xmlDoc.SelectSingleNode("/pr/cameras/camera/regions").ChildNodes;
+            foreach (XmlNode regionitem in xml_regions)
+            {
+                
+                MyPoly poly = new MyPoly();
+                poly.MyPen = new Pen(Color.Red, 1);
+                XmlElement xp = (XmlElement)regionitem;
+                poly.MyPen.Color = ColorTranslator.FromHtml(xp.GetAttribute("PenColor"));
+                poly.MyPen.Width = Convert.ToInt32(xp.GetAttribute("PenWidth"));
+                XmlNodeList pointlist = regionitem.ChildNodes;
+                foreach (XmlNode pitem in pointlist)
+                {
+                    Point p=new Point();
+                    XmlElement test = (XmlElement)pitem;
+                    p.X = Convert.ToInt32(test.GetAttribute("X"));
+                    p.Y = Convert.ToInt32(test.GetAttribute("Y"));
+                    poly.ListPoint.Add(p);
+                }
+                //IsFinished=true
+                poly.IsFinished =true;
+                ListXMLShapes.Add(poly);
+            }
+        }
+        public void mytest(object sender, ItemClickEventArgs e)
+        {
+            readxml();
+            DrawingShapes(ListXMLShapes);
+        }
+
+        private void mytest()
+        {
+        
         }
 
     }

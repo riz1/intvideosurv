@@ -68,6 +68,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.colorEdit1 = new DevExpress.XtraEditors.ColorEdit();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
@@ -103,8 +104,9 @@
             this.barButtonUndo,
             this.barButtonSave,
             this.barEditColor,
-            this.barButtonItem1});
-            this.barManager1.MaxItemId = 12;
+            this.barButtonItem1,
+            this.barButtonItem3});
+            this.barManager1.MaxItemId = 13;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemFontEdit1,
             this.repositoryItemColorEdit1});
@@ -135,7 +137,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonDuoBX),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonUndo, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonSave)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonSave),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
             this.bar1.Text = "Custom 4";
             // 
             // LineButton
@@ -338,6 +341,7 @@
             this.pictureEdit1.TabIndex = 0;
             this.pictureEdit1.TabStop = false;
             this.pictureEdit1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseMove);
+            this.pictureEdit1.Click += new System.EventHandler(this.pictureEdit1_Click);
             this.pictureEdit1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseDoubleClick);
             this.pictureEdit1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseDown);
             this.pictureEdit1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureEdit1_MouseUp);
@@ -371,6 +375,13 @@
             this.colorEdit1.TabIndex = 1;
             this.colorEdit1.ToolTip = "画笔颜色";
             this.colorEdit1.EditValueChanged += new System.EventHandler(this.ChosemyColor);
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "测试";
+            this.barButtonItem3.Id = 12;
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mytest);
             // 
             // frmDrawing
             // 
@@ -437,6 +448,7 @@
         private DevExpress.XtraEditors.ColorEdit colorEdit1;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
     }
 }
 
