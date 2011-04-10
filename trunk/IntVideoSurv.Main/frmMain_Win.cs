@@ -769,6 +769,7 @@ namespace CameraViewer
                     CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_212.JPG");
+                    cameraWindow.CameraID = 5;
                     cameraWindow.CurrentImageGuid = guidA;
                     cameraWindow.Refresh();
 
@@ -778,6 +779,7 @@ namespace CameraViewer
                     CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_21.JPG");
+                    cameraWindow.CameraID = 5;
                     cameraWindow.CurrentImageGuid = guidB;
                     cameraWindow.Refresh();
             
