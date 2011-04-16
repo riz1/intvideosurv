@@ -27,15 +27,15 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat(",'{0}')", ocapturePicture.FilePath);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
-            cmdText += " SELECT @@IDENTITY;";
 
             try
             {
-                //cmdText = cmdText.Replace("\r\n", "");
-                //db.ExecuteNonQuery(CommandType.Text, cmdText);
-                DataSet test = db.ExecuteDataSet(cmdText);//执行有问题
-                 int i = int.Parse(test.Tables[0].Rows[0][0].ToString());
-                return i;
+                cmdText = cmdText.Replace("\r\n", "");
+                db.ExecuteNonQuery(CommandType.Text, cmdText);
+                //string cmdText2 = "select max(PictureID) from CapturePicture";
+                //return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText2).ToString());
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('CapturePicture')").ToString());
+                return id;
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace IntVideoSurv.DataAccess
             sbField.Append("INSERT INTO  [Vehicle](");
             sbValue.Append("values (");
             sbField.Append("[VehicleID]");
-            sbValue.AppendFormat("'{0}'", oVehicle.VehicleID);
+            sbValue.AppendFormat("{0}", oVehicle.VehicleID);
             sbField.Append(",[platenumber]");
             sbValue.AppendFormat(",'{0}'", oVehicle.platenumber);
             sbField.Append(",[speed]");
@@ -58,32 +58,32 @@ namespace IntVideoSurv.DataAccess
             if (oVehicle.stemagainst==true)
             {
                 sbField.Append(",[stemagainst]");
-                sbValue.AppendFormat(",'{0}'", 1);
+                sbValue.AppendFormat(",{0}", 1);
             }
             else
             {
                 sbField.Append(",[stemagainst]");
-                sbValue.AppendFormat(",'{0}'", 0);
+                sbValue.AppendFormat(",{0}", 0);
             }
             if (oVehicle.stop == true)
             {
                 sbField.Append(",[stop]");
-                sbValue.AppendFormat("'{0}'", 1);
+                sbValue.AppendFormat(",{0}", 1);
             }
             else
             {
                 sbField.Append(",[stop]");
-                sbValue.AppendFormat("'{0}'", 0);
+                sbValue.AppendFormat(",{0}", 0);
             }
             if (oVehicle.accident == true)
             {
                 sbField.Append(",[accident]");
-                sbValue.AppendFormat(",'{0}'", 1);
+                sbValue.AppendFormat(",{0}", 1);
             } 
             else
             {
                 sbField.Append(",[accident]");
-                sbValue.AppendFormat(",'{0}'", 0);
+                sbValue.AppendFormat(",{0}", 0);
             }
             if (oVehicle.linechange == true)
             {
@@ -97,19 +97,22 @@ namespace IntVideoSurv.DataAccess
             }
             sbField.Append(",[platecolor]");
             sbValue.AppendFormat(",'{0}'", oVehicle.platecolor);
+            sbField.Append(",[vehiclecolor]");
+            sbValue.AppendFormat(",'{0}'", oVehicle.vehiclecolor);
             sbField.Append(",[PictureID]");
-            sbValue.AppendFormat("'{0}'", oVehicle.PictureID);
+            sbValue.AppendFormat(",{0}", oVehicle.PictureID);
             sbField.Append(",[REctId])");
-            sbValue.AppendFormat(",'{0}')", oVehicle.REctId);
+            sbValue.AppendFormat(",{0})", oVehicle.REctId);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
-            //cmdText += " SELECT @@IDENTITY;";
 
             try
             {
                 cmdText = cmdText.Replace("\r\n", "");
-                //db.ExecuteNonQuery(CommandType.Text, cmdText);
-                return int.Parse(db.ExecuteDataSet(cmdText += " SELECT @@IDENTITY;").ToString());
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+                //获得倒数第二条记录
+                //int id = int.Parse(db.ExecuteScalar(CommandType.Text, "select top 2 VehicleID from Vehicle").ToString());
+                //return id;
             }
             catch (Exception ex)
             {
@@ -132,14 +135,13 @@ namespace IntVideoSurv.DataAccess
             sbField.Append(",[PictureID])");
             sbValue.AppendFormat(",{0})", oFace.PictureID);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
-            //cmdText += " SELECT @@IDENTITY;"; 
 
             try
             {
                 cmdText = cmdText.Replace("\r\n", "");
-                //db.ExecuteNonQuery(CommandType.Text, cmdText);
-                //return int.Parse(db.e(CommandType.Text, cmdText).ToString());
-                return int.Parse(db.ExecuteDataSet(cmdText += " SELECT @@IDENTITY;").ToString());
+                db.ExecuteNonQuery(CommandType.Text, cmdText);
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('Face')").ToString());
+                return id;
             }
             catch (Exception ex)
             {
@@ -156,7 +158,7 @@ namespace IntVideoSurv.DataAccess
             //sbField.Append("[RectID]");
             //sbValue.AppendFormat("'{0}'", oRect.RectID);
             sbField.Append("[X]");
-            sbValue.AppendFormat("'{0}'", oRect.X);
+            sbValue.AppendFormat("{0}", oRect.X);
             sbField.Append(",[Y]");
             sbValue.AppendFormat(",{0}", oRect.Y);
             sbField.Append(",[W]");
@@ -164,14 +166,13 @@ namespace IntVideoSurv.DataAccess
             sbField.Append(",[H])");
             sbValue.AppendFormat(",{0})", oRect.H);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
-            //cmdText += " SELECT @@IDENTITY;";
 
             try
             {
                 cmdText = cmdText.Replace("\r\n", "");
-                //db.ExecuteNonQuery(CommandType.Text, cmdText);
-                return int.Parse(db.ExecuteDataSet(cmdText += " SELECT @@IDENTITY;").ToString());
-
+                db.ExecuteNonQuery(CommandType.Text, cmdText);
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('REct')").ToString());
+                return id;
             }
             catch (Exception ex)
             {
@@ -190,14 +191,13 @@ namespace IntVideoSurv.DataAccess
             sbField.Append("[REct])");
             sbValue.AppendFormat("'{0}')", oTrack.REct);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
-            //cmdText += " SELECT @@IDENTITY;";
 
             try
             {
                 cmdText = cmdText.Replace("\r\n", "");
-                //db.ExecuteNonQuery(CommandType.Text, cmdText);
-                return int.Parse(db.ExecuteDataSet(cmdText += " SELECT @@IDENTITY;").ToString());
-
+                db.ExecuteNonQuery(CommandType.Text, cmdText);
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('Track')").ToString());
+                return id;
             }
             catch (Exception ex)
             {
