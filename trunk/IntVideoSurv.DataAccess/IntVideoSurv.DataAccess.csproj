@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="AlarmDataAccess.cs" />
     <Compile Include="AlarmIconDataAccess.cs" />
+    <Compile Include="AnalysisXMLDataAccess.cs" />
     <Compile Include="CameraDataAccess.cs" />
     <Compile Include="CameraIconDataAccess.cs" />
     <Compile Include="CameraMonitorPairDataAccess.cs" />
