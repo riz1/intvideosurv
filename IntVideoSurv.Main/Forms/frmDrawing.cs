@@ -704,12 +704,12 @@ namespace CameraViewer
         private List<MyShape> ListXMLShapes = new List<MyShape>();
         public void readxml()
         {
-            XmlNodeList xml_lines,xml_arrows,xml_rects,xml_regions;
+            /*XmlNodeList xml_CapturePicture,xml_Rect,xml_camera,xml_object,xml_;
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(@"c:\1.0admin.xml");
+            xmlDoc.Load(@"c:\1.0.xml");
             //直线
-            xml_lines= xmlDoc.SelectSingleNode("/pr/cameras/camera/lines").ChildNodes;
-            foreach (XmlNode lineitem in xml_lines)
+            xml_camera = xmlDoc.SelectSingleNode("/pr/cameras").ChildNodes;
+            foreach (XmlNode camitem in xml_camera)
             {
 
                 MyLine line=new MyLine();
@@ -722,6 +722,12 @@ namespace CameraViewer
                 line.MyPen.Color = ColorTranslator.FromHtml(xe.GetAttribute("PenColor"));
                 line.MyPen.Width = Convert.ToInt32(xe.GetAttribute("PenWidth"));
                 ListXMLShapes.Add(line);
+                REct orect = new REct();
+                xml_object = camitem.ChildNodes;
+
+
+
+
             }
             //箭头
             xml_arrows = xmlDoc.SelectSingleNode("/pr/cameras/camera/arrows").ChildNodes;
@@ -777,12 +783,13 @@ namespace CameraViewer
                 //IsFinished=true
                 poly.IsFinished =true;
                 ListXMLShapes.Add(poly);
-            }
+            }*/
         }
         public void mytest(object sender, ItemClickEventArgs e)
         {
-            readxml();
-            DrawingShapes(ListXMLShapes);
+            //readxml();
+            //DrawingShapes(ListXMLShapes);
+            //AnalysisXML.Instance.AnalysisFile();
         }
 
         private void mytest()
