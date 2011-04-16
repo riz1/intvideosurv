@@ -51,9 +51,8 @@ namespace CameraViewer
                 CapturePicture ocap=new CapturePicture();
                 ocap.CameraID = Convert.ToInt32(xcam.GetAttribute("id"));
                 XmlNode xml_time = xmlDoc.SelectSingleNode("/pr/cameras/camera/timeid");
-                ocap.Datetime = Convert.ToDateTime(xml_time.Value);
+                ocap.Datetime = Convert.ToDateTime(xml_time.InnerText);
                 ocap.FilePath="xml/xinxi";
-                //get pictureid
                 pictureId = AnalysisXMLBusiness.Instance.InsertCapturePicture(ref errMessage, ocap);
                 
                 xml_vehicles=xmlDoc.SelectSingleNode("/pr/cameras/camera/objects/vehicles").ChildNodes;
@@ -73,17 +72,45 @@ namespace CameraViewer
                     oveh.VehicleID=Convert.ToInt32(xveh.GetAttribute("id"));
                     oveh.platenumber=Convert.ToString(xveh.GetAttribute("platenumber"));
                     oveh.speed=Convert.ToSingle(xveh.GetAttribute("speed"));
-                    oveh.stemagainst=Convert.ToBoolean(xveh.GetAttribute("stemagainst"));
-                    oveh.stop = Convert.ToBoolean(xveh.GetAttribute("stop"));
-                    oveh.accident = Convert.ToBoolean(xveh.GetAttribute("accident"));
-                    oveh.linechange = Convert.ToBoolean(xveh.GetAttribute("linechange"));
+                    if (Convert.ToInt32(xveh.GetAttribute("stemagainst"))==1)
+                    {
+                        oveh.stemagainst = true;
+                    } 
+                    else
+                    {
+                        oveh.stemagainst = false;
+                    }
+                    if (Convert.ToInt32(xveh.GetAttribute("accident")) == 1)
+                    {
+                        oveh.accident = true;
+                    } 
+                    else
+                    {
+                        oveh.accident = false;
+                    }
+                    if (Convert.ToInt32(xveh.GetAttribute("stop")) == 1)
+                    {
+                        oveh.stop = true;
+                    } 
+                    else
+                    {
+                        oveh.stop = false;
+                    }
+                    if (Convert.ToInt32(xveh.GetAttribute("linechange")) == 1)
+                    {
+                        oveh.linechange = true;
+                    } 
+                    else
+                    {
+                        oveh.linechange = false;
+                    }
                     oveh.platecolor=Convert.ToString(xveh.GetAttribute("platecolor"));
                     oveh.vehiclecolor=Convert.ToString(xveh.GetAttribute("vehiclecolor"));
                     oveh.PictureID = pictureId;
                     oveh.REctId = rectId;
                     vehicleId = AnalysisXMLBusiness.Instance.InsertVehicle(ref errMessage, oveh);
 
-                    xml_vehicles_tract_rects = xmlDoc.SelectSingleNode("/pr/cameras/camera/objects/vehicles/track").ChildNodes;
+                    xml_vehicles_tract_rects = xmlDoc.SelectSingleNode("/pr/cameras/camera/objects/vehicles/vehicle/track").ChildNodes;
                     foreach (XmlNode xml_vehicles_tract_rects_item in xml_vehicles_tract_rects)
                     {
                         REct rect2 = new REct();
@@ -115,7 +142,7 @@ namespace CameraViewer
                     Face face = new Face();
                     face.RectID = rectId;
                     face.PictureID = pictureId;
-                    face.score = Convert.ToSingle(xml_faces_item_score.Value);
+                    face.score = Convert.ToSingle(xml_faces_item_score.InnerText);
                     faceId = AnalysisXMLBusiness.Instance.InsertFace(ref errMessage, face);
                     
                 }
