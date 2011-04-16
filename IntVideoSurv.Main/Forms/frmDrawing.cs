@@ -789,7 +789,7 @@ namespace CameraViewer
         {
             //readxml();
             //DrawingShapes(ListXMLShapes);
-            //AnalysisXML.Instance.AnalysisFile();
+            AnalysisXML.Instance.AnalysisFile();
         }
 
         private void mytest()
