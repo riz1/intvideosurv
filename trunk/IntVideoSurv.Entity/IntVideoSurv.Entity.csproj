@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AlarmIconInfo.cs" />
     <Compile Include="AlarmInfo.cs" />
+    <Compile Include="AnalysisXMLInfo.cs" />
     <Compile Include="CameraIconInfo.cs" />
     <Compile Include="CameraInfo.cs" />
     <Compile Include="CameraMonitorPairInfo.cs" />
