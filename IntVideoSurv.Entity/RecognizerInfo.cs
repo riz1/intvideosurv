@@ -29,7 +29,8 @@ namespace IntVideoSurv.Entity
         public int Port { get; set; }
         [ColumnMapping()]
         public int MaxRecogNumber { get; set; }
+        [ColumnMapping()]
+        public int RecogType { get; set; }
         public Dictionary<int, CameraInfo> ListCameras { get; set; }
-
     }
 }
