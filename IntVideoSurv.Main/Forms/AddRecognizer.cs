@@ -33,6 +33,12 @@ namespace CameraViewer.Forms
             this.textEditIp.Text = decoderInfo.Ip;
             this.textEditport.Text = decoderInfo.Port.ToString();
             this.textEditmax.Text = decoderInfo.MaxRecogNumber.ToString();
+            if(decoderInfo.RecogType==1)
+                this.comboBoxEdit_Type.Text ="Event";
+            if (decoderInfo.RecogType == 2)
+                this.comboBoxEdit_Type.Text = "Vehicle";
+            if (decoderInfo.RecogType == 4)
+                this.comboBoxEdit_Type.Text = "Face";
             Opt = Util.Operateion.Update;
             recognizerOldName = decoderInfo.Name;
             InitValidationRules();
@@ -44,6 +50,14 @@ namespace CameraViewer.Forms
             set;
             get;
         }
+        //
+        public enum E_Type
+        {
+            E_Event = 1,
+            E_Vehicle = 2,
+            E_Face = 4,
+        }
+
         private string errMessage = "";
         public CameraViewer.Util.Operateion Opt
         {
@@ -67,10 +81,15 @@ namespace CameraViewer.Forms
             ri.Port = int.Parse(textEditport.Text);
             ri.Ip = textEditIp.Text;
             ri.MaxRecogNumber = int.Parse(textEditmax.Text);
+            if (comboBoxEdit_Type.Text == "Event")
+                ri.RecogType = (int)E_Type.E_Event;
+            if (comboBoxEdit_Type.Text == "Vehicle")
+                ri.RecogType = (int)E_Type.E_Vehicle;
+            if (comboBoxEdit_Type.Text == "Face")
+                ri.RecogType = (int)E_Type.E_Face;
             switch (Opt)
             {
                 case Util.Operateion.Add:
-                    //di.Name = textEditname.Text;
                     RecognizerBusiness.Instance.Insert(ref errMessage, ri);
                     OperateLog ol = new OperateLog
                     {
