@@ -1461,11 +1461,26 @@ namespace CameraViewer.Forms
             dataTable.Columns.Add("识别器端口", typeof(int));
             dataTable.Columns.Add("识别器Ip地址", typeof(string));
             dataTable.Columns.Add("识别器最大解码数", typeof(int));
+            dataTable.Columns.Add("识别器类型", typeof(string));
             int i = 1;
+            string recoginzerType="";
             foreach (var node in listRecognizer)
             {
-
-                dataTable.Rows.Add(i++, node.Value.Name, node.Value.Port, node.Value.Ip, node.Value.MaxRecogNumber);
+                switch (node.Value.RecogType)
+                {
+                   case 1:
+                      recoginzerType = "Event";
+                	  break;
+                    case 2:
+                      recoginzerType = "Vehicle";
+                      break;
+                    case 4:
+                      recoginzerType = "Face";
+                      break;
+                    default:
+                      break;
+                }
+                dataTable.Rows.Add(i++, node.Value.Name, node.Value.Port, node.Value.Ip, node.Value.MaxRecogNumber,recoginzerType);
             }
 
             gridControlShowRecognizer.DataSource = dataTable;
@@ -1476,6 +1491,7 @@ namespace CameraViewer.Forms
             gridView5.Columns["识别器端口"].Width = 10;
             gridView5.Columns["识别器Ip地址"].Width = 30;
             gridView5.Columns["识别器最大解码数"].Width = 10;
+            gridView5.Columns["识别器类型"].Width = 30;
         }
         /// <summary>
         /// 右键单击识别器管理
@@ -1530,7 +1546,7 @@ namespace CameraViewer.Forms
             {
                 return;
             }
-            if ((tn.Tag.ToString().IndexOf("D") >= 0))
+            if ((tn.Tag.ToString().IndexOf("R") >= 0))
             {
                 if (XtraMessageBox.Show("确定要删除该识别器吗?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
