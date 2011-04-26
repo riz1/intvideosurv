@@ -149,30 +149,6 @@ namespace IntVideoSurv.Business
         }
         public Dictionary<int, RecognizerInfo> GetAllRecognizerInfo(ref string errMessage)
         {
-            /*Database db = DatabaseFactory.CreateDatabase();
-            errMessage = "";
-            Dictionary<int, DecoderInfo> list = new Dictionary<int, DecoderInfo>();
-            try
-            {
-
-                DataSet ds = DecoderDataAccess.GetAllDecInfo(db);
-
-                DecoderInfo oDecoder;
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    oDecoder = new DecoderInfo(ds.Tables[0].Rows[i]);
-                    list.Add(oDecoder.id, oDecoder);
-
-                }
-                return list;
-
-            }
-            catch (Exception ex)
-            {
-                errMessage = ex.Message + ex.StackTrace;
-                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
-            }*/
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             Dictionary<int, RecognizerInfo> mylist = new Dictionary<int, RecognizerInfo>();
