@@ -163,7 +163,6 @@ namespace IntVideoSurv.Business
                 {
                     oRecognizerInfo = new RecognizerInfo(ds.Tables[0].Rows[i]);
                     dsCamera = RecognizerDataAccess.GetCameraInfoByRecognizerId(db, oRecognizerInfo.Id);
-                    //DecoderDataAccess.GetCamInfoByCameraId(db,dsCamera.Tables[0].Rows[i].)
                     oRecognizerInfo.ListCameras = new Dictionary<int, CameraInfo>();
                     foreach (DataRow dr in dsCamera.Tables[0].Rows)
                     {
