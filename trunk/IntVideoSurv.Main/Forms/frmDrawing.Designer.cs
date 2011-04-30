@@ -50,6 +50,7 @@
             this.barButtonUndo = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonSave = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -68,7 +69,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.colorEdit1 = new DevExpress.XtraEditors.ColorEdit();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.comboBoxEditTypeChoice = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
@@ -82,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditTypeChoice.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -208,6 +210,13 @@
             this.barButtonSave.ImageIndex = 4;
             this.barButtonSave.Name = "barButtonSave";
             this.barButtonSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonSave_ItemClick);
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "测试";
+            this.barButtonItem3.Id = 12;
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mytest);
             // 
             // barDockControlTop
             // 
@@ -358,7 +367,7 @@
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(80, 21);
+            this.comboBoxEdit1.Size = new System.Drawing.Size(84, 21);
             this.comboBoxEdit1.TabIndex = 1;
             this.toolTip1.SetToolTip(this.comboBoxEdit1, "画笔粗细");
             this.comboBoxEdit1.SelectedIndexChanged += new System.EventHandler(this.Selectindex);
@@ -366,28 +375,33 @@
             // colorEdit1
             // 
             this.colorEdit1.EditValue = System.Drawing.Color.Red;
-            this.colorEdit1.Location = new System.Drawing.Point(417, 4);
+            this.colorEdit1.Location = new System.Drawing.Point(421, 4);
             this.colorEdit1.MenuManager = this.barManager1;
             this.colorEdit1.Name = "colorEdit1";
             this.colorEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.colorEdit1.Size = new System.Drawing.Size(69, 21);
+            this.colorEdit1.Size = new System.Drawing.Size(84, 21);
             this.colorEdit1.TabIndex = 1;
             this.colorEdit1.ToolTip = "画笔颜色";
             this.colorEdit1.EditValueChanged += new System.EventHandler(this.ChosemyColor);
             // 
-            // barButtonItem3
+            // comboBoxEditTypeChoice
             // 
-            this.barButtonItem3.Caption = "测试";
-            this.barButtonItem3.Id = 12;
-            this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mytest);
+            this.comboBoxEditTypeChoice.Location = new System.Drawing.Point(511, 4);
+            this.comboBoxEditTypeChoice.MenuManager = this.barManager1;
+            this.comboBoxEditTypeChoice.Name = "comboBoxEditTypeChoice";
+            this.comboBoxEditTypeChoice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEditTypeChoice.Size = new System.Drawing.Size(84, 21);
+            this.comboBoxEditTypeChoice.TabIndex = 10;
+            this.comboBoxEditTypeChoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditTypeChoice_SelectedIndexChanged);
             // 
             // frmDrawing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 395);
+            this.Controls.Add(this.comboBoxEditTypeChoice);
             this.Controls.Add(this.comboBoxEdit1);
             this.Controls.Add(this.colorEdit1);
             this.Controls.Add(this.panelControl2);
@@ -414,6 +428,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditTypeChoice.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -449,6 +464,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditTypeChoice;
     }
 }
 
