@@ -1464,6 +1464,10 @@ namespace CameraViewer.Forms
             dataTable.Columns.Add("识别器类型", typeof(string));
             int i = 1;
             string recoginzerType="";
+            /*if (listRecognizer==null)
+            {
+                return;
+            }*/
             foreach (var node in listRecognizer)
             {
                 switch (node.Value.RecogType)
