@@ -9,12 +9,24 @@ using DevExpress.XtraEditors;
 using System.Xml;
 using IntVideoSurv.Business;
 using IntVideoSurv.Entity;
+using CameraViewer.Forms;
 
 namespace CameraViewer
 {
     public partial class frmDrawing : XtraForm
     {
-
+        private int DrawTrack;
+        private int DrawObjs;
+        private int DrawDirection;
+        private int DrawROI;
+        private int flagObjCount;
+        private int flagDirection;
+        private int flagCrossLine;
+        private int flagChangeChannel;
+        private int flagCongestion;
+        private int flagStop;
+        private int Minarea;
+        private int iMaxObjNum;
         private enum DrawingType
         {
             Line = 0,
@@ -71,6 +83,11 @@ namespace CameraViewer
             comboBoxEdit1.Properties.Items.Add("中");
             comboBoxEdit1.Properties.Items.Add("粗");
             comboBoxEdit1.SelectedIndex = 0;
+            //初始化类型选择
+            comboBoxEditTypeChoice.Properties.Items.Add("事件");
+            comboBoxEditTypeChoice.Properties.Items.Add("人脸");
+            comboBoxEditTypeChoice.Properties.Items.Add("车牌");
+            //comboBoxEditTypeChoice.SelectedIndex = 0;
 
         }
 
@@ -134,164 +151,11 @@ namespace CameraViewer
         private void barButtonSave_ItemClick(object sender, ItemClickEventArgs e)
         {
             int i;
-            //保存为用户的xml文件画笔，无pen信息
             XmlDocument drawXml = new XmlDocument();
-            XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);
+            XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);//head
             drawXml.AppendChild(docNode);
             RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
-            if (ri==null)
-            {
-                if (XtraMessageBox.Show("对不起，您使用的照片没有对应的识别器，请另选", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
-                {
-                    this.Close();
-                    return;
-                }
-                    
-            }
-            XmlNode recognizerNode = drawXml.CreateElement("pr");
-            XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
-            recognizerAttribute.Value = ri.Id.ToString();
-            recognizerNode.Attributes.Append(recognizerAttribute);
-            drawXml.AppendChild(recognizerNode);
-            //cameras
-            XmlNode camerasNode = drawXml.CreateElement("cameras");
-            recognizerNode.AppendChild(camerasNode);
-            //camera
-            XmlNode cameraNode = drawXml.CreateElement("camera");
-            camerasNode.AppendChild(cameraNode);
-            XmlAttribute cameraAttribute = drawXml.CreateAttribute("id");
-            cameraAttribute.Value = _cameraId.ToString();
-            cameraNode.Attributes.Append(cameraAttribute);
-            //lines,rectangles,arrows,polygons
-            XmlNode linesNode = drawXml.CreateElement("lines");
-            cameraNode.AppendChild(linesNode);
-            XmlNode rectanglesNode = drawXml.CreateElement("rects");
-            cameraNode.AppendChild(rectanglesNode);
-            XmlNode arrowsNode = drawXml.CreateElement("arrows");
-            cameraNode.AppendChild(arrowsNode);
-            XmlNode polygonsNode = drawXml.CreateElement("regions");
-            cameraNode.AppendChild(polygonsNode);
 
-            try
-            {
-                if (ListShapes == null)
-                {
-                    return;
-                }
-                foreach (var v in ListShapes)
-                {
-                    if (v is MyLine)
-                    {
-                        XmlNode line = drawXml.CreateElement("line");
-                        linesNode.AppendChild(line);
-                        XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                        int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
-                        lineX1.Value = x1.ToString();
-                        line.Attributes.Append(lineX1);
-                        XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                        int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
-                        lineY1.Value = y1.ToString();
-                        line.Attributes.Append(lineY1);
-
-                        XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                        lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
-                        line.Attributes.Append(lineX2);
-                        XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                        lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
-                        line.Attributes.Append(lineY2);
-                        //lineX.InnerText = listLine[i];
-                    }
-                    else if (v is MyRect)
-                    {
-                        XmlNode rectangle = drawXml.CreateElement("rectangle");
-                        rectanglesNode.AppendChild(rectangle);
-                        XmlAttribute X1 = drawXml.CreateAttribute("X");
-                        X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
-                        rectangle.Attributes.Append(X1);
-                        XmlAttribute Y1 = drawXml.CreateAttribute("Y");
-                        Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
-                        rectangle.Attributes.Append(Y1);
-
-                        XmlAttribute w = drawXml.CreateAttribute("W");
-                        w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
-                        rectangle.Attributes.Append(w);
-                        XmlAttribute h = drawXml.CreateAttribute("H");
-                        h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
-                        rectangle.Attributes.Append(h);
-                    }
-                    else if (v is MyArrow)
-                    {
-                        XmlNode arrow = drawXml.CreateElement("arrow");
-                        arrowsNode.AppendChild(arrow);
-                        XmlAttribute X1 = drawXml.CreateAttribute("X1");
-                        X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
-                        arrow.Attributes.Append(X1);
-                        XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
-                        Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
-                        arrow.Attributes.Append(Y1);
-
-                        XmlAttribute X2 = drawXml.CreateAttribute("X2");
-                        X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
-                        arrow.Attributes.Append(X2);
-                        XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
-                        Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
-                        arrow.Attributes.Append(Y2);
-                    }
-                    else
-                    {
-                        XmlNode region = drawXml.CreateElement("region");
-                        XmlAttribute pointnumber = drawXml.CreateAttribute("pointnumber");
-                        pointnumber.Value = (v as MyPoly).ListPoint.Count.ToString();
-                        region.Attributes.Append(pointnumber);
-                        polygonsNode.AppendChild(region);
-                        for (i = 0; i < (v as MyPoly).ListPoint.Count; i++)
-                        {
-                            XmlNode point = drawXml.CreateElement("point");
-                            region.AppendChild(point);
-                            XmlAttribute x = drawXml.CreateAttribute("X");
-                            x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X * (float)xScale)).ToString();
-                            point.Attributes.Append(x);
-                            XmlAttribute y = drawXml.CreateAttribute("Y");
-                            y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y * (float)yScale)).ToString();
-                            point.Attributes.Append(y);
-                        }
-                    }
-                }
-            }
-            catch (System.Exception ex)
-            {
-                XtraMessageBox.Show(ex.ToString());
-            }
-
-            String name;
-            name = @"c:\" + ri.Id.ToString() + "." + _cameraId.ToString() + ".xml";//识别器和摄像头的编号
-            drawXml.Save(@name);
-            //保存为管理员xml文件，有pen信息
-            XmlDocument drawXmlAdmin = new XmlDocument();
-            XmlNode docNodeAdmin = drawXmlAdmin.CreateXmlDeclaration("1.0", "gb2312", null);
-            drawXmlAdmin.AppendChild(docNodeAdmin);
-            XmlNode recognizerNodeAdmin = drawXmlAdmin.CreateElement("pr");
-            XmlAttribute recognizerAttributeAdmin = drawXmlAdmin.CreateAttribute("id");
-            recognizerAttributeAdmin.Value = ri.Id.ToString();
-            recognizerNodeAdmin.Attributes.Append(recognizerAttributeAdmin);
-            drawXmlAdmin.AppendChild(recognizerNodeAdmin);
-            XmlNode camerasNodeAdmin = drawXmlAdmin.CreateElement("cameras");
-            recognizerNodeAdmin.AppendChild(camerasNodeAdmin);
-            XmlNode cameraNodeAdmin = drawXmlAdmin.CreateElement("camera");
-            XmlAttribute cameraAttributeAdmin = drawXmlAdmin.CreateAttribute("id");
-            cameraAttributeAdmin.Value = _cameraId.ToString();
-            camerasNodeAdmin.AppendChild(cameraNodeAdmin);
-            cameraNodeAdmin.Attributes.Append(cameraAttributeAdmin);
-
-            XmlNode linesNodeAdmin = drawXmlAdmin.CreateElement("lines");
-            cameraNodeAdmin.AppendChild(linesNodeAdmin);
-            XmlNode rectsNodeAdmin = drawXmlAdmin.CreateElement("rects");
-            cameraNodeAdmin.AppendChild(rectsNodeAdmin);
-            XmlNode arrowsNodeAdmin = drawXmlAdmin.CreateElement("arrows");
-            cameraNodeAdmin.AppendChild(arrowsNodeAdmin);
-            XmlNode regionsNodeAdmin = drawXmlAdmin.CreateElement("regions");
-            cameraNodeAdmin.AppendChild(regionsNodeAdmin);
-            /*RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
             if (ri == null)
             {
                 if (XtraMessageBox.Show("对不起，您使用的照片没有对应的识别器，请另选", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
@@ -300,138 +164,696 @@ namespace CameraViewer
                     return;
                 }
 
-            }*/
-            
+            }
+            XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
+            XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
+            recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
 
-            try
+            recognizerNode.Attributes.Append(recognizerAttribute);
+            drawXml.AppendChild(recognizerNode);
+            XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
+            recognizerNode.AppendChild(camerasNode);
+            XmlNode cameraNode = drawXml.CreateElement("camera");
+            camerasNode.AppendChild(cameraNode);
+            XmlAttribute cameraAttribute = drawXml.CreateAttribute("id");
+            cameraAttribute.Value = _cameraId.ToString();
+            cameraNode.Attributes.Append(cameraAttribute);
+            switch (comboBoxEditTypeChoice.SelectedIndex)
             {
-                if (ListShapes == null)
+                case 0://event
+                    //////////////////////////////camera////////////////////////////////////////
+                    XmlAttribute cameraWidth = drawXml.CreateAttribute("width");
+                    cameraWidth.Value = "200".ToString();
+                    cameraNode.Attributes.Append(cameraWidth);
+                    XmlAttribute cameraHeight = drawXml.CreateAttribute("height");
+                    cameraHeight.Value = "230".ToString();
+                    cameraNode.Attributes.Append(cameraHeight);
+                    XmlAttribute cameraMinarea = drawXml.CreateAttribute("Minarea");
+                    cameraMinarea.Value = Minarea.ToString();
+                    cameraNode.Attributes.Append(cameraMinarea);
+                    XmlAttribute cameraDrawTrack = drawXml.CreateAttribute("DrawTrack");
+                    cameraDrawTrack.Value = DrawTrack.ToString();
+                    cameraNode.Attributes.Append(cameraDrawTrack);
+                    XmlAttribute cameraDrawObject = drawXml.CreateAttribute("DrawObjs");
+                    cameraDrawObject.Value = DrawObjs.ToString();
+                    cameraNode.Attributes.Append(cameraDrawObject);
+                    XmlAttribute cameraDrawDirection = drawXml.CreateAttribute("DrawDirection");
+                    cameraDrawDirection.Value = DrawDirection.ToString();
+                    cameraNode.Attributes.Append(cameraDrawDirection);
+                    XmlAttribute cameraDrawROI = drawXml.CreateAttribute("DrawROI");
+                    cameraDrawROI.Value = DrawROI.ToString();
+                    cameraNode.Attributes.Append(cameraDrawROI);
+                    XmlAttribute cameraFlagObjCount = drawXml.CreateAttribute("flagObjCount");
+                    cameraFlagObjCount.Value = flagObjCount.ToString();
+                    cameraNode.Attributes.Append(cameraFlagObjCount);
+                    XmlAttribute cameraFlagStop = drawXml.CreateAttribute("flagStop");
+                    cameraFlagStop.Value = flagStop.ToString();
+                    cameraNode.Attributes.Append(cameraFlagStop);
+                    XmlAttribute cameraFlagDirection = drawXml.CreateAttribute("flagDirection");
+                    cameraFlagDirection.Value = flagDirection.ToString();
+                    cameraNode.Attributes.Append(cameraFlagDirection);
+                    XmlAttribute cameraCrossLine = drawXml.CreateAttribute("flagCrossLine");
+                    cameraCrossLine.Value = flagCrossLine.ToString();
+                    cameraNode.Attributes.Append(cameraCrossLine);
+                    XmlAttribute cameraFlagChangeChannel = drawXml.CreateAttribute("flagChangeChannel");
+                    cameraFlagChangeChannel.Value = flagChangeChannel.ToString();
+                    cameraNode.Attributes.Append(cameraFlagChangeChannel);
+                    XmlAttribute cameraFlagConjestion = drawXml.CreateAttribute("flagConjestion");
+                    cameraFlagConjestion.Value = flagCongestion.ToString();
+                    cameraNode.Attributes.Append(cameraFlagConjestion);
+                    XmlAttribute cameraIMaxObjNum = drawXml.CreateAttribute("iMaxObjNum");
+                    cameraIMaxObjNum.Value = iMaxObjNum.ToString();
+                    cameraNode.Attributes.Append(cameraIMaxObjNum);
+                    //////////////////////////////////count/////////////////////////////////////
+                    XmlNode cooutInfo = drawXml.CreateElement("Count");
+                    cameraNode.AppendChild(cooutInfo);
+                    try
+                    {
+                        if (ListShapes == null)
+                        {
+                            return;
+                        }
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyLine)
+                            {
+                                XmlNode line = drawXml.CreateElement("line");
+                                cooutInfo.AppendChild(line);
+                                XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
+                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                lineX1.Value = x1.ToString();
+                                line.Attributes.Append(lineX1);
+                                XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
+                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                lineY1.Value = y1.ToString();
+                                line.Attributes.Append(lineY1);
+
+                                XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
+                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                line.Attributes.Append(lineX2);
+                                XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
+                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                line.Attributes.Append(lineY2);
+                            }
+                            else if (v is MyArrow)
+                            {
+                                XmlNode arrow = drawXml.CreateElement("arrow");
+                                cooutInfo.AppendChild(arrow);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X1");
+                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
+                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y1);
+
+                                XmlAttribute X2 = drawXml.CreateAttribute("X2");
+                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X2);
+                                XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
+                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y2);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    //////////////////////////////////Dir////////////////////////////////////////
+                    XmlNode dirInfo = drawXml.CreateElement("Dir");
+                    cameraNode.AppendChild(dirInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyArrow)
+                            {
+                                XmlNode arrow = drawXml.CreateElement("arrow");
+                                dirInfo.AppendChild(arrow);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X1");
+                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
+                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y1);
+
+                                XmlAttribute X2 = drawXml.CreateAttribute("X2");
+                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X2);
+                                XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
+                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y2);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    ///////////////////////////////////cross///////////////////////////////////////
+                    XmlNode crossInfo = drawXml.CreateElement("Cross");
+                    cameraNode.AppendChild(crossInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyLine)
+                            {
+                                XmlNode line = drawXml.CreateElement("line");
+                                crossInfo.AppendChild(line);
+                                XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
+                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                lineX1.Value = x1.ToString();
+                                line.Attributes.Append(lineX1);
+                                XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
+                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                lineY1.Value = y1.ToString();
+                                line.Attributes.Append(lineY1);
+
+                                XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
+                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                line.Attributes.Append(lineX2);
+                                XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
+                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                line.Attributes.Append(lineY2);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    /////////////////////////////////changechannel/////////////////////////////////////////
+                    XmlNode changeChannelInfo = drawXml.CreateElement("ChangeChannel");
+                    cameraNode.AppendChild(changeChannelInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyLine)
+                            {
+                                XmlNode line = drawXml.CreateElement("line");
+                                changeChannelInfo.AppendChild(line);
+                                XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
+                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                lineX1.Value = x1.ToString();
+                                line.Attributes.Append(lineX1);
+                                XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
+                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                lineY1.Value = y1.ToString();
+                                line.Attributes.Append(lineY1);
+
+                                XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
+                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                line.Attributes.Append(lineX2);
+                                XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
+                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                line.Attributes.Append(lineY2);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                    	XtraMessageBox.Show(ex.ToString());
+                    }
+                    //////////////////////////////////////ROI////////////////////////////////////
+                    XmlNode ROIInfo = drawXml.CreateElement("ROI");
+                    cameraNode.AppendChild(ROIInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyPoly)
+                            {
+                                for (i = 0; i < (v as MyPoly).ListPoint.Count; i++)
+                                {
+                                    XmlNode point = drawXml.CreateElement("point");
+                                    ROIInfo.AppendChild(point);
+                                    XmlAttribute x = drawXml.CreateAttribute("X");
+                                    x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X * (float)xScale)).ToString();
+                                    point.Attributes.Append(x);
+                                    XmlAttribute y = drawXml.CreateAttribute("Y");
+                                    y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y * (float)yScale)).ToString();
+                                    point.Attributes.Append(y);
+                                }
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                    	XtraMessageBox.Show(ex.ToString());
+                    }
+                    break;
+                case 1://face
+                    XmlNode cameraRectsF = drawXml.CreateElement("Rects");
+                    cameraNode.AppendChild(cameraRectsF);
+                    try
+                    {
+                        foreach(var v in ListShapes)
+                        {
+                            if (v is MyRect)
+                            {
+                                XmlNode rectangle = drawXml.CreateElement("Rect");
+                                cameraRectsF.AppendChild(rectangle);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X");
+                                X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y");
+                                Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(Y1);
+
+                                XmlAttribute w = drawXml.CreateAttribute("W");
+                                w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(w);
+                                XmlAttribute h = drawXml.CreateAttribute("H");
+                                h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(h);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                    	XtraMessageBox.Show(ex.ToString());
+                    }
+                    break;
+                case 2://vehicle
+                    XmlNode cameraRectsV = drawXml.CreateElement("Rects");
+                    cameraNode.AppendChild(cameraRectsV);
+                    try
+                    {
+                        foreach(var v in ListShapes)
+                        {
+                            if (v is MyRect)
+                            {
+                                XmlNode rectangle = drawXml.CreateElement("Rect");
+                                cameraRectsV.AppendChild(rectangle);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X");
+                                X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y");
+                                Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(Y1);
+
+                                XmlAttribute w = drawXml.CreateAttribute("W");
+                                w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(w);
+                                XmlAttribute h = drawXml.CreateAttribute("H");
+                                h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(h);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                    	XtraMessageBox.Show(ex.ToString());
+                    }
+                    break;
+                default:
+                    break;
+            }
+            drawXml.Save(@"c:\text.xml");
+            SaveXmlWithPenInfo();
+        }
+        public void SaveXmlWithPenInfo()
+        {
+            int i;
+            XmlDocument drawXml = new XmlDocument();
+            XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);//head
+            drawXml.AppendChild(docNode);
+            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
+
+            if (ri == null)
+            {
+                if (XtraMessageBox.Show("对不起，您使用的照片没有对应的识别器，请另选", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
+                    this.Close();
                     return;
                 }
-                foreach (var v in ListShapes)
-                {
-                    if (v is MyLine)
-                    {
-                        XmlNode line = drawXmlAdmin.CreateElement("line");
-                        linesNodeAdmin.AppendChild(line);
-                        XmlAttribute lineX1 = drawXmlAdmin.CreateAttribute("X1");
-                        int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
-                        lineX1.Value = x1.ToString();
-                        line.Attributes.Append(lineX1);
-                        XmlAttribute lineY1 = drawXmlAdmin.CreateAttribute("Y1");
-                        int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
-                        lineY1.Value = y1.ToString();
-                        line.Attributes.Append(lineY1);
 
-                        XmlAttribute lineX2 = drawXmlAdmin.CreateAttribute("X2");
-                        lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
-                        line.Attributes.Append(lineX2);
-                        XmlAttribute lineY2 = drawXmlAdmin.CreateAttribute("Y2");
-                        lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
-                        line.Attributes.Append(lineY2);
-
-                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
-                        //penColor.Value = (v as MyLine).MyPen.Color.ToString();
-                        penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
-
-                        line.Attributes.Append(penColor);
-                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
-                        penWidth.Value = (v as MyLine).MyPen.Width.ToString();
-                        line.Attributes.Append(penWidth);
-                        //lineX.InnerText = listLine[i];
-                    }
-                    else if (v is MyRect)
-                    {
-                        XmlNode rectangle = drawXmlAdmin.CreateElement("rectangle");
-                        rectsNodeAdmin.AppendChild(rectangle);
-                        XmlAttribute X1 = drawXmlAdmin.CreateAttribute("X");
-                        X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
-                        rectangle.Attributes.Append(X1);
-                        XmlAttribute Y1 = drawXmlAdmin.CreateAttribute("Y");
-                        Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
-                        rectangle.Attributes.Append(Y1);
-
-                        XmlAttribute w = drawXmlAdmin.CreateAttribute("W");
-                        w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
-                        rectangle.Attributes.Append(w);
-                        XmlAttribute h = drawXmlAdmin.CreateAttribute("H");
-                        h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
-                        rectangle.Attributes.Append(h);
-
-                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
-                        //penColor.Value = (v as MyRect).MyPen.Color.ToString();
-                        penColor.Value = ColorTranslator.ToHtml((v as MyRect).MyPen.Color);
-                        rectangle.Attributes.Append(penColor);
-                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
-                        penWidth.Value = (v as MyRect).MyPen.Width.ToString();
-                        rectangle.Attributes.Append(penWidth);
-                    }
-                    else if (v is MyArrow)
-                    {
-                        XmlNode arrow = drawXmlAdmin.CreateElement("arrow");
-                        arrowsNodeAdmin.AppendChild(arrow);
-                        XmlAttribute X1 = drawXmlAdmin.CreateAttribute("X1");
-                        X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
-                        arrow.Attributes.Append(X1);
-                        XmlAttribute Y1 = drawXmlAdmin.CreateAttribute("Y1");
-                        Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
-                        arrow.Attributes.Append(Y1);
-
-                        XmlAttribute X2 = drawXmlAdmin.CreateAttribute("X2");
-                        X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
-                        arrow.Attributes.Append(X2);
-                        XmlAttribute Y2 = drawXmlAdmin.CreateAttribute("Y2");
-                        Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
-                        arrow.Attributes.Append(Y2);
-
-                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
-                        //penColor.Value = (v as MyArrow).MyPen.Color.ToString();
-                        penColor.Value = ColorTranslator.ToHtml((v as MyArrow).MyPen.Color);
-                        arrow.Attributes.Append(penColor);
-                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
-                        penWidth.Value = (v as MyArrow).MyPen.Width.ToString();
-                        arrow.Attributes.Append(penWidth);
-                    }
-                    else
-                    {
-                        XmlNode region = drawXmlAdmin.CreateElement("region");
-                        XmlAttribute pointnumber = drawXmlAdmin.CreateAttribute("pointnumber");
-                        pointnumber.Value = (v as MyPoly).ListPoint.Count.ToString();
-                        region.Attributes.Append(pointnumber);
-                        regionsNodeAdmin.AppendChild(region);
-
-                        XmlAttribute penColor = drawXmlAdmin.CreateAttribute("PenColor");
-                        //penColor.Value = (v as MyPoly).MyPen.Color.ToString();
-                        penColor.Value = ColorTranslator.ToHtml((v as MyPoly).MyPen.Color);
-                        region.Attributes.Append(penColor);
-                        XmlAttribute penWidth = drawXmlAdmin.CreateAttribute("PenWidth");
-                        penWidth.Value = (v as MyPoly).MyPen.Width.ToString();
-                        region.Attributes.Append(penWidth);
-
-                        for (i = 0; i < (v as MyPoly).ListPoint.Count; i++)
-                        {
-                            XmlNode point = drawXmlAdmin.CreateElement("point");
-                            region.AppendChild(point);
-                            XmlAttribute x = drawXmlAdmin.CreateAttribute("X");
-                            x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X * (float)xScale)).ToString();
-                            point.Attributes.Append(x);
-                            XmlAttribute y = drawXmlAdmin.CreateAttribute("Y");
-                            y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y * (float)yScale)).ToString();
-                            point.Attributes.Append(y);
-                        }
-
-                    }
-                }
             }
-            catch (System.Exception ex)
+            XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
+            XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
+            recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
+       
+            recognizerNode.Attributes.Append(recognizerAttribute);
+            drawXml.AppendChild(recognizerNode);
+            XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
+            recognizerNode.AppendChild(camerasNode);
+            XmlNode cameraNode = drawXml.CreateElement("camera");
+            camerasNode.AppendChild(cameraNode);
+            XmlAttribute cameraAttribute = drawXml.CreateAttribute("id");
+            cameraAttribute.Value = _cameraId.ToString();
+            cameraNode.Attributes.Append(cameraAttribute);
+            switch (comboBoxEditTypeChoice.SelectedIndex)
             {
-                XtraMessageBox.Show(ex.ToString());
-            } 
-            String nameadmin;
-            nameadmin = @"c:\" + ri.Id.ToString() + "." + _cameraId.ToString() + "admin" + ".xml";//识别器和摄像头的编号
-            drawXmlAdmin.Save(@nameadmin);//保存完之后再加pen信息，保存为另一个文件
+                case 0://event
+                    //////////////////////////////camera////////////////////////////////////////
+                    XmlAttribute cameraWidth = drawXml.CreateAttribute("width");
+                    cameraWidth.Value = "200".ToString();
+                    cameraNode.Attributes.Append(cameraWidth);
+                    XmlAttribute cameraHeight = drawXml.CreateAttribute("height");
+                    cameraHeight.Value = "230".ToString();
+                    cameraNode.Attributes.Append(cameraHeight);
+                    XmlAttribute cameraMinarea = drawXml.CreateAttribute("Minarea");
+                    cameraMinarea.Value = Minarea.ToString();
+                    cameraNode.Attributes.Append(cameraMinarea);
+                    XmlAttribute cameraDrawTrack = drawXml.CreateAttribute("DrawTrack");
+                    cameraDrawTrack.Value = DrawTrack.ToString();
+                    cameraNode.Attributes.Append(cameraDrawTrack);
+                    XmlAttribute cameraDrawObject = drawXml.CreateAttribute("DrawObjs");
+                    cameraDrawObject.Value = DrawObjs.ToString();
+                    cameraNode.Attributes.Append(cameraDrawObject);
+                    XmlAttribute cameraDrawDirection = drawXml.CreateAttribute("DrawDirection");
+                    cameraDrawDirection.Value = DrawDirection.ToString();
+                    cameraNode.Attributes.Append(cameraDrawDirection);
+                    XmlAttribute cameraDrawROI = drawXml.CreateAttribute("DrawROI");
+                    cameraDrawROI.Value = DrawROI.ToString();
+                    cameraNode.Attributes.Append(cameraDrawROI);
+                    XmlAttribute cameraFlagObjCount = drawXml.CreateAttribute("flagObjCount");
+                    cameraFlagObjCount.Value = flagObjCount.ToString();
+                    cameraNode.Attributes.Append(cameraFlagObjCount);
+                    XmlAttribute cameraFlagStop = drawXml.CreateAttribute("flagStop");
+                    cameraFlagStop.Value = flagStop.ToString();
+                    cameraNode.Attributes.Append(cameraFlagStop);
+                    XmlAttribute cameraFlagDirection = drawXml.CreateAttribute("flagDirection");
+                    cameraFlagDirection.Value = flagDirection.ToString();
+                    cameraNode.Attributes.Append(cameraFlagDirection);
+                    XmlAttribute cameraCrossLine = drawXml.CreateAttribute("flagCrossLine");
+                    cameraCrossLine.Value = flagCrossLine.ToString();
+                    cameraNode.Attributes.Append(cameraCrossLine);
+                    XmlAttribute cameraFlagChangeChannel = drawXml.CreateAttribute("flagChangeChannel");
+                    cameraFlagChangeChannel.Value = flagChangeChannel.ToString();
+                    cameraNode.Attributes.Append(cameraFlagChangeChannel);
+                    XmlAttribute cameraFlagConjestion = drawXml.CreateAttribute("flagConjestion");
+                    cameraFlagConjestion.Value = flagCongestion.ToString();
+                    cameraNode.Attributes.Append(cameraFlagConjestion);
+                    XmlAttribute cameraIMaxObjNum = drawXml.CreateAttribute("iMaxObjNum");
+                    cameraIMaxObjNum.Value = iMaxObjNum.ToString();
+                    cameraNode.Attributes.Append(cameraIMaxObjNum);
+                    //////////////////////////////////count/////////////////////////////////////
+                    XmlNode cooutInfo = drawXml.CreateElement("Count");
+                    cameraNode.AppendChild(cooutInfo);
+                    try
+                    {
+                        if (ListShapes == null)
+                        {
+                            return;
+                        }
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyLine)
+                            {
+                                XmlNode line = drawXml.CreateElement("line");
+                                cooutInfo.AppendChild(line);
+                                XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
+                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                lineX1.Value = x1.ToString();
+                                line.Attributes.Append(lineX1);
+                                XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
+                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                lineY1.Value = y1.ToString();
+                                line.Attributes.Append(lineY1);
 
+                                XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
+                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                line.Attributes.Append(lineX2);
+                                XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
+                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                line.Attributes.Append(lineY2);
+                                //添加pen的信息
+                                XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
+                                penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
+                                line.Attributes.Append(penColor);
+                                XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
+                                penWidth.Value = (v as MyLine).MyPen.Width.ToString();
+                                line.Attributes.Append(penWidth);
+                            }
+                            else if (v is MyArrow)
+                            {
+                                XmlNode arrow = drawXml.CreateElement("arrow");
+                                cooutInfo.AppendChild(arrow);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X1");
+                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
+                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y1);
+
+                                XmlAttribute X2 = drawXml.CreateAttribute("X2");
+                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X2);
+                                XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
+                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y2);
+                                //添加pen的信息
+                                XmlAttribute apenColor = drawXml.CreateAttribute("PenColor");
+                                apenColor.Value = ColorTranslator.ToHtml((v as MyArrow).MyPen.Color);
+                                arrow.Attributes.Append(apenColor);
+                                XmlAttribute apenWidth = drawXml.CreateAttribute("PenWidth");
+                                apenWidth.Value = (v as MyArrow).MyPen.Width.ToString();
+                                arrow.Attributes.Append(apenWidth);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    //////////////////////////////////Dir////////////////////////////////////////
+                    XmlNode dirInfo = drawXml.CreateElement("Dir");
+                    cameraNode.AppendChild(dirInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyArrow)
+                            {
+                                XmlNode arrow = drawXml.CreateElement("arrow");
+                                dirInfo.AppendChild(arrow);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X1");
+                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
+                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y1);
+
+                                XmlAttribute X2 = drawXml.CreateAttribute("X2");
+                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                arrow.Attributes.Append(X2);
+                                XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
+                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                arrow.Attributes.Append(Y2);
+                                //添加pen的信息
+                                XmlAttribute dpenColor = drawXml.CreateAttribute("PenColor");
+                                dpenColor.Value = ColorTranslator.ToHtml((v as MyArrow).MyPen.Color);
+                                arrow.Attributes.Append(dpenColor);
+                                XmlAttribute dpenWidth = drawXml.CreateAttribute("PenWidth");
+                                dpenWidth.Value = (v as MyArrow).MyPen.Width.ToString();
+                                arrow.Attributes.Append(dpenWidth);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    ///////////////////////////////////cross///////////////////////////////////////
+                    XmlNode crossInfo = drawXml.CreateElement("Cross");
+                    cameraNode.AppendChild(crossInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyLine)
+                            {
+                                XmlNode line = drawXml.CreateElement("line");
+                                crossInfo.AppendChild(line);
+                                XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
+                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                lineX1.Value = x1.ToString();
+                                line.Attributes.Append(lineX1);
+                                XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
+                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                lineY1.Value = y1.ToString();
+                                line.Attributes.Append(lineY1);
+
+                                XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
+                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                line.Attributes.Append(lineX2);
+                                XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
+                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                line.Attributes.Append(lineY2);
+                                //添加pen的信息
+                                XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
+                                penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
+                                line.Attributes.Append(penColor);
+                                XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
+                                penWidth.Value = (v as MyLine).MyPen.Width.ToString();
+                                line.Attributes.Append(penWidth);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    /////////////////////////////////changechannel/////////////////////////////////////////
+                    XmlNode changeChannelInfo = drawXml.CreateElement("ChangeChannel");
+                    cameraNode.AppendChild(changeChannelInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyLine)
+                            {
+                                XmlNode line = drawXml.CreateElement("line");
+                                changeChannelInfo.AppendChild(line);
+                                XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
+                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                lineX1.Value = x1.ToString();
+                                line.Attributes.Append(lineX1);
+                                XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
+                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                lineY1.Value = y1.ToString();
+                                line.Attributes.Append(lineY1);
+
+                                XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
+                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                line.Attributes.Append(lineX2);
+                                XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
+                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                line.Attributes.Append(lineY2);
+                                //添加pen的信息
+                                XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
+                                penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
+                                line.Attributes.Append(penColor);
+                                XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
+                                penWidth.Value = (v as MyLine).MyPen.Width.ToString();
+                                line.Attributes.Append(penWidth);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    //////////////////////////////////////ROI////////////////////////////////////
+                    XmlNode ROIInfo = drawXml.CreateElement("ROI");
+                    cameraNode.AppendChild(ROIInfo);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyPoly)
+                            {
+                                for (i = 0; i < (v as MyPoly).ListPoint.Count; i++)
+                                {
+                                    XmlNode point = drawXml.CreateElement("point");
+                                    ROIInfo.AppendChild(point);
+                                    XmlAttribute x = drawXml.CreateAttribute("X");
+                                    x.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].X * (float)xScale)).ToString();
+                                    point.Attributes.Append(x);
+                                    XmlAttribute y = drawXml.CreateAttribute("Y");
+                                    y.Value = ((int)((v as MyPoly).ListPoint.ToArray()[i].Y * (float)yScale)).ToString();
+                                    point.Attributes.Append(y);
+                                    //添加pen的信息
+                                    XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
+                                    penColor.Value = ColorTranslator.ToHtml((v as MyPoly).MyPen.Color);
+                                    point.Attributes.Append(penColor);
+                                    XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
+                                    penWidth.Value = (v as MyPoly).MyPen.Width.ToString();
+                                    point.Attributes.Append(penWidth);
+                                }
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    break;
+                case 1://face
+                    XmlNode cameraRectsF = drawXml.CreateElement("Rects");
+                    cameraNode.AppendChild(cameraRectsF);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyRect)
+                            {
+                                XmlNode rectangle = drawXml.CreateElement("Rect");
+                                cameraRectsF.AppendChild(rectangle);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X");
+                                X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y");
+                                Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(Y1);
+
+                                XmlAttribute w = drawXml.CreateAttribute("W");
+                                w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(w);
+                                XmlAttribute h = drawXml.CreateAttribute("H");
+                                h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(h);
+                                //添加pen的信息
+                                XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
+                                penColor.Value = ColorTranslator.ToHtml((v as MyRect).MyPen.Color);
+                                rectangle.Attributes.Append(penColor);
+                                XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
+                                penWidth.Value = (v as MyRect).MyPen.Width.ToString();
+                                rectangle.Attributes.Append(penWidth);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    break;
+                case 2://vehicle
+                    XmlNode cameraRectsV = drawXml.CreateElement("Rects");
+                    cameraNode.AppendChild(cameraRectsV);
+                    try
+                    {
+                        foreach (var v in ListShapes)
+                        {
+                            if (v is MyRect)
+                            {
+                                XmlNode rectangle = drawXml.CreateElement("Rect");
+                                cameraRectsV.AppendChild(rectangle);
+                                XmlAttribute X1 = drawXml.CreateAttribute("X");
+                                X1.Value = ((int)((v as MyRect).P1.X * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(X1);
+                                XmlAttribute Y1 = drawXml.CreateAttribute("Y");
+                                Y1.Value = ((int)((v as MyRect).P1.Y * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(Y1);
+
+                                XmlAttribute w = drawXml.CreateAttribute("W");
+                                w.Value = ((int)((v as MyRect).Width * (float)xScale)).ToString();
+                                rectangle.Attributes.Append(w);
+                                XmlAttribute h = drawXml.CreateAttribute("H");
+                                h.Value = ((int)((v as MyRect).Height * (float)yScale)).ToString();
+                                rectangle.Attributes.Append(h);
+                                //添加pen的信息
+                                XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
+                                penColor.Value = ColorTranslator.ToHtml((v as MyRect).MyPen.Color);
+                                rectangle.Attributes.Append(penColor);
+                                XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
+                                penWidth.Value = (v as MyRect).MyPen.Width.ToString();
+                                rectangle.Attributes.Append(penWidth);
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString());
+                    }
+                    break;
+                default:
+                    break;
+            }
+            drawXml.Save(@"c:\text2.xml");
         }
 
         private void DrawingShapes(List<MyShape> ListShapes)
@@ -795,6 +1217,53 @@ namespace CameraViewer
         private void mytest()
         {
         
+        }
+
+        private void comboBoxEditTypeChoice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxEditTypeChoice.SelectedIndex)
+            {
+                case 0://事件
+                    //save xml to Event
+                    ButtonJiantou.Enabled = true;
+                    LineButton.Enabled = true;
+                    ButtonRect.Enabled = true;
+                    frmEventSetting eventfrm = new frmEventSetting();
+                    eventfrm.ShowDialog();
+                    DrawTrack = eventfrm.DrawTrack;
+                    DrawObjs = eventfrm.DrawObjs;
+                    DrawDirection = eventfrm.DrawDirection;
+                    DrawROI = eventfrm.DrawROI;
+                    flagObjCount = eventfrm.flagObjCount;
+                    flagDirection = eventfrm.flagDirection;
+                    flagCrossLine = eventfrm.flagCrossLine;
+                    flagChangeChannel = eventfrm.flagChangeChannel;
+                    flagCongestion = eventfrm.flagCongestion;
+                    flagStop = eventfrm.flagStop;
+                    Minarea = eventfrm.Minarea;
+                    iMaxObjNum = eventfrm.iMaxObjNum;
+                    /*if (DrawTrack==0)
+                    {
+
+                    }*/
+                    eventfrm.Close();
+                    break;
+                case 1://人脸
+                    LineButton.Enabled = false;
+                    ButtonJiantou.Enabled = false;
+                    barButtonDuoBX.Enabled = false;
+
+                    //save xml to Face
+                    break;
+                case 2://车牌
+                    LineButton.Enabled = false;
+                    ButtonJiantou.Enabled = false;
+                    barButtonDuoBX.Enabled = false;
+                    //save xml to Vehicle
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
