@@ -882,7 +882,7 @@ namespace CameraViewer
                     else
                     {
 
-                        if (camWindows[i, j].Camera!=null && lastClicked.Camera.CurrentCamera.CameraId == camWindows[i, j].Camera.CurrentCamera.CameraId)
+                        if (camWindows[i, j]==lastClicked)
                         {
                             camWindows[i, j].Visible = true;
                             camWindows[i, j].Location = new Point(startX, startY);
@@ -932,7 +932,7 @@ namespace CameraViewer
                 doubleClicked = (CameraWindow)sender;
                 if (DoubleCamera != null)
                 {
-                    DoubleCamera(!isFullScreen, currentWin.Camera.CurrentCamera);
+                    DoubleCamera(!isFullScreen, currentWin.Camera == null ? null : currentWin.Camera.CurrentCamera);
                 }
                 CurrentCameraWindow = currentWin;
                 SetClickON(CurrentCameraWindow);

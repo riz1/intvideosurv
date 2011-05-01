@@ -30,7 +30,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public static int Insert(ref string errMessage, VideoInfo videoInfo)
+        public int Insert(ref string errMessage, VideoInfo videoInfo)
         {
 
             Database db = DatabaseFactory.CreateDatabase();
@@ -48,7 +48,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public static int Delete(ref string errMessage, int id)
+        public int Delete(ref string errMessage, int id)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
@@ -66,7 +66,7 @@ namespace IntVideoSurv.Business
 
         }
 
-        public static VideoInfo GetVideoInfoById(ref string errMessage, int id)
+        public VideoInfo GetVideoInfoById(ref string errMessage, int id)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
@@ -97,7 +97,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public static Dictionary<int,VideoInfo> GetVideoInfoByCamera(ref string errMessage, int cameraId)
+        public Dictionary<int,VideoInfo> GetVideoInfoByCamera(ref string errMessage, int cameraId)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
@@ -134,7 +134,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public static Dictionary<int, VideoInfo> GetVideoInfoByCameraDateTime(ref string errMessage, int cameraId, DateTime captureBeginTime, DateTime captureEndTime)
+        public Dictionary<int, VideoInfo> GetVideoInfoByCameraDateTime(ref string errMessage, int cameraId, DateTime captureBeginTime, DateTime captureEndTime)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";

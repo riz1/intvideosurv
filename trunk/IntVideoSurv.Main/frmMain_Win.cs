@@ -71,11 +71,14 @@ namespace CameraViewer
 
 
             _getTransPacket = new GetTransPacket();
-            _getTransPacket.LivePacketHandle.DataChange += LivePacketHandleDataChange;
+            _getTransPacket.LiveDecoderPacketHandle.DataChange += LiveDecoderPacketHandleDataChange;
 
             //start tcp server
-            //var thread = new Thread(StartServer) { IsBackground = true };
-            //thread.Start();
+            var thread = new Thread(StartServerForDecoder) { IsBackground = true };
+            thread.Start();
+
+            var threadForRecognizer = new Thread(StartServerForRecognizer) { IsBackground = true };
+            threadForRecognizer.Start();
 
             
         }
@@ -267,7 +270,7 @@ namespace CameraViewer
         {
             
             bar2.Visible = !isFullScreen;
-            cameraView1.Visible = !isFullScreen;
+            //cameraView1.Visible = !isFullScreen;
             _isFullScreen = isFullScreen;
             if (_isFullScreen)
             {
@@ -427,8 +430,8 @@ namespace CameraViewer
             Splash.Splash.Status = "获取解码器信息...";
             _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
             cameraView1.ListDecoder = _listDecoder;
-            
 
+            LoadAllCamera();
             this.cameraView1.tvSynGroup.DoubleClick += this.tvSynGroup_DoubleClick;
             this.cameraView1.xtraTabControl2.SelectedPageChanged += this.xtraTabControl2_SelectedPageChanged;
             this.cameraView1.DoubleDecoderCam += CameraView1DoubleDecoderCam;
@@ -477,6 +480,109 @@ namespace CameraViewer
             //splitContainerControl1.SplitterPosition = splitContainerControl1.Height - tlpBottom.Height;
         }
 
+        private void LoadAllCamera()
+        {
+            if (_listGroup == null) return;
+            int iRow = 2;
+            int iCol = 2;
+            int iCount = 0;
+            mainMultiplexer.CloseAll();
+            mainMultiplexer.CamerasVisible = true;
+            mainMultiplexer.CellWidth = 320;
+            mainMultiplexer.CellHeight = 240;
+            mainMultiplexer.FitToWindow = true;
+            _listCam = new Dictionary<int, CameraInfo>();
+            HikVideoServerDeviceDriver deviceDriver;
+            HikVideoServerCameraDriver cameraDriver;
+            foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
+            {
+                if (item.Value.ListDevice != null)
+                {
+                    foreach (KeyValuePair<int, DeviceInfo> device in item.Value.ListDevice)
+                    {
+                        if (device.Value.ListCamera != null)
+                        {
+                            foreach (KeyValuePair<int, CameraInfo> camera in device.Value.ListCamera)
+                            {
+                                if (camera.Value.IsValid)
+                                {
+
+                                    //runninPool.Add(device.Value, camera.Value);
+                                    _listCam.Add(iCount, camera.Value);
+                                    iCount = iCount + 1;
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            Util.GetRowCol(iCount, ref iRow, ref iCol);
+            iCount = 0;
+            VideoOutputInfo videoInfo;
+            //VideoOutputDriver videoDriver;
+            DeviceInfo oDevice;
+            DeviceInfo oDeviceHandle;
+            int OutputPort = 0;
+            for (int i = 0; i < iRow; i++)
+            {
+                for (int j = 0; j < iCol; j++)
+                {
+                    // get camera
+                    if (_listCam.ContainsKey(iCount))
+                    {
+                        CameraInfo camera = _listCam[iCount];
+                        CameraWindow camwin = mainMultiplexer.GetCamera(i, j);
+                        IntPtr intPtr= new IntPtr();
+                        camera.Handle = intPtr;
+                        oDevice = _listDevice[camera.DeviceId];
+                        // oDevice.Handle = camwin.Handle;
+                        oDevice.Handle = this.Handle;
+                        if (!_runningDeviceList.ContainsKey(camera.DeviceId))
+                        {
+                            deviceDriver = new HikVideoServerDeviceDriver();
+                            deviceDriver.Init(ref oDevice);
+                            _runningDeviceList.Add(camera.DeviceId, deviceDriver);
+                        }
+                        if (!_runningDeviceList[camera.DeviceId].IsValidDevice)
+                        {
+                            iCount = iCount + 1;
+                            continue;
+
+                        }
+                        oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
+                        if (!_runningCameraList.ContainsKey(camera.CameraId))
+                        {
+                            cameraDriver = new HikVideoServerCameraDriver(oDevice);
+                            cameraDriver.Start(camera, CardOutType.DefaultDisplay, 1);
+                            _runningCameraList.Add(camera.CameraId, cameraDriver);
+                            mainMultiplexer.SetCamera(i, j, cameraDriver);
+                        }
+
+
+                        //runningPool.Add(camwin, oDevice, camera);
+                        if (OutputPort < 2)
+                        {
+                            videoInfo = new VideoOutputInfo();
+                            videoInfo.CameraId = camera.CameraId;
+                            videoInfo.OutputPort = OutputPort;
+
+                            OutputPort = OutputPort + 1;
+
+                        }
+                        iCount = iCount + 1;
+
+                    }
+
+                }
+            }
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.SingleCameraMode = false;
+            mainMultiplexer.CamerasVisible = true;
+        }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -564,29 +670,29 @@ namespace CameraViewer
             barStaticItemCurrentTime.Caption = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
-        private void LivePacketHandleDataChange(object sender, DataChangeEventArgs e)
+        private void LiveDecoderPacketHandleDataChange(object sender, DataChangeEventArgs e)
         {
 
-            var livePacketHandle = (LivePacketHandle)sender;
+            var livePacketHandle = (LiveDecoderPacketHandle)sender;
             if (livePacketHandle == null) return;
             //处理视频 
             ShowLiveVideo(livePacketHandle);
 
         }
-        protected void ShowLiveVideo(LivePacketHandle livePacketHandle)
+        protected void ShowLiveVideo(LiveDecoderPacketHandle liveDecoderPacketHandle)
         {
             CrossThreadOperationControl crossAdd = delegate()
             {
                 string errMsg = "";
                 Dictionary<int, WindowCameraInfo> listWindowCamera =
                     WindowCameraBusiness.Instance.GetWindowCameraInfoByCamera(ref errMsg,
-                                                                              livePacketHandle.CurrentNetImage.CameraId);
+                                                                              liveDecoderPacketHandle.CurrentNetImage.CameraId);
 
                 foreach (var windowCameraInfo in listWindowCamera)
                 {
                     CameraWindow cameraWindow = mainMultiplexer.GetCamera(windowCameraInfo.Value.Row, windowCameraInfo.Value.Col);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
-                    cameraWindow.CurrentImage = livePacketHandle.CurrentNetImage.Image;
+                    cameraWindow.CurrentImage = liveDecoderPacketHandle.CurrentNetImage.Image;
                     cameraWindow.CameraID = windowCameraInfo.Key;
                     cameraWindow.Refresh();                   
                 }
@@ -652,6 +758,8 @@ namespace CameraViewer
 
         #endregion
 
+        #region 与解码器的通信
+
         private bool _socketState;
         private void timerCheckConnection_Tick(object sender, EventArgs e)
         {
@@ -659,27 +767,22 @@ namespace CameraViewer
                 ConnectionServer();
         }
         private TcpListener listener = new TcpListener(IPAddress.Any, 8000);
-        private TcpClient client=new TcpClient();
-        private Thread thThreadread;//创建线程，用以侦听端口号，接受信息
+        private readonly TcpClient tcpClientDecoder=new TcpClient();
 
+        private Socket _socket2Decoder;
 
-        private  int portNum; //= Convert.ToInt32(LocalPortTxt.Text);
-        private bool done = false;
-        private IPEndPoint ipep ;
-        private Socket server;
-
-        public void StartServer()
+        public void StartServerForDecoder()
         {
             try{
-                server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                server.Bind(new IPEndPoint(new IPAddress(new byte[]{192,168,1,108}), 8888));
-                server.Listen(500);
+                _socket2Decoder = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                _socket2Decoder.Bind(new IPEndPoint(new IPAddress(new byte[]{127,0,0,1}), 8888));
+                _socket2Decoder.Listen(500);
                 // 开始侦听
-                while (!done)
+                while (true)
                 {
-                    Socket client = server.Accept();
+                    Socket client = _socket2Decoder.Accept();
                     //start tcp server
-                    var parStart = new ParameterizedThreadStart(SocketThread);
+                    var parStart = new ParameterizedThreadStart(SocketDecoderThread);
                     var myThread = new Thread(parStart);
                     myThread.Start(client);
                 }
@@ -690,36 +793,100 @@ namespace CameraViewer
             }
             finally
             {
-                client.Close();
+                tcpClientDecoder.Close();
                 listener.Stop();
-                server.Close();
+                _socket2Decoder.Close();
             }
         }
 
         //处理socket连接的线程
-        public void SocketThread(object socket)
+        public void SocketDecoderThread(object socket)
         {
             //获得客户端节点对象   
-            var clientConnection = new ClientConnection((Socket)socket);
+            var clientConnection = new DecoderClientConnection((Socket)socket);
 
-            clientConnection.LivePacketHandle.DataChange += LivePacketHandleDataChange; 
+            clientConnection.LiveDecoderPacketHandle.DataChange += LiveDecoderPacketHandleDataChange; 
 
-            if (!listRunningClient.ContainsKey(clientConnection.DecoderInfo.id))
+            if (!listRunningDecoderClient.ContainsKey(clientConnection.DecoderInfo.id))
             {
-                listRunningClient.Add(clientConnection.DecoderInfo.id, clientConnection);
+                listRunningDecoderClient.Add(clientConnection.DecoderInfo.id, clientConnection);
             }
             else
             {
-                listRunningClient[clientConnection.DecoderInfo.id] = clientConnection;
+                listRunningDecoderClient[clientConnection.DecoderInfo.id] = clientConnection;
             }
             clientConnection.SendDecoderXML();
             clientConnection.GetData();
         }
-        private Dictionary<int, ClientConnection> listRunningClient = new Dictionary<int, ClientConnection>();
+        private Dictionary<int, DecoderClientConnection> listRunningDecoderClient = new Dictionary<int, DecoderClientConnection>();
+
+
+        #endregion
+
+        #region 与识别器的通信
+
+        private readonly TcpListener _listenerRecognizer = new TcpListener(IPAddress.Any, 8000);
+        private readonly TcpClient _tcpClientRecognizer = new TcpClient();
+
+        private Socket _socket2Recognizer;
+
+        public void StartServerForRecognizer()
+        {
+            try
+            {
+                _socket2Recognizer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                _socket2Recognizer.Bind(new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 9999));
+                _socket2Recognizer.Listen(500);
+                // 开始侦听
+                while (true)
+                {
+                    Socket client = _socket2Recognizer.Accept();
+                    //start tcp server
+                    var parStart = new ParameterizedThreadStart(SocketRecognizerThread);
+                    var myThread = new Thread(parStart);
+                    myThread.Start(client);
+                }
+            }
+            catch (Exception e)
+            {
+                ;
+            }
+            finally
+            {
+                _tcpClientRecognizer.Close();
+                _listenerRecognizer.Stop();
+                _socket2Recognizer.Close();
+            }
+        }
+
+        //处理socket连接的线程
+        public void SocketRecognizerThread(object socket)
+        {
+            //获得客户端节点对象   
+            var recognizerClientConnectionConnection = new RecognizerClientConnection((Socket)socket);
+
+            recognizerClientConnectionConnection.LiveRecognizerEventPacketHandle.DataChange += LiveDecoderPacketHandleDataChange;
+
+            if (!listRunningRecognizerClient.ContainsKey(recognizerClientConnectionConnection.RecognizerInfo.Id))
+            {
+                listRunningRecognizerClient.Add(recognizerClientConnectionConnection.RecognizerInfo.Id, recognizerClientConnectionConnection);
+            }
+            else
+            {
+                listRunningRecognizerClient[recognizerClientConnectionConnection.RecognizerInfo.Id] = recognizerClientConnectionConnection;
+            }
+            recognizerClientConnectionConnection.SendRecognizerXML(recognizerClientConnectionConnection.RecognizerInfo.Id);
+            recognizerClientConnectionConnection.GetData();
+        }
+        private Dictionary<int, RecognizerClientConnection> listRunningRecognizerClient = new Dictionary<int, RecognizerClientConnection>();
+
+
+        #endregion
+
 
         private void barButtonItem8_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            foreach (var v in listRunningClient)
+            foreach (var v in listRunningDecoderClient)
             {
                 v.Value.SendDecoderStartCommand();
             }
@@ -727,7 +894,7 @@ namespace CameraViewer
 
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            foreach (var v in listRunningClient)
+            foreach (var v in listRunningDecoderClient)
             {
                 v.Value.SendDecoderStopCommand();
             }
@@ -735,7 +902,7 @@ namespace CameraViewer
 
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            foreach (var v in listRunningClient)
+            foreach (var v in listRunningDecoderClient)
             {
                 v.Value.SetPicWidthHeight(352,288);
             }
@@ -743,7 +910,7 @@ namespace CameraViewer
 
         private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            foreach (var v in listRunningClient)
+            foreach (var v in listRunningDecoderClient)
             {
                 v.Value.SendDecoderXML();
             }
