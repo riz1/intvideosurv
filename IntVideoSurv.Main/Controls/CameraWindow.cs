@@ -31,6 +31,8 @@ namespace CameraViewer
 		private bool	firstFrame = true;
         //private List<MyShape> ListXMLShapes = new List<MyShape>();
         private Pen arrowpen;
+               
+
 		// AutoSize property
 		[DefaultValue(false)]
 		public bool AutoSize
@@ -125,6 +127,7 @@ namespace CameraViewer
 		{
 			SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer |
 				ControlStyles.ResizeRedraw | ControlStyles.UserPaint, true);
+		    DoubleBuffered = true;
 		}
         private void MyDrawReversibleRectangle(Rectangle rc)
         {

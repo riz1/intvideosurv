@@ -1377,13 +1377,14 @@ namespace IntVideoSurv.Business.HiK
                     if (CaptureState != 1)
                     {
                         RecordVideo();
+                        isStartRecord = true;
                         Thread.Sleep(10);
                         continue;
                     }
                     while ((stopEvent.WaitOne(0, true) == false))
                     {
                         // sleeping ...
-                        if (DateTime.Now.AddMinutes(-1 * Config.DEFFFILEMIN).CompareTo(start) >= 0)
+                        if (DateTime.Now.AddSeconds(-60 * _cameraInfo.RecordIntervalInMinutes).CompareTo(start) >= 0)
                         {
                             isStartRecord = false;
                             StopVideo();
@@ -1430,7 +1431,8 @@ namespace IntVideoSurv.Business.HiK
         private string processFile = "";
         private bool startMove = false;
         DateTime startDate = DateTime.MinValue;
-
+        private DateTime beginDateTime;
+        private DateTime endDateTime;
 
 
         public bool RecordVideo()
@@ -1440,12 +1442,17 @@ namespace IntVideoSurv.Business.HiK
                 return false;
             }
             CaptureState = 1;
+            beginDateTime = DateTime.Now; ;
             videoFile = GeneratorFileInfo.GenerateSaveFilePath(Config.VideoPath, "264", _cameraInfo.CameraId, DateTime.Now);
             return HCNetSDK.NET_DVR_SaveRealData(_cameraInfo.PlayHandle, videoFile);
 
         }
         public bool StopVideo()
         {
+            endDateTime = DateTime.Now;
+            string errMsg = "";
+            VideoBusiness.Instance.Insert(ref errMsg, new VideoInfo() { CameraId = _cameraInfo.CameraId, CaptureTimeBegin = beginDateTime, CaptureTimeEnd = endDateTime, FilePath = videoFile });
+            CaptureState = 0;
             return HCNetSDK.NET_DVR_StopSaveRealData(_cameraInfo.PlayHandle);
 
         }

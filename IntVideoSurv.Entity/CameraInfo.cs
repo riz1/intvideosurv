@@ -92,7 +92,7 @@ namespace IntVideoSurv.Entity
         public ArrayList ListOutputTarget;
         public int TotalDSP { get; set; }
 
-
+        public int RecordIntervalInMinutes = 1;
         public override string ToString()
         {
             return String.Format("ID:{0}  名称:{1}  描述:{2}  设备ID:{3}  设备名:{4}", CameraId, Name, Description, DeviceId, DeviceName);
