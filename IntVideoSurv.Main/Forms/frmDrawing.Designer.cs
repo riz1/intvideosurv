@@ -43,10 +43,10 @@
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.LineButton = new DevExpress.XtraBars.BarButtonItem();
-            this.ButtonJiantou = new DevExpress.XtraBars.BarButtonItem();
-            this.ButtonRect = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonDuoBX = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonLine = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonArrow = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonRect = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonPolygon = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonUndo = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonSave = new DevExpress.XtraBars.BarButtonItem();
@@ -70,6 +70,9 @@
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.colorEdit1 = new DevExpress.XtraEditors.ColorEdit();
             this.comboBoxEditTypeChoice = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
@@ -98,10 +101,10 @@
             this.barManager1.Form = this;
             this.barManager1.Images = this.imageCollection1;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.LineButton,
-            this.ButtonRect,
-            this.ButtonJiantou,
-            this.barButtonDuoBX,
+            this.barButtonLine,
+            this.barButtonRect,
+            this.barButtonArrow,
+            this.barButtonPolygon,
             this.barButtonItem2,
             this.barButtonUndo,
             this.barButtonSave,
@@ -132,60 +135,62 @@
             this.bar1.DockCol = 0;
             this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar1.FloatLocation = new System.Drawing.Point(480, 168);
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.LineButton),
-            new DevExpress.XtraBars.LinkPersistInfo(this.ButtonJiantou),
-            new DevExpress.XtraBars.LinkPersistInfo(this.ButtonRect),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonDuoBX),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonLine),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonArrow),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonRect),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonPolygon),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonUndo, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonSave),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
+            this.bar1.Offset = 437;
             this.bar1.Text = "Custom 4";
             // 
-            // LineButton
+            // barButtonLine
             // 
-            this.LineButton.Caption = "直线";
-            this.LineButton.Id = 1;
-            this.LineButton.ImageIndex = 0;
-            this.LineButton.Name = "LineButton";
+            this.barButtonLine.Caption = "直线";
+            this.barButtonLine.Id = 1;
+            this.barButtonLine.ImageIndex = 0;
+            this.barButtonLine.Name = "LineButton";
             toolTipTitleItem1.Text = "直线";
             superToolTip1.Items.Add(toolTipTitleItem1);
-            this.LineButton.SuperTip = superToolTip1;
-            this.LineButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LineButton_ItemClick);
+            this.barButtonLine.SuperTip = superToolTip1;
+            this.barButtonLine.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LineButton_ItemClick);
             // 
-            // ButtonJiantou
+            // barButtonArrow
             // 
-            this.ButtonJiantou.Caption = "箭头";
-            this.ButtonJiantou.Id = 3;
-            this.ButtonJiantou.ImageIndex = 2;
-            this.ButtonJiantou.Name = "ButtonJiantou";
+            this.barButtonArrow.Caption = "箭头";
+            this.barButtonArrow.Id = 3;
+            this.barButtonArrow.ImageIndex = 2;
+            this.barButtonArrow.Name = "ButtonJiantou";
             toolTipTitleItem2.Text = "箭头";
             superToolTip2.Items.Add(toolTipTitleItem2);
-            this.ButtonJiantou.SuperTip = superToolTip2;
-            this.ButtonJiantou.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonJiantou_ItemClick);
+            this.barButtonArrow.SuperTip = superToolTip2;
+            this.barButtonArrow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonJiantou_ItemClick);
             // 
-            // ButtonRect
+            // barButtonRect
             // 
-            this.ButtonRect.Caption = "矩形";
-            this.ButtonRect.Id = 2;
-            this.ButtonRect.ImageIndex = 1;
-            this.ButtonRect.Name = "ButtonRect";
+            this.barButtonRect.Caption = "矩形";
+            this.barButtonRect.Id = 2;
+            this.barButtonRect.ImageIndex = 1;
+            this.barButtonRect.Name = "ButtonRect";
             toolTipTitleItem3.Text = "矩形";
             superToolTip3.Items.Add(toolTipTitleItem3);
-            this.ButtonRect.SuperTip = superToolTip3;
-            this.ButtonRect.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonRect_ItemClick);
+            this.barButtonRect.SuperTip = superToolTip3;
+            this.barButtonRect.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonRect_ItemClick);
             // 
-            // barButtonDuoBX
+            // barButtonPolygon
             // 
-            this.barButtonDuoBX.Caption = "多边形";
-            this.barButtonDuoBX.Id = 4;
-            this.barButtonDuoBX.ImageIndex = 3;
-            this.barButtonDuoBX.Name = "barButtonDuoBX";
+            this.barButtonPolygon.Caption = "多边形";
+            this.barButtonPolygon.Id = 4;
+            this.barButtonPolygon.ImageIndex = 3;
+            this.barButtonPolygon.Name = "barButtonDuoBX";
             toolTipTitleItem4.Text = "多边形";
             superToolTip4.Items.Add(toolTipTitleItem4);
-            this.barButtonDuoBX.SuperTip = superToolTip4;
-            this.barButtonDuoBX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            this.barButtonPolygon.SuperTip = superToolTip4;
+            this.barButtonPolygon.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonUndo
             // 
@@ -361,12 +366,13 @@
             // 
             // comboBoxEdit1
             // 
-            this.comboBoxEdit1.EditValue = "";
-            this.comboBoxEdit1.Location = new System.Drawing.Point(331, 4);
+            this.comboBoxEdit1.EditValue = "细";
+            this.comboBoxEdit1.Location = new System.Drawing.Point(213, 4);
             this.comboBoxEdit1.MenuManager = this.barManager1;
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.comboBoxEdit1.Size = new System.Drawing.Size(84, 21);
             this.comboBoxEdit1.TabIndex = 1;
             this.toolTip1.SetToolTip(this.comboBoxEdit1, "画笔粗细");
@@ -375,7 +381,7 @@
             // colorEdit1
             // 
             this.colorEdit1.EditValue = System.Drawing.Color.Red;
-            this.colorEdit1.Location = new System.Drawing.Point(421, 4);
+            this.colorEdit1.Location = new System.Drawing.Point(337, 4);
             this.colorEdit1.MenuManager = this.barManager1;
             this.colorEdit1.Name = "colorEdit1";
             this.colorEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -387,20 +393,49 @@
             // 
             // comboBoxEditTypeChoice
             // 
-            this.comboBoxEditTypeChoice.Location = new System.Drawing.Point(511, 4);
+            this.comboBoxEditTypeChoice.EditValue = "请选择事件类型";
+            this.comboBoxEditTypeChoice.Location = new System.Drawing.Point(60, 4);
             this.comboBoxEditTypeChoice.MenuManager = this.barManager1;
             this.comboBoxEditTypeChoice.Name = "comboBoxEditTypeChoice";
             this.comboBoxEditTypeChoice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEditTypeChoice.Size = new System.Drawing.Size(84, 21);
+            this.comboBoxEditTypeChoice.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.comboBoxEditTypeChoice.Size = new System.Drawing.Size(113, 21);
             this.comboBoxEditTypeChoice.TabIndex = 10;
             this.comboBoxEditTypeChoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditTypeChoice_SelectedIndexChanged);
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(2, 7);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(52, 14);
+            this.labelControl1.TabIndex = 15;
+            this.labelControl1.Text = "识别类型:";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(179, 7);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(28, 14);
+            this.labelControl2.TabIndex = 15;
+            this.labelControl2.Text = "线型:";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(303, 7);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(28, 14);
+            this.labelControl3.TabIndex = 15;
+            this.labelControl3.Text = "颜色:";
             // 
             // frmDrawing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 395);
+            this.Controls.Add(this.labelControl3);
+            this.Controls.Add(this.labelControl2);
+            this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.comboBoxEditTypeChoice);
             this.Controls.Add(this.comboBoxEdit1);
             this.Controls.Add(this.colorEdit1);
@@ -430,6 +465,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.colorEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditTypeChoice.Properties)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -447,10 +483,10 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
         private DevExpress.XtraBars.Bar bar1;
-        private DevExpress.XtraBars.BarButtonItem LineButton;
-        private DevExpress.XtraBars.BarButtonItem ButtonRect;
-        private DevExpress.XtraBars.BarButtonItem ButtonJiantou;
-        private DevExpress.XtraBars.BarButtonItem barButtonDuoBX;
+        private DevExpress.XtraBars.BarButtonItem barButtonLine;
+        private DevExpress.XtraBars.BarButtonItem barButtonRect;
+        private DevExpress.XtraBars.BarButtonItem barButtonArrow;
+        private DevExpress.XtraBars.BarButtonItem barButtonPolygon;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonUndo;
         private DevExpress.XtraBars.BarButtonItem barButtonSave;
@@ -465,6 +501,9 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditTypeChoice;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
     }
 }
 

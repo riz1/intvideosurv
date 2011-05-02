@@ -200,7 +200,7 @@
             this.panelControl2.Controls.Add(this.simpleButtonCancel);
             this.panelControl2.Controls.Add(this.simpleButtonOk);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(0, 159);
+            this.panelControl2.Location = new System.Drawing.Point(0, 133);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(496, 50);
             this.panelControl2.TabIndex = 1;
@@ -227,10 +227,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 209);
+            this.ClientSize = new System.Drawing.Size(496, 183);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEventSetting";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "事件信息设置";
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
