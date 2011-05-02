@@ -153,7 +153,7 @@
             this.barButtonLine.Caption = "直线";
             this.barButtonLine.Id = 1;
             this.barButtonLine.ImageIndex = 0;
-            this.barButtonLine.Name = "LineButton";
+            this.barButtonLine.Name = "barButtonLine";
             toolTipTitleItem1.Text = "直线";
             superToolTip1.Items.Add(toolTipTitleItem1);
             this.barButtonLine.SuperTip = superToolTip1;
@@ -164,7 +164,7 @@
             this.barButtonArrow.Caption = "箭头";
             this.barButtonArrow.Id = 3;
             this.barButtonArrow.ImageIndex = 2;
-            this.barButtonArrow.Name = "ButtonJiantou";
+            this.barButtonArrow.Name = "barButtonArrow";
             toolTipTitleItem2.Text = "箭头";
             superToolTip2.Items.Add(toolTipTitleItem2);
             this.barButtonArrow.SuperTip = superToolTip2;
@@ -175,7 +175,7 @@
             this.barButtonRect.Caption = "矩形";
             this.barButtonRect.Id = 2;
             this.barButtonRect.ImageIndex = 1;
-            this.barButtonRect.Name = "ButtonRect";
+            this.barButtonRect.Name = "barButtonRect";
             toolTipTitleItem3.Text = "矩形";
             superToolTip3.Items.Add(toolTipTitleItem3);
             this.barButtonRect.SuperTip = superToolTip3;
@@ -186,7 +186,7 @@
             this.barButtonPolygon.Caption = "多边形";
             this.barButtonPolygon.Id = 4;
             this.barButtonPolygon.ImageIndex = 3;
-            this.barButtonPolygon.Name = "barButtonDuoBX";
+            this.barButtonPolygon.Name = "barButtonPolygon";
             toolTipTitleItem4.Text = "多边形";
             superToolTip4.Items.Add(toolTipTitleItem4);
             this.barButtonPolygon.SuperTip = superToolTip4;
@@ -393,7 +393,7 @@
             // 
             // comboBoxEditTypeChoice
             // 
-            this.comboBoxEditTypeChoice.EditValue = "请选择事件类型";
+            this.comboBoxEditTypeChoice.EditValue = "请选择识别类型";
             this.comboBoxEditTypeChoice.Location = new System.Drawing.Point(60, 4);
             this.comboBoxEditTypeChoice.MenuManager = this.barManager1;
             this.comboBoxEditTypeChoice.Name = "comboBoxEditTypeChoice";

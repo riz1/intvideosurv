@@ -82,7 +82,7 @@ namespace CameraViewer.Forms
             if (checkEditDrawROI.Checked)
             {
                 DrawROI = 1;
-            }
+             }
             else
             {
                 DrawROI = 0;
