@@ -87,7 +87,9 @@ namespace CameraViewer
             comboBoxEditTypeChoice.Properties.Items.Add("事件");
             comboBoxEditTypeChoice.Properties.Items.Add("人脸");
             comboBoxEditTypeChoice.Properties.Items.Add("车牌");
-            //comboBoxEditTypeChoice.SelectedIndex = 0;
+
+            //初始化画图按钮
+            barButtonLine.Enabled = barButtonRect.Enabled = barButtonArrow.Enabled = barButtonPolygon.Enabled = false;
 
         }
 
@@ -98,28 +100,28 @@ namespace CameraViewer
         }
         private void ResetButtonStyle()
         {
-            LineButton.ButtonStyle =
-                ButtonRect.ButtonStyle = barButtonDuoBX.ButtonStyle = ButtonJiantou.ButtonStyle = BarButtonStyle.Default;
+            barButtonLine.ButtonStyle =
+                barButtonRect.ButtonStyle = barButtonPolygon.ButtonStyle = barButtonArrow.ButtonStyle = BarButtonStyle.Default;
         }
         private void LineButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             _currentDrawingType = DrawingType.Line;
             ResetButtonStyle();
-            LineButton.ButtonStyle = BarButtonStyle.Check;
+            barButtonLine.ButtonStyle = BarButtonStyle.Check;
         }
 
         private void ButtonRect_ItemClick(object sender, ItemClickEventArgs e)
         {
             _currentDrawingType = DrawingType.Rect;
             ResetButtonStyle();
-            ButtonRect.ButtonStyle = BarButtonStyle.Check;
+            barButtonRect.ButtonStyle = BarButtonStyle.Check;
         }
 
         private void ButtonJiantou_ItemClick(object sender, ItemClickEventArgs e)
         {
             _currentDrawingType = DrawingType.Arrow;
             ResetButtonStyle();
-            ButtonJiantou.ButtonStyle = BarButtonStyle.Check;
+            barButtonArrow.ButtonStyle = BarButtonStyle.Check;
         }
         //多边形
 
@@ -128,7 +130,7 @@ namespace CameraViewer
         {
             _currentDrawingType = DrawingType.Polygon;
             ResetButtonStyle();
-            barButtonDuoBX.ButtonStyle = BarButtonStyle.Check;
+            barButtonPolygon.ButtonStyle = BarButtonStyle.Check;
             currentMyPoly = new MyPoly() { MyPen = (Pen)(mypen.Clone()) };
         }
 
@@ -1221,13 +1223,14 @@ namespace CameraViewer
 
         private void comboBoxEditTypeChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBoxEditTypeChoice.SelectedIndex)
+            switch (comboBoxEditTypeChoice.Text)
             {
-                case 0://事件
+                case "事件"://事件
                     //save xml to Event
-                    ButtonJiantou.Enabled = true;
-                    LineButton.Enabled = true;
-                    ButtonRect.Enabled = true;
+                    barButtonArrow.Enabled = true;
+                    barButtonLine.Enabled = true;
+                    barButtonRect.Enabled = true;
+                    barButtonPolygon.Enabled = true;
                     frmEventSetting eventfrm = new frmEventSetting();
                     eventfrm.ShowDialog();
                     DrawTrack = eventfrm.DrawTrack;
@@ -1248,22 +1251,23 @@ namespace CameraViewer
                     }*/
                     eventfrm.Close();
                     break;
-                case 1://人脸
-                    LineButton.Enabled = false;
-                    ButtonJiantou.Enabled = false;
-                    barButtonDuoBX.Enabled = false;
+                case "人脸"://人脸
+                    barButtonLine.Enabled = false;
+                    barButtonArrow.Enabled = false;
+                    barButtonPolygon.Enabled = false;
 
                     //save xml to Face
                     break;
-                case 2://车牌
-                    LineButton.Enabled = false;
-                    ButtonJiantou.Enabled = false;
-                    barButtonDuoBX.Enabled = false;
+                case "车牌"://车牌
+                    barButtonLine.Enabled = false;
+                    barButtonArrow.Enabled = false;
+                    barButtonPolygon.Enabled = false;
                     //save xml to Vehicle
                     break;
                 default:
                     break;
             }
+
         }
 
     }
