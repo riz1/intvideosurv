@@ -185,10 +185,10 @@ namespace CameraViewer
                 case 0://event
                     //////////////////////////////camera////////////////////////////////////////
                     XmlAttribute cameraWidth = drawXml.CreateAttribute("width");
-                    cameraWidth.Value = "200".ToString();
+                    cameraWidth.Value = pictureEdit1.Image.Width.ToString();
                     cameraNode.Attributes.Append(cameraWidth);
                     XmlAttribute cameraHeight = drawXml.CreateAttribute("height");
-                    cameraHeight.Value = "230".ToString();
+                    cameraHeight.Value = pictureEdit1.Image.Height.ToString();
                     cameraNode.Attributes.Append(cameraHeight);
                     XmlAttribute cameraMinarea = drawXml.CreateAttribute("Minarea");
                     cameraMinarea.Value = Minarea.ToString();
