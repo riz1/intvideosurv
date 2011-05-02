@@ -1236,7 +1236,7 @@ namespace CameraViewer
                     DrawTrack = eventfrm.DrawTrack;
                     DrawObjs = eventfrm.DrawObjs;
                     DrawDirection = eventfrm.DrawDirection;
-                    DrawROI = eventfrm.DrawROI;
+                    barButtonPolygon.Enabled=((DrawROI = eventfrm.DrawROI)==1);
                     flagObjCount = eventfrm.flagObjCount;
                     flagDirection = eventfrm.flagDirection;
                     flagCrossLine = eventfrm.flagCrossLine;
@@ -1255,13 +1255,14 @@ namespace CameraViewer
                     barButtonLine.Enabled = false;
                     barButtonArrow.Enabled = false;
                     barButtonPolygon.Enabled = false;
-
+                    barButtonRect.Enabled = true;
                     //save xml to Face
                     break;
                 case "车牌"://车牌
                     barButtonLine.Enabled = false;
                     barButtonArrow.Enabled = false;
                     barButtonPolygon.Enabled = false;
+                    barButtonRect.Enabled = true;
                     //save xml to Vehicle
                     break;
                 default:
