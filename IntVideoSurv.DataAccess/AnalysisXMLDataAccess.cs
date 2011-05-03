@@ -22,7 +22,7 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat("{0}", ocapturePicture.CameraID);
             sbField.Append(",[Datetime]");
             //sbValue.AppendFormat(",'{0}'", ocapturePicture.Datetime);
-            sbValue.AppendFormat(",'{0}'", DateTime.Now);
+            sbValue.AppendFormat(",'{0}'", ocapturePicture.Datetime);
             sbField.Append(",[FilePath])");
             sbValue.AppendFormat(",'{0}')", ocapturePicture.FilePath);
 

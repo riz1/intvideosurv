@@ -105,6 +105,8 @@
     <Compile Include="RecognizerBusiness.cs" />
     <Compile Include="SynGroupBusiness.cs" />
     <Compile Include="SystemLogBusiness.cs" />
+    <Compile Include="SystemParametersBusiness.cs" />
+    <Compile Include="TempPictureBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="VideoBusiness.cs" />
