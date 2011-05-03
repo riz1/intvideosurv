@@ -802,21 +802,30 @@ namespace CameraViewer
         //处理socket连接的线程
         public void SocketDecoderThread(object socket)
         {
-            //获得客户端节点对象   
-            var clientConnection = new DecoderClientConnection((Socket)socket);
-
-            clientConnection.LiveDecoderPacketHandle.DataChange += LiveDecoderPacketHandleDataChange; 
-
-            if (!listRunningDecoderClient.ContainsKey(clientConnection.DecoderInfo.id))
+            try
             {
-                listRunningDecoderClient.Add(clientConnection.DecoderInfo.id, clientConnection);
+                //获得客户端节点对象   
+                var clientConnection = new DecoderClientConnection((Socket)socket);
+
+                clientConnection.LiveDecoderPacketHandle.DataChange += LiveDecoderPacketHandleDataChange; 
+
+                if (!listRunningDecoderClient.ContainsKey(clientConnection.DecoderInfo.id))
+                {
+                    listRunningDecoderClient.Add(clientConnection.DecoderInfo.id, clientConnection);
+                }
+                else
+                {
+                    listRunningDecoderClient[clientConnection.DecoderInfo.id] = clientConnection;
+                }
+                clientConnection.SendDecoderXML();
+                clientConnection.GetData();
             }
-            else
+            catch (Exception)
             {
-                listRunningDecoderClient[clientConnection.DecoderInfo.id] = clientConnection;
+
+                ;
             }
-            clientConnection.SendDecoderXML();
-            clientConnection.GetData();
+
         }
         private Dictionary<int, DecoderClientConnection> listRunningDecoderClient = new Dictionary<int, DecoderClientConnection>();
 

@@ -50,7 +50,7 @@ namespace IntVideoSurv.Business
             try
             {
                 int ret = 0;
-                string destFilePath = SystemParametersBusiness.Instance.GetCapturePictureFilePath(ref errMessage) + @"\" + oTempPicture.CameraID +
+                string destFilePath = SystemParametersBusiness.Instance.ListSystemParameter["CapPicPath"] + @"\" + oTempPicture.CameraID +
                         @"\" + oTempPicture.Datetime.ToString(@"yyyy\\MM\\dd\\HH\\") + oTempPicture.CameraID + oTempPicture.Datetime.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff") + ".jpg";
                 if (File.Exists(oTempPicture.FilePath))
                 {
