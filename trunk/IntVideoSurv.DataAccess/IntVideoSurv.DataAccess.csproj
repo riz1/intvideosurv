@@ -88,6 +88,7 @@
     <Compile Include="SynGroupDataAccess.cs" />
     <Compile Include="SystemLogDataAccess.cs" />
     <Compile Include="SystemParametersDataAccess.cs" />
+    <Compile Include="TaskDataAccess.cs" />
     <Compile Include="TempPictureDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="VideoDataAccess.cs" />

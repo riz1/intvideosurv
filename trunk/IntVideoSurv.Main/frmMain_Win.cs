@@ -888,7 +888,7 @@ namespace CameraViewer
         {
             foreach (var v in listRunningDecoderClient)
             {
-                v.Value.SendDecoderStartCommand();
+                //v.Value.SendRealDecoderStartCommand();
             }
         }
 
@@ -896,7 +896,7 @@ namespace CameraViewer
         {
             foreach (var v in listRunningDecoderClient)
             {
-                v.Value.SendDecoderStopCommand();
+                //v.Value.SendRealDecoderStopCommand();
             }
         }
 
@@ -904,7 +904,7 @@ namespace CameraViewer
         {
             foreach (var v in listRunningDecoderClient)
             {
-                v.Value.SetPicWidthHeight(352,288);
+                //v.Value.SetPicWidthHeight(352,288);
             }
         }
 

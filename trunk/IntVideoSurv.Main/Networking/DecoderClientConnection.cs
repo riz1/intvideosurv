@@ -89,6 +89,19 @@ namespace CameraViewer.NetWorking
             }
         }
 
+        private TaskInfo GenerateTaskInfo(int cameraid, TaskStatus taskStatus)
+        {
+
+            Random r = new Random();
+            int taskId = r.Next(int.MaxValue);
+            string errMessage = "";
+            while (TaskBusiness.Instance.IsTaskExisted(ref errMessage,taskId))
+            {
+                taskId = r.Next(int.MaxValue);
+            }
+            return new TaskInfo() { CameraId = cameraid, DecoderId = DecoderInfo.id, HappenDateTime = DateTime.Now, Status = (int)taskStatus, TaskId = taskId };;
+        }
+
         private byte[] BuildPacket(int type, byte[] data, int pos, int length)
         {
             int dataLength = (length + 8);
@@ -165,17 +178,23 @@ namespace CameraViewer.NetWorking
             }
         }
 
-        //发送解码器启动指令
+        //发送实时解码器启动指令
 
-        public void SendDecoderStartCommand()
+        public void SendRealDecoderStartCommand(int cameraid)
         {
-            byte[] bytes = new byte[0];
-            byte[] byteToSend = BuildPacket(2, bytes, 0, 0);
+            TaskInfo taskInfo = GenerateTaskInfo(cameraid, TaskStatus.StartSend);
+            byte[] bytes = new byte[8];
+            Array.Copy(BitConverter.GetBytes(taskInfo.CameraId), 0, bytes, 0, 4);
+            Array.Copy(BitConverter.GetBytes(taskInfo.TaskId), 0, bytes, 4, 4);
+            byte[] byteToSend = BuildPacket(2, bytes, 0, 8);
 
             try
             {
                 if (_networkStream != null)
                     _networkStream.Write(byteToSend, 0, byteToSend.Length);
+                string errMessage = "";
+                TaskBusiness.Instance.Insert(ref errMessage, taskInfo);
+
             }
             catch (IOException ex)
             {
@@ -191,11 +210,110 @@ namespace CameraViewer.NetWorking
         }
 
         //发送解码器停止指令
-
-        public void SendDecoderStopCommand()
+        public void SendRealDecoderStopCommand(int taskId)
         {
-            byte[] bytes = new byte[0];
-            byte[] byteToSend = BuildPacket(3, bytes, 0, 0);
+            byte[] bytes = new byte[4];
+            Array.Copy(BitConverter.GetBytes(taskId), 0, bytes, 0, 4);
+            byte[] byteToSend = BuildPacket(3, bytes, 0, 4);
+
+            try
+            {
+                if (_networkStream != null)
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
+                string errMessage = "";
+                TaskBusiness.Instance.Update(ref errMessage, taskId,(int)TaskStatus.StopSend);
+            }
+            catch (IOException ex)
+            {
+                //_connectState = false;
+                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
+                return;
+            }
+            catch (ObjectDisposedException ode)
+            {
+                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
+                return;
+            }
+        }
+
+        //发送历史解码器启动指令
+
+        public void SendHistoryDecoderStartCommand(int cameraid,DateTime beginDateTime, DateTime endDateTime)
+        {
+            TaskInfo taskInfo = GenerateTaskInfo(cameraid, TaskStatus.StartSend);
+            byte[] bytes = new byte[56];
+            Array.Copy(BitConverter.GetBytes(taskInfo.CameraId), 0, bytes, 0, 4);
+            Array.Copy(BitConverter.GetBytes(beginDateTime.Year), 0, bytes, 4, 4);
+            Array.Copy(BitConverter.GetBytes(beginDateTime.Month), 0, bytes, 8, 4);
+            Array.Copy(BitConverter.GetBytes(beginDateTime.Day), 0, bytes, 12, 4);
+            Array.Copy(BitConverter.GetBytes(beginDateTime.Hour), 0, bytes, 16, 4);
+            Array.Copy(BitConverter.GetBytes(beginDateTime.Minute), 0, bytes, 20, 4);
+            Array.Copy(BitConverter.GetBytes(beginDateTime.Second), 0, bytes, 24, 4);
+            Array.Copy(BitConverter.GetBytes(endDateTime.Year), 0, bytes, 28, 4);
+            Array.Copy(BitConverter.GetBytes(endDateTime.Month), 0, bytes, 32, 4);
+            Array.Copy(BitConverter.GetBytes(endDateTime.Day), 0, bytes, 36, 4);
+            Array.Copy(BitConverter.GetBytes(endDateTime.Hour), 0, bytes, 40, 4);
+            Array.Copy(BitConverter.GetBytes(endDateTime.Minute), 0, bytes, 44, 4);
+            Array.Copy(BitConverter.GetBytes(endDateTime.Second), 0, bytes, 48, 4);
+            Array.Copy(BitConverter.GetBytes(taskInfo.TaskId), 0, bytes, 52, 4);
+            byte[] byteToSend = BuildPacket(8, bytes, 0, 56);
+
+            try
+            {
+                if (_networkStream != null)
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
+                string errMessage = "";
+                TaskBusiness.Instance.Insert(ref errMessage, taskInfo);
+            }
+            catch (IOException ex)
+            {
+                //_connectState = false;
+                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
+                return;
+            }
+            catch (ObjectDisposedException ode)
+            {
+                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
+                return;
+            }
+        }
+
+        //发送历史解码器停止指令
+        public void SendHistoryDecoderStopCommand(int taskId)
+        {
+            byte[] bytes = new byte[4];
+            Array.Copy(BitConverter.GetBytes(taskId), 0, bytes, 0, 4);
+            byte[] byteToSend = BuildPacket(9, bytes, 0, 4);
+
+            try
+            {
+                if (_networkStream != null)
+                    _networkStream.Write(byteToSend, 0, byteToSend.Length);
+                string errMessage = "";
+                TaskBusiness.Instance.Update(ref errMessage, taskId, (int)TaskStatus.StopSend);
+            }
+            catch (IOException ex)
+            {
+                //_connectState = false;
+                //ConnetSever(this, new DataChangeEventArgs("false", Ip));
+                return;
+            }
+            catch (ObjectDisposedException ode)
+            {
+                //System.Diagnostics.Debug.WriteLine("对象释放异常！");
+                return;
+            }
+        }
+        //设置图片长宽
+
+        public void SetPicWidthHeight(int taskId,int width, int height)
+        {
+            byte[] bytes = new byte[12];
+            Array.Copy(BitConverter.GetBytes(taskId), 0, bytes, 0, 4);
+            Array.Copy(BitConverter.GetBytes(width), 0, bytes, 4, 4);
+            Array.Copy(BitConverter.GetBytes(height), 0, bytes, 8, 4);
+
+            byte[] byteToSend = BuildPacket(5, bytes, 0, 12);
 
             try
             {
@@ -214,15 +332,15 @@ namespace CameraViewer.NetWorking
                 return;
             }
         }
-        //设置图片长宽
 
-        public void SetPicWidthHeight(int width, int height)
+        //发送图片类型指令
+        //1(RGB)+2(YUV)
+        public void SendDecoderSetPicTypeCommand(int taskId,int picType)
         {
             byte[] bytes = new byte[8];
-            Array.Copy(BitConverter.GetBytes(width), 0, bytes, 0, 4);
-            Array.Copy(BitConverter.GetBytes(height), 0, bytes, 4, 4);
-
-            byte[] byteToSend = BuildPacket(5, bytes, 0, 8);
+            Array.Copy(BitConverter.GetBytes(taskId), 0, bytes, 0, 4);
+            Array.Copy(BitConverter.GetBytes(picType), 0, bytes, 4, 4);
+            byte[] byteToSend = BuildPacket(3, bytes, 0, 8);
 
             try
             {

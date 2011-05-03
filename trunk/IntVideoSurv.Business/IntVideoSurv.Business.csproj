@@ -106,6 +106,7 @@
     <Compile Include="SynGroupBusiness.cs" />
     <Compile Include="SystemLogBusiness.cs" />
     <Compile Include="SystemParametersBusiness.cs" />
+    <Compile Include="TaskBusiness.cs" />
     <Compile Include="TempPictureBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Util.cs" />
