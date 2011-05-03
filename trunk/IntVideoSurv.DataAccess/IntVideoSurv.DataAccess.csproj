@@ -87,6 +87,8 @@
     <Compile Include="RecognizerDataAccess.cs" />
     <Compile Include="SynGroupDataAccess.cs" />
     <Compile Include="SystemLogDataAccess.cs" />
+    <Compile Include="SystemParametersDataAccess.cs" />
+    <Compile Include="TempPictureDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="VideoDataAccess.cs" />
     <Compile Include="WindowCameraDataAccess.cs" />

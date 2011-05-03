@@ -78,6 +78,8 @@
     <Compile Include="SynCameraInfo.cs" />
     <Compile Include="SynGroup.cs" />
     <Compile Include="SystemLog.cs" />
+    <Compile Include="SystemParameters.cs" />
+    <Compile Include="TempPicture.cs" />
     <Compile Include="UsedDisplayChannelInfo.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="VideoInfo.cs" />

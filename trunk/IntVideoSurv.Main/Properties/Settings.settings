@@ -23,5 +23,8 @@
     <Setting Name="CapturePictureFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">d:\CapturePicture</Value>
     </Setting>
+    <Setting Name="TempPicPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">d:\TempPicPath</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
