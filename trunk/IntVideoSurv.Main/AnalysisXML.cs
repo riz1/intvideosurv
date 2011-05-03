@@ -55,7 +55,7 @@ namespace CameraViewer
                     XmlNode xml_time = xmlDoc.SelectSingleNode("/pr/cameras/camera/timeid");
                     ocap.Datetime = new DateTime(long.Parse(xml_time.InnerText));
                     string errMessage = "";
-                    ocap.FilePath = SystemParametersBusiness.Instance.GetCapturePictureFilePath(ref errMessage) + @"\" + ocap.CameraID +
+                    ocap.FilePath = SystemParametersBusiness.Instance.ListSystemParameter["CapPicPath"] + @"\" + ocap.CameraID +
                         @"\" + ocap.Datetime.ToString(@"yyyy\\MM\\dd\\HH\\") + ocap.CameraID +ocap.Datetime.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff")+".jpg";
                     pictureId = AnalysisXMLBusiness.Instance.InsertCapturePicture(ref errMessage, ocap);
                     

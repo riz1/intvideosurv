@@ -79,10 +79,7 @@ namespace CameraViewer.NetWorking
                                                                                            Datetime = captureTime,
                                                                                            IsHistroy = false,
                                                                                            FilePath =
-                                                                                               SystemParametersBusiness.
-                                                                                                   Instance.
-                                                                                                   GetCapturePictureFilePath
-                                                                                                   (ref errMessage) +
+                                                                                               SystemParametersBusiness.Instance.ListSystemParameter["TempPicPath"] +
                                                                                                @"\" + cameraId +
                                                                                                @"\" +
                                                                                                captureTime.ToString(

@@ -10,18 +10,18 @@ namespace IntVideoSurv.DataAccess
 {
     public class SystemParametersDataAccess
     {
-        public static int UpdateCapturePictureFilePath(Database db, string filePath)
+        public static int UpdateParameter(Database db, SystemParameter systemParameter)
         {
             StringBuilder sb = new StringBuilder();
-            if (IsExistRow(db))
+            if (IsExistRow(db, systemParameter.Name))
             {
-                sb.Append("update SystemParameters set");
-                sb.AppendFormat(" CapturePictureFilePath='{0}'", filePath);                
+                sb.Append("update systemParameter set");
+                sb.AppendFormat(" Value='{0}',Type='{1}' where Name='{2}'", systemParameter.Name, systemParameter.Type,systemParameter.Value);                
             }
             else
             {
-                sb.Append("insert into SystemParameters(CapturePictureFilePath) ");
-                sb.AppendFormat("values('{0}')", filePath);   
+                sb.Append("insert into systemParameter(name,type,value) ");
+                sb.AppendFormat("values('{0}','{1}','{2}')", systemParameter.Name, systemParameter.Type, systemParameter.Value);   
             }
 
             string cmdText = sb.ToString();
@@ -36,9 +36,9 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        private static bool IsExistRow(Database db)
+        private static bool IsExistRow(Database db,string name)
         {
-            string cmdText = "select count(*) from SystemParameters";
+            string cmdText = string.Format("select count(*) from systemParameter where Name='{0}';", name);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString())>0;
@@ -50,9 +50,9 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        public static DataSet GetCapturePictureFilePath(Database db)
+        public static DataSet GetSystemParameters(Database db)
         {
-            string cmdText = string.Format("select CapturePictureFilePath from SystemParameters;");
+            string cmdText = string.Format("select * from systemParameter;");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

@@ -16,22 +16,31 @@ namespace IntVideoSurv.Business
         private static SystemParametersBusiness instance;
         public static SystemParametersBusiness Instance
         {
+            get { return instance ?? (instance = new SystemParametersBusiness()); }
+        }
+
+        private Dictionary<string, SystemParameter> _listSystemParameter;
+        public Dictionary<string,SystemParameter> ListSystemParameter
+        {
             get
             {
-                if (instance == null)
+                if (_listSystemParameter==null)
                 {
-                    instance = new SystemParametersBusiness();
+                    string errMessage = "";
+                    _listSystemParameter = GetSystemParameters(ref errMessage);                    
                 }
-                return instance;
+                return _listSystemParameter;
             }
         }
-        public int SetCapturePictureFilePath(ref string errMessage, string filePath)
+        public int UpdateParameter(ref string errMessage, SystemParameter systemParameter)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             try
             {
-                return SystemParametersDataAccess.UpdateCapturePictureFilePath(db, filePath);
+                int ret = SystemParametersDataAccess.UpdateParameter(db, systemParameter);
+                GetSystemParameters(ref errMessage);
+                return ret;
 
             }
             catch (Exception ex)
@@ -42,24 +51,29 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public string GetCapturePictureFilePath(ref string errMessage)
+        public Dictionary<string,SystemParameter> GetSystemParameters(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
+            var list = new Dictionary<string, SystemParameter>();
             errMessage = "";
             try
             {
-                DataSet ds = SystemParametersDataAccess.GetCapturePictureFilePath(db);
-                if (ds.Tables[0].Rows.Count == 0)
-                {
-                    return null;
-                }
-                return (ds.Tables[0].Rows[0]).ToString();
+                DataSet ds = SystemParametersDataAccess.GetSystemParameters(db);
 
+                SystemParameter systemParameter;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    systemParameter = new SystemParameter(ds.Tables[0].Rows[i]);
+                    list.Add(systemParameter.Name, systemParameter);
+                }
+                _listSystemParameter = list;
+                return list;
             }
             catch (Exception ex)
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                _listSystemParameter = null;
                 return null;
             }
         }
