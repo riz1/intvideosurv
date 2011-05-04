@@ -73,6 +73,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButtonDefault = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
@@ -145,7 +146,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonSave),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
-            this.bar1.Offset = 437;
+            this.bar1.Offset = 544;
             this.bar1.Text = "Custom 4";
             // 
             // barButtonLine
@@ -228,14 +229,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(702, 31);
+            this.barDockControlTop.Size = new System.Drawing.Size(813, 31);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 372);
-            this.barDockControlBottom.Size = new System.Drawing.Size(702, 23);
+            this.barDockControlBottom.Size = new System.Drawing.Size(813, 23);
             // 
             // barDockControlLeft
             // 
@@ -248,7 +249,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(702, 31);
+            this.barDockControlRight.Location = new System.Drawing.Point(813, 31);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 341);
             // 
             // imageCollection1
@@ -342,7 +343,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(192, 31);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(510, 341);
+            this.panelControl2.Size = new System.Drawing.Size(621, 341);
             this.panelControl2.TabIndex = 5;
             // 
             // pictureEdit1
@@ -350,7 +351,7 @@
             this.pictureEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureEdit1.Location = new System.Drawing.Point(2, 2);
             this.pictureEdit1.Name = "pictureEdit1";
-            this.pictureEdit1.Size = new System.Drawing.Size(506, 337);
+            this.pictureEdit1.Size = new System.Drawing.Size(617, 337);
             this.pictureEdit1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureEdit1.TabIndex = 0;
             this.pictureEdit1.TabStop = false;
@@ -367,7 +368,7 @@
             // comboBoxEdit1
             // 
             this.comboBoxEdit1.EditValue = "细";
-            this.comboBoxEdit1.Location = new System.Drawing.Point(213, 4);
+            this.comboBoxEdit1.Location = new System.Drawing.Point(332, 4);
             this.comboBoxEdit1.MenuManager = this.barManager1;
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -381,7 +382,7 @@
             // colorEdit1
             // 
             this.colorEdit1.EditValue = System.Drawing.Color.Red;
-            this.colorEdit1.Location = new System.Drawing.Point(337, 4);
+            this.colorEdit1.Location = new System.Drawing.Point(456, 4);
             this.colorEdit1.MenuManager = this.barManager1;
             this.colorEdit1.Name = "colorEdit1";
             this.colorEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -414,7 +415,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(179, 7);
+            this.labelControl2.Location = new System.Drawing.Point(298, 7);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(28, 14);
             this.labelControl2.TabIndex = 15;
@@ -422,17 +423,27 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(303, 7);
+            this.labelControl3.Location = new System.Drawing.Point(422, 7);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(28, 14);
             this.labelControl3.TabIndex = 15;
             this.labelControl3.Text = "颜色:";
             // 
+            // simpleButtonDefault
+            // 
+            this.simpleButtonDefault.Location = new System.Drawing.Point(179, 2);
+            this.simpleButtonDefault.Name = "simpleButtonDefault";
+            this.simpleButtonDefault.Size = new System.Drawing.Size(113, 26);
+            this.simpleButtonDefault.TabIndex = 1;
+            this.simpleButtonDefault.Text = "默认";
+            this.simpleButtonDefault.Click += new System.EventHandler(this.simpleButtonDefault_Click);
+            // 
             // frmDrawing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 395);
+            this.ClientSize = new System.Drawing.Size(813, 395);
+            this.Controls.Add(this.simpleButtonDefault);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
@@ -504,6 +515,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonDefault;
     }
 }
 
