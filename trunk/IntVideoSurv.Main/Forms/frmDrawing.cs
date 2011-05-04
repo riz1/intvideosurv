@@ -157,7 +157,8 @@ namespace CameraViewer
         private Point EndPoint= Point.Empty;
         private void Button_undo_Click(object sender, ItemClickEventArgs e)
         {
-
+            MyLine test_line,temp_line;
+            MyArrow test_arrow,temp_arrow;
             if ((ListShapes.Count >= 1))
             {
                 MyShape temp = ListShapes.ToArray()[ListShapes.Count - 1];
@@ -165,8 +166,37 @@ namespace CameraViewer
                 ListShapes.RemoveAt(ListShapes.Count - 1);
                 if (temp is MyArrow || temp is MyLine)
                 {
-                    Etype_Redomyshape.Add(temp, Etype_myshape[temp]);//将temp所对应的键值对存入redo中
-                    Etype_myshape.Remove(temp);
+                    //Etype_Redomyshape.Add(temp, Etype_myshape[temp]);//将temp所对应的键值对存入redo中
+                    foreach (KeyValuePair<MyShape,EventSelectedType> item in Etype_myshape)
+                    {
+                        if (item.Key is MyLine && temp is MyLine)
+                        {
+                            test_line = (MyLine)item.Key;
+                            temp_line = (MyLine)temp;
+                            if (test_line.P1 == temp_line.P1 && test_line.P2 == temp_line.P2)
+                            {
+                                Etype_Redomyshape.Add(temp, item.Value);
+                                Etype_myshape.Remove(item.Key);
+                                break;
+                            }
+
+                        }
+                        else
+                        {
+                            if (item.Key is MyArrow && temp is MyArrow)
+                            {
+                                test_arrow = (MyArrow)item.Key;
+                                temp_arrow = (MyArrow)temp;
+                                if (test_arrow.P1 == temp_arrow.P1 && test_arrow.P2 == temp_arrow.P2)
+                                {
+                                    Etype_Redomyshape.Add(temp, item.Value);
+                                    Etype_myshape.Remove(item.Key);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 DrawingShapes(ListShapes);
             }
@@ -194,7 +224,7 @@ namespace CameraViewer
             XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
             XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
             recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
-           
+           // recognizerAttribute.Value = "6".ToString(); //ri.Id.ToString();
             recognizerNode.Attributes.Append(recognizerAttribute);
             drawXml.AppendChild(recognizerNode);
             XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
@@ -520,7 +550,7 @@ namespace CameraViewer
             XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
             XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
             recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
-     
+            //recognizerAttribute.Value ="5".ToString(); //ri.Id.ToString()
             recognizerNode.Attributes.Append(recognizerAttribute);
             drawXml.AppendChild(recognizerNode);
             XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
@@ -1047,12 +1077,12 @@ namespace CameraViewer
                 {
                     case DrawingType.Line:
                         ListShapes.Add(new MyLine { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint });
-                        Etype_myshape.Add(new MyLine { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint },_currentEventSelectedType );
+                        Etype_myshape.Add(new MyLine { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint }, _currentEventSelectedType);
                         break;
 
                     case DrawingType.Arrow:
                         ListShapes.Add(new MyArrow { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint });
-                        Etype_myshape.Add(new MyArrow { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint },_currentEventSelectedType);
+                        Etype_myshape.Add(new MyArrow { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint }, _currentEventSelectedType);
                         break;
 
                     case DrawingType.Rect:
@@ -1133,7 +1163,8 @@ namespace CameraViewer
 
         public void Mouse_Redo(object sender, ItemClickEventArgs e)
         {
-
+            MyLine test_line, temp_line;
+            MyArrow test_arrow, temp_arrow;
             if (ListRedo == null || ListRedo.Count <= 0)
                 return;
             MyShape v = ListRedo.ToArray()[ListRedo.Count - 1];
@@ -1141,8 +1172,35 @@ namespace CameraViewer
             ListShapes.Add(v);
             if (v is MyArrow || v is MyLine)
             {
-                Etype_myshape.Add(v, Etype_Redomyshape[v]);
-                Etype_Redomyshape.Remove(v);
+                //Etype_myshape.Add(v, Etype_Redomyshape[v]);
+                foreach (KeyValuePair<MyShape, EventSelectedType> item in Etype_Redomyshape)
+                {
+                    if (item.Key is MyLine && v is MyLine)
+                    {
+                        test_line = (MyLine)item.Key;
+                        temp_line = (MyLine)v;
+                        if (test_line.P1 == temp_line.P1 && test_line.P2 == temp_line.P2)
+                        {
+                            Etype_myshape.Add(v, item.Value);
+                            Etype_Redomyshape.Remove(item.Key);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (item.Key is MyArrow && v is MyArrow)
+                        {
+                            test_arrow = (MyArrow)item.Key;
+                            temp_arrow = (MyArrow)v;
+                            if (test_arrow.P1 == temp_arrow.P1 && test_arrow.P2 == temp_arrow.P2)
+                            {
+                                Etype_myshape.Add(v, item.Value);
+                                Etype_Redomyshape.Remove(item.Key);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
             DrawingShapes(ListShapes);
         }
