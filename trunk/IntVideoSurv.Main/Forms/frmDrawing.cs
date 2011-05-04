@@ -27,6 +27,20 @@ namespace CameraViewer
         private int flagStop;
         private int Minarea;
         private int iMaxObjNum;
+
+        private bool eFlagObjCount;
+        private bool eFlagDirection;
+        private bool eFlagCrossLine;
+        private bool eFlagChangeChannel;
+        private enum EventSelectedType
+        {
+            EventFlagObjCount = 0,
+            EventFlagDirection = 1,
+            EventFlagCrossLine = 2,
+            EventFlagChangeChannel = 4,
+            None = 8
+        }
+        private EventSelectedType _currentEventSelectedType = EventSelectedType.None;
         private enum DrawingType
         {
             Line = 0,
@@ -35,7 +49,8 @@ namespace CameraViewer
             Polygon = 4,
             None=8
         }
-
+        private Dictionary<MyShape, EventSelectedType> Etype_myshape = new Dictionary<MyShape, EventSelectedType>();
+        private Dictionary<MyShape, EventSelectedType> Etype_Redomyshape = new Dictionary<MyShape, EventSelectedType>();
         private DrawingType _currentDrawingType = DrawingType.None;
         private List<MyShape> ListShapes = new List<MyShape>();
         private List<MyShape> ListRedo = new List<MyShape>();
@@ -91,6 +106,10 @@ namespace CameraViewer
             //初始化画图按钮
             barButtonLine.Enabled = barButtonRect.Enabled = barButtonArrow.Enabled = barButtonPolygon.Enabled = false;
 
+            eFlagObjCount = false;
+            eFlagDirection = false;
+            eFlagCrossLine = false;
+            eFlagChangeChannel = false;
         }
 
         private void treeList1_MouseClick(object sender, MouseEventArgs e)
@@ -144,6 +163,11 @@ namespace CameraViewer
                 MyShape temp = ListShapes.ToArray()[ListShapes.Count - 1];
                 ListRedo.Add(temp);
                 ListShapes.RemoveAt(ListShapes.Count - 1);
+                if (temp is MyArrow || temp is MyLine)
+                {
+                    Etype_Redomyshape.Add(temp, Etype_myshape[temp]);//将temp所对应的键值对存入redo中
+                    Etype_myshape.Remove(temp);
+                }
                 DrawingShapes(ListShapes);
             }
 
@@ -170,7 +194,7 @@ namespace CameraViewer
             XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
             XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
             recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
-
+           
             recognizerNode.Attributes.Append(recognizerAttribute);
             drawXml.AppendChild(recognizerNode);
             XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
@@ -235,44 +259,44 @@ namespace CameraViewer
                         {
                             return;
                         }
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyLine)
+                            if (v.Key is MyLine && v.Value == EventSelectedType.EventFlagObjCount)
                             {
                                 XmlNode line = drawXml.CreateElement("line");
                                 cooutInfo.AppendChild(line);
                                 XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                int x1 = (int)((v.Key as MyLine).P1.X * (float)xScale);//化整
                                 lineX1.Value = x1.ToString();
                                 line.Attributes.Append(lineX1);
                                 XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                int y1 = (int)((v.Key as MyLine).P1.Y * (float)yScale);
                                 lineY1.Value = y1.ToString();
                                 line.Attributes.Append(lineY1);
 
                                 XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                lineX2.Value = ((int)((v.Key as MyLine).P2.X * (float)xScale)).ToString();
                                 line.Attributes.Append(lineX2);
                                 XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                lineY2.Value = ((int)((v.Key as MyLine).P2.Y * (float)yScale)).ToString();
                                 line.Attributes.Append(lineY2);
                             }
-                            else if (v is MyArrow)
+                            else if (v.Key is MyArrow && v.Value == EventSelectedType.EventFlagObjCount)
                             {
                                 XmlNode arrow = drawXml.CreateElement("arrow");
                                 cooutInfo.AppendChild(arrow);
                                 XmlAttribute X1 = drawXml.CreateAttribute("X1");
-                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                X1.Value = ((int)((v.Key as MyArrow).P1.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X1);
                                 XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
-                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                Y1.Value = ((int)((v.Key as MyArrow).P1.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y1);
 
                                 XmlAttribute X2 = drawXml.CreateAttribute("X2");
-                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                X2.Value = ((int)((v.Key as MyArrow).P2.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X2);
                                 XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
-                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                Y2.Value = ((int)((v.Key as MyArrow).P2.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y2);
                             }
                         }
@@ -286,24 +310,24 @@ namespace CameraViewer
                     cameraNode.AppendChild(dirInfo);
                     try
                     {
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyArrow)
+                            if (v.Key is MyArrow && v.Value == EventSelectedType.EventFlagDirection)
                             {
                                 XmlNode arrow = drawXml.CreateElement("arrow");
                                 dirInfo.AppendChild(arrow);
                                 XmlAttribute X1 = drawXml.CreateAttribute("X1");
-                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                X1.Value = ((int)((v.Key as MyArrow).P1.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X1);
                                 XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
-                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                Y1.Value = ((int)((v.Key as MyArrow).P1.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y1);
 
                                 XmlAttribute X2 = drawXml.CreateAttribute("X2");
-                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                X2.Value = ((int)((v.Key as MyArrow).P2.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X2);
                                 XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
-                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                Y2.Value = ((int)((v.Key as MyArrow).P2.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y2);
                             }
                         }
@@ -317,26 +341,26 @@ namespace CameraViewer
                     cameraNode.AppendChild(crossInfo);
                     try
                     {
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyLine)
+                            if (v.Key is MyLine && v.Value == EventSelectedType.EventFlagCrossLine)
                             {
                                 XmlNode line = drawXml.CreateElement("line");
                                 crossInfo.AppendChild(line);
                                 XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                int x1 = (int)((v.Key as MyLine).P1.X * (float)xScale);//化整
                                 lineX1.Value = x1.ToString();
                                 line.Attributes.Append(lineX1);
                                 XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                int y1 = (int)((v.Key as MyLine).P1.Y * (float)yScale);
                                 lineY1.Value = y1.ToString();
                                 line.Attributes.Append(lineY1);
 
                                 XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                lineX2.Value = ((int)((v.Key as MyLine).P2.X * (float)xScale)).ToString();
                                 line.Attributes.Append(lineX2);
                                 XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                lineY2.Value = ((int)((v.Key as MyLine).P2.Y * (float)yScale)).ToString();
                                 line.Attributes.Append(lineY2);
                             }
                         }
@@ -350,26 +374,26 @@ namespace CameraViewer
                     cameraNode.AppendChild(changeChannelInfo);
                     try
                     {
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyLine)
+                            if (v.Key is MyLine && v.Value == EventSelectedType.EventFlagChangeChannel)
                             {
                                 XmlNode line = drawXml.CreateElement("line");
                                 changeChannelInfo.AppendChild(line);
                                 XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                int x1 = (int)((v.Key as MyLine).P1.X * (float)xScale);//化整
                                 lineX1.Value = x1.ToString();
                                 line.Attributes.Append(lineX1);
                                 XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                int y1 = (int)((v.Key as MyLine).P1.Y * (float)yScale);
                                 lineY1.Value = y1.ToString();
                                 line.Attributes.Append(lineY1);
 
                                 XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                lineX2.Value = ((int)((v.Key as MyLine).P2.X * (float)xScale)).ToString();
                                 line.Attributes.Append(lineX2);
                                 XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                lineY2.Value = ((int)((v.Key as MyLine).P2.Y * (float)yScale)).ToString();
                                 line.Attributes.Append(lineY2);
                             }
                         }
@@ -496,7 +520,7 @@ namespace CameraViewer
             XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
             XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
             recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
-       
+     
             recognizerNode.Attributes.Append(recognizerAttribute);
             drawXml.AppendChild(recognizerNode);
             XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
@@ -561,58 +585,58 @@ namespace CameraViewer
                         {
                             return;
                         }
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyLine)
+                            if (v.Key is MyLine && v.Value == EventSelectedType.EventFlagObjCount)
                             {
                                 XmlNode line = drawXml.CreateElement("line");
                                 cooutInfo.AppendChild(line);
                                 XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                int x1 = (int)((v.Key as MyLine).P1.X * (float)xScale);//化整
                                 lineX1.Value = x1.ToString();
                                 line.Attributes.Append(lineX1);
                                 XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                int y1 = (int)((v.Key as MyLine).P1.Y * (float)yScale);
                                 lineY1.Value = y1.ToString();
                                 line.Attributes.Append(lineY1);
 
                                 XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                lineX2.Value = ((int)((v.Key as MyLine).P2.X * (float)xScale)).ToString();
                                 line.Attributes.Append(lineX2);
                                 XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                lineY2.Value = ((int)((v.Key as MyLine).P2.Y * (float)yScale)).ToString();
                                 line.Attributes.Append(lineY2);
                                 //添加pen的信息
                                 XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
-                                penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
+                                penColor.Value = ColorTranslator.ToHtml((v.Key as MyLine).MyPen.Color);
                                 line.Attributes.Append(penColor);
                                 XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
-                                penWidth.Value = (v as MyLine).MyPen.Width.ToString();
+                                penWidth.Value = (v.Key as MyLine).MyPen.Width.ToString();
                                 line.Attributes.Append(penWidth);
                             }
-                            else if (v is MyArrow)
+                            else if (v.Key is MyArrow && v.Value==EventSelectedType.EventFlagObjCount)
                             {
                                 XmlNode arrow = drawXml.CreateElement("arrow");
                                 cooutInfo.AppendChild(arrow);
                                 XmlAttribute X1 = drawXml.CreateAttribute("X1");
-                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                X1.Value = ((int)((v.Key as MyArrow).P1.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X1);
                                 XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
-                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                Y1.Value = ((int)((v.Key as MyArrow).P1.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y1);
 
                                 XmlAttribute X2 = drawXml.CreateAttribute("X2");
-                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                X2.Value = ((int)((v.Key as MyArrow).P2.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X2);
                                 XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
-                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                Y2.Value = ((int)((v.Key as MyArrow).P2.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y2);
                                 //添加pen的信息
                                 XmlAttribute apenColor = drawXml.CreateAttribute("PenColor");
-                                apenColor.Value = ColorTranslator.ToHtml((v as MyArrow).MyPen.Color);
+                                apenColor.Value = ColorTranslator.ToHtml((v.Key as MyArrow).MyPen.Color);
                                 arrow.Attributes.Append(apenColor);
                                 XmlAttribute apenWidth = drawXml.CreateAttribute("PenWidth");
-                                apenWidth.Value = (v as MyArrow).MyPen.Width.ToString();
+                                apenWidth.Value = (v.Key as MyArrow).MyPen.Width.ToString();
                                 arrow.Attributes.Append(apenWidth);
                             }
                         }
@@ -626,31 +650,31 @@ namespace CameraViewer
                     cameraNode.AppendChild(dirInfo);
                     try
                     {
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyArrow)
+                            if (v.Key is MyArrow && v.Value == EventSelectedType.EventFlagDirection)
                             {
                                 XmlNode arrow = drawXml.CreateElement("arrow");
                                 dirInfo.AppendChild(arrow);
                                 XmlAttribute X1 = drawXml.CreateAttribute("X1");
-                                X1.Value = ((int)((v as MyArrow).P1.X * (float)xScale)).ToString();
+                                X1.Value = ((int)((v.Key as MyArrow).P1.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X1);
                                 XmlAttribute Y1 = drawXml.CreateAttribute("Y1");
-                                Y1.Value = ((int)((v as MyArrow).P1.Y * (float)yScale)).ToString();
+                                Y1.Value = ((int)((v.Key as MyArrow).P1.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y1);
 
                                 XmlAttribute X2 = drawXml.CreateAttribute("X2");
-                                X2.Value = ((int)((v as MyArrow).P2.X * (float)xScale)).ToString();
+                                X2.Value = ((int)((v.Key as MyArrow).P2.X * (float)xScale)).ToString();
                                 arrow.Attributes.Append(X2);
                                 XmlAttribute Y2 = drawXml.CreateAttribute("Y2");
-                                Y2.Value = ((int)((v as MyArrow).P2.Y * (float)yScale)).ToString();
+                                Y2.Value = ((int)((v.Key as MyArrow).P2.Y * (float)yScale)).ToString();
                                 arrow.Attributes.Append(Y2);
                                 //添加pen的信息
                                 XmlAttribute dpenColor = drawXml.CreateAttribute("PenColor");
-                                dpenColor.Value = ColorTranslator.ToHtml((v as MyArrow).MyPen.Color);
+                                dpenColor.Value = ColorTranslator.ToHtml((v.Key as MyArrow).MyPen.Color);
                                 arrow.Attributes.Append(dpenColor);
                                 XmlAttribute dpenWidth = drawXml.CreateAttribute("PenWidth");
-                                dpenWidth.Value = (v as MyArrow).MyPen.Width.ToString();
+                                dpenWidth.Value = (v.Key as MyArrow).MyPen.Width.ToString();
                                 arrow.Attributes.Append(dpenWidth);
                             }
                         }
@@ -664,33 +688,33 @@ namespace CameraViewer
                     cameraNode.AppendChild(crossInfo);
                     try
                     {
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyLine)
+                            if (v.Key is MyLine && v.Value == EventSelectedType.EventFlagCrossLine)
                             {
                                 XmlNode line = drawXml.CreateElement("line");
                                 crossInfo.AppendChild(line);
                                 XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                int x1 = (int)((v.Key as MyLine).P1.X * (float)xScale);//化整
                                 lineX1.Value = x1.ToString();
                                 line.Attributes.Append(lineX1);
                                 XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                int y1 = (int)((v.Key as MyLine).P1.Y * (float)yScale);
                                 lineY1.Value = y1.ToString();
                                 line.Attributes.Append(lineY1);
 
                                 XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                lineX2.Value = ((int)((v.Key as MyLine).P2.X * (float)xScale)).ToString();
                                 line.Attributes.Append(lineX2);
                                 XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                lineY2.Value = ((int)((v.Key as MyLine).P2.Y * (float)yScale)).ToString();
                                 line.Attributes.Append(lineY2);
                                 //添加pen的信息
                                 XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
-                                penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
+                                penColor.Value = ColorTranslator.ToHtml((v.Key as MyLine).MyPen.Color);
                                 line.Attributes.Append(penColor);
                                 XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
-                                penWidth.Value = (v as MyLine).MyPen.Width.ToString();
+                                penWidth.Value = (v.Key as MyLine).MyPen.Width.ToString();
                                 line.Attributes.Append(penWidth);
                             }
                         }
@@ -704,33 +728,33 @@ namespace CameraViewer
                     cameraNode.AppendChild(changeChannelInfo);
                     try
                     {
-                        foreach (var v in ListShapes)
+                        foreach (var v in Etype_myshape)
                         {
-                            if (v is MyLine)
+                            if (v.Key is MyLine && v.Value == EventSelectedType.EventFlagChangeChannel)
                             {
                                 XmlNode line = drawXml.CreateElement("line");
                                 changeChannelInfo.AppendChild(line);
                                 XmlAttribute lineX1 = drawXml.CreateAttribute("X1");
-                                int x1 = (int)((v as MyLine).P1.X * (float)xScale);//化整
+                                int x1 = (int)((v.Key as MyLine).P1.X * (float)xScale);//化整
                                 lineX1.Value = x1.ToString();
                                 line.Attributes.Append(lineX1);
                                 XmlAttribute lineY1 = drawXml.CreateAttribute("Y1");
-                                int y1 = (int)((v as MyLine).P1.Y * (float)yScale);
+                                int y1 = (int)((v.Key as MyLine).P1.Y * (float)yScale);
                                 lineY1.Value = y1.ToString();
                                 line.Attributes.Append(lineY1);
 
                                 XmlAttribute lineX2 = drawXml.CreateAttribute("X2");
-                                lineX2.Value = ((int)((v as MyLine).P2.X * (float)xScale)).ToString();
+                                lineX2.Value = ((int)((v.Key as MyLine).P2.X * (float)xScale)).ToString();
                                 line.Attributes.Append(lineX2);
                                 XmlAttribute lineY2 = drawXml.CreateAttribute("Y2");
-                                lineY2.Value = ((int)((v as MyLine).P2.Y * (float)yScale)).ToString();
+                                lineY2.Value = ((int)((v.Key as MyLine).P2.Y * (float)yScale)).ToString();
                                 line.Attributes.Append(lineY2);
                                 //添加pen的信息
                                 XmlAttribute penColor = drawXml.CreateAttribute("PenColor");
-                                penColor.Value = ColorTranslator.ToHtml((v as MyLine).MyPen.Color);
+                                penColor.Value = ColorTranslator.ToHtml((v.Key as MyLine).MyPen.Color);
                                 line.Attributes.Append(penColor);
                                 XmlAttribute penWidth = drawXml.CreateAttribute("PenWidth");
-                                penWidth.Value = (v as MyLine).MyPen.Width.ToString();
+                                penWidth.Value = (v.Key as MyLine).MyPen.Width.ToString();
                                 line.Attributes.Append(penWidth);
                             }
                         }
@@ -1023,23 +1047,21 @@ namespace CameraViewer
                 {
                     case DrawingType.Line:
                         ListShapes.Add(new MyLine { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint });
-                        //graphics.DrawLine(mypen, StartPoint, EndPoint);
+                        Etype_myshape.Add(new MyLine { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint },_currentEventSelectedType );
                         break;
 
                     case DrawingType.Arrow:
                         ListShapes.Add(new MyArrow { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint });
-                        //graphics.DrawLine(mypen, StartPoint, EndPoint);
+                        Etype_myshape.Add(new MyArrow { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, P2 = EndPoint },_currentEventSelectedType);
                         break;
 
                     case DrawingType.Rect:
                         ListShapes.Add(new MyRect { MyPen = (Pen)(mypen.Clone()), P1 = StartPoint, Width = EndPoint.X - StartPoint.X, Height = EndPoint.Y - StartPoint.Y });
-                        //graphics.DrawRectangle(mypen, StartPoint.X, StartPoint.Y, EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
                         break;
 
                     case DrawingType.Polygon:
-                        //currentMyPoly.ListPoint.Add(EndPoint);
+                       
                         currentMyPoly.IsFinished = false;
-                        //graphics.DrawLines(mypen, currentMyPoly.ListPoint.ToArray());
                         break;
                 }
                 StartPoint= EndPoint;
@@ -1117,6 +1139,11 @@ namespace CameraViewer
             MyShape v = ListRedo.ToArray()[ListRedo.Count - 1];
             ListRedo.RemoveAt(ListRedo.Count - 1);
             ListShapes.Add(v);
+            if (v is MyArrow || v is MyLine)
+            {
+                Etype_myshape.Add(v, Etype_Redomyshape[v]);
+                Etype_Redomyshape.Remove(v);
+            }
             DrawingShapes(ListShapes);
         }
 
@@ -1237,18 +1264,61 @@ namespace CameraViewer
                     DrawObjs = eventfrm.DrawObjs;
                     DrawDirection = eventfrm.DrawDirection;
                     barButtonPolygon.Enabled=((DrawROI = eventfrm.DrawROI)==1);
-                    flagObjCount = eventfrm.flagObjCount;
-                    flagDirection = eventfrm.flagDirection;
-                    flagCrossLine = eventfrm.flagCrossLine;
-                    flagChangeChannel = eventfrm.flagChangeChannel;
+                    flagObjCount = eventfrm.flagObjCount;//
+                    flagDirection = eventfrm.flagDirection;//
+                    flagCrossLine = eventfrm.flagCrossLine;//
+                    flagChangeChannel = eventfrm.flagChangeChannel;//
                     flagCongestion = eventfrm.flagCongestion;
                     flagStop = eventfrm.flagStop;
                     Minarea = eventfrm.Minarea;
                     iMaxObjNum = eventfrm.iMaxObjNum;
-                    /*if (DrawTrack==0)
+                    //清空Dictionary
+                    Etype_myshape.Clear();
+                    Etype_Redomyshape.Clear();
+                    if (flagObjCount == 1)//line and arrow
+                    {
+                        simpleButtonDefault.Text = "开始画统计";
+                        _currentEventSelectedType = EventSelectedType.EventFlagObjCount;
+                        eFlagObjCount = true;
+                        /*barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = true;
+                        barButtonArrow.Enabled = true;*/
+                    }
+                    else if (flagDirection == 1)//arrow
+                    {
+                        simpleButtonDefault.Text = "开始画箭头";
+                        _currentEventSelectedType = EventSelectedType.EventFlagDirection;
+                        eFlagDirection = true;
+                        /*barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = false;
+                        barButtonArrow.Enabled = true;*/
+                    }
+                    else if (flagCrossLine == 1)//line
+                    {
+                        simpleButtonDefault.Text = "开始画跨线";
+                        _currentEventSelectedType = EventSelectedType.EventFlagCrossLine;
+                        eFlagCrossLine = true;
+                        /*barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = true;
+                        barButtonArrow.Enabled = false;*/
+                    }
+                    else if(flagChangeChannel == 1)//line
+                    {
+                        simpleButtonDefault.Text = "开始画变道";
+                        _currentEventSelectedType = EventSelectedType.EventFlagChangeChannel;
+                        eFlagChangeChannel = true;
+                        /*barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = true;
+                        barButtonArrow.Enabled = false;*/
+                    }
+                    else
                     {
 
-                    }*/
+                    }
                     eventfrm.Close();
                     break;
                 case "人脸"://人脸
@@ -1269,6 +1339,153 @@ namespace CameraViewer
                     break;
             }
 
+        }
+
+        private void simpleButtonDefault_Click(object sender, EventArgs e)
+        {
+            switch (_currentEventSelectedType)
+            {
+                case EventSelectedType.EventFlagObjCount:
+                    if (eFlagObjCount == true)
+                    {
+                        simpleButtonDefault.Text = "结束画统计";
+                        barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = true;
+                        barButtonArrow.Enabled = true;
+                        eFlagObjCount = false;
+                    }
+                    else
+                    {
+                        if (flagDirection == 1)
+                        {
+                            _currentEventSelectedType = EventSelectedType.EventFlagDirection;
+                            simpleButtonDefault.Text = "开始画箭头";
+                            eFlagDirection = true;
+                        }
+                        else if(flagCrossLine == 1)
+                        {
+                            _currentEventSelectedType = EventSelectedType.EventFlagCrossLine;
+                            simpleButtonDefault.Text = "开始画跨线";
+                            eFlagCrossLine = true;
+                        }
+                        else if (flagChangeChannel == 1)
+                        {
+                            _currentEventSelectedType = EventSelectedType.EventFlagChangeChannel;
+                            simpleButtonDefault.Text = "开始画变道";
+                            //eFlagCrossLine = true;
+                        }
+                        else
+                        {
+                            _currentEventSelectedType = EventSelectedType.None;
+                        }
+                        
+                    }
+                    /*simpleButtonDefault.Text = "结束画Count";
+                    barButtonRect.Enabled = false;
+                    barButtonPolygon.Enabled = false;
+                    barButtonLine.Enabled = true;
+                    barButtonArrow.Enabled = true;*/
+                    //_currentEventSelectedType = EventSelectedType.EventFlagDirection;
+                    //simpleButtonDefault.Text = "开始画箭头";
+                    break;
+                case EventSelectedType.EventFlagDirection:
+                    if (eFlagDirection == true)
+                    {
+                        simpleButtonDefault.Text = "结束画箭头";
+                        barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = false;
+                        barButtonArrow.Enabled = true;
+                        eFlagDirection = false;
+                    }
+                    else
+                    {
+                        if (flagCrossLine == 1)
+                        {
+                            _currentEventSelectedType = EventSelectedType.EventFlagCrossLine;
+                            simpleButtonDefault.Text = "开始画跨线";
+                            eFlagCrossLine = true;
+                        }
+                        else if (flagChangeChannel == 1)
+                        {
+                            _currentEventSelectedType = EventSelectedType.EventFlagChangeChannel;
+                            simpleButtonDefault.Text = "开始画变道";
+                            //eFlagCrossLine = true;
+                        }
+                        else
+                        {
+                            _currentEventSelectedType = EventSelectedType.None;
+                        }
+                        
+                    }
+                    /*simpleButtonDefault.Text = "结束画箭头";
+                    barButtonRect.Enabled = false;
+                    barButtonPolygon.Enabled = false;
+                    barButtonLine.Enabled = false;
+                    barButtonArrow.Enabled = true;
+                    _currentEventSelectedType = EventSelectedType.EventFlagCrossLine;
+                    simpleButtonDefault.Text = "开始画CrossLine";*/
+                    break;
+                case EventSelectedType.EventFlagCrossLine:
+                    if (eFlagCrossLine == true)
+                    {
+                        simpleButtonDefault.Text = "结束画跨线";
+                        barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = true;
+                        barButtonArrow.Enabled = false;
+                        eFlagCrossLine = false;
+                    }
+                    else
+                    {
+                        if (flagChangeChannel == 1)
+                        {
+                            _currentEventSelectedType = EventSelectedType.EventFlagChangeChannel;
+                            simpleButtonDefault.Text = "开始画变道";
+                            eFlagChangeChannel = true;
+                        }
+                        else
+                        {
+                            _currentEventSelectedType = EventSelectedType.None;
+                        }
+                        
+                    }
+                    /*simpleButtonDefault.Text = "结束画CrossLine";
+                    barButtonRect.Enabled = false;
+                    barButtonPolygon.Enabled = false;
+                    barButtonLine.Enabled = true;
+                    barButtonArrow.Enabled = false;
+                    _currentEventSelectedType = EventSelectedType.EventFlagChangeChannel;
+                    simpleButtonDefault.Text = "开始画ChangeChannel";*/
+                    break;
+                case EventSelectedType.EventFlagChangeChannel:
+                    if (eFlagChangeChannel == true)
+                    {
+                        simpleButtonDefault.Text = "结束画变道";
+                        barButtonRect.Enabled = false;
+                        barButtonPolygon.Enabled = false;
+                        barButtonLine.Enabled = true;
+                        barButtonArrow.Enabled = false;
+                        eFlagChangeChannel = false;
+                    }
+                    else
+                    {
+                        _currentEventSelectedType = EventSelectedType.None;
+                        simpleButtonDefault.Text = "默认";
+                    }
+                    /*simpleButtonDefault.Text = "结束画ChangeChannel";
+                    barButtonRect.Enabled = false;
+                    barButtonPolygon.Enabled = false;
+                    barButtonLine.Enabled = true;
+                    barButtonArrow.Enabled = false;
+                    _currentEventSelectedType = EventSelectedType.None;
+                    simpleButtonDefault.Text = "默认";*/
+                    break;
+                case EventSelectedType.None:
+                    simpleButtonDefault.Text = "默认";
+                    break;
+            }
         }
 
     }
