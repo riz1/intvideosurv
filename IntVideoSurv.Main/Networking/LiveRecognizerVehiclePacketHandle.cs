@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Drawing;
+using System.Xml;
 using log4net;
 
 namespace CameraViewer.NetWorking
@@ -35,11 +36,19 @@ namespace CameraViewer.NetWorking
             try
             {
                 logger.Info("开始解析车牌数据");
+                //获取xml
+                XmlDocument xmlDocument = new XmlDocument() ;
+                xmlDocument.LoadXml(BitConverter.ToString(bytes,4));
 
-
-                //解析人脸数据并入库
-                //更新主窗口显示结果的界面
-                OnDataChanged(this, new DataChangeEventArgs(GetType().Name));
+                //解析车牌数据并入库
+                /*******************处理流程：
+                
+ * 1）解析xml文件，获取cameraid和DateTime
+ * 2）根据cameraid和DateTime判断改图像是否已经进入CapturePicture表
+ * 3）如果是；转5；
+ * 4）如果否，将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture
+ * 5）识别结果入库
+ */
 
                 logger.Info("结束解析车牌数据");
             }
