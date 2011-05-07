@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Net;
@@ -12,6 +14,9 @@ using System.Windows.Forms;
 using CameraViewer.NetWorking;
 using CameraViewer.Remoting;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
 using IntVideoSurv.Business;
 using IntVideoSurv.Entity;
 using CameraViewer.Forms;
@@ -32,6 +37,7 @@ namespace CameraViewer
         Dictionary<int, DeviceInfo> _listDevice;
         Dictionary<int, CameraInfo> _listCam;
         Dictionary<int, CameraInfo> _listAllCam;
+        Dictionary<string, CameraInfo> _listAllCamStr = new Dictionary<string, CameraInfo>();
         Dictionary<int, SynGroup> _listSynGroup;
         Dictionary<int, DecoderInfo> _listDecoder;
         Dictionary<int, GroupSwitchGroup> _listGroupSwitchGroup;
@@ -46,6 +52,7 @@ namespace CameraViewer
         Dictionary<int, MapInfo> _listMap;
         OutputTVDeviceDriver _outputTv;
         TcpChannel chan1;
+        private CameraWindow _currentcCameraWindow;
 
 
         private GetTransPacket _getTransPacket;
@@ -426,6 +433,8 @@ namespace CameraViewer
             //videoOutList = new Dictionary<VideoOutputInfo, VideoOutputDriver>();
             _runningCameraList = new Dictionary<int, HikVideoServerCameraDriver>();
             _listAllCam = CameraBusiness.Instance.GetAllCameraInfo(ref _errMessage);
+            LoadCameraInCombox();
+            InitDataTable();
 
             Splash.Splash.Status = "获取解码器信息...";
             _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
@@ -443,6 +452,17 @@ namespace CameraViewer
             //HikVideoServerCameraDriver.InitDecodeCard();
             splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
             this.Visible = true;
+        }
+        private void LoadCameraInCombox()
+        {
+            checkedComboBoxEditFaceCamera.Properties.Items.Add("当前摄像头", true);
+            foreach (var VARIABLE in _listAllCam)
+            {
+                _listAllCamStr.Add(VARIABLE.Value.DeviceName+":"+VARIABLE.Value.Name,VARIABLE.Value);
+                checkedComboBoxEditFaceCamera.Properties.Items.Add(
+                    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+            }
+            
         }
 
         private void InitDisplayRegion()
@@ -1067,22 +1087,22 @@ namespace CameraViewer
             //{
                 try
                 {
-                    CameraWindow camwin = mainMultiplexer.GetCurrentCameraWindow();
-                    if (camwin == null)
+                    _currentcCameraWindow = mainMultiplexer.GetCurrentCameraWindow();
+                    if (_currentcCameraWindow == null)
                     {
                         XtraMessageBox.Show("请选中一个窗格!");
                         return;
                     }
                     _currentImageIndex = 0;
-                    currentGuid = camwin.CurrentImageGuid;
-                    _ImageSerias[_currentImageIndex++] = (Image)(camwin.CurrentImage.Clone());
+                    currentGuid = _currentcCameraWindow.CurrentImageGuid;
+                    _ImageSerias[_currentImageIndex++] = (Image)(_currentcCameraWindow.CurrentImage.Clone());
                     while (_currentImageIndex < 5)
                     {
                         lock (lockerCurrentImage)
                         {
-                            if (currentGuid != camwin.CurrentImageGuid)
+                            if (currentGuid != _currentcCameraWindow.CurrentImageGuid)
                             {
-                                _ImageSerias[_currentImageIndex++] = (Image)(camwin.CurrentImage.Clone());
+                                _ImageSerias[_currentImageIndex++] = (Image)(_currentcCameraWindow.CurrentImage.Clone());
                             }
                             Thread.Sleep(77);                            
                         }
@@ -1097,7 +1117,7 @@ namespace CameraViewer
 
                     //仅作测试用，摄像头ID设置为1
                     DelShowDrawingForm delShowDrawingForm  = ShowDrawingForm;
-                    this.Invoke(delShowDrawingForm, new object[] { _ImageSerias, camwin.CameraID });
+                    this.Invoke(delShowDrawingForm, new object[] { _ImageSerias, _currentcCameraWindow.CameraID });
 
 
                 }
@@ -1106,6 +1126,135 @@ namespace CameraViewer
                     XtraMessageBox.Show(ex.ToString());
                 }
             //}
+        }
+
+        private void radioGroupFace_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (radioGroupFace.SelectedIndex)
+            {
+                    //实时
+                case 0:
+                    teStartTimeFace.Enabled = teEndTimeFace.Enabled = btnQueryFace.Enabled = false;
+                    break;
+                case 1:
+                    teStartTimeFace.Enabled = teEndTimeFace.Enabled = btnQueryFace.Enabled = true;
+                    break;
+                default:
+                    teStartTimeFace.Enabled = teEndTimeFace.Enabled = btnQueryFace.Enabled = false;
+                    break;
+
+            }
+        }
+
+        private void btnQueryFace_Click(object sender, EventArgs e)
+        {
+            string errMessage = "";
+            //Dictionary<int, Face> listFace =AnalysisXMLBusiness.Instance.GetFaceCustom( ref errMessage,GenerateFaceQueryCondition());
+            Dictionary<int, Face> listFace = new Dictionary<int, Face>();
+            listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f });
+
+            FillGridControlVehicleDetail(listFace);
+        }
+        
+        string GenerateFaceQueryCondition()
+        {
+            string str = " and CapturePicture.CameraId in (";
+            string[] selectCameras = checkedComboBoxEditFaceCamera.Text.Split(',');
+            foreach (string selectCamera in selectCameras)
+            {
+                string changeselectCamera = selectCamera.Trim();
+                if (changeselectCamera == "当前摄像头")
+                {
+                    CameraWindow currentCameraWindow = mainMultiplexer.GetCurrentCameraWindow();
+                    if (currentCameraWindow != null)
+                    {
+                        str += currentCameraWindow.CameraID + ",";
+                    }
+                    else
+                    {
+                        str += "null,";
+                    }
+                }
+                else
+                {
+                    str += _listAllCamStr[changeselectCamera].CameraId + ",";
+                }
+            }
+            str = str.Substring(0, str.Length - 1) + ") ";
+
+            DateTime startTime = DateTime.Parse(teStartTimeFace.EditValue.ToString());
+            DateTime endTime = DateTime.Parse(teEndTimeFace.EditValue.ToString());
+        
+
+            if (DateTime.Compare(startTime, endTime) == 0)
+            {
+                XtraMessageBox.Show("时间不能相等！");
+                return "";
+            }
+            else if ((DateTime.Compare(startTime, endTime) > 0))
+            {
+                XtraMessageBox.Show("起始时间不能大于结束时间！");
+                return "";
+            }
+
+            str += " and (CapturePicture.[DateTime] between '"+teStartTimeFace.EditValue+"' and '"+teEndTimeFace.EditValue+"')";
+
+            return str;
+        }
+        DataTable dataTableFace = new DataTable();
+        private byte[] GetImageData(string fileName)
+        {
+            Image img = Image.FromFile(fileName);
+            MemoryStream mem = new MemoryStream();
+            img.Save(mem, System.Drawing.Imaging.ImageFormat.Bmp);
+            return mem.GetBuffer();
+        }
+        private void FillGridControlVehicleDetail(Dictionary<int, Face> listFace)
+        {
+
+            dataTableFace.Rows.Clear();
+            if (listFace == null) return;
+            DateTime nowDateTime = DateTime.Now;
+            int i = 1;
+
+
+            foreach (var variable in listFace)
+            {
+                dataTableFace.Rows.Add(i++,
+                                       GetImageData(variable.Value.FacePath),
+                                       variable.Value.CapturePicture.Datetime,
+                                       variable.Value.CameraInfo.Name,
+                                       variable.Value.score,
+                                       variable.Value);
+            }
+            gridViewFace.PopulateColumns(dataTableFace);
+            GridColumn column;
+            RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
+            pictureEdit.SizeMode = PictureSizeMode.Zoom;
+            pictureEdit.NullText = " ";
+            column = gridViewFace.Columns["人脸照片"];
+            column.ColumnEdit = pictureEdit;
+            column.Caption += "人脸照片";
+            gridControlFace.DataSource = dataTableFace;
+            gridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            gridViewFace.Columns["人脸对象"].Visible = false;
+
+        }
+
+        private void InitDataTable()
+        {
+            dataTableFace.Columns.Add("索引号", typeof(int));    
+            dataTableFace.Columns.Add("人脸照片",typeof(byte[]));
+
+            dataTableFace.Columns.Add("时间", typeof(DateTime));
+            dataTableFace.Columns.Add("地点");
+            dataTableFace.Columns.Add("置信度", typeof(float));
+            dataTableFace.Columns.Add("人脸对象", typeof(Face));
+        }
+
+        private void gridControlFace_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

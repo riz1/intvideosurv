@@ -205,5 +205,23 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+
+        public static DataSet GetFaceCustom(Database db,string str)
+        {
+            string cmdText = string.Format(
+                "select Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId "+
+                "from Face,CapturePicture,VideoInfo "+
+                "where Face.PictureId=CapturePicture.PictureId and " +
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
