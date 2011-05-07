@@ -26,9 +26,11 @@ namespace CameraViewer.NetWorking
         public LiveRecognizerVehiclePacketHandle LiveRecognizerVehiclePacketHandle;
         public static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        
         public RecognizerClientConnection(Socket socket)
         {
             string errMessage = "";
+
             Ip = ((IPEndPoint) socket.RemoteEndPoint).Address.ToString();
             Port = ((IPEndPoint)socket.RemoteEndPoint).Port;
             RecognizerInfo = RecognizerBusiness.Instance.GetRecognizerInfoByRecognizerIP(ref errMessage, Ip);
@@ -36,7 +38,6 @@ namespace CameraViewer.NetWorking
             LiveRecognizerEventPacketHandle = new LiveRecognizerEventPacketHandle();
             LiveRecognizerFacePacketHandle = new LiveRecognizerFacePacketHandle();
             LiveRecognizerVehiclePacketHandle = new LiveRecognizerVehiclePacketHandle();
-
             _handlers = new IPacketHandler[] { LiveRecognizerEventPacketHandle, LiveRecognizerFacePacketHandle, LiveRecognizerVehiclePacketHandle };
 
 
