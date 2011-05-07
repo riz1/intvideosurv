@@ -1151,8 +1151,8 @@ namespace CameraViewer
             string errMessage = "";
             //Dictionary<int, Face> listFace =AnalysisXMLBusiness.Instance.GetFaceCustom( ref errMessage,GenerateFaceQueryCondition());
             Dictionary<int, Face> listFace = new Dictionary<int, Face>();
-            listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f });
-            listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f });
+            listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
+            listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
 
             FillGridControlVehicleDetail(listFace);
         }
@@ -1262,15 +1262,39 @@ namespace CameraViewer
                 FillPicVideo(_selectedFace);
             }
         }
+
+        private int _lastVideoPort=-1;
         private void FillPicVideo(Face face)
         {
+            if (File.Exists(face.CapturePicture.FilePath))
+            {
+                pictureEditFace.Image = Image.FromFile(face.CapturePicture.FilePath);                
+            }
+            if (File.Exists(face.VideoInfo.FilePath))
+            {
+                if (_lastVideoPort!=-1)
+                {
+                    bool ret = HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+                }
+                if (File.Exists(face.VideoInfo.FilePath))
+                {
+                    _lastVideoPort = 1;
+                    HikPlayer.PlayM4_OpenFile(_lastVideoPort, face.VideoInfo.FilePath);
+                    HikPlayer.PlayM4_Play(_lastVideoPort, splitContainerControl2.Panel1.Handle);
+                }
 
-            pictureEditFace.Image = Image.FromFile(face.CapturePicture.FilePath);
+            }
+
         }
 
         private void advBandedGridViewFace_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
-
+            if (advBandedGridViewFace.SelectedRowsCount > 0)
+            {
+                int getSelectedRow = this.advBandedGridViewFace.GetSelectedRows()[0];
+                _selectedFace = (Face)(this.advBandedGridViewFace.GetRowCellValue(getSelectedRow, "»À¡≥∂‘œÛ"));
+                FillPicVideo(_selectedFace);
+            }
         }
 
         private void advBandedGridViewFace_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
@@ -1279,6 +1303,36 @@ namespace CameraViewer
             {
                 e.Info.DisplayText = (e.RowHandle + 1).ToString().Trim();
             }
+        }
+
+        private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            JustForTest justForTest = new JustForTest();
+            justForTest.ShowDialog();
+        }
+
+        private void simpleButton7_Click(object sender, EventArgs e)
+        {
+            HikPlayer.PlayM4_Play(_lastVideoPort, splitContainerControl2.Panel1.Handle);
+        }
+
+        private bool _isPaused;
+        private void simpleButton8_Click(object sender, EventArgs e)
+        {
+            _isPaused = !_isPaused;
+            HikPlayer.PlayM4_Pause(_lastVideoPort, _isPaused);
+        }
+
+        private void simpleButton9_Click(object sender, EventArgs e)
+        {
+            HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+            _lastVideoPort = -1;
+            _isPaused = false;
+        }
+
+        private void splitContainerControl2_Panel2_SizeChanged(object sender, EventArgs e)
+        {
+            splitContainerControl2.SplitterPosition = splitContainerControl2.Height - 32;
         }
 
     }
