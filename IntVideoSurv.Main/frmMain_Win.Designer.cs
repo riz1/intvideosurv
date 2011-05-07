@@ -51,6 +51,7 @@ namespace CameraViewer
             this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemGetPics = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
             this.bar4 = new DevExpress.XtraBars.Bar();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
@@ -103,6 +104,10 @@ namespace CameraViewer
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl8 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl9 = new DevExpress.XtraEditors.PanelControl();
+            this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton9 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.pictureEditFace = new DevExpress.XtraEditors.PictureEdit();
             this.gridControlFace = new DevExpress.XtraGrid.GridControl();
@@ -172,6 +177,9 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.panelControl8)).BeginInit();
             this.panelControl8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).BeginInit();
+            this.panelControl9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
+            this.splitContainerControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
             this.panelControl7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditFace.Properties)).BeginInit();
@@ -233,9 +241,10 @@ namespace CameraViewer
             this.barButtonItem11,
             this.barButtonItem12,
             this.barButtonItem13,
-            this.barButtonItemGetPics});
+            this.barButtonItemGetPics,
+            this.barButtonItem14});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 37;
+            this.barManager1.MaxItemId = 38;
             this.barManager1.StatusBar = this.bar4;
             // 
             // barMenu
@@ -326,7 +335,8 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem11),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem12),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem13),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemGetPics)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemGetPics),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem14)});
             this.bar3.Offset = 4;
             this.bar3.Text = "Custom 3";
             // 
@@ -385,6 +395,13 @@ namespace CameraViewer
             this.barButtonItemGetPics.Id = 36;
             this.barButtonItemGetPics.Name = "barButtonItemGetPics";
             this.barButtonItemGetPics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemGetPics_ItemClick);
+            // 
+            // barButtonItem14
+            // 
+            this.barButtonItem14.Caption = "²âÊÔ²¥·ÅÊÓÆµ";
+            this.barButtonItem14.Id = 37;
+            this.barButtonItem14.Name = "barButtonItem14";
+            this.barButtonItem14.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem14_ItemClick);
             // 
             // bar4
             // 
@@ -872,11 +889,57 @@ namespace CameraViewer
             // 
             // panelControl9
             // 
+            this.panelControl9.Controls.Add(this.splitContainerControl2);
             this.panelControl9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl9.Location = new System.Drawing.Point(630, 0);
             this.panelControl9.Name = "panelControl9";
             this.panelControl9.Size = new System.Drawing.Size(199, 202);
             this.panelControl9.TabIndex = 3;
+            // 
+            // splitContainerControl2
+            // 
+            this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl2.Horizontal = false;
+            this.splitContainerControl2.Location = new System.Drawing.Point(2, 2);
+            this.splitContainerControl2.Name = "splitContainerControl2";
+            this.splitContainerControl2.Panel1.AppearanceCaption.ForeColor = System.Drawing.Color.Red;
+            this.splitContainerControl2.Panel1.AppearanceCaption.Options.UseForeColor = true;
+            this.splitContainerControl2.Panel2.Controls.Add(this.simpleButton9);
+            this.splitContainerControl2.Panel2.Controls.Add(this.simpleButton8);
+            this.splitContainerControl2.Panel2.Controls.Add(this.simpleButton7);
+            this.splitContainerControl2.Panel2.Text = "Panel2";
+            this.splitContainerControl2.Panel2.SizeChanged += new System.EventHandler(this.splitContainerControl2_Panel2_SizeChanged);
+            this.splitContainerControl2.Size = new System.Drawing.Size(195, 198);
+            this.splitContainerControl2.SplitterPosition = 170;
+            this.splitContainerControl2.TabIndex = 0;
+            this.splitContainerControl2.Text = "splitContainerControl2";
+            // 
+            // simpleButton9
+            // 
+            this.simpleButton9.Location = new System.Drawing.Point(134, 0);
+            this.simpleButton9.Name = "simpleButton9";
+            this.simpleButton9.Size = new System.Drawing.Size(38, 23);
+            this.simpleButton9.TabIndex = 0;
+            this.simpleButton9.Text = "¿Ú";
+            this.simpleButton9.Click += new System.EventHandler(this.simpleButton9_Click);
+            // 
+            // simpleButton8
+            // 
+            this.simpleButton8.Location = new System.Drawing.Point(80, 0);
+            this.simpleButton8.Name = "simpleButton8";
+            this.simpleButton8.Size = new System.Drawing.Size(38, 23);
+            this.simpleButton8.TabIndex = 0;
+            this.simpleButton8.Text = "||";
+            this.simpleButton8.Click += new System.EventHandler(this.simpleButton8_Click);
+            // 
+            // simpleButton7
+            // 
+            this.simpleButton7.Location = new System.Drawing.Point(26, -1);
+            this.simpleButton7.Name = "simpleButton7";
+            this.simpleButton7.Size = new System.Drawing.Size(38, 23);
+            this.simpleButton7.TabIndex = 0;
+            this.simpleButton7.Text = ">";
+            this.simpleButton7.Click += new System.EventHandler(this.simpleButton7_Click);
             // 
             // panelControl7
             // 
@@ -1288,6 +1351,9 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.panelControl8)).EndInit();
             this.panelControl8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).EndInit();
+            this.panelControl9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
+            this.splitContainerControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
             this.panelControl7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditFace.Properties)).EndInit();
@@ -1416,6 +1482,11 @@ namespace CameraViewer
         private DevExpress.XtraEditors.PanelControl panelControl9;
         private DevExpress.XtraEditors.PanelControl panelControl7;
         private DevExpress.XtraEditors.PictureEdit pictureEditFace;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem14;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton9;
+        private DevExpress.XtraEditors.SimpleButton simpleButton8;
+        private DevExpress.XtraEditors.SimpleButton simpleButton7;
         
     }
 }
