@@ -23,12 +23,16 @@ using CameraViewer.Forms;
 using System.IO;
 using IntVideoSurv.Business.HiK;
 using System.Threading;
+using log4net;
 
 namespace CameraViewer
 {
     public partial class MainForm : XtraForm
     {
         public delegate void ImageDataChangeHandle(object sender, DataChangeEventArgs e);
+        public delegate void FaceHandle(object sender, DataChangeEventArgs e);
+        public delegate void EventHandle(object sender, DataChangeEventArgs e);
+        public delegate void VehicleHandle(object sender, DataChangeEventArgs e);
 
         Dictionary<int, HikVideoServerDeviceDriver> _runningDeviceList;
         Dictionary<int, HikVideoServerCameraDriver> _runningCameraList;
@@ -54,6 +58,7 @@ namespace CameraViewer
         TcpChannel chan1;
         private CameraWindow _currentcCameraWindow;
 
+        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private GetTransPacket _getTransPacket;
 
@@ -419,13 +424,9 @@ namespace CameraViewer
             _runningDeviceList = new Dictionary<int, HikVideoServerDeviceDriver>();
             _listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref _errMessage);
             cameraView1.ListGroup = _listGroup;
-            Splash.Splash.Status = "初始化板卡...";
+            Splash.Splash.Status = "初始化设备...";
             _outputTv = new OutputTVDeviceDriver();
             _outputTv.Init();
-            HikVideoServerCameraDriver.InitDecodeCard();
-            Splash.Splash.Status = "获取解码卡信息...";
-            _listDisplayChannelInfo = DisplayChannelBusiness.Instance.GetAllDisplayChannelInfo(ref _errMessage);
-            InitDisplayRegion();
 
             Splash.Splash.Status = "获取设备信息...";
             _listDevice = DeviceBusiness.Instance.GetAllDeviceInfo(ref _errMessage);
@@ -436,9 +437,7 @@ namespace CameraViewer
             LoadCameraInCombox();
             InitDataTable();
 
-            Splash.Splash.Status = "获取解码器信息...";
-            _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
-            cameraView1.ListDecoder = _listDecoder;
+            splitContainerControlFaceVideo.Visible = false;
 
             LoadAllCamera();
             this.cameraView1.tvSynGroup.DoubleClick += this.tvSynGroup_DoubleClick;
@@ -699,6 +698,8 @@ namespace CameraViewer
             ShowLiveVideo(livePacketHandle);
 
         }
+
+
         protected void ShowLiveVideo(LiveDecoderPacketHandle liveDecoderPacketHandle)
         {
             CrossThreadOperationControl crossAdd = delegate()
@@ -719,6 +720,70 @@ namespace CameraViewer
 
             };
         }
+        #region 人脸实时显示
+        private void LiveFacePacketHandleDataChange(object sender, DataChangeEventArgs e)
+        {
+
+            var livePacketHandle = (LiveRecognizerFacePacketHandle)sender;
+            if (livePacketHandle == null) return;
+            //处理人脸 
+            ShowLiveFace(livePacketHandle);
+
+        }
+        protected void ShowLiveFace(LiveRecognizerFacePacketHandle liveRecognizerFacePacket)
+        {
+            CrossThreadOperationControl crossAdd = delegate()
+            {
+                string errMsg = "";
+
+            };
+        }
+
+        #endregion
+
+        #region 车牌实时显示
+        private void LiveVehiclePacketHandleDataChange(object sender, DataChangeEventArgs e)
+        {
+
+            var livePacketHandle = (LiveRecognizerVehiclePacketHandle)sender;
+            if (livePacketHandle == null) return;
+            //处理车牌 
+            ShowLiveVehicle(livePacketHandle);
+
+        }
+        protected void ShowLiveVehicle(LiveRecognizerVehiclePacketHandle liveRecognizerVehiclePacket)
+        {
+            CrossThreadOperationControl crossAdd = delegate()
+            {
+                string errMsg = "";
+
+            };
+        }
+
+        #endregion
+
+
+        #region 事件实时显示
+        private void LiveEventePacketHandleDataChange(object sender, DataChangeEventArgs e)
+        {
+
+            var livePacketHandle = (LiveRecognizerEventPacketHandle)sender;
+            if (livePacketHandle == null) return;
+            //处理事件 
+            ShowLiveEvent(livePacketHandle);
+
+        }
+        protected void ShowLiveEvent(LiveRecognizerEventPacketHandle liveRecognizerEventPacket)
+        {
+            CrossThreadOperationControl crossAdd = delegate()
+            {
+                string errMsg = "";
+
+            };
+        }
+
+        #endregion
+
         #region Connect sever
         private delegate void CrossThreadOperationControl();
         private void ConnectionServer()
@@ -894,7 +959,11 @@ namespace CameraViewer
             //获得客户端节点对象   
             var recognizerClientConnectionConnection = new RecognizerClientConnection((Socket)socket);
 
-            recognizerClientConnectionConnection.LiveRecognizerEventPacketHandle.DataChange += LiveDecoderPacketHandleDataChange;
+            recognizerClientConnectionConnection.LiveRecognizerEventPacketHandle.DataChange += LiveEventePacketHandleDataChange;
+            recognizerClientConnectionConnection.LiveRecognizerFacePacketHandle.DataChange +=
+                LiveFacePacketHandleDataChange;
+            recognizerClientConnectionConnection.LiveRecognizerVehiclePacketHandle.DataChange +=
+    LiveVehiclePacketHandleDataChange;
 
             if (!listRunningRecognizerClient.ContainsKey(recognizerClientConnectionConnection.RecognizerInfo.Id))
             {
@@ -1144,6 +1213,7 @@ namespace CameraViewer
                     break;
 
             }
+            splitContainerControlFaceVideo.Visible = (1 == radioGroupFace.SelectedIndex);
         }
 
         private void btnQueryFace_Click(object sender, EventArgs e)
@@ -1228,7 +1298,6 @@ namespace CameraViewer
                                        variable.Value.score,
                                        variable.Value);
             }
-
             GridColumn column;
             RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
             pictureEdit.SizeMode = PictureSizeMode.Zoom;
@@ -1280,7 +1349,7 @@ namespace CameraViewer
                 {
                     _lastVideoPort = 1;
                     HikPlayer.PlayM4_OpenFile(_lastVideoPort, face.VideoInfo.FilePath);
-                    HikPlayer.PlayM4_Play(_lastVideoPort, splitContainerControl2.Panel1.Handle);
+                    HikPlayer.PlayM4_Play(_lastVideoPort, splitContainerControlFaceVideo.Panel1.Handle);
                 }
 
             }
@@ -1313,7 +1382,7 @@ namespace CameraViewer
 
         private void simpleButton7_Click(object sender, EventArgs e)
         {
-            HikPlayer.PlayM4_Play(_lastVideoPort, splitContainerControl2.Panel1.Handle);
+            HikPlayer.PlayM4_Play(_lastVideoPort, splitContainerControlFaceVideo.Panel1.Handle);
         }
 
         private bool _isPaused;
@@ -1332,8 +1401,16 @@ namespace CameraViewer
 
         private void splitContainerControl2_Panel2_SizeChanged(object sender, EventArgs e)
         {
-            splitContainerControl2.SplitterPosition = splitContainerControl2.Height - 32;
+            splitContainerControlFaceVideo.SplitterPosition = splitContainerControlFaceVideo.Height - 32;
         }
+        private void LiveRegognizerFacePacketHandleDataChange(object sender, DataChangeEventArgs e)
+        {
 
+            var livePacketHandle = (LiveRecognizerFacePacketHandle)sender;
+            if (livePacketHandle == null) return;
+            //处理视频 
+            //ShowLiveVideo(livePacketHandle);
+
+        }
     }
 }

@@ -36,6 +36,7 @@ namespace CameraViewer.NetWorking
             LiveRecognizerEventPacketHandle = new LiveRecognizerEventPacketHandle();
             LiveRecognizerFacePacketHandle = new LiveRecognizerFacePacketHandle();
             LiveRecognizerVehiclePacketHandle = new LiveRecognizerVehiclePacketHandle();
+
             _handlers = new IPacketHandler[] { LiveRecognizerEventPacketHandle, LiveRecognizerFacePacketHandle, LiveRecognizerVehiclePacketHandle };
 
 
