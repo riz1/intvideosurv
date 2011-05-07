@@ -67,12 +67,13 @@
   <ItemGroup>
     <Compile Include="AlarmDataAccess.cs" />
     <Compile Include="AlarmIconDataAccess.cs" />
-    <Compile Include="AnalysisXMLDataAccess.cs" />
     <Compile Include="CameraDataAccess.cs" />
     <Compile Include="CameraIconDataAccess.cs" />
     <Compile Include="CameraMonitorPairDataAccess.cs" />
+    <Compile Include="CapturePictureDataAccess.cs" />
     <Compile Include="DecoderDataAccess.cs" />
     <Compile Include="DefaultCardOutDataAccess.cs" />
+    <Compile Include="FaceDataAccess.cs" />
     <Compile Include="GroupSwitchDetailDataAccess.cs" />
     <Compile Include="GroupSwitchGroupDataAccess.cs" />
     <Compile Include="CommonDataAccess.cs" />
@@ -85,12 +86,15 @@
     <Compile Include="DeviceDataAccess.cs" />
     <Compile Include="GroupDataAccess.cs" />
     <Compile Include="RecognizerDataAccess.cs" />
+    <Compile Include="REctDataAccess.cs" />
     <Compile Include="SynGroupDataAccess.cs" />
     <Compile Include="SystemLogDataAccess.cs" />
     <Compile Include="SystemParametersDataAccess.cs" />
     <Compile Include="TaskDataAccess.cs" />
     <Compile Include="TempPictureDataAccess.cs" />
+    <Compile Include="TrackDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
+    <Compile Include="VehicleDataAccess.cs" />
     <Compile Include="VideoDataAccess.cs" />
     <Compile Include="WindowCameraDataAccess.cs" />
   </ItemGroup>
