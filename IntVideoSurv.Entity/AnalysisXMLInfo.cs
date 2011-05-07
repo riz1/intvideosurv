@@ -89,6 +89,15 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public int PictureID { get; set; }
 
+        [ColumnMapping()]
+        public string FacePath { get; set; }
+        [ColumnMapping()]
+        public int VideoId;
+
+        public CapturePicture CapturePicture { get; set; }
+        public VideoInfo VideoInfo { get; set; }
+        public CameraInfo CameraInfo { get; set; }
+
     }
     [Serializable]
     public class REct : EntityObject
