@@ -110,7 +110,32 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int,Face> GetFaceCustom(ref string errMessage, string str)
+        public Face GetFace(ref string errMessage, int cameraId, DateTime captureDataTime)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Face face=null;
+
+            try
+            {
+                DataSet ds = AnalysisXMLDataAccess.GetFaceCustom(db, string.Format(" and CapturePicture.CameraId={0} and  CapturePicture.DateTime='{1}'",cameraId,captureDataTime));
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    face = new Face(ds.Tables[0].Rows[i]);
+                    break;
+                }
+                return face;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
+
+        public Dictionary<int, Face> GetFaceCustom(ref string errMessage, string str)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";

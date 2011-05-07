@@ -3,13 +3,15 @@ using System.IO;
 using System.Text;
 using System.Drawing;
 using System.Xml;
+using IntVideoSurv.Business;
+using IntVideoSurv.Entity;
 using log4net;
 
 namespace CameraViewer.NetWorking
 {
     public class LiveRecognizerFacePacketHandle : IPacketHandler
     {
-        public event MainForm.ImageDataChangeHandle DataChange;
+        public event MainForm.FaceHandle DataChange;
 
         public static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -25,7 +27,7 @@ namespace CameraViewer.NetWorking
             string constructedString = encoding.GetString(characters);
             return (constructedString);
         }
-
+        public Face CurrentFace { set; get; }
         public void Handle(byte[] bytes)
         {
             try
@@ -45,7 +47,11 @@ namespace CameraViewer.NetWorking
  * 4）如果否，将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture
  * 5）识别结果入库
  */
-                
+                int cameraId = 1;
+                DateTime dt = DateTime.Now;
+                string errMessage = "";
+                CurrentFace = AnalysisXMLBusiness.Instance.GetFace(ref errMessage, cameraId, dt);
+                OnDataChanged(this, new DataChangeEventArgs(GetType().Name));
                 logger.Info("结束解析人脸数据");
             }
             catch (Exception ex)
