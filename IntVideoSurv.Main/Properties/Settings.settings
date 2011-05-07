@@ -6,7 +6,7 @@
       <Value Profile="(Default)">d:\StreamMediaServicePath</Value>
     </Setting>
     <Setting Name="DefaultSkinName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">DarkRoom</Value>
+      <Value Profile="(Default)">Dark Side</Value>
     </Setting>
     <Setting Name="DirectPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">d:\DirectPath</Value>

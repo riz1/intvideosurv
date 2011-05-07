@@ -1152,6 +1152,7 @@ namespace CameraViewer
             //Dictionary<int, Face> listFace =AnalysisXMLBusiness.Instance.GetFaceCustom( ref errMessage,GenerateFaceQueryCondition());
             Dictionary<int, Face> listFace = new Dictionary<int, Face>();
             listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f });
+            listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f });
 
             FillGridControlVehicleDetail(listFace);
         }
@@ -1227,24 +1228,23 @@ namespace CameraViewer
                                        variable.Value.score,
                                        variable.Value);
             }
-            gridViewFace.PopulateColumns(dataTableFace);
+
             GridColumn column;
             RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
             pictureEdit.SizeMode = PictureSizeMode.Zoom;
             pictureEdit.NullText = " ";
-            column = gridViewFace.Columns["人脸照片"];
+            column = advBandedGridViewFace.Columns["照片"];
             column.ColumnEdit = pictureEdit;
-            column.Caption += "人脸照片";
             gridControlFace.DataSource = dataTableFace;
-            gridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-            gridViewFace.Columns["人脸对象"].Visible = false;
+            advBandedGridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            advBandedGridViewFace.Columns["人脸对象"].Visible = false;
 
         }
 
         private void InitDataTable()
         {
             dataTableFace.Columns.Add("索引号", typeof(int));    
-            dataTableFace.Columns.Add("人脸照片",typeof(byte[]));
+            dataTableFace.Columns.Add("照片",typeof(byte[]));
 
             dataTableFace.Columns.Add("时间", typeof(DateTime));
             dataTableFace.Columns.Add("地点");
@@ -1252,9 +1252,34 @@ namespace CameraViewer
             dataTableFace.Columns.Add("人脸对象", typeof(Face));
         }
 
-        private void gridControlFace_Click(object sender, EventArgs e)
+        private Face _selectedFace;
+        private void advBandedGridViewFace_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            if (advBandedGridViewFace.SelectedRowsCount > 0)
+            {
+                int getSelectedRow = this.advBandedGridViewFace.GetSelectedRows()[0];
+                _selectedFace = (Face)(this.advBandedGridViewFace.GetRowCellValue(getSelectedRow, "人脸对象"));
+                FillPicVideo(_selectedFace);
+            }
+        }
+        private void FillPicVideo(Face face)
+        {
+
+            pictureEditFace.Image = Image.FromFile(face.CapturePicture.FilePath);
+        }
+
+        private void advBandedGridViewFace_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
 
         }
+
+        private void advBandedGridViewFace_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString().Trim();
+            }
+        }
+
     }
 }

@@ -34,7 +34,7 @@ namespace CameraViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DarkRoom")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dark Side")]
         public string DefaultSkinName {
             get {
                 return ((string)(this["DefaultSkinName"]));

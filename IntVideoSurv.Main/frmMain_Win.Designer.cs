@@ -102,10 +102,20 @@ namespace CameraViewer
             this.xtraTabPageFace = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl8 = new DevExpress.XtraEditors.PanelControl();
-            this.gridControlFace = new DevExpress.XtraGrid.GridControl();
-            this.gridViewFace = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl9 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.pictureEditFace = new DevExpress.XtraEditors.PictureEdit();
+            this.gridControlFace = new DevExpress.XtraGrid.GridControl();
+            this.advBandedGridViewFace = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridViewFace = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.btnQueryFace = new DevExpress.XtraEditors.SimpleButton();
             this.lblStartTime = new DevExpress.XtraEditors.LabelControl();
@@ -161,10 +171,13 @@ namespace CameraViewer
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl8)).BeginInit();
             this.panelControl8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlFace)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewFace)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditFace.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlFace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewFace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewFace)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTimeFace.Properties)).BeginInit();
@@ -839,7 +852,6 @@ namespace CameraViewer
             // panelControl5
             // 
             this.panelControl5.Controls.Add(this.panelControl8);
-            this.panelControl5.Controls.Add(this.panelControl7);
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl5.Location = new System.Drawing.Point(0, 48);
             this.panelControl5.Name = "panelControl5";
@@ -849,25 +861,146 @@ namespace CameraViewer
             // panelControl8
             // 
             this.panelControl8.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl8.Controls.Add(this.gridControlFace);
             this.panelControl8.Controls.Add(this.panelControl9);
+            this.panelControl8.Controls.Add(this.panelControl7);
+            this.panelControl8.Controls.Add(this.gridControlFace);
             this.panelControl8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl8.Location = new System.Drawing.Point(2, 2);
             this.panelControl8.Name = "panelControl8";
-            this.panelControl8.Size = new System.Drawing.Size(629, 202);
+            this.panelControl8.Size = new System.Drawing.Size(829, 202);
             this.panelControl8.TabIndex = 1;
+            // 
+            // panelControl9
+            // 
+            this.panelControl9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl9.Location = new System.Drawing.Point(630, 0);
+            this.panelControl9.Name = "panelControl9";
+            this.panelControl9.Size = new System.Drawing.Size(199, 202);
+            this.panelControl9.TabIndex = 3;
+            // 
+            // panelControl7
+            // 
+            this.panelControl7.Controls.Add(this.pictureEditFace);
+            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl7.Location = new System.Drawing.Point(387, 0);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(243, 202);
+            this.panelControl7.TabIndex = 2;
+            // 
+            // pictureEditFace
+            // 
+            this.pictureEditFace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureEditFace.Location = new System.Drawing.Point(2, 2);
+            this.pictureEditFace.MenuManager = this.barManager1;
+            this.pictureEditFace.Name = "pictureEditFace";
+            this.pictureEditFace.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            this.pictureEditFace.Size = new System.Drawing.Size(239, 198);
+            this.pictureEditFace.TabIndex = 0;
             // 
             // gridControlFace
             // 
-            this.gridControlFace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlFace.Dock = System.Windows.Forms.DockStyle.Left;
             this.gridControlFace.Location = new System.Drawing.Point(0, 0);
-            this.gridControlFace.MainView = this.gridViewFace;
+            this.gridControlFace.MainView = this.advBandedGridViewFace;
             this.gridControlFace.MenuManager = this.barManager1;
             this.gridControlFace.Name = "gridControlFace";
-            this.gridControlFace.Size = new System.Drawing.Size(429, 202);
+            this.gridControlFace.Size = new System.Drawing.Size(387, 202);
             this.gridControlFace.TabIndex = 1;
             this.gridControlFace.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.advBandedGridViewFace,
             this.gridViewFace});
+            // 
+            // advBandedGridViewFace
+            // 
+            this.advBandedGridViewFace.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1,
+            this.gridBand2});
+            this.advBandedGridViewFace.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.bandedGridColumn1,
+            this.bandedGridColumn2,
+            this.bandedGridColumn3,
+            this.bandedGridColumn4,
+            this.bandedGridColumn5,
+            this.bandedGridColumn6});
+            this.advBandedGridViewFace.GridControl = this.gridControlFace;
+            this.advBandedGridViewFace.IndicatorWidth = 40;
+            this.advBandedGridViewFace.Name = "advBandedGridViewFace";
+            this.advBandedGridViewFace.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.advBandedGridViewFace.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.advBandedGridViewFace.OptionsBehavior.Editable = false;
+            this.advBandedGridViewFace.OptionsBehavior.ReadOnly = true;
+            this.advBandedGridViewFace.OptionsView.ShowBands = false;
+            this.advBandedGridViewFace.OptionsView.ShowGroupPanel = false;
+            this.advBandedGridViewFace.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.advBandedGridViewFace_SelectionChanged);
+            this.advBandedGridViewFace.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.advBandedGridViewFace_RowClick);
+            this.advBandedGridViewFace.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.advBandedGridViewFace_CustomDrawRowIndicator);
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.Caption = "基本信息";
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
+            this.gridBand1.Columns.Add(this.bandedGridColumn4);
+            this.gridBand1.Columns.Add(this.bandedGridColumn2);
+            this.gridBand1.Columns.Add(this.bandedGridColumn3);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.Width = 206;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "索引号";
+            this.bandedGridColumn1.FieldName = "索引号";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 100;
+            // 
+            // bandedGridColumn4
+            // 
+            this.bandedGridColumn4.Caption = "置信度";
+            this.bandedGridColumn4.FieldName = "置信度";
+            this.bandedGridColumn4.Name = "bandedGridColumn4";
+            this.bandedGridColumn4.Visible = true;
+            this.bandedGridColumn4.Width = 106;
+            // 
+            // bandedGridColumn2
+            // 
+            this.bandedGridColumn2.Caption = "时间";
+            this.bandedGridColumn2.FieldName = "时间";
+            this.bandedGridColumn2.Name = "bandedGridColumn2";
+            this.bandedGridColumn2.RowIndex = 1;
+            this.bandedGridColumn2.Visible = true;
+            this.bandedGridColumn2.Width = 206;
+            // 
+            // bandedGridColumn3
+            // 
+            this.bandedGridColumn3.Caption = "地点";
+            this.bandedGridColumn3.FieldName = "地点";
+            this.bandedGridColumn3.Name = "bandedGridColumn3";
+            this.bandedGridColumn3.RowIndex = 2;
+            this.bandedGridColumn3.Visible = true;
+            this.bandedGridColumn3.Width = 206;
+            // 
+            // gridBand2
+            // 
+            this.gridBand2.Caption = "人脸";
+            this.gridBand2.Columns.Add(this.bandedGridColumn6);
+            this.gridBand2.Columns.Add(this.bandedGridColumn5);
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.Width = 123;
+            // 
+            // bandedGridColumn6
+            // 
+            this.bandedGridColumn6.Caption = "人脸对象";
+            this.bandedGridColumn6.FieldName = "人脸对象";
+            this.bandedGridColumn6.Name = "bandedGridColumn6";
+            // 
+            // bandedGridColumn5
+            // 
+            this.bandedGridColumn5.AutoFillDown = true;
+            this.bandedGridColumn5.Caption = "照片";
+            this.bandedGridColumn5.FieldName = "照片";
+            this.bandedGridColumn5.Name = "bandedGridColumn5";
+            this.bandedGridColumn5.Visible = true;
+            this.bandedGridColumn5.Width = 123;
             // 
             // gridViewFace
             // 
@@ -881,22 +1014,6 @@ namespace CameraViewer
             this.gridViewFace.OptionsSelection.InvertSelection = true;
             this.gridViewFace.OptionsView.RowAutoHeight = true;
             this.gridViewFace.OptionsView.ShowGroupPanel = false;
-            // 
-            // panelControl9
-            // 
-            this.panelControl9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl9.Location = new System.Drawing.Point(429, 0);
-            this.panelControl9.Name = "panelControl9";
-            this.panelControl9.Size = new System.Drawing.Size(200, 202);
-            this.panelControl9.TabIndex = 0;
-            // 
-            // panelControl7
-            // 
-            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl7.Location = new System.Drawing.Point(631, 2);
-            this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(200, 202);
-            this.panelControl7.TabIndex = 0;
             // 
             // panelControl6
             // 
@@ -1170,10 +1287,13 @@ namespace CameraViewer
             this.panelControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl8)).EndInit();
             this.panelControl8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlFace)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewFace)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditFace.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlFace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewFace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewFace)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
             this.panelControl6.PerformLayout();
@@ -1282,10 +1402,20 @@ namespace CameraViewer
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.RadioGroup radioGroup2;
         private DevExpress.XtraEditors.PanelControl panelControl8;
-        private DevExpress.XtraEditors.PanelControl panelControl9;
-        private DevExpress.XtraEditors.PanelControl panelControl7;
         private DevExpress.XtraGrid.GridControl gridControlFace;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewFace;
+        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewFace;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraEditors.PanelControl panelControl9;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
+        private DevExpress.XtraEditors.PictureEdit pictureEditFace;
         
     }
 }
