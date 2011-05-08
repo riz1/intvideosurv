@@ -4,6 +4,8 @@ using System.Text;
 using System.Drawing;
 using System.Xml;
 using log4net;
+using IntVideoSurv.Business;
+using IntVideoSurv.Entity;
 
 namespace CameraViewer.NetWorking
 {
@@ -37,6 +39,50 @@ namespace CameraViewer.NetWorking
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.LoadXml(BitConverter.ToString(bytes, 4));
 
+                string errMessage = "";
+                int cameraid;
+                DateTime timeid;
+                int pictureId;
+                XmlNodeList xml_cameras;
+                xml_cameras = xmlDocument.SelectSingleNode("/pr/cameras").ChildNodes;
+                foreach (XmlNode xmlItem in xml_cameras)
+                {
+                    XmlElement camera = (XmlElement)xmlItem;
+                    cameraid = Convert.ToInt32(camera.GetAttribute("id"));
+                    timeid = new DateTime(long.Parse(camera.GetAttribute("timeid")));
+                    if (CapturePictureBusiness.Instance.GetTheCapturePicture(ref errMessage,cameraid,timeid) != -1)
+                    {
+                        //将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture
+                    }
+                    //识别结果入库
+                    CapturePicture cp = new CapturePicture();
+                    cp.CameraID = cameraid;
+                    cp.Datetime = timeid;
+                    cp.FilePath = SystemParametersBusiness.Instance.ListSystemParameter["CapPicPath"] + @"\" + cp.CameraID +
+                        @"\" + cp.Datetime.ToString(@"yyyy\\MM\\dd\\HH\\") + cp.CameraID + cp.Datetime.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff") + ".jpg";
+                    pictureId = CapturePictureBusiness.Instance.Insert(ref errMessage, cp);
+                    XmlNodeList objectlist = xmlItem.ChildNodes;
+                    foreach (XmlNode xmlitem1 in objectlist)
+                    {
+                        XmlElement objecttarget = (XmlElement)xmlitem1;
+                        if(objecttarget.Name=="object")
+                        {
+                            foreach (XmlNode rectitem in objecttarget.ChildNodes)
+                            {
+                                XmlElement rectelement = (XmlElement)rectitem;
+                                REct myrect = new REct();
+                                myrect.X = Convert.ToInt32(rectelement.GetAttribute("x"));
+                                myrect.Y = Convert.ToInt32(rectelement.GetAttribute("y"));
+                                myrect.W = Convert.ToInt32(rectelement.GetAttribute("w"));
+                                myrect.H = Convert.ToInt32(rectelement.GetAttribute("h"));
+                                REctBusiness.Instance.Insert(ref errMessage, myrect);
+                            }
+                        }
+
+                    }
+                    
+
+                }
                 /*******************处理流程：
                 
                  * 1）解析xml文件，获取cameraid和DateTime
