@@ -10,7 +10,7 @@ namespace IntVideoSurv.DataAccess
 {
     public class VehicleDataAccess
     {
-        public static int InsertVehicle(Database db, Vehicle oVehicle)
+        public static int Insert(Database db, Vehicle oVehicle)
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
