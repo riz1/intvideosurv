@@ -43,19 +43,25 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
-        public int MoveTempPicture(ref string errMessage, TempPicture oTempPicture)
+        public string MoveTempPicture(ref string errMessage, TempPicture oTempPicture)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             try
             {
-                int ret = 0;
+                string ret = null;
                 string destFilePath = SystemParametersBusiness.Instance.ListSystemParameter["CapPicPath"] + @"\" + oTempPicture.CameraID +
                         @"\" + oTempPicture.Datetime.ToString(@"yyyy\\MM\\dd\\HH\\") + oTempPicture.CameraID + oTempPicture.Datetime.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff") + ".jpg";
                 if (File.Exists(oTempPicture.FilePath))
                 {
+                    string path = Path.GetDirectoryName(destFilePath);
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
                     File.Move(oTempPicture.FilePath, destFilePath);
-                    ret = TempPictureDataAccess.DeleteTempPicture(db, oTempPicture.PictureID);
+                    TempPictureDataAccess.DeleteTempPicture(db, oTempPicture.PictureID);
+                    ret = destFilePath;
 
                 }
                 return ret;
@@ -65,7 +71,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return -1;
+                return null;
             }
         }
 
@@ -106,19 +112,24 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
-        public DataSet GetTempPicture(Database db, TempPicture oTempPicture)
+        public TempPicture GetTempPicture(ref string errMessage,int cameraId, DateTime camptureDateTime)
         {
-            string cmdText = string.Format("select * from TempPicture where CameraId={0} and DateTime='{1}'", oTempPicture.CameraID, oTempPicture.Datetime);
+            Database db = DatabaseFactory.CreateDatabase();
+            string cmdText = string.Format("select * from TempPicture where CameraId={0} and DateTime='{1}'", cameraId, camptureDateTime);
             try
             {
-                return db.ExecuteDataSet(CommandType.Text, cmdText);
+                DataSet ds = TempPictureDataAccess.GetTempPicture(db, cameraId, camptureDateTime);
+                return  new TempPicture(ds.Tables[0].Rows[0]);
 
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
             }
         }
+
     }
 }

@@ -35,7 +35,7 @@ namespace IntVideoSurv.Business
             errMessage = "";
             try
             {
-                return TrackDataAccess.Insert(db, oTrack);
+                return TrackDataAccess.InsertTrack(db, oTrack);
 
             }
             catch (Exception ex)

@@ -44,7 +44,7 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public int REctId { get; set; }
         [ColumnMapping]
-        public int confidence { get; set;}
+        public float confidence { get; set;}
         public string PicturePath;
         public int VideoId;
         public string VideoPath;
