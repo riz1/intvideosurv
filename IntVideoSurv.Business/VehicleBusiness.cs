@@ -45,5 +45,58 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
+        public Vehicle GetVehicle(ref string errMessage, int cameraId, DateTime captureDataTime)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Vehicle vehicle = null;
+
+            try
+            {
+                DataSet ds = VehicleDataAccess.GetVehicleCustom(db, string.Format(" and CapturePicture.CameraId={0} and  CapturePicture.DateTime='{1}'", cameraId, captureDataTime));
+                vehicle = new Vehicle(ds.Tables[0].Rows[0]);
+                vehicle.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, vehicle.PictureID);
+                vehicle.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                  vehicle.CapturePicture.CameraID);
+                vehicle.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, vehicle.VedioId);
+                return vehicle;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
+
+        public Dictionary<int, Vehicle> GetVehicleCustom(ref string errMessage, string str)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, Vehicle> list = new Dictionary<int, Vehicle>();
+            try
+            {
+                DataSet ds = FaceDataAccess.GetFaceCustom(db, str);
+                Vehicle vehicle;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    vehicle = new Vehicle(ds.Tables[0].Rows[i]);
+                    vehicle.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, vehicle.PictureID);
+                    vehicle.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                      vehicle.CapturePicture.CameraID);
+                    vehicle.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, vehicle.VedioId);
+                    list.Add(vehicle.VehicleID, vehicle);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
     }
 }

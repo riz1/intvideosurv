@@ -54,11 +54,11 @@ namespace IntVideoSurv.Business
             try
             {
                 DataSet ds = FaceDataAccess.GetFaceCustom(db, string.Format(" and CapturePicture.CameraId={0} and  CapturePicture.DateTime='{1}'", cameraId, captureDataTime));
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    face = new Face(ds.Tables[0].Rows[i]);
-                    break;
-                }
+                face = new Face(ds.Tables[0].Rows[0]);
+                face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, face.PictureID);
+                face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                  face.CapturePicture.CameraID);
+                face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VedioId);
                 return face;
 
             }
@@ -82,6 +82,10 @@ namespace IntVideoSurv.Business
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     face = new Face(ds.Tables[0].Rows[i]);
+                    face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage,face.PictureID);
+                    face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                      face.CapturePicture.CameraID);
+                    face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VedioId);
                     list.Add(face.FaceID, face);
                 }
                 return list;

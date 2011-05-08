@@ -63,6 +63,24 @@ namespace IntVideoSurv.Business
                 return null;
             }
         }
+
+        public CapturePicture GetCapturePicture(ref string errMessage, int id)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = CapturePictureDataAccess.GetCapturePicture(db, id);
+                return new CapturePicture(ds.Tables[0].Rows[0]);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
         public bool IsExistCapturePicture(ref string errMessage,int id,DateTime dt)
         {
             Database db = DatabaseFactory.CreateDatabase();

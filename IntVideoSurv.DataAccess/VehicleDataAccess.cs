@@ -87,5 +87,24 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static DataSet GetVehicleCustom(Database db, string str)
+        {
+            string cmdText = string.Format(
+                "select Vehicle.VehicleID,Vehicle.platenumber,Vehicle.speed,Vehicle.stemagainst,Vehicle.stop,Vehicle.accident"+
+                ",Vehicle.linechange,Vehicle.platecolor,Vehicle.vehiclecolor,Vehicle.PictureId,Vehicle.RectId"+
+                ",Vehicle.confidence,VideoInfo.Id as VideoId " +
+                "from Vehicle,CapturePicture,VideoInfo " +
+                "where Vehicle.PictureId=CapturePicture.PictureId and " +
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
