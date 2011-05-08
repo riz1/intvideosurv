@@ -57,7 +57,7 @@ namespace CameraViewer
                     string errMessage = "";
                     ocap.FilePath = SystemParametersBusiness.Instance.ListSystemParameter["CapPicPath"] + @"\" + ocap.CameraID +
                         @"\" + ocap.Datetime.ToString(@"yyyy\\MM\\dd\\HH\\") + ocap.CameraID +ocap.Datetime.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff")+".jpg";
-                    pictureId = AnalysisXMLBusiness.Instance.InsertCapturePicture(ref errMessage, ocap);
+                    pictureId = CapturePictureBusiness.Instance.Insert(ref errMessage, ocap);
                     
                     xml_vehicles=xmlDoc.SelectSingleNode("/pr/cameras/camera/objects/vehicles").ChildNodes;
                     foreach (XmlNode veh_item in xml_vehicles)
@@ -69,7 +69,7 @@ namespace CameraViewer
                         rect1.Y = Convert.ToInt32(xml_vehicles_rect1.GetAttribute("y"));
                         rect1.W = Convert.ToInt32(xml_vehicles_rect1.GetAttribute("w"));
                         rect1.H = Convert.ToInt32(xml_vehicles_rect1.GetAttribute("h"));
-                        rectId = AnalysisXMLBusiness.Instance.InsertREct(ref errMessage, rect1);
+                        rectId = REctBusiness.Instance.Insert(ref errMessage, rect1);
 
                         Vehicle oveh=new Vehicle();
                         XmlElement xveh=(XmlElement)veh_item;
@@ -112,7 +112,7 @@ namespace CameraViewer
                         oveh.vehiclecolor=Convert.ToString(xveh.GetAttribute("vehiclecolor"));
                         oveh.PictureID = pictureId;
                         oveh.REctId = rectId;
-                        vehicleId = AnalysisXMLBusiness.Instance.InsertVehicle(ref errMessage, oveh);
+                        vehicleId = VehicleBusiness.Instance.Insert(ref errMessage, oveh);
 
                         xml_vehicles_tract_rects = xmlDoc.SelectSingleNode("/pr/cameras/camera/objects/vehicles/vehicle/track").ChildNodes;
                         foreach (XmlNode xml_vehicles_tract_rects_item in xml_vehicles_tract_rects)
@@ -123,11 +123,11 @@ namespace CameraViewer
                             rect2.Y = Convert.ToInt32(xml_vehicles_tract_rects_item1.GetAttribute("y"));
                             rect2.W = Convert.ToInt32(xml_vehicles_tract_rects_item1.GetAttribute("w"));
                             rect2.H = Convert.ToInt32(xml_vehicles_tract_rects_item1.GetAttribute("h"));
-                            rectId = AnalysisXMLBusiness.Instance.InsertREct(ref errMessage, rect2);
+                            rectId = REctBusiness.Instance.Insert(ref errMessage, rect2);
                         }
                         Track track = new Track();
                         track.REct = rectId;
-                        trackId = AnalysisXMLBusiness.Instance.InsertTrack(ref errMessage, track);
+                        trackId = TrackBusiness.Instance.Insert(ref errMessage, track);
 
                     }
                     xml_faces = xmlDoc.SelectSingleNode("/pr/cameras/camera/objects/faces").ChildNodes;
@@ -141,13 +141,13 @@ namespace CameraViewer
                         rect3.Y = Convert.ToInt32(xml_faces_item_rect1.GetAttribute("y"));
                         rect3.W = Convert.ToInt32(xml_faces_item_rect1.GetAttribute("w"));
                         rect3.H = Convert.ToInt32(xml_faces_item_rect1.GetAttribute("h"));
-                        rectId = AnalysisXMLBusiness.Instance.InsertREct(ref errMessage, rect3);
+                        rectId = REctBusiness.Instance.Insert(ref errMessage, rect3);
                         XmlNode xml_faces_item_score = xmlDoc.SelectSingleNode("/pr/cameras/camera/objects/faces/face/score");
                         Face face = new Face();
                         face.RectID = rectId;
                         face.PictureID = pictureId;
                         face.score = Convert.ToSingle(xml_faces_item_score.InnerText);
-                        faceId = AnalysisXMLBusiness.Instance.InsertFace(ref errMessage, face);
+                        faceId = FaceBusiness.Instance.Insert(ref errMessage, face);
                         
                     }
 
