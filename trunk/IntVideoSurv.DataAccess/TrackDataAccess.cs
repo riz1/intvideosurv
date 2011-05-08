@@ -9,7 +9,7 @@ namespace IntVideoSurv.DataAccess
 {
     public class TrackDataAccess
     {
-        public static int InsertTrack(Database db, Track oTrack)
+        public static int Insert(Database db, Track oTrack)
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
