@@ -32,11 +32,6 @@ namespace CameraViewer.Controls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CameraView));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.panNav1 = new Damany.Controls.PanNav();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.cameraNav1 = new Damany.Controls.CameraNav();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
@@ -56,10 +51,6 @@ namespace CameraViewer.Controls
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.imageListForTreeView = new System.Windows.Forms.ImageList(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
-            this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
             this.xtraTabControl2.SuspendLayout();
@@ -100,48 +91,6 @@ namespace CameraViewer.Controls
             this.imageList2.Images.SetKeyName(8, "");
             this.imageList2.Images.SetKeyName(9, "videocamera.ico");
             // 
-            // xtraTabControl1
-            // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 299);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(213, 188);
-            this.xtraTabControl1.TabIndex = 28;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
-            // 
-            // xtraTabPage1
-            // 
-            this.xtraTabPage1.Controls.Add(this.panNav1);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(207, 160);
-            this.xtraTabPage1.Text = "云台";
-            // 
-            // panNav1
-            // 
-            this.panNav1.Location = new System.Drawing.Point(3, 0);
-            this.panNav1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.panNav1.Name = "panNav1";
-            this.panNav1.Size = new System.Drawing.Size(169, 162);
-            this.panNav1.TabIndex = 0;
-            // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Controls.Add(this.cameraNav1);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(207, 160);
-            this.xtraTabPage2.Text = "相机";
-            // 
-            // cameraNav1
-            // 
-            this.cameraNav1.Location = new System.Drawing.Point(0, 0);
-            this.cameraNav1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.cameraNav1.Name = "cameraNav1";
-            this.cameraNav1.Size = new System.Drawing.Size(204, 149);
-            this.cameraNav1.TabIndex = 0;
-            // 
             // navBarControl1
             // 
             this.navBarControl1.ActiveGroup = null;
@@ -159,7 +108,7 @@ namespace CameraViewer.Controls
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 140;
-            this.navBarControl1.Size = new System.Drawing.Size(213, 299);
+            this.navBarControl1.Size = new System.Drawing.Size(213, 487);
             this.navBarControl1.SmallImages = this.imageList2;
             this.navBarControl1.StoreDefaultPaintStyleName = true;
             this.navBarControl1.TabIndex = 29;
@@ -223,7 +172,7 @@ namespace CameraViewer.Controls
             this.xtraTabControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabControl2.Name = "xtraTabControl2";
             this.xtraTabControl2.SelectedTabPage = this.xtraTabPageCameraList;
-            this.xtraTabControl2.Size = new System.Drawing.Size(213, 299);
+            this.xtraTabControl2.Size = new System.Drawing.Size(213, 487);
             this.xtraTabControl2.TabIndex = 30;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageCameraList,
@@ -235,7 +184,7 @@ namespace CameraViewer.Controls
             this.xtraTabPageCameraList.Controls.Add(this.tlCamera);
             this.xtraTabPageCameraList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabPageCameraList.Name = "xtraTabPageCameraList";
-            this.xtraTabPageCameraList.Size = new System.Drawing.Size(207, 271);
+            this.xtraTabPageCameraList.Size = new System.Drawing.Size(207, 459);
             this.xtraTabPageCameraList.Text = "摄像头";
             // 
             // tlCamera
@@ -253,7 +202,7 @@ namespace CameraViewer.Controls
             this.tlCamera.OptionsView.ShowIndicator = false;
             this.tlCamera.OptionsView.ShowVertLines = false;
             this.tlCamera.SelectImageList = this.imageCollection1;
-            this.tlCamera.Size = new System.Drawing.Size(207, 271);
+            this.tlCamera.Size = new System.Drawing.Size(207, 459);
             this.tlCamera.TabIndex = 2;
             this.tlCamera.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tlCamera_MouseDoubleClick);
             // 
@@ -343,13 +292,8 @@ namespace CameraViewer.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControl2);
             this.Controls.Add(this.navBarControl1);
-            this.Controls.Add(this.xtraTabControl1);
             this.Name = "CameraView";
             this.Size = new System.Drawing.Size(213, 487);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
-            this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
             this.xtraTabControl2.ResumeLayout(false);
@@ -366,9 +310,6 @@ namespace CameraViewer.Controls
 
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ImageList imageList2;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraNavBar.NavBarControl navBarControl1;
         private DevExpress.XtraNavBar.NavBarItem navBarItem6;
         private DevExpress.XtraNavBar.NavBarItem navBarItem7;
@@ -377,8 +318,6 @@ namespace CameraViewer.Controls
         private DevExpress.XtraNavBar.NavBarItem navBarItem2;
         private DevExpress.XtraNavBar.NavBarItem navBarItem3;
         private DevExpress.XtraNavBar.NavBarItem navBarItem4;
-        private Damany.Controls.PanNav panNav1;
-        private Damany.Controls.CameraNav cameraNav1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageDecoderList;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageCameraList;
         public DevExpress.XtraTab.XtraTabControl xtraTabControl2;
