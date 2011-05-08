@@ -77,10 +77,11 @@
   <ItemGroup>
     <Compile Include="AlarmBusiness.cs" />
     <Compile Include="AlarmIconBusiness.cs" />
-    <Compile Include="AnalysisXMLBusiness.cs" />
     <Compile Include="CameraIconBusiness.cs" />
+    <Compile Include="CapturePictureBusiness.cs" />
     <Compile Include="DecoderBusiness.cs" />
     <Compile Include="DefaultCardOutBusiness.cs" />
+    <Compile Include="FaceBusiness.cs" />
     <Compile Include="GroupSwitchDetailBusiness.cs" />
     <Compile Include="GroupSwitchGroupBusiness.cs" />
     <Compile Include="Config.cs" />
@@ -103,13 +104,16 @@
     <Compile Include="CameraBusiness.cs" />
     <Compile Include="HiK\HikStreamMediaServerSDK.cs" />
     <Compile Include="RecognizerBusiness.cs" />
+    <Compile Include="REctBusiness.cs" />
     <Compile Include="SynGroupBusiness.cs" />
     <Compile Include="SystemLogBusiness.cs" />
     <Compile Include="SystemParametersBusiness.cs" />
     <Compile Include="TaskBusiness.cs" />
     <Compile Include="TempPictureBusiness.cs" />
+    <Compile Include="TrackBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="VehicleBusiness.cs" />
     <Compile Include="VideoBusiness.cs" />
     <Compile Include="WindowCameraBusiness.cs" />
   </ItemGroup>
