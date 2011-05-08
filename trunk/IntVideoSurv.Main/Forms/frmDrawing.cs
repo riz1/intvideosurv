@@ -210,7 +210,7 @@ namespace CameraViewer
             XmlDocument drawXml = new XmlDocument();
             XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);//head
             drawXml.AppendChild(docNode);
-            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
+            /*RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
 
             if (ri == null)
             {
@@ -220,11 +220,11 @@ namespace CameraViewer
                     return;
                 }
 
-            }
+            }*/
             XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
             XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
-            recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
-           // recognizerAttribute.Value = "6".ToString(); //ri.Id.ToString();
+            //recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
+            recognizerAttribute.Value = "5".ToString(); //ri.Id.ToString();
             recognizerNode.Attributes.Append(recognizerAttribute);
             drawXml.AppendChild(recognizerNode);
             XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
@@ -536,7 +536,7 @@ namespace CameraViewer
             XmlDocument drawXml = new XmlDocument();
             XmlNode docNode = drawXml.CreateXmlDeclaration("1.0", "gb2312", null);//head
             drawXml.AppendChild(docNode);
-            RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
+            /*RecognizerInfo ri = RecognizerBusiness.Instance.GetRecognizerInfoByCameraId(ref errMessage, _cameraId);
 
             if (ri == null)
             {
@@ -546,11 +546,11 @@ namespace CameraViewer
                     return;
                 }
 
-            }
+            }*/
             XmlNode recognizerNode = drawXml.CreateElement("pr");//pr
             XmlAttribute recognizerAttribute = drawXml.CreateAttribute("id");
-            recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
-            //recognizerAttribute.Value ="5".ToString(); //ri.Id.ToString()
+            //recognizerAttribute.Value = ri.Id.ToString(); //ri.Id.ToString();
+            recognizerAttribute.Value ="5".ToString(); //ri.Id.ToString()
             recognizerNode.Attributes.Append(recognizerAttribute);
             drawXml.AppendChild(recognizerNode);
             XmlNode camerasNode = drawXml.CreateElement("cameras");//cameras
