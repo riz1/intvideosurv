@@ -44,7 +44,6 @@ namespace CameraViewer.NetWorking
                 string errMessage = "";
                 int cameraid;
                 DateTime timeid;
-                int pictureId;
                 XmlNodeList xml_cameras,xml_faces;
                 xml_cameras = xmlDocument.SelectSingleNode("/pr/cameras").ChildNodes;
                 foreach (XmlNode xmlItem in xml_cameras)
@@ -52,18 +51,22 @@ namespace CameraViewer.NetWorking
                     XmlElement camera = (XmlElement)xmlItem;
                     cameraid = Convert.ToInt32(camera.GetAttribute("id"));
                     timeid = new DateTime(long.Parse(camera.GetAttribute("timeid")));
-                    if (CapturePictureBusiness.Instance.GetTheCapturePicture(ref errMessage, cameraid, timeid) != -1)
+                    if (!CapturePictureBusiness.Instance.IsExistCapturePicture(ref errMessage, cameraid, timeid))
                     {
-                        //将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture
+                        //将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture 
+                        //图像还在临时图像库中
+                        TempPicture tempPicture = TempPictureBusiness.Instance.GetTempPicture(ref errMessage, cameraid, timeid);
+                        string destFile = TempPictureBusiness.Instance.MoveTempPicture(ref errMessage, tempPicture);
+                        CapturePicture capturePictureinsert = new CapturePicture(){CameraID = cameraid,Datetime = timeid,FilePath = destFile};
+                        CapturePictureBusiness.Instance.Insert(ref errMessage, capturePictureinsert);
+
                     }
                     //识别结果入库
-                    CapturePicture cp = new CapturePicture();
-                    cp.CameraID = cameraid;
-                    cp.Datetime = timeid;
-                    cp.FilePath = SystemParametersBusiness.Instance.ListSystemParameter["CapPicPath"] + @"\" + cp.CameraID +
-                        @"\" + cp.Datetime.ToString(@"yyyy\\MM\\dd\\HH\\") + cp.CameraID + cp.Datetime.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff") + ".jpg";
-                    pictureId = CapturePictureBusiness.Instance.Insert(ref errMessage, cp);
+                    CapturePicture oCapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage,cameraid,timeid);
                     xml_faces = xmlItem.FirstChild.ChildNodes;//获得faces节点
+                    string facePath = SystemParametersBusiness.Instance.ListSystemParameter["FacePicPath"] + @"\" + cameraid +
+                        @"\" + timeid.ToString(@"yyyy\\MM\\dd\\HH\\") + cameraid + timeid.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff");
+                    int i = 1;
                     foreach (XmlNode faceItem in xml_faces)
                     {
                         XmlNode rectNode = faceItem.FirstChild;
@@ -76,20 +79,27 @@ namespace CameraViewer.NetWorking
                         facerect.W = Convert.ToInt32(rectElement.GetAttribute("w"));
                         facerect.H = Convert.ToInt32(rectElement.GetAttribute("h"));
                         int RectId = REctBusiness.Instance.Insert(ref errMessage, facerect);
+                        
                         //抠图
-                        Image newImage = Image.FromFile(@"C:\bmp.bmp");
+                        Image newImage = Image.FromFile(oCapturePicture.FilePath);
                         Bitmap tmpbitmap = new Bitmap(facerect.W+1, facerect.H+1);
                         Rectangle rectSrt = new Rectangle(facerect.X, facerect.Y, facerect.W, facerect.H);
                         Rectangle rectDst = new Rectangle(0, 0, facerect.W, facerect.H);
                         Graphics graphic = Graphics.FromImage(tmpbitmap);
                         graphic.DrawImage(newImage, rectDst, rectSrt, GraphicsUnit.Pixel);
-                        tmpbitmap.Save(@"C:\temp.jpg", ImageFormat.Jpeg);
+                        string faceFile = facePath +"_" + i + ".jpg";
+                        string path = Path.GetDirectoryName(faceFile);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        tmpbitmap.Save(faceFile, ImageFormat.Jpeg);
                         
                         Face xmlface = new Face();
                         xmlface.score = Convert.ToSingle(scoreElement.InnerText);
                         xmlface.RectID = RectId;
-                        xmlface.PictureID = pictureId;
-                        xmlface.FacePath = "path";
+                        xmlface.PictureID = oCapturePicture.PictureID;
+                        xmlface.FacePath = faceFile;
                         int faceId = FaceBusiness.Instance.Insert(ref errMessage, xmlface);
                     }
 
@@ -106,8 +116,7 @@ namespace CameraViewer.NetWorking
  */
                 int cameraId = 1;
                 DateTime dt = DateTime.Now;
-                string errMessage = "";
-                CurrentFace = AnalysisXMLBusiness.Instance.GetFace(ref errMessage, cameraId, dt);
+                CurrentFace = FaceBusiness.Instance.GetFace(ref errMessage, cameraId, dt);
                 OnDataChanged(this, new DataChangeEventArgs(GetType().Name));
                 logger.Info("结束解析人脸数据");
             }

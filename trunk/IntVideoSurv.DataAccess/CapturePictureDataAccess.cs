@@ -44,7 +44,7 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        public static DataSet GetTheCapturePicture(Database db, int id, DateTime dt)
+        public static DataSet GetCapturePicture(Database db, int id, DateTime dt)
         {
             string cmdText = string.Format("select * from CapturePicture where CameraID={0} and Datetime={0}", id,dt);
             try
@@ -58,5 +58,21 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+
+        public static bool IsExistCapturePicture(Database db, int id, DateTime dt)
+        {
+            string cmdText = string.Format("select count(*) from CapturePicture where CameraID={0} and Datetime={0}", id, dt);
+            try
+            {
+                return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString()) > 0;
+
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+
     }
 }

@@ -29,6 +29,7 @@ namespace IntVideoSurv.Business
                 return instance;
             }
         }
+
         public int Insert(ref string errMessage, CapturePicture oCapturePicture)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -45,31 +46,37 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
-        public int GetTheCapturePicture(ref string errMessage,int id,DateTime dt)
+        public CapturePicture GetCapturePicture(ref string errMessage, int cameraId,DateTime dateTime)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             try
             {
-                if (CapturePictureDataAccess.GetTheCapturePicture(db, id,dt).Tables[0].Rows.Count != 0)
-                {
-
-                    return -1;
-
-                }
-                else
-                {
-                    return 0;
-                    //return CapturePictureDataAccess.Insert(db, );
-                }
-                //return DecoderDataAccess.InsertCamera(db, odecoder, ocamera);  
+                DataSet ds = CapturePictureDataAccess.GetCapturePicture(db, cameraId, dateTime);
+                return new CapturePicture(ds.Tables[0].Rows[0]);
 
             }
             catch (Exception ex)
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return -1;
+                return null;
+            }
+        }
+        public bool IsExistCapturePicture(ref string errMessage,int id,DateTime dt)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return CapturePictureDataAccess.IsExistCapturePicture(db, id, dt);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return false;
             }
         }
     }

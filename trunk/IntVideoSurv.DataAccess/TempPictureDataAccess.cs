@@ -61,6 +61,21 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+
+        public static DataSet GetTempPicture(Database db, int cameraId, DateTime captureTime)
+        {
+            string cmdText = string.Format("select * from TempPicture where CameraId={0} and DateTime='{1}'", cameraId, captureTime);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public static int DeleteTempPicture(Database db, int pictureId)
         {
             StringBuilder sb = new StringBuilder();

@@ -42,7 +42,6 @@ namespace CameraViewer.NetWorking
                 string errMessage = "";
                 int cameraid;
                 DateTime timeid;
-                int pictureId;
                 XmlNodeList xml_cameras;
                 xml_cameras = xmlDocument.SelectSingleNode("/pr/cameras").ChildNodes;
                 foreach (XmlNode xmlItem in xml_cameras)
@@ -50,17 +49,18 @@ namespace CameraViewer.NetWorking
                     XmlElement camera = (XmlElement)xmlItem;
                     cameraid = Convert.ToInt32(camera.GetAttribute("id"));
                     timeid = new DateTime(long.Parse(camera.GetAttribute("timeid")));
-                    if (CapturePictureBusiness.Instance.GetTheCapturePicture(ref errMessage,cameraid,timeid) != -1)
+                    if (!CapturePictureBusiness.Instance.IsExistCapturePicture(ref errMessage,cameraid,timeid))
                     {
-                        //将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture
+                        //将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture 
+                        //图像还在临时图像库中
+                        TempPicture tempPicture = TempPictureBusiness.Instance.GetTempPicture(ref errMessage, cameraid, timeid);
+                        string destFile = TempPictureBusiness.Instance.MoveTempPicture(ref errMessage, tempPicture);
+                        CapturePicture capturePictureinsert = new CapturePicture() { CameraID = cameraid, Datetime = timeid, FilePath = destFile };
+                        CapturePictureBusiness.Instance.Insert(ref errMessage, capturePictureinsert);
                     }
-                    //识别结果入库
-                    CapturePicture cp = new CapturePicture();
-                    cp.CameraID = cameraid;
-                    cp.Datetime = timeid;
-                    cp.FilePath = SystemParametersBusiness.Instance.ListSystemParameter["CapPicPath"] + @"\" + cp.CameraID +
-                        @"\" + cp.Datetime.ToString(@"yyyy\\MM\\dd\\HH\\") + cp.CameraID + cp.Datetime.ToString(@"_yyyy_MM_dd_HH_mm_ss_fff") + ".jpg";
-                    pictureId = CapturePictureBusiness.Instance.Insert(ref errMessage, cp);
+
+                    CapturePicture oCapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, cameraid, timeid);
+
                     XmlNodeList objectlist = xmlItem.ChildNodes;
                     foreach (XmlNode xmlitem1 in objectlist)
                     {
