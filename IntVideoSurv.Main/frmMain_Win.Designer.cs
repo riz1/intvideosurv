@@ -74,7 +74,9 @@ namespace CameraViewer
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.cameraView1 = new CameraViewer.Controls.CameraView();
+            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
@@ -159,6 +161,9 @@ namespace CameraViewer
             this.dockPanel1_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
+            this.splitContainerControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             this.dockPanelAlarm.SuspendLayout();
             this.dockPanel3_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcBottom)).BeginInit();
@@ -594,7 +599,7 @@ namespace CameraViewer
             this.splitContainerControl1.Horizontal = false;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.cameraView1);
+            this.splitContainerControl1.Panel1.Controls.Add(this.splitContainerControl2);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.simpleButton5);
             this.splitContainerControl1.Panel2.Controls.Add(this.simpleButton4);
@@ -609,14 +614,39 @@ namespace CameraViewer
             this.splitContainerControl1.Resize += new System.EventHandler(this.splitContainerControl1_Resize);
             this.splitContainerControl1.SplitterPositionChanged += new System.EventHandler(this.splitContainerControl1_SplitterPositionChanged);
             // 
+            // splitContainerControl2
+            // 
+            this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl2.Horizontal = false;
+            this.splitContainerControl2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl2.Name = "splitContainerControl2";
+            this.splitContainerControl2.Panel1.Controls.Add(this.cameraView1);
+            this.splitContainerControl2.Panel1.Text = "Panel1";
+            this.splitContainerControl2.Panel2.Controls.Add(this.pictureEdit1);
+            this.splitContainerControl2.Panel2.Text = "Panel2";
+            this.splitContainerControl2.Size = new System.Drawing.Size(188, 603);
+            this.splitContainerControl2.SplitterPosition = 403;
+            this.splitContainerControl2.TabIndex = 6;
+            this.splitContainerControl2.Text = "splitContainerControl2";
+            // 
             // cameraView1
             // 
             this.cameraView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cameraView1.Location = new System.Drawing.Point(0, 0);
             this.cameraView1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.cameraView1.Name = "cameraView1";
-            this.cameraView1.Size = new System.Drawing.Size(188, 603);
+            this.cameraView1.Size = new System.Drawing.Size(188, 403);
             this.cameraView1.TabIndex = 4;
+            this.cameraView1.Load += new System.EventHandler(this.cameraView1_Load);
+            // 
+            // pictureEdit1
+            // 
+            this.pictureEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureEdit1.Location = new System.Drawing.Point(0, 0);
+            this.pictureEdit1.MenuManager = this.barManager1;
+            this.pictureEdit1.Name = "pictureEdit1";
+            this.pictureEdit1.Size = new System.Drawing.Size(188, 195);
+            this.pictureEdit1.TabIndex = 5;
             // 
             // simpleButton5
             // 
@@ -1404,6 +1434,9 @@ namespace CameraViewer
             this.dockPanel1_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
+            this.splitContainerControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             this.dockPanelAlarm.ResumeLayout(false);
             this.dockPanel3_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcBottom)).EndInit();
@@ -1568,6 +1601,8 @@ namespace CameraViewer
         private DevExpress.XtraEditors.LabelControl label3;
         private DevExpress.XtraEditors.LabelControl label4;
         private DevExpress.XtraEditors.ComboBoxEdit cbeNumberPerPage;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         
     }
 }

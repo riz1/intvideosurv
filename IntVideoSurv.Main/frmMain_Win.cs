@@ -1412,5 +1412,10 @@ namespace CameraViewer
             //ShowLiveVideo(livePacketHandle);
 
         }
+
+        private void cameraView1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
