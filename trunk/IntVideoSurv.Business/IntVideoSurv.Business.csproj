@@ -81,6 +81,7 @@
     <Compile Include="CapturePictureBusiness.cs" />
     <Compile Include="DecoderBusiness.cs" />
     <Compile Include="DefaultCardOutBusiness.cs" />
+    <Compile Include="EventBusiness.cs" />
     <Compile Include="FaceBusiness.cs" />
     <Compile Include="GroupSwitchDetailBusiness.cs" />
     <Compile Include="GroupSwitchGroupBusiness.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="MapBusiness.cs" />
     <Compile Include="MonitorFolder.cs" />
     <Compile Include="DisplayChannelBusiness.cs" />
+    <Compile Include="ObjectBusiness.cs" />
     <Compile Include="OperateLogBusiness.cs" />
     <Compile Include="OutputTVDeviceDriver.cs" />
     <Compile Include="ProgSwitchBusiness.cs" />
