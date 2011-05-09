@@ -1197,6 +1197,8 @@ namespace CameraViewer
             //}
         }
 
+        #region 人脸显示相关
+
         private void radioGroupFace_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (radioGroupFace.SelectedIndex)
@@ -1204,21 +1206,29 @@ namespace CameraViewer
                     //实时
                 case 0:
                     teStartTimeFace.Enabled = teEndTimeFace.Enabled = btnQueryFace.Enabled = false;
+                    gridControlFace.DataSource = null;
                     break;
                 case 1:
                     teStartTimeFace.Enabled = teEndTimeFace.Enabled = btnQueryFace.Enabled = true;
+                    gridControlFace.DataSource = dataTableFace;
+                    splitContainerControlFaceVideo.Visible = false;
+                    if (_lastVideoPort != -1)
+                    {
+                      HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+                    }
                     break;
                 default:
                     teStartTimeFace.Enabled = teEndTimeFace.Enabled = btnQueryFace.Enabled = false;
                     break;
 
             }
+            pictureEditFace.Image = null;
+
             splitContainerControlFaceVideo.Visible = (1 == radioGroupFace.SelectedIndex);
         }
 
         private void btnQueryFace_Click(object sender, EventArgs e)
         {
-            string errMessage = "";
 
             ReloadQueryData();
         }
@@ -1315,6 +1325,9 @@ namespace CameraViewer
             gridControlFace.DataSource = dataTableFace;
             advBandedGridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             advBandedGridViewFace.Columns["人脸对象"].Visible = false;
+
+            HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+            splitContainerControlFaceVideo.Panel1.Refresh();
             splitContainerControlFaceVideo.Visible = false;
 
 
@@ -1358,6 +1371,7 @@ namespace CameraViewer
                 if (File.Exists(face.VideoInfo.FilePath))
                 {
                     _lastVideoPort = 1;
+                    splitContainerControlFaceVideo.Visible = true;
                     HikPlayer.PlayM4_OpenFile(_lastVideoPort, face.VideoInfo.FilePath);
                     HikPlayer.PlayM4_Play(_lastVideoPort, splitContainerControlFaceVideo.Panel1.Handle);
                 }
@@ -1431,7 +1445,7 @@ namespace CameraViewer
         private int _totalPages;
         private int _totalCount;
         private int _currentPage = 1;
-        private int _numberOfPerPage = 100;
+        private int _numberOfPerPage = 20;
 
         private void btnFacePrePage_Click(object sender, EventArgs e)
         {
@@ -1473,9 +1487,13 @@ namespace CameraViewer
         {
 
             _numberOfPerPage = int.Parse(cbeFaceNumberPerPage.Text);
-            _currentPage = 1;
-            CaculatPages();
-            ReloadQueryData();
+            if (radioGroupFace.SelectedIndex==1)
+            {
+                _currentPage = 1;
+                CaculatPages();
+                ReloadQueryData();                
+            }
+
         }
         private void CaculatPages()
         {
@@ -1489,5 +1507,6 @@ namespace CameraViewer
             }
             lblFaceCurrentPage.Text = string.Format("当前：{0}/{1}页", _currentPage, _totalPages);
         }
+        #endregion
     }
 }
