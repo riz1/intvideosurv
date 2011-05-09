@@ -98,5 +98,54 @@ namespace IntVideoSurv.Business
                 return null;
             }
         }
+
+        public Dictionary<int, Face> GetFaceCustom(ref string errMessage, string str,int pageNo,int pageSize)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, Face> list = new Dictionary<int, Face>();
+            try
+            {
+                DataSet ds = FaceDataAccess.GetFaceCustom(db, str,pageNo,pageSize);
+                Face face;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    face = new Face(ds.Tables[0].Rows[i]);
+                    face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, face.PictureID);
+                    face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                      face.CapturePicture.CameraID);
+                    face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VideoId);
+                    list.Add(face.FaceID, face);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
+
+        public int GetFaceQuantity(ref string errMessage,string str)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            int ret = 0;
+            try
+            {
+                return FaceDataAccess.GetFaceCustomQuantity(db,str);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return 0;
+            }
+
+
+        }
     }
 }

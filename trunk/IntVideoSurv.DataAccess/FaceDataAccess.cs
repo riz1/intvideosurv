@@ -44,14 +44,69 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetFaceCustom(Database db, string str)
         {
+            str = str.Replace("''", "'");
             string cmdText = string.Format(
                 "select Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId " +
+                "from Face,CapturePicture,VideoInfo " +
+                "where Face.PictureId=CapturePicture.PictureId and " +
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.[DateTime] desc", str);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static int GetFaceCustomQuantity(Database db, string str)
+        {
+            str = str.Replace("''", "'");
+            string cmdText = string.Format(
+                "select count(distinct Face.FaceId) " +
                 "from Face,CapturePicture,VideoInfo " +
                 "where Face.PictureId=CapturePicture.PictureId and " +
                 "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
+                return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static DataSet GetFaceCustom(Database db, string str, int pageno,int pagesize)
+        {
+            string fields = " Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId ";
+            string tables = " Face,CapturePicture,VideoInfo ";
+            string condition=string.Format(
+                " Face.PictureId=CapturePicture.PictureId and " +
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+            string ordercolumn = " DateTime ";
+            byte ordertype = 1;
+            string pkcolumn = " FaceId ";
+            string cmdText = "";
+            if (pageno==1)
+            {
+                  cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                  +" WHERE {3}  order by {4} {5}", pagesize, fields, tables, condition, ordercolumn, ordertype==1?"desc":"asc");
+                
+            }
+            else
+            {
+                  cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                  +" WHERE {3} AND "
+                  +" {4}>(SELECT max({4}) FROM (SELECT TOP {5} "
+                  + " {4} FROM {2} order by {6} {7}) AS TabTemp) order by {6} {7}", pagesize, fields, tables, condition, pkcolumn, (pageno - 1) * pagesize, ordercolumn, ordertype==1?"desc":"asc");
+                
+            }
+            try
+            {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
+               
             }
             catch (Exception ex)
             {

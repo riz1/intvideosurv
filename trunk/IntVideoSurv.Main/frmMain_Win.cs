@@ -1219,12 +1219,8 @@ namespace CameraViewer
         private void btnQueryFace_Click(object sender, EventArgs e)
         {
             string errMessage = "";
-            Dictionary<int, Face> listFace =FaceBusiness.Instance.GetFaceCustom( ref errMessage,GenerateFaceQueryCondition());
-            //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
-            //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
-            //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
 
-            FillGridControlVehicleDetail(listFace);
+            ReloadQueryData();
         }
         
         string GenerateFaceQueryCondition()
@@ -1268,7 +1264,7 @@ namespace CameraViewer
                 return "";
             }
 
-            str += " and (CapturePicture.[DateTime] between '"+teStartTimeFace.EditValue+"' and '"+teEndTimeFace.EditValue+"')";
+            str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeFace.EditValue + "') and convert(DateTime,'" + teEndTimeFace.EditValue + "'))";
 
             return str;
         }
@@ -1280,13 +1276,25 @@ namespace CameraViewer
             img.Save(mem, System.Drawing.Imaging.ImageFormat.Bmp);
             return mem.GetBuffer();
         }
+        private void ReloadQueryData()
+        {
+            string errMessage = "";
+            string faceQueryCondition = GenerateFaceQueryCondition();
+            _totalCount = FaceBusiness.Instance.GetFaceQuantity(ref errMessage, faceQueryCondition);
+            CaculatPages();
+            Dictionary<int, Face> listFace = FaceBusiness.Instance.GetFaceCustom(ref errMessage, faceQueryCondition, _currentPage, _numberOfPerPage);
+            //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
+            //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
+            //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
+
+            FillGridControlVehicleDetail(listFace);
+        }
         private void FillGridControlVehicleDetail(Dictionary<int, Face> listFace)
         {
 
             dataTableFace.Rows.Clear();
             if (listFace == null) return;
-            DateTime nowDateTime = DateTime.Now;
-            int i = 1;
+            int i = (_currentPage - 1) * _numberOfPerPage+1;
 
 
             foreach (var variable in listFace)
@@ -1307,6 +1315,8 @@ namespace CameraViewer
             gridControlFace.DataSource = dataTableFace;
             advBandedGridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             advBandedGridViewFace.Columns["人脸对象"].Visible = false;
+            splitContainerControlFaceVideo.Visible = false;
+
 
         }
 
@@ -1416,6 +1426,68 @@ namespace CameraViewer
         private void cameraView1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private int _totalPages;
+        private int _totalCount;
+        private int _currentPage = 1;
+        private int _numberOfPerPage = 100;
+
+        private void btnFacePrePage_Click(object sender, EventArgs e)
+        {
+            _currentPage--;
+            if (_currentPage < 1)
+            {
+                _currentPage++;
+                return;
+            }
+            ReloadQueryData();
+        }
+
+
+
+        private void btnFaceNextPage_Click(object sender, EventArgs e)
+        {
+            _currentPage++;
+            if (_currentPage > _totalPages)
+            {
+                _currentPage--;
+                return;
+            }
+            ReloadQueryData();
+        }
+
+        private void btnFaceLastPage_Click(object sender, EventArgs e)
+        {
+            _currentPage = _totalPages;
+            ReloadQueryData();
+        }
+
+        private void btnFaceFirstPage_Click(object sender, EventArgs e)
+        {
+            _currentPage = 1;
+            ReloadQueryData();
+        }
+
+        private void cbeFaceNumberPerPage_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            _numberOfPerPage = int.Parse(cbeFaceNumberPerPage.Text);
+            _currentPage = 1;
+            CaculatPages();
+            ReloadQueryData();
+        }
+        private void CaculatPages()
+        {
+            if (_totalCount % _numberOfPerPage == 0)
+            {
+                _totalPages = _totalCount / _numberOfPerPage;
+            }
+            else
+            {
+                _totalPages = (int)((float)_totalCount / _numberOfPerPage) + 1;
+            }
+            lblFaceCurrentPage.Text = string.Format("当前：{0}/{1}页", _currentPage, _totalPages);
         }
     }
 }
