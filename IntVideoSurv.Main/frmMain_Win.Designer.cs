@@ -122,14 +122,14 @@ namespace CameraViewer
             this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
-            this.lblCurrentPage = new DevExpress.XtraEditors.LabelControl();
+            this.lblFaceCurrentPage = new DevExpress.XtraEditors.LabelControl();
             this.label3 = new DevExpress.XtraEditors.LabelControl();
             this.label4 = new DevExpress.XtraEditors.LabelControl();
-            this.cbeNumberPerPage = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.btnLastPage = new DevExpress.XtraEditors.SimpleButton();
-            this.btnNextPage = new DevExpress.XtraEditors.SimpleButton();
-            this.btnPrePage = new DevExpress.XtraEditors.SimpleButton();
-            this.btnFirstPage = new DevExpress.XtraEditors.SimpleButton();
+            this.cbeFaceNumberPerPage = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.btnFaceLastPage = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFaceNextPage = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFacePrePage = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFaceFirstPage = new DevExpress.XtraEditors.SimpleButton();
             this.btnQueryFace = new DevExpress.XtraEditors.SimpleButton();
             this.lblStartTime = new DevExpress.XtraEditors.LabelControl();
             this.lblEndTime = new DevExpress.XtraEditors.LabelControl();
@@ -195,7 +195,7 @@ namespace CameraViewer
             this.splitContainerControlFaceVideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeNumberPerPage.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeFaceNumberPerPage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTimeFace.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeFace.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditFaceCamera.Properties)).BeginInit();
@@ -1105,14 +1105,14 @@ namespace CameraViewer
             // 
             // panelControl6
             // 
-            this.panelControl6.Controls.Add(this.lblCurrentPage);
+            this.panelControl6.Controls.Add(this.lblFaceCurrentPage);
             this.panelControl6.Controls.Add(this.label3);
             this.panelControl6.Controls.Add(this.label4);
-            this.panelControl6.Controls.Add(this.cbeNumberPerPage);
-            this.panelControl6.Controls.Add(this.btnLastPage);
-            this.panelControl6.Controls.Add(this.btnNextPage);
-            this.panelControl6.Controls.Add(this.btnPrePage);
-            this.panelControl6.Controls.Add(this.btnFirstPage);
+            this.panelControl6.Controls.Add(this.cbeFaceNumberPerPage);
+            this.panelControl6.Controls.Add(this.btnFaceLastPage);
+            this.panelControl6.Controls.Add(this.btnFaceNextPage);
+            this.panelControl6.Controls.Add(this.btnFacePrePage);
+            this.panelControl6.Controls.Add(this.btnFaceFirstPage);
             this.panelControl6.Controls.Add(this.btnQueryFace);
             this.panelControl6.Controls.Add(this.lblStartTime);
             this.panelControl6.Controls.Add(this.lblEndTime);
@@ -1127,13 +1127,13 @@ namespace CameraViewer
             this.panelControl6.Size = new System.Drawing.Size(833, 52);
             this.panelControl6.TabIndex = 2;
             // 
-            // lblCurrentPage
+            // lblFaceCurrentPage
             // 
-            this.lblCurrentPage.Location = new System.Drawing.Point(311, 33);
-            this.lblCurrentPage.Name = "lblCurrentPage";
-            this.lblCurrentPage.Size = new System.Drawing.Size(67, 14);
-            this.lblCurrentPage.TabIndex = 32;
-            this.lblCurrentPage.Text = "当前：1/1页";
+            this.lblFaceCurrentPage.Location = new System.Drawing.Point(311, 33);
+            this.lblFaceCurrentPage.Name = "lblFaceCurrentPage";
+            this.lblFaceCurrentPage.Size = new System.Drawing.Size(67, 14);
+            this.lblFaceCurrentPage.TabIndex = 32;
+            this.lblFaceCurrentPage.Text = "当前：1/1页";
             // 
             // label3
             // 
@@ -1151,14 +1151,14 @@ namespace CameraViewer
             this.label4.TabIndex = 30;
             this.label4.Text = "项";
             // 
-            // cbeNumberPerPage
+            // cbeFaceNumberPerPage
             // 
-            this.cbeNumberPerPage.EditValue = "100";
-            this.cbeNumberPerPage.Location = new System.Drawing.Point(211, 27);
-            this.cbeNumberPerPage.Name = "cbeNumberPerPage";
-            this.cbeNumberPerPage.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cbeFaceNumberPerPage.EditValue = "100";
+            this.cbeFaceNumberPerPage.Location = new System.Drawing.Point(211, 27);
+            this.cbeFaceNumberPerPage.Name = "cbeFaceNumberPerPage";
+            this.cbeFaceNumberPerPage.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbeNumberPerPage.Properties.Items.AddRange(new object[] {
+            this.cbeFaceNumberPerPage.Properties.Items.AddRange(new object[] {
             "50",
             "100",
             "200",
@@ -1166,41 +1166,46 @@ namespace CameraViewer
             "1000",
             "5000",
             "99999999"});
-            this.cbeNumberPerPage.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeNumberPerPage.Size = new System.Drawing.Size(79, 21);
-            this.cbeNumberPerPage.TabIndex = 31;
+            this.cbeFaceNumberPerPage.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbeFaceNumberPerPage.Size = new System.Drawing.Size(79, 21);
+            this.cbeFaceNumberPerPage.TabIndex = 31;
+            this.cbeFaceNumberPerPage.SelectedValueChanged += new System.EventHandler(this.cbeFaceNumberPerPage_SelectedValueChanged);
             // 
-            // btnLastPage
+            // btnFaceLastPage
             // 
-            this.btnLastPage.Location = new System.Drawing.Point(150, 25);
-            this.btnLastPage.Name = "btnLastPage";
-            this.btnLastPage.Size = new System.Drawing.Size(26, 24);
-            this.btnLastPage.TabIndex = 27;
-            this.btnLastPage.Text = ">|";
+            this.btnFaceLastPage.Location = new System.Drawing.Point(150, 25);
+            this.btnFaceLastPage.Name = "btnFaceLastPage";
+            this.btnFaceLastPage.Size = new System.Drawing.Size(26, 24);
+            this.btnFaceLastPage.TabIndex = 27;
+            this.btnFaceLastPage.Text = ">|";
+            this.btnFaceLastPage.Click += new System.EventHandler(this.btnFaceLastPage_Click);
             // 
-            // btnNextPage
+            // btnFaceNextPage
             // 
-            this.btnNextPage.Location = new System.Drawing.Point(120, 25);
-            this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Size = new System.Drawing.Size(26, 24);
-            this.btnNextPage.TabIndex = 26;
-            this.btnNextPage.Text = ">";
+            this.btnFaceNextPage.Location = new System.Drawing.Point(120, 25);
+            this.btnFaceNextPage.Name = "btnFaceNextPage";
+            this.btnFaceNextPage.Size = new System.Drawing.Size(26, 24);
+            this.btnFaceNextPage.TabIndex = 26;
+            this.btnFaceNextPage.Text = ">";
+            this.btnFaceNextPage.Click += new System.EventHandler(this.btnFaceNextPage_Click);
             // 
-            // btnPrePage
+            // btnFacePrePage
             // 
-            this.btnPrePage.Location = new System.Drawing.Point(90, 25);
-            this.btnPrePage.Name = "btnPrePage";
-            this.btnPrePage.Size = new System.Drawing.Size(26, 24);
-            this.btnPrePage.TabIndex = 25;
-            this.btnPrePage.Text = "<";
+            this.btnFacePrePage.Location = new System.Drawing.Point(90, 25);
+            this.btnFacePrePage.Name = "btnFacePrePage";
+            this.btnFacePrePage.Size = new System.Drawing.Size(26, 24);
+            this.btnFacePrePage.TabIndex = 25;
+            this.btnFacePrePage.Text = "<";
+            this.btnFacePrePage.Click += new System.EventHandler(this.btnFacePrePage_Click);
             // 
-            // btnFirstPage
+            // btnFaceFirstPage
             // 
-            this.btnFirstPage.Location = new System.Drawing.Point(60, 25);
-            this.btnFirstPage.Name = "btnFirstPage";
-            this.btnFirstPage.Size = new System.Drawing.Size(26, 24);
-            this.btnFirstPage.TabIndex = 28;
-            this.btnFirstPage.Text = "|<";
+            this.btnFaceFirstPage.Location = new System.Drawing.Point(60, 25);
+            this.btnFaceFirstPage.Name = "btnFaceFirstPage";
+            this.btnFaceFirstPage.Size = new System.Drawing.Size(26, 24);
+            this.btnFaceFirstPage.TabIndex = 28;
+            this.btnFaceFirstPage.Text = "|<";
+            this.btnFaceFirstPage.Click += new System.EventHandler(this.btnFaceFirstPage_Click);
             // 
             // btnQueryFace
             // 
@@ -1470,7 +1475,7 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
             this.panelControl6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeNumberPerPage.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeFaceNumberPerPage.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTimeFace.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeFace.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditFaceCamera.Properties)).EndInit();
@@ -1593,14 +1598,14 @@ namespace CameraViewer
         private DevExpress.XtraEditors.SimpleButton simpleButton7;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl3;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl4;
-        private DevExpress.XtraEditors.SimpleButton btnLastPage;
-        private DevExpress.XtraEditors.SimpleButton btnNextPage;
-        private DevExpress.XtraEditors.SimpleButton btnPrePage;
-        private DevExpress.XtraEditors.SimpleButton btnFirstPage;
-        private DevExpress.XtraEditors.LabelControl lblCurrentPage;
+        private DevExpress.XtraEditors.SimpleButton btnFaceLastPage;
+        private DevExpress.XtraEditors.SimpleButton btnFaceNextPage;
+        private DevExpress.XtraEditors.SimpleButton btnFacePrePage;
+        private DevExpress.XtraEditors.SimpleButton btnFaceFirstPage;
+        private DevExpress.XtraEditors.LabelControl lblFaceCurrentPage;
         private DevExpress.XtraEditors.LabelControl label3;
         private DevExpress.XtraEditors.LabelControl label4;
-        private DevExpress.XtraEditors.ComboBoxEdit cbeNumberPerPage;
+        private DevExpress.XtraEditors.ComboBoxEdit cbeFaceNumberPerPage;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         
