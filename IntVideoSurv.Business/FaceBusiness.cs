@@ -58,7 +58,7 @@ namespace IntVideoSurv.Business
                 face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, face.PictureID);
                 face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
                                                                                   face.CapturePicture.CameraID);
-                face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VedioId);
+                face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VideoId);
                 return face;
 
             }
@@ -85,7 +85,7 @@ namespace IntVideoSurv.Business
                     face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage,face.PictureID);
                     face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
                                                                                       face.CapturePicture.CameraID);
-                    face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VedioId);
+                    face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VideoId);
                     list.Add(face.FaceID, face);
                 }
                 return list;

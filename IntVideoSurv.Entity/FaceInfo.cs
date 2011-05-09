@@ -22,7 +22,7 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public int FaceID {get;set;}
         [ColumnMapping()]
-        public float score { get; set; }
+        public double score { get; set; }
         [ColumnMapping()]
         public int RectID { get; set; }
         [ColumnMapping()]
@@ -32,7 +32,7 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public string FacePath { get; set; }
         [ColumnMapping()]
-        public int VedioId { get; set; }
+        public int VideoId { get; set; }
 
         public CapturePicture CapturePicture { get; set; }
         public VideoInfo VideoInfo { get; set; }
