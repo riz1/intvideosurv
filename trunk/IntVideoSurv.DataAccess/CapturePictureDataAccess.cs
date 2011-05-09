@@ -46,7 +46,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCapturePicture(Database db, int cameraId, DateTime dt)
         {
-            string cmdText = string.Format("select * from CapturePicture where CameraID={0} and Datetime={0}", cameraId,dt);
+            string cmdText = string.Format("select * from CapturePicture where CameraID={0} and Datetime={1}", cameraId,dt);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -60,7 +60,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCapturePicture(Database db, int id)
         {
-            string cmdText = string.Format("select * from CapturePicture where PictureID={0} and Datetime={0}", id);
+            string cmdText = string.Format("select * from CapturePicture where PictureID={0}", id);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -75,7 +75,7 @@ namespace IntVideoSurv.DataAccess
 
         public static bool IsExistCapturePicture(Database db, int id, DateTime dt)
         {
-            string cmdText = string.Format("select count(*) from CapturePicture where CameraID={0} and Datetime={0}", id, dt);
+            string cmdText = string.Format("select count(*) from CapturePicture where CameraID={0} and Datetime={1}", id, dt);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString()) > 0;
