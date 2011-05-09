@@ -88,7 +88,7 @@
             // 
             this.checkEditflagStop.Location = new System.Drawing.Point(320, 21);
             this.checkEditflagStop.Name = "checkEditflagStop";
-            this.checkEditflagStop.Properties.Caption = "违法停车";
+            this.checkEditflagStop.Properties.Caption = "flagStop";
             this.checkEditflagStop.Size = new System.Drawing.Size(108, 19);
             this.checkEditflagStop.TabIndex = 3;
             // 
@@ -96,7 +96,7 @@
             // 
             this.checkEditflagCongestion.Location = new System.Drawing.Point(320, 102);
             this.checkEditflagCongestion.Name = "checkEditflagCongestion";
-            this.checkEditflagCongestion.Properties.Caption = "拥堵";
+            this.checkEditflagCongestion.Properties.Caption = "flagCongestion";
             this.checkEditflagCongestion.Size = new System.Drawing.Size(112, 19);
             this.checkEditflagCongestion.TabIndex = 2;
             // 
@@ -104,7 +104,7 @@
             // 
             this.checkEditflagChangeChannel.Location = new System.Drawing.Point(320, 52);
             this.checkEditflagChangeChannel.Name = "checkEditflagChangeChannel";
-            this.checkEditflagChangeChannel.Properties.Caption = "违法变道";
+            this.checkEditflagChangeChannel.Properties.Caption = "flagChangeChannel";
             this.checkEditflagChangeChannel.Size = new System.Drawing.Size(140, 19);
             this.checkEditflagChangeChannel.TabIndex = 2;
             // 
@@ -112,7 +112,7 @@
             // 
             this.checkEditflagCrossLine.Location = new System.Drawing.Point(320, 77);
             this.checkEditflagCrossLine.Name = "checkEditflagCrossLine";
-            this.checkEditflagCrossLine.Properties.Caption = "跨线";
+            this.checkEditflagCrossLine.Properties.Caption = "flagCrossLine";
             this.checkEditflagCrossLine.Size = new System.Drawing.Size(95, 19);
             this.checkEditflagCrossLine.TabIndex = 2;
             // 
@@ -120,7 +120,7 @@
             // 
             this.checkEditflagDirection.Location = new System.Drawing.Point(182, 77);
             this.checkEditflagDirection.Name = "checkEditflagDirection";
-            this.checkEditflagDirection.Properties.Caption = "画箭头";
+            this.checkEditflagDirection.Properties.Caption = "flagDirection";
             this.checkEditflagDirection.Size = new System.Drawing.Size(95, 19);
             this.checkEditflagDirection.TabIndex = 2;
             // 
@@ -128,7 +128,7 @@
             // 
             this.checkEditflagObjCount.Location = new System.Drawing.Point(182, 52);
             this.checkEditflagObjCount.Name = "checkEditflagObjCount";
-            this.checkEditflagObjCount.Properties.Caption = "统计功能";
+            this.checkEditflagObjCount.Properties.Caption = "flagObjCount";
             this.checkEditflagObjCount.Size = new System.Drawing.Size(95, 19);
             this.checkEditflagObjCount.TabIndex = 2;
             this.checkEditflagObjCount.CheckedChanged += new System.EventHandler(this.checkEdit5_CheckedChanged);
@@ -137,7 +137,7 @@
             // 
             this.checkEditDrawROI.Location = new System.Drawing.Point(182, 102);
             this.checkEditDrawROI.Name = "checkEditDrawROI";
-            this.checkEditDrawROI.Properties.Caption = "画区域";
+            this.checkEditDrawROI.Properties.Caption = "DrawROI";
             this.checkEditDrawROI.Size = new System.Drawing.Size(95, 19);
             this.checkEditDrawROI.TabIndex = 2;
             // 
@@ -145,7 +145,7 @@
             // 
             this.checkEditDrawDirection.Location = new System.Drawing.Point(43, 102);
             this.checkEditDrawDirection.Name = "checkEditDrawDirection";
-            this.checkEditDrawDirection.Properties.Caption = "逆行功能";
+            this.checkEditDrawDirection.Properties.Caption = "DrawDirection";
             this.checkEditDrawDirection.Size = new System.Drawing.Size(105, 19);
             this.checkEditDrawDirection.TabIndex = 2;
             // 
@@ -153,7 +153,7 @@
             // 
             this.checkEditDrawObjs.Location = new System.Drawing.Point(43, 77);
             this.checkEditDrawObjs.Name = "checkEditDrawObjs";
-            this.checkEditDrawObjs.Properties.Caption = "画物体";
+            this.checkEditDrawObjs.Properties.Caption = "DrawObjs";
             this.checkEditDrawObjs.Size = new System.Drawing.Size(95, 19);
             this.checkEditDrawObjs.TabIndex = 2;
             // 
@@ -161,7 +161,7 @@
             // 
             this.checkEditDrawTrack.Location = new System.Drawing.Point(42, 52);
             this.checkEditDrawTrack.Name = "checkEditDrawTrack";
-            this.checkEditDrawTrack.Properties.Caption = "画轨迹";
+            this.checkEditDrawTrack.Properties.Caption = "DrawTrack";
             this.checkEditDrawTrack.Size = new System.Drawing.Size(95, 19);
             this.checkEditDrawTrack.TabIndex = 2;
             // 
@@ -183,24 +183,24 @@
             // 
             this.labelControl2.Location = new System.Drawing.Point(45, 22);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(48, 14);
+            this.labelControl2.Size = new System.Drawing.Size(41, 14);
             this.labelControl2.TabIndex = 0;
-            this.labelControl2.Text = "最小区域";
+            this.labelControl2.Text = "Minarea";
             // 
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(186, 22);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(60, 14);
+            this.labelControl1.Size = new System.Drawing.Size(67, 14);
             this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "最大目标数";
+            this.labelControl1.Text = "iMaxObjNum";
             // 
             // panelControl2
             // 
             this.panelControl2.Controls.Add(this.simpleButtonCancel);
             this.panelControl2.Controls.Add(this.simpleButtonOk);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(0, 133);
+            this.panelControl2.Location = new System.Drawing.Point(0, 159);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(496, 50);
             this.panelControl2.TabIndex = 1;
@@ -227,13 +227,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 183);
+            this.ClientSize = new System.Drawing.Size(496, 209);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmEventSetting";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "事件信息设置";
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
