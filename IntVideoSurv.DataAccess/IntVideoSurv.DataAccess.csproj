@@ -74,6 +74,7 @@
     <Compile Include="DecoderDataAccess.cs" />
     <Compile Include="DefaultCardOutDataAccess.cs" />
     <Compile Include="EventDataAccess.cs" />
+    <Compile Include="EventRectDataAccess.cs" />
     <Compile Include="FaceDataAccess.cs" />
     <Compile Include="GroupSwitchDetailDataAccess.cs" />
     <Compile Include="GroupSwitchGroupDataAccess.cs" />
