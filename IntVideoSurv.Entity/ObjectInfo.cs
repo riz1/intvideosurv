@@ -25,7 +25,6 @@ namespace IntVideoSurv.Entity
         public bool illegalDir { get; set; }
         [ColumnMapping()]
         public bool CrossLine { get; set; }
-        public bool stop { get; set; }
         [ColumnMapping()]
         public bool changeChannel { get; set; }
         [ColumnMapping()]

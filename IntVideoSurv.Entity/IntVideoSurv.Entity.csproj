@@ -63,6 +63,7 @@
     <Compile Include="DefaultCardOut.cs" />
     <Compile Include="DisplayHandlePair.cs" />
     <Compile Include="EventInfo.cs" />
+    <Compile Include="EventRectInfo.cs" />
     <Compile Include="FaceInfo.cs" />
     <Compile Include="GroupSwitchDetailInfo.cs" />
     <Compile Include="GroupSwitchGroup.cs" />
