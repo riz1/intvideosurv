@@ -62,6 +62,7 @@
     <Compile Include="DecoderInfo.cs" />
     <Compile Include="DefaultCardOut.cs" />
     <Compile Include="DisplayHandlePair.cs" />
+    <Compile Include="EventInfo.cs" />
     <Compile Include="FaceInfo.cs" />
     <Compile Include="GroupSwitchDetailInfo.cs" />
     <Compile Include="GroupSwitchGroup.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="GroupInfo.cs" />
     <Compile Include="DisplayChannelInfo.cs" />
     <Compile Include="MapInfo.cs" />
+    <Compile Include="ObjectInfo.cs" />
     <Compile Include="OperateLog.cs" />
     <Compile Include="OperateLogTypeId.cs" />
     <Compile Include="OperateLogTypeName.cs" />
