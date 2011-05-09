@@ -82,6 +82,7 @@
     <Compile Include="DecoderBusiness.cs" />
     <Compile Include="DefaultCardOutBusiness.cs" />
     <Compile Include="EventBusiness.cs" />
+    <Compile Include="EventRectBusiness.cs" />
     <Compile Include="FaceBusiness.cs" />
     <Compile Include="GroupSwitchDetailBusiness.cs" />
     <Compile Include="GroupSwitchGroupBusiness.cs" />
