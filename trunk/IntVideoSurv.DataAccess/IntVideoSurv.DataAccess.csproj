@@ -73,12 +73,14 @@
     <Compile Include="CapturePictureDataAccess.cs" />
     <Compile Include="DecoderDataAccess.cs" />
     <Compile Include="DefaultCardOutDataAccess.cs" />
+    <Compile Include="EventDataAccess.cs" />
     <Compile Include="FaceDataAccess.cs" />
     <Compile Include="GroupSwitchDetailDataAccess.cs" />
     <Compile Include="GroupSwitchGroupDataAccess.cs" />
     <Compile Include="CommonDataAccess.cs" />
     <Compile Include="DisplayChannelDataAccess.cs" />
     <Compile Include="MapDataAccess.cs" />
+    <Compile Include="ObjectDataAccess.cs" />
     <Compile Include="OperateLogDataAccess.cs" />
     <Compile Include="ProgSwitchDataAccess.cs" />
     <Compile Include="ProgSwitchDetailDataAccess.cs" />
