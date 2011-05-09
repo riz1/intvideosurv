@@ -41,6 +41,9 @@ namespace CameraViewer.NetWorking
 
                 string errMessage = "";
                 int cameraid;
+                int pictureid = 0;
+                int eventid;
+                int objid;
                 DateTime timeid;
                 XmlNodeList xml_cameras;
                 xml_cameras = xmlDocument.SelectSingleNode("/pr/cameras").ChildNodes;
@@ -56,29 +59,67 @@ namespace CameraViewer.NetWorking
                         TempPicture tempPicture = TempPictureBusiness.Instance.GetTempPicture(ref errMessage, cameraid, timeid);
                         string destFile = TempPictureBusiness.Instance.MoveTempPicture(ref errMessage, tempPicture);
                         CapturePicture capturePictureinsert = new CapturePicture() { CameraID = cameraid, Datetime = timeid, FilePath = destFile };
-                        CapturePictureBusiness.Instance.Insert(ref errMessage, capturePictureinsert);
+                        pictureid = CapturePictureBusiness.Instance.Insert(ref errMessage, capturePictureinsert);
                     }
 
                     CapturePicture oCapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, cameraid, timeid);
+
+                    Event ev = new Event();
+                    ev.CarNum = Convert.ToInt32(camera.GetAttribute("CarNum"));
+                    ev.Congestion = Convert.ToInt32(camera.GetAttribute("Congestion"));
+                    ev.PictureID = pictureid;
+                    eventid = EventBusiness.Instance.Insert(ref errMessage, ev);
 
                     XmlNodeList objectlist = xmlItem.ChildNodes;
                     foreach (XmlNode xmlitem1 in objectlist)
                     {
                         XmlElement objecttarget = (XmlElement)xmlitem1;
-                        if(objecttarget.Name=="object")
+                        ObjectInfo obj = new ObjectInfo();
+                        if (Convert.ToInt32(objecttarget.GetAttribute("stop")) == 1)
                         {
-                            foreach (XmlNode rectitem in objecttarget.ChildNodes)
-                            {
-                                XmlElement rectelement = (XmlElement)rectitem;
-                                REct myrect = new REct();
-                                myrect.X = Convert.ToInt32(rectelement.GetAttribute("x"));
-                                myrect.Y = Convert.ToInt32(rectelement.GetAttribute("y"));
-                                myrect.W = Convert.ToInt32(rectelement.GetAttribute("w"));
-                                myrect.H = Convert.ToInt32(rectelement.GetAttribute("h"));
-                                REctBusiness.Instance.Insert(ref errMessage, myrect);
-                            }
+                            obj.stop = true;
                         }
-
+                        else
+                        {
+                            obj.stop = false;
+                        }
+                        if (Convert.ToInt32(objecttarget.GetAttribute("illegalDir")) == 1)
+                        {
+                            obj.illegalDir = true;
+                        }
+                        else
+                        {
+                            obj.illegalDir = false;
+                        }
+                        if (Convert.ToInt32(objecttarget.GetAttribute("CrossLine")) == 1)
+                        {
+                            obj.CrossLine = true;
+                        }
+                        else
+                        {
+                            obj.CrossLine = false;
+                        }
+                        if (Convert.ToInt32(objecttarget.GetAttribute("changeChannel")) == 1)
+                        {
+                            obj.changeChannel = true;
+                        }
+                        else
+                        {
+                            obj.changeChannel = false;
+                        }
+                        obj.EventId = eventid;
+                        objid = ObjectBusiness.Instance.Insert(ref errMessage, obj);
+                        foreach (XmlNode rectitem in objecttarget.ChildNodes)
+                        {
+                            XmlElement rectelement = (XmlElement)rectitem;
+                            EventRect myrect = new EventRect();
+                            myrect.x = Convert.ToInt32(rectelement.GetAttribute("x"));
+                            myrect.y = Convert.ToInt32(rectelement.GetAttribute("y"));
+                            myrect.w = Convert.ToInt32(rectelement.GetAttribute("w"));
+                            myrect.h = Convert.ToInt32(rectelement.GetAttribute("h"));
+                            myrect.ObjectId = objid;
+                            EventRectBusiness.Instance.Insert(ref errMessage, myrect);
+                        }
                     }
                     
 
