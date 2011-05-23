@@ -42,8 +42,8 @@ namespace CameraViewer.NetWorking
                 xmlDocument.LoadXml(BitConverter.ToString(bytes, 4));
 
                 string errMessage = "";
-                int cameraid;
-                DateTime timeid;
+                int cameraid =-1;
+                DateTime timeid = new DateTime(1,1,1);
                 XmlNodeList xml_cameras,xml_faces;
                 xml_cameras = xmlDocument.SelectSingleNode("/pr/cameras").ChildNodes;
                 foreach (XmlNode xmlItem in xml_cameras)
@@ -114,9 +114,8 @@ namespace CameraViewer.NetWorking
  * 4）如果否，将改图像从TempPicture表移动到CapturePicture//先获取临时图像GetTempPicture，再移动图像MoveTempPicture
  * 5）识别结果入库
  */
-                int cameraId = 1;
-                DateTime dt = DateTime.Now;
-                CurrentFace = FaceBusiness.Instance.GetFace(ref errMessage, cameraId, dt);
+
+                CurrentFace = FaceBusiness.Instance.GetFace(ref errMessage, cameraid, timeid);
                 OnDataChanged(this, new DataChangeEventArgs(GetType().Name));
                 logger.Info("结束解析人脸数据");
             }
