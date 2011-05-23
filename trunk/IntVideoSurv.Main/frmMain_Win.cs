@@ -723,22 +723,61 @@ namespace CameraViewer
         #region 人脸实时显示
         private void LiveFacePacketHandleDataChange(object sender, DataChangeEventArgs e)
         {
+            if (radioGroupFace.SelectedIndex==0)
+            {
+                var livePacketHandle = (LiveRecognizerFacePacketHandle)sender;
+                if (livePacketHandle == null) return;
+                //处理人脸 
+                ShowLiveFace(livePacketHandle);                
+            }
 
-            var livePacketHandle = (LiveRecognizerFacePacketHandle)sender;
-            if (livePacketHandle == null) return;
-            //处理人脸 
-            ShowLiveFace(livePacketHandle);
 
         }
+        List<Face> listLiveFace = new List<Face>();
         protected void ShowLiveFace(LiveRecognizerFacePacketHandle liveRecognizerFacePacket)
         {
             CrossThreadOperationControl crossAdd = delegate()
             {
                 string errMsg = "";
-
+                Face face = liveRecognizerFacePacket.CurrentFace;
+                if (face==null) return;
+                if (!isCameraWatched(face.CameraInfo.CameraId))return;
+                listLiveFace.Insert(0, face);
+                if (listLiveFace.Count > _numberOfPerPage)
+                {
+                    listLiveFace.RemoveRange(_numberOfPerPage, listLiveFace.Count - _numberOfPerPage);
+                }
+                FillGridControlVehicleDetail(listLiveFace);
             };
         }
 
+        private bool isCameraWatched(int cameraid)
+        {
+            string[] selectCameras = checkedComboBoxEditFaceCamera.Text.Split(',');
+            foreach (string selectCamera in selectCameras)
+            {
+                string changeselectCamera = selectCamera.Trim();
+                if (changeselectCamera == "当前摄像头")
+                {
+                    CameraWindow currentCameraWindow = mainMultiplexer.GetCurrentCameraWindow();
+                    if (currentCameraWindow != null)
+                    {
+                        if (cameraid == currentCameraWindow.CameraID)
+                        {
+                            return true;
+                        } 
+                    }
+                }
+                else
+                {
+                    if (cameraid == _listAllCamStr[changeselectCamera].CameraId)
+                    {
+                        return true;
+                    } 
+                }
+            }
+            return false;
+        }
         #endregion
 
         #region 车牌实时显示
@@ -1315,6 +1354,40 @@ namespace CameraViewer
                                        variable.Value.CameraInfo.Name,
                                        variable.Value.score,
                                        variable.Value);
+            }
+            GridColumn column;
+            RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
+            pictureEdit.SizeMode = PictureSizeMode.Zoom;
+            pictureEdit.NullText = " ";
+            column = advBandedGridViewFace.Columns["照片"];
+            column.ColumnEdit = pictureEdit;
+            gridControlFace.DataSource = dataTableFace;
+            advBandedGridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            advBandedGridViewFace.Columns["人脸对象"].Visible = false;
+
+            HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+            splitContainerControlFaceVideo.Panel1.Refresh();
+            splitContainerControlFaceVideo.Visible = false;
+
+
+        }
+
+        private void FillGridControlVehicleDetail(List<Face> listFace)
+        {
+
+            dataTableFace.Rows.Clear();
+            if (listFace == null) return;
+            int i = 1;
+
+
+            foreach (var variable in listFace)
+            {
+                dataTableFace.Rows.Add(i++,
+                                       GetImageData(variable.FacePath),
+                                       variable.CapturePicture.Datetime,
+                                       variable.CameraInfo.Name,
+                                       variable.score,
+                                       variable);
             }
             GridColumn column;
             RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
