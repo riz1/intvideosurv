@@ -91,14 +91,69 @@ namespace IntVideoSurv.DataAccess
         {
             string cmdText = string.Format(
                 "select Vehicle.VehicleID,Vehicle.platenumber,Vehicle.speed,Vehicle.stemagainst,Vehicle.stop,Vehicle.accident"+
-                ",Vehicle.linechange,Vehicle.platecolor,Vehicle.vehiclecolor,Vehicle.PictureId,Vehicle.RectId"+
-                ",Vehicle.confidence,VideoInfo.Id as VideoId " +
+                ",Vehicle.linechange,Vehicle.platecolor,Vehicle.vehiclecolor,Vehicle.PictureID,Vehicle.RectId"+
+                ",Vehicle.confidence,VideoInfo.ID as VideoId " +
                 "from Vehicle,CapturePicture,VideoInfo " +
-                "where Vehicle.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "where Vehicle.PictureID=CapturePicture.PictureID and " +
+                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.[Datetime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static DataSet GetVehicleCustom(Database db, string str, int pageno,int pagesize)
+        {
+            string fields = " Vehicle.VehicleID,Vehicle.platenumber,Vehicle.speed,Vehicle.stemagainst,Vehicle.stop,Vehicle.accident,Vehicle.linechange,Vehicle.platecolor,Vehicle.vehiclecolor,Vehicle.pictureID,Vehicle.RectId,Vehicle.confidence,VideoInfo.ID as VideoId ";
+            string tables = " Vehicle,CapturePicture,VideoInfo ";
+            string condition = string.Format(
+                " Vehicle.PictureID=CapturePicture.PictureID and " +
+                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.[Datetime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+            string ordercolumn = " Datetime ";
+            byte ordertype = 1;
+            string pkcolumn = " VehicleID ";
+            string cmdText = "";
+            if (pageno == 1)
+            {
+                cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                + " WHERE {3}  order by {4} {5}", pagesize, fields, tables, condition, ordercolumn, ordertype == 1 ? "desc" : "asc");
+
+            }
+            else
+            {
+                cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                + " WHERE {3} AND "
+                + " {4}>(SELECT max({4}) FROM (SELECT TOP {5} "
+                + " {4} FROM {2} order by {6} {7}) AS TabTemp) order by {6} {7}", pagesize, fields, tables, condition, pkcolumn, (pageno - 1) * pagesize, ordercolumn, ordertype == 1 ? "desc" : "asc");
+
+            }
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public static int GetVehicleCustomQuantity(Database db, string str)
+        {
+            str = str.Replace("''", "'");
+            string cmdText = string.Format(
+                "select count(distinct Vehicle.VehicleID) " +
+                "from Vehicle,CapturePicture,VideoInfo " +
+                "where Vehicle.PictureID=CapturePicture.PictureID and " +
+                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.[Datetime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+            try
+            {
+                return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
             }
             catch (Exception ex)
             {
