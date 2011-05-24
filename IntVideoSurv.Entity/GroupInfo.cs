@@ -16,7 +16,17 @@ namespace IntVideoSurv.Entity
          #region construction
         public GroupInfo() { }
         public GroupInfo(IDataReader dataReader) : base(dataReader) { }
-        public GroupInfo(DataRow dataRow) : base(dataRow) { }
+        public GroupInfo(DataRow dataRow)
+        {
+            GroupID =Convert.ToInt32(dataRow["GroupID"]);
+            ParentId =  Convert.ToInt32(dataRow["ParentId"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Description = Convert.ToString(dataRow["Description"]);
+            AddBy = Convert.ToString(dataRow["AddBy"]);
+            AddTime = Convert.ToString(dataRow["AddTime"]);
+            ModifyBy = Convert.ToString(dataRow["ModifyBy"]);
+            ModifyTime =  Convert.ToString(dataRow["ModifyTime"]);
+        }
         #endregion
         [ColumnMapping()]
         public int GroupID
@@ -61,7 +71,7 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public string ModifyBy { set; get; }
         [ColumnMapping()]
-        public string ModifyTimes { set; get; }
+        public string ModifyTime { set; get; }
 
         public override string ToString()
         {
