@@ -17,8 +17,12 @@ namespace IntVideoSurv.Entity
         public VideoInfo() { }
         public VideoInfo(IDataReader dataReader) : base(dataReader) { }
         public VideoInfo(DataRow dataRow)
-            : base(dataRow)
         {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+            CaptureTimeBegin = Convert.ToDateTime(dataRow["CaptureTimeBegin"]);
+            CaptureTimeEnd = Convert.ToDateTime(dataRow["CaptureTimeEnd"]);
+            FilePath = Convert.ToString(dataRow["FilePath"]);
         }
         #endregion
 

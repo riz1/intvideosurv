@@ -14,10 +14,13 @@ namespace IntVideoSurv.Entity
         public GroupSwitchDetailInfo() { }
         public GroupSwitchDetailInfo(IDataReader dataReader) : base(dataReader) { }
         public GroupSwitchDetailInfo(DataRow dataRow)
-            : base(dataRow)
         {
-            //Name = dataRow["CameraInfo.Name"].ToString();
-            //DeviceName = dataRow["DeviceInfo.Name"].ToString();
+            Id = Convert.ToInt32(dataRow["Id"]);
+            SynGroupId = Convert.ToInt32(dataRow["SynGroupId"]);
+            SynGroupName = Convert.ToString(dataRow["SynGroupName"]);
+            TickTime = Convert.ToInt32(dataRow["TickTime"]);
+            GroupSwitchGroupId = Convert.ToInt32(dataRow["GroupSwitchGroupId"]);
+            GroupSwitchGroupName = Convert.ToInt32(dataRow["GroupSwitchGroupName"]);
         }
         #endregion
 

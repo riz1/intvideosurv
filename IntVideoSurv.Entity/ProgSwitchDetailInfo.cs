@@ -14,7 +14,15 @@ namespace IntVideoSurv.Entity
 
         public ProgSwitchDetailInfo() { }
         public ProgSwitchDetailInfo(IDataReader dataReader) : base(dataReader) { }
-        public ProgSwitchDetailInfo(DataRow dataRow) : base(dataRow) { }
+        public ProgSwitchDetailInfo(DataRow dataRow)
+        {
+            ProgSwitchDetailId = Convert.ToInt32(dataRow["ProgSwitchDetailId"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+            TickTime = Convert.ToInt32(dataRow["TickTime"]);
+            CameraName = Convert.ToString(dataRow["CameraName"]);
+            DeviceId = Convert.ToInt32(dataRow["DeviceId"]);
+            DeviceName = Convert.ToString(dataRow["DeviceName"]);
+        }
        
         #endregion
 

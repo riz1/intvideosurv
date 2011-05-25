@@ -15,10 +15,11 @@ namespace IntVideoSurv.Entity
         public WindowCameraInfo() { }
         public WindowCameraInfo(IDataReader dataReader) : base(dataReader) { }
         public WindowCameraInfo(DataRow dataRow)
-            : base(dataRow)
         {
-            //Name = dataRow["CameraInfo.Name"].ToString();
-            //DeviceName = dataRow["DeviceInfo.Name"].ToString();
+            Id = Convert.ToInt32(dataRow["Id"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+            Row = Convert.ToInt32(dataRow["Row"]);
+            Col = Convert.ToInt32(dataRow["Col"]);
         }
         #endregion
 

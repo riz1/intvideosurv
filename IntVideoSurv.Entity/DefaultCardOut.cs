@@ -15,7 +15,17 @@ namespace IntVideoSurv.Entity
         #region construction
         public DefaultCardOut() { }
         public DefaultCardOut(IDataReader dataReader) : base(dataReader) { }
-        public DefaultCardOut(DataRow dataRow) : base(dataRow) { }
+        public DefaultCardOut(DataRow dataRow)
+        {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            DisplayChannelId = Convert.ToInt32(dataRow["DisplayChannelId"]);
+            DisplayChannelName = Convert.ToString(dataRow["DisplayChannelName"]);
+            DispalyChannelNoInCurrentCard = Convert.ToInt32(dataRow["DispalyChannelNoInCurrentCard"]);
+            DecodeCardNo = Convert.ToInt32(dataRow["DecodeCardNo"]);
+            SplitScreenNo = Convert.ToInt32(dataRow["SplitScreenNo"]);
+            DisplaySplitScreenNo = Convert.ToInt32(dataRow["DisplaySplitScreenNo"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+        }
         #endregion
 
         [ColumnMapping()]

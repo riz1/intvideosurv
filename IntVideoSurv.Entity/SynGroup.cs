@@ -17,7 +17,13 @@ namespace IntVideoSurv.Entity
         #region construction
         public SynGroup() { }
         public SynGroup(IDataReader dataReader) : base(dataReader) { }
-        public SynGroup(DataRow dataRow) : base(dataRow) { }
+        public SynGroup(DataRow dataRow)
+        {
+            SynGroupId = Convert.ToInt32(dataRow["SynGroupId"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Description = Convert.ToString(dataRow["Description"]);
+            MonitorId = Convert.ToInt32(dataRow["MonitorId"]);
+        }
         #endregion
         [ColumnMapping()]
         public int SynGroupId

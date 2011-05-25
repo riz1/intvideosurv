@@ -12,8 +12,13 @@ namespace IntVideoSurv.Entity
         public MapInfo() { }
         public MapInfo(IDataReader dataReader) : base(dataReader) { }
         public MapInfo(DataRow dataRow)
-            : base(dataRow)
         {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Width = Convert.ToInt32(dataRow["Width"]);
+            Height = Convert.ToInt32(dataRow["Height"]);
+            FileName = Convert.ToString(dataRow["FileName"]);
+
         }
         #endregion
 

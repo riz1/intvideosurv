@@ -16,7 +16,15 @@ namespace IntVideoSurv.Entity
         #region construction
         public ProgSwitchInfo() { }
         public ProgSwitchInfo(IDataReader dataReader) : base(dataReader) { }
-        public ProgSwitchInfo(DataRow dataRow) : base(dataRow) { }
+        public ProgSwitchInfo(DataRow dataRow)
+        {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Description = Convert.ToString(dataRow["Description"]);
+            DisplayChannelId = Convert.ToInt32(dataRow["DisplayChannelId"]);
+            DisplaySplitScreenNo = Convert.ToInt32(dataRow["DisplaySplitScreenNo"]);
+            DisplayChannelName = Convert.ToString(dataRow["DisplayChannelName"]);
+        }
         #endregion
         [ColumnMapping()]
         public int Id

@@ -15,8 +15,13 @@ namespace IntVideoSurv.Entity
         public REct() { }
         public REct(IDataReader dataReader) : base(dataReader) { }
         public REct(DataRow dataRow)
-            : base(dataRow)
         {
+            RectID = Convert.ToInt32(dataRow["RectID"]);
+            X = Convert.ToInt32(dataRow["X"]);
+            Y = Convert.ToInt32(dataRow["Y"]);
+            W = Convert.ToInt32(dataRow["W"]);
+            H = Convert.ToInt32(dataRow["H"]);
+
         }
 #endregion
         [ColumnMapping()]

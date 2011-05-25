@@ -15,7 +15,14 @@ namespace IntVideoSurv.Entity
 
         public TaskInfo(IDataReader dataReader) : base(dataReader) { }
 
-        public TaskInfo(DataRow dataRow) : base(dataRow) { }
+        public TaskInfo(DataRow dataRow)
+        {
+            TaskId = Convert.ToInt32(dataRow["TaskId"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+            DecoderId = Convert.ToInt32(dataRow["DecoderId"]);
+            Status = Convert.ToInt32(dataRow["Status"]);
+            HappenDateTime = Convert.ToDateTime(dataRow["HappenDateTime"]);
+        }
 
         [ColumnMapping()]
         public int TaskId { get; set; }

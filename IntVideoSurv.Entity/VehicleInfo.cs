@@ -15,8 +15,20 @@ namespace IntVideoSurv.Entity
         public Vehicle() { }
         public Vehicle(IDataReader dataReader) : base(dataReader) { }
         public Vehicle(DataRow dataRow)
-            : base(dataRow)
         {
+            VehicleID = Convert.ToInt32(dataRow["VehicleID"]);
+            platenumber = Convert.ToString(dataRow["platenumber"]);
+            speed = Convert.ToSingle(dataRow["speed"]);
+            stemagainst = Convert.ToBoolean(dataRow["stemagainst"]);
+            stop = Convert.ToBoolean(dataRow["stop"]);
+            accident = Convert.ToBoolean(dataRow["accident"]);
+            linechange = Convert.ToBoolean(dataRow["linechange"]);
+            platecolor = Convert.ToString(dataRow["platecolor"]);
+            vehiclecolor = Convert.ToString(dataRow["vehiclecolor"]);
+            PictureID = Convert.ToInt32(dataRow["PictureID"]);
+            REctId = Convert.ToInt32(dataRow["REctId"]);
+            confidence = Convert.ToSingle(dataRow["confidence"]);
+            VedioId = Convert.ToInt32(dataRow["VedioId"]);
         }
         #endregion
 

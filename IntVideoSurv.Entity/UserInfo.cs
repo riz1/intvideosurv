@@ -16,9 +16,13 @@ namespace IntVideoSurv.Entity
         public UserInfo() { }
         public UserInfo(IDataReader dataReader) : base(dataReader) { }
         public UserInfo(DataRow dataRow)
-            : base(dataRow)
         {
-
+            UserId = Convert.ToInt32(dataRow["UserId"]);
+            UserName = Convert.ToString(dataRow["UserName"]);
+            Password = Convert.ToString(dataRow["Password"]);
+            CreateDateTime = Convert.ToDateTime(dataRow["CreateDateTime"]);
+            UserTypeId = Convert.ToInt32(dataRow["UserTypeId"]);
+            UserTypeName = Convert.ToString(dataRow["UserTypeName"]);
         }
         #endregion
 

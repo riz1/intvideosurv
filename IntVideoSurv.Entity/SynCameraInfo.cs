@@ -14,10 +14,15 @@ namespace IntVideoSurv.Entity
         public SynCameraInfo() { }
         public SynCameraInfo(IDataReader dataReader) : base(dataReader) { }
         public SynCameraInfo(DataRow dataRow)
-            : base(dataRow)
         {
-            //Name = dataRow["CameraInfo.Name"].ToString();
-            //DeviceName = dataRow["DeviceInfo.Name"].ToString();
+            SynGroupId = Convert.ToInt32(dataRow["SynGroupId"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+            DispalyChannelNoInCurrentCard = Convert.ToInt32(dataRow["DispalyChannelNoInCurrentCard"]);
+            DecodeCardNo = Convert.ToInt32(dataRow["DecodeCardNo"]);
+            SplitScreenNo = Convert.ToInt32(dataRow["SplitScreenNo"]);
+            DisplaySplitScreenNo = Convert.ToInt32(dataRow["DisplaySplitScreenNo"]);
+            DisplayChannelId = Convert.ToInt32(dataRow["DisplayChannelId"]);
+
         }
         #endregion
         [ColumnMapping()]

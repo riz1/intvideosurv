@@ -20,8 +20,15 @@ namespace IntVideoSurv.Entity
         public SystemLog() { }
         public SystemLog(IDataReader dataReader) : base(dataReader) { }
         public SystemLog(DataRow dataRow)
-            : base(dataRow)
         {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            HappenTime = Convert.ToDateTime(dataRow["HappenTime"]);
+            SystemTypeId = Convert.ToInt32(dataRow["SystemTypeId"]);
+            SystemTypeName = Convert.ToString(dataRow["SystemTypeName"]);
+            Content = Convert.ToString(dataRow["Content"]);
+            SyeUserName = Convert.ToString(dataRow["SyeUserName"]);
+            ClientUserId = Convert.ToInt32(dataRow["ClientUserId"]);
+            ClientUserName = Convert.ToString(dataRow["ClientUserName"]);
 
         }
         #endregion

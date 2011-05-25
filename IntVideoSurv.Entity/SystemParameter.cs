@@ -12,8 +12,10 @@ namespace IntVideoSurv.Entity
         public SystemParameter() { }
         public SystemParameter(IDataReader dataReader) : base(dataReader) { }
         public SystemParameter(DataRow dataRow)
-            : base(dataRow)
         {
+            Name = Convert.ToString(dataRow["Name"]);
+            Type = Convert.ToString(dataRow["Type"]);
+            Value = Convert.ToString(dataRow["Value"]);
         }
         #endregion
 

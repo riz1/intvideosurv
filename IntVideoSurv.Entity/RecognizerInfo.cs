@@ -15,7 +15,15 @@ namespace IntVideoSurv.Entity
 
         public RecognizerInfo(IDataReader dataReader) : base(dataReader) { }
 
-        public RecognizerInfo(DataRow dataRow) : base(dataRow) { }
+        public RecognizerInfo(DataRow dataRow)
+        {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Ip = Convert.ToString(dataRow["Ip"]);
+            Port = Convert.ToInt32(dataRow["Port"]);
+            MaxRecogNumber = Convert.ToInt32(dataRow["MaxRecogNumber"]);
+            RecogType = Convert.ToInt32(dataRow["RecogType"]);
+        }
 
         [ColumnMapping()]
         public int Id { get; set; }

@@ -14,10 +14,12 @@ namespace IntVideoSurv.Entity
         public TempPicture() { }
         public TempPicture(IDataReader dataReader) : base(dataReader) { }
         public TempPicture(DataRow dataRow)
-            : base(dataRow)
         {
-            //Name = dataRow["CameraInfo.Name"].ToString();
-            //DeviceName = dataRow["DeviceInfo.Name"].ToString();
+            PictureID = Convert.ToInt32(dataRow["PictureID"]);
+            CameraID = Convert.ToInt32(dataRow["CameraID"]);
+            Datetime = Convert.ToDateTime(dataRow["Datetime"]);
+            FilePath = Convert.ToString(dataRow["FilePath"]);
+            IsHistroy = Convert.ToBoolean(dataRow["IsHistroy"]);
         }
         #endregion
 

@@ -13,7 +13,30 @@ namespace IntVideoSurv.Entity
         #region construction
         public DeviceInfo() { }
         public DeviceInfo(IDataReader dataReader) : base(dataReader) { }
-        public DeviceInfo(DataRow dataRow) : base(dataRow) { }
+        public DeviceInfo(DataRow dataRow)
+        {
+            Description = Convert.ToString(dataRow["Description"]);
+            DeviceId = Convert.ToInt32(dataRow["DeviceId"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            source = Convert.ToString(dataRow["source"]);
+            login = Convert.ToString(dataRow["login"]);
+            pwd = Convert.ToString(dataRow["pwd"]);
+            Port = Convert.ToInt32(dataRow["Port"]);
+            VideoCount = Convert.ToInt32(dataRow["VideoCount"]);
+            ViddeoStartNo = Convert.ToInt32(dataRow["ViddeoStartNo"]);
+            WarningOutputCount = Convert.ToInt32(dataRow["WarningOutputCount"]);
+            WarningInputNo = Convert.ToInt32(dataRow["WarningInputNo"]);
+            WarningCount = Convert.ToInt32(dataRow["WarningCount"]);
+            FileExtName = Convert.ToString(dataRow["FileExtName"]);
+            IsCamera = Convert.ToInt32(dataRow["IsCamera"]);
+            Remark = Convert.ToString(dataRow["Remark"]);
+            ProviderName = Convert.ToString(dataRow["ProviderName"]);
+            AddBy = Convert.ToString(dataRow["AddBy"]);
+            AddTime = Convert.ToString(dataRow["AddTime"]);
+            ModifyBy = Convert.ToString(dataRow["ModifyBy"]);
+            ModifyTime = Convert.ToString(dataRow["ModifyTime"]);
+            GroupId = Convert.ToInt32(dataRow["GroupId"]);
+        }
         #endregion
         [ColumnMapping()]
         public string Description { get; set; }
@@ -43,7 +66,6 @@ namespace IntVideoSurv.Entity
         public string FileExtName { get; set; }
         [ColumnMapping()]
         public int IsCamera { get; set; }
-        [ColumnMapping()]
         public IntPtr Handle { get; set; }
         [ColumnMapping()]
         public int ServiceID { get; set; }

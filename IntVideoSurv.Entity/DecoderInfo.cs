@@ -15,7 +15,14 @@ namespace IntVideoSurv.Entity
         
         public DecoderInfo(IDataReader dataReader) : base(dataReader) { }
         
-        public DecoderInfo(DataRow dataRow) : base(dataRow) { }
+        public DecoderInfo(DataRow dataRow)
+        {
+            id = Convert.ToInt32(dataRow["id"]);
+            Ip = Convert.ToString(dataRow["Ip"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Port = Convert.ToInt32(dataRow["Port"]);
+            MaxDecodeChannelNo = Convert.ToInt32(dataRow["MaxDecodeChannelNo"]);
+        }
 
         [ColumnMapping()]
         public int id { get; set; }

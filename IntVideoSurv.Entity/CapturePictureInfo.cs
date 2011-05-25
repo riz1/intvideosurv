@@ -15,10 +15,12 @@ namespace IntVideoSurv.Entity
         public CapturePicture() { }
         public CapturePicture(IDataReader dataReader) : base(dataReader) { }
         public CapturePicture(DataRow dataRow)
-            : base(dataRow)
         {
-            //Name = dataRow["CameraInfo.Name"].ToString();
-            //DeviceName = dataRow["DeviceInfo.Name"].ToString();
+            PictureID = Convert.ToInt32(dataRow["PictureID"]);
+            CameraID = Convert.ToInt32(dataRow["CameraID"]);
+            Datetime = Convert.ToDateTime(dataRow["Datetime"]);
+            FilePath = Convert.ToString(dataRow["FilePath"]);
+
         }
 #endregion
         
@@ -29,7 +31,7 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public DateTime Datetime {get;set;}
         [ColumnMapping()]
-        public string FilePath {get;set;}
+        public string FilePath { get; set; }
 
     }
 }
