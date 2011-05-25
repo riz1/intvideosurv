@@ -17,8 +17,14 @@ namespace IntVideoSurv.Entity
         public AlarmIconInfo() { }
         public AlarmIconInfo(IDataReader dataReader) : base(dataReader) { }
         public AlarmIconInfo(DataRow dataRow)
-            : base(dataRow)
         {
+            AlarmId = Convert.ToInt32(dataRow["AlarmId"]);
+            ToolTip = Convert.ToString(dataRow["ToolTip"]);
+            IconIndex = Convert.ToInt32(dataRow["IconIndex"]);
+            X = Convert.ToSingle(dataRow["X"]);
+            Y = Convert.ToSingle(dataRow["Y"]);
+            MatchCameraId = Convert.ToInt32(dataRow["MatchCameraId"]);
+            Map = Convert.ToInt16(dataRow["map"]);
         }
         #endregion
 
