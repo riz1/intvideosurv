@@ -21,10 +21,29 @@ namespace IntVideoSurv.Entity
         public CameraInfo() { }
         public CameraInfo(IDataReader dataReader) : base(dataReader) { }
         public CameraInfo(DataRow dataRow)
-            : base(dataRow)
         {
-            //Name = dataRow["CameraInfo.Name"].ToString();
-            //DeviceName = dataRow["DeviceInfo.Name"].ToString();
+            DeviceId = Convert.ToInt32(dataRow["DeviceId"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Description = Convert.ToString(dataRow["Description"]);
+            IsValid = Convert.ToBoolean(dataRow["IsValid"]);
+            ChannelNo = Convert.ToInt32(dataRow["ChannelNo"]);
+            AddressID = Convert.ToInt32(dataRow["AddressID"]);
+            ConnURL = Convert.ToString(dataRow["ConnURL"]);
+            IsDetect = Convert.ToBoolean(dataRow["IsDetectMotion"]);
+            Remark = Convert.ToString(dataRow["Remark"]);
+            Oupputpath = Convert.ToString(dataRow["Oupputpath"]);
+            AddBy = Convert.ToString(dataRow["AddBy"]);
+            AddTime = Convert.ToString(dataRow["AddTime"]);
+            ModifyBy = Convert.ToString(dataRow["ModifyBy"]);
+            ModifyTime = Convert.ToString(dataRow["ModifyTime"]);
+            frameInterval = Convert.ToInt32(dataRow["frameInterval"]);
+            resolution = Convert.ToString(dataRow["resolution"]);
+            quality = Convert.ToString(dataRow["quality"]);
+            StreamType = Convert.ToInt32(dataRow["StreamType"]);
+            Width = Convert.ToInt32(dataRow["Width"]);
+            Height = Convert.ToInt32(dataRow["Height"]);
+            DeviceName = Convert.ToString(dataRow["DeviceName"]);
         }
         #endregion
 

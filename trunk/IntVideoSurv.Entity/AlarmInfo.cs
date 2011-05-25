@@ -17,8 +17,13 @@ namespace IntVideoSurv.Entity
         public AlarmInfo() { }
         public AlarmInfo(IDataReader dataReader) : base(dataReader) { }
         public AlarmInfo(DataRow dataRow)
-            : base(dataRow)
         {
+            AlarmId = Convert.ToInt32(dataRow["AlarmId"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Description = Convert.ToString(dataRow["Description"]);
+            DeviceId = Convert.ToInt32(dataRow["DeviceId"]);
+            IsValid = Convert.ToBoolean(dataRow["IsValid"]);
+            ChannelNo = Convert.ToInt32(dataRow["ChannelNo"]);
         }
         #endregion
 

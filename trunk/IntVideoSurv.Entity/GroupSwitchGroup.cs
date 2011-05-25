@@ -14,7 +14,12 @@ namespace IntVideoSurv.Entity
         #region construction
         public GroupSwitchGroup() { }
         public GroupSwitchGroup(IDataReader dataReader) : base(dataReader) { }
-        public GroupSwitchGroup(DataRow dataRow) : base(dataRow) { }
+        public GroupSwitchGroup(DataRow dataRow)
+        {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            Name = Convert.ToString(dataRow["Name"]);
+            Description = Convert.ToString(dataRow["Description"]);
+        }
         #endregion
         [ColumnMapping]
         public int Id

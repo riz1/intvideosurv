@@ -15,9 +15,18 @@ namespace IntVideoSurv.Entity
         public OperateLog() { }
         public OperateLog(IDataReader dataReader) : base(dataReader) { }
         public OperateLog(DataRow dataRow)
-            : base(dataRow)
         {
-
+            Id = Convert.ToInt32(dataRow["Id"]);
+            GroupId = Convert.ToInt32(dataRow["GroupId"]);
+            DeviceId = Convert.ToInt32(dataRow["DeviceId"]);
+            CameraId = Convert.ToInt32(dataRow["CameraId"]);
+            HappenTime = Convert.ToDateTime(dataRow["HappenTime"]);
+            OperateTypeId = Convert.ToInt32(dataRow["OperateTypeId"]);
+            OperateTypeName = Convert.ToString(dataRow["OperateTypeName"]);
+            ClientUserId = Convert.ToInt32(dataRow["ClientUserId"]);
+            ClientUserName = Convert.ToString(dataRow["ClientUserName"]);
+            Content = Convert.ToString(dataRow["Content"]);
+            OperateUserName = Convert.ToString(dataRow["OperateUserName"]);
         }
         #endregion
 

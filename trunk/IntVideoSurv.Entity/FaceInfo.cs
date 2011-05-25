@@ -15,14 +15,19 @@ namespace IntVideoSurv.Entity
         public Face() { }
         public Face(IDataReader dataReader) : base(dataReader) { }
         public Face(DataRow dataRow)
-            : base(dataRow)
         {
+            FaceID = Convert.ToInt32(dataRow["FaceID"]);
+            score = Convert.ToSingle(dataRow["score"]);
+            RectID = Convert.ToInt32(dataRow["RectID"]);
+            PictureID = Convert.ToInt32(dataRow["PictureID"]);
+            FacePath = Convert.ToString(dataRow["FacePath"]);
+            VideoId = Convert.ToInt32(dataRow["VideoId"]);
         }
 #endregion
         [ColumnMapping()]
         public int FaceID {get;set;}
         [ColumnMapping()]
-        public double score { get; set; }
+        public float score { get; set; }
         [ColumnMapping()]
         public int RectID { get; set; }
         [ColumnMapping()]

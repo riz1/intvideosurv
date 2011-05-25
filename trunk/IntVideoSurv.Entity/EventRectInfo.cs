@@ -15,8 +15,13 @@ namespace IntVideoSurv.Entity
         public EventRect() { }
         public EventRect(IDataReader dataReader) : base(dataReader) { }
         public EventRect(DataRow dataRow)
-            : base(dataRow)
         {
+            EventRectId = Convert.ToInt32(dataRow["EventRectId"]);
+            x = Convert.ToInt32(dataRow["x"]);
+            y = Convert.ToInt32(dataRow["y"]);
+            w = Convert.ToInt32(dataRow["w"]);
+            h = Convert.ToInt32(dataRow["h"]);
+            ObjectId = Convert.ToInt32(dataRow["ObjectId"]);
         }
 #endregion
         [ColumnMapping()]

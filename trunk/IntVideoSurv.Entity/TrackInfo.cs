@@ -14,8 +14,9 @@ namespace IntVideoSurv.Entity
         public Track() { }
         public Track(IDataReader dataReader) : base(dataReader) { }
         public Track(DataRow dataRow)
-            : base(dataRow)
         {
+            Id = Convert.ToInt32(dataRow["Id"]);
+            REct = Convert.ToInt32(dataRow["REct"]);
         }
 #endregion
         [ColumnMapping()]

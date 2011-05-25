@@ -13,8 +13,11 @@ namespace IntVideoSurv.Entity
         public Event() { }
         public Event(IDataReader dataReader) : base(dataReader) { }
         public Event(DataRow dataRow)
-            : base(dataRow)
         {
+            EventId = Convert.ToInt32(dataRow["EventId"]);
+            CarNum = Convert.ToInt32(dataRow["CarNum"]);
+            Congestion = Convert.ToInt32(dataRow["Congestion"]);
+            PictureID = Convert.ToInt32(dataRow["PictureID"]);
         }
         #endregion
         [ColumnMapping()]

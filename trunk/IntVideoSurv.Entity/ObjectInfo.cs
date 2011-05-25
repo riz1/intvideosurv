@@ -13,8 +13,13 @@ namespace IntVideoSurv.Entity
         public ObjectInfo() { }
         public ObjectInfo(IDataReader dataReader) : base(dataReader) { }
         public ObjectInfo(DataRow dataRow)
-            : base(dataRow)
         {
+            ObjectId = Convert.ToInt32(dataRow["ObjectId"]);
+            stop = Convert.ToBoolean(dataRow["stop"]);
+            illegalDir = Convert.ToBoolean(dataRow["illegalDir"]);
+            CrossLine = Convert.ToBoolean(dataRow["CrossLine"]);
+            changeChannel = Convert.ToBoolean(dataRow["changeChannel"]);
+            EventId = Convert.ToInt32(dataRow["EventId"]);
         }
         #endregion
         [ColumnMapping()]
