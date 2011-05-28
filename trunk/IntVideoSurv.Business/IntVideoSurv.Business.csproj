@@ -79,6 +79,7 @@
     <Compile Include="AlarmIconBusiness.cs" />
     <Compile Include="CameraIconBusiness.cs" />
     <Compile Include="CapturePictureBusiness.cs" />
+    <Compile Include="DataBaseParasBusiness.cs" />
     <Compile Include="DecoderBusiness.cs" />
     <Compile Include="DefaultCardOutBusiness.cs" />
     <Compile Include="EventBusiness.cs" />

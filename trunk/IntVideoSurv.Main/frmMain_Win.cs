@@ -18,12 +18,16 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using IntVideoSurv.Business;
+using IntVideoSurv.DataAccess;
 using IntVideoSurv.Entity;
 using CameraViewer.Forms;
 using System.IO;
 using IntVideoSurv.Business.HiK;
 using System.Threading;
 using log4net;
+using System.Configuration;
+using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
+
 
 namespace CameraViewer
 {
@@ -419,7 +423,7 @@ namespace CameraViewer
         {
             this.Visible = false;
             FilterInterface();
-
+            InitDataBaseType();
             Splash.Splash.Status = "获取群组信息...";
             _runningDeviceList = new Dictionary<int, HikVideoServerDeviceDriver>();
             _listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref _errMessage);
@@ -453,6 +457,31 @@ namespace CameraViewer
             splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
             this.Visible = true;
         }
+
+        private void InitDataBaseType()
+        {
+            DatabaseSettings v = (DatabaseSettings)ConfigurationManager.GetSection("dataConfiguration");
+
+            switch (v.DefaultDatabase)
+            {
+                case "SqlServerConn":
+                    DbParasBusiness.SetDataBase(MyDBType.SqlServer);
+                    break;
+                case "AccessConn":
+                    DbParasBusiness.SetDataBase(MyDBType.Access);
+                    break;
+                case "MySqlConn":
+                    DbParasBusiness.SetDataBase(MyDBType.Mysql);
+                    break;
+                case "OracleConn":
+                    DbParasBusiness.SetDataBase(MyDBType.Oracle);
+                    break;
+                default:
+                    DbParasBusiness.SetDataBase(MyDBType.Oracle);
+                    break;
+            }
+        }
+
         private void LoadCameraInCombox()
         {
             checkedComboBoxEditFaceCamera.Properties.Items.Add("当前摄像头", true);

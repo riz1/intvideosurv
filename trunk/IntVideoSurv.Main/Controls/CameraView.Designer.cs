@@ -233,7 +233,7 @@ namespace CameraViewer.Controls
             this.xtraTabPageDecoderList.Controls.Add(this.tvSynGroup);
             this.xtraTabPageDecoderList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabPageDecoderList.Name = "xtraTabPageDecoderList";
-            this.xtraTabPageDecoderList.Size = new System.Drawing.Size(207, 271);
+            this.xtraTabPageDecoderList.Size = new System.Drawing.Size(207, 459);
             this.xtraTabPageDecoderList.Text = "½âÂëÆ÷";
             // 
             // tvSynGroup
@@ -250,7 +250,7 @@ namespace CameraViewer.Controls
             this.tvSynGroup.OptionsView.ShowColumns = false;
             this.tvSynGroup.OptionsView.ShowHorzLines = false;
             this.tvSynGroup.OptionsView.ShowIndicator = false;
-            this.tvSynGroup.Size = new System.Drawing.Size(207, 271);
+            this.tvSynGroup.Size = new System.Drawing.Size(207, 459);
             this.tvSynGroup.TabIndex = 0;
             // 
             // treeListColumn3
