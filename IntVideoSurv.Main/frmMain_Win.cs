@@ -457,12 +457,15 @@ namespace CameraViewer
         {
             checkedComboBoxEditFaceCamera.Properties.Items.Add("当前摄像头", true);
             checkedComboBoxEditVehicleCamera.Properties.Items.Add("当前摄像头", true);
+            checkedComboBoxEditEventCamera.Properties.Items.Add("当前摄像头", true);
             foreach (var VARIABLE in _listAllCam)
             {
                 _listAllCamStr.Add(VARIABLE.Value.DeviceName+":"+VARIABLE.Value.Name,VARIABLE.Value);
                 checkedComboBoxEditFaceCamera.Properties.Items.Add(
                     VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
                 checkedComboBoxEditVehicleCamera.Properties.Items.Add(
+                    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                checkedComboBoxEditEventCamera.Properties.Items.Add(
                     VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
             }
             
@@ -1910,7 +1913,123 @@ namespace CameraViewer
         }
 #endregion
 
-        
+        #region 事件显示部分
+        private int _totalPagesForEvent;
+        private int _totalCountForEvent;
+        private int _currentPageForEvent = 1;
+        private int _numberOfPerPageForEvent = 20;
+        private void radioGroupEvent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (radioGroupEvent.SelectedIndex)
+            {
+                //实时
+                case 0:
+                    teStartTimeEvent.Enabled = teEndTimeEvent.Enabled = btnQueryEvent.Enabled = false;
+                    gridControlEvent.DataSource = null;
+                    break;
+                case 1:
+                    teStartTimeEvent.Enabled = teEndTimeEvent.Enabled = btnQueryEvent.Enabled = true;
+                    gridControlEvent.DataSource = dataTableFace;
+                    splitContainerControlEventVideo.Visible = false;
+                    if (_lastVideoPort != -1)
+                    {
+                        HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+                    }
+                    break;
+                default:
+                    teStartTimeEvent.Enabled = teEndTimeEvent.Enabled = btnQueryEvent.Enabled = false;
+                    break;
+
+            }
+            pictureEditEvent.Image = null;
+
+            splitContainerControlEventVideo.Visible = (1 == radioGroupEvent.SelectedIndex);
+        }
+
+        private void btnQueryEvent_Click(object sender, EventArgs e)
+        {
+            ReloadQueryDataForEvent();
+        }
+
+        string GenerateEventQueryCondition()
+        {
+            string str = " and CapturePicture.CameraId in (";
+            string[] selectCameras = checkedComboBoxEditEventCamera.Text.Split(',');
+            foreach (string selectCamera in selectCameras)
+            {
+                string changeselectCamera = selectCamera.Trim();
+                if (changeselectCamera == "当前摄像头")
+                {
+                    CameraWindow currentCameraWindow = mainMultiplexer.GetCurrentCameraWindow();
+                    if (currentCameraWindow != null)
+                    {
+                        str += currentCameraWindow.CameraID + ",";
+                    }
+                    else
+                    {
+                        str += "null,";
+                    }
+                }
+                else
+                {
+                    str += _listAllCamStr[changeselectCamera].CameraId + ",";
+                }
+            }
+            str = str.Substring(0, str.Length - 1) + ") ";
+
+            DateTime startTime = DateTime.Parse(teStartTimeEvent.EditValue.ToString());
+            DateTime endTime = DateTime.Parse(teEndTimeEvent.EditValue.ToString());
+
+
+            if (DateTime.Compare(startTime, endTime) == 0)
+            {
+                XtraMessageBox.Show("时间不能相等！");
+                return "";
+            }
+            else if ((DateTime.Compare(startTime, endTime) > 0))
+            {
+                XtraMessageBox.Show("起始时间不能大于结束时间！");
+                return "";
+            }
+
+            str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeEvent.EditValue + "') and convert(DateTime,'" + teEndTimeEvent.EditValue + "'))";
+
+            return str;
+        }
+
+        DataTable dataTableEvent = new DataTable();
+       
+        private void ReloadQueryDataForEvent()
+        {
+            string errMessage = "";
+            string faceQueryCondition = GenerateEventQueryCondition();
+            _totalCount = FaceBusiness.Instance.GetFaceQuantity(ref errMessage, faceQueryCondition);
+            CaculatePagesForEvent();
+            Dictionary<int, Face> listFace = FaceBusiness.Instance.GetFaceCustom(ref errMessage, faceQueryCondition, _currentPage, _numberOfPerPage);
+            //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
+            //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
+            //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
+
+            FillGridControlEventDetail(listFace);
+        }
+
+        private void FillGridControlEventDetail(Dictionary<int, Face> listFace)
+        {
+
+        }
+        private void CaculatePagesForEvent()
+        {
+            if (_totalCountForEvent % _numberOfPerPageForEvent == 0)
+            {
+                _totalPagesForEvent = _totalCountForEvent / _numberOfPerPageForEvent;
+            }
+            else
+            {
+                _totalPagesForEvent = (int)((float)_totalCountForEvent / _numberOfPerPageForEvent) + 1;
+            }
+            lblEventCurrentPage.Text = string.Format("当前：{0}/{1}页", _currentPageForEvent, _totalPagesForEvent);
+        }
+        #endregion
 
     }
 }
