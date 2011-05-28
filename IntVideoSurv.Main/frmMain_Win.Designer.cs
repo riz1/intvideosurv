@@ -94,23 +94,19 @@ namespace CameraViewer
             this.xtraTabControlResult = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageEvent = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.xtraTabPageVehicle = new DevExpress.XtraTab.XtraTabPage();
-            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.splitContainerControl5 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.gridControlVehicle = new DevExpress.XtraGrid.GridControl();
-            this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn10 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.splitContainerControl6 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.pictureEditVehicle = new DevExpress.XtraEditors.PictureEdit();
-            this.splitContainerControlVideoVehicle = new DevExpress.XtraEditors.SplitContainerControl();
-            this.simpleButton10 = new DevExpress.XtraEditors.SimpleButton();
+            this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gridControlEvent = new DevExpress.XtraGrid.GridControl();
+            this.advBandedGridViewEvent = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn14 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn15 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn16 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.splitContainerControl8 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.pictureEditEvent = new DevExpress.XtraEditors.PictureEdit();
+            this.splitContainerControl9 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.simpleButton9 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
@@ -119,6 +115,39 @@ namespace CameraViewer
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.simpleButton13 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton14 = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lblEventCurrentPage = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
+            this.cbeEventNumberPerPage = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.btnEventLastPage = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEventNextPage = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEventPrevPage = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEventFirstPage = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton16 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
+            this.teStartTimeEvent = new DevExpress.XtraEditors.TimeEdit();
+            this.teEndTimeEvent = new DevExpress.XtraEditors.TimeEdit();
+            this.checkedComboBoxEditEventCamera = new DevExpress.XtraEditors.CheckedComboBoxEdit();
+            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.radioGroupEvent = new DevExpress.XtraEditors.RadioGroup();
+            this.xtraTabPageVehicle = new DevExpress.XtraTab.XtraTabPage();
+            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.splitContainerControl5 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gridControlVehicle = new DevExpress.XtraGrid.GridControl();
+            this.advBandedGridViewVehicle = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn10 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.splitContainerControl6 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.pictureEditVehicle = new DevExpress.XtraEditors.PictureEdit();
+            this.splitContainerControlVideoVehicle = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton10 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton11 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton12 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
@@ -189,6 +218,19 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
+            this.bandedGridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn21 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn22 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn23 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn24 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn25 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn26 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -216,25 +258,41 @@ namespace CameraViewer
             this.xtraTabControlResult.SuspendLayout();
             this.xtraTabPageEvent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.xtraTabPageVehicle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).BeginInit();
-            this.splitContainerControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlVehicle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).BeginInit();
-            this.splitContainerControl6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEditVehicle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlVideoVehicle)).BeginInit();
-            this.splitContainerControlVideoVehicle.SuspendLayout();
+            this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).BeginInit();
+            this.splitContainerControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlEvent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewEvent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl8)).BeginInit();
+            this.splitContainerControl8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditEvent.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).BeginInit();
+            this.splitContainerControl9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeEventNumberPerPage.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teStartTimeEvent.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teEndTimeEvent.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditEventCamera.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupEvent.Properties)).BeginInit();
+            this.xtraTabPageVehicle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
+            this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).BeginInit();
+            this.splitContainerControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlVehicle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewVehicle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).BeginInit();
+            this.splitContainerControl6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditVehicle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlVideoVehicle)).BeginInit();
+            this.splitContainerControlVideoVehicle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
@@ -893,191 +951,156 @@ namespace CameraViewer
             // 
             // panelControl2
             // 
+            this.panelControl2.Controls.Add(this.splitContainerControl7);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 42);
+            this.panelControl2.Location = new System.Drawing.Point(0, 52);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(868, 212);
+            this.panelControl2.Size = new System.Drawing.Size(868, 202);
             this.panelControl2.TabIndex = 1;
             // 
-            // panelControl1
+            // splitContainerControl7
             // 
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(868, 42);
-            this.panelControl1.TabIndex = 0;
+            this.splitContainerControl7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl7.Location = new System.Drawing.Point(2, 2);
+            this.splitContainerControl7.Name = "splitContainerControl7";
+            this.splitContainerControl7.Panel1.Controls.Add(this.gridControlEvent);
+            this.splitContainerControl7.Panel1.Text = "Panel1";
+            this.splitContainerControl7.Panel2.Controls.Add(this.splitContainerControl8);
+            this.splitContainerControl7.Panel2.Text = "Panel2";
+            this.splitContainerControl7.Size = new System.Drawing.Size(864, 198);
+            this.splitContainerControl7.SplitterPosition = 306;
+            this.splitContainerControl7.TabIndex = 0;
+            this.splitContainerControl7.Text = "splitContainerControl7";
             // 
-            // xtraTabPageVehicle
+            // gridControlEvent
             // 
-            this.xtraTabPageVehicle.Controls.Add(this.panelControl3);
-            this.xtraTabPageVehicle.Controls.Add(this.panelControl4);
-            this.xtraTabPageVehicle.Name = "xtraTabPageVehicle";
-            this.xtraTabPageVehicle.Size = new System.Drawing.Size(868, 254);
-            this.xtraTabPageVehicle.Text = "车牌";
+            this.gridControlEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlEvent.Location = new System.Drawing.Point(0, 0);
+            this.gridControlEvent.MainView = this.advBandedGridViewEvent;
+            this.gridControlEvent.MenuManager = this.barManager1;
+            this.gridControlEvent.Name = "gridControlEvent";
+            this.gridControlEvent.Size = new System.Drawing.Size(306, 198);
+            this.gridControlEvent.TabIndex = 0;
+            this.gridControlEvent.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.advBandedGridViewEvent});
             // 
-            // panelControl3
+            // advBandedGridViewEvent
             // 
-            this.panelControl3.Controls.Add(this.splitContainerControl5);
-            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(0, 52);
-            this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(868, 202);
-            this.panelControl3.TabIndex = 3;
+            this.advBandedGridViewEvent.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand5,
+            this.gridBand6});
+            this.advBandedGridViewEvent.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.bandedGridColumn12,
+            this.bandedGridColumn14,
+            this.bandedGridColumn15,
+            this.bandedGridColumn16,
+            this.bandedGridColumn24,
+            this.bandedGridColumn25,
+            this.bandedGridColumn26});
+            this.advBandedGridViewEvent.GridControl = this.gridControlEvent;
+            this.advBandedGridViewEvent.Name = "advBandedGridViewEvent";
+            this.advBandedGridViewEvent.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.advBandedGridViewEvent.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.advBandedGridViewEvent.OptionsBehavior.Editable = false;
+            this.advBandedGridViewEvent.OptionsBehavior.ReadOnly = true;
+            this.advBandedGridViewEvent.OptionsView.ShowBands = false;
+            this.advBandedGridViewEvent.OptionsView.ShowGroupPanel = false;
             // 
-            // splitContainerControl5
+            // gridBand5
             // 
-            this.splitContainerControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl5.Location = new System.Drawing.Point(2, 2);
-            this.splitContainerControl5.Name = "splitContainerControl5";
-            this.splitContainerControl5.Panel1.Controls.Add(this.gridControlVehicle);
-            this.splitContainerControl5.Panel1.Text = "Panel1";
-            this.splitContainerControl5.Panel2.Controls.Add(this.splitContainerControl6);
-            this.splitContainerControl5.Panel2.Text = "Panel2";
-            this.splitContainerControl5.Size = new System.Drawing.Size(864, 198);
-            this.splitContainerControl5.SplitterPosition = 329;
-            this.splitContainerControl5.TabIndex = 0;
-            this.splitContainerControl5.Text = "splitContainerControl5";
+            this.gridBand5.Caption = "基本信息";
+            this.gridBand5.Columns.Add(this.bandedGridColumn12);
+            this.gridBand5.Columns.Add(this.bandedGridColumn14);
+            this.gridBand5.Columns.Add(this.bandedGridColumn15);
+            this.gridBand5.MinWidth = 20;
+            this.gridBand5.Name = "gridBand5";
+            this.gridBand5.Width = 136;
             // 
-            // gridControlVehicle
+            // bandedGridColumn12
             // 
-            this.gridControlVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlVehicle.Location = new System.Drawing.Point(0, 0);
-            this.gridControlVehicle.MainView = this.advBandedGridView1;
-            this.gridControlVehicle.MenuManager = this.barManager1;
-            this.gridControlVehicle.Name = "gridControlVehicle";
-            this.gridControlVehicle.Size = new System.Drawing.Size(329, 198);
-            this.gridControlVehicle.TabIndex = 0;
-            this.gridControlVehicle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.advBandedGridView1});
+            this.bandedGridColumn12.Caption = "索引号";
+            this.bandedGridColumn12.Name = "bandedGridColumn12";
+            this.bandedGridColumn12.Visible = true;
+            this.bandedGridColumn12.Width = 136;
             // 
-            // advBandedGridView1
+            // bandedGridColumn14
             // 
-            this.advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand3,
-            this.gridBand4});
-            this.advBandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
-            this.bandedGridColumn7,
-            this.bandedGridColumn8,
-            this.bandedGridColumn9,
-            this.bandedGridColumn10,
-            this.bandedGridColumn11});
-            this.advBandedGridView1.GridControl = this.gridControlVehicle;
-            this.advBandedGridView1.Name = "advBandedGridView1";
-            this.advBandedGridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.advBandedGridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.advBandedGridView1.OptionsBehavior.Editable = false;
-            this.advBandedGridView1.OptionsBehavior.ReadOnly = true;
-            this.advBandedGridView1.OptionsView.ShowBands = false;
-            this.advBandedGridView1.OptionsView.ShowGroupPanel = false;
-            this.advBandedGridView1.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.advBandedGridView1_SelectionChanged);
-            this.advBandedGridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.advBandedGridView1_RowClick);
-            this.advBandedGridView1.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.advBandedGridView1_CustomDrawRowIndicator);
+            this.bandedGridColumn14.Caption = "时间";
+            this.bandedGridColumn14.Name = "bandedGridColumn14";
+            this.bandedGridColumn14.RowIndex = 1;
+            this.bandedGridColumn14.Visible = true;
+            this.bandedGridColumn14.Width = 136;
             // 
-            // gridBand3
+            // bandedGridColumn15
             // 
-            this.gridBand3.Caption = "基本信息";
-            this.gridBand3.Columns.Add(this.bandedGridColumn7);
-            this.gridBand3.Columns.Add(this.bandedGridColumn8);
-            this.gridBand3.Columns.Add(this.bandedGridColumn9);
-            this.gridBand3.Columns.Add(this.bandedGridColumn10);
-            this.gridBand3.MinWidth = 20;
-            this.gridBand3.Name = "gridBand3";
-            this.gridBand3.Width = 196;
+            this.bandedGridColumn15.Caption = "地点";
+            this.bandedGridColumn15.Name = "bandedGridColumn15";
+            this.bandedGridColumn15.RowIndex = 2;
+            this.bandedGridColumn15.Visible = true;
+            this.bandedGridColumn15.Width = 136;
             // 
-            // bandedGridColumn7
+            // gridBand6
             // 
-            this.bandedGridColumn7.Caption = "索引号";
-            this.bandedGridColumn7.Name = "bandedGridColumn7";
-            this.bandedGridColumn7.Visible = true;
-            this.bandedGridColumn7.Width = 94;
+            this.gridBand6.Caption = "照片";
+            this.gridBand6.Columns.Add(this.bandedGridColumn16);
+            this.gridBand6.MinWidth = 20;
+            this.gridBand6.Name = "gridBand6";
+            this.gridBand6.Width = 166;
             // 
-            // bandedGridColumn8
+            // bandedGridColumn16
             // 
-            this.bandedGridColumn8.Caption = "置信度";
-            this.bandedGridColumn8.Name = "bandedGridColumn8";
-            this.bandedGridColumn8.Visible = true;
-            this.bandedGridColumn8.Width = 102;
+            this.bandedGridColumn16.Caption = "照片";
+            this.bandedGridColumn16.Name = "bandedGridColumn16";
+            this.bandedGridColumn16.Visible = true;
+            this.bandedGridColumn16.Width = 166;
             // 
-            // bandedGridColumn9
+            // splitContainerControl8
             // 
-            this.bandedGridColumn9.Caption = "时间";
-            this.bandedGridColumn9.Name = "bandedGridColumn9";
-            this.bandedGridColumn9.RowIndex = 1;
-            this.bandedGridColumn9.Visible = true;
-            this.bandedGridColumn9.Width = 196;
+            this.splitContainerControl8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl8.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl8.Name = "splitContainerControl8";
+            this.splitContainerControl8.Panel1.Controls.Add(this.pictureEditEvent);
+            this.splitContainerControl8.Panel1.Text = "Panel1";
+            this.splitContainerControl8.Panel2.Controls.Add(this.splitContainerControl9);
+            this.splitContainerControl8.Panel2.Text = "Panel2";
+            this.splitContainerControl8.Size = new System.Drawing.Size(553, 198);
+            this.splitContainerControl8.SplitterPosition = 301;
+            this.splitContainerControl8.TabIndex = 0;
+            this.splitContainerControl8.Text = "splitContainerControl8";
             // 
-            // bandedGridColumn10
+            // pictureEditEvent
             // 
-            this.bandedGridColumn10.Caption = "地点";
-            this.bandedGridColumn10.Name = "bandedGridColumn10";
-            this.bandedGridColumn10.RowIndex = 2;
-            this.bandedGridColumn10.Visible = true;
-            this.bandedGridColumn10.Width = 196;
+            this.pictureEditEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureEditEvent.Location = new System.Drawing.Point(0, 0);
+            this.pictureEditEvent.MenuManager = this.barManager1;
+            this.pictureEditEvent.Name = "pictureEditEvent";
+            this.pictureEditEvent.Size = new System.Drawing.Size(301, 198);
+            this.pictureEditEvent.TabIndex = 0;
             // 
-            // gridBand4
+            // splitContainerControl9
             // 
-            this.gridBand4.Caption = "车辆";
-            this.gridBand4.Columns.Add(this.bandedGridColumn11);
-            this.gridBand4.MinWidth = 20;
-            this.gridBand4.Name = "gridBand4";
-            this.gridBand4.Width = 144;
+            this.splitContainerControl9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl9.Horizontal = false;
+            this.splitContainerControl9.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl9.Name = "splitContainerControl9";
+            this.splitContainerControl9.Panel1.Text = "Panel1";
+            this.splitContainerControl9.Panel2.Controls.Add(this.simpleButton6);
+            this.splitContainerControl9.Panel2.Controls.Add(this.simpleButton13);
+            this.splitContainerControl9.Panel2.Controls.Add(this.simpleButton14);
+            this.splitContainerControl9.Panel2.Text = "Panel2";
+            this.splitContainerControl9.Size = new System.Drawing.Size(247, 198);
+            this.splitContainerControl9.SplitterPosition = 167;
+            this.splitContainerControl9.TabIndex = 0;
+            this.splitContainerControl9.Text = "splitContainerControl9";
             // 
-            // bandedGridColumn11
+            // simpleButton6
             // 
-            this.bandedGridColumn11.Caption = "车牌号";
-            this.bandedGridColumn11.Name = "bandedGridColumn11";
-            this.bandedGridColumn11.Visible = true;
-            this.bandedGridColumn11.Width = 144;
-            // 
-            // splitContainerControl6
-            // 
-            this.splitContainerControl6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl6.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl6.Name = "splitContainerControl6";
-            this.splitContainerControl6.Panel1.Controls.Add(this.pictureEditVehicle);
-            this.splitContainerControl6.Panel1.Text = "Panel1";
-            this.splitContainerControl6.Panel2.Controls.Add(this.splitContainerControlVideoVehicle);
-            this.splitContainerControl6.Panel2.Text = "Panel2";
-            this.splitContainerControl6.Size = new System.Drawing.Size(530, 198);
-            this.splitContainerControl6.SplitterPosition = 303;
-            this.splitContainerControl6.TabIndex = 0;
-            this.splitContainerControl6.Text = "splitContainerControl6";
-            // 
-            // pictureEditVehicle
-            // 
-            this.pictureEditVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureEditVehicle.Location = new System.Drawing.Point(0, 0);
-            this.pictureEditVehicle.MenuManager = this.barManager1;
-            this.pictureEditVehicle.Name = "pictureEditVehicle";
-            this.pictureEditVehicle.Size = new System.Drawing.Size(303, 198);
-            this.pictureEditVehicle.TabIndex = 0;
-            // 
-            // splitContainerControlVideoVehicle
-            // 
-            this.splitContainerControlVideoVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControlVideoVehicle.Horizontal = false;
-            this.splitContainerControlVideoVehicle.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControlVideoVehicle.Name = "splitContainerControlVideoVehicle";
-            this.splitContainerControlVideoVehicle.Panel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-            this.splitContainerControlVideoVehicle.Panel1.Text = "Panel1";
-            this.splitContainerControlVideoVehicle.Panel2.Controls.Add(this.simpleButton10);
-            this.splitContainerControlVideoVehicle.Panel2.Controls.Add(this.simpleButton11);
-            this.splitContainerControlVideoVehicle.Panel2.Controls.Add(this.simpleButton12);
-            this.splitContainerControlVideoVehicle.Panel2.Text = "Panel2";
-            this.splitContainerControlVideoVehicle.Size = new System.Drawing.Size(222, 198);
-            this.splitContainerControlVideoVehicle.SplitterPosition = 167;
-            this.splitContainerControlVideoVehicle.TabIndex = 0;
-            this.splitContainerControlVideoVehicle.Text = "splitContainerControl7";
-            // 
-            // simpleButton10
-            // 
-            this.simpleButton10.Location = new System.Drawing.Point(168, 2);
-            this.simpleButton10.Name = "simpleButton10";
-            this.simpleButton10.Size = new System.Drawing.Size(77, 22);
-            this.simpleButton10.StyleController = this.layoutControl1;
-            this.simpleButton10.TabIndex = 3;
-            this.simpleButton10.Text = "口";
-            this.simpleButton10.Click += new System.EventHandler(this.simpleButton13_Click);
+            this.simpleButton6.Location = new System.Drawing.Point(169, 2);
+            this.simpleButton6.Name = "simpleButton6";
+            this.simpleButton6.Size = new System.Drawing.Size(77, 22);
+            this.simpleButton6.StyleController = this.layoutControl1;
+            this.simpleButton6.TabIndex = 3;
+            this.simpleButton6.Text = "口";
             // 
             // layoutControl1
             // 
@@ -1174,6 +1197,369 @@ namespace CameraViewer
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
             this.layoutControlItem3.TextVisible = false;
+            // 
+            // simpleButton13
+            // 
+            this.simpleButton13.Location = new System.Drawing.Point(1, 2);
+            this.simpleButton13.Name = "simpleButton13";
+            this.simpleButton13.Size = new System.Drawing.Size(78, 22);
+            this.simpleButton13.StyleController = this.layoutControl1;
+            this.simpleButton13.TabIndex = 2;
+            this.simpleButton13.Text = ">";
+            // 
+            // simpleButton14
+            // 
+            this.simpleButton14.Location = new System.Drawing.Point(83, 2);
+            this.simpleButton14.Name = "simpleButton14";
+            this.simpleButton14.Size = new System.Drawing.Size(82, 22);
+            this.simpleButton14.StyleController = this.layoutControl1;
+            this.simpleButton14.TabIndex = 1;
+            this.simpleButton14.Text = "||";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.lblEventCurrentPage);
+            this.panelControl1.Controls.Add(this.labelControl9);
+            this.panelControl1.Controls.Add(this.labelControl10);
+            this.panelControl1.Controls.Add(this.cbeEventNumberPerPage);
+            this.panelControl1.Controls.Add(this.btnEventLastPage);
+            this.panelControl1.Controls.Add(this.btnEventNextPage);
+            this.panelControl1.Controls.Add(this.btnEventPrevPage);
+            this.panelControl1.Controls.Add(this.btnEventFirstPage);
+            this.panelControl1.Controls.Add(this.simpleButton16);
+            this.panelControl1.Controls.Add(this.labelControl11);
+            this.panelControl1.Controls.Add(this.labelControl12);
+            this.panelControl1.Controls.Add(this.teStartTimeEvent);
+            this.panelControl1.Controls.Add(this.teEndTimeEvent);
+            this.panelControl1.Controls.Add(this.checkedComboBoxEditEventCamera);
+            this.panelControl1.Controls.Add(this.labelControl13);
+            this.panelControl1.Controls.Add(this.radioGroupEvent);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(0, 0);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(868, 52);
+            this.panelControl1.TabIndex = 0;
+            // 
+            // lblEventCurrentPage
+            // 
+            this.lblEventCurrentPage.Location = new System.Drawing.Point(311, 33);
+            this.lblEventCurrentPage.Name = "lblEventCurrentPage";
+            this.lblEventCurrentPage.Size = new System.Drawing.Size(67, 14);
+            this.lblEventCurrentPage.TabIndex = 48;
+            this.lblEventCurrentPage.Text = "当前：1/1页";
+            // 
+            // labelControl9
+            // 
+            this.labelControl9.Location = new System.Drawing.Point(183, 33);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(24, 14);
+            this.labelControl9.TabIndex = 45;
+            this.labelControl9.Text = "每页";
+            // 
+            // labelControl10
+            // 
+            this.labelControl10.Location = new System.Drawing.Point(297, 33);
+            this.labelControl10.Name = "labelControl10";
+            this.labelControl10.Size = new System.Drawing.Size(12, 14);
+            this.labelControl10.TabIndex = 46;
+            this.labelControl10.Text = "项";
+            // 
+            // cbeEventNumberPerPage
+            // 
+            this.cbeEventNumberPerPage.EditValue = "20";
+            this.cbeEventNumberPerPage.Location = new System.Drawing.Point(211, 27);
+            this.cbeEventNumberPerPage.Name = "cbeEventNumberPerPage";
+            this.cbeEventNumberPerPage.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbeEventNumberPerPage.Properties.Items.AddRange(new object[] {
+            "5",
+            "10",
+            "20",
+            "50",
+            "100",
+            "200"});
+            this.cbeEventNumberPerPage.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbeEventNumberPerPage.Size = new System.Drawing.Size(79, 21);
+            this.cbeEventNumberPerPage.TabIndex = 47;
+            // 
+            // btnEventLastPage
+            // 
+            this.btnEventLastPage.Location = new System.Drawing.Point(150, 25);
+            this.btnEventLastPage.Name = "btnEventLastPage";
+            this.btnEventLastPage.Size = new System.Drawing.Size(26, 24);
+            this.btnEventLastPage.TabIndex = 43;
+            this.btnEventLastPage.Text = ">|";
+            // 
+            // btnEventNextPage
+            // 
+            this.btnEventNextPage.Location = new System.Drawing.Point(120, 25);
+            this.btnEventNextPage.Name = "btnEventNextPage";
+            this.btnEventNextPage.Size = new System.Drawing.Size(26, 24);
+            this.btnEventNextPage.TabIndex = 42;
+            this.btnEventNextPage.Text = ">";
+            // 
+            // btnEventPrevPage
+            // 
+            this.btnEventPrevPage.Location = new System.Drawing.Point(90, 25);
+            this.btnEventPrevPage.Name = "btnEventPrevPage";
+            this.btnEventPrevPage.Size = new System.Drawing.Size(26, 24);
+            this.btnEventPrevPage.TabIndex = 41;
+            this.btnEventPrevPage.Text = "<";
+            // 
+            // btnEventFirstPage
+            // 
+            this.btnEventFirstPage.Location = new System.Drawing.Point(60, 25);
+            this.btnEventFirstPage.Name = "btnEventFirstPage";
+            this.btnEventFirstPage.Size = new System.Drawing.Size(26, 24);
+            this.btnEventFirstPage.TabIndex = 44;
+            this.btnEventFirstPage.Text = "|<";
+            // 
+            // simpleButton16
+            // 
+            this.simpleButton16.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton16.Appearance.Options.UseFont = true;
+            this.simpleButton16.Dock = System.Windows.Forms.DockStyle.Right;
+            this.simpleButton16.Enabled = false;
+            this.simpleButton16.ImeMode = System.Windows.Forms.ImeMode.Alpha;
+            this.simpleButton16.Location = new System.Drawing.Point(806, 2);
+            this.simpleButton16.Name = "simpleButton16";
+            this.simpleButton16.Size = new System.Drawing.Size(60, 48);
+            this.simpleButton16.TabIndex = 40;
+            this.simpleButton16.Text = "查询";
+            // 
+            // labelControl11
+            // 
+            this.labelControl11.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.labelControl11.Location = new System.Drawing.Point(271, 6);
+            this.labelControl11.Name = "labelControl11";
+            this.labelControl11.Size = new System.Drawing.Size(60, 14);
+            this.labelControl11.TabIndex = 36;
+            this.labelControl11.Text = "开始时间：";
+            // 
+            // labelControl12
+            // 
+            this.labelControl12.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.labelControl12.Location = new System.Drawing.Point(506, 6);
+            this.labelControl12.Name = "labelControl12";
+            this.labelControl12.Size = new System.Drawing.Size(60, 14);
+            this.labelControl12.TabIndex = 37;
+            this.labelControl12.Text = "结束时间：";
+            // 
+            // teStartTimeEvent
+            // 
+            this.teStartTimeEvent.EditValue = new System.DateTime(2010, 10, 30, 11, 0, 0, 0);
+            this.teStartTimeEvent.Enabled = false;
+            this.teStartTimeEvent.Location = new System.Drawing.Point(337, 3);
+            this.teStartTimeEvent.Name = "teStartTimeEvent";
+            this.teStartTimeEvent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.teStartTimeEvent.Properties.Mask.EditMask = "G";
+            this.teStartTimeEvent.Size = new System.Drawing.Size(145, 21);
+            this.teStartTimeEvent.TabIndex = 38;
+            // 
+            // teEndTimeEvent
+            // 
+            this.teEndTimeEvent.EditValue = new System.DateTime(2010, 1, 11, 10, 0, 0, 0);
+            this.teEndTimeEvent.Enabled = false;
+            this.teEndTimeEvent.Location = new System.Drawing.Point(572, 3);
+            this.teEndTimeEvent.Name = "teEndTimeEvent";
+            this.teEndTimeEvent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.teEndTimeEvent.Properties.Mask.EditMask = "G";
+            this.teEndTimeEvent.Size = new System.Drawing.Size(138, 21);
+            this.teEndTimeEvent.TabIndex = 39;
+            // 
+            // checkedComboBoxEditEventCamera
+            // 
+            this.checkedComboBoxEditEventCamera.Location = new System.Drawing.Point(111, 3);
+            this.checkedComboBoxEditEventCamera.MenuManager = this.barManager1;
+            this.checkedComboBoxEditEventCamera.Name = "checkedComboBoxEditEventCamera";
+            this.checkedComboBoxEditEventCamera.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.checkedComboBoxEditEventCamera.Size = new System.Drawing.Size(117, 21);
+            this.checkedComboBoxEditEventCamera.TabIndex = 35;
+            // 
+            // labelControl13
+            // 
+            this.labelControl13.Location = new System.Drawing.Point(65, 6);
+            this.labelControl13.Name = "labelControl13";
+            this.labelControl13.Size = new System.Drawing.Size(40, 14);
+            this.labelControl13.TabIndex = 34;
+            this.labelControl13.Text = "摄像头:";
+            // 
+            // radioGroupEvent
+            // 
+            this.radioGroupEvent.Dock = System.Windows.Forms.DockStyle.Left;
+            this.radioGroupEvent.Location = new System.Drawing.Point(2, 2);
+            this.radioGroupEvent.MenuManager = this.barManager1;
+            this.radioGroupEvent.Name = "radioGroupEvent";
+            this.radioGroupEvent.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "实时"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "历史")});
+            this.radioGroupEvent.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.radioGroupEvent.Size = new System.Drawing.Size(57, 48);
+            this.radioGroupEvent.TabIndex = 33;
+            // 
+            // xtraTabPageVehicle
+            // 
+            this.xtraTabPageVehicle.Controls.Add(this.panelControl3);
+            this.xtraTabPageVehicle.Controls.Add(this.panelControl4);
+            this.xtraTabPageVehicle.Name = "xtraTabPageVehicle";
+            this.xtraTabPageVehicle.Size = new System.Drawing.Size(868, 254);
+            this.xtraTabPageVehicle.Text = "车牌";
+            // 
+            // panelControl3
+            // 
+            this.panelControl3.Controls.Add(this.splitContainerControl5);
+            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl3.Location = new System.Drawing.Point(0, 52);
+            this.panelControl3.Name = "panelControl3";
+            this.panelControl3.Size = new System.Drawing.Size(868, 202);
+            this.panelControl3.TabIndex = 3;
+            // 
+            // splitContainerControl5
+            // 
+            this.splitContainerControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl5.Location = new System.Drawing.Point(2, 2);
+            this.splitContainerControl5.Name = "splitContainerControl5";
+            this.splitContainerControl5.Panel1.Controls.Add(this.gridControlVehicle);
+            this.splitContainerControl5.Panel1.Text = "Panel1";
+            this.splitContainerControl5.Panel2.Controls.Add(this.splitContainerControl6);
+            this.splitContainerControl5.Panel2.Text = "Panel2";
+            this.splitContainerControl5.Size = new System.Drawing.Size(864, 198);
+            this.splitContainerControl5.SplitterPosition = 329;
+            this.splitContainerControl5.TabIndex = 0;
+            this.splitContainerControl5.Text = "splitContainerControl5";
+            // 
+            // gridControlVehicle
+            // 
+            this.gridControlVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlVehicle.Location = new System.Drawing.Point(0, 0);
+            this.gridControlVehicle.MainView = this.advBandedGridViewVehicle;
+            this.gridControlVehicle.MenuManager = this.barManager1;
+            this.gridControlVehicle.Name = "gridControlVehicle";
+            this.gridControlVehicle.Size = new System.Drawing.Size(329, 198);
+            this.gridControlVehicle.TabIndex = 0;
+            this.gridControlVehicle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.advBandedGridViewVehicle});
+            // 
+            // advBandedGridViewVehicle
+            // 
+            this.advBandedGridViewVehicle.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand3,
+            this.gridBand4});
+            this.advBandedGridViewVehicle.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.bandedGridColumn7,
+            this.bandedGridColumn8,
+            this.bandedGridColumn9,
+            this.bandedGridColumn10,
+            this.bandedGridColumn11,
+            this.bandedGridColumn13,
+            this.bandedGridColumn17,
+            this.bandedGridColumn18,
+            this.bandedGridColumn19,
+            this.bandedGridColumn20,
+            this.bandedGridColumn21,
+            this.bandedGridColumn22,
+            this.bandedGridColumn23});
+            this.advBandedGridViewVehicle.GridControl = this.gridControlVehicle;
+            this.advBandedGridViewVehicle.Name = "advBandedGridViewVehicle";
+            this.advBandedGridViewVehicle.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.advBandedGridViewVehicle.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.advBandedGridViewVehicle.OptionsBehavior.Editable = false;
+            this.advBandedGridViewVehicle.OptionsBehavior.ReadOnly = true;
+            this.advBandedGridViewVehicle.OptionsView.ShowBands = false;
+            this.advBandedGridViewVehicle.OptionsView.ShowGroupPanel = false;
+            this.advBandedGridViewVehicle.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.advBandedGridView1_SelectionChanged);
+            this.advBandedGridViewVehicle.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.advBandedGridView1_RowClick);
+            this.advBandedGridViewVehicle.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.advBandedGridView1_CustomDrawRowIndicator);
+            // 
+            // bandedGridColumn7
+            // 
+            this.bandedGridColumn7.Caption = "索引号";
+            this.bandedGridColumn7.Name = "bandedGridColumn7";
+            this.bandedGridColumn7.Visible = true;
+            this.bandedGridColumn7.Width = 94;
+            // 
+            // bandedGridColumn8
+            // 
+            this.bandedGridColumn8.Caption = "置信度";
+            this.bandedGridColumn8.Name = "bandedGridColumn8";
+            this.bandedGridColumn8.Visible = true;
+            this.bandedGridColumn8.Width = 102;
+            // 
+            // bandedGridColumn9
+            // 
+            this.bandedGridColumn9.Caption = "时间";
+            this.bandedGridColumn9.Name = "bandedGridColumn9";
+            this.bandedGridColumn9.RowIndex = 1;
+            this.bandedGridColumn9.Visible = true;
+            this.bandedGridColumn9.Width = 196;
+            // 
+            // bandedGridColumn10
+            // 
+            this.bandedGridColumn10.Caption = "地点";
+            this.bandedGridColumn10.Name = "bandedGridColumn10";
+            this.bandedGridColumn10.RowIndex = 2;
+            this.bandedGridColumn10.Visible = true;
+            this.bandedGridColumn10.Width = 196;
+            // 
+            // bandedGridColumn11
+            // 
+            this.bandedGridColumn11.Caption = "车牌号";
+            this.bandedGridColumn11.Name = "bandedGridColumn11";
+            this.bandedGridColumn11.Visible = true;
+            this.bandedGridColumn11.Width = 144;
+            // 
+            // splitContainerControl6
+            // 
+            this.splitContainerControl6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl6.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl6.Name = "splitContainerControl6";
+            this.splitContainerControl6.Panel1.Controls.Add(this.pictureEditVehicle);
+            this.splitContainerControl6.Panel1.Text = "Panel1";
+            this.splitContainerControl6.Panel2.Controls.Add(this.splitContainerControlVideoVehicle);
+            this.splitContainerControl6.Panel2.Text = "Panel2";
+            this.splitContainerControl6.Size = new System.Drawing.Size(530, 198);
+            this.splitContainerControl6.SplitterPosition = 303;
+            this.splitContainerControl6.TabIndex = 0;
+            this.splitContainerControl6.Text = "splitContainerControl6";
+            // 
+            // pictureEditVehicle
+            // 
+            this.pictureEditVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureEditVehicle.Location = new System.Drawing.Point(0, 0);
+            this.pictureEditVehicle.MenuManager = this.barManager1;
+            this.pictureEditVehicle.Name = "pictureEditVehicle";
+            this.pictureEditVehicle.Size = new System.Drawing.Size(303, 198);
+            this.pictureEditVehicle.TabIndex = 0;
+            // 
+            // splitContainerControlVideoVehicle
+            // 
+            this.splitContainerControlVideoVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControlVideoVehicle.Horizontal = false;
+            this.splitContainerControlVideoVehicle.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControlVideoVehicle.Name = "splitContainerControlVideoVehicle";
+            this.splitContainerControlVideoVehicle.Panel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+            this.splitContainerControlVideoVehicle.Panel1.Text = "Panel1";
+            this.splitContainerControlVideoVehicle.Panel2.Controls.Add(this.simpleButton10);
+            this.splitContainerControlVideoVehicle.Panel2.Controls.Add(this.simpleButton11);
+            this.splitContainerControlVideoVehicle.Panel2.Controls.Add(this.simpleButton12);
+            this.splitContainerControlVideoVehicle.Panel2.Text = "Panel2";
+            this.splitContainerControlVideoVehicle.Size = new System.Drawing.Size(222, 198);
+            this.splitContainerControlVideoVehicle.SplitterPosition = 167;
+            this.splitContainerControlVideoVehicle.TabIndex = 0;
+            this.splitContainerControlVideoVehicle.Text = "splitContainerControl7";
+            // 
+            // simpleButton10
+            // 
+            this.simpleButton10.Location = new System.Drawing.Point(168, 2);
+            this.simpleButton10.Name = "simpleButton10";
+            this.simpleButton10.Size = new System.Drawing.Size(77, 22);
+            this.simpleButton10.StyleController = this.layoutControl1;
+            this.simpleButton10.TabIndex = 3;
+            this.simpleButton10.Text = "口";
+            this.simpleButton10.Click += new System.EventHandler(this.simpleButton13_Click);
             // 
             // simpleButton11
             // 
@@ -1894,6 +2280,91 @@ namespace CameraViewer
             this.timerTest.Enabled = true;
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
+            // bandedGridColumn13
+            // 
+            this.bandedGridColumn13.Caption = "车辆对象";
+            this.bandedGridColumn13.Name = "bandedGridColumn13";
+            this.bandedGridColumn13.Visible = true;
+            // 
+            // bandedGridColumn17
+            // 
+            this.bandedGridColumn17.Caption = "speed";
+            this.bandedGridColumn17.Name = "bandedGridColumn17";
+            this.bandedGridColumn17.Visible = true;
+            // 
+            // bandedGridColumn18
+            // 
+            this.bandedGridColumn18.Caption = "stemagainst";
+            this.bandedGridColumn18.Name = "bandedGridColumn18";
+            this.bandedGridColumn18.Visible = true;
+            // 
+            // bandedGridColumn19
+            // 
+            this.bandedGridColumn19.Caption = "stop";
+            this.bandedGridColumn19.Name = "bandedGridColumn19";
+            this.bandedGridColumn19.Visible = true;
+            // 
+            // bandedGridColumn20
+            // 
+            this.bandedGridColumn20.Caption = "accident";
+            this.bandedGridColumn20.Name = "bandedGridColumn20";
+            this.bandedGridColumn20.Visible = true;
+            // 
+            // bandedGridColumn21
+            // 
+            this.bandedGridColumn21.Caption = "linechange";
+            this.bandedGridColumn21.Name = "bandedGridColumn21";
+            this.bandedGridColumn21.Visible = true;
+            // 
+            // bandedGridColumn22
+            // 
+            this.bandedGridColumn22.Caption = "platecolor";
+            this.bandedGridColumn22.Name = "bandedGridColumn22";
+            this.bandedGridColumn22.Visible = true;
+            // 
+            // bandedGridColumn23
+            // 
+            this.bandedGridColumn23.Caption = "vehiclecolor";
+            this.bandedGridColumn23.Name = "bandedGridColumn23";
+            this.bandedGridColumn23.Visible = true;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.Caption = "基本信息";
+            this.gridBand3.Columns.Add(this.bandedGridColumn7);
+            this.gridBand3.Columns.Add(this.bandedGridColumn8);
+            this.gridBand3.Columns.Add(this.bandedGridColumn9);
+            this.gridBand3.Columns.Add(this.bandedGridColumn10);
+            this.gridBand3.MinWidth = 20;
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.Width = 196;
+            // 
+            // gridBand4
+            // 
+            this.gridBand4.Caption = "车辆";
+            this.gridBand4.Columns.Add(this.bandedGridColumn11);
+            this.gridBand4.MinWidth = 20;
+            this.gridBand4.Name = "gridBand4";
+            this.gridBand4.Width = 144;
+            // 
+            // bandedGridColumn24
+            // 
+            this.bandedGridColumn24.Caption = "CrossLine";
+            this.bandedGridColumn24.Name = "bandedGridColumn24";
+            this.bandedGridColumn24.Visible = true;
+            // 
+            // bandedGridColumn25
+            // 
+            this.bandedGridColumn25.Caption = "IilegalDir";
+            this.bandedGridColumn25.Name = "bandedGridColumn25";
+            this.bandedGridColumn25.Visible = true;
+            // 
+            // bandedGridColumn26
+            // 
+            this.bandedGridColumn26.Caption = "ChangeChannel";
+            this.bandedGridColumn26.Name = "bandedGridColumn26";
+            this.bandedGridColumn26.Visible = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1945,25 +2416,42 @@ namespace CameraViewer
             this.xtraTabControlResult.ResumeLayout(false);
             this.xtraTabPageEvent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.xtraTabPageVehicle.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).EndInit();
-            this.splitContainerControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlVehicle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).EndInit();
-            this.splitContainerControl6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEditVehicle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlVideoVehicle)).EndInit();
-            this.splitContainerControlVideoVehicle.ResumeLayout(false);
+            this.panelControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).EndInit();
+            this.splitContainerControl7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlEvent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewEvent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl8)).EndInit();
+            this.splitContainerControl8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditEvent.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).EndInit();
+            this.splitContainerControl9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeEventNumberPerPage.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teStartTimeEvent.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teEndTimeEvent.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditEventCamera.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupEvent.Properties)).EndInit();
+            this.xtraTabPageVehicle.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
+            this.panelControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).EndInit();
+            this.splitContainerControl5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlVehicle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewVehicle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).EndInit();
+            this.splitContainerControl6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditVehicle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlVideoVehicle)).EndInit();
+            this.splitContainerControlVideoVehicle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
@@ -2148,14 +2636,56 @@ namespace CameraViewer
         private DevExpress.XtraEditors.SimpleButton simpleButton10;
         private DevExpress.XtraEditors.SimpleButton simpleButton11;
         private DevExpress.XtraEditors.SimpleButton simpleButton12;
-        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewVehicle;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn10;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn9;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn8;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn11;
+        private DevExpress.XtraEditors.LabelControl lblEventCurrentPage;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
+        private DevExpress.XtraEditors.LabelControl labelControl10;
+        private DevExpress.XtraEditors.ComboBoxEdit cbeEventNumberPerPage;
+        private DevExpress.XtraEditors.SimpleButton btnEventLastPage;
+        private DevExpress.XtraEditors.SimpleButton btnEventNextPage;
+        private DevExpress.XtraEditors.SimpleButton btnEventPrevPage;
+        private DevExpress.XtraEditors.SimpleButton btnEventFirstPage;
+        private DevExpress.XtraEditors.SimpleButton simpleButton16;
+        private DevExpress.XtraEditors.LabelControl labelControl11;
+        private DevExpress.XtraEditors.LabelControl labelControl12;
+        private DevExpress.XtraEditors.TimeEdit teStartTimeEvent;
+        private DevExpress.XtraEditors.TimeEdit teEndTimeEvent;
+        private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEditEventCamera;
+        private DevExpress.XtraEditors.LabelControl labelControl13;
+        private DevExpress.XtraEditors.RadioGroup radioGroupEvent;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl7;
+        private DevExpress.XtraGrid.GridControl gridControlEvent;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl8;
+        private DevExpress.XtraEditors.PictureEdit pictureEditEvent;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl9;
+        private DevExpress.XtraEditors.SimpleButton simpleButton6;
+        private DevExpress.XtraEditors.SimpleButton simpleButton13;
+        private DevExpress.XtraEditors.SimpleButton simpleButton14;
+        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewEvent;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn14;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn15;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn16;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn13;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn17;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn18;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn19;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn20;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn21;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn22;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn23;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn24;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn25;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn26;
         
     }
 }

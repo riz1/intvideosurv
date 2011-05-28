@@ -1589,7 +1589,7 @@ namespace CameraViewer
         }
         #endregion
 
-#region 车辆显示相关
+        #region 车辆显示相关
 
         private int _totalPagesForVehicle;
         private int _totalCountForVehicle;
@@ -1719,15 +1719,15 @@ namespace CameraViewer
             //column = advBandedGridViewFace.Columns["照片"];
             //column.ColumnEdit = pictureEdit;
             gridControlVehicle.DataSource = dataTableVehicle;
-            advBandedGridView1.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-            advBandedGridView1.Columns["车辆对象"].Visible = false;
-            advBandedGridView1.Columns["speed"].Visible = false;
-            advBandedGridView1.Columns["stemagainst"].Visible = false;
-            advBandedGridView1.Columns["stop"].Visible = false;
-            advBandedGridView1.Columns["accident"].Visible = false;
-            advBandedGridView1.Columns["linechange"].Visible = false;
-            advBandedGridView1.Columns["platecolor"].Visible = false;
-            advBandedGridView1.Columns["vehiclecolor"].Visible = false;
+            advBandedGridViewVehicle.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            advBandedGridViewVehicle.Columns["车辆对象"].Visible = false;
+            advBandedGridViewVehicle.Columns["speed"].Visible = false;
+            advBandedGridViewVehicle.Columns["stemagainst"].Visible = false;
+            advBandedGridViewVehicle.Columns["stop"].Visible = false;
+            advBandedGridViewVehicle.Columns["accident"].Visible = false;
+            advBandedGridViewVehicle.Columns["linechange"].Visible = false;
+            advBandedGridViewVehicle.Columns["platecolor"].Visible = false;
+            advBandedGridViewVehicle.Columns["vehiclecolor"].Visible = false;
             
             HikPlayer.PlayM4_CloseFile(_lastVideoPort1);
             splitContainerControlVideoVehicle.Panel1.Refresh();
@@ -1754,10 +1754,10 @@ namespace CameraViewer
         private Vehicle _selectedVehicle;
         private void advBandedGridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
        {
-           if (advBandedGridView1.SelectedRowsCount > 0)
+           if (advBandedGridViewVehicle.SelectedRowsCount > 0)
            {
-                int getSelectedRow = this.advBandedGridView1.GetSelectedRows()[0];
-                _selectedVehicle = (Vehicle)(this.advBandedGridView1.GetRowCellValue(getSelectedRow, "车辆对象"));
+                int getSelectedRow = this.advBandedGridViewVehicle.GetSelectedRows()[0];
+                _selectedVehicle = (Vehicle)(this.advBandedGridViewVehicle.GetRowCellValue(getSelectedRow, "车辆对象"));
                 FillPicVideoVehicle(_selectedVehicle);
             }
         }
@@ -1789,10 +1789,10 @@ namespace CameraViewer
 
         private void advBandedGridView1_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
-            if (advBandedGridView1.SelectedRowsCount > 0)
+            if (advBandedGridViewVehicle.SelectedRowsCount > 0)
             {
-                int getSelectedRow = this.advBandedGridView1.GetSelectedRows()[0];
-                _selectedFace = (Face)(this.advBandedGridView1.GetRowCellValue(getSelectedRow, "车辆对象"));
+                int getSelectedRow = this.advBandedGridViewVehicle.GetSelectedRows()[0];
+                _selectedFace = (Face)(this.advBandedGridViewVehicle.GetRowCellValue(getSelectedRow, "车辆对象"));
                 FillPicVideoVehicle(_selectedVehicle);
             }
         }
@@ -1909,6 +1909,8 @@ namespace CameraViewer
             lblVehicleCurrentPage.Text = string.Format("当前：{0}/{1}页", _currentPageForVehicle, _totalPagesForVehicle);
         }
 #endregion
+
+        
 
     }
 }
