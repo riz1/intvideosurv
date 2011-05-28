@@ -1,0 +1,337 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="DecoderManagement" priority="4" />
+      <Item value="false" priority="5" />
+      <Item value="case" priority="3" />
+      <Item value="DisplayTypes`0" priority="0" />
+      <Item value="true" priority="8" />
+      <Item value="DockStyle`0" priority="0" />
+      <Item value="break" priority="3" />
+      <Item value="private" priority="5" />
+      <Item value="void" priority="2" />
+      <Item value="listGroup" priority="0" />
+      <Item value="ref" priority="2" />
+      <Item value="Dictionary" priority="1" />
+      <Item value="int" priority="15" />
+      <Item value="listDecoder" priority="2" />
+      <Item value="if" priority="8" />
+      <Item value="treeList1_TreeListMenuItemClick`0" priority="0" />
+      <Item value="treeListDecoder" priority="3" />
+      <Item value="new" priority="9" />
+      <Item value="object" priority="6" />
+      <Item value="null" priority="3" />
+      <Item value="TreeList" priority="0" />
+      <Item value="treelist" priority="0" />
+      <Item value="node" priority="10" />
+      <Item value="TreeNode" priority="2" />
+      <Item value="item" priority="11" />
+      <Item value="TreeNode`0" priority="1" />
+      <Item value="else" priority="3" />
+      <Item value="aNode" priority="1" />
+      <Item value="System" priority="1" />
+      <Item value="Windows" priority="1" />
+      <Item value="Forms" priority="1" />
+      <Item value="ContextMenuStrip`0" priority="0" />
+      <Item value="ToolStripMenuItem`0" priority="0" />
+      <Item value="MessageBox`0" priority="5" />
+      <Item value="string" priority="5" />
+      <Item value="typeof" priority="1" />
+      <Item value="dataTable" priority="0" />
+      <Item value="gridView1" priority="0" />
+      <Item value="tag" priority="1" />
+      <Item value="Dictionary&lt;int,DecoderInfo&gt;" priority="0" />
+      <Item value="errMessage" priority="3" />
+      <Item value="foreach" priority="1" />
+      <Item value="KeyValuePair" priority="1" />
+      <Item value="EnvironmentVariableTarget`0" priority="0" />
+      <Item value="NodeChangedEventArgs`0" priority="0" />
+      <Item value="i" priority="0" />
+      <Item value="textEditId" priority="2" />
+      <Item value="id" priority="5" />
+      <Item value="Name" priority="0" />
+      <Item value="textEditname" priority="0" />
+      <Item value="Port" priority="0" />
+      <Item value="textEditport" priority="1" />
+      <Item value="di" priority="5" />
+      <Item value="textEditIp" priority="0" />
+      <Item value="textEditmax" priority="0" />
+      <Item value="Decoder`0" priority="0" />
+      <Item value="DecoderBusiness`0" priority="1" />
+      <Item value="public" priority="5" />
+      <Item value="const" priority="0" />
+      <Item value="AddXtraForm`0" priority="1" />
+      <Item value="TreeListNode`0" priority="0" />
+      <Item value="var" priority="0" />
+      <Item value="Data" priority="0" />
+      <Item value="DataTable`0" priority="0" />
+      <Item value="DataColumn`0" priority="0" />
+      <Item value="DataColumn" priority="0" />
+      <Item value="Type`0" priority="0" />
+      <Item value="String`0" priority="0" />
+      <Item value="v" priority="1" />
+      <Item value="DecoderInfo`0" priority="2" />
+      <Item value="e" priority="5" />
+      <Item value="oDecoderInfo" priority="0" />
+      <Item value="MouseButtons`0" priority="0" />
+      <Item value="treeListShowDecoder" priority="1" />
+      <Item value="Cursor" priority="0" />
+      <Item value="switch" priority="0" />
+      <Item value="Util" priority="5" />
+      <Item value="default" priority="0" />
+      <Item value="AddXtraForm" priority="0" />
+      <Item value="addDecoder" priority="0" />
+      <Item value="Dispose`0" priority="0" />
+      <Item value="Id" priority="3" />
+      <Item value="this" priority="2" />
+      <Item value="AddCameraInDecoder`0" priority="1" />
+      <Item value="AddCameraInDecoder" priority="0" />
+      <Item value="addCamera" priority="3" />
+      <Item value="LoadCameraInfo`0" priority="0" />
+      <Item value="CameraInfo`0" priority="2" />
+      <Item value="ListBoxControl`0" priority="0" />
+      <Item value="ItemActivation`0" priority="0" />
+      <Item value="decoder" priority="2" />
+      <Item value="camera" priority="0" />
+      <Item value="DecoderID" priority="2" />
+      <Item value="cameraid" priority="2" />
+      <Item value="sb" priority="1" />
+      <Item value="DataSet`0" priority="1" />
+      <Item value="DeviceInfo`0" priority="0" />
+      <Item value="cam" priority="0" />
+      <Item value="GroupBusiness`0" priority="0" />
+      <Item value="treeListNodeGroup" priority="0" />
+      <Item value="treeListNodeDevice" priority="1" />
+      <Item value="vDevice" priority="0" />
+      <Item value="vCamera" priority="0" />
+      <Item value="Text" priority="0" />
+      <Item value="static" priority="0" />
+      <Item value="Database`0" priority="0" />
+      <Item value="DecoderDataAccess`0" priority="0" />
+      <Item value="ocamera" priority="0" />
+      <Item value="mytest" priority="0" />
+      <Item value="returnid" priority="0" />
+      <Item value="while" priority="0" />
+      <Item value="OnDragOver`0" priority="0" />
+      <Item value="IDataAdapter`0" priority="1" />
+      <Item value="flag" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraEditors.GroupControl">
+      <Item value="Visible" priority="1" />
+      <Item value="Dock" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Windows.Forms.DockStyle">
+      <Item value="Fill" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Entity.DecoderInfo">
+      <Item value="Port" priority="2" />
+      <Item value="MaxDecodeChannelNo" priority="3" />
+      <Item value="Name" priority="4" />
+      <Item value="Ip" priority="2" />
+      <Item value="ListCameras" priority="0" />
+      <Item value="id" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@IntVideoSurv.Business.DecoderBusiness">
+      <Item value="Instance" priority="4" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Business.DecoderBusiness">
+      <Item value="GetAllDecoderInfo`0" priority="0" />
+      <Item value="Insert`0" priority="0" />
+      <Item value="GetDecoderInfoByDecoderId`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraTreeList.TreeList">
+      <Item value="Nodes" priority="1" />
+      <Item value="ExpandAll`0" priority="0" />
+      <Item value="FocusedNode" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.KeyValuePair`2">
+      <Item value="Value" priority="10" />
+      <Item value="Key" priority="5" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TreeNode">
+      <Item value="Tag" priority="3" />
+      <Item value="Nodes" priority="0" />
+      <Item value="Parent" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Int32">
+      <Item value="ToString`0" priority="4" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataTable">
+      <Item value="Columns" priority="0" />
+      <Item value="Rows" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraGrid.Columns.GridColumn">
+      <Item value="Width" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraGrid.Views.Grid.GridView">
+      <Item value="Columns" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraEditors.TextEdit">
+      <Item value="EditValue" priority="1" />
+      <Item value="Text" priority="5" />
+      <Item value="InplaceType" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Int32">
+      <Item value="Parse`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:CameraViewer.Forms.AddXtraForm">
+      <Item value="ShowDialog`0" priority="0" />
+      <Item value="Opt" priority="0" />
+      <Item value="Id" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Type">
+      <Item value="GetType`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TreeNodeMouseClickEventArgs">
+      <Item value="Node" priority="1" />
+      <Item value="GetType`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="ToString`0" priority="4" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraTreeList.Nodes.TreeListNodes">
+      <Item value="Clear`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraTreeList.Nodes.TreeListNode">
+      <Item value="ParentNode" priority="1" />
+      <Item value="Tag" priority="7" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.MouseEventArgs">
+      <Item value="Button" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@CameraViewer.Util">
+      <Item value="Operateion`0" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@CameraViewer.Util+Operateion">
+      <Item value="Add" priority="1" />
+      <Item value="Update" priority="1" />
+      <Item value="Delete" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraBars.ItemClickEventArgs">
+      <Item value="Y" priority="1" />
+      <Item value="Item" priority="0" />
+      <Item value="ToString`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@IntVideoSurv.Business.CameraBusiness">
+      <Item value="Instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraEditors.ListBoxControl">
+      <Item value="Items" priority="2" />
+      <Item value="SelectedItem" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Entity.CameraInfo">
+      <Item value="CameraId" priority="2" />
+      <Item value="Name" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.String">
+      <Item value="Split`0" priority="1" />
+      <Item value="ToString`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:CameraViewer.Forms.AddCameraInDecoder">
+      <Item value="ID" priority="0" />
+      <Item value="DecoderID" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Windows.Forms.MessageBox">
+      <Item value="Show`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Text.StringBuilder">
+      <Item value="AppendFormat`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@IntVideoSurv.Business.GroupBusiness">
+      <Item value="Instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DevExpress.XtraEditors.LabelControl">
+      <Item value="Text" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataSet">
+      <Item value="Tables" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataRowCollection">
+      <Item value="Count" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Controls/f:DeviceMaintain.cs" caret="330" fromTop="5" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLog.cs" caret="1105" fromTop="16" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeName.cs" caret="1899" fromTop="22" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeId.cs" caret="1008" fromTop="21" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:GroupDataAccess.cs" caret="981" fromTop="27" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:UserBusiness.cs" caret="925" fromTop="2" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:UserDataAccess.cs" caret="938" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmUser.cs" caret="3007" fromTop="3" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmGroup.cs" caret="2187" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:frmMain_Win.cs" caret="0" fromTop="0" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DeviceDataAccess.cs" caret="0" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Controls/f:CameraView.cs" caret="640" fromTop="0" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:GroupBusiness.cs" caret="2959" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Properties/f:Settings.Designer.cs" caret="977" fromTop="22" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.Designer.cs" caret="133672" fromTop="11" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.Designer.cs" caret="6664" fromTop="25" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:CameraBusiness.cs" caret="3790" fromTop="10" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:GroupInfo.cs" caret="1813" fromTop="58" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:CameraDataAccess.cs" caret="6075" fromTop="171" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="6087" fromTop="0" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="2929" fromTop="25" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:DecoderInfo.cs" caret="0" fromTop="0" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:RecognizerInfo.cs" caret="804" fromTop="11" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DecoderDataAccess.cs" caret="9736" fromTop="312" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="14912" fromTop="0" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:RecognizerDataAccess.cs" caret="8497" fromTop="18" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:DecoderBusiness.cs" caret="8917" fromTop="11" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Program.cs" caret="220" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Multiplexer.cs" caret="39639" fromTop="804" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="12609" fromTop="7" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="15194" fromTop="14" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="15715" fromTop="15" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="16041" fromTop="16" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="14897" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="317" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="487" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2182" fromTop="4" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2329" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2479" fromTop="8" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2505" fromTop="10" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2664" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="14" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6866" fromTop="5" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5716" fromTop="12" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6843" fromTop="16" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="613" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="3726" fromTop="13" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="781" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1309" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1850" fromTop="16" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="22052" fromTop="25" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21220" fromTop="4" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21482" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21220" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4648" fromTop="9" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4927" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4648" fromTop="4" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="12609" fromTop="7" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>

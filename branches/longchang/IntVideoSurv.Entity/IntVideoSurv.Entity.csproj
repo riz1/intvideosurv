@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IntVideoSurv.Entity</RootNamespace>
+    <AssemblyName>IntVideoSurv.Entity</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Com.SS.Framework.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\Com.SS.Framework.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlarmIconInfo.cs" />
+    <Compile Include="AlarmInfo.cs" />
+    <Compile Include="CameraIconInfo.cs" />
+    <Compile Include="CameraInfo.cs" />
+    <Compile Include="CameraMonitorPairInfo.cs" />
+    <Compile Include="CapturePictureInfo.cs" />
+    <Compile Include="CardOutType.cs" />
+    <Compile Include="DecodeChannel.cs" />
+    <Compile Include="DecoderInfo.cs" />
+    <Compile Include="DefaultCardOut.cs" />
+    <Compile Include="DisplayHandlePair.cs" />
+    <Compile Include="EventInfo.cs" />
+    <Compile Include="EventRectInfo.cs" />
+    <Compile Include="FaceInfo.cs" />
+    <Compile Include="GroupSwitchDetailInfo.cs" />
+    <Compile Include="GroupSwitchGroup.cs" />
+    <Compile Include="DeviceInfo.cs" />
+    <Compile Include="GroupInfo.cs" />
+    <Compile Include="DisplayChannelInfo.cs" />
+    <Compile Include="MapInfo.cs" />
+    <Compile Include="ObjectInfo.cs" />
+    <Compile Include="OperateLog.cs" />
+    <Compile Include="OperateLogTypeId.cs" />
+    <Compile Include="OperateLogTypeName.cs" />
+    <Compile Include="ProgSwitchDetailInfo.cs" />
+    <Compile Include="ProgSwitchInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecognizerInfo.cs" />
+    <Compile Include="REctInfo.cs" />
+    <Compile Include="SynCameraInfo.cs" />
+    <Compile Include="SynGroup.cs" />
+    <Compile Include="SystemLog.cs" />
+    <Compile Include="SystemParameter.cs" />
+    <Compile Include="TaskInfo.cs" />
+    <Compile Include="TempPicture.cs" />
+    <Compile Include="TrackInfo.cs" />
+    <Compile Include="UsedDisplayChannelInfo.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="VehicleInfo.cs" />
+    <Compile Include="VideoInfo.cs" />
+    <Compile Include="VideoOutputInfo.cs" />
+    <Compile Include="VideoProvider.cs" />
+    <Compile Include="WindowCameraInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
