@@ -124,6 +124,7 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -580,6 +581,10 @@
     <ProjectReference Include="..\IntVideoSurv.Business\IntVideoSurv.Business.csproj">
       <Project>{901DA7E9-24CA-4953-8746-A42C69D45575}</Project>
       <Name>IntVideoSurv.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntVideoSurv.DataAccess\IntVideoSurv.DataAccess.csproj">
+      <Project>{ACD53762-AEFE-4599-A419-9C0C681157B4}</Project>
+      <Name>IntVideoSurv.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntVideoSurv.Interface\IntVideoSurv.Interface.csproj">
       <Project>{BB30D2E9-DCF8-4436-901D-1514C26BCEF4}</Project>
