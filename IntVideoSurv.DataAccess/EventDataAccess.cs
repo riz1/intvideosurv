@@ -42,9 +42,9 @@ namespace IntVideoSurv.DataAccess
         {
             str = str.Replace("''", "'");
             string cmdText = string.Format(
-                "select Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId " +
-                "from Face,CapturePicture,VideoInfo " +
-                "where Face.PictureId=CapturePicture.PictureId and " +
+                "select EventInfo.EventId,EventInfo.CarNum,EventInfo.Congestion,EventInfo.PictureId,VideoInfo.id AS VideoId " +
+                "from EventInfo,CapturePicture,VideoInfo " +
+                "where EventInfo.PictureId=CapturePicture.PictureId and " +
                 "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.[DateTime] desc", str);
             try
             {
@@ -60,9 +60,9 @@ namespace IntVideoSurv.DataAccess
         {
             str = str.Replace("''", "'");
             string cmdText = string.Format(
-                "select count(distinct Face.FaceId) " +
-                "from Face,CapturePicture,VideoInfo " +
-                "where Face.PictureId=CapturePicture.PictureId and " +
+                "select count(distinct EventInfo.EventId) " +
+                "from EventInfo,CapturePicture,VideoInfo " +
+                "where EventInfo.PictureId=CapturePicture.PictureId and " +
                 "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
@@ -77,14 +77,14 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetEventCustom(Database db, string str, int pageno, int pagesize)
         {
-            string fields = " Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId ";
-            string tables = " Face,CapturePicture,VideoInfo ";
+            string fields = " EventInfo.EventId,EventInfo.CarNum,EventInfo.Congestion,EventInfo.PictureId,VideoInfo.Id as VideoId ";
+            string tables = " EventInfo,CapturePicture,VideoInfo ";
             string condition = string.Format(
-                " Face.PictureId=CapturePicture.PictureId and " +
+                " EventInfo.PictureId=CapturePicture.PictureId and " +
                 "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " DateTime ";
             byte ordertype = 1;
-            string pkcolumn = " FaceId ";
+            string pkcolumn = " EventId ";
             string cmdText = "";
             if (pageno == 1)
             {
