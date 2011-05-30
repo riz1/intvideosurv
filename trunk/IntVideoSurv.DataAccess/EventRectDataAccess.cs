@@ -43,5 +43,75 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+
+        public static DataSet GetEventRectCustom(Database db, int objectid)
+        {
+            string cmdText = string.Format(
+                "select EventRectInfo.EventRectId,EventRectInfo.x,EventRectInfo.y,EventRectInfo.w,EventRectInfo.h,EventRectInfo.ObjectId " +
+                "from EventRectInfo " +
+                "where EventRectInfo.ObjectId={0} order by EventRectId",objectid);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static int GetEventRectCustomQuantity(Database db, int objectid)
+        {
+            string cmdText = string.Format(
+                "select count(distinct EventRectInfo.EventRectId) " +
+                "from EventRectInfo " +
+                "where EventRectInfo.ObjectId={0}",objectid);
+            try
+            {
+                return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        /*public static DataSet GetEventRectCustom(Database db, string str, int pageno, int pagesize)
+        {
+            string fields = " EventRectInfo.EventRectId,EventRectInfo.x,EventRectInfo.y,EventRectInfo.w,EventRectInfo.h,EventRectInfo.ObjectId ";
+            string tables = " EventInfo ";
+            string condition = string.Format(
+                " EventInfo.PictureId=CapturePicture.PictureId and " +
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+            string ordercolumn = " DateTime ";
+            byte ordertype = 1;
+            string pkcolumn = " EventId ";
+            string cmdText = "";
+            if (pageno == 1)
+            {
+                cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                + " WHERE {3}  order by {4} {5}", pagesize, fields, tables, condition, ordercolumn, ordertype == 1 ? "desc" : "asc");
+
+            }
+            else
+            {
+                cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                + " WHERE {3} AND "
+                + " {4}>(SELECT max({4}) FROM (SELECT TOP {5} "
+                + " {4} FROM {2} order by {6} {7}) AS TabTemp) order by {6} {7}", pagesize, fields, tables, condition, pkcolumn, (pageno - 1) * pagesize, ordercolumn, ordertype == 1 ? "desc" : "asc");
+
+            }
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }*/
     }
 }
