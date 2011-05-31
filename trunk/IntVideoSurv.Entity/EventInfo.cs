@@ -28,5 +28,11 @@ namespace IntVideoSurv.Entity
         public int Congestion { get; set; }
         [ColumnMapping()]
         public int PictureID { get; set; }
+        [ColumnMapping()]
+        public int VideoId { get; set; }
+
+        public CapturePicture CapturePicture { get; set; }
+        public VideoInfo VideoInfo { get; set; }
+        public CameraInfo CameraInfo { get; set; }
     }
 }
