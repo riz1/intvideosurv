@@ -497,6 +497,11 @@ namespace CameraViewer
                 checkedComboBoxEditEventCamera.Properties.Items.Add(
                     VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
             }
+            checkedComboBoxEditUserSelection.Properties.Items.Add("无", true);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("运动", false);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("跨线", false);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("逆行", false);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("变道", false);
             
         }
 
@@ -1772,7 +1777,7 @@ namespace CameraViewer
             dataTableVehicle.Columns.Add("车牌号", typeof(string));
 
             dataTableVehicle.Columns.Add("时间", typeof(DateTime));
-            dataTableVehicle.Columns.Add("地点");
+            dataTableVehicle.Columns.Add("地点", typeof(string));
             dataTableVehicle.Columns.Add("置信度", typeof(float));
             dataTableVehicle.Columns.Add("speed", typeof(float));
             dataTableVehicle.Columns.Add("stemagainst", typeof(bool));
@@ -2031,19 +2036,46 @@ namespace CameraViewer
         private void ReloadQueryDataForEvent()
         {
             string errMessage = "";
-            string faceQueryCondition = GenerateEventQueryCondition();
-            _totalCount = FaceBusiness.Instance.GetFaceQuantity(ref errMessage, faceQueryCondition);
+            string eventQueryCondition = GenerateEventQueryCondition();
+            _totalCountForEvent = EventBusiness.Instance.GetEventQuantity(ref errMessage, eventQueryCondition);
             CaculatePagesForEvent();
-            Dictionary<int, Face> listFace = FaceBusiness.Instance.GetFaceCustom(ref errMessage, faceQueryCondition, _currentPage, _numberOfPerPage);
+            Dictionary<int, Event> listEvent = EventBusiness.Instance.GetEventCustom(ref errMessage, eventQueryCondition, _currentPageForEvent, _numberOfPerPageForEvent);
             //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
             //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
             //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
 
-            FillGridControlEventDetail(listFace);
+            FillGridControlEventDetail(listEvent);
         }
 
-        private void FillGridControlEventDetail(Dictionary<int, Face> listFace)
+        private void FillGridControlEventDetail(Dictionary<int, Event> listevent)
         {
+            dataTableEvent.Rows.Clear();
+            if (listevent == null) return;
+            int i = 1;
+
+
+            foreach (var variable in listevent)
+            {
+                dataTableFace.Rows.Add(i++,
+                                       GetImageData(variable.FacePath),
+                                       variable.CapturePicture.Datetime,
+                                       variable.CameraInfo.Name,
+                                       variable.score,
+                                       variable);
+            }
+            GridColumn column;
+            RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
+            pictureEdit.SizeMode = PictureSizeMode.Zoom;
+            pictureEdit.NullText = " ";
+            column = advBandedGridViewFace.Columns["照片"];
+            column.ColumnEdit = pictureEdit;
+            gridControlFace.DataSource = dataTableFace;
+            advBandedGridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            advBandedGridViewFace.Columns["人脸对象"].Visible = false;
+
+            HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+            splitContainerControlFaceVideo.Panel1.Refresh();
+            splitContainerControlFaceVideo.Visible = false;
 
         }
         private void CaculatePagesForEvent()
