@@ -46,21 +46,21 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Face GetEvent(ref string errMessage, int cameraId, DateTime captureDataTime)
+        public Event GetEvent(ref string errMessage, int cameraId, DateTime captureDataTime)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Face face = null;
+            Event et = null;
 
             try
             {
                 DataSet ds = EventDataAccess.GetEventCustom(db, string.Format(" and CapturePicture.CameraId={0} and  CapturePicture.DateTime='{1}'", cameraId, captureDataTime));
-                face = new Face(ds.Tables[0].Rows[0]);
-                face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, face.PictureID);
-                face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
-                                                                                  face.CapturePicture.CameraID);
-                face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VideoId);
-                return face;
+                et = new Event(ds.Tables[0].Rows[0]);
+                et.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, et.PictureID);
+                et.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                  et.CapturePicture.CameraID);
+                et.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, et.VideoId);
+                return et;
 
             }
             catch (Exception ex)
@@ -71,23 +71,23 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int, Face> GetEventCustom(ref string errMessage, string str)
+        public Dictionary<int, Event> GetEventCustom(ref string errMessage, string str)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, Face> list = new Dictionary<int, Face>();
+            Dictionary<int, Event> list = new Dictionary<int, Event>();
             try
             {
                 DataSet ds = EventDataAccess.GetEventCustom(db, str);
-                Face face;
+                Event et;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    face = new Face(ds.Tables[0].Rows[i]);
-                    face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, face.PictureID);
-                    face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
-                                                                                      face.CapturePicture.CameraID);
-                    face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VideoId);
-                    list.Add(face.FaceID, face);
+                    et = new Event(ds.Tables[0].Rows[i]);
+                    et.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, et.PictureID);
+                    et.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                      et.CapturePicture.CameraID);
+                    et.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, et.VideoId);
+                    list.Add(et.EventId, et);
                 }
                 return list;
 
@@ -100,23 +100,23 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int, Face> GetEventCustom(ref string errMessage, string str, int pageNo, int pageSize)
+        public Dictionary<int, Event> GetEventCustom(ref string errMessage, string str, int pageNo, int pageSize)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, Face> list = new Dictionary<int, Face>();
+            Dictionary<int, Event> list = new Dictionary<int, Event>();
             try
             {
                 DataSet ds = EventDataAccess.GetEventCustom(db, str, pageNo, pageSize);
-                Face face;
+                Event et;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    face = new Face(ds.Tables[0].Rows[i]);
-                    face.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, face.PictureID);
-                    face.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
-                                                                                      face.CapturePicture.CameraID);
-                    face.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, face.VideoId);
-                    list.Add(face.FaceID, face);
+                    et = new Event(ds.Tables[0].Rows[i]);
+                    et.CapturePicture = CapturePictureBusiness.Instance.GetCapturePicture(ref errMessage, et.PictureID);
+                    et.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
+                                                                                      et.CapturePicture.CameraID);
+                    et.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, et.VideoId);
+                    list.Add(et.EventId, et);
                 }
                 return list;
 
