@@ -99,13 +99,12 @@ namespace CameraViewer
             this.advBandedGridViewEvent = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn14 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn15 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn16 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn14 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn24 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand8 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn25 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn26 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.splitContainerControl8 = new DevExpress.XtraEditors.SplitContainerControl();
             this.pictureEditEvent = new DevExpress.XtraEditors.PictureEdit();
             this.splitContainerControlEventVideo = new DevExpress.XtraEditors.SplitContainerControl();
@@ -121,6 +120,8 @@ namespace CameraViewer
             this.simpleButton13 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton14 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.checkedComboBoxEditUserSelection = new DevExpress.XtraEditors.CheckedComboBoxEdit();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.lblEventCurrentPage = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
@@ -276,6 +277,7 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditUserSelection.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeEventNumberPerPage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTimeEvent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeEvent.Properties)).BeginInit();
@@ -988,15 +990,14 @@ namespace CameraViewer
             // 
             this.advBandedGridViewEvent.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand5,
-            this.gridBand6});
+            this.gridBand7,
+            this.gridBand8});
             this.advBandedGridViewEvent.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.bandedGridColumn12,
             this.bandedGridColumn14,
             this.bandedGridColumn15,
-            this.bandedGridColumn16,
             this.bandedGridColumn24,
-            this.bandedGridColumn25,
-            this.bandedGridColumn26});
+            this.bandedGridColumn25});
             this.advBandedGridViewEvent.GridControl = this.gridControlEvent;
             this.advBandedGridViewEvent.Name = "advBandedGridViewEvent";
             this.advBandedGridViewEvent.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -1010,18 +1011,26 @@ namespace CameraViewer
             // 
             this.gridBand5.Caption = "基本信息";
             this.gridBand5.Columns.Add(this.bandedGridColumn12);
-            this.gridBand5.Columns.Add(this.bandedGridColumn14);
             this.gridBand5.Columns.Add(this.bandedGridColumn15);
+            this.gridBand5.Columns.Add(this.bandedGridColumn14);
             this.gridBand5.MinWidth = 20;
             this.gridBand5.Name = "gridBand5";
-            this.gridBand5.Width = 136;
+            this.gridBand5.Width = 187;
             // 
             // bandedGridColumn12
             // 
             this.bandedGridColumn12.Caption = "索引号";
             this.bandedGridColumn12.Name = "bandedGridColumn12";
             this.bandedGridColumn12.Visible = true;
-            this.bandedGridColumn12.Width = 136;
+            this.bandedGridColumn12.Width = 187;
+            // 
+            // bandedGridColumn15
+            // 
+            this.bandedGridColumn15.Caption = "地点";
+            this.bandedGridColumn15.Name = "bandedGridColumn15";
+            this.bandedGridColumn15.RowIndex = 1;
+            this.bandedGridColumn15.Visible = true;
+            this.bandedGridColumn15.Width = 77;
             // 
             // bandedGridColumn14
             // 
@@ -1029,48 +1038,37 @@ namespace CameraViewer
             this.bandedGridColumn14.Name = "bandedGridColumn14";
             this.bandedGridColumn14.RowIndex = 1;
             this.bandedGridColumn14.Visible = true;
-            this.bandedGridColumn14.Width = 136;
+            this.bandedGridColumn14.Width = 110;
             // 
-            // bandedGridColumn15
+            // gridBand7
             // 
-            this.bandedGridColumn15.Caption = "地点";
-            this.bandedGridColumn15.Name = "bandedGridColumn15";
-            this.bandedGridColumn15.RowIndex = 2;
-            this.bandedGridColumn15.Visible = true;
-            this.bandedGridColumn15.Width = 136;
-            // 
-            // gridBand6
-            // 
-            this.gridBand6.Caption = "照片";
-            this.gridBand6.Columns.Add(this.bandedGridColumn16);
-            this.gridBand6.MinWidth = 20;
-            this.gridBand6.Name = "gridBand6";
-            this.gridBand6.Width = 166;
-            // 
-            // bandedGridColumn16
-            // 
-            this.bandedGridColumn16.Caption = "照片";
-            this.bandedGridColumn16.Name = "bandedGridColumn16";
-            this.bandedGridColumn16.Visible = true;
-            this.bandedGridColumn16.Width = 166;
+            this.gridBand7.Caption = "物体信息";
+            this.gridBand7.Columns.Add(this.bandedGridColumn24);
+            this.gridBand7.MinWidth = 20;
+            this.gridBand7.Name = "gridBand7";
+            this.gridBand7.Width = 75;
             // 
             // bandedGridColumn24
             // 
-            this.bandedGridColumn24.Caption = "CrossLine";
+            this.bandedGridColumn24.AutoFillDown = true;
+            this.bandedGridColumn24.Caption = "物体";
             this.bandedGridColumn24.Name = "bandedGridColumn24";
             this.bandedGridColumn24.Visible = true;
             // 
+            // gridBand8
+            // 
+            this.gridBand8.Caption = "rect信息";
+            this.gridBand8.Columns.Add(this.bandedGridColumn25);
+            this.gridBand8.MinWidth = 20;
+            this.gridBand8.Name = "gridBand8";
+            this.gridBand8.Width = 75;
+            // 
             // bandedGridColumn25
             // 
-            this.bandedGridColumn25.Caption = "IilegalDir";
+            this.bandedGridColumn25.AutoFillDown = true;
+            this.bandedGridColumn25.Caption = "Rect";
             this.bandedGridColumn25.Name = "bandedGridColumn25";
             this.bandedGridColumn25.Visible = true;
-            // 
-            // bandedGridColumn26
-            // 
-            this.bandedGridColumn26.Caption = "ChangeChannel";
-            this.bandedGridColumn26.Name = "bandedGridColumn26";
-            this.bandedGridColumn26.Visible = true;
             // 
             // splitContainerControl8
             // 
@@ -1236,6 +1234,8 @@ namespace CameraViewer
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.checkedComboBoxEditUserSelection);
+            this.panelControl1.Controls.Add(this.labelControl7);
             this.panelControl1.Controls.Add(this.lblEventCurrentPage);
             this.panelControl1.Controls.Add(this.labelControl9);
             this.panelControl1.Controls.Add(this.labelControl10);
@@ -1257,6 +1257,25 @@ namespace CameraViewer
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(868, 52);
             this.panelControl1.TabIndex = 0;
+            // 
+            // checkedComboBoxEditUserSelection
+            // 
+            this.checkedComboBoxEditUserSelection.Location = new System.Drawing.Point(471, 28);
+            this.checkedComboBoxEditUserSelection.MenuManager = this.barManager1;
+            this.checkedComboBoxEditUserSelection.Name = "checkedComboBoxEditUserSelection";
+            this.checkedComboBoxEditUserSelection.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.checkedComboBoxEditUserSelection.Size = new System.Drawing.Size(118, 21);
+            this.checkedComboBoxEditUserSelection.TabIndex = 50;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.labelControl7.Location = new System.Drawing.Point(405, 33);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(60, 14);
+            this.labelControl7.TabIndex = 49;
+            this.labelControl7.Text = "用户显示：";
             // 
             // lblEventCurrentPage
             // 
@@ -2437,6 +2456,7 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditUserSelection.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeEventNumberPerPage.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTimeEvent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeEvent.Properties)).EndInit();
@@ -2669,12 +2689,9 @@ namespace CameraViewer
         private DevExpress.XtraEditors.SimpleButton simpleButton13;
         private DevExpress.XtraEditors.SimpleButton simpleButton14;
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewEvent;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn14;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn15;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn16;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn13;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn17;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn18;
@@ -2685,9 +2702,13 @@ namespace CameraViewer
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn23;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEditUserSelection;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn24;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand8;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn25;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn26;
         
     }
 }
