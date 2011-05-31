@@ -45,5 +45,30 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
+
+        public Dictionary<int, ObjectInfo> GetEventRectCustom(ref string errMessage, int eventid)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, ObjectInfo> list = new Dictionary<int, ObjectInfo>();
+            try
+            {
+                DataSet ds = ObjectDataAccess.GetObjectCustom(db, eventid);
+                ObjectInfo obj;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    obj = new ObjectInfo(ds.Tables[0].Rows[i]);
+                    list.Add(obj.ObjectId, obj);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
     }
 }
