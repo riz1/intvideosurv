@@ -970,7 +970,7 @@ namespace CameraViewer
             this.splitContainerControl7.Panel2.Controls.Add(this.splitContainerControl8);
             this.splitContainerControl7.Panel2.Text = "Panel2";
             this.splitContainerControl7.Size = new System.Drawing.Size(864, 198);
-            this.splitContainerControl7.SplitterPosition = 306;
+            this.splitContainerControl7.SplitterPosition = 309;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
             // 
@@ -981,7 +981,7 @@ namespace CameraViewer
             this.gridControlEvent.MainView = this.advBandedGridViewEvent;
             this.gridControlEvent.MenuManager = this.barManager1;
             this.gridControlEvent.Name = "gridControlEvent";
-            this.gridControlEvent.Size = new System.Drawing.Size(306, 198);
+            this.gridControlEvent.Size = new System.Drawing.Size(309, 198);
             this.gridControlEvent.TabIndex = 0;
             this.gridControlEvent.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridViewEvent});
@@ -1079,7 +1079,7 @@ namespace CameraViewer
             this.splitContainerControl8.Panel1.Text = "Panel1";
             this.splitContainerControl8.Panel2.Controls.Add(this.splitContainerControlEventVideo);
             this.splitContainerControl8.Panel2.Text = "Panel2";
-            this.splitContainerControl8.Size = new System.Drawing.Size(553, 198);
+            this.splitContainerControl8.Size = new System.Drawing.Size(550, 198);
             this.splitContainerControl8.SplitterPosition = 301;
             this.splitContainerControl8.TabIndex = 0;
             this.splitContainerControl8.Text = "splitContainerControl8";
@@ -1104,7 +1104,7 @@ namespace CameraViewer
             this.splitContainerControlEventVideo.Panel2.Controls.Add(this.simpleButton13);
             this.splitContainerControlEventVideo.Panel2.Controls.Add(this.simpleButton14);
             this.splitContainerControlEventVideo.Panel2.Text = "Panel2";
-            this.splitContainerControlEventVideo.Size = new System.Drawing.Size(247, 198);
+            this.splitContainerControlEventVideo.Size = new System.Drawing.Size(244, 198);
             this.splitContainerControlEventVideo.SplitterPosition = 167;
             this.splitContainerControlEventVideo.TabIndex = 0;
             this.splitContainerControlEventVideo.Text = "splitContainerControl9";
@@ -1117,6 +1117,7 @@ namespace CameraViewer
             this.simpleButton6.StyleController = this.layoutControl1;
             this.simpleButton6.TabIndex = 3;
             this.simpleButton6.Text = "¿Ú";
+            this.simpleButton6.Click += new System.EventHandler(this.simpleButton6_Click);
             // 
             // layoutControl1
             // 
@@ -1222,6 +1223,7 @@ namespace CameraViewer
             this.simpleButton13.StyleController = this.layoutControl1;
             this.simpleButton13.TabIndex = 2;
             this.simpleButton13.Text = ">";
+            this.simpleButton13.Click += new System.EventHandler(this.simpleButton13_Click);
             // 
             // simpleButton14
             // 
@@ -1231,6 +1233,7 @@ namespace CameraViewer
             this.simpleButton14.StyleController = this.layoutControl1;
             this.simpleButton14.TabIndex = 1;
             this.simpleButton14.Text = "||";
+            this.simpleButton14.Click += new System.EventHandler(this.simpleButton14_Click);
             // 
             // panelControl1
             // 
@@ -1318,6 +1321,7 @@ namespace CameraViewer
             this.cbeEventNumberPerPage.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbeEventNumberPerPage.Size = new System.Drawing.Size(79, 21);
             this.cbeEventNumberPerPage.TabIndex = 47;
+            this.cbeEventNumberPerPage.SelectedValueChanged += new System.EventHandler(this.cbeVehicleNumberPerPage_SelectedValueChanged);
             // 
             // btnEventLastPage
             // 
@@ -1326,6 +1330,7 @@ namespace CameraViewer
             this.btnEventLastPage.Size = new System.Drawing.Size(26, 24);
             this.btnEventLastPage.TabIndex = 43;
             this.btnEventLastPage.Text = ">|";
+            this.btnEventLastPage.Click += new System.EventHandler(this.btnEventLastPage_Click);
             // 
             // btnEventNextPage
             // 
@@ -1334,6 +1339,7 @@ namespace CameraViewer
             this.btnEventNextPage.Size = new System.Drawing.Size(26, 24);
             this.btnEventNextPage.TabIndex = 42;
             this.btnEventNextPage.Text = ">";
+            this.btnEventNextPage.Click += new System.EventHandler(this.btnEventNextPage_Click);
             // 
             // btnEventPrevPage
             // 
@@ -1342,6 +1348,7 @@ namespace CameraViewer
             this.btnEventPrevPage.Size = new System.Drawing.Size(26, 24);
             this.btnEventPrevPage.TabIndex = 41;
             this.btnEventPrevPage.Text = "<";
+            this.btnEventPrevPage.Click += new System.EventHandler(this.btnEventPrePage_Click);
             // 
             // btnEventFirstPage
             // 
@@ -1350,6 +1357,7 @@ namespace CameraViewer
             this.btnEventFirstPage.Size = new System.Drawing.Size(26, 24);
             this.btnEventFirstPage.TabIndex = 44;
             this.btnEventFirstPage.Text = "|<";
+            this.btnEventFirstPage.Click += new System.EventHandler(this.btnEventFirstPage_Click);
             // 
             // btnQueryEvent
             // 
