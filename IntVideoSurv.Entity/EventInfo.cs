@@ -34,5 +34,7 @@ namespace IntVideoSurv.Entity
         public CapturePicture CapturePicture { get; set; }
         public VideoInfo VideoInfo { get; set; }
         public CameraInfo CameraInfo { get; set; }
+
+        public Dictionary<int, ObjectInfo> listObject { get; set; }
     }
 }
