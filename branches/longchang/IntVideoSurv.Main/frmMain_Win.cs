@@ -338,10 +338,126 @@ namespace CameraViewer
                         fcl.Show();
                         //½áÊøÂ¼Ïñ
                     }
+                    ChangeButtonState(e);
                     break;
 
             }
 
+        }
+
+        private void ChangeButtonState(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.D1:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD1.Appearance.ForeColor = Color.Red;
+                        barButtonD1.Appearance.Font = new Font("Tahoma",48);
+                    }
+                    else
+                    {
+                        barButtonD1.Appearance.ForeColor = Color.Black;
+                        barButtonD1.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D2:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD2.Appearance.ForeColor = Color.Red;
+                        barButtonD2.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD2.Appearance.ForeColor = Color.Black;
+                        barButtonD2.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D3:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD3.Appearance.ForeColor = Color.Red;
+                        barButtonD3.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD3.Appearance.ForeColor = Color.Black;
+                        barButtonD3.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D4:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD4.Appearance.ForeColor = Color.Red;
+                        barButtonD4.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD4.Appearance.ForeColor = Color.Black;
+                        barButtonD4.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D5:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD5.Appearance.ForeColor = Color.Red;
+                        barButtonD5.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD5.Appearance.ForeColor = Color.Black;
+                        barButtonD5.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D6:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD6.Appearance.ForeColor = Color.Red;
+                        barButtonD6.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD6.Appearance.ForeColor = Color.Black;
+                        barButtonD6.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D7:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD7.Appearance.ForeColor = Color.Red;
+                        barButtonD7.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD7.Appearance.ForeColor = Color.Black;
+                        barButtonD7.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D8:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD8.Appearance.ForeColor = Color.Red;
+                        barButtonD8.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD8.Appearance.ForeColor = Color.Black;
+                        barButtonD8.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+                case Keys.D9:
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        barButtonD9.Appearance.ForeColor = Color.Red;
+                        barButtonD9.Appearance.Font = new Font("Tahoma", 48);
+                    }
+                    else
+                    {
+                        barButtonD9.Appearance.ForeColor = Color.Black;
+                        barButtonD9.Appearance.Font = new Font("Tahoma", 9);
+                    }
+                    break;
+            }
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
