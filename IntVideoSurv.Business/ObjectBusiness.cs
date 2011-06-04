@@ -46,11 +46,12 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int, ObjectInfo> GetEventRectCustom(ref string errMessage, int eventid)
+        public Dictionary<int, ObjectInfo> GetEventObjectCustom(ref string errMessage, int eventid)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             Dictionary<int, ObjectInfo> list = new Dictionary<int, ObjectInfo>();
+            Dictionary<int, EventRect> listRect = new Dictionary<int, EventRect>();
             try
             {
                 DataSet ds = ObjectDataAccess.GetObjectCustom(db, eventid);
@@ -58,6 +59,7 @@ namespace IntVideoSurv.Business
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     obj = new ObjectInfo(ds.Tables[0].Rows[i]);
+                    obj.listRect = EventRectBusiness.Instance.GetEventRectCustom(ref errMessage, obj.ObjectId);
                     list.Add(obj.ObjectId, obj);
                 }
                 return list;
