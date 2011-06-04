@@ -172,6 +172,12 @@
     <Compile Include="Controls\CameraWindow.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\CaptureLicense.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CaptureLicense.Designer.cs">
+      <DependentUpon>CaptureLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DeviceMaintain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -437,6 +443,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CameraWindow.resx">
       <DependentUpon>CameraWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CaptureLicense.resx">
+      <DependentUpon>CaptureLicense.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DeviceMaintain.resx">

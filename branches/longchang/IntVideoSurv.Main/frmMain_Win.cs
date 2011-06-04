@@ -334,7 +334,8 @@ namespace CameraViewer
                     }
                     else
                     {
-
+                        frmCaptureLicense fcl = new frmCaptureLicense();
+                        fcl.Show();
                         //½áÊøÂ¼Ïñ
                     }
                     break;

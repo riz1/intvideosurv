@@ -30,7 +30,7 @@ namespace CameraViewer.Forms
             //trackBarControl1.Properties.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
             trackBar1.Minimum = 0;
             trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            //ret = AirnoixPlayer.Avdec_Play(intPtr);
 
         }
 
@@ -68,21 +68,11 @@ namespace CameraViewer.Forms
             int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
             if (currentPos >= 3)
             {
-                ret = AirnoixPlayer.Avdec_StepFrame(intPtr, false);
-                maunulSteps--;
-                ret = AirnoixPlayer.Avdec_StepFrame(intPtr, false);
-                maunulSteps--;
-                ret = AirnoixPlayer.Avdec_StepFrame(intPtr, false);
-                maunulSteps--;
+                AirnoixPlayer.Avdec_SetCurrentPosition(intPtr,currentPos - 3);
             }
             if (AirnoixPlayer.Avdec_GetTotalFrames(intPtr) - currentPos <= 7)
             {
-                for (int i = 0; i < AirnoixPlayer.Avdec_GetTotalFrames(intPtr) - currentPos + 1; i++)
-                {
-                    ret = AirnoixPlayer.Avdec_StepFrame(intPtr, false);
-                    maunulSteps--;
-                }
-
+                AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, currentPos - 7);
             }
             while (frameWidth == 0 || frameHeight == 0)
             {
@@ -98,7 +88,7 @@ namespace CameraViewer.Forms
                 ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
                 ret = AirnoixPlayer.Avdec_Pause(intPtr);
                 images[i] = Image.FromFile(filename);
-                ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
+                //ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
                 maunulSteps++;
 
             }
@@ -167,10 +157,13 @@ namespace CameraViewer.Forms
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            int ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            AirnoixPlayer.Avdec_Pause(intPtr);
-            
+            AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
+            if ((state == AirnoixPlayerState.PLAY_STATE_PAUSE) || (state == AirnoixPlayerState.PLAY_STATE_STOP))
+            {
+                int ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+                ret = AirnoixPlayer.Avdec_Play(intPtr);
+                ret = AirnoixPlayer.Avdec_Pause(intPtr);                
+            }
 
         }
 
@@ -179,25 +172,20 @@ namespace CameraViewer.Forms
             int ret = AirnoixPlayer.Avdec_Done(intPtr);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, 360);
-            string fmt = string.Format("BMP {0:0000}{1:0000}{2:0000}", frameWidth, frameHeight, 24);
-            string filename =  "C:\\" + Guid.NewGuid() + ".bmp";
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
-            ret = AirnoixPlayer.Avdec_Pause(intPtr);
 
+        private void buttonPlay_Click(object sender, EventArgs e)
+        {
+            AirnoixPlayer.Avdec_Play(intPtr);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonPause_Click(object sender, EventArgs e)
         {
-            int ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, 100);
-            string fmt = string.Format("BMP {0:0000}{1:0000}{2:0000}", frameWidth, frameHeight, 24);
-            string filename = "C:\\" + Guid.NewGuid() + ".bmp";
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
-            ret = AirnoixPlayer.Avdec_Pause(intPtr);
+            AirnoixPlayer.Avdec_Pause(intPtr);
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            AirnoixPlayer.Avdec_Stop(intPtr);
         }
 
 

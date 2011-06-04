@@ -204,7 +204,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<int, DecoderInfo>();
             }
         }
         public DecoderInfo GetDecoderInfoByDecoderId(ref string errMessage, int DecoderId)
