@@ -84,8 +84,11 @@
             this.panelControlVideo = new DevExpress.XtraEditors.PanelControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonPlay = new System.Windows.Forms.Button();
+            this.buttonPause = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.captureLicense1 = new CameraViewer.Controls.CaptureLicense();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -129,7 +132,7 @@
             // 
             // simpleButtonPrevious
             // 
-            this.simpleButtonPrevious.Location = new System.Drawing.Point(1, 474);
+            this.simpleButtonPrevious.Location = new System.Drawing.Point(1, 485);
             this.simpleButtonPrevious.Name = "simpleButtonPrevious";
             this.simpleButtonPrevious.Size = new System.Drawing.Size(33, 106);
             this.simpleButtonPrevious.TabIndex = 1;
@@ -138,7 +141,7 @@
             // 
             // simpleButtonCurrent
             // 
-            this.simpleButtonCurrent.Location = new System.Drawing.Point(1, 586);
+            this.simpleButtonCurrent.Location = new System.Drawing.Point(1, 597);
             this.simpleButtonCurrent.Name = "simpleButtonCurrent";
             this.simpleButtonCurrent.Size = new System.Drawing.Size(33, 106);
             this.simpleButtonCurrent.TabIndex = 2;
@@ -147,7 +150,7 @@
             // 
             // simpleButtonLast
             // 
-            this.simpleButtonLast.Location = new System.Drawing.Point(1, 698);
+            this.simpleButtonLast.Location = new System.Drawing.Point(1, 709);
             this.simpleButtonLast.Name = "simpleButtonLast";
             this.simpleButtonLast.Size = new System.Drawing.Size(33, 106);
             this.simpleButtonLast.TabIndex = 3;
@@ -168,7 +171,7 @@
             this.treeListColumn5,
             this.treeListColumn6,
             this.treeListColumn7});
-            this.treeListPicturesBefore.Location = new System.Drawing.Point(40, 474);
+            this.treeListPicturesBefore.Location = new System.Drawing.Point(40, 485);
             this.treeListPicturesBefore.Name = "treeListPicturesBefore";
             this.treeListPicturesBefore.OptionsBehavior.Editable = false;
             this.treeListPicturesBefore.OptionsView.ShowButtons = false;
@@ -335,7 +338,7 @@
             this.treeListColumn12,
             this.treeListColumn13,
             this.treeListColumn14});
-            this.treeListPicturesCurrent.Location = new System.Drawing.Point(40, 586);
+            this.treeListPicturesCurrent.Location = new System.Drawing.Point(40, 597);
             this.treeListPicturesCurrent.Name = "treeListPicturesCurrent";
             this.treeListPicturesCurrent.OptionsBehavior.Editable = false;
             this.treeListPicturesCurrent.OptionsView.ShowButtons = false;
@@ -502,7 +505,7 @@
             this.treeListColumn19,
             this.treeListColumn20,
             this.treeListColumn21});
-            this.treeListPicturesAfter.Location = new System.Drawing.Point(40, 698);
+            this.treeListPicturesAfter.Location = new System.Drawing.Point(40, 709);
             this.treeListPicturesAfter.Name = "treeListPicturesAfter";
             this.treeListPicturesAfter.OptionsBehavior.Editable = false;
             this.treeListPicturesAfter.OptionsView.ShowButtons = false;
@@ -661,52 +664,81 @@
             // 
             this.panelControlVideo.Location = new System.Drawing.Point(4, 2);
             this.panelControlVideo.Name = "panelControlVideo";
-            this.panelControlVideo.Size = new System.Drawing.Size(600, 450);
+            this.panelControlVideo.Size = new System.Drawing.Size(600, 427);
             this.panelControlVideo.TabIndex = 7;
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 250;
+            this.timer1.Interval = 25;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(644, 371);
+            this.trackBar1.Location = new System.Drawing.Point(1, 434);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(460, 45);
+            this.trackBar1.Size = new System.Drawing.Size(603, 45);
             this.trackBar1.TabIndex = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
-            // button1
+            // buttonPlay
             // 
-            this.button1.Location = new System.Drawing.Point(660, 392);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonPlay.Location = new System.Drawing.Point(57, 459);
+            this.buttonPlay.Name = "buttonPlay";
+            this.buttonPlay.Size = new System.Drawing.Size(56, 23);
+            this.buttonPlay.TabIndex = 12;
+            this.buttonPlay.Text = "播放";
+            this.buttonPlay.UseVisualStyleBackColor = true;
+            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
-            // button2
+            // buttonPause
             // 
-            this.button2.Location = new System.Drawing.Point(918, 392);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonPause.Location = new System.Drawing.Point(119, 459);
+            this.buttonPause.Name = "buttonPause";
+            this.buttonPause.Size = new System.Drawing.Size(56, 23);
+            this.buttonPause.TabIndex = 12;
+            this.buttonPause.Text = "暂停";
+            this.buttonPause.UseVisualStyleBackColor = true;
+            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
+            // 
+            // buttonStop
+            // 
+            this.buttonStop.Location = new System.Drawing.Point(181, 459);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(56, 23);
+            this.buttonStop.TabIndex = 12;
+            this.buttonStop.Text = "停止";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            // 
+            // captureLicense1
+            // 
+            this.captureLicense1.Location = new System.Drawing.Point(633, 370);
+            this.captureLicense1.Name = "captureLicense1";
+            this.captureLicense1.Size = new System.Drawing.Size(391, 104);
+            this.captureLicense1.TabIndex = 13;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Location = new System.Drawing.Point(1024, 396);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(79, 66);
+            this.simpleButton1.TabIndex = 14;
+            this.simpleButton1.Text = "保存";
             // 
             // frmCaptureLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1116, 805);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.trackBar1);
+            this.ClientSize = new System.Drawing.Size(1116, 823);
+            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.captureLicense1);
+            this.Controls.Add(this.buttonStop);
+            this.Controls.Add(this.buttonPause);
+            this.Controls.Add(this.buttonPlay);
             this.Controls.Add(this.panelControlVideo);
             this.Controls.Add(this.treeListPicturesAfter);
             this.Controls.Add(this.treeListPicturesCurrent);
@@ -715,6 +747,7 @@
             this.Controls.Add(this.simpleButtonCurrent);
             this.Controls.Add(this.simpleButtonPrevious);
             this.Controls.Add(this.pictureEditSelectedPicture);
+            this.Controls.Add(this.trackBar1);
             this.Name = "frmCaptureLicense";
             this.Text = "证据截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureLicense_FormClosed);
@@ -810,8 +843,11 @@
         private DevExpress.XtraEditors.PanelControl panelControlVideo;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.Button buttonPause;
+        private System.Windows.Forms.Button buttonStop;
+        private CameraViewer.Controls.CaptureLicense captureLicense1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
 
     }
 }
