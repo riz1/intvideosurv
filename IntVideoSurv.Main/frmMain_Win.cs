@@ -499,7 +499,7 @@ namespace CameraViewer
                     VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
             }
             checkedComboBoxEditUserSelection.Properties.Items.Add("无", true);
-            checkedComboBoxEditUserSelection.Properties.Items.Add("运动", false);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("停止", false);
             checkedComboBoxEditUserSelection.Properties.Items.Add("跨线", false);
             checkedComboBoxEditUserSelection.Properties.Items.Add("逆行", false);
             checkedComboBoxEditUserSelection.Properties.Items.Add("变道", false);
@@ -1414,40 +1414,6 @@ namespace CameraViewer
 
         }
 
-        private void FillGridControlVehicleDetail(List<Face> listFace)
-        {
-
-            dataTableFace.Rows.Clear();
-            if (listFace == null) return;
-            int i = 1;
-
-
-            foreach (var variable in listFace)
-            {
-                dataTableFace.Rows.Add(i++,
-                                       GetImageData(variable.FacePath),
-                                       variable.CapturePicture.Datetime,
-                                       variable.CameraInfo.Name,
-                                       variable.score,
-                                       variable);
-            }
-            GridColumn column;
-            RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
-            pictureEdit.SizeMode = PictureSizeMode.Zoom;
-            pictureEdit.NullText = " ";
-            column = advBandedGridViewFace.Columns["照片"];
-            column.ColumnEdit = pictureEdit;
-            gridControlFace.DataSource = dataTableFace;
-            advBandedGridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-            advBandedGridViewFace.Columns["人脸对象"].Visible = false;
-
-            HikPlayer.PlayM4_CloseFile(_lastVideoPort);
-            splitContainerControlFaceVideo.Panel1.Refresh();
-            splitContainerControlFaceVideo.Visible = false;
-
-
-        }
-
         private void InitDataTable()
         {
             dataTableFace.Columns.Add("索引号", typeof(int));    
@@ -1788,17 +1754,7 @@ namespace CameraViewer
             dataTableVehicle.Columns.Add("vehiclecolor", typeof(string));
             dataTableVehicle.Columns.Add("车辆对象", typeof(Vehicle));
         }
-        DataTable dataTableEvent = new DataTable();
-        private void InitEventDataTable()
-        {
-            dataTableEvent.Columns.Add("索引号", typeof(int));
-
-            dataTableEvent.Columns.Add("时间", typeof(DateTime));
-            dataTableEvent.Columns.Add("地点", typeof(string));
-            dataTableEvent.Columns.Add("物体", typeof(ObjectInfo));
-            dataTableEvent.Columns.Add("Rect", typeof(EventRect));
-            dataTableEvent.Columns.Add("事件对象", typeof(Event));
-        }
+       
         private Vehicle _selectedVehicle;
         private void advBandedGridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
        {
@@ -2051,13 +2007,54 @@ namespace CameraViewer
             _totalCountForEvent = EventBusiness.Instance.GetEventQuantity(ref errMessage, eventQueryCondition);
             CaculatePagesForEvent();
             Dictionary<int, Event> listEvent = EventBusiness.Instance.GetEventCustom(ref errMessage, eventQueryCondition, _currentPageForEvent, _numberOfPerPageForEvent);
+
             //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
             //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
             //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
 
             FillGridControlEventDetail(listEvent);
+            string[] userSelections = checkedComboBoxEditUserSelection.Text.Split(',');
+            if (listEvent == null)
+            {
+                return;
+            }
+            foreach (var variable in listEvent)
+            {
+                Dictionary<int, ObjectInfo> listObject = new Dictionary<int, ObjectInfo>();
+                listObject = ObjectBusiness.Instance.GetEventObjectCustom(ref errMessage, variable.Value.EventId);
+                foreach (var objcet in listObject)
+                {
+                    foreach (string selection in userSelections)
+                    {
+                        if (selection == "无")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            if (selection == "停止")
+                            {
+                                //显示objcet.Value.stop
+                            }
+                            else if (selection == "跨线")
+                            {
+                                //显示objcet.Value.CrossLine
+                            }
+                            else if (selection == "逆行")
+                            {
+                                //显示objcet.Value.illegalDir
+                            }
+                            else if (selection == "变道")
+                            {
+                                //显示objcet.Value.changeChannel
+                            }
+                        }
+                    }
+                }
+      
+            }
         }
-        //有问题
+        
         private void FillGridControlEventDetail(Dictionary<int, Event> listevent)
         {
             dataTableEvent.Rows.Clear();
@@ -2069,24 +2066,32 @@ namespace CameraViewer
             {
                 dataTableEvent.Rows.Add(i++,
                                        variable.Value.CapturePicture.Datetime,
-                                       variable.CameraInfo.Name,
-                                       variable.score,
-                                       variable);
+                                       variable.Value.CameraInfo.Name,
+                                       variable.Value);
             }
-            GridColumn column;
+            /*GridColumn column;
             RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
             pictureEdit.SizeMode = PictureSizeMode.Zoom;
             pictureEdit.NullText = " ";
             column = advBandedGridViewFace.Columns["照片"];
-            column.ColumnEdit = pictureEdit;
+            column.ColumnEdit = pictureEdit;*/
             gridControlFace.DataSource = dataTableFace;
             advBandedGridViewFace.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-            advBandedGridViewFace.Columns["人脸对象"].Visible = false;
+            advBandedGridViewFace.Columns["事件对象"].Visible = false;
 
             HikPlayer.PlayM4_CloseFile(_lastVideoPort);
             splitContainerControlFaceVideo.Panel1.Refresh();
             splitContainerControlFaceVideo.Visible = false;
 
+        }
+        DataTable dataTableEvent = new DataTable();
+        private void InitEventDataTable()
+        {
+            dataTableEvent.Columns.Add("索引号", typeof(int));
+
+            dataTableEvent.Columns.Add("时间", typeof(DateTime));
+            dataTableEvent.Columns.Add("地点", typeof(string));
+            dataTableEvent.Columns.Add("事件对象", typeof(Event));
         }
         private Event _selectedEvent;
         private void advBandedGridViewEvent_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
