@@ -105,6 +105,7 @@ namespace IntVideoSurv.Business
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             Dictionary<int, Event> list = new Dictionary<int, Event>();
+            Dictionary<int, ObjectInfo> listObject = new Dictionary<int, ObjectInfo>();
             try
             {
                 DataSet ds = EventDataAccess.GetEventCustom(db, str, pageNo, pageSize);
@@ -116,6 +117,8 @@ namespace IntVideoSurv.Business
                     et.CameraInfo = CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,
                                                                                       et.CapturePicture.CameraID);
                     et.VideoInfo = VideoBusiness.Instance.GetVideoInfoById(ref errMessage, et.VideoId);
+                    et.listObject = ObjectBusiness.Instance.GetEventObjectCustom(ref errMessage, et.EventId);
+
                     list.Add(et.EventId, et);
                 }
                 return list;
