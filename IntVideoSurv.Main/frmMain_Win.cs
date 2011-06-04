@@ -68,14 +68,14 @@ namespace CameraViewer
 
         public MainForm()
         {
-            #if !DEBUG
+#if !DEBUG
             while (Login(_inputUsername, _inputPassword, PromoteInfo) != true)
             {
                 PromoteInfo = "请输入正确的用户名和密码!";
             }
-            #else
+#else
             CurrentUser = new UserInfo { UserId = 1, UserName = "admin", UserTypeId = 1, UserTypeName = "管理员" };
-            #endif
+#endif
             Splash.Splash.Show();
             this.Visible = false;
             Splash.Splash.Status = "启动.Net Remoting...";
@@ -96,12 +96,12 @@ namespace CameraViewer
             var threadForRecognizer = new Thread(StartServerForRecognizer) { IsBackground = true };
             threadForRecognizer.Start();
 
-            
+
         }
         private void BeginRemotingService()
         {
             chan1 = new TcpChannel(8085);
-            ChannelServices.RegisterChannel(chan1,false);
+            ChannelServices.RegisterChannel(chan1, false);
             RemotingConfiguration.RegisterWellKnownServiceType
                 (
                 typeof(SMUserService),
@@ -141,14 +141,14 @@ namespace CameraViewer
             {
                 //ViewCameraByCameraId(int.Parse(strs[0]));
 
-                if (mainMultiplexer.GetCurrentCameraWindow()==null)
+                if (mainMultiplexer.GetCurrentCameraWindow() == null)
                 {
                     return;
                 }
                 string errMsg = "";
                 int row = 0, col = 0;
                 mainMultiplexer.GetCurrentCameraWindowPosition(ref row, ref col);
-                WindowCameraBusiness.Instance.Insert(ref errMsg,new WindowCameraInfo{CameraId = int.Parse(strs[0]),Row =row, Col = col});
+                WindowCameraBusiness.Instance.Insert(ref errMsg, new WindowCameraInfo { CameraId = int.Parse(strs[0]), Row = row, Col = col });
             }
         }
 
@@ -253,7 +253,7 @@ namespace CameraViewer
             }
             _runningDeviceList.Clear();
         }
-        
+
         private void xtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             switch (e.Page.TabIndex)
@@ -267,7 +267,7 @@ namespace CameraViewer
                 case 1:
                     _listDecoder = DecoderBusiness.Instance.GetAllDecoderInfo(ref _errMessage);
                     cameraView1.ListDecoder = _listDecoder;
-                    break;                    
+                    break;
                 default:
                     _listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref _errMessage);
                     cameraView1.ListGroup = _listGroup;
@@ -284,7 +284,7 @@ namespace CameraViewer
         private bool _isFullScreen;
         public void FullScreen(bool isFullScreen)
         {
-            
+
             bar2.Visible = !isFullScreen;
             //cameraView1.Visible = !isFullScreen;
             _isFullScreen = isFullScreen;
@@ -310,13 +310,37 @@ namespace CameraViewer
             Exit();
 
         }
-
+        Dictionary<Keys, bool> _listNumKeyStatus = new Dictionary<Keys, bool>();
         private void frmMain_Win_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            switch (e.KeyCode)
             {
-                Exit();
+                case Keys.Escape:
+                    Exit();
+                    break;
+                case Keys.D1:
+                case Keys.D2:
+                case Keys.D3:
+                case Keys.D4:
+                case Keys.D5:
+                case Keys.D6:
+                case Keys.D7:
+                case Keys.D8:
+                case Keys.D9:
+                    _listNumKeyStatus[e.KeyCode] = !_listNumKeyStatus[e.KeyCode];
+                    if (_listNumKeyStatus[e.KeyCode])
+                    {
+                        //开始录像
+                    }
+                    else
+                    {
+
+                        //结束录像
+                    }
+                    break;
+
             }
+
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -343,16 +367,16 @@ namespace CameraViewer
                 }
 
                 SystemLogBusiness.Instance.Insert(ref _errMessage, new SystemLog
-                    {
-                        HappenTime = DateTime.Now,
-                        SystemTypeId = 3,
-                        SystemTypeName = "用户退出成功",
-                        Content = "用户退出成功",
-                        SyeUserName = CurrentUser.UserName,
-                        ClientUserId = CurrentUser.UserId,
-                        ClientUserName = CurrentUser.UserName
+                {
+                    HappenTime = DateTime.Now,
+                    SystemTypeId = 3,
+                    SystemTypeName = "用户退出成功",
+                    Content = "用户退出成功",
+                    SyeUserName = CurrentUser.UserName,
+                    ClientUserId = CurrentUser.UserId,
+                    ClientUserName = CurrentUser.UserName
 
-                    });
+                });
                 CloseAll();
                 _outputTv.Close();
                 ChannelServices.UnregisterChannel(chan1);
@@ -455,7 +479,28 @@ namespace CameraViewer
             Splash.Splash.Close();
             //HikVideoServerCameraDriver.InitDecodeCard();
             splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
+
+            MakeLongChangInterface();
+
             this.Visible = true;
+        }
+
+        private void MakeLongChangInterface()
+        {
+            dockPanel1.Visible = dockPanelResult.Visible = dockPanelAlarm.Visible = false;
+            int iRow = 3, iCol = 3;
+            Util.GetRowCol(9, ref iRow, ref iCol);
+            mainMultiplexer.SetRowCol(iRow, iCol);
+            mainMultiplexer.Refresh();
+            _listNumKeyStatus.Add(Keys.D1, false);
+            _listNumKeyStatus.Add(Keys.D2, false);
+            _listNumKeyStatus.Add(Keys.D3, false);
+            _listNumKeyStatus.Add(Keys.D4, false);
+            _listNumKeyStatus.Add(Keys.D5, false);
+            _listNumKeyStatus.Add(Keys.D6, false);
+            _listNumKeyStatus.Add(Keys.D7, false);
+            _listNumKeyStatus.Add(Keys.D8, false);
+            _listNumKeyStatus.Add(Keys.D9, false);
         }
 
         private void InitDataBaseType()
@@ -489,7 +534,7 @@ namespace CameraViewer
             checkedComboBoxEditEventCamera.Properties.Items.Add("当前摄像头", true);
             foreach (var VARIABLE in _listAllCam)
             {
-                _listAllCamStr.Add(VARIABLE.Value.DeviceName+":"+VARIABLE.Value.Name,VARIABLE.Value);
+                _listAllCamStr.Add(VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, VARIABLE.Value);
                 checkedComboBoxEditFaceCamera.Properties.Items.Add(
                     VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
                 checkedComboBoxEditVehicleCamera.Properties.Items.Add(
@@ -497,7 +542,7 @@ namespace CameraViewer
                 checkedComboBoxEditEventCamera.Properties.Items.Add(
                     VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
             }
-            
+
         }
 
         private void InitDisplayRegion()
@@ -509,7 +554,7 @@ namespace CameraViewer
             struCardPlayInfo.nHeight = 576;
             struCardPlayInfo.bToScreen = 0;
             struCardPlayInfo.bToVideoOut = 1;
-            if (_listDisplayChannelInfo==null) return;
+            if (_listDisplayChannelInfo == null) return;
             foreach (var displayChannelInfo in _listDisplayChannelInfo)
             {
                 InitDisplayRegion(displayChannelInfo.Key);
@@ -527,7 +572,7 @@ namespace CameraViewer
             int iRtn = HikVisionSDK.SetDisplayStandard(displayChannelInfoId, VideoStandard_t.StandardPAL);
             REGION_PARAM[] struDisplayRegion = HikVideoServerCameraDriver.GetStruDisplayRegion(struCardPlayInfo, _listDisplayChannelInfo[displayChannelInfoId].SplitScreenNo);
             iRtn = HikVisionSDK.SetDisplayRegion(displayChannelInfoId, _listDisplayChannelInfo[displayChannelInfoId].SplitScreenNo, ref struDisplayRegion[0], 0);
-            
+
         }
         private void frmMain_Win_Resize(object sender, EventArgs e)
         {
@@ -590,7 +635,7 @@ namespace CameraViewer
                     {
                         CameraInfo camera = _listCam[iCount];
                         CameraWindow camwin = mainMultiplexer.GetCamera(i, j);
-                        IntPtr intPtr= new IntPtr();
+                        IntPtr intPtr = new IntPtr();
                         camera.Handle = intPtr;
                         oDevice = _listDevice[camera.DeviceId];
                         // oDevice.Handle = camwin.Handle;
@@ -641,14 +686,14 @@ namespace CameraViewer
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var tag = ((ContextMenuStrip)((ToolStripMenuItem) sender).Owner).SourceControl.Tag;
+            var tag = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Tag;
             if (tag is AlarmIconInfo)
             {
                 AlarmIconInfo alarmIconInfo = (AlarmIconInfo)tag;
                 AlarmIconBusiness.Instance.Delete(ref _errMessage, alarmIconInfo.AlarmId);
                 _listCurrentAlarmIcon.Remove(alarmIconInfo.AlarmId);
                 _listAllAlarmIcon.Remove(alarmIconInfo.AlarmId);
-                ((ContextMenuStrip)((ToolStripMenuItem) sender).Owner).SourceControl.Dispose();
+                ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Dispose();
             }
             else if (tag is CameraIconInfo)
             {
@@ -665,27 +710,27 @@ namespace CameraViewer
         {
             if (HikVideoServerCameraDriver.AlarmSites != null)
             {
-                
+
                 CurrentAlarmSites = HikVideoServerCameraDriver.AlarmSites;
                 string sitesSubString = CurrentAlarmSites.Substring(8, 4);
                 int x = int.Parse(sitesSubString, NumberStyles.HexNumber);
                 string sites = Convert.ToString(x, 2);
                 for (int i = 0; i < sites.Length; i++)
                 {
-                    if ((sites.Substring(i,1)=="1"))
+                    if ((sites.Substring(i, 1) == "1"))
                     {
-                        if ((_listAlarm.ContainsKey(sites.Length - i))&&_listAlarmSites.ContainsKey(sites.Length - i)==false)
+                        if ((_listAlarm.ContainsKey(sites.Length - i)) && _listAlarmSites.ContainsKey(sites.Length - i) == false)
                         {
                             _listAlarmSites.Add(sites.Length - i, _listAlarm[sites.Length - i]);
                         }
-                        else if ((_listAlarm.ContainsKey(sites.Length - i))&&_listAlarmSites.ContainsKey(sites.Length - i)==true)
+                        else if ((_listAlarm.ContainsKey(sites.Length - i)) && _listAlarmSites.ContainsKey(sites.Length - i) == true)
                         {
                             _listAlarmSites[sites.Length - i] = _listAlarm[sites.Length - i];
                         }
-                        
+
                     }
                 }
-                HikVideoServerCameraDriver.AlarmSites =null;
+                HikVideoServerCameraDriver.AlarmSites = null;
             }
         }
 
@@ -751,7 +796,7 @@ namespace CameraViewer
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = liveDecoderPacketHandle.CurrentNetImage.Image;
                     cameraWindow.CameraID = windowCameraInfo.Key;
-                    cameraWindow.Refresh();                   
+                    cameraWindow.Refresh();
                 }
 
             };
@@ -759,12 +804,12 @@ namespace CameraViewer
         #region 人脸实时显示
         private void LiveFacePacketHandleDataChange(object sender, DataChangeEventArgs e)
         {
-            if (radioGroupFace.SelectedIndex==0)
+            if (radioGroupFace.SelectedIndex == 0)
             {
                 var livePacketHandle = (LiveRecognizerFacePacketHandle)sender;
                 if (livePacketHandle == null) return;
                 //处理人脸 
-                ShowLiveFace(livePacketHandle);                
+                ShowLiveFace(livePacketHandle);
             }
 
 
@@ -776,8 +821,8 @@ namespace CameraViewer
             {
                 string errMsg = "";
                 Face face = liveRecognizerFacePacket.CurrentFace;
-                if (face==null) return;
-                if (!isCameraWatched(face.CameraInfo.CameraId))return;
+                if (face == null) return;
+                if (!isCameraWatched(face.CameraInfo.CameraId)) return;
                 listLiveFace.Insert(0, face);
                 if (listLiveFace.Count > _numberOfPerPage)
                 {
@@ -801,7 +846,7 @@ namespace CameraViewer
                         if (cameraid == currentCameraWindow.CameraID)
                         {
                             return true;
-                        } 
+                        }
                     }
                 }
                 else
@@ -809,7 +854,7 @@ namespace CameraViewer
                     if (cameraid == _listAllCamStr[changeselectCamera].CameraId)
                     {
                         return true;
-                    } 
+                    }
                 }
             }
             return false;
@@ -899,7 +944,7 @@ namespace CameraViewer
                 {
                     barStaticItemNetStatus.Appearance.ForeColor = Color.Red;
                     barStaticItemNetStatus.Caption = string.Format("连接失败！{0}秒后重连", Properties.Settings.Default.AutoConnectTime / 1000);
- //                   pictureEditRealImage.Image = MainForm.DefaultImage ?? Image.FromFile("NoData.jpg");
+                    //                   pictureEditRealImage.Image = MainForm.DefaultImage ?? Image.FromFile("NoData.jpg");
                     _socketState = false;
                 }
             };
@@ -927,15 +972,16 @@ namespace CameraViewer
                 ConnectionServer();
         }
         private TcpListener listener = new TcpListener(IPAddress.Any, 8000);
-        private readonly TcpClient tcpClientDecoder=new TcpClient();
+        private readonly TcpClient tcpClientDecoder = new TcpClient();
 
         private Socket _socket2Decoder;
 
         public void StartServerForDecoder()
         {
-            try{
+            try
+            {
                 _socket2Decoder = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                _socket2Decoder.Bind(new IPEndPoint(new IPAddress(new byte[]{127,0,0,1}), 8888));
+                _socket2Decoder.Bind(new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 8888));
                 _socket2Decoder.Listen(500);
                 // 开始侦听
                 while (true)
@@ -967,7 +1013,7 @@ namespace CameraViewer
                 //获得客户端节点对象   
                 var clientConnection = new DecoderClientConnection((Socket)socket);
 
-                clientConnection.LiveDecoderPacketHandle.DataChange += LiveDecoderPacketHandleDataChange; 
+                clientConnection.LiveDecoderPacketHandle.DataChange += LiveDecoderPacketHandleDataChange;
 
                 if (!listRunningDecoderClient.ContainsKey(clientConnection.DecoderInfo.id))
                 {
@@ -1103,7 +1149,7 @@ namespace CameraViewer
         {
             lock (lockerCurrentImage)
             {
-                testimage =!testimage;
+                testimage = !testimage;
                 if (testimage)
                 {
                     CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
@@ -1122,8 +1168,8 @@ namespace CameraViewer
                     cameraWindow.CameraID = 5;
                     cameraWindow.CurrentImageGuid = guidB;
                     cameraWindow.Refresh();
-            
-                }                
+
+                }
             }
 
 
@@ -1151,7 +1197,7 @@ namespace CameraViewer
         {
             int iRow = 3, iCol = 3;
             Util.GetRowCol(9, ref iRow, ref iCol);
-            mainMultiplexer.SetRowCol(iRow,iCol);
+            mainMultiplexer.SetRowCol(iRow, iCol);
             mainMultiplexer.Refresh();
         }
 
@@ -1175,18 +1221,18 @@ namespace CameraViewer
 
         private void splitContainerControl1_Resize(object sender, EventArgs e)
         {
-            
+
         }
 
         private void splitContainerControl1_SplitterPositionChanged(object sender, EventArgs e)
         {
-                splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
+            splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
         }
 
         private void barButtonItem13_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            long date =DateTime.Now.Ticks;
-            DateTime theDate =new DateTime(date);　　
+            long date = DateTime.Now.Ticks;
+            DateTime theDate = new DateTime(date);
 
         }
 
@@ -1202,12 +1248,12 @@ namespace CameraViewer
             b.Save(msb, System.Drawing.Imaging.ImageFormat.Bmp);
             byte[] ima = msa.GetBuffer();
             byte[] imb = msb.GetBuffer();
-            if (ima.Length != imb.Length) 
+            if (ima.Length != imb.Length)
                 return false;
             else
             {
                 for (int i = 0; i < ima.Length; i++)
-                    if (ima[i] != imb[i]) 
+                    if (ima[i] != imb[i])
                         return false;
             }
             return true;
@@ -1219,56 +1265,56 @@ namespace CameraViewer
             Thread thread = new Thread(threadStart);
             thread.Start();
         }
-        public delegate void DelShowDrawingForm(Image[] image,int cameraId);
-        private void ShowDrawingForm(Image[] image,int cameraId)
+        public delegate void DelShowDrawingForm(Image[] image, int cameraId);
+        private void ShowDrawingForm(Image[] image, int cameraId)
         {
-            frmDrawing myfrmDrawing = new frmDrawing(image,cameraId);
+            frmDrawing myfrmDrawing = new frmDrawing(image, cameraId);
             myfrmDrawing.ShowDialog();
         }
         private void CaptureImageThread()
         {
             //lock (lockerCurrentImage)
             //{
-                try
+            try
+            {
+                _currentcCameraWindow = mainMultiplexer.GetCurrentCameraWindow();
+                if (_currentcCameraWindow == null)
                 {
-                    _currentcCameraWindow = mainMultiplexer.GetCurrentCameraWindow();
-                    if (_currentcCameraWindow == null)
+                    XtraMessageBox.Show("请选中一个窗格!");
+                    return;
+                }
+                _currentImageIndex = 0;
+                currentGuid = _currentcCameraWindow.CurrentImageGuid;
+                _ImageSerias[_currentImageIndex++] = (Image)(_currentcCameraWindow.CurrentImage.Clone());
+                while (_currentImageIndex < 5)
+                {
+                    lock (lockerCurrentImage)
                     {
-                        XtraMessageBox.Show("请选中一个窗格!");
-                        return;
-                    }
-                    _currentImageIndex = 0;
-                    currentGuid = _currentcCameraWindow.CurrentImageGuid;
-                    _ImageSerias[_currentImageIndex++] = (Image)(_currentcCameraWindow.CurrentImage.Clone());
-                    while (_currentImageIndex < 5)
-                    {
-                        lock (lockerCurrentImage)
+                        if (currentGuid != _currentcCameraWindow.CurrentImageGuid)
                         {
-                            if (currentGuid != _currentcCameraWindow.CurrentImageGuid)
-                            {
-                                _ImageSerias[_currentImageIndex++] = (Image)(_currentcCameraWindow.CurrentImage.Clone());
-                            }
-                            Thread.Sleep(77);                            
+                            _ImageSerias[_currentImageIndex++] = (Image)(_currentcCameraWindow.CurrentImage.Clone());
                         }
-
+                        Thread.Sleep(77);
                     }
 
-                    //_ImageSerias[0] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Desert.jpg");
-                    //_ImageSerias[1] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Penguins.jpg");
-                    //_ImageSerias[2] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Koala.jpg");
-                    //_ImageSerias[3] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Tulips.jpg");
-                    //_ImageSerias[4] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg");
-
-                    //仅作测试用，摄像头ID设置为1
-                    DelShowDrawingForm delShowDrawingForm  = ShowDrawingForm;
-                    this.Invoke(delShowDrawingForm, new object[] { _ImageSerias, _currentcCameraWindow.CameraID });
-
-
                 }
-                catch (Exception ex)
-                {
-                    XtraMessageBox.Show(ex.ToString());
-                }
+
+                //_ImageSerias[0] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Desert.jpg");
+                //_ImageSerias[1] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Penguins.jpg");
+                //_ImageSerias[2] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Koala.jpg");
+                //_ImageSerias[3] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Tulips.jpg");
+                //_ImageSerias[4] = Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg");
+
+                //仅作测试用，摄像头ID设置为1
+                DelShowDrawingForm delShowDrawingForm = ShowDrawingForm;
+                this.Invoke(delShowDrawingForm, new object[] { _ImageSerias, _currentcCameraWindow.CameraID });
+
+
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.ToString());
+            }
             //}
         }
 
@@ -1278,7 +1324,7 @@ namespace CameraViewer
         {
             switch (radioGroupFace.SelectedIndex)
             {
-                    //实时
+                //实时
                 case 0:
                     teStartTimeFace.Enabled = teEndTimeFace.Enabled = btnQueryFace.Enabled = false;
                     gridControlFace.DataSource = null;
@@ -1289,7 +1335,7 @@ namespace CameraViewer
                     splitContainerControlFaceVideo.Visible = false;
                     if (_lastVideoPort != -1)
                     {
-                      HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+                        HikPlayer.PlayM4_CloseFile(_lastVideoPort);
                     }
                     break;
                 default:
@@ -1307,7 +1353,7 @@ namespace CameraViewer
 
             ReloadQueryData();
         }
-        
+
         string GenerateFaceQueryCondition()
         {
             string str = " and CapturePicture.CameraId in (";
@@ -1336,7 +1382,7 @@ namespace CameraViewer
 
             DateTime startTime = DateTime.Parse(teStartTimeFace.EditValue.ToString());
             DateTime endTime = DateTime.Parse(teEndTimeFace.EditValue.ToString());
-        
+
 
             if (DateTime.Compare(startTime, endTime) == 0)
             {
@@ -1379,7 +1425,7 @@ namespace CameraViewer
 
             dataTableFace.Rows.Clear();
             if (listFace == null) return;
-            int i = (_currentPage - 1) * _numberOfPerPage+1;
+            int i = (_currentPage - 1) * _numberOfPerPage + 1;
 
 
             foreach (var variable in listFace)
@@ -1444,8 +1490,8 @@ namespace CameraViewer
 
         private void InitDataTable()
         {
-            dataTableFace.Columns.Add("索引号", typeof(int));    
-            dataTableFace.Columns.Add("照片",typeof(byte[]));
+            dataTableFace.Columns.Add("索引号", typeof(int));
+            dataTableFace.Columns.Add("照片", typeof(byte[]));
 
             dataTableFace.Columns.Add("时间", typeof(DateTime));
             dataTableFace.Columns.Add("地点");
@@ -1466,7 +1512,7 @@ namespace CameraViewer
             }
         }
 
-        private int _lastVideoPort=-1;
+        private int _lastVideoPort = -1;
         private void FillPicVideo(Face face)
         {
             if (File.Exists(face.CapturePicture.FilePath))
@@ -1490,7 +1536,7 @@ namespace CameraViewer
             }
 
         }
- 
+
 
         private void advBandedGridViewFace_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
@@ -1599,11 +1645,11 @@ namespace CameraViewer
         {
 
             _numberOfPerPage = int.Parse(cbeFaceNumberPerPage.Text);
-            if (radioGroupFace.SelectedIndex==1)
+            if (radioGroupFace.SelectedIndex == 1)
             {
                 _currentPage = 1;
                 CaculatPages();
-                ReloadQueryData();                
+                ReloadQueryData();
             }
 
         }
@@ -1760,7 +1806,7 @@ namespace CameraViewer
             advBandedGridViewVehicle.Columns["linechange"].Visible = false;
             advBandedGridViewVehicle.Columns["platecolor"].Visible = false;
             advBandedGridViewVehicle.Columns["vehiclecolor"].Visible = false;
-            
+
             HikPlayer.PlayM4_CloseFile(_lastVideoPort1);
             splitContainerControlVideoVehicle.Panel1.Refresh();
             splitContainerControlVideoVehicle.Visible = false;
@@ -1785,9 +1831,9 @@ namespace CameraViewer
         }
         private Vehicle _selectedVehicle;
         private void advBandedGridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
-       {
-           if (advBandedGridViewVehicle.SelectedRowsCount > 0)
-           {
+        {
+            if (advBandedGridViewVehicle.SelectedRowsCount > 0)
+            {
                 int getSelectedRow = this.advBandedGridViewVehicle.GetSelectedRows()[0];
                 _selectedVehicle = (Vehicle)(this.advBandedGridViewVehicle.GetRowCellValue(getSelectedRow, "车辆对象"));
                 FillPicVideoVehicle(_selectedVehicle);
@@ -1837,11 +1883,11 @@ namespace CameraViewer
             }
         }
 
-      /*private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            JustForTest justForTest = new JustForTest();
-            justForTest.ShowDialog();
-        }*/
+        /*private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+          {
+              JustForTest justForTest = new JustForTest();
+              justForTest.ShowDialog();
+          }*/
 
         private void simpleButton11_Click(object sender, EventArgs e)
         {
@@ -1862,24 +1908,24 @@ namespace CameraViewer
             _isPausedForVehicle = false;
         }
 
-      //  private void splitContainerControl2_Panel2_SizeChanged(object sender, EventArgs e)
+        //  private void splitContainerControl2_Panel2_SizeChanged(object sender, EventArgs e)
         //{
-            //splitContainerControlFaceVideo.SplitterPosition = splitContainerControlFaceVideo.Height - 32;
-       // }
-      /*  private void LiveRegognizerFacePacketHandleDataChange(object sender, DataChangeEventArgs e)
-        {
+        //splitContainerControlFaceVideo.SplitterPosition = splitContainerControlFaceVideo.Height - 32;
+        // }
+        /*  private void LiveRegognizerFacePacketHandleDataChange(object sender, DataChangeEventArgs e)
+          {
 
-            var livePacketHandle = (LiveRecognizerFacePacketHandle)sender;
-            if (livePacketHandle == null) return;
-            //处理视频 
-            //ShowLiveVideo(livePacketHandle);
+              var livePacketHandle = (LiveRecognizerFacePacketHandle)sender;
+              if (livePacketHandle == null) return;
+              //处理视频 
+              //ShowLiveVideo(livePacketHandle);
 
-        }*/
+          }*/
 
-      //  private void cameraView1_Load(object sender, EventArgs e)
-       // {
+        //  private void cameraView1_Load(object sender, EventArgs e)
+        // {
 
-       // }
+        // }
         private void btnVehiclePrePage_Click(object sender, EventArgs e)
         {
             _currentPageForVehicle--;
@@ -1940,7 +1986,7 @@ namespace CameraViewer
             }
             lblVehicleCurrentPage.Text = string.Format("当前：{0}/{1}页", _currentPageForVehicle, _totalPagesForVehicle);
         }
-#endregion
+        #endregion
 
         #region 事件显示部分
         private int _totalPagesForEvent;
@@ -2027,7 +2073,7 @@ namespace CameraViewer
         }
 
         DataTable dataTableEvent = new DataTable();
-       
+
         private void ReloadQueryDataForEvent()
         {
             string errMessage = "";
@@ -2059,6 +2105,13 @@ namespace CameraViewer
             lblEventCurrentPage.Text = string.Format("当前：{0}/{1}页", _currentPageForEvent, _totalPagesForEvent);
         }
         #endregion
+
+        private void barButtonItem15_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmCaptureLicense fcl = new frmCaptureLicense();
+            fcl.ShowDialog();
+
+        }
 
     }
 }
