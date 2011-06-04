@@ -115,5 +115,17 @@ namespace CameraViewer.Properties {
                 this["TempPicPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\CapturePictureTempPath")]
+        public string CapturePictureTempPath {
+            get {
+                return ((string)(this["CapturePictureTempPath"]));
+            }
+            set {
+                this["CapturePictureTempPath"] = value;
+            }
+        }
     }
 }

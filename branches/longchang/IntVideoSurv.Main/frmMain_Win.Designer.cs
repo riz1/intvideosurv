@@ -52,6 +52,7 @@ namespace CameraViewer
             this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemGetPics = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem15 = new DevExpress.XtraBars.BarButtonItem();
             this.bar4 = new DevExpress.XtraBars.Bar();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
@@ -369,9 +370,10 @@ namespace CameraViewer
             this.barButtonItem12,
             this.barButtonItem13,
             this.barButtonItemGetPics,
-            this.barButtonItem14});
+            this.barButtonItem14,
+            this.barButtonItem15});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 38;
+            this.barManager1.MaxItemId = 39;
             this.barManager1.StatusBar = this.bar4;
             // 
             // barMenu
@@ -463,7 +465,8 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem12),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem13),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemGetPics),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem14)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem14),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem15)});
             this.bar3.Offset = 4;
             this.bar3.Text = "Custom 3";
             // 
@@ -529,6 +532,13 @@ namespace CameraViewer
             this.barButtonItem14.Id = 37;
             this.barButtonItem14.Name = "barButtonItem14";
             this.barButtonItem14.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem14_ItemClick);
+            // 
+            // barButtonItem15
+            // 
+            this.barButtonItem15.Caption = "ÊÓÆµ×¥Í¼";
+            this.barButtonItem15.Id = 38;
+            this.barButtonItem15.Name = "barButtonItem15";
+            this.barButtonItem15.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem15_ItemClick);
             // 
             // bar4
             // 
@@ -1070,7 +1080,6 @@ namespace CameraViewer
             // 
             this.bandedGridColumn26.Caption = "ChangeChannel";
             this.bandedGridColumn26.Name = "bandedGridColumn26";
-            this.bandedGridColumn26.Visible = true;
             // 
             // splitContainerControl8
             // 
@@ -2590,8 +2599,6 @@ namespace CameraViewer
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraEditors.PictureEdit pictureEditFace;
         private DevExpress.XtraBars.BarButtonItem barButtonItem14;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControlFaceVideo;
@@ -2669,8 +2676,6 @@ namespace CameraViewer
         private DevExpress.XtraEditors.SimpleButton simpleButton13;
         private DevExpress.XtraEditors.SimpleButton simpleButton14;
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewEvent;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn14;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn15;
@@ -2688,6 +2693,11 @@ namespace CameraViewer
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn24;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn25;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn26;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem15;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         
     }
 }
