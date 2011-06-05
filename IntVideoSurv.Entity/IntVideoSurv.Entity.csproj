@@ -58,6 +58,7 @@
     <Compile Include="CameraMonitorPairInfo.cs" />
     <Compile Include="CapturePictureInfo.cs" />
     <Compile Include="CardOutType.cs" />
+    <Compile Include="TTestInfo.cs" />
     <Compile Include="DecodeChannel.cs" />
     <Compile Include="DecoderInfo.cs" />
     <Compile Include="DefaultCardOut.cs" />

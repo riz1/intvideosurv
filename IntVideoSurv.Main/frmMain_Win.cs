@@ -1525,8 +1525,16 @@ namespace CameraViewer
                 XtraMessageBox.Show("起始时间不能大于结束时间！");
                 return "";
             }
-
-            str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeFace.EditValue + "') and convert(DateTime,'" + teEndTimeFace.EditValue + "'))";
+            if (DataBaseParas.DBType ==MyDBType.SqlServer)
+            {
+                str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeFace.EditValue + "') and convert(DateTime,'" + teEndTimeFace.EditValue + "'))";
+             
+            }
+            else
+            {
+                str += " and (CapturePicture.DateTime between to_date('" + teStartTimeFace.EditValue + "','YYYY/MM/DD HH24:mi:ss' ) and to_date('" + teEndTimeFace.EditValue + "','YYYY/MM/DD HH24:mi:ss' ))";
+               
+            }
 
             return str;
         }
@@ -2469,6 +2477,13 @@ namespace CameraViewer
             frmCaptureLicense fcl = new frmCaptureLicense();
             fcl.ShowDialog();
 
+        }
+
+        private void barButtonItem16_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string str ="";
+            TTestInfoBusiness.Instance.Insert(ref str, new TTestInfo() {Id = 1, ts = DateTime.Now});
+            List<TTestInfo> list = TTestInfoBusiness.Instance.GetAllTTestInfo(ref str);
         }
 
     }

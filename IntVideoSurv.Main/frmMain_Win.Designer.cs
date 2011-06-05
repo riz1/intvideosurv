@@ -246,6 +246,7 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
+            this.barButtonItem16 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -396,9 +397,10 @@ namespace CameraViewer
             this.barButtonD6,
             this.barButtonD7,
             this.barButtonD8,
-            this.barButtonD9});
+            this.barButtonD9,
+            this.barButtonItem16});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 50;
+            this.barManager1.MaxItemId = 51;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.barManager1.StatusBar = this.bar4;
@@ -502,7 +504,8 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD6),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD7),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD8),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD9)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD9),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem16)});
             this.bar3.Offset = 4;
             this.bar3.Text = "Custom 3";
             // 
@@ -2539,6 +2542,13 @@ namespace CameraViewer
             this.timerTest.Enabled = true;
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
+            // barButtonItem16
+            // 
+            this.barButtonItem16.Caption = "TimeStamp";
+            this.barButtonItem16.Id = 50;
+            this.barButtonItem16.Name = "barButtonItem16";
+            this.barButtonItem16.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem16_ItemClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2879,6 +2889,7 @@ namespace CameraViewer
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand8;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem16;
         
     }
 }

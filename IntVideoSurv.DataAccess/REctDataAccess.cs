@@ -32,7 +32,19 @@ namespace IntVideoSurv.DataAccess
             {
                 cmdText = cmdText.Replace("\r\n", "");
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
-                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('REct')").ToString());
+
+                string strsql = "";
+                if (DataBaseParas.DBType == MyDBType.SqlServer)
+                {
+                    strsql = "SELECT     ident_current('REct')";
+                }
+                else if (DataBaseParas.DBType == MyDBType.Oracle)
+                {
+                    strsql =
+                    "select ID   from   REct   where  rowid=(select   max(rowid)   from   REct)";
+                }
+
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
                 return id;
             }
             catch (Exception ex)

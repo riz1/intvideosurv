@@ -23,7 +23,16 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat("{0}", ocapturePicture.CameraID);
             sbField.Append(",Datetime");
             //sbValue.AppendFormat(",'{0}'", ocapturePicture.Datetime);
-            sbValue.AppendFormat(",'{0}'", ocapturePicture.Datetime);
+            //sbValue.AppendFormat(",'{0}'", ocapturePicture.Datetime);
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            {
+                sbValue.AppendFormat("'{0}'", ocapturePicture.Datetime);
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                //sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS')", ocapturePicture.Datetime);
+                sbValue.AppendFormat(",to_timestamp('{0:yyyy/MM/dd HH:mm:ss.fff}','YYYY/MM/DD HH24:MI:SS.xff')", ocapturePicture.Datetime);
+            }
             sbField.Append(",FilePath)");
             sbValue.AppendFormat(",'{0}')", ocapturePicture.FilePath);
 
@@ -33,9 +42,19 @@ namespace IntVideoSurv.DataAccess
             {
                 cmdText = cmdText.Replace("\r\n", "");
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
-                //string cmdText2 = "select max(PictureID) from CapturePicture";
-                //return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText2).ToString());
-                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('CapturePicture')").ToString());
+
+                string strsql = "";
+                if (DataBaseParas.DBType == MyDBType.SqlServer)
+                {
+                    strsql = "SELECT     ident_current('CapturePicture')";
+                }
+                else if (DataBaseParas.DBType == MyDBType.Oracle)
+                {
+                    strsql =
+                    "select ID   from   CapturePicture   where  rowid=(select   max(rowid)   from   CapturePicture)";
+                }
+
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
                 return id;
             }
             catch (Exception ex)

@@ -14,17 +14,17 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  Face(");
+            sbField.Append("INSERT INTO  Face](");
             sbValue.Append("values (");
-            //sbField.Append("FaceID");
+            //sbField.Append("FaceID]");
             //sbValue.AppendFormat("'{0}'", oFace.FaceID);
-            sbField.Append("score");
+            sbField.Append("score]");
             sbValue.AppendFormat("'{0}'", oFace.score);
-            sbField.Append(",RectID");
+            sbField.Append(",RectID]");
             sbValue.AppendFormat(",{0}", oFace.RectID);
-            sbField.Append(",PictureID");
+            sbField.Append(",PictureID]");
             sbValue.AppendFormat(",{0}", oFace.PictureID);
-            sbField.Append(",FacePath)");
+            sbField.Append(",FacePath])");
             sbValue.AppendFormat(",'{0}')", oFace.FacePath);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 
@@ -32,7 +32,18 @@ namespace IntVideoSurv.DataAccess
             {
                 cmdText = cmdText.Replace("\r\n", "");
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
-                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('Face')").ToString());
+                string strsql = "";
+                if (DataBaseParas.DBType == MyDBType.SqlServer)
+                {
+                    strsql = "SELECT     ident_current('Face')";
+                }
+                else if (DataBaseParas.DBType == MyDBType.Oracle)
+                {
+                    strsql =
+                    "select ID   from   Face   where  rowid=(select   max(rowid)   from   Face)";
+                }
+
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
                 return id;
             }
             catch (Exception ex)
@@ -49,7 +60,7 @@ namespace IntVideoSurv.DataAccess
                 "select Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId " +
                 "from Face,CapturePicture,VideoInfo " +
                 "where Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.DateTime desc", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.DateTime] desc", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -67,7 +78,7 @@ namespace IntVideoSurv.DataAccess
                 "select count(distinct Face.FaceId) " +
                 "from Face,CapturePicture,VideoInfo " +
                 "where Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0}", str);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -89,20 +100,32 @@ namespace IntVideoSurv.DataAccess
             byte ordertype = 1;
             string pkcolumn = " FaceId ";
             string cmdText = "";
-            if (pageno==1)
+
+            if (DataBaseParas.DBType==MyDBType.SqlServer)
             {
-                  cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
-                  +" WHERE {3}  order by {4} {5}", pagesize, fields, tables, condition, ordercolumn, ordertype==1?"desc":"asc");
-                
+                if (pageno == 1)
+                {
+                    cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                    + " WHERE {3}  order by {4} {5}", pagesize, fields, tables, condition, ordercolumn, ordertype == 1 ? "desc" : "asc");
+
+                }
+                else
+                {
+                    cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
+                    + " WHERE {3} AND "
+                    + " {4}>(SELECT max({4}) FROM (SELECT TOP {5} "
+                    + " {4} FROM {2} order by {6} {7}) AS TabTemp) order by {6} {7}", pagesize, fields, tables, condition, pkcolumn, (pageno - 1) * pagesize, ordercolumn, ordertype == 1 ? "desc" : "asc");
+
+                }                
             }
-            else
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
             {
-                  cmdText = string.Format("SELECT TOP {0} {1} FROM {2}"
-                  +" WHERE {3} AND "
-                  +" {4}>(SELECT max({4}) FROM (SELECT TOP {5} "
-                  + " {4} FROM {2} order by {6} {7}) AS TabTemp) order by {6} {7}", pagesize, fields, tables, condition, pkcolumn, (pageno - 1) * pagesize, ordercolumn, ordertype==1?"desc":"asc");
-                
+                //select * from (select a.*,rownum rn  from face a where rownum <= 40) where rn >= 20 order by faceid desc; 
+                cmdText = string.Format("SELECT * FROM (select {0},rownum rn from {1} where rownum <={2} and {3} order by {4}) where rn>={5} order by faceid", 
+                    fields, tables, pageno * pagesize,condition, pkcolumn,(pageno - 1) * pagesize);
+
             }
+
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

@@ -16,15 +16,25 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [VideoInfo(");
+            sbField.Append("INSERT INTO  VideoInfo(");
             sbValue.Append("values (");
-            sbField.Append("[CameraId");
+            sbField.Append("CameraId");
             sbValue.AppendFormat("{0}", videoInfo.CameraId);
-            sbField.Append(",[CaptureTimeBegin");
-            sbValue.AppendFormat(",'{0}'", videoInfo.CaptureTimeBegin);
-            sbField.Append(",[CaptureTimeEnd");
-            sbValue.AppendFormat(",'{0}'", videoInfo.CaptureTimeEnd);
-            sbField.Append(",[FilePath)");
+            sbField.Append(",CaptureTimeBegin");
+            //sbValue.AppendFormat(",'{0}'", videoInfo.CaptureTimeBegin);
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            {
+                sbValue.AppendFormat(",'{0}'", videoInfo.CaptureTimeBegin);
+                sbValue.AppendFormat(",'{0}'", videoInfo.CaptureTimeEnd);
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS')", videoInfo.CaptureTimeBegin);
+                sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS')", videoInfo.CaptureTimeEnd);
+            }
+            sbField.Append(",CaptureTimeEnd");
+            //sbValue.AppendFormat(",'{0}'", videoInfo.CaptureTimeEnd);
+            sbField.Append(",FilePath)");
             sbValue.AppendFormat(",'{0}')", videoInfo.FilePath);
             string cmdText = sbField + " " + sbValue;
             try

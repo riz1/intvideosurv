@@ -22,7 +22,16 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat("{0}", oTempPicture.CameraID);
             sbField.Append(",Datetime");
             //sbValue.AppendFormat(",'{0}'", oTempPicture.Datetime);
-            sbValue.AppendFormat(",'{0}'", oTempPicture.Datetime);
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            {
+                sbValue.AppendFormat(",'{0}'", oTempPicture.Datetime);
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                sbValue.AppendFormat(",to_timestamp('{0:yyyy/MM/dd HH:mm:ss.fff}','YYYY/MM/DD HH24:MI:SS.xff')", oTempPicture.Datetime);
+
+            }
+            
             sbField.Append(",IsHistroy");
             //sbValue.AppendFormat(",'{0}'", oTempPicture.Datetime);
             sbValue.AppendFormat(",'{0}'", oTempPicture.IsHistroy);
@@ -37,7 +46,18 @@ namespace IntVideoSurv.DataAccess
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
                 //string cmdText2 = "select max(PictureID) from TempPicture";
                 //return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText2).ToString());
-                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('TempPicture')").ToString());
+                string strsql = "";
+                if (DataBaseParas.DBType == MyDBType.SqlServer)
+                {
+                    strsql = "SELECT     ident_current('TempPicture')";
+                }
+                else if (DataBaseParas.DBType == MyDBType.Oracle)
+                {
+                    strsql =
+                    "select ID   from   TempPicture   where  rowid=(select   max(rowid)   from   TempPicture)";
+                }
+
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
                 return id;
             }
             catch (Exception ex)

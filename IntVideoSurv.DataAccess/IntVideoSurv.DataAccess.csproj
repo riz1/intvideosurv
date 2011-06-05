@@ -97,6 +97,7 @@
     <Compile Include="TaskDataAccess.cs" />
     <Compile Include="TempPictureDataAccess.cs" />
     <Compile Include="TrackDataAccess.cs" />
+    <Compile Include="TTestDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="VehicleDataAccess.cs" />
     <Compile Include="VideoDataAccess.cs" />

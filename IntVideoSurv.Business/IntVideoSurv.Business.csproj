@@ -115,6 +115,7 @@
     <Compile Include="TaskBusiness.cs" />
     <Compile Include="TempPictureBusiness.cs" />
     <Compile Include="TrackBusiness.cs" />
+    <Compile Include="TTestInfoBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="VehicleBusiness.cs" />

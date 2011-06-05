@@ -36,7 +36,15 @@ namespace IntVideoSurv.DataAccess
             sbField.Append(",password");
             sbValue.AppendFormat(",'{0}'", userInfo.Password);
             sbField.Append(",createdatetime");
-            sbValue.AppendFormat(",'{0}'", userInfo.CreateDateTime);
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            {
+                sbValue.AppendFormat(",'{0}'", userInfo.CreateDateTime);                
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS')", userInfo.CreateDateTime);  
+            }
+
             sbField.Append(",usertypeid");
             sbValue.AppendFormat(",{0}", userInfo.UserTypeId);
             sbField.Append(",usertypename)");

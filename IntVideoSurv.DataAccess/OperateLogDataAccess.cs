@@ -39,7 +39,15 @@ namespace IntVideoSurv.DataAccess
             sbField.Append(",CameraId");
             sbValue.AppendFormat(",{0}", operateLog.CameraId);
             sbField.Append(",Happentime");
-            sbValue.AppendFormat(",'{0}'", operateLog.HappenTime);
+
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            {
+                sbValue.AppendFormat(",'{0}'", operateLog.HappenTime);
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS')", operateLog.HappenTime);
+            }
             sbField.Append(",operatetypeid");
             sbValue.AppendFormat(",{0}", operateLog.OperateTypeId);
             sbField.Append(",operatetypename");
