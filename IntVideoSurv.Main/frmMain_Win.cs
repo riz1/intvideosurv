@@ -2054,7 +2054,7 @@ namespace CameraViewer
       
             }
         }
-        
+
         private void FillGridControlEventDetail(Dictionary<int, Event> listevent)
         {
             dataTableEvent.Rows.Clear();
@@ -2084,7 +2084,6 @@ namespace CameraViewer
             splitContainerControlFaceVideo.Visible = false;
 
         }
-        DataTable dataTableEvent = new DataTable();
         private void InitEventDataTable()
         {
             dataTableEvent.Columns.Add("Ë÷ÒýºÅ", typeof(int));
@@ -2153,11 +2152,6 @@ namespace CameraViewer
               justForTest.ShowDialog();
           }*/
 
-        private void simpleButton13_Click(object sender, EventArgs e)
-        {
-            HikPlayer.PlayM4_Play(_lastVideoPort1, splitContainerControlVideoVehicle.Panel1.Handle);
-        }
-
         private bool _isPausedForEvent;
         private void simpleButton14_Click(object sender, EventArgs e)
         {
@@ -2209,18 +2203,6 @@ namespace CameraViewer
             ReloadQueryDataForEvent();
         }
 
-        private void cbeVehicleNumberPerPage_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-            _numberOfPerPageForEvent = int.Parse(cbeEventNumberPerPage.Text);
-            if (radioGroupEvent.SelectedIndex == 1)
-            {
-                _currentPageForEvent = 1;
-                CaculatePagesForEvent();
-                ReloadQueryDataForEvent();
-            }
-
-        }
         private void CaculatePagesForEvent()
         {
             if (_totalCountForEvent % _numberOfPerPageForEvent == 0)
@@ -2232,6 +2214,22 @@ namespace CameraViewer
                 _totalPagesForEvent = (int)((float)_totalCountForEvent / _numberOfPerPageForEvent) + 1;
             }
             lblEventCurrentPage.Text = string.Format("µ±Ç°£º{0}/{1}Ò³", _currentPageForEvent, _totalPagesForEvent);
+        }
+
+        private void cbeEventNumberPerPage_SelectedValueChanged(object sender, EventArgs e)
+        {
+            _numberOfPerPageForEvent = int.Parse(cbeEventNumberPerPage.Text);
+            if (radioGroupEvent.SelectedIndex == 1)
+            {
+                _currentPageForEvent = 1;
+                CaculatePagesForEvent();
+                ReloadQueryDataForEvent();
+            }
+        }
+
+        private void simpleButtonPlay_Click(object sender, EventArgs e)
+        {
+            HikPlayer.PlayM4_Play(_lastVideoPort1, splitContainerControlVideoVehicle.Panel1.Handle);
         }
         #endregion
 
