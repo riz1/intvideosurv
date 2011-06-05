@@ -599,6 +599,14 @@ namespace CameraViewer
             splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
 
             MakeLongChangInterface();
+            DateTime dtNow = DateTime.Now;
+            teStartTimeFace.EditValue = dtNow.AddDays(-1);
+            teStartTimeVehicle.EditValue = dtNow.AddDays(-1);
+            teStartTimeEvent.EditValue = dtNow.AddDays(-1);
+
+            teEndTimeFace.EditValue = dtNow;
+            teEndTimeVehicle.EditValue = dtNow;
+            teEndTimeEvent.EditValue = dtNow;
 
             this.Visible = true;
         }
@@ -1880,12 +1888,35 @@ namespace CameraViewer
         {
             string errMessage = "";
             string faceQueryCondition = GenerateVehicleQueryCondition();
+            if (faceQueryCondition=="")
+            {
+                return;
+            }
             _totalCount = VehicleBusiness.Instance.GetVehicleQuantity(ref errMessage, faceQueryCondition);
             CaculatPagesForVehicle();
             Dictionary<int, Vehicle> listVehicle = VehicleBusiness.Instance.GetVehicleCustom(ref errMessage, faceQueryCondition, _currentPage, _numberOfPerPage);
             //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
             //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
             //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
+            if (listVehicle==null)
+            {
+                listVehicle = new Dictionary<int, Vehicle>();
+                listVehicle.Add(1, new Vehicle() { accident = true, CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" },confidence = 35,linechange = false,PictureID = 1,platecolor = "000255000",
+                platenumber = "´¨A12345",REctId=1,speed = 50});
+                listVehicle.Add(2, new Vehicle()
+                {
+                    accident = true,
+                    CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" },
+                    CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" },
+                    confidence = 35,
+                    linechange = false,
+                    PictureID = 1,
+                    platecolor = "000255000",
+                    platenumber = "´¨A12345",
+                    REctId = 1,
+                    speed = 50
+                });
+            }
 
             FillGridControlVehicleDetail(listVehicle);
         }

@@ -15,13 +15,13 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [WindowCameraInfo](");
+            sbField.Append("INSERT INTO  WindowCameraInfo(");
             sbValue.Append("values (");
-            sbField.Append("[row]");
+            sbField.Append("row");
             sbValue.AppendFormat("{0}", windowCameraInfo.Row);
-            sbField.Append(",[col]");
+            sbField.Append(",col");
             sbValue.AppendFormat(",{0}", windowCameraInfo.Col);
-            sbField.Append(",[Camera])");
+            sbField.Append(",Camera)");
             sbValue.AppendFormat(",{0})", windowCameraInfo.CameraId);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
@@ -42,9 +42,9 @@ namespace IntVideoSurv.DataAccess
         {
 
             StringBuilder sbValue = new StringBuilder();
-            sbValue.Append("update [WindowCameraInfo] set ");
-            sbValue.AppendFormat("[Camera]={0}", camera);
-            sbValue.AppendFormat(" where [Id]={0}", id);
+            sbValue.Append("update WindowCameraInfo set ");
+            sbValue.AppendFormat("Camera={0}", camera);
+            sbValue.AppendFormat(" where Id={0}", id);
             string cmdText = sbValue.ToString();
             try
             {
@@ -63,9 +63,9 @@ namespace IntVideoSurv.DataAccess
         {
 
             StringBuilder sbValue = new StringBuilder();
-            sbValue.Append("update [WindowCameraInfo] set ");
-            sbValue.AppendFormat("[Camera]={0}", camera);
-            sbValue.AppendFormat(" where [row]={0} and col={1}", row, col);
+            sbValue.Append("update WindowCameraInfo set ");
+            sbValue.AppendFormat("Camera={0}", camera);
+            sbValue.AppendFormat(" where row={0} and col={1}", row, col);
             string cmdText = sbValue.ToString();
             try
             {
@@ -83,8 +83,8 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int id)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from [WindowCameraInfo] ");
-            sb.AppendFormat(" where [Id]={0}", id);
+            sb.Append("delete from WindowCameraInfo ");
+            sb.AppendFormat(" where Id={0}", id);
             string cmdText = sb.ToString();
             try
             {
@@ -101,7 +101,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllWindowCameraInfo(Database db)
         {
-            string cmdText = string.Format("select * from [WindowCameraInfo] order by [Id]");
+            string cmdText = string.Format("select * from WindowCameraInfo order by Id");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -115,7 +115,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetWindowCameraInfoById(Database db, int id)
         {
-            string cmdText = string.Format("select * from [WindowCameraInfo] where [Id]={0}", id);
+            string cmdText = string.Format("select * from WindowCameraInfo where Id={0}", id);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -129,7 +129,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetWindowCameraInfoByCamera(Database db, int camera)
         {
-            string cmdText = string.Format("select * from [WindowCameraInfo] where [Camera]={0}", camera);
+            string cmdText = string.Format("select * from WindowCameraInfo where Camera={0}", camera);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -143,7 +143,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetWindowCameraInfoByRowCol(Database db, int row, int col)
         {
-            string cmdText = string.Format("select * from [WindowCameraInfo] where [row]={0} and [col]={1}", row, col);
+            string cmdText = string.Format("select * from WindowCameraInfo where row={0} and col={1}", row, col);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -157,7 +157,7 @@ namespace IntVideoSurv.DataAccess
 
         public static bool IsWindowCameraExisted(Database db, int row, int col)
         {
-            string cmdText = string.Format("select count(*) from [WindowCameraInfo] where [row]={0} and [col]={1}", row, col);
+            string cmdText = string.Format("select count(*) from WindowCameraInfo where row={0} and col={1}", row, col);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString()) > 0 ? true : false;

@@ -207,8 +207,8 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetDisplayDeviceById(Database db, int deviceId)
         {
-            string cmdText = string.Format("select [deviceID] as 索引号, [DeviceInfo.name] as 设备名, [source] as IP地址, [port] as 端口, "+
-                "[login] as 登录名,[DeviceInfo.description] as 描述,[GroupInfo.Name] as 组名 "+
+            string cmdText = string.Format("select deviceID as 索引号, DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
+                "login as 登录名,DeviceInfo.description as 描述,GroupInfo.Name as 组名 "+
                 "from (DeviceInfo left join GroupInfo on (DeviceInfo.GroupId=GroupInfo.GroupId)) where DeviceId={0}", deviceId);
             try
             {
@@ -224,8 +224,8 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetDisplayDeviceByGroupId(Database db, int groupId)
         {
             string cmdText = string.Format(
-                "select [deviceID] as 索引号, [DeviceInfo.name] as 设备名, [source] as IP地址, [port] as 端口, "+
-                "[login] as 登录名,[DeviceInfo.description] as 描述,[GroupInfo.Name] as 组名 "+
+                "select deviceID as 索引号, DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
+                "login as 登录名,DeviceInfo.description as 描述,GroupInfo.Name as 组名 "+
                 "from (DeviceInfo left join GroupInfo on (DeviceInfo.GroupId=GroupInfo.GroupId)) where DeviceInfo.GroupId={0} order by DeviceId", groupId);
             try
             {
@@ -239,8 +239,8 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllDisplayDeviceByDeviceList(Database db,string devicelist)
         {
-            string cmdText = string.Format("select [deviceID] as 索引号, [DeviceInfo.name] as 设备名, [source] as IP地址, [port] as 端口, "+
-                "[login] as 登录名,[DeviceInfo.description] as 描述,[GroupInfo.Name] as 组名 "+
+            string cmdText = string.Format("select deviceID as 索引号, DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
+                "login as 登录名,DeviceInfo.description as 描述,GroupInfo.Name as 组名 "+
                 " from  (DeviceInfo left join GroupInfo on (DeviceInfo.GroupId=GroupInfo.GroupId)) where DeviceId in {0} order by DeviceId", devicelist);
             try
             {

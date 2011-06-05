@@ -92,8 +92,8 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int id)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from [GroupSwitchDetail] ");
-            sb.AppendFormat(" where [Id]={0}", id);
+            sb.Append("delete from GroupSwitchDetail ");
+            sb.AppendFormat(" where Id={0}", id);
             string cmdText = sb.ToString();
             try
             {
@@ -129,13 +129,13 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [GroupSwitchDetail](");
+            sbField.Append("INSERT INTO  GroupSwitchDetail(");
             sbValue.Append("values (");
-            sbField.Append("[GroupSwitchGroupId]");
+            sbField.Append("GroupSwitchGroupId");
             sbValue.AppendFormat("{0}", groupSwitchid);
-            sbField.Append(",[SynGroupId]");
+            sbField.Append(",SynGroupId");
             sbValue.AppendFormat(",{0}", synGroupId);
-            sbField.Append(",[TickTime])");
+            sbField.Append(",TickTime)");
             sbValue.AppendFormat(",{0})", tickTime);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
@@ -160,7 +160,7 @@ namespace IntVideoSurv.DataAccess
         public static int UpdateTickTimeById(Database db, int id, int tickTime)
         {
 
-            string cmdText = string.Format("update [GroupSwitchDetail] set [TickTime]={0} where [Id] = {1}", tickTime, id);
+            string cmdText = string.Format("update GroupSwitchDetail set TickTime={0} where Id = {1}", tickTime, id);
 
 
             try

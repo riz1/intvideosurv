@@ -13,11 +13,11 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [Track](");
+            sbField.Append("INSERT INTO  Track(");
             sbValue.Append("values (");
-            //sbField.Append("[Id]");
+            //sbField.Append("Id");
             //sbValue.AppendFormat("'{0}'", oTrack.Id);
-            sbField.Append("[REct])");
+            sbField.Append("REct)");
             sbValue.AppendFormat("'{0}')", oTrack.REct);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 
