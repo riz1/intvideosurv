@@ -34,5 +34,7 @@ namespace IntVideoSurv.Entity
         public bool changeChannel { get; set; }
         [ColumnMapping()]
         public int EventId { get; set; }
+
+        public Dictionary<int, EventRect> listRect { get; set; }
     }
 }

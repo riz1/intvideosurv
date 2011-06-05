@@ -52,5 +52,22 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+
+        public static DataSet GetObjectCustom(Database db, int eventid)
+        {
+            string cmdText = string.Format(
+                "select ObjectInfo.ObjectId,ObjectInfo.stop,ObjectInfo.illegalDir,ObjectInfo.CrossLine,ObjectInfo.changeChannel,ObjectInfo.EventId " +
+                "from ObjectInfo " +
+                "where ObjectInfo.EventId={0} order by ObjectId", eventid);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

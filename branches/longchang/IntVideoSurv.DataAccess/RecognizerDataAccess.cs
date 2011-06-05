@@ -225,8 +225,8 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCameraInfoByRecognizerId(Database db, int RecognizerId)
         {
-
-            string cmdText = string.Format("select * from CameraInfo where CameraId in (select camera from RecognizerCamera where recognizer={0})", RecognizerId);
+            //,DeviceInfo.Name as DeviceName from (CameraInfo inner join DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid)
+            string cmdText = string.Format("select CameraInfo.*, DeviceInfo.Name as DeviceName from CameraInfo,DeviceInfo where CameraInfo.deviceid =  DeviceInfo.deviceid and CameraId in (select camera from RecognizerCamera where recognizer={0})", RecognizerId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -256,7 +256,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetCamInfoByCameraId(Database db, int CameraId)
         {
 
-            string cmdText = string.Format("select * from CameraInfo where CameraId={0} order by CameraId", CameraId);
+            string cmdText = string.Format("select CameraInfo.*, DeviceInfo.Name as DeviceName from CameraInfo,DeviceInfo where CameraInfo.deviceid =  DeviceInfo.deviceid and CameraId={0} order by CameraId", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
