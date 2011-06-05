@@ -31,6 +31,14 @@ namespace IntVideoSurv.DataAccess
             sbValue.Append("values(");
             sbField.Append("Happentime");
             sbValue.AppendFormat("'{0}'", systemLog.HappenTime);
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            {
+                sbValue.AppendFormat("'{0}'", systemLog.HappenTime);
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS')", systemLog.HappenTime);
+            }
             sbField.Append(",systemtypeid");
             sbValue.AppendFormat(",{0}", systemLog.SystemTypeId);
             sbField.Append(",systemtypename");

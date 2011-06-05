@@ -40,7 +40,17 @@ namespace IntVideoSurv.DataAccess
             sbField.Append(",Status");
             sbValue.AppendFormat(",{0}", taskInfo.Status);
             sbField.Append(",HappenDateTime");
-            sbValue.AppendFormat(",'{0}')", taskInfo.HappenDateTime == null ? DateTime.Now : taskInfo.HappenDateTime);
+
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            { 
+                sbValue.AppendFormat(",'{0}')", taskInfo.HappenDateTime == null ? DateTime.Now : taskInfo.HappenDateTime);
+
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS'))", taskInfo.HappenDateTime == null ? DateTime.Now : taskInfo.HappenDateTime);
+            }
+
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
             try
             {
@@ -61,7 +71,16 @@ namespace IntVideoSurv.DataAccess
             sbValue.Append("update TaskInfo set ");
 
             sbValue.AppendFormat("Status={0}", status);
-            sbValue.AppendFormat(",HappenDateTime='{0}'", DateTime.Now);
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
+            {
+                sbValue.AppendFormat(",HappenDateTime='{0}'", DateTime.Now);
+
+            }
+            else if (DataBaseParas.DBType == MyDBType.Oracle)
+            {
+                sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS'))", DateTime.Now);
+            }
+            
             sbValue.AppendFormat(" where TaskId={0}", taskId);
             string cmdText = sbValue.ToString();
             try
