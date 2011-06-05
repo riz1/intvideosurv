@@ -582,6 +582,7 @@ namespace CameraViewer
             LoadCameraInCombox();
             InitDataTable();
             InitVehicleDataTable();
+            InitEventDataTable();
 
             splitContainerControlFaceVideo.Visible = false;
 
@@ -659,7 +660,12 @@ namespace CameraViewer
                 checkedComboBoxEditEventCamera.Properties.Items.Add(
                     VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
             }
-
+            checkedComboBoxEditUserSelection.Properties.Items.Add("无", true);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("停止", false);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("跨线", false);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("逆行", false);
+            checkedComboBoxEditUserSelection.Properties.Items.Add("变道", false);
+            
         }
 
         private void InitDisplayRegion()
@@ -945,7 +951,7 @@ namespace CameraViewer
                 {
                     listLiveFace.RemoveRange(_numberOfPerPage, listLiveFace.Count - _numberOfPerPage);
                 }
-                FillGridControlVehicleDetail(listLiveFace);
+                FillGridControlFaceDetail(listLiveFace);
             };
         }
 
@@ -1571,12 +1577,12 @@ namespace CameraViewer
 
         }
 
-        private void FillGridControlVehicleDetail(List<Face> listFace)
+        private void FillGridControlFaceDetail(List<Face> listFace)
         {
 
             dataTableFace.Rows.Clear();
             if (listFace == null) return;
-            int i = 1;
+            int i = (_currentPage - 1) * _numberOfPerPage + 1;
 
 
             foreach (var variable in listFace)
@@ -1604,6 +1610,7 @@ namespace CameraViewer
 
 
         }
+
 
         private void InitDataTable()
         {
@@ -1900,7 +1907,6 @@ namespace CameraViewer
                                        variable.Value.stemagainst,
                                        variable.Value.stop,
                                        variable.Value.accident,
-                                       variable.Value.accident,
                                        variable.Value.linechange,
                                        variable.Value.platecolor,
                                        variable.Value.vehiclecolor,
@@ -1935,7 +1941,7 @@ namespace CameraViewer
             dataTableVehicle.Columns.Add("车牌号", typeof(string));
 
             dataTableVehicle.Columns.Add("时间", typeof(DateTime));
-            dataTableVehicle.Columns.Add("地点");
+            dataTableVehicle.Columns.Add("地点", typeof(string));
             dataTableVehicle.Columns.Add("置信度", typeof(float));
             dataTableVehicle.Columns.Add("speed", typeof(float));
             dataTableVehicle.Columns.Add("stemagainst", typeof(bool));
@@ -1946,6 +1952,7 @@ namespace CameraViewer
             dataTableVehicle.Columns.Add("vehiclecolor", typeof(string));
             dataTableVehicle.Columns.Add("车辆对象", typeof(Vehicle));
         }
+       
         private Vehicle _selectedVehicle;
         private void advBandedGridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
@@ -1987,7 +1994,7 @@ namespace CameraViewer
             if (advBandedGridViewVehicle.SelectedRowsCount > 0)
             {
                 int getSelectedRow = this.advBandedGridViewVehicle.GetSelectedRows()[0];
-                _selectedFace = (Face)(this.advBandedGridViewVehicle.GetRowCellValue(getSelectedRow, "车辆对象"));
+                _selectedVehicle = (Vehicle)(this.advBandedGridViewVehicle.GetRowCellValue(getSelectedRow, "车辆对象"));
                 FillPicVideoVehicle(_selectedVehicle);
             }
         }
@@ -2194,19 +2201,222 @@ namespace CameraViewer
         private void ReloadQueryDataForEvent()
         {
             string errMessage = "";
-            string faceQueryCondition = GenerateEventQueryCondition();
-            _totalCount = FaceBusiness.Instance.GetFaceQuantity(ref errMessage, faceQueryCondition);
+            string eventQueryCondition = GenerateEventQueryCondition();
+            _totalCountForEvent = EventBusiness.Instance.GetEventQuantity(ref errMessage, eventQueryCondition);
             CaculatePagesForEvent();
-            Dictionary<int, Face> listFace = FaceBusiness.Instance.GetFaceCustom(ref errMessage, faceQueryCondition, _currentPage, _numberOfPerPage);
+            Dictionary<int, Event> listEvent = EventBusiness.Instance.GetEventCustom(ref errMessage, eventQueryCondition, _currentPageForEvent, _numberOfPerPageForEvent);
+
             //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
             //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
             //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
 
-            FillGridControlEventDetail(listFace);
+            FillGridControlEventDetail(listEvent);
+            string[] userSelections = checkedComboBoxEditUserSelection.Text.Split(',');
+            if (listEvent == null)
+            {
+                return;
+            }
+            foreach (var variable in listEvent)
+            {
+                Dictionary<int, ObjectInfo> listObject = new Dictionary<int, ObjectInfo>();
+                listObject = ObjectBusiness.Instance.GetEventObjectCustom(ref errMessage, variable.Value.EventId);
+                foreach (var objcet in listObject)
+                {
+                    foreach (string selection in userSelections)
+                    {
+                        if (selection == "无")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            if (selection == "停止")
+                            {
+                                //显示objcet.Value.stop
+                            }
+                            else if (selection == "跨线")
+                            {
+                                //显示objcet.Value.CrossLine
+                            }
+                            else if (selection == "逆行")
+                            {
+                                //显示objcet.Value.illegalDir
+                            }
+                            else if (selection == "变道")
+                            {
+                                //显示objcet.Value.changeChannel
+                            }
+                        }
+                    }
+                }
+      
+            }
+        }
+        
+        private void FillGridControlEventDetail(Dictionary<int, Event> listevent)
+        {
+            dataTableEvent.Rows.Clear();
+            if (listevent == null) return;
+            int i = 1;
+
+
+            foreach (var variable in listevent)
+            {
+                dataTableEvent.Rows.Add(i++,
+                                       variable.Value.CapturePicture.Datetime,
+                                       variable.Value.CameraInfo.Name,
+                                       variable.Value);
+            }
+            /*GridColumn column;
+            RepositoryItemPictureEdit pictureEdit = gridControlFace.RepositoryItems.Add("PictureEdit") as RepositoryItemPictureEdit;
+            pictureEdit.SizeMode = PictureSizeMode.Zoom;
+            pictureEdit.NullText = " ";
+            column = advBandedGridViewFace.Columns["照片"];
+            column.ColumnEdit = pictureEdit;*/
+            gridControlEvent.DataSource = dataTableFace;
+            advBandedGridViewEvent.Columns["时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            advBandedGridViewEvent.Columns["事件对象"].Visible = false;
+
+            HikPlayer.PlayM4_CloseFile(_lastVideoPort);
+            splitContainerControlFaceVideo.Panel1.Refresh();
+            splitContainerControlFaceVideo.Visible = false;
+
+        }
+        //DataTable dataTableEvent = new DataTable();
+        private void InitEventDataTable()
+        {
+            dataTableEvent.Columns.Add("索引号", typeof(int));
+
+            dataTableEvent.Columns.Add("时间", typeof(DateTime));
+            dataTableEvent.Columns.Add("地点", typeof(string));
+            dataTableEvent.Columns.Add("事件对象", typeof(Event));
+        }
+        private Event _selectedEvent;
+        private void advBandedGridViewEvent_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            if (advBandedGridViewEvent.SelectedRowsCount > 0)
+            {
+                int getSelectedRow = this.advBandedGridViewEvent.GetSelectedRows()[0];
+                _selectedEvent = (Event)(this.advBandedGridViewEvent.GetRowCellValue(getSelectedRow, "事件对象"));
+                FillPicVideoEvent(_selectedEvent);
+            }
         }
 
-        private void FillGridControlEventDetail(Dictionary<int, Face> listFace)
+        private int _lastVideoPortEvent = -1;
+        private void FillPicVideoEvent(Event oevent)
         {
+            if (File.Exists(oevent.CapturePicture.FilePath))
+            {
+                pictureEditVehicle.Image = Image.FromFile(oevent.CapturePicture.FilePath);
+            }
+            if (File.Exists(oevent.VideoInfo.FilePath))
+            {
+                if (_lastVideoPortEvent != -1)
+                {
+                    bool ret = HikPlayer.PlayM4_CloseFile(_lastVideoPortEvent);
+                }
+                if (File.Exists(oevent.VideoInfo.FilePath))
+                {
+                    _lastVideoPortEvent = 1;
+                    splitContainerControlEventVideo.Visible = true;
+                    HikPlayer.PlayM4_OpenFile(_lastVideoPortEvent, oevent.VideoInfo.FilePath);
+                    HikPlayer.PlayM4_Play(_lastVideoPortEvent, splitContainerControlEventVideo.Panel1.Handle);
+                }
+
+            }
+
+        }
+
+        private void advBandedGridViewEvent_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            if (advBandedGridViewEvent.SelectedRowsCount > 0)
+            {
+                int getSelectedRow = this.advBandedGridViewEvent.GetSelectedRows()[0];
+                _selectedEvent = (Event)(this.advBandedGridViewEvent.GetRowCellValue(getSelectedRow, "事件对象"));
+                FillPicVideoEvent(_selectedEvent);
+            }
+        }
+
+        private void advBandedGridViewEvent_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString().Trim();
+            }
+        }
+
+        /*private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+          {
+              JustForTest justForTest = new JustForTest();
+              justForTest.ShowDialog();
+          }
+
+        private void simpleButton13_Click(object sender, EventArgs e)
+        {
+            HikPlayer.PlayM4_Play(_lastVideoPort1, splitContainerControlVideoVehicle.Panel1.Handle);
+        }*/
+
+        private bool _isPausedForEvent;
+        private void simpleButton14_Click(object sender, EventArgs e)
+        {
+            _isPaused = !_isPausedForVehicle;
+            HikPlayer.PlayM4_Pause(_lastVideoPortEvent, _isPausedForEvent);
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e)
+        {
+            HikPlayer.PlayM4_CloseFile(_lastVideoPortEvent);
+            _lastVideoPortEvent = -1;
+            _isPausedForEvent = false;
+        }
+
+
+        private void btnEventPrePage_Click(object sender, EventArgs e)
+        {
+            _currentPageForEvent--;
+            if (_currentPageForEvent < 1)
+            {
+                _currentPageForEvent++;
+                return;
+            }
+            ReloadQueryDataForEvent();
+        }
+
+
+
+        private void btnEventNextPage_Click(object sender, EventArgs e)
+        {
+            _currentPageForEvent++;
+            if (_currentPageForEvent > _totalPagesForEvent)
+            {
+                _currentPageForEvent--;
+                return;
+            }
+            ReloadQueryDataForEvent();
+        }
+
+        private void btnEventLastPage_Click(object sender, EventArgs e)
+        {
+            _currentPageForEvent = _totalPagesForEvent;
+            ReloadQueryDataForEvent();
+        }
+
+        private void btnEventFirstPage_Click(object sender, EventArgs e)
+        {
+            _currentPageForEvent = 1;
+            ReloadQueryDataForEvent();
+        }
+
+        private void cbeEventPerPage_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            _numberOfPerPageForEvent = int.Parse(cbeEventNumberPerPage.Text);
+            if (radioGroupEvent.SelectedIndex == 1)
+            {
+                _currentPageForEvent = 1;
+                CaculatePagesForEvent();
+                ReloadQueryDataForEvent();
+            }
 
         }
         private void CaculatePagesForEvent()
