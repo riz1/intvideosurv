@@ -27,13 +27,13 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [RecognizerCamera](");
+            sbField.Append("INSERT INTO  RecognizerCamera(");
             sbValue.Append("values (");
-            //sbField.Append("[id]");
+            //sbField.Append("id");
             //sbValue.AppendFormat("{0}", id);
-            sbField.Append("[Recognizer]");
+            sbField.Append("Recognizer");
             sbValue.AppendFormat("{0}", recognizer);
-            sbField.Append(",[Camera])");
+            sbField.Append(",Camera)");
             sbValue.AppendFormat(",{0})", camera);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
@@ -56,19 +56,19 @@ namespace IntVideoSurv.DataAccess
             
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [RecognizerInfo](");
+            sbField.Append("INSERT INTO  RecognizerInfo(");
             sbValue.Append("values (");
-            //sbField.Append("[id]");
+            //sbField.Append("id");
             //sbValue.AppendFormat("'{0}'", oDecoderInfo.id);
-            sbField.Append("[Name]");
+            sbField.Append("Name");
             sbValue.AppendFormat("'{0}'", oRecognizerInfo.Name);
-            sbField.Append(",[Ip]");
+            sbField.Append(",Ip");
             sbValue.AppendFormat(",'{0}'", oRecognizerInfo.Ip);
-            sbField.Append(",[Port]");
+            sbField.Append(",Port");
             sbValue.AppendFormat(",{0}", oRecognizerInfo.Port);
-            sbField.Append(",[RecogType]");
+            sbField.Append(",RecogType");
             sbValue.AppendFormat(",{0}", oRecognizerInfo.RecogType);
-            sbField.Append(",[MaxRecogNumber])");
+            sbField.Append(",MaxRecogNumber)");
             sbValue.AppendFormat(",'{0}')", oRecognizerInfo.MaxRecogNumber);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();

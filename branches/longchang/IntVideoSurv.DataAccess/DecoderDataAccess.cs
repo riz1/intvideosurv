@@ -28,13 +28,13 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [DecoderCamera](");
+            sbField.Append("INSERT INTO  DecoderCamera(");
             sbValue.Append("values (");
-            //sbField.Append("[id]");
+            //sbField.Append("id");
             //sbValue.AppendFormat("{0}", id);
-            sbField.Append("[decoder]");
+            sbField.Append("decoder");
             sbValue.AppendFormat("{0}", decoder);
-            sbField.Append(",[camera])");
+            sbField.Append(",camera)");
             sbValue.AppendFormat(",{0})", camera);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
@@ -83,17 +83,17 @@ namespace IntVideoSurv.DataAccess
             }*/
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [DecoderInfo](");
+            sbField.Append("INSERT INTO  DecoderInfo(");
             sbValue.Append("values (");
-            //sbField.Append("[id]");
+            //sbField.Append("id");
             //sbValue.AppendFormat("'{0}'", oDecoderInfo.id);
-            sbField.Append("[Name]");
+            sbField.Append("Name");
             sbValue.AppendFormat("'{0}'", oDecoderInfo.Name);
-            sbField.Append(",[Ip]");
+            sbField.Append(",Ip");
             sbValue.AppendFormat(",'{0}'", oDecoderInfo.Ip);
-            sbField.Append(",[Port]");
+            sbField.Append(",Port");
             sbValue.AppendFormat(",{0}", oDecoderInfo.Port);
-            sbField.Append(",[MaxDecodeChannelNo])");
+            sbField.Append(",MaxDecodeChannelNo)");
             sbValue.AppendFormat(",'{0}')", oDecoderInfo.MaxDecodeChannelNo);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();

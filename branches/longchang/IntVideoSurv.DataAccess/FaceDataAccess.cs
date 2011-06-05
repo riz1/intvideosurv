@@ -14,17 +14,17 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [Face](");
+            sbField.Append("INSERT INTO  Face(");
             sbValue.Append("values (");
-            //sbField.Append("[FaceID]");
+            //sbField.Append("FaceID");
             //sbValue.AppendFormat("'{0}'", oFace.FaceID);
-            sbField.Append("[score]");
+            sbField.Append("score");
             sbValue.AppendFormat("'{0}'", oFace.score);
-            sbField.Append(",[RectID]");
+            sbField.Append(",RectID");
             sbValue.AppendFormat(",{0}", oFace.RectID);
-            sbField.Append(",[PictureID]");
+            sbField.Append(",PictureID");
             sbValue.AppendFormat(",{0}", oFace.PictureID);
-            sbField.Append(",[FacePath])");
+            sbField.Append(",FacePath)");
             sbValue.AppendFormat(",'{0}')", oFace.FacePath);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 
@@ -49,7 +49,7 @@ namespace IntVideoSurv.DataAccess
                 "select Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId " +
                 "from Face,CapturePicture,VideoInfo " +
                 "where Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.[DateTime] desc", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.DateTime desc", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -67,7 +67,7 @@ namespace IntVideoSurv.DataAccess
                 "select count(distinct Face.FaceId) " +
                 "from Face,CapturePicture,VideoInfo " +
                 "where Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -84,7 +84,7 @@ namespace IntVideoSurv.DataAccess
             string tables = " Face,CapturePicture,VideoInfo ";
             string condition=string.Format(
                 " Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " DateTime ";
             byte ordertype = 1;
             string pkcolumn = " FaceId ";

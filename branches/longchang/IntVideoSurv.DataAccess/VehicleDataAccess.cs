@@ -14,61 +14,61 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [Vehicle](");
+            sbField.Append("INSERT INTO  Vehicle(");
             sbValue.Append("values (");
-            sbField.Append("[VehicleID]");
+            sbField.Append("VehicleID");
             sbValue.AppendFormat("{0}", oVehicle.VehicleID);
-            sbField.Append(",[platenumber]");
+            sbField.Append(",platenumber");
             sbValue.AppendFormat(",'{0}'", oVehicle.platenumber);
-            sbField.Append(",[speed]");
+            sbField.Append(",speed");
             sbValue.AppendFormat(",{0}", oVehicle.speed);
             if (oVehicle.stemagainst == true)
             {
-                sbField.Append(",[stemagainst]");
+                sbField.Append(",stemagainst");
                 sbValue.AppendFormat(",{0}", 1);
             }
             else
             {
-                sbField.Append(",[stemagainst]");
+                sbField.Append(",stemagainst");
                 sbValue.AppendFormat(",{0}", 0);
             }
             if (oVehicle.stop == true)
             {
-                sbField.Append(",[stop]");
+                sbField.Append(",stop");
                 sbValue.AppendFormat(",{0}", 1);
             }
             else
             {
-                sbField.Append(",[stop]");
+                sbField.Append(",stop");
                 sbValue.AppendFormat(",{0}", 0);
             }
             if (oVehicle.accident == true)
             {
-                sbField.Append(",[accident]");
+                sbField.Append(",accident");
                 sbValue.AppendFormat(",{0}", 1);
             }
             else
             {
-                sbField.Append(",[accident]");
+                sbField.Append(",accident");
                 sbValue.AppendFormat(",{0}", 0);
             }
             if (oVehicle.linechange == true)
             {
-                sbField.Append(",[linechange]");
+                sbField.Append(",linechange");
                 sbValue.AppendFormat(",{0}", 1);
             }
             else
             {
-                sbField.Append(",[linechange]");
+                sbField.Append(",linechange");
                 sbValue.AppendFormat(",{0}", 0);
             }
-            sbField.Append(",[platecolor]");
+            sbField.Append(",platecolor");
             sbValue.AppendFormat(",'{0}'", oVehicle.platecolor);
-            sbField.Append(",[vehiclecolor]");
+            sbField.Append(",vehiclecolor");
             sbValue.AppendFormat(",'{0}'", oVehicle.vehiclecolor);
-            sbField.Append(",[PictureID]");
+            sbField.Append(",PictureID");
             sbValue.AppendFormat(",{0}", oVehicle.PictureID);
-            sbField.Append(",[REctId])");
+            sbField.Append(",REctId)");
             sbValue.AppendFormat(",{0})", oVehicle.REctId);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
@@ -95,7 +95,7 @@ namespace IntVideoSurv.DataAccess
                 ",Vehicle.confidence,VideoInfo.ID as VideoId " +
                 "from Vehicle,CapturePicture,VideoInfo " +
                 "where Vehicle.PictureID=CapturePicture.PictureID and " +
-                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.[Datetime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.Datetime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -112,7 +112,7 @@ namespace IntVideoSurv.DataAccess
             string tables = " Vehicle,CapturePicture,VideoInfo ";
             string condition = string.Format(
                 " Vehicle.PictureID=CapturePicture.PictureID and " +
-                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.[Datetime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.Datetime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " Datetime ";
             byte ordertype = 1;
             string pkcolumn = " VehicleID ";
@@ -150,7 +150,7 @@ namespace IntVideoSurv.DataAccess
                 "select count(distinct Vehicle.VehicleID) " +
                 "from Vehicle,CapturePicture,VideoInfo " +
                 "where Vehicle.PictureID=CapturePicture.PictureID and " +
-                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.[Datetime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.Datetime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());

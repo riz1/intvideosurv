@@ -14,19 +14,19 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [EvenRectInfo](");
+            sbField.Append("INSERT INTO  EvenRectInfo(");
             sbValue.Append("values (");
-            //sbField.Append("[FaceID]");
+            //sbField.Append("FaceID");
             //sbValue.AppendFormat("'{0}'", oFace.FaceID);
-            sbField.Append("[x]");
+            sbField.Append("x");
             sbValue.AppendFormat("{0}", oEventRect.x);
-            sbField.Append(",[y]");
+            sbField.Append(",y");
             sbValue.AppendFormat(",{0}", oEventRect.y);
-            sbField.Append(",[w]");
+            sbField.Append(",w");
             sbValue.AppendFormat(",{0}", oEventRect.w);
-            sbField.Append(",[h]");
+            sbField.Append(",h");
             sbValue.AppendFormat(",{0}", oEventRect.h);
-            sbField.Append(",[ObjectId])");
+            sbField.Append(",ObjectId)");
             sbValue.AppendFormat(",{0})", oEventRect.ObjectId);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 
@@ -83,7 +83,7 @@ namespace IntVideoSurv.DataAccess
             string tables = " EventInfo ";
             string condition = string.Format(
                 " EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " DateTime ";
             byte ordertype = 1;
             string pkcolumn = " EventId ";

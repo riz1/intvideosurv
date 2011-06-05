@@ -14,13 +14,13 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [EventInfo](");
+            sbField.Append("INSERT INTO  EventInfo(");
             sbValue.Append("values (");
-            sbField.Append("[CarNum]");
+            sbField.Append("CarNum");
             sbValue.AppendFormat("{0}", oEvent.CarNum);
-            sbField.Append(",[Congestion]");
+            sbField.Append(",Congestion");
             sbValue.AppendFormat(",{0}", oEvent.Congestion);
-            sbField.Append(",[PictureID])");
+            sbField.Append(",PictureID)");
             sbValue.AppendFormat(",{0})", oEvent.PictureID);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 
@@ -45,7 +45,7 @@ namespace IntVideoSurv.DataAccess
                 "select EventInfo.EventId,EventInfo.CarNum,EventInfo.Congestion,EventInfo.PictureId,VideoInfo.id AS VideoId " +
                 "from EventInfo,CapturePicture,VideoInfo " +
                 "where EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.[DateTime] desc", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.DateTime desc", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -63,7 +63,7 @@ namespace IntVideoSurv.DataAccess
                 "select count(distinct EventInfo.EventId) " +
                 "from EventInfo,CapturePicture,VideoInfo " +
                 "where EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -81,7 +81,7 @@ namespace IntVideoSurv.DataAccess
             string tables = " EventInfo,CapturePicture,VideoInfo ";
             string condition = string.Format(
                 " EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.[DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " DateTime ";
             byte ordertype = 1;
             string pkcolumn = " EventId ";

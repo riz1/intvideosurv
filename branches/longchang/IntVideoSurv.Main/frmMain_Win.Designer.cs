@@ -152,19 +152,21 @@ namespace CameraViewer
             this.splitContainerControl5 = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControlVehicle = new DevExpress.XtraGrid.GridControl();
             this.advBandedGridViewVehicle = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn10 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn22 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn23 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn21 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn22 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn23 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.splitContainerControl6 = new DevExpress.XtraEditors.SplitContainerControl();
             this.pictureEditVehicle = new DevExpress.XtraEditors.PictureEdit();
             this.splitContainerControlVideoVehicle = new DevExpress.XtraEditors.SplitContainerControl();
@@ -244,8 +246,6 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -1096,6 +1096,7 @@ namespace CameraViewer
             this.bandedGridColumn15,
             this.bandedGridColumn27});
             this.advBandedGridViewEvent.GridControl = this.gridControlEvent;
+            this.advBandedGridViewEvent.IndicatorWidth = 40;
             this.advBandedGridViewEvent.Name = "advBandedGridViewEvent";
             this.advBandedGridViewEvent.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.advBandedGridViewEvent.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -1118,6 +1119,7 @@ namespace CameraViewer
             // bandedGridColumn12
             // 
             this.bandedGridColumn12.Caption = "索引号";
+            this.bandedGridColumn12.FieldName = "索引号";
             this.bandedGridColumn12.Name = "bandedGridColumn12";
             this.bandedGridColumn12.Visible = true;
             this.bandedGridColumn12.Width = 217;
@@ -1125,6 +1127,7 @@ namespace CameraViewer
             // bandedGridColumn15
             // 
             this.bandedGridColumn15.Caption = "地点";
+            this.bandedGridColumn15.FieldName = "地点";
             this.bandedGridColumn15.Name = "bandedGridColumn15";
             this.bandedGridColumn15.RowIndex = 1;
             this.bandedGridColumn15.Visible = true;
@@ -1133,6 +1136,7 @@ namespace CameraViewer
             // bandedGridColumn14
             // 
             this.bandedGridColumn14.Caption = "时间";
+            this.bandedGridColumn14.FieldName = "时间";
             this.bandedGridColumn14.Name = "bandedGridColumn14";
             this.bandedGridColumn14.RowIndex = 1;
             this.bandedGridColumn14.Visible = true;
@@ -1141,6 +1145,7 @@ namespace CameraViewer
             // bandedGridColumn27
             // 
             this.bandedGridColumn27.Caption = "事件对象";
+            this.bandedGridColumn27.FieldName = "事件对象";
             this.bandedGridColumn27.Name = "bandedGridColumn27";
             this.bandedGridColumn27.RowIndex = 1;
             // 
@@ -1598,6 +1603,7 @@ namespace CameraViewer
             this.bandedGridColumn22,
             this.bandedGridColumn23});
             this.advBandedGridViewVehicle.GridControl = this.gridControlVehicle;
+            this.advBandedGridViewVehicle.IndicatorWidth = 40;
             this.advBandedGridViewVehicle.Name = "advBandedGridViewVehicle";
             this.advBandedGridViewVehicle.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.advBandedGridViewVehicle.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -1609,9 +1615,21 @@ namespace CameraViewer
             this.advBandedGridViewVehicle.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.advBandedGridView1_RowClick);
             this.advBandedGridViewVehicle.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.advBandedGridView1_CustomDrawRowIndicator);
             // 
+            // gridBand3
+            // 
+            this.gridBand3.Caption = "基本信息";
+            this.gridBand3.Columns.Add(this.bandedGridColumn7);
+            this.gridBand3.Columns.Add(this.bandedGridColumn8);
+            this.gridBand3.Columns.Add(this.bandedGridColumn9);
+            this.gridBand3.Columns.Add(this.bandedGridColumn10);
+            this.gridBand3.MinWidth = 20;
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.Width = 196;
+            // 
             // bandedGridColumn7
             // 
             this.bandedGridColumn7.Caption = "索引号";
+            this.bandedGridColumn7.FieldName = "索引号";
             this.bandedGridColumn7.Name = "bandedGridColumn7";
             this.bandedGridColumn7.Visible = true;
             this.bandedGridColumn7.Width = 94;
@@ -1619,6 +1637,7 @@ namespace CameraViewer
             // bandedGridColumn8
             // 
             this.bandedGridColumn8.Caption = "置信度";
+            this.bandedGridColumn8.FieldName = "置信度";
             this.bandedGridColumn8.Name = "bandedGridColumn8";
             this.bandedGridColumn8.Visible = true;
             this.bandedGridColumn8.Width = 102;
@@ -1626,6 +1645,7 @@ namespace CameraViewer
             // bandedGridColumn9
             // 
             this.bandedGridColumn9.Caption = "时间";
+            this.bandedGridColumn9.FieldName = "时间";
             this.bandedGridColumn9.Name = "bandedGridColumn9";
             this.bandedGridColumn9.RowIndex = 1;
             this.bandedGridColumn9.Visible = true;
@@ -1634,65 +1654,91 @@ namespace CameraViewer
             // bandedGridColumn10
             // 
             this.bandedGridColumn10.Caption = "地点";
+            this.bandedGridColumn10.FieldName = "地点";
             this.bandedGridColumn10.Name = "bandedGridColumn10";
             this.bandedGridColumn10.RowIndex = 2;
             this.bandedGridColumn10.Visible = true;
             this.bandedGridColumn10.Width = 196;
             // 
+            // gridBand4
+            // 
+            this.gridBand4.Caption = "车辆";
+            this.gridBand4.Columns.Add(this.bandedGridColumn11);
+            this.gridBand4.Columns.Add(this.bandedGridColumn20);
+            this.gridBand4.Columns.Add(this.bandedGridColumn22);
+            this.gridBand4.Columns.Add(this.bandedGridColumn17);
+            this.gridBand4.Columns.Add(this.bandedGridColumn13);
+            this.gridBand4.Columns.Add(this.bandedGridColumn23);
+            this.gridBand4.Columns.Add(this.bandedGridColumn18);
+            this.gridBand4.Columns.Add(this.bandedGridColumn19);
+            this.gridBand4.Columns.Add(this.bandedGridColumn21);
+            this.gridBand4.MinWidth = 20;
+            this.gridBand4.Name = "gridBand4";
+            this.gridBand4.Width = 744;
+            // 
             // bandedGridColumn11
             // 
             this.bandedGridColumn11.Caption = "车牌号";
+            this.bandedGridColumn11.FieldName = "车牌号";
             this.bandedGridColumn11.Name = "bandedGridColumn11";
             this.bandedGridColumn11.Visible = true;
             this.bandedGridColumn11.Width = 144;
             // 
-            // bandedGridColumn13
+            // bandedGridColumn20
             // 
-            this.bandedGridColumn13.Caption = "车辆对象";
-            this.bandedGridColumn13.Name = "bandedGridColumn13";
-            this.bandedGridColumn13.Visible = true;
+            this.bandedGridColumn20.Caption = "accident";
+            this.bandedGridColumn20.FieldName = "accident";
+            this.bandedGridColumn20.Name = "bandedGridColumn20";
+            this.bandedGridColumn20.Visible = true;
+            // 
+            // bandedGridColumn22
+            // 
+            this.bandedGridColumn22.Caption = "platecolor";
+            this.bandedGridColumn22.FieldName = "platecolor";
+            this.bandedGridColumn22.Name = "bandedGridColumn22";
+            this.bandedGridColumn22.Visible = true;
             // 
             // bandedGridColumn17
             // 
             this.bandedGridColumn17.Caption = "speed";
+            this.bandedGridColumn17.FieldName = "speed";
             this.bandedGridColumn17.Name = "bandedGridColumn17";
             this.bandedGridColumn17.Visible = true;
+            // 
+            // bandedGridColumn13
+            // 
+            this.bandedGridColumn13.Caption = "车辆对象";
+            this.bandedGridColumn13.FieldName = "车辆对象";
+            this.bandedGridColumn13.Name = "bandedGridColumn13";
+            this.bandedGridColumn13.Visible = true;
+            // 
+            // bandedGridColumn23
+            // 
+            this.bandedGridColumn23.Caption = "vehiclecolor";
+            this.bandedGridColumn23.FieldName = "vehiclecolor";
+            this.bandedGridColumn23.Name = "bandedGridColumn23";
+            this.bandedGridColumn23.Visible = true;
             // 
             // bandedGridColumn18
             // 
             this.bandedGridColumn18.Caption = "stemagainst";
+            this.bandedGridColumn18.FieldName = "stemagainst";
             this.bandedGridColumn18.Name = "bandedGridColumn18";
             this.bandedGridColumn18.Visible = true;
             // 
             // bandedGridColumn19
             // 
             this.bandedGridColumn19.Caption = "stop";
+            this.bandedGridColumn19.FieldName = "stop";
             this.bandedGridColumn19.Name = "bandedGridColumn19";
             this.bandedGridColumn19.Visible = true;
-            // 
-            // bandedGridColumn20
-            // 
-            this.bandedGridColumn20.Caption = "accident";
-            this.bandedGridColumn20.Name = "bandedGridColumn20";
-            this.bandedGridColumn20.Visible = true;
             // 
             // bandedGridColumn21
             // 
             this.bandedGridColumn21.Caption = "linechange";
+            this.bandedGridColumn21.FieldName = "linechange";
             this.bandedGridColumn21.Name = "bandedGridColumn21";
             this.bandedGridColumn21.Visible = true;
-            // 
-            // bandedGridColumn22
-            // 
-            this.bandedGridColumn22.Caption = "platecolor";
-            this.bandedGridColumn22.Name = "bandedGridColumn22";
-            this.bandedGridColumn22.Visible = true;
-            // 
-            // bandedGridColumn23
-            // 
-            this.bandedGridColumn23.Caption = "vehiclecolor";
-            this.bandedGridColumn23.Name = "bandedGridColumn23";
-            this.bandedGridColumn23.Visible = true;
             // 
             // splitContainerControl6
             // 
@@ -1808,6 +1854,7 @@ namespace CameraViewer
             // 
             // comboBoxEdit1
             // 
+            this.comboBoxEdit1.EditValue = "20";
             this.comboBoxEdit1.Location = new System.Drawing.Point(216, 26);
             this.comboBoxEdit1.MenuManager = this.barManager1;
             this.comboBoxEdit1.Name = "comboBoxEdit1";
@@ -1820,6 +1867,7 @@ namespace CameraViewer
             "50",
             "100",
             "200"});
+            this.comboBoxEdit1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.comboBoxEdit1.Size = new System.Drawing.Size(84, 21);
             this.comboBoxEdit1.TabIndex = 37;
             this.comboBoxEdit1.SelectedValueChanged += new System.EventHandler(this.cbeVehicleNumberPerPage_SelectedValueChanged);
@@ -2490,33 +2538,6 @@ namespace CameraViewer
             // 
             this.timerTest.Enabled = true;
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
-            // 
-            // gridBand3
-            // 
-            this.gridBand3.Caption = "基本信息";
-            this.gridBand3.Columns.Add(this.bandedGridColumn7);
-            this.gridBand3.Columns.Add(this.bandedGridColumn8);
-            this.gridBand3.Columns.Add(this.bandedGridColumn9);
-            this.gridBand3.Columns.Add(this.bandedGridColumn10);
-            this.gridBand3.MinWidth = 20;
-            this.gridBand3.Name = "gridBand3";
-            this.gridBand3.Width = 196;
-            // 
-            // gridBand4
-            // 
-            this.gridBand4.Caption = "车辆";
-            this.gridBand4.Columns.Add(this.bandedGridColumn11);
-            this.gridBand4.Columns.Add(this.bandedGridColumn20);
-            this.gridBand4.Columns.Add(this.bandedGridColumn22);
-            this.gridBand4.Columns.Add(this.bandedGridColumn17);
-            this.gridBand4.Columns.Add(this.bandedGridColumn13);
-            this.gridBand4.Columns.Add(this.bandedGridColumn23);
-            this.gridBand4.Columns.Add(this.bandedGridColumn18);
-            this.gridBand4.Columns.Add(this.bandedGridColumn19);
-            this.gridBand4.Columns.Add(this.bandedGridColumn21);
-            this.gridBand4.MinWidth = 20;
-            this.gridBand4.Name = "gridBand4";
-            this.gridBand4.Width = 744;
             // 
             // MainForm
             // 

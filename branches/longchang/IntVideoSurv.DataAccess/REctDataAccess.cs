@@ -14,17 +14,17 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [REct](");
+            sbField.Append("INSERT INTO  REct(");
             sbValue.Append("values (");
-            //sbField.Append("[RectID]");
+            //sbField.Append("RectID");
             //sbValue.AppendFormat("'{0}'", oRect.RectID);
-            sbField.Append("[X]");
+            sbField.Append("X");
             sbValue.AppendFormat("{0}", oRect.X);
-            sbField.Append(",[Y]");
+            sbField.Append(",Y");
             sbValue.AppendFormat(",{0}", oRect.Y);
-            sbField.Append(",[W]");
+            sbField.Append(",W");
             sbValue.AppendFormat(",{0}", oRect.W);
-            sbField.Append(",[H])");
+            sbField.Append(",H)");
             sbValue.AppendFormat(",{0})", oRect.H);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 

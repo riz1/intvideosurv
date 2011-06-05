@@ -15,16 +15,16 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [CapturePicture](");
+            sbField.Append("INSERT INTO  CapturePicture(");
             sbValue.Append("values (");
-            //sbField.Append("[PictureID]");
+            //sbField.Append("PictureID");
             //sbValue.AppendFormat("'{0}'", ocapturePicture.PictureID);
-            sbField.Append("[CameraID]");
+            sbField.Append("CameraID");
             sbValue.AppendFormat("{0}", ocapturePicture.CameraID);
-            sbField.Append(",[Datetime]");
+            sbField.Append(",Datetime");
             //sbValue.AppendFormat(",'{0}'", ocapturePicture.Datetime);
             sbValue.AppendFormat(",'{0}'", ocapturePicture.Datetime);
-            sbField.Append(",[FilePath])");
+            sbField.Append(",FilePath)");
             sbValue.AppendFormat(",'{0}')", ocapturePicture.FilePath);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
