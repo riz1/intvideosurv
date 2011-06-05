@@ -97,9 +97,12 @@ namespace CameraViewer
             this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControlEvent = new DevExpress.XtraGrid.GridControl();
             this.advBandedGridViewEvent = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn15 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn14 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand8 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.splitContainerControl8 = new DevExpress.XtraEditors.SplitContainerControl();
             this.pictureEditEvent = new DevExpress.XtraEditors.PictureEdit();
             this.splitContainerControlEventVideo = new DevExpress.XtraEditors.SplitContainerControl();
@@ -112,7 +115,7 @@ namespace CameraViewer
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.simpleButton13 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonPlay = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton14 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.checkedComboBoxEditUserSelection = new DevExpress.XtraEditors.CheckedComboBoxEdit();
@@ -227,9 +230,6 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
-            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand8 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -1003,6 +1003,16 @@ namespace CameraViewer
             this.advBandedGridViewEvent.OptionsView.ShowBands = false;
             this.advBandedGridViewEvent.OptionsView.ShowGroupPanel = false;
             // 
+            // gridBand5
+            // 
+            this.gridBand5.Caption = "基本信息";
+            this.gridBand5.Columns.Add(this.bandedGridColumn12);
+            this.gridBand5.Columns.Add(this.bandedGridColumn15);
+            this.gridBand5.Columns.Add(this.bandedGridColumn14);
+            this.gridBand5.MinWidth = 20;
+            this.gridBand5.Name = "gridBand5";
+            this.gridBand5.Width = 217;
+            // 
             // bandedGridColumn12
             // 
             this.bandedGridColumn12.Caption = "索引号";
@@ -1025,6 +1035,20 @@ namespace CameraViewer
             this.bandedGridColumn14.RowIndex = 1;
             this.bandedGridColumn14.Visible = true;
             this.bandedGridColumn14.Width = 128;
+            // 
+            // gridBand7
+            // 
+            this.gridBand7.Caption = "物体信息";
+            this.gridBand7.MinWidth = 20;
+            this.gridBand7.Name = "gridBand7";
+            this.gridBand7.Width = 63;
+            // 
+            // gridBand8
+            // 
+            this.gridBand8.Caption = "rect信息";
+            this.gridBand8.MinWidth = 20;
+            this.gridBand8.Name = "gridBand8";
+            this.gridBand8.Width = 75;
             // 
             // splitContainerControl8
             // 
@@ -1057,7 +1081,7 @@ namespace CameraViewer
             this.splitContainerControlEventVideo.Name = "splitContainerControlEventVideo";
             this.splitContainerControlEventVideo.Panel1.Text = "Panel1";
             this.splitContainerControlEventVideo.Panel2.Controls.Add(this.simpleButton6);
-            this.splitContainerControlEventVideo.Panel2.Controls.Add(this.simpleButton13);
+            this.splitContainerControlEventVideo.Panel2.Controls.Add(this.simpleButtonPlay);
             this.splitContainerControlEventVideo.Panel2.Controls.Add(this.simpleButton14);
             this.splitContainerControlEventVideo.Panel2.Text = "Panel2";
             this.splitContainerControlEventVideo.Size = new System.Drawing.Size(244, 198);
@@ -1171,15 +1195,15 @@ namespace CameraViewer
             this.layoutControlItem3.TextToControlDistance = 0;
             this.layoutControlItem3.TextVisible = false;
             // 
-            // simpleButton13
+            // simpleButtonPlay
             // 
-            this.simpleButton13.Location = new System.Drawing.Point(1, 2);
-            this.simpleButton13.Name = "simpleButton13";
-            this.simpleButton13.Size = new System.Drawing.Size(78, 22);
-            this.simpleButton13.StyleController = this.layoutControl1;
-            this.simpleButton13.TabIndex = 2;
-            this.simpleButton13.Text = ">";
-            this.simpleButton13.Click += new System.EventHandler(this.simpleButton13_Click);
+            this.simpleButtonPlay.Location = new System.Drawing.Point(1, 2);
+            this.simpleButtonPlay.Name = "simpleButtonPlay";
+            this.simpleButtonPlay.Size = new System.Drawing.Size(78, 22);
+            this.simpleButtonPlay.StyleController = this.layoutControl1;
+            this.simpleButtonPlay.TabIndex = 2;
+            this.simpleButtonPlay.Text = ">";
+            this.simpleButtonPlay.Click += new System.EventHandler(this.simpleButtonPlay_Click);
             // 
             // simpleButton14
             // 
@@ -1277,7 +1301,7 @@ namespace CameraViewer
             this.cbeEventNumberPerPage.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbeEventNumberPerPage.Size = new System.Drawing.Size(79, 21);
             this.cbeEventNumberPerPage.TabIndex = 47;
-            this.cbeEventNumberPerPage.SelectedValueChanged += new System.EventHandler(this.cbeVehicleNumberPerPage_SelectedValueChanged);
+            this.cbeEventNumberPerPage.SelectedValueChanged += new System.EventHandler(this.cbeEventNumberPerPage_SelectedValueChanged);
             // 
             // btnEventLastPage
             // 
@@ -2350,30 +2374,6 @@ namespace CameraViewer
             this.timerTest.Enabled = true;
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
-            // gridBand5
-            // 
-            this.gridBand5.Caption = "基本信息";
-            this.gridBand5.Columns.Add(this.bandedGridColumn12);
-            this.gridBand5.Columns.Add(this.bandedGridColumn15);
-            this.gridBand5.Columns.Add(this.bandedGridColumn14);
-            this.gridBand5.MinWidth = 20;
-            this.gridBand5.Name = "gridBand5";
-            this.gridBand5.Width = 217;
-            // 
-            // gridBand7
-            // 
-            this.gridBand7.Caption = "物体信息";
-            this.gridBand7.MinWidth = 20;
-            this.gridBand7.Name = "gridBand7";
-            this.gridBand7.Width = 63;
-            // 
-            // gridBand8
-            // 
-            this.gridBand8.Caption = "rect信息";
-            this.gridBand8.MinWidth = 20;
-            this.gridBand8.Name = "gridBand8";
-            this.gridBand8.Width = 75;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2674,7 +2674,7 @@ namespace CameraViewer
         private DevExpress.XtraEditors.PictureEdit pictureEditEvent;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControlEventVideo;
         private DevExpress.XtraEditors.SimpleButton simpleButton6;
-        private DevExpress.XtraEditors.SimpleButton simpleButton13;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonPlay;
         private DevExpress.XtraEditors.SimpleButton simpleButton14;
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewEvent;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;
