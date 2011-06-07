@@ -27,6 +27,7 @@ using System.Threading;
 using log4net;
 using System.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
+using CameraViewer.Player;
 
 
 namespace CameraViewer
@@ -2484,6 +2485,46 @@ namespace CameraViewer
             string str ="";
             TTestInfoBusiness.Instance.Insert(ref str, new TTestInfo() {Id = 1, ts = DateTime.Now});
             List<TTestInfo> list = TTestInfoBusiness.Instance.GetAllTTestInfo(ref str);
+        }
+
+        private AirnoixCamera airnoixCamera;
+        private void barButtonItem17_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //0x000A0000 
+            CameraWindow cameraWindow = mainMultiplexer.GetCurrentCameraWindow();
+            //IntPtr intPtr = AirnoixClient.MP4_ClientInit(cameraWindow.Handle, 0x000A0000, 0x00000200, 0);
+            //tagRECT tc = new tagRECT() { top = 0, left = 0, right = cameraWindow.Width, bottom = cameraWindow.Height };
+            //AirnoixClient.MP4_ClientSetDisPlayPos(intPtr, ref tc);
+            //int  ret = AirnoixClient.MP4_ClientSetWaitTime(intPtr, 30000);
+            //ret = AirnoixClient.MP4_ClientSetConnectUser(intPtr, "system", "system");
+            //ret = AirnoixClient.MP4_ClientConnectEx(intPtr, "192.168.1.6", 6002, 0, 0, 0);
+
+            airnoixCamera = new AirnoixCamera(cameraWindow.Handle);   
+            airnoixCamera.DisplayPos = new Rectangle(0,0,cameraWindow.Width,cameraWindow.Height);
+            airnoixCamera.Ip = "192.168.1.6";
+            airnoixCamera.Port = 6002;
+            airnoixCamera.UserName = "system";
+            airnoixCamera.Password = "system";
+            airnoixCamera.SaveTo = "c:\\";
+
+            airnoixCamera.Start();
+
+
+        }
+
+        private void barButtonItem18_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            airnoixCamera.StartRecord();
+        }
+
+        private void barButtonItem19_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            airnoixCamera.StopRecord();
+        }
+
+        private void barButtonItem20_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Image xx = airnoixCamera.CaptureImage();
         }
 
     }
