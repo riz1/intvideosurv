@@ -62,6 +62,8 @@ namespace CameraViewer
             this.barButtonD7 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonD8 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonD9 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem16 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem17 = new DevExpress.XtraBars.BarButtonItem();
             this.bar4 = new DevExpress.XtraBars.Bar();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
@@ -246,7 +248,9 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
-            this.barButtonItem16 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem18 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem19 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem20 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -398,9 +402,13 @@ namespace CameraViewer
             this.barButtonD7,
             this.barButtonD8,
             this.barButtonD9,
-            this.barButtonItem16});
+            this.barButtonItem16,
+            this.barButtonItem17,
+            this.barButtonItem18,
+            this.barButtonItem19,
+            this.barButtonItem20});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 51;
+            this.barManager1.MaxItemId = 55;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.barManager1.StatusBar = this.bar4;
@@ -505,7 +513,11 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD7),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD8),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonD9),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem16)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem16),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem17),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem18),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem19),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem20)});
             this.bar3.Offset = 4;
             this.bar3.Text = "Custom 3";
             // 
@@ -632,6 +644,20 @@ namespace CameraViewer
             this.barButtonD9.Caption = "9";
             this.barButtonD9.Id = 49;
             this.barButtonD9.Name = "barButtonD9";
+            // 
+            // barButtonItem16
+            // 
+            this.barButtonItem16.Caption = "TimeStamp";
+            this.barButtonItem16.Id = 50;
+            this.barButtonItem16.Name = "barButtonItem16";
+            this.barButtonItem16.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem16_ItemClick);
+            // 
+            // barButtonItem17
+            // 
+            this.barButtonItem17.Caption = "Airnoix";
+            this.barButtonItem17.Id = 51;
+            this.barButtonItem17.Name = "barButtonItem17";
+            this.barButtonItem17.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem17_ItemClick);
             // 
             // bar4
             // 
@@ -2542,12 +2568,26 @@ namespace CameraViewer
             this.timerTest.Enabled = true;
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
-            // barButtonItem16
+            // barButtonItem18
             // 
-            this.barButtonItem16.Caption = "TimeStamp";
-            this.barButtonItem16.Id = 50;
-            this.barButtonItem16.Name = "barButtonItem16";
-            this.barButtonItem16.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem16_ItemClick);
+            this.barButtonItem18.Caption = "startrecord";
+            this.barButtonItem18.Id = 52;
+            this.barButtonItem18.Name = "barButtonItem18";
+            this.barButtonItem18.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem18_ItemClick);
+            // 
+            // barButtonItem19
+            // 
+            this.barButtonItem19.Caption = "endrecord";
+            this.barButtonItem19.Id = 53;
+            this.barButtonItem19.Name = "barButtonItem19";
+            this.barButtonItem19.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem19_ItemClick);
+            // 
+            // barButtonItem20
+            // 
+            this.barButtonItem20.Caption = "getpicture";
+            this.barButtonItem20.Id = 54;
+            this.barButtonItem20.Name = "barButtonItem20";
+            this.barButtonItem20.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem20_ItemClick);
             // 
             // MainForm
             // 
@@ -2890,6 +2930,10 @@ namespace CameraViewer
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
         private DevExpress.XtraBars.BarButtonItem barButtonItem16;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem17;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem18;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem19;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem20;
         
     }
 }

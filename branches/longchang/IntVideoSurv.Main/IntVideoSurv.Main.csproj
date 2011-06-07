@@ -372,6 +372,8 @@
     <Compile Include="NetWorking\LiveRecognizerVehiclePacketHandle.cs" />
     <Compile Include="NetWorking\NetImage.cs" />
     <Compile Include="NetWorking\RecognizerClientConnection.cs" />
+    <Compile Include="Player\AirnoixCamera.cs" />
+    <Compile Include="Player\AirnoixClient.cs" />
     <Compile Include="Player\AirnoixPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
