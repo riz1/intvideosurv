@@ -64,6 +64,9 @@ namespace CameraViewer
             this.barButtonD9 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem16 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem17 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem18 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem19 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem20 = new DevExpress.XtraBars.BarButtonItem();
             this.bar4 = new DevExpress.XtraBars.Bar();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
@@ -184,7 +187,7 @@ namespace CameraViewer
             this.btnVehicleNextPage = new DevExpress.XtraEditors.SimpleButton();
             this.btnVehiclePrePage = new DevExpress.XtraEditors.SimpleButton();
             this.btnVehicleFirstPage = new DevExpress.XtraEditors.SimpleButton();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.textEditPlateNumber = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.btnQueryVehicle = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -248,9 +251,6 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
-            this.barButtonItem18 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem19 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem20 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -317,7 +317,7 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPlateNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTimeVehicle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeVehicle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditVehicleCamera.Properties)).BeginInit();
@@ -658,6 +658,27 @@ namespace CameraViewer
             this.barButtonItem17.Id = 51;
             this.barButtonItem17.Name = "barButtonItem17";
             this.barButtonItem17.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem17_ItemClick);
+            // 
+            // barButtonItem18
+            // 
+            this.barButtonItem18.Caption = "startrecord";
+            this.barButtonItem18.Id = 52;
+            this.barButtonItem18.Name = "barButtonItem18";
+            this.barButtonItem18.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem18_ItemClick);
+            // 
+            // barButtonItem19
+            // 
+            this.barButtonItem19.Caption = "endrecord";
+            this.barButtonItem19.Id = 53;
+            this.barButtonItem19.Name = "barButtonItem19";
+            this.barButtonItem19.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem19_ItemClick);
+            // 
+            // barButtonItem20
+            // 
+            this.barButtonItem20.Caption = "getpicture";
+            this.barButtonItem20.Id = 54;
+            this.barButtonItem20.Name = "barButtonItem20";
+            this.barButtonItem20.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem20_ItemClick);
             // 
             // bar4
             // 
@@ -1849,7 +1870,7 @@ namespace CameraViewer
             this.panelControl4.Controls.Add(this.btnVehicleNextPage);
             this.panelControl4.Controls.Add(this.btnVehiclePrePage);
             this.panelControl4.Controls.Add(this.btnVehicleFirstPage);
-            this.panelControl4.Controls.Add(this.textEdit1);
+            this.panelControl4.Controls.Add(this.textEditPlateNumber);
             this.panelControl4.Controls.Add(this.labelControl2);
             this.panelControl4.Controls.Add(this.btnQueryVehicle);
             this.panelControl4.Controls.Add(this.labelControl3);
@@ -1945,13 +1966,13 @@ namespace CameraViewer
             this.btnVehicleFirstPage.Text = "|<";
             this.btnVehicleFirstPage.Click += new System.EventHandler(this.btnVehicleFirstPage_Click);
             // 
-            // textEdit1
+            // textEditPlateNumber
             // 
-            this.textEdit1.Location = new System.Drawing.Point(476, 26);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textEdit1.Size = new System.Drawing.Size(102, 21);
-            this.textEdit1.TabIndex = 32;
+            this.textEditPlateNumber.Location = new System.Drawing.Point(476, 26);
+            this.textEditPlateNumber.Name = "textEditPlateNumber";
+            this.textEditPlateNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textEditPlateNumber.Size = new System.Drawing.Size(102, 21);
+            this.textEditPlateNumber.TabIndex = 32;
             // 
             // labelControl2
             // 
@@ -2568,27 +2589,6 @@ namespace CameraViewer
             this.timerTest.Enabled = true;
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
-            // barButtonItem18
-            // 
-            this.barButtonItem18.Caption = "startrecord";
-            this.barButtonItem18.Id = 52;
-            this.barButtonItem18.Name = "barButtonItem18";
-            this.barButtonItem18.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem18_ItemClick);
-            // 
-            // barButtonItem19
-            // 
-            this.barButtonItem19.Caption = "endrecord";
-            this.barButtonItem19.Id = 53;
-            this.barButtonItem19.Name = "barButtonItem19";
-            this.barButtonItem19.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem19_ItemClick);
-            // 
-            // barButtonItem20
-            // 
-            this.barButtonItem20.Caption = "getpicture";
-            this.barButtonItem20.Id = 54;
-            this.barButtonItem20.Name = "barButtonItem20";
-            this.barButtonItem20.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem20_ItemClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2681,7 +2681,7 @@ namespace CameraViewer
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPlateNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTimeVehicle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeVehicle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditVehicleCamera.Properties)).EndInit();
@@ -2795,7 +2795,7 @@ namespace CameraViewer
         private DevExpress.XtraEditors.TimeEdit teEndTimeFace;
         private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEditFaceCamera;
         private DevExpress.XtraEditors.SimpleButton btnQueryFace;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit textEditPlateNumber;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.SimpleButton btnQueryVehicle;
         private DevExpress.XtraEditors.LabelControl labelControl3;

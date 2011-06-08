@@ -99,70 +99,74 @@ namespace CameraViewer.Controls
         {
             Cursor currentCursor = Cursor.Current;
             TreeNode node;
-
-            switch (ViewType)
+            try
             {
-                case EnumViewType.Normal:
-                    tlCamera.Nodes.Clear();
-                    foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
-                    {
-                        TreeListNode treeListNodeGroup = tlCamera.AppendNode(new[] {item.Value.Name, item.Key +";G"}, -1,0,3,1,CheckState.Checked);
-                        treeListNodeGroup.Tag = item.Key + ";G";
-                        foreach (var vDevice in item.Value.ListDevice)
+                switch (ViewType)
+                {
+                    case EnumViewType.Normal:
+                        tlCamera.Nodes.Clear();
+                        foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
                         {
-                            TreeListNode treeListNodeDevice = tlCamera.AppendNode(new[] { vDevice.Value.Name, vDevice.Key + ";D" }, treeListNodeGroup.Id, 1, 3, 1, CheckState.Checked);
-                            treeListNodeDevice.Tag = vDevice.Key + ";D";
-                            foreach (var vCamera in vDevice.Value.ListCamera)
+                            TreeListNode treeListNodeGroup = tlCamera.AppendNode(new[] { item.Value.Name, item.Key + ";G" }, -1, 0, 3, 1, CheckState.Checked);
+                            treeListNodeGroup.Tag = item.Key + ";G";
+                            foreach (var vDevice in item.Value.ListDevice)
                             {
-                                TreeListNode treeListNodeCamera = tlCamera.AppendNode(new[] { vCamera.Value.Name, vCamera.Key + ";C" }, treeListNodeDevice.Id, 2, 3, 1, CheckState.Checked);
-                                treeListNodeCamera.Tag = vCamera.Key + ";C";
+                                TreeListNode treeListNodeDevice = tlCamera.AppendNode(new[] { vDevice.Value.Name, vDevice.Key + ";D" }, treeListNodeGroup.Id, 1, 3, 1, CheckState.Checked);
+                                treeListNodeDevice.Tag = vDevice.Key + ";D";
+                                foreach (var vCamera in vDevice.Value.ListCamera)
+                                {
+                                    TreeListNode treeListNodeCamera = tlCamera.AppendNode(new[] { vCamera.Value.Name, vCamera.Key + ";C" }, treeListNodeDevice.Id, 2, 3, 1, CheckState.Checked);
+                                    treeListNodeCamera.Tag = vCamera.Key + ";C";
+                                }
+
                             }
+                        }
+                        tlCamera.ExpandAll();
+                        Cursor.Current = currentCursor;
+                        break;
+
+                    case EnumViewType.SynSwitch:
+
+                        if (_listDecoder == null)
+                        {
+                            return;
+                        }
+                        if (!_isGroupOpened)
+                        {
+                            _isGroupOpened = true;
+                        }
+                        else
+                        {
+                            return;
+                        }
+
+                        Cursor.Current = Cursors.WaitCursor;
+                        tvSynGroup.Nodes.Clear();
+                        foreach (KeyValuePair<int, DecoderInfo> item in _listDecoder)
+                        {
+                            // node = new TreeNode(item.Value.Name);
+                            TreeListNode mynode = tvSynGroup.AppendNode(new[] { item.Value.Name, item.Key + ";S" }, -1, 1, 3, 1, CheckState.Checked);
+                            mynode.Tag = item;
+                            AppendNode(mynode);
+                            //tvSynGroup.Nodes.Add(node);
 
                         }
-                    }
-                    tlCamera.ExpandAll();
-                    Cursor.Current = currentCursor;
-                    break;
+                        tvSynGroup.ExpandAll();
+                        Cursor.Current = currentCursor;
+                        break;
 
-                case EnumViewType.SynSwitch:
+                    case EnumViewType.GroupSwitch:
 
-                    if (_listDecoder == null)
-                    {
-                        return;
-                    }
-                    if (!_isGroupOpened)
-                    {
-                        _isGroupOpened = true;
-                    }
-                    else
-                    {
-                        return;
-                    }
+                        break;
+                    default:
+                        break;
 
-                    Cursor.Current = Cursors.WaitCursor;
-                    tvSynGroup.Nodes.Clear();
-                    foreach (KeyValuePair<int, DecoderInfo> item in _listDecoder)
-                    {
-                       // node = new TreeNode(item.Value.Name);
-                        TreeListNode mynode = tvSynGroup.AppendNode(new[] { item.Value.Name, item.Key + ";S" }, -1, 1, 3, 1, CheckState.Checked);
-                        mynode.Tag = item;
-                        AppendNode(mynode);
-                        //tvSynGroup.Nodes.Add(node);
-
-                    }
-                    tvSynGroup.ExpandAll();
-                    Cursor.Current = currentCursor;
-                    break;
-
-                case EnumViewType.GroupSwitch:
-
-                    break;
-                default:
-                    break;
-
+                }
             }
-
-
+            catch (System.Exception e)
+            {
+            	
+            }
         }
         private void AppendNode(TreeListNode aNode)
         {

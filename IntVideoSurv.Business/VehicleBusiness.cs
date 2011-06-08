@@ -45,6 +45,30 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
+        public bool GetVehicleCountByPlateNumber(ref string errMessage, string number)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                int i = VehicleDataAccess.GetVehicleCountByPlateNumber(db, number);
+                if (i>=1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return false;
+            }
+        }
         public Vehicle GetVehicle(ref string errMessage, int cameraId, DateTime captureDataTime)
         {
             Database db = DatabaseFactory.CreateDatabase();

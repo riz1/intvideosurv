@@ -87,6 +87,20 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static int GetVehicleCountByPlateNumber(Database db, string number)
+        {
+            string cmdText = string.Format("select count(platenumber) from Vehicle where platenumber='{0}'", number);
+            try
+            {
+                return int.Parse(db.ExecuteDataSet(CommandType.Text, cmdText).ToString());
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public static DataSet GetVehicleCustom(Database db, string str)
         {
             string cmdText = string.Format(

@@ -1887,8 +1887,25 @@ namespace CameraViewer
                 XtraMessageBox.Show("起始时间不能大于结束时间！");
                 return "";
             }
-
-            str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeVehicle.EditValue + "') and convert(DateTime,'" + teEndTimeVehicle.EditValue + "'))";
+            if (textEditPlateNumber.Text == "")
+            {
+                str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeVehicle.EditValue + "') and convert(DateTime,'" + teEndTimeVehicle.EditValue + "'))";
+            }
+            else
+            {
+                //platenumber有没有记录
+                if (VehicleBusiness.Instance.GetVehicleCountByPlateNumber(ref _errMessage,textEditPlateNumber.Text) == true)
+                {
+                    str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeVehicle.EditValue + "') and convert(DateTime,'" + teEndTimeVehicle.EditValue + "'))";
+                    str += " and (Vehicle.platenumber = " + textEditPlateNumber.Text + ")";
+                }
+                else
+                {
+                    XtraMessageBox.Show("没有对应的车牌号码！");
+                    return "";
+                }
+                
+            }
 
             return str;
         }
@@ -2157,6 +2174,11 @@ namespace CameraViewer
         private int _totalCountForEvent;
         private int _currentPageForEvent = 1;
         private int _numberOfPerPageForEvent = 20;
+        private bool stop = false;
+        private bool crossline = false;
+        private bool illegalDir = false;
+        private bool changechannel = false;
+
         private void radioGroupEvent_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (radioGroupEvent.SelectedIndex)
@@ -2233,6 +2255,42 @@ namespace CameraViewer
 
             str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeEvent.EditValue + "') and convert(DateTime,'" + teEndTimeEvent.EditValue + "'))";
 
+            string[] userSelections = checkedComboBoxEditUserSelection.Text.Split(',');
+            foreach(var selection in userSelections)
+            {
+                string changeselectCamera = selection.Trim();
+                if (selection == "无")
+                {
+                    return "";
+                }
+                else
+                {
+                    if (selection == "停止")
+                    {
+                        stop = true;
+                        str += " and (Event.listObject.Value.stop = {0}" + stop + ")";
+                    }
+                    else if (selection == "跨线")
+                    {
+                        crossline = true;
+                        str += " and (Event.listObject.Value.CrossLine = {0}" + crossline + ")";
+
+                    }
+                    else if (selection == "逆行")
+                    {
+                        illegalDir = true;
+                        str += " and (Event.listObject.Value.illegalDir = {0}" + illegalDir + ")";
+
+                    }
+                    else if (selection == "变道")
+                    {
+                        changechannel = true;
+                        str += " and (Event.listObject.Value.changeChannel = {0}" + changechannel + ")";
+
+                    }
+                }
+
+            }
             return str;
         }
 
