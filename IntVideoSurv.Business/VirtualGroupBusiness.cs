@@ -45,5 +45,47 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
+        public  int DeleteByGroupID(ref string errMessage, int GroupID)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return VirtualGroupDataAccess.DeleteByGroupID(db, GroupID);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
+        public Dictionary<int, VirtualGroupInfo> GetAllVirtualGroupInfo(ref string errMessage)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, VirtualGroupInfo> list = new Dictionary<int, VirtualGroupInfo>();
+            try
+            {
+                VirtualGroupInfo oVirtualGroupInfo;
+                DataSet ds = VirtualGroupDataAccess.GetAllVirtualGroupInfo(db);
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    oVirtualGroupInfo = new VirtualGroupInfo(ds.Tables[0].Rows[i]);
+                    list.Add(oVirtualGroupInfo.ID, oVirtualGroupInfo);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
     }
 }

@@ -15,8 +15,8 @@ namespace IntVideoSurv.DataAccess
             StringBuilder sbValue = new StringBuilder();
             sbField.Append("INSERT INTO  [VirtualGroup](");
             sbValue.Append("values (");
-            sbField.Append("[ID]");
-            sbValue.AppendFormat("{0}", oVirtualGroup.ID);
+            //sbField.Append("[ID]");
+            //sbValue.AppendFormat("{0}", oVirtualGroup.ID);
             sbField.Append("[Name])");
             sbValue.AppendFormat("'{0}')", oVirtualGroup.Name);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
@@ -27,6 +27,39 @@ namespace IntVideoSurv.DataAccess
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('VirtualGroup')").ToString());
                 return id;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static int DeleteByGroupID(Database db, int GroupID)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from VirtualGroup ");
+            sb.AppendFormat(" where ID={0}", GroupID);
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        //
+        public static DataSet GetAllVirtualGroupInfo(Database db)
+        {
+            string cmdText = string.Format("select * from VirtualGroup order by ID");
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
             }
             catch (Exception ex)
             {

@@ -26,9 +26,10 @@ namespace CameraViewer.Forms
         Dictionary<int, DisplayChannelInfo> _listDisplayChannel;
         Dictionary<int, MapInfo> _listMapInfo;
         Dictionary<int, DecoderInfo> listDecoder;
-
+        Dictionary<int, CameraInfo> clist = new Dictionary<int, CameraInfo>();
+        Dictionary<int, UserInfo> listUser = new Dictionary<int, UserInfo>();
         private DisplayTypes _displaytype = DisplayTypes.DeviceManagement;
-
+        public Dictionary<int,VirtualGroupInfo> listVirtualGroup;
         public frmSetting()
         {
             InitializeComponent();
@@ -46,6 +47,9 @@ namespace CameraViewer.Forms
             DisplayRightPanel();
             showDecoderInfo();
             ShowRecognizerInfo();
+            //
+            BuildVirtualGroupTree();
+            showVirtualGroupInfo();
 
         }
         /// <summary>
@@ -398,6 +402,9 @@ namespace CameraViewer.Forms
             DecoderManagement.Visible = false;
             //识别器
             RecognizerManagement.Visible = false;
+            //组管理
+            gcVritualGroupManegement.Visible = false;
+
             switch (_displaytype)
             {
                 case DisplayTypes.DeviceManagement:
@@ -452,6 +459,11 @@ namespace CameraViewer.Forms
                     RecognizerManagement.Visible = true;
                     RecognizerManagement.Dock = DockStyle.Fill;
                     gridView5.OptionsView.ShowGroupPanel = false;
+                    break;
+                case DisplayTypes.VirtualGroupManagement:
+                    gcVritualGroupManegement.Visible = true;
+                    gcVritualGroupManegement.Dock = DockStyle.Fill;
+                    gridView6.OptionsView.ShowGroupPanel = false;
                     break;
             }
 
@@ -1618,7 +1630,228 @@ namespace CameraViewer.Forms
 
             }
         }
-        
+
+        private void nbVirtualGroup_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            _displaytype = DisplayTypes.VirtualGroupManagement;
+            DisplayRightPanel();
+        }
+
+        public void BuildVirtualGroupTree()
+        {
+            listVirtualGroup =VirtualGroupBusiness.Instance.GetAllVirtualGroupInfo(ref errMessage);
+            Cursor currentCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            TreeListNode node;
+            TreeListNode camnode;
+            
+
+            treeListVirtualGroup.Nodes.Clear();
+            TreeListNode treeListNodeRoot = treeListVirtualGroup.AppendNode(new[] { "组管理", 0 + ";A" }, -1, 0, 3, 1, CheckState.Checked);
+            treeListNodeRoot.Tag = 0 + ";A";
+            if (listVirtualGroup != null)
+            {
+
+                foreach (KeyValuePair<int, VirtualGroupInfo> item in listVirtualGroup)
+                {
+                    TreeListNode treeListNodeG = treeListVirtualGroup.AppendNode(new[] { item.Value.Name, item.Key + ";B" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeG.Tag = item.Key + ";B";
+                    TreeListNode treeListNodeGQ = treeListVirtualGroup.AppendNode(new[] { "摄像头管理", item.Key + ";C" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeGQ.Tag = item.Key + ";C";
+                    TreeListNode treeListNodeUQ = treeListVirtualGroup.AppendNode(new[] { "用户管理", item.Key + ";E" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeUQ.Tag = item.Key + ";E";
+                    clist = CameraGroupBusiness.Instance.GetAllCameraInfo(ref errMessage,item.Key);
+                    listUser = UserGroupBusiness.Instance.GetAllCameraInfo(ref errMessage, item.Key);
+                    foreach(KeyValuePair<int, CameraInfo> itemcamera in clist)
+                    {
+                       // TreeListNode treeListNodeC = treeListVirtualGroup.AppendNode(new[] { itemcamera.Value.Name, itemcamera.Key + ";D" }, treeListNodeGQ.Id, 1, 3, 1, CheckState.Checked);
+                        //treeListNodeC.Tag = itemcamera.Key + ";D";
+                        DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, itemcamera.Value.CameraId);
+                        TreeListNode treeListNodeC = treeListVirtualGroup.AppendNode(new[] { di.Name + ":" + itemcamera.Value.Name, itemcamera.Key + ";D" }, treeListNodeGQ.Id, 1, 3, 1, CheckState.Checked);
+                        treeListNodeC.Tag = itemcamera.Key + ";D";
+                    }
+                    foreach (KeyValuePair<int, UserInfo> itemuser in listUser)
+                    {
+                        TreeListNode treeListNodeU = treeListVirtualGroup.AppendNode(new[] { itemuser.Value.UserName, itemuser.Key + ";F" }, treeListNodeUQ.Id, 1, 3, 1, CheckState.Checked);
+                        treeListNodeU.Tag = itemuser.Key + ";F";
+                    }
+                }
+            }
+            treeListVirtualGroup.Columns[1].Visible = false;
+            treeListVirtualGroup.ExpandAll();
+            Cursor.Current = currentCursor;
+
+        }
+        /// <summary>
+        /// 右键单击组管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeListVirtualGroup_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                TreeListNode node = treeListVirtualGroup.FocusedNode;
+                if ((node.Tag.ToString()).IndexOf("A") >= 0)
+                {
+                    //添加组
+                    popupMenuAddVirtualGroup.ShowPopup(Cursor.Position);
+
+                }
+                else if ((node.Tag.ToString()).IndexOf("B") >= 0)
+                {
+                    //删除和修改组，。。。。。
+                    popupMenuDeleteAndEditVirtualGroup.ShowPopup(Cursor.Position);
+                }
+                else if ((node.Tag.ToString()).IndexOf("C") >= 0)
+                {
+                    //添加摄像头，。。。。。
+                    popupMenuAddCameraInVirtualGroup.ShowPopup(Cursor.Position);
+                }
+                else if ((node.Tag.ToString()).IndexOf("D") >= 0)
+                {
+                    //删除摄像头，。。。。。
+                    popupMenuDeleteCameraInVritualGroup.ShowPopup(Cursor.Position);
+                }
+                else if ((node.Tag.ToString()).IndexOf("E") >= 0)
+                {
+                    //添加用户，
+                    popupMenuAddUser.ShowPopup(Cursor.Position);
+                }
+                else if ((node.Tag.ToString()).IndexOf("F") >= 0)
+                {
+                    //删除用户，
+                    popupMenuDeleteUser.ShowPopup(Cursor.Position);
+                }
+                else
+                {
+
+                }
+                
+                
+            }
+        }
+        //从组中删除摄像头
+        void DeleteCameraFromVirtualGroup(int GroupID,int CameraID)
+        {
+            int err;
+            err = CameraGroupBusiness.Instance.DeleteByGroupIDandCamID(ref errMessage, GroupID, CameraID);
+        }
+        //添加摄像头
+        private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddCameraInVirtualGroup fdialog = new AddCameraInVirtualGroup();
+            fdialog.Groupid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
+            fdialog.ShowDialog(this);
+            BuildVirtualGroupTree();
+           
+        }
+        //删除组
+        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            int Gid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
+            int err;
+           err=VirtualGroupBusiness.Instance.DeleteByGroupID(ref errMessage, Gid);
+           BuildVirtualGroupTree();
+        }
+        //添加组
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddVirtualGroup fdialog = new AddVirtualGroup();
+            fdialog.ShowDialog(this);
+            BuildVirtualGroupTree();
+        }
+        //添加用户
+        private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddUserInVirtualGroup user = new AddUserInVirtualGroup();
+            user.Groupid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
+            user.ShowDialog(this);
+            BuildVirtualGroupTree();
+        }
+        //删除用户
+        private void barButtonItemDeleteUser_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            TreeListNode tn = treeListVirtualGroup.FocusedNode;
+            if (tn == null)
+            {
+                return;
+            }
+            if ((tn.Tag.ToString().IndexOf("F") >= 0))
+            {
+                if (XtraMessageBox.Show("确定要删除该用户吗?", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    string[] strs = tn.Tag.ToString().Split(';');
+                    int userid = int.Parse(strs[0]);
+                    UserInfo di = UserBusiness.Instance.GetUserInfo(ref errMessage, userid);
+                    UserGroupBusiness.Instance.DeleteUser(ref errMessage, userid);
+                    OperateLogBusiness.Instance.Insert(ref errMessage, new OperateLog
+                    {
+                        DeviceId = di.UserId,
+                        ClientUserId = MainForm.CurrentUser.UserId,
+                        ClientUserName = MainForm.CurrentUser.UserName,
+                        Content = di.ToString(),
+                        HappenTime = DateTime.Now,
+                        OperateTypeId = (int)(OperateLogTypeId.UserDeleteVirtualGroup),
+                        OperateTypeName = OperateLogTypeName.UserDeleteInVirtualGroup,
+                        OperateUserName = MainForm.CurrentUser.UserName
+                    });
+                    BuildVirtualGroupTree();
+
+                }
+
+            }
+        }
+        //删除组
+        private void barButtonItemDeleteVirtualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            int Gid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
+            int err;
+            err = VirtualGroupBusiness.Instance.DeleteByGroupID(ref errMessage, Gid);
+            BuildVirtualGroupTree();
+        }
+        //修改组
+        private void barButtonItemEditVirtualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+        //组中添加摄像头
+        private void barButtonItemAddCameraInVritualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddCameraInVirtualGroup fdialog = new AddCameraInVirtualGroup();
+            fdialog.Groupid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
+            fdialog.ShowDialog(this);
+            BuildVirtualGroupTree();
+        }
+        //从组中删除摄像头
+        private void barButtonItemDeleteCameraInVirtualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            int i;
+            i = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
+            CameraGroupBusiness.Instance.DeleteByCamID(ref errMessage, i);
+            BuildVirtualGroupTree();
+        }
+        Dictionary<int, VirtualGroupInfo> listVG=new Dictionary<int,VirtualGroupInfo>();
+        void showVirtualGroupInfo()
+        {
+            listVG = VirtualGroupBusiness.Instance.GetAllVirtualGroupInfo(ref errMessage);
+
+            var dataTable = new System.Data.DataTable("VirtualGroupInfo");
+            dataTable.Columns.Add("编号", typeof(int));
+            dataTable.Columns.Add("组名称", typeof(string));
+            int i = 1;
+            foreach (var node in listVG)
+            {
+
+                dataTable.Rows.Add(i++, node.Value.Name);
+            }
+
+            gridControlShowVirtualGroup.DataSource = dataTable;
+            gridControlShowVirtualGroup.MainView.PopulateColumns();
+            gridView6.Columns["编号"].Width = 40;
+            gridView6.Columns["组名称"].Width = 40;
+
+        }
 
 
     }
@@ -1634,7 +1867,8 @@ namespace CameraViewer.Forms
         MapManagement = 256,
         SkinManagement = 512,
         DecoderManagement = 1024,
-        RecognizerManagement = 2048
+        RecognizerManagement = 2048,
+        VirtualGroupManagement = 4096
 
     }
 }

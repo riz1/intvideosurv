@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="AlarmBusiness.cs" />
     <Compile Include="AlarmIconBusiness.cs" />
+    <Compile Include="CameraGroupBusiness.cs" />
     <Compile Include="CameraIconBusiness.cs" />
     <Compile Include="CapturePictureBusiness.cs" />
     <Compile Include="DataBaseParasBusiness.cs" />
@@ -117,9 +118,11 @@
     <Compile Include="TrackBusiness.cs" />
     <Compile Include="TTestInfoBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
+    <Compile Include="UserGroupBusiness.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="VehicleBusiness.cs" />
     <Compile Include="VideoBusiness.cs" />
+    <Compile Include="VirtualGroupBusiness.cs" />
     <Compile Include="WindowCameraBusiness.cs" />
   </ItemGroup>
   <ItemGroup>

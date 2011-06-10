@@ -45,5 +45,66 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
+        //
+        public Dictionary<int, CameraInfo> GetAllCameraInfo(ref string errMessage,int VirtualGroupId)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, CameraInfo> list = new Dictionary<int, CameraInfo>();
+            try
+            {
+                CameraInfo oCameraInfo;
+                DataSet ds = CameraGroupDataAccess.GetAllCameraInfo(db, VirtualGroupId);
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    oCameraInfo = new CameraInfo(ds.Tables[0].Rows[i]);
+                    list.Add(oCameraInfo.CameraId, oCameraInfo);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
+        public  int DeleteByGroupIDandCamID(ref string errMessage, int GroupID,int CameraID)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return CameraGroupDataAccess.DeleteByGroupIDandCamID(db, GroupID, CameraID);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
+        public int DeleteByCamID(ref string errMessage, int CameraID)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return CameraGroupDataAccess.DeleteByCamID(db, CameraID);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
+
     }
 }

@@ -29,6 +29,33 @@ namespace IntVideoSurv.Business
                 return instance;
             }
         }
+        public int InsertUser(ref string errMessage, int userid, int groupid)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                if (UserGroupDataAccess.GetTheUser(db, userid).Tables[0].Rows.Count != 0)
+                {
+
+                    return -1;
+
+                }
+                else
+                {
+                    return UserGroupDataAccess.InsertUser(db, userid, groupid);
+                }
+                //return DecoderDataAccess.InsertCamera(db, odecoder, ocamera);  
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
         public int Insert(ref string errMessage, UserGroupInfo oUserGroup)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -63,6 +90,24 @@ namespace IntVideoSurv.Business
 
 
         }
+        public int DeleteUser(ref string errMessage, int userid)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                int iRtn = UserGroupDataAccess.DeleteUser(db, userid);
+
+                return iRtn;
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
         public int Delete(ref string errMessage, int ID)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -80,6 +125,31 @@ namespace IntVideoSurv.Business
                 return -1;
             }
 
+        }
+        public Dictionary<int, UserInfo> GetAllCameraInfo(ref string errMessage, int VirtualGroupId)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, UserInfo> list = new Dictionary<int, UserInfo>();
+            try
+            {
+                UserInfo oUserInfo;
+                DataSet ds = UserGroupDataAccess.GetAllCameraInfo(db, VirtualGroupId);
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    oUserInfo = new UserInfo(ds.Tables[0].Rows[i]);
+                    list.Add(oUserInfo.UserId, oUserInfo);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
         }
     }
 }

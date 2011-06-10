@@ -193,11 +193,29 @@
     <Compile Include="Forms\AddCameraInDecoder.Designer.cs">
       <DependentUpon>AddCameraInDecoder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddCameraInVirtualGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCameraInVirtualGroup.Designer.cs">
+      <DependentUpon>AddCameraInVirtualGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddRecognizer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AddRecognizer.Designer.cs">
       <DependentUpon>AddRecognizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddUserInVirtualGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddUserInVirtualGroup.Designer.cs">
+      <DependentUpon>AddUserInVirtualGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddVirtualGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddVirtualGroup.Designer.cs">
+      <DependentUpon>AddVirtualGroup.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCaptureLicense.cs">
       <SubType>Form</SubType>
@@ -463,8 +481,20 @@
       <DependentUpon>AddCameraInDecoder.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddCameraInVirtualGroup.resx">
+      <DependentUpon>AddCameraInVirtualGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddRecognizer.resx">
       <DependentUpon>AddRecognizer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddUserInVirtualGroup.resx">
+      <DependentUpon>AddUserInVirtualGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddVirtualGroup.resx">
+      <DependentUpon>AddVirtualGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCaptureLicense.resx">

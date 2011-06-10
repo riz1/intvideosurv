@@ -55,7 +55,12 @@ namespace IntVideoSurv.Entity
         //shexiangtou;
         CameraAddInRecognizer = 2201,
         CameraUpdateInRecognizer,
-        CameraDeleteInRecognizer
+        CameraDeleteInRecognizer,
+        //C
+        CameraAddInVirtualGroup=2301,
+        //user
+        UserAddInVirtualGroup = 2401,
+        UserDeleteVirtualGroup,
 
 
     }
