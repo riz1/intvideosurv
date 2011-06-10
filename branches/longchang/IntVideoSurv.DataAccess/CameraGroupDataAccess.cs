@@ -15,10 +15,10 @@ namespace IntVideoSurv.DataAccess
             StringBuilder sbValue = new StringBuilder();
             sbField.Append("INSERT INTO  [CameraGroup](");
             sbValue.Append("values (");
-            sbField.Append("[ID]");
-            sbValue.AppendFormat("{0}", oCameraGroup.ID);
-            sbField.Append("[GroupID]");
-            sbValue.AppendFormat("{0}", oCameraGroup.GroupID);
+           // sbField.Append("[ID]");
+            //sbValue.AppendFormat("{0}", oCameraGroup.ID);
+            sbField.Append("[VirtualGroupID],");
+            sbValue.AppendFormat("{0},", oCameraGroup.GroupID);
             sbField.Append("[CameraID])");
             sbValue.AppendFormat("{0})", oCameraGroup.CameraID);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
@@ -36,5 +36,69 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        //
+        public static DataSet GetAllCameraInfo(Database db,int VirtualGroupId)
+        {
+            string cmdText = string.Format("select b.* from CameraGroup a,CameraInfo b where a.CameraID=b.CameraId and a.VirtualGroupID={0}", VirtualGroupId);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static int DeleteByGroupIDandCamID(Database db, int GroupID,int CameraID)
+        {
+            StringBuilder sb = new StringBuilder();
+            //删除整个组
+            if(CameraID==-1)
+            {
+                sb.Append("delete from VirtualGroup ");
+                sb.AppendFormat(" where VirtualGroupID={0}", GroupID);
+
+            }
+            else{
+                sb.Append("delete from VirtualGroup ");
+                sb.AppendFormat(" where VirtualGroupID={0} and CameraID={0}", GroupID, CameraID);
+            }
+
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        public static int DeleteByCamID(Database db, int CameraID)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from CameraGroup ");
+            sb.AppendFormat(" where  CameraID={0}", CameraID);
+
+
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
     }
 }

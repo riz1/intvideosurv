@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AlarmIconInfo.cs" />
     <Compile Include="AlarmInfo.cs" />
+    <Compile Include="CameraGroupInfo.cs" />
     <Compile Include="CameraIconInfo.cs" />
     <Compile Include="CameraInfo.cs" />
     <Compile Include="CameraMonitorPairInfo.cs" />
@@ -89,11 +90,13 @@
     <Compile Include="TempPicture.cs" />
     <Compile Include="TrackInfo.cs" />
     <Compile Include="UsedDisplayChannelInfo.cs" />
+    <Compile Include="UserGroupInfo.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="VehicleInfo.cs" />
     <Compile Include="VideoInfo.cs" />
     <Compile Include="VideoOutputInfo.cs" />
     <Compile Include="VideoProvider.cs" />
+    <Compile Include="VirtualGroupInfo.cs" />
     <Compile Include="WindowCameraInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -44,6 +44,7 @@ namespace CameraViewer.Forms
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem3 = new DevExpress.XtraNavBar.NavBarItem();
+            this.nbVirtualGroup = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem6 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem7 = new DevExpress.XtraNavBar.NavBarItem();
             this.gcDeviceManagement = new DevExpress.XtraEditors.GroupControl();
@@ -71,6 +72,19 @@ namespace CameraViewer.Forms
             this.barButtonItemEditRecognizer = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDeleteRecognizer = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDeleteCameraInRecognizer = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDeleteUser = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDeleteVirtualGroup = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemEditVirtualGroup = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemAddCameraInVritualGroup = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDeleteCameraInVirtualGroup = new DevExpress.XtraBars.BarButtonItem();
             this.contextMenuStripGroupAndDevice = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,6 +139,13 @@ namespace CameraViewer.Forms
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.treeViewMonitor = new System.Windows.Forms.TreeView();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gcVritualGroupManegement = new DevExpress.XtraEditors.GroupControl();
+            this.splitContainerControl9 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.treeListVirtualGroup = new DevExpress.XtraTreeList.TreeList();
+            this.treeListColumn9 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn10 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.gridControlShowVirtualGroup = new DevExpress.XtraGrid.GridControl();
+            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcMap = new DevExpress.XtraEditors.GroupControl();
             this.pcMapPreview = new DevExpress.XtraEditors.PanelControl();
             this.pictureBoxMap = new System.Windows.Forms.PictureBox();
@@ -213,6 +234,13 @@ namespace CameraViewer.Forms
             this.popupMenuAddRecognizer = new DevExpress.XtraBars.PopupMenu(this.components);
             this.popupMenuAddCameraInRecognizer = new DevExpress.XtraBars.PopupMenu(this.components);
             this.popupMenuDeleteCamera = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuAddVirtualGroup = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuAddUserOrCamera = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuAddUser = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuDeleteUser = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuDeleteAndEditVirtualGroup = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuAddCameraInVirtualGroup = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuDeleteCameraInVritualGroup = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeviceManagement)).BeginInit();
             this.gcDeviceManagement.SuspendLayout();
@@ -260,6 +288,13 @@ namespace CameraViewer.Forms
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcVritualGroupManegement)).BeginInit();
+            this.gcVritualGroupManegement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).BeginInit();
+            this.splitContainerControl9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.treeListVirtualGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlShowVirtualGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMap)).BeginInit();
             this.gcMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcMapPreview)).BeginInit();
@@ -330,6 +365,13 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddRecognizer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddCameraInRecognizer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteCamera)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddVirtualGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddUserOrCamera)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteAndEditVirtualGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddCameraInVirtualGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteCameraInVritualGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // bar2
@@ -402,7 +444,8 @@ namespace CameraViewer.Forms
             this.nbMap,
             this.navBarItem1,
             this.navBarItem2,
-            this.navBarItem3});
+            this.navBarItem3,
+            this.nbVirtualGroup});
             this.navBarControl1.LargeImages = this.imageList1;
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
@@ -425,7 +468,8 @@ namespace CameraViewer.Forms
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbMap),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem3)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem3),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.nbVirtualGroup)});
             this.navBarGroup1.Name = "navBarGroup1";
             // 
             // nbDevice
@@ -484,6 +528,14 @@ namespace CameraViewer.Forms
             this.navBarItem3.SmallImageIndex = 4;
             this.navBarItem3.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbRecognizer_link);
             // 
+            // nbVirtualGroup
+            // 
+            this.nbVirtualGroup.Caption = "组管理";
+            this.nbVirtualGroup.LargeImageIndex = 6;
+            this.nbVirtualGroup.Name = "nbVirtualGroup";
+            this.nbVirtualGroup.SmallImageIndex = 6;
+            this.nbVirtualGroup.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbVirtualGroup_LinkClicked);
+            // 
             // navBarItem6
             // 
             this.navBarItem6.Caption = "Calendar";
@@ -501,9 +553,9 @@ namespace CameraViewer.Forms
             // gcDeviceManagement
             // 
             this.gcDeviceManagement.Controls.Add(this.splitContainerControl1);
-            this.gcDeviceManagement.Location = new System.Drawing.Point(64, 87);
+            this.gcDeviceManagement.Location = new System.Drawing.Point(254, 87);
             this.gcDeviceManagement.Name = "gcDeviceManagement";
-            this.gcDeviceManagement.Size = new System.Drawing.Size(271, 170);
+            this.gcDeviceManagement.Size = new System.Drawing.Size(346, 170);
             this.gcDeviceManagement.TabIndex = 31;
             this.gcDeviceManagement.Text = "设备管理";
             this.gcDeviceManagement.Visible = false;
@@ -517,8 +569,8 @@ namespace CameraViewer.Forms
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gridControlShowDevice);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(267, 145);
-            this.splitContainerControl1.SplitterPosition = 221;
+            this.splitContainerControl1.Size = new System.Drawing.Size(342, 145);
+            this.splitContainerControl1.SplitterPosition = 146;
             this.splitContainerControl1.TabIndex = 7;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -536,7 +588,7 @@ namespace CameraViewer.Forms
             this.treeListDevice.OptionsView.ShowColumns = false;
             this.treeListDevice.OptionsView.ShowHorzLines = false;
             this.treeListDevice.OptionsView.ShowIndicator = false;
-            this.treeListDevice.Size = new System.Drawing.Size(221, 145);
+            this.treeListDevice.Size = new System.Drawing.Size(146, 145);
             this.treeListDevice.TabIndex = 0;
             this.treeListDevice.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TreeListDeviceRightClick);
             this.treeListDevice.Click += new System.EventHandler(this.treeListDevice_Click);
@@ -564,7 +616,7 @@ namespace CameraViewer.Forms
             this.gridControlShowDevice.MainView = this.gridView4;
             this.gridControlShowDevice.MenuManager = this.barManager1;
             this.gridControlShowDevice.Name = "gridControlShowDevice";
-            this.gridControlShowDevice.Size = new System.Drawing.Size(41, 145);
+            this.gridControlShowDevice.Size = new System.Drawing.Size(191, 145);
             this.gridControlShowDevice.TabIndex = 0;
             this.gridControlShowDevice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -597,8 +649,21 @@ namespace CameraViewer.Forms
             this.barButtonItemAddCameraInRecognizer,
             this.barButtonItemEditRecognizer,
             this.barButtonItemDeleteRecognizer,
-            this.barButtonItemDeleteCameraInRecognizer});
-            this.barManager1.MaxItemId = 13;
+            this.barButtonItemDeleteCameraInRecognizer,
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barButtonItem4,
+            this.barButtonItem5,
+            this.barButtonItem6,
+            this.barButtonItem7,
+            this.barButtonItem8,
+            this.barButtonItem9,
+            this.barButtonItemDeleteUser,
+            this.barButtonItemDeleteVirtualGroup,
+            this.barButtonItemEditVirtualGroup,
+            this.barButtonItemAddCameraInVritualGroup,
+            this.barButtonItemDeleteCameraInVirtualGroup});
+            this.barManager1.MaxItemId = 26;
             // 
             // barDockControlTop
             // 
@@ -717,6 +782,93 @@ namespace CameraViewer.Forms
             this.barButtonItemDeleteCameraInRecognizer.Id = 12;
             this.barButtonItemDeleteCameraInRecognizer.Name = "barButtonItemDeleteCameraInRecognizer";
             this.barButtonItemDeleteCameraInRecognizer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemDeleteCameraInRecognizer_ItemClick);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "添加组";
+            this.barButtonItem1.Id = 13;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "删除组";
+            this.barButtonItem2.Id = 14;
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "修改组";
+            this.barButtonItem4.Id = 15;
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "添加摄像头";
+            this.barButtonItem5.Id = 16;
+            this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
+            // 
+            // barButtonItem6
+            // 
+            this.barButtonItem6.Caption = "添加用户";
+            this.barButtonItem6.Id = 17;
+            this.barButtonItem6.Name = "barButtonItem6";
+            // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "删除摄像头";
+            this.barButtonItem7.Id = 18;
+            this.barButtonItem7.Name = "barButtonItem7";
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "barButtonItem8";
+            this.barButtonItem8.Id = 19;
+            this.barButtonItem8.Name = "barButtonItem8";
+            // 
+            // barButtonItem9
+            // 
+            this.barButtonItem9.Caption = "添加用户";
+            this.barButtonItem9.Id = 20;
+            this.barButtonItem9.Name = "barButtonItem9";
+            this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            // 
+            // barButtonItemDeleteUser
+            // 
+            this.barButtonItemDeleteUser.Caption = "删除用户";
+            this.barButtonItemDeleteUser.Id = 21;
+            this.barButtonItemDeleteUser.Name = "barButtonItemDeleteUser";
+            this.barButtonItemDeleteUser.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemDeleteUser_ItemClick);
+            // 
+            // barButtonItemDeleteVirtualGroup
+            // 
+            this.barButtonItemDeleteVirtualGroup.Caption = "删除组";
+            this.barButtonItemDeleteVirtualGroup.Id = 22;
+            this.barButtonItemDeleteVirtualGroup.Name = "barButtonItemDeleteVirtualGroup";
+            this.barButtonItemDeleteVirtualGroup.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemDeleteVirtualGroup_ItemClick);
+            // 
+            // barButtonItemEditVirtualGroup
+            // 
+            this.barButtonItemEditVirtualGroup.Caption = "修改组";
+            this.barButtonItemEditVirtualGroup.Id = 23;
+            this.barButtonItemEditVirtualGroup.Name = "barButtonItemEditVirtualGroup";
+            this.barButtonItemEditVirtualGroup.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemEditVirtualGroup_ItemClick);
+            // 
+            // barButtonItemAddCameraInVritualGroup
+            // 
+            this.barButtonItemAddCameraInVritualGroup.Caption = "添加摄像头";
+            this.barButtonItemAddCameraInVritualGroup.Id = 24;
+            this.barButtonItemAddCameraInVritualGroup.Name = "barButtonItemAddCameraInVritualGroup";
+            this.barButtonItemAddCameraInVritualGroup.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemAddCameraInVritualGroup_ItemClick);
+            // 
+            // barButtonItemDeleteCameraInVirtualGroup
+            // 
+            this.barButtonItemDeleteCameraInVirtualGroup.Caption = "删除摄像头";
+            this.barButtonItemDeleteCameraInVirtualGroup.Id = 25;
+            this.barButtonItemDeleteCameraInVirtualGroup.Name = "barButtonItemDeleteCameraInVirtualGroup";
+            this.barButtonItemDeleteCameraInVirtualGroup.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemDeleteCameraInVirtualGroup_ItemClick);
             // 
             // contextMenuStripGroupAndDevice
             // 
@@ -1284,10 +1436,11 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Name = "splitContainerControl2";
             this.splitContainerControl2.Panel1.Controls.Add(this.navBarControl1);
             this.splitContainerControl2.Panel1.Text = "Panel1";
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcVritualGroupManegement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcMap);
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcDeviceManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.RecognizerManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcUserManagement);
-            this.splitContainerControl2.Panel2.Controls.Add(this.gcDeviceManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.DecoderManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcSkin);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcDisplayChannelManagement);
@@ -1302,14 +1455,90 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Text = "splitContainerControl2";
             this.splitContainerControl2.Resize += new System.EventHandler(this.splitContainerControl2_Resize);
             // 
+            // gcVritualGroupManegement
+            // 
+            this.gcVritualGroupManegement.Controls.Add(this.splitContainerControl9);
+            this.gcVritualGroupManegement.Location = new System.Drawing.Point(37, 109);
+            this.gcVritualGroupManegement.Name = "gcVritualGroupManegement";
+            this.gcVritualGroupManegement.Size = new System.Drawing.Size(211, 120);
+            this.gcVritualGroupManegement.TabIndex = 36;
+            this.gcVritualGroupManegement.Text = "组管理";
+            // 
+            // splitContainerControl9
+            // 
+            this.splitContainerControl9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl9.Location = new System.Drawing.Point(2, 23);
+            this.splitContainerControl9.Name = "splitContainerControl9";
+            this.splitContainerControl9.Panel1.Controls.Add(this.treeListVirtualGroup);
+            this.splitContainerControl9.Panel1.Text = "Panel1";
+            this.splitContainerControl9.Panel2.Controls.Add(this.gridControlShowVirtualGroup);
+            this.splitContainerControl9.Panel2.Text = "Panel2";
+            this.splitContainerControl9.Size = new System.Drawing.Size(207, 95);
+            this.splitContainerControl9.TabIndex = 0;
+            this.splitContainerControl9.Text = "splitContainerControl9";
+            // 
+            // treeListVirtualGroup
+            // 
+            this.treeListVirtualGroup.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumn9,
+            this.treeListColumn10});
+            this.treeListVirtualGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeListVirtualGroup.Location = new System.Drawing.Point(0, 0);
+            this.treeListVirtualGroup.Name = "treeListVirtualGroup";
+            this.treeListVirtualGroup.OptionsSelection.InvertSelection = true;
+            this.treeListVirtualGroup.OptionsSelection.UseIndicatorForSelection = true;
+            this.treeListVirtualGroup.OptionsView.ShowColumns = false;
+            this.treeListVirtualGroup.OptionsView.ShowHorzLines = false;
+            this.treeListVirtualGroup.OptionsView.ShowIndicator = false;
+            this.treeListVirtualGroup.Size = new System.Drawing.Size(100, 95);
+            this.treeListVirtualGroup.TabIndex = 0;
+            this.treeListVirtualGroup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListVirtualGroup_MouseUp);
+            // 
+            // treeListColumn9
+            // 
+            this.treeListColumn9.Caption = "treeListColumn9";
+            this.treeListColumn9.FieldName = "组管理";
+            this.treeListColumn9.Name = "treeListColumn9";
+            this.treeListColumn9.OptionsColumn.AllowEdit = false;
+            this.treeListColumn9.Visible = true;
+            this.treeListColumn9.VisibleIndex = 0;
+            // 
+            // treeListColumn10
+            // 
+            this.treeListColumn10.Caption = "treeListColumn10";
+            this.treeListColumn10.FieldName = "Tag";
+            this.treeListColumn10.Name = "treeListColumn10";
+            this.treeListColumn10.Visible = true;
+            this.treeListColumn10.VisibleIndex = 1;
+            // 
+            // gridControlShowVirtualGroup
+            // 
+            this.gridControlShowVirtualGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlShowVirtualGroup.Location = new System.Drawing.Point(0, 0);
+            this.gridControlShowVirtualGroup.MainView = this.gridView6;
+            this.gridControlShowVirtualGroup.MenuManager = this.barManager1;
+            this.gridControlShowVirtualGroup.Name = "gridControlShowVirtualGroup";
+            this.gridControlShowVirtualGroup.Size = new System.Drawing.Size(102, 95);
+            this.gridControlShowVirtualGroup.TabIndex = 0;
+            this.gridControlShowVirtualGroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView6});
+            // 
+            // gridView6
+            // 
+            this.gridView6.GridControl = this.gridControlShowVirtualGroup;
+            this.gridView6.Name = "gridView6";
+            this.gridView6.OptionsBehavior.Editable = false;
+            this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView6.OptionsView.ShowGroupPanel = false;
+            // 
             // gcMap
             // 
             this.gcMap.Controls.Add(this.pcMapPreview);
             this.gcMap.Controls.Add(this.panelControl1);
             this.gcMap.Controls.Add(this.pcMapTreeview);
-            this.gcMap.Location = new System.Drawing.Point(15, 3);
+            this.gcMap.Location = new System.Drawing.Point(394, 3);
             this.gcMap.Name = "gcMap";
-            this.gcMap.Size = new System.Drawing.Size(559, 98);
+            this.gcMap.Size = new System.Drawing.Size(247, 68);
             this.gcMap.TabIndex = 32;
             this.gcMap.Text = "地图管理";
             // 
@@ -1320,7 +1549,7 @@ namespace CameraViewer.Forms
             this.pcMapPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pcMapPreview.Location = new System.Drawing.Point(188, 23);
             this.pcMapPreview.Name = "pcMapPreview";
-            this.pcMapPreview.Size = new System.Drawing.Size(369, 73);
+            this.pcMapPreview.Size = new System.Drawing.Size(57, 43);
             this.pcMapPreview.TabIndex = 1;
             // 
             // pictureBoxMap
@@ -1328,7 +1557,7 @@ namespace CameraViewer.Forms
             this.pictureBoxMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxMap.Location = new System.Drawing.Point(2, 2);
             this.pictureBoxMap.Name = "pictureBoxMap";
-            this.pictureBoxMap.Size = new System.Drawing.Size(365, 44);
+            this.pictureBoxMap.Size = new System.Drawing.Size(53, 14);
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxMap.TabIndex = 4;
             this.pictureBoxMap.TabStop = false;
@@ -1339,9 +1568,9 @@ namespace CameraViewer.Forms
             this.panelControl2.Controls.Add(this.btnAddMap);
             this.panelControl2.Controls.Add(this.teMapName);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(2, 46);
+            this.panelControl2.Location = new System.Drawing.Point(2, 16);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(365, 25);
+            this.panelControl2.Size = new System.Drawing.Size(53, 25);
             this.panelControl2.TabIndex = 3;
             // 
             // btnBrowserMap
@@ -1376,7 +1605,7 @@ namespace CameraViewer.Forms
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(188, 23);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(369, 73);
+            this.panelControl1.Size = new System.Drawing.Size(57, 43);
             this.panelControl1.TabIndex = 3;
             // 
             // pcMapTreeview
@@ -1385,7 +1614,7 @@ namespace CameraViewer.Forms
             this.pcMapTreeview.Dock = System.Windows.Forms.DockStyle.Left;
             this.pcMapTreeview.Location = new System.Drawing.Point(2, 23);
             this.pcMapTreeview.Name = "pcMapTreeview";
-            this.pcMapTreeview.Size = new System.Drawing.Size(186, 73);
+            this.pcMapTreeview.Size = new System.Drawing.Size(186, 43);
             this.pcMapTreeview.TabIndex = 0;
             // 
             // tvMap
@@ -1403,7 +1632,7 @@ namespace CameraViewer.Forms
             this.tvMap.OptionsView.ShowHorzLines = false;
             this.tvMap.OptionsView.ShowIndicator = false;
             this.tvMap.OptionsView.ShowVertLines = false;
-            this.tvMap.Size = new System.Drawing.Size(182, 69);
+            this.tvMap.Size = new System.Drawing.Size(182, 39);
             this.tvMap.TabIndex = 0;
             this.tvMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tvMap_MouseUp);
             this.tvMap.DoubleClick += new System.EventHandler(this.tvMap_DoubleClick_1);
@@ -2147,6 +2376,59 @@ namespace CameraViewer.Forms
             this.popupMenuDeleteCamera.Manager = this.barManager1;
             this.popupMenuDeleteCamera.Name = "popupMenuDeleteCamera";
             // 
+            // popupMenuAddVirtualGroup
+            // 
+            this.popupMenuAddVirtualGroup.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1)});
+            this.popupMenuAddVirtualGroup.Manager = this.barManager1;
+            this.popupMenuAddVirtualGroup.Name = "popupMenuAddVirtualGroup";
+            // 
+            // popupMenuAddUserOrCamera
+            // 
+            this.popupMenuAddUserOrCamera.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem4),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7)});
+            this.popupMenuAddUserOrCamera.Manager = this.barManager1;
+            this.popupMenuAddUserOrCamera.Name = "popupMenuAddUserOrCamera";
+            // 
+            // popupMenuAddUser
+            // 
+            this.popupMenuAddUser.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem9)});
+            this.popupMenuAddUser.Manager = this.barManager1;
+            this.popupMenuAddUser.Name = "popupMenuAddUser";
+            // 
+            // popupMenuDeleteUser
+            // 
+            this.popupMenuDeleteUser.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemDeleteUser)});
+            this.popupMenuDeleteUser.Manager = this.barManager1;
+            this.popupMenuDeleteUser.Name = "popupMenuDeleteUser";
+            // 
+            // popupMenuDeleteAndEditVirtualGroup
+            // 
+            this.popupMenuDeleteAndEditVirtualGroup.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemDeleteVirtualGroup)});
+            this.popupMenuDeleteAndEditVirtualGroup.Manager = this.barManager1;
+            this.popupMenuDeleteAndEditVirtualGroup.Name = "popupMenuDeleteAndEditVirtualGroup";
+            // 
+            // popupMenuAddCameraInVirtualGroup
+            // 
+            this.popupMenuAddCameraInVirtualGroup.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAddCameraInVritualGroup)});
+            this.popupMenuAddCameraInVirtualGroup.Manager = this.barManager1;
+            this.popupMenuAddCameraInVirtualGroup.Name = "popupMenuAddCameraInVirtualGroup";
+            // 
+            // popupMenuDeleteCameraInVritualGroup
+            // 
+            this.popupMenuDeleteCameraInVritualGroup.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemDeleteCameraInVirtualGroup)});
+            this.popupMenuDeleteCameraInVritualGroup.Manager = this.barManager1;
+            this.popupMenuDeleteCameraInVritualGroup.Name = "popupMenuDeleteCameraInVritualGroup";
+            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2210,6 +2492,13 @@ namespace CameraViewer.Forms
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcVritualGroupManegement)).EndInit();
+            this.gcVritualGroupManegement.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).EndInit();
+            this.splitContainerControl9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.treeListVirtualGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlShowVirtualGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcMap)).EndInit();
             this.gcMap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcMapPreview)).EndInit();
@@ -2285,6 +2574,13 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddRecognizer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddCameraInRecognizer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteCamera)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddVirtualGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddUserOrCamera)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteAndEditVirtualGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuAddCameraInVirtualGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDeleteCameraInVritualGroup)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2473,5 +2769,33 @@ namespace CameraViewer.Forms
         private DevExpress.XtraBars.BarButtonItem barButtonItemDeleteCameraInRecognizer;
         private DevExpress.XtraBars.PopupMenu popupMenuAddCameraInRecognizer;
         private DevExpress.XtraBars.PopupMenu popupMenuDeleteCamera;
+        private DevExpress.XtraNavBar.NavBarItem nbVirtualGroup;
+        private DevExpress.XtraEditors.GroupControl gcVritualGroupManegement;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl9;
+        private DevExpress.XtraTreeList.TreeList treeListVirtualGroup;
+        private DevExpress.XtraGrid.GridControl gridControlShowVirtualGroup;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
+        private DevExpress.XtraBars.PopupMenu popupMenuAddVirtualGroup;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.PopupMenu popupMenuAddUserOrCamera;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn9;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn10;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem7;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
+        private DevExpress.XtraBars.PopupMenu popupMenuAddUser;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDeleteUser;
+        private DevExpress.XtraBars.PopupMenu popupMenuDeleteUser;
+        private DevExpress.XtraBars.PopupMenu popupMenuDeleteAndEditVirtualGroup;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDeleteVirtualGroup;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemEditVirtualGroup;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAddCameraInVritualGroup;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDeleteCameraInVirtualGroup;
+        private DevExpress.XtraBars.PopupMenu popupMenuAddCameraInVirtualGroup;
+        private DevExpress.XtraBars.PopupMenu popupMenuDeleteCameraInVritualGroup;
     }
 }

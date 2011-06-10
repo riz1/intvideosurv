@@ -56,6 +56,9 @@ namespace IntVideoSurv.Entity
         public const string CameraAddInRecognizer = "添加摄像头";
         public const string CameraUpdateInRecognizer = "更新摄像头";
         public const string CameraDeleteInRecognizer = "删除摄像头";
+        public const string CameraAddInVirtualGroup = "添加摄像头到VirtualGroup";
 
+        public const string UserAddInVirtualGroup = "添加用户到VirtualGroup";
+        public const string UserDeleteInVirtualGroup = "删除在virtualgroup中的用户";
     }
 }

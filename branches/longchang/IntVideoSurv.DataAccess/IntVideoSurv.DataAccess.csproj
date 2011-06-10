@@ -68,6 +68,7 @@
     <Compile Include="AlarmDataAccess.cs" />
     <Compile Include="AlarmIconDataAccess.cs" />
     <Compile Include="CameraDataAccess.cs" />
+    <Compile Include="CameraGroupDataAccess.cs" />
     <Compile Include="CameraIconDataAccess.cs" />
     <Compile Include="CameraMonitorPairDataAccess.cs" />
     <Compile Include="CapturePictureDataAccess.cs" />
@@ -99,8 +100,10 @@
     <Compile Include="TrackDataAccess.cs" />
     <Compile Include="TTestDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
+    <Compile Include="UserGroupDataAccess.cs" />
     <Compile Include="VehicleDataAccess.cs" />
     <Compile Include="VideoDataAccess.cs" />
+    <Compile Include="VirtualGroupDataAccess.cs" />
     <Compile Include="WindowCameraDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
