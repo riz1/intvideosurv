@@ -92,6 +92,12 @@ namespace CameraViewer.Player
             Started = true;
         }
 
+        public void Stop()
+        {
+            AirnoixClient.MP4_ClientDisConnect(_camHandle);
+            Started = false;
+        }
+
         public void StartRecord()
         {
             if (!Directory.Exists(SaveTo))

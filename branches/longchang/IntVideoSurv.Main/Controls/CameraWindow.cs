@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 using System.Threading;
+using CameraViewer.Player;
 using IntVideoSurv.Business;
 using IntVideoSurv.Business.HiK;
 using System.Xml;
@@ -31,7 +32,16 @@ namespace CameraViewer
 		private bool	firstFrame = true;
         //private List<MyShape> ListXMLShapes = new List<MyShape>();
         private Pen arrowpen;
-               
+
+	    private AirnoixCamera _airnoixCamera;
+	    public AirnoixCamera AirnoixCamera
+	    {
+            get { return _airnoixCamera; }
+            set
+            {
+                _airnoixCamera = value;
+            }
+	    }
 
 		// AutoSize property
 		[DefaultValue(false)]
@@ -367,6 +377,22 @@ namespace CameraViewer
                 ;
             }
             
+        }
+
+	    private void ReConectCamera(object sender, EventArgs e)
+        {
+            if (_airnoixCamera != null)
+            {
+                string Ip = "192.168.1.6";
+                int Port = 6002;
+                string UserName = "system";
+                string Password = "system";
+                string SaveTo = "c:\\";
+                _airnoixCamera.Dispose();
+
+                _airnoixCamera.DisplayPos = new Rectangle(0, 0, this.Width, this.Height);
+                _airnoixCamera.Start();
+            }
         }
         
 	}

@@ -938,9 +938,21 @@ namespace CameraViewer
                 SetClickON(CurrentCameraWindow);
                 isFullScreen = !isFullScreen;
                 UpdateSize();
+
                 
+                #region 更新选中窗口的视频
 
+                if (CurrentCameraWindow.AirnoixCamera!=null)
+                {
+                    if (CurrentCameraWindow.AirnoixCamera.Started)
+                    {
+                        CurrentCameraWindow.AirnoixCamera.Stop();
+                        CurrentCameraWindow.AirnoixCamera.DisplayPos = new Rectangle(0, 0, CurrentCameraWindow.Width, CurrentCameraWindow.Height);
+                        CurrentCameraWindow.AirnoixCamera.Start();
+                    }
+                }
 
+                #endregion
             }
             catch (Exception ex)
             {
