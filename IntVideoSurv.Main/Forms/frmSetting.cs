@@ -1661,6 +1661,10 @@ namespace CameraViewer.Forms
                     TreeListNode treeListNodeUQ = treeListVirtualGroup.AppendNode(new[] { "用户管理", item.Key + ";E" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
                     treeListNodeUQ.Tag = item.Key + ";E";
                     clist = CameraGroupBusiness.Instance.GetAllCameraInfo(ref errMessage,item.Key);
+                    if (clist==null)
+                    {
+                        continue;
+                    }
                     listUser = UserGroupBusiness.Instance.GetAllCameraInfo(ref errMessage, item.Key);
                     foreach(KeyValuePair<int, CameraInfo> itemcamera in clist)
                     {

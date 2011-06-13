@@ -56,7 +56,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllCameraInfo(Database db,int VirtualGroupId)
         {
-            string cmdText = string.Format("select b.* from CameraGroup a,CameraInfo b where a.CameraID=b.CameraId and a.VirtualGroupID={0}", VirtualGroupId);
+            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from CameraGroup,CameraInfo, DeviceInfo where CameraGroup.CameraID=CameraInfo.CameraId and CameraGroup.VirtualGroupID={0} and CameraInfo.deviceid =  DeviceInfo.deviceid", VirtualGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
