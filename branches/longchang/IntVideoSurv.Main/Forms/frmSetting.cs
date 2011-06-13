@@ -1808,6 +1808,8 @@ namespace CameraViewer.Forms
             int Gid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
             int err;
             err = VirtualGroupBusiness.Instance.DeleteByGroupID(ref errMessage, Gid);
+            err = UserGroupBusiness.Instance.DeleteByVirtualGroupID(ref errMessage,Gid);
+            err = CameraGroupBusiness.Instance.DeleteByVirtualGroupID(ref errMessage,Gid);
             BuildVirtualGroupTree();
         }
         //ÐÞ¸Ä×é

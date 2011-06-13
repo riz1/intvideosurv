@@ -118,7 +118,24 @@ namespace IntVideoSurv.DataAccess
             }
 
         }
+        public static int DeleteByVirtualGroupID(Database db, int ID)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from UserGroup ");
+            sb.AppendFormat(" where VirtualGroupID={0}", ID);
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
         public static DataSet GetAllCameraInfo(Database db, int VirtualGroupId)
         {
             string cmdText = string.Format("select b.* from UserGroup a,UserInfo b where a.UserID=b.userid and a.VirtualGroupID={0}", VirtualGroupId);
@@ -136,6 +153,20 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetTheUser(Database db, int userid)
         {
             string cmdText = string.Format("select * from UserGroup where UserID={0}", userid);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static DataSet GetCameraInfoByUserId(Database db, int userid)
+        {
+            string cmdText = string.Format("select * from CameraInfo where CameraId in (select CameraID from CameraGroup where VirtualGroupID in (select VirtualGroupID from UserGroup where UserID={0}))", userid);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

@@ -36,7 +36,24 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        //
+        public static int DeleteByVirtualGroupID(Database db, int GroupID)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from CameraGroup ");
+            sb.AppendFormat(" where VirtualGroupID={0}", GroupID);
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
         public static DataSet GetAllCameraInfo(Database db,int VirtualGroupId)
         {
             string cmdText = string.Format("select b.* from CameraGroup a,CameraInfo b where a.CameraID=b.CameraId and a.VirtualGroupID={0}", VirtualGroupId);
