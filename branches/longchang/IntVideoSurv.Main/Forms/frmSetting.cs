@@ -1746,13 +1746,14 @@ namespace CameraViewer.Forms
             BuildVirtualGroupTree();
            
         }
-        //删除组
+      
         private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             int Gid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
             int err;
            err=VirtualGroupBusiness.Instance.DeleteByGroupID(ref errMessage, Gid);
            BuildVirtualGroupTree();
+           showVirtualGroupInfo();
         }
         //添加组
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1760,6 +1761,7 @@ namespace CameraViewer.Forms
             AddVirtualGroup fdialog = new AddVirtualGroup();
             fdialog.ShowDialog(this);
             BuildVirtualGroupTree();
+            showVirtualGroupInfo();
         }
         //添加用户
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1811,6 +1813,7 @@ namespace CameraViewer.Forms
             err = UserGroupBusiness.Instance.DeleteByVirtualGroupID(ref errMessage,Gid);
             err = CameraGroupBusiness.Instance.DeleteByVirtualGroupID(ref errMessage,Gid);
             BuildVirtualGroupTree();
+            showVirtualGroupInfo();
         }
         //修改组
         private void barButtonItemEditVirtualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
