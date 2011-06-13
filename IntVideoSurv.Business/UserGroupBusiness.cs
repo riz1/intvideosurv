@@ -126,6 +126,24 @@ namespace IntVideoSurv.Business
             }
 
         }
+        public int DeleteByVirtualGroupID(ref string errMessage, int ID)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                int iRtn = UserGroupDataAccess.DeleteByVirtualGroupID(db, ID);
+
+                return iRtn;
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
         public Dictionary<int, UserInfo> GetAllCameraInfo(ref string errMessage, int VirtualGroupId)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -140,6 +158,31 @@ namespace IntVideoSurv.Business
                 {
                     oUserInfo = new UserInfo(ds.Tables[0].Rows[i]);
                     list.Add(oUserInfo.UserId, oUserInfo);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
+        public Dictionary<int, CameraInfo> GetCameraInfoByUserId(ref string errMessage, int userid)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, CameraInfo> list = new Dictionary<int, CameraInfo>();
+            try
+            {
+                CameraInfo oCameraInfo;
+                DataSet ds = UserGroupDataAccess.GetCameraInfoByUserId(db, userid);
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    oCameraInfo = new CameraInfo(ds.Tables[0].Rows[i]);
+                    list.Add(oCameraInfo.CameraId, oCameraInfo);
                 }
                 return list;
 

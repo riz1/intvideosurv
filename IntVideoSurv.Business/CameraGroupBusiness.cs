@@ -45,7 +45,22 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
-        //
+        public int DeleteByVirtualGroupID(ref string errMessage, int vgid)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return CameraGroupDataAccess.DeleteByVirtualGroupID(db, vgid);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+        }
         public Dictionary<int, CameraInfo> GetAllCameraInfo(ref string errMessage,int VirtualGroupId)
         {
             Database db = DatabaseFactory.CreateDatabase();
