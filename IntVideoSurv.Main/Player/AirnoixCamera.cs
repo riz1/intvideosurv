@@ -110,7 +110,9 @@ namespace CameraViewer.Player
 
         public void StopRecord()
         {
+            _isRecording = false;
             AirnoixClient.MP4_ClientStopCapture(_camHandle);
+            DisposeWriter();
         }
 
         public System.Drawing.Image CaptureImage()
@@ -130,7 +132,8 @@ namespace CameraViewer.Player
 
         }
 
-
+        private bool _isRecording = false;
+        public string VideoPath { set; get;}
         public int StreamReadCallback(System.IntPtr hClient, System.IntPtr context)
         {
             int type = 0;
@@ -142,31 +145,28 @@ namespace CameraViewer.Player
                 //视频文件头
                 if (type == 0x80)
                 {
-                    if (_header == null)
+                    if ((_isRecording==false)||(_header == null))
                     {
+
+                        DisposeWriter();
                         _header = new byte[len];
                         Array.Copy(_buf, 0, _header, 0, len);
-                    }
-                }
-
-                if (_header != null)
-                {
-                    var now = DateTime.Now;
-                    if (now.Minute != _lastRecordTime.Minute)
-                    {
-                        DisposeWriter();
-                        var file = now.ToShortTimeString().Replace(":", "-") + ".avi";
+                        var now = DateTime.Now;
+                        var file = now.ToString("HH-mm-ss.avi");
                         var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file);
+                        VideoPath = path;
                         _writer = new BinaryWriter(File.OpenWrite(path));
                         _writer.Write(_header);
-                        _lastRecordTime = now;
+                        _isRecording = true;
+
                     }
                 }
-
+                //视频数据
                 if (_writer != null && len > 0 && type != 0x80)
                 {
                     _writer.Write(_buf, 0, len);
                 }
+
             }
 
             return 0;

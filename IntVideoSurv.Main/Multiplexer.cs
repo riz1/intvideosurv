@@ -759,7 +759,7 @@ namespace CameraViewer
             return cameraWindow;
         }
 
-        public CameraWindow GetCamera(int row, int col)
+        public CameraWindow GetCameraWindow(int row, int col)
         {
             CameraWindow rtnCameraWindow = null;
             if ((row >= 0) && (col >= 0) && (row < MaxRows) && (col < MaxCols))

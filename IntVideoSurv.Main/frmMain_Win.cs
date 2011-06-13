@@ -209,7 +209,7 @@ namespace CameraViewer
                         }
 
                     }
-                    CameraWindow camwin = mainMultiplexer.GetCamera(i, j);
+                    CameraWindow camwin = mainMultiplexer.GetCameraWindow(i, j);
                     cameraDriver1 = _runningCameraList[camera.CameraId];
                     cameraDriver1.CurrentCamera.ListOutputTarget.Add(new DisplayHandlePair { DisplayChannelId = item.DisplayChannelId, DisplaySplitScreenNo = item.DisplaySplitScreenNo, Handle = camwin.Handle });
                     _runningCameraList[camera.CameraId] = cameraDriver1;
@@ -312,37 +312,56 @@ namespace CameraViewer
 
         }
         Dictionary<Keys, bool> _listNumKeyStatus = new Dictionary<Keys, bool>();
+        private CameraWindow careCameraWindows = null;
         private void frmMain_Win_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Escape:
                     Exit();
-                    break;
+                    return;
                 case Keys.D1:
-                case Keys.D2:
-                case Keys.D3:
-                case Keys.D4:
-                case Keys.D5:
-                case Keys.D6:
-                case Keys.D7:
-                case Keys.D8:
-                case Keys.D9:
-                    _listNumKeyStatus[e.KeyCode] = !_listNumKeyStatus[e.KeyCode];
-                    if (_listNumKeyStatus[e.KeyCode])
-                    {
-                        //¿ªÊ¼Â¼Ïñ
-                    }
-                    else
-                    {
-                        frmCaptureLicense fcl = new frmCaptureLicense();
-                        fcl.Show();
-                        //½áÊøÂ¼Ïñ
-                    }
-                    ChangeButtonState(e);
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(0, 0);
                     break;
-
+                case Keys.D2:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(0, 1);
+                    break;
+                case Keys.D3:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(0, 2);
+                    break;
+                case Keys.D4:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(1, 0);
+                    break;
+                case Keys.D5:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(1, 1);
+                    break;
+                case Keys.D6:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(1, 2);
+                    break;
+                case Keys.D7:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(2, 0);
+                    break;
+                case Keys.D8:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(2, 1);
+                    break;
+                case Keys.D9:
+                    careCameraWindows = mainMultiplexer.GetCameraWindow(2, 2);
+                    break;
             }
+            _listNumKeyStatus[e.KeyCode] = !_listNumKeyStatus[e.KeyCode];
+            if (_listNumKeyStatus[e.KeyCode])
+            {
+                //¿ªÊ¼Â¼Ïñ
+                careCameraWindows.AirnoixCamera.StartRecord();
+            }
+            else
+            {
+                careCameraWindows.AirnoixCamera.StopRecord();
+                frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera.VideoPath);
+                fcl.Show();
+                //½áÊøÂ¼Ïñ
+            }
+            ChangeButtonState(e);
 
         }
 
@@ -766,7 +785,7 @@ namespace CameraViewer
                     if (_listCam.ContainsKey(iCount))
                     {
                         CameraInfo camera = _listCam[iCount];
-                        CameraWindow camwin = mainMultiplexer.GetCamera(i, j);
+                        CameraWindow camwin = mainMultiplexer.GetCameraWindow(i, j);
                         IntPtr intPtr = new IntPtr();
                         camera.Handle = intPtr;
                         oDevice = _listDevice[camera.DeviceId];
@@ -924,7 +943,7 @@ namespace CameraViewer
 
                 foreach (var windowCameraInfo in listWindowCamera)
                 {
-                    CameraWindow cameraWindow = mainMultiplexer.GetCamera(windowCameraInfo.Value.Row, windowCameraInfo.Value.Col);
+                    CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(windowCameraInfo.Value.Row, windowCameraInfo.Value.Col);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = liveDecoderPacketHandle.CurrentNetImage.Image;
                     cameraWindow.CameraID = windowCameraInfo.Key;
@@ -1269,7 +1288,7 @@ namespace CameraViewer
 
         private void barButtonItem12_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+            CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(1, 1);
             cameraWindow.CurrentImage = Image.FromFile(@"C:\fff1a7ef-43d7-46d9-ad61-d5c9f8fe4b53.bmp");
         }
 
@@ -1284,7 +1303,7 @@ namespace CameraViewer
                 testimage = !testimage;
                 if (testimage)
                 {
-                    CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+                    CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(1, 1);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_212.JPG");
                     cameraWindow.CameraID = 5;
@@ -1294,7 +1313,7 @@ namespace CameraViewer
                 }
                 else
                 {
-                    CameraWindow cameraWindow = mainMultiplexer.GetCamera(1, 1);
+                    CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(1, 1);
                     if (cameraWindow.CurrentImage != null) cameraWindow.CurrentImage.Dispose();
                     cameraWindow.CurrentImage = Image.FromFile(@"C:\imm_2010_07_06_18_35_29_21.JPG");
                     cameraWindow.CameraID = 5;

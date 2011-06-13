@@ -30,6 +30,25 @@ namespace CameraViewer.Forms
 
         }
 
+        public frmCaptureLicense(string videoPath)
+        {
+            InitializeComponent();
+            if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
+            }
+            intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
+            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, videoPath, null, true);
+
+            frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
+            frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
+
+            trackBar1.Minimum = 0;
+            trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+
+
+        }
+
         private IntPtr intPtr;
         private int frameWidth;
         private int frameHeight;
@@ -171,7 +190,8 @@ namespace CameraViewer.Forms
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            AirnoixPlayer.Avdec_Play(intPtr);
+            int ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+            ret = AirnoixPlayer.Avdec_Play(intPtr);
         }
 
         private void buttonPause_Click(object sender, EventArgs e)
@@ -181,6 +201,7 @@ namespace CameraViewer.Forms
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
+            trackBar1.Value = trackBar1.Minimum;
             AirnoixPlayer.Avdec_Stop(intPtr);
         }
 
