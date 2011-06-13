@@ -80,7 +80,7 @@ namespace IntVideoSurv.DataAccess
             }
             else{
                 sb.Append("delete from VirtualGroup ");
-                sb.AppendFormat(" where VirtualGroupID={0} and CameraID={0}", GroupID, CameraID);
+                sb.AppendFormat(" where VirtualGroupID={0} and CameraID={1}", GroupID, CameraID);
             }
 
             string cmdText = sb.ToString();
