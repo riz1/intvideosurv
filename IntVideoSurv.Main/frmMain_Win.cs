@@ -2564,7 +2564,7 @@ namespace CameraViewer
             airnoixCamera.UserName = "system";
             airnoixCamera.Password = "system";
             airnoixCamera.SaveTo = "c:\\";
-
+            cameraWindow.AirnoixCamera = airnoixCamera;
             airnoixCamera.Start();
 
 
@@ -2583,6 +2583,14 @@ namespace CameraViewer
         private void barButtonItem20_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Image xx = airnoixCamera.CaptureImage();
+        }
+
+        private void barButtonItem21_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            airnoixCamera.Stop();
+            airnoixCamera.DisplayPos = new Rectangle(0, 0, mainMultiplexer.GetCurrentCameraWindow().Width, mainMultiplexer.GetCurrentCameraWindow().Height);
+            airnoixCamera.Start();
+
         }
 
     }

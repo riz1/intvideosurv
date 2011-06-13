@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data;
 using IntVideoSurv.Entity;
 using IntVideoSurv.DataAccess;
 using log4net;
-using videosource;
-using System.Drawing;
 
 namespace IntVideoSurv.Business
 {
