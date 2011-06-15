@@ -56,7 +56,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllCameraInfo(Database db,int VirtualGroupId)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from CameraGroup,CameraInfo, DeviceInfo where CameraGroup.CameraID=CameraInfo.CameraId and CameraGroup.VirtualGroupID={0} and CameraInfo.deviceid =  DeviceInfo.deviceid", VirtualGroupId);
+            string cmdText = string.Format("select b.* from CameraGroup a,CameraInfo b where a.CameraID=b.CameraId and a.VirtualGroupID={0}", VirtualGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -80,7 +80,7 @@ namespace IntVideoSurv.DataAccess
             }
             else{
                 sb.Append("delete from VirtualGroup ");
-                sb.AppendFormat(" where VirtualGroupID={0} and CameraID={1}", GroupID, CameraID);
+                sb.AppendFormat(" where VirtualGroupID={0} and CameraID={0}", GroupID, CameraID);
             }
 
             string cmdText = sb.ToString();
