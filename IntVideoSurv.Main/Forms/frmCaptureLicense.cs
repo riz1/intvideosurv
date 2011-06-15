@@ -18,8 +18,8 @@ namespace CameraViewer.Forms
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
             }
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"V:\项目代码备份\凯智\修改的美赞美\bin\RecoderFile\View_162801(new).avi", null, true);
-            
+            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\电影\movie\[乔丹经典比赛合辑].1996NBA.Finals.G6.SupersonicsBulls.AVI", null, false);
+            //V:\项目代码备份\凯智\修改的美赞美\bin\RecoderFile\View_162801(new).avi
             frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             //trackBarControl1.Properties.Minimum = 1;
