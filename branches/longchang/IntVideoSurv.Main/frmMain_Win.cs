@@ -2612,5 +2612,11 @@ namespace CameraViewer
 
         }
 
+        private void barButtonItemPlayTwoFiles_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmPlayTwoFiles test = new frmPlayTwoFiles();
+            test.ShowDialog(this);
+        }
+
     }
 }

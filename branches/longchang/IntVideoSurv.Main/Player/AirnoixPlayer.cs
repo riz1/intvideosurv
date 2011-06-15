@@ -98,5 +98,8 @@ namespace CameraViewer.Player
         
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int Avdec_SetDisplayPos(IntPtr p, System.Drawing.Rectangle lpRect);
+
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int Avdec_CloseFile(IntPtr p);
     }
 }
