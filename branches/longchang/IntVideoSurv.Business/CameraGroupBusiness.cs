@@ -83,7 +83,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<int, CameraInfo>();
             }
         }
         public  int DeleteByGroupIDandCamID(ref string errMessage, int GroupID,int CameraID)
