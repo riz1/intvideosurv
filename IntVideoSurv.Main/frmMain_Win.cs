@@ -347,6 +347,8 @@ namespace CameraViewer
                 case Keys.D9:
                     careCameraWindows = mainMultiplexer.GetCameraWindow(2, 2);
                     break;
+                default:
+                    return;
             }
             _listNumKeyStatus[e.KeyCode] = !_listNumKeyStatus[e.KeyCode];
             if (_listNumKeyStatus[e.KeyCode])

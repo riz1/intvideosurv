@@ -25,7 +25,7 @@ namespace CameraViewer.Forms
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
             }
             intPtr = AirnoixPlayer.Avdec_Init(panelControlPlay.Handle, 0, 512, 0);
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\李太勇老师\123.avi", null, false);
+            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"V:\项目代码备份\凯智\修改的美赞美\bin\RecoderFile\View_202722.264", null, false);
             frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             //trackBarControl1.Properties.Minimum = 1;
@@ -126,11 +126,11 @@ namespace CameraViewer.Forms
         private void timer1_Tick(object sender, EventArgs e)
         {
             
-            if (trackBarProgressing.Value == 10500)
+            if (trackBarProgressing.Value == 1050)
             {
                 int ret;
                 ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\李太勇老师\18-55-28.avi", null, true);
+                ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\Users\Administrator.ltyong-win7.000\Desktop\16-17-33_N(16).mkv", null, true);
                 timer1.Enabled = false;
             }
         }
@@ -141,12 +141,12 @@ namespace CameraViewer.Forms
             int ret;
             ret = AirnoixPlayer.Avdec_Play(intPtr);
             ret = AirnoixPlayer.Avdec_Pause(intPtr);
-            MessageBox.Show("播放从10000到10500帧，然后重新播放另一个视频");
+            MessageBox.Show("播放从1000到1050帧，然后重新播放另一个视频");
             trackBarProgressing.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
 
             if (trackBarProgressing.Maximum > 0)
             {
-                trackBarProgressing.Value = 10000;
+                trackBarProgressing.Value = 1000;
                 ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBarProgressing.Value);
             }
             ret = AirnoixPlayer.Avdec_Play(intPtr);

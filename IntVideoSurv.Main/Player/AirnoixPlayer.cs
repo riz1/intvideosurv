@@ -101,5 +101,8 @@ namespace CameraViewer.Player
 
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int Avdec_CloseFile(IntPtr p);
+
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int Avdec_SetRefreshDisplayPos(IntPtr p,bool bFresh);
     }
 }

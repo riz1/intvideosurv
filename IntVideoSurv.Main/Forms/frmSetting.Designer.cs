@@ -1460,7 +1460,7 @@ namespace CameraViewer.Forms
             this.gcVritualGroupManegement.Controls.Add(this.splitContainerControl9);
             this.gcVritualGroupManegement.Location = new System.Drawing.Point(37, 109);
             this.gcVritualGroupManegement.Name = "gcVritualGroupManegement";
-            this.gcVritualGroupManegement.Size = new System.Drawing.Size(211, 120);
+            this.gcVritualGroupManegement.Size = new System.Drawing.Size(502, 143);
             this.gcVritualGroupManegement.TabIndex = 36;
             this.gcVritualGroupManegement.Text = "ื้นÜภํ";
             // 
@@ -1473,7 +1473,8 @@ namespace CameraViewer.Forms
             this.splitContainerControl9.Panel1.Text = "Panel1";
             this.splitContainerControl9.Panel2.Controls.Add(this.gridControlShowVirtualGroup);
             this.splitContainerControl9.Panel2.Text = "Panel2";
-            this.splitContainerControl9.Size = new System.Drawing.Size(207, 95);
+            this.splitContainerControl9.Size = new System.Drawing.Size(498, 118);
+            this.splitContainerControl9.SplitterPosition = 242;
             this.splitContainerControl9.TabIndex = 0;
             this.splitContainerControl9.Text = "splitContainerControl9";
             // 
@@ -1490,7 +1491,7 @@ namespace CameraViewer.Forms
             this.treeListVirtualGroup.OptionsView.ShowColumns = false;
             this.treeListVirtualGroup.OptionsView.ShowHorzLines = false;
             this.treeListVirtualGroup.OptionsView.ShowIndicator = false;
-            this.treeListVirtualGroup.Size = new System.Drawing.Size(100, 95);
+            this.treeListVirtualGroup.Size = new System.Drawing.Size(242, 118);
             this.treeListVirtualGroup.TabIndex = 0;
             this.treeListVirtualGroup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListVirtualGroup_MouseUp);
             // 
@@ -1518,7 +1519,7 @@ namespace CameraViewer.Forms
             this.gridControlShowVirtualGroup.MainView = this.gridView6;
             this.gridControlShowVirtualGroup.MenuManager = this.barManager1;
             this.gridControlShowVirtualGroup.Name = "gridControlShowVirtualGroup";
-            this.gridControlShowVirtualGroup.Size = new System.Drawing.Size(102, 95);
+            this.gridControlShowVirtualGroup.Size = new System.Drawing.Size(251, 118);
             this.gridControlShowVirtualGroup.TabIndex = 0;
             this.gridControlShowVirtualGroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView6});

@@ -42,9 +42,9 @@ namespace CameraViewer.Forms
 
             frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
-
-            //trackBar1.Minimum = 0;
-            //trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            trackBar1.Minimum = 0;
+            trackBar1.Maximum = _totalFrames; 
 
 
         }
@@ -54,25 +54,51 @@ namespace CameraViewer.Forms
         private int frameHeight;
         private AirnoixPlayerState _previousState;
         private int maunulSteps = 0;
+        private int _totalFrames;
         private void simpleButtonPrevious_Click(object sender, EventArgs e)
         {
-            treeListPicturesBefore.Nodes.Clear();
-            Image[] images = GetImages();
-            treeListPicturesBefore.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+            try
+            {
+                treeListPicturesBefore.Nodes.Clear();
+                Image[] images = GetImages();
+                treeListPicturesBefore.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+            }
+            catch (Exception)
+            {
+                
+                return;
+            }
+
         }
 
         private void simpleButtonCurrent_Click(object sender, EventArgs e)
         {
-            treeListPicturesCurrent.Nodes.Clear();
-            Image[] images = GetImages();
-            treeListPicturesCurrent.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+            try
+            {
+                treeListPicturesCurrent.Nodes.Clear();
+                Image[] images = GetImages();
+                treeListPicturesCurrent.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+            }
+            catch (Exception)
+            {
+                
+                return;
+            }
         }
 
         private void simpleButtonLast_Click(object sender, EventArgs e)
         {
-            treeListPicturesAfter.Nodes.Clear();
-            Image[] images = GetImages();
-            treeListPicturesAfter.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+            try
+            {
+                treeListPicturesAfter.Nodes.Clear();
+                Image[] images = GetImages();
+                treeListPicturesAfter.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+            }
+            catch (Exception)
+            {
+                
+                return;
+            }
         }
 
         private Image[] GetImages()
@@ -83,11 +109,18 @@ namespace CameraViewer.Forms
             int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
             if (currentPos >= 3)
             {
-                AirnoixPlayer.Avdec_SetCurrentPosition(intPtr,currentPos - 3);
+                for (int i = 0; i < 3; i++)
+                {
+                    AirnoixPlayer.Avdec_StepFrame(intPtr, false);                    
+                }
+
             }
-            if (AirnoixPlayer.Avdec_GetTotalFrames(intPtr) - currentPos <= 7)
+            if (_totalFrames - currentPos <= 7)
             {
-                AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, currentPos - 7);
+                for (int i = 0; i < _totalFrames - currentPos; i++)
+                {
+                    AirnoixPlayer.Avdec_StepFrame(intPtr, false);
+                }
             }
             while (frameWidth == 0 || frameHeight == 0)
             {
@@ -100,11 +133,11 @@ namespace CameraViewer.Forms
                 string fmt = string.Format("BMP {0:0000}{1:0000}{2:0000}", frameWidth, frameHeight, 24);
                 string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
                 ret = AirnoixPlayer.Avdec_Play(intPtr);
-                ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
                 ret = AirnoixPlayer.Avdec_Pause(intPtr);
+                ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
+                
                 images[i] = Image.FromFile(filename);
                 //ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
-                maunulSteps++;
 
             }
             if (_previousState == AirnoixPlayerState.PLAY_STATE_PLAY)
@@ -147,7 +180,8 @@ namespace CameraViewer.Forms
                 //播放第一段视频
                 if(isfirstvideo==true)
                 {
-                    if (AirnoixPlayer.Avdec_GetCurrentState(intPtr) == AirnoixPlayerState.PLAY_STATE_PLAY)
+                    int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                    if (_totalFrames == 0)
                     {
                         int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                          if (first == true)
@@ -215,11 +249,26 @@ namespace CameraViewer.Forms
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
-            if ((state == AirnoixPlayerState.PLAY_STATE_PAUSE) || (state == AirnoixPlayerState.PLAY_STATE_STOP))
+            if ( state == AirnoixPlayerState.PLAY_STATE_STOP)
             {
-                int ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
-                ret = AirnoixPlayer.Avdec_Play(intPtr);
-                ret = AirnoixPlayer.Avdec_Pause(intPtr);                
+                AirnoixPlayer.Avdec_Play(intPtr);
+                AirnoixPlayer.Avdec_Pause(intPtr);
+            }
+            if ((state == AirnoixPlayerState.PLAY_STATE_PAUSE))
+            {
+                int ret = 0;//= AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+                if ((trackBar1.Value - 1) % 30 == 0)
+                {
+                    ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+                }
+                else
+                {
+                    ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+                    for (int i = 0; i < (trackBar1.Value - 1) % 30; i++)
+                    {
+                        ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
+                    }
+                }            
             }
 
         }
