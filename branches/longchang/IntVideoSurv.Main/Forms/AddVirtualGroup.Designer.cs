@@ -79,6 +79,7 @@
             this.Controls.Add(this.textEditVirtualGroup);
             this.Controls.Add(this.labelControl12);
             this.Name = "AddVirtualGroup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加组";
             ((System.ComponentModel.ISupportInitialize)(this.textEditVirtualGroup.Properties)).EndInit();
             this.ResumeLayout(false);

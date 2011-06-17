@@ -118,6 +118,7 @@
             this.ClientSize = new System.Drawing.Size(268, 387);
             this.Controls.Add(this.panelControl1);
             this.Name = "AddCameraInVirtualGroup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加摄像头";
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
