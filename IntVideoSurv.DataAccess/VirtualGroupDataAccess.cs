@@ -13,11 +13,11 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [VirtualGroup](");
+            sbField.Append("INSERT INTO  VirtualGroup(");
             sbValue.Append("values (");
             //sbField.Append("[ID]");
             //sbValue.AppendFormat("{0}", oVirtualGroup.ID);
-            sbField.Append("[Name])");
+            sbField.Append("Name)");
             sbValue.AppendFormat("'{0}')", oVirtualGroup.Name);
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 
@@ -25,8 +25,21 @@ namespace IntVideoSurv.DataAccess
             {
                 cmdText = cmdText.Replace("\r\n", "");
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
-                int id = int.Parse(db.ExecuteScalar(CommandType.Text, "SELECT     ident_current('VirtualGroup')").ToString());
+
+                string strsql = "";             
+
+                if (DataBaseParas.DBType == MyDBType.SqlServer)
+                {
+                    strsql = "SELECT     ident_current('VirtualGroup')";
+                }
+                else if (DataBaseParas.DBType == MyDBType.Oracle)
+                {
+                    strsql =
+                    "select ID   from   VirtualGroup   where  rowid=(select   max(rowid)   from   VirtualGroup)";
+                }
+                int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
                 return id;
+
             }
             catch (Exception ex)
             {

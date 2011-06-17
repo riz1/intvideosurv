@@ -166,7 +166,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<int, UserInfo>();
             }
         }
         public Dictionary<int, CameraInfo> GetCameraInfoByUserId(ref string errMessage, int userid)
