@@ -522,7 +522,6 @@ namespace CameraViewer
             this.cameraWindow11.Visible = false;
             this.cameraWindow11.Click += new System.EventHandler(this.cameraWindow_Click);
             this.cameraWindow11.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cameraWindow_MouseDoubleClick);
-            this.cameraWindow11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cameraWindow_MouseDoubleClick);
             this.cameraWindow11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cameraWindow_MouseDown);
             // 
             // cameraWindow10
