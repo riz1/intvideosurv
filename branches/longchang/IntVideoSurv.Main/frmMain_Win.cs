@@ -46,13 +46,10 @@ namespace CameraViewer
         Dictionary<int, DeviceInfo> _listDevice;
         Dictionary<int, CameraInfo> _listCam;
         Dictionary<int, CameraInfo> _listAllCam;
+        Dictionary<int, LongChang_CameraInfo> _listAllLongChang_Cam;
         Dictionary<string, CameraInfo> _listAllCamStr = new Dictionary<string, CameraInfo>();
-        Dictionary<int, SynGroup> _listSynGroup;
         Dictionary<int, DecoderInfo> _listDecoder;
-        Dictionary<int, GroupSwitchGroup> _listGroupSwitchGroup;
-        Dictionary<int, ProgSwitchInfo> _listProgSwitch;
         Dictionary<int, DisplayChannelInfo> _listDisplayChannelInfo;
-        Dictionary<int, DefaultCardOut> _listDefaultCardOut;
         Dictionary<int, AlarmIconInfo> _listCurrentAlarmIcon;
         Dictionary<int, CameraIconInfo> _listCurrentCameraIcon;
         Dictionary<int, AlarmIconInfo> _listAllAlarmIcon;
@@ -69,7 +66,7 @@ namespace CameraViewer
 
         public MainForm()
         {
-#if !DEBUG
+#if DEBUG
             while (Login(_inputUsername, _inputPassword, PromoteInfo) != true)
             {
                 PromoteInfo = "请输入正确的用户名和密码!";
@@ -375,7 +372,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD1.Appearance.ForeColor = Color.Red;
-                        barButtonD1.Appearance.Font = new Font("Tahoma",48);
+                        barButtonD1.Appearance.Font = new Font("Tahoma",12);
                     }
                     else
                     {
@@ -387,7 +384,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD2.Appearance.ForeColor = Color.Red;
-                        barButtonD2.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD2.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -399,7 +396,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD3.Appearance.ForeColor = Color.Red;
-                        barButtonD3.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD3.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -411,7 +408,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD4.Appearance.ForeColor = Color.Red;
-                        barButtonD4.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD4.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -423,7 +420,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD5.Appearance.ForeColor = Color.Red;
-                        barButtonD5.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD5.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -435,7 +432,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD6.Appearance.ForeColor = Color.Red;
-                        barButtonD6.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD6.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -447,7 +444,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD7.Appearance.ForeColor = Color.Red;
-                        barButtonD7.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD7.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -459,7 +456,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD8.Appearance.ForeColor = Color.Red;
-                        barButtonD8.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD8.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -471,7 +468,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[e.KeyCode])
                     {
                         barButtonD9.Appearance.ForeColor = Color.Red;
-                        barButtonD9.Appearance.Font = new Font("Tahoma", 48);
+                        barButtonD9.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -619,8 +616,16 @@ namespace CameraViewer
             Splash.Splash.Close();
             //HikVideoServerCameraDriver.InitDecodeCard();
             splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
-
+            
+            
+            //******************************隆昌************************//
             MakeLongChangInterface();
+            _listAllLongChang_Cam = LongChang_CameraBusiness.Instance.GetCamInfoByDeviceUserIdAndType(ref _errMessage, CurrentUser.UserId,0);
+            barStaticItemCameraNo.Caption = _listAllLongChang_Cam.Count.ToString();
+            LoadAllCameraInLongChang();
+
+            //******************************隆昌************************//
+            
             DateTime dtNow = DateTime.Now;
             teStartTimeFace.EditValue = dtNow.AddDays(-1);
             teStartTimeVehicle.EditValue = dtNow.AddDays(-1);
@@ -830,6 +835,51 @@ namespace CameraViewer
                     }
 
                 }
+            }
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.SingleCameraMode = false;
+            mainMultiplexer.CamerasVisible = true;
+        }
+
+        private void LoadAllCameraInLongChang()
+        {
+            if (_listAllLongChang_Cam == null)
+            {
+                return;
+            }
+
+            int iRow = 3;
+            int iCol = 3;
+            int iCount = 0;
+            mainMultiplexer.CloseAll();
+            mainMultiplexer.CamerasVisible = true;
+            mainMultiplexer.CellWidth = 320;
+            mainMultiplexer.CellHeight = 240;
+            mainMultiplexer.FitToWindow = true;
+            mainMultiplexer.SetRowCol(3,3);
+ 
+            iCount = 0;
+
+            foreach (var VARIABLE in _listAllLongChang_Cam)
+            {
+                int i = iCount / iRow;
+                int j = iCount % iCol;
+                CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(i, j);
+                AirnoixCamera airnoixCameraNew;
+                //开始连接摄像头
+                airnoixCameraNew = new AirnoixCamera(cameraWindow.Handle);
+                airnoixCameraNew.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
+                airnoixCameraNew.Ip = VARIABLE.Value.IP;
+                airnoixCameraNew.Port = VARIABLE.Value.Port;
+                airnoixCameraNew.UserName = VARIABLE.Value.UserName;
+                airnoixCameraNew.Password = VARIABLE.Value.PassWord;
+                airnoixCameraNew.SaveTo = "c:\\";
+                cameraWindow.AirnoixCamera = airnoixCameraNew;
+                airnoixCameraNew.Start();
+
+                //
+                iCount = iCount + 1;
             }
             mainMultiplexer.Rows = iRow;
             mainMultiplexer.Cols = iCol;

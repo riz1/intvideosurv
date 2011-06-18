@@ -756,6 +756,7 @@ namespace CameraViewer
             this.barStaticItemDecoderNo.Id = 24;
             this.barStaticItemDecoderNo.Name = "barStaticItemDecoderNo";
             this.barStaticItemDecoderNo.TextAlignment = System.Drawing.StringAlignment.Near;
+            this.barStaticItemDecoderNo.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // barStaticItem4
             // 
@@ -2606,7 +2607,6 @@ namespace CameraViewer
             // 
             // timerTest
             // 
-            this.timerTest.Enabled = true;
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
             // MainForm

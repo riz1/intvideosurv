@@ -97,6 +97,7 @@
     <Compile Include="HiK\HikVideoServerCameraDriver.cs" />
     <Compile Include="HiK\HikVideoServerDeviceDriver.cs" />
     <Compile Include="HiK\HikVisionSDK.cs" />
+    <Compile Include="LongChang_CameraBusiness.cs" />
     <Compile Include="MapBusiness.cs" />
     <Compile Include="MonitorFolder.cs" />
     <Compile Include="DisplayChannelBusiness.cs" />

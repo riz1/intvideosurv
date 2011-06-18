@@ -81,6 +81,7 @@
     <Compile Include="GroupSwitchGroupDataAccess.cs" />
     <Compile Include="CommonDataAccess.cs" />
     <Compile Include="DisplayChannelDataAccess.cs" />
+    <Compile Include="LongChang_CameraDataAccess.cs" />
     <Compile Include="MapDataAccess.cs" />
     <Compile Include="ObjectDataAccess.cs" />
     <Compile Include="OperateLogDataAccess.cs" />

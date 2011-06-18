@@ -109,7 +109,8 @@ namespace CameraViewer.Player
             [InAttribute()]
             [MarshalAsAttribute(UnmanagedType.LPStr)]
             string pFileName);
-
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int MP4_ClientSetErrorMessage(IntPtr hClient,IntPtr hwnd,int msg);
 
     }
 }

@@ -129,7 +129,7 @@ namespace CameraViewer.Player
 
         public void MessageCallback(System.IntPtr hClient, uint dwCode, System.IntPtr context)
         {
-
+             int x = AirnoixClient.MP4_ClientSetErrorMessage(_camHandle, _camHandle, 100);
         }
 
         private bool _isRecording = false;
