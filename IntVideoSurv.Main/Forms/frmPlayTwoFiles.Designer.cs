@@ -36,7 +36,6 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.timerPlay = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button_show = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.panelControlPlay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarProgressing)).BeginInit();
             this.SuspendLayout();
@@ -98,22 +97,11 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button_show
-            // 
-            this.button_show.Location = new System.Drawing.Point(448, 429);
-            this.button_show.Name = "button_show";
-            this.button_show.Size = new System.Drawing.Size(115, 27);
-            this.button_show.TabIndex = 2;
-            this.button_show.Text = "演示";
-            this.button_show.UseVisualStyleBackColor = true;
-            this.button_show.Click += new System.EventHandler(this.button_show_Click);
-            // 
             // frmPlayTwoFiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 469);
-            this.Controls.Add(this.button_show);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonPause);
             this.Controls.Add(this.buttonPlay);
@@ -138,6 +126,5 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Timer timerPlay;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button_show;
     }
 }

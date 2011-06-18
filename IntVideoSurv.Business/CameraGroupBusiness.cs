@@ -45,6 +45,31 @@ namespace IntVideoSurv.Business
                 return -1;
             }
         }
+        public int InsertCamera(ref string errMessage, CameraGroupInfo oCameraGroup)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                if (CameraGroupDataAccess.GetCamInfoByID(db, oCameraGroup.CameraID, oCameraGroup.GroupID).Tables[0].Rows.Count!= 0)
+                {
+
+                    return -1;
+
+                }
+                else
+                {
+                    return CameraGroupDataAccess.Insert(db, oCameraGroup);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+        }
         public int DeleteByVirtualGroupID(ref string errMessage, int vgid)
         {
             Database db = DatabaseFactory.CreateDatabase();

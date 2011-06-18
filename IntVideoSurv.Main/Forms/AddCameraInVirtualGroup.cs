@@ -56,7 +56,7 @@ namespace CameraViewer.Forms
             CameraGroupInfo item=new CameraGroupInfo();
             item.CameraID=cameraid;
             item.GroupID=Groupid;
-            int id = CameraGroupBusiness.Instance.Insert(ref errMessage,item);
+            int id = CameraGroupBusiness.Instance.InsertCamera(ref errMessage, item);
                     if (-1 == id)
                     {
                         XtraMessageBox.Show("对不起，您添加的摄像头已经被其他的组使用，请另选");
