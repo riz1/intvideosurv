@@ -183,7 +183,7 @@ namespace CameraViewer.Forms
                     int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                     if (_totalFrames == 0)
                     {
-                        int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                        //int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                          if (first == true)
                         {
                             tmpcount = currentPos;

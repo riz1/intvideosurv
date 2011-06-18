@@ -127,6 +127,21 @@ namespace IntVideoSurv.DataAccess
             }
 
         }
+        public static DataSet GetCamInfoByID(Database db, int CameraID, int GroupID)
+        {
+            string cmdText = string.Format("select * from CameraGroup where CameraID={0} and VirtualGroupID={1}", CameraID, GroupID);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
 
     }
 }
