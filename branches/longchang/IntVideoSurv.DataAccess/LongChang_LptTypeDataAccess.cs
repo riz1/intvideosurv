@@ -12,7 +12,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static DataSet GetAllLptTypeInfo(Database db)
         {
-            string cmdText = string.Format("select * from TOG_LPTTYPE order by hpzldm");
+            string cmdText = string.Format("select * from TOC_LPTTYPE order by hpzldm");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

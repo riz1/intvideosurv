@@ -25,14 +25,14 @@ namespace IntVideoSurv.Entity
         public LongChang_VehColorInfo(IDataReader dataReader) : base(dataReader) { }
         public LongChang_VehColorInfo(DataRow dataRow)
         {
-            VehicleColorNum = dataRow["clysdm"] is DBNull ? -1 : Convert.ToInt32(dataRow["clysdm"]);
+            VehicleColorNum = dataRow["clysdm"] is DBNull ? "" : Convert.ToString(dataRow["clysdm"]);
             VehicleColor = dataRow["clys"] is DBNull ? "" : Convert.ToString(dataRow["clys"]);
 
         }
         #endregion
 
         [ColumnMapping()]
-        public int VehicleColorNum { get; set; }
+        public string VehicleColorNum { get; set; }
         [ColumnMapping()]
         public string VehicleColor { get; set; }
         

@@ -10,37 +10,37 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace IntVideoSurv.Business
 {
-    public class LongChang_VehColorBusiness
+    public class LongChang_CaptureDepartmentBusiness
     {
         public static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static LongChang_VehColorBusiness instance;
-        public static LongChang_VehColorBusiness Instance
+        private static LongChang_CaptureDepartmentBusiness instance;
+        public static LongChang_CaptureDepartmentBusiness Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new LongChang_VehColorBusiness();
+                    instance = new LongChang_CaptureDepartmentBusiness();
                 }
                 return instance;
             }
         }
 
-        public Dictionary<string, LongChang_VehColorInfo> GetAllVehColorInfo(ref string errMessage)
+        public Dictionary<string, LongChang_CaptureDepartmentInfo> GetAllVehColorInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<string, LongChang_VehColorInfo> list = new Dictionary<string, LongChang_VehColorInfo>();
+            Dictionary<string, LongChang_CaptureDepartmentInfo> list = new Dictionary<string, LongChang_CaptureDepartmentInfo>();
             try
             {
 
-                DataSet ds = LongChang_VehColorDataAccess.GetAllVehColorInfo(db);
+                DataSet ds = LongChang_ToGateTypeDataAccess.GetAllVehColorInfo(db);
 
-                LongChang_VehColorInfo oVehColor;
+                LongChang_CaptureDepartmentInfo longChangCaptureDepartmentInfo;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    oVehColor = new LongChang_VehColorInfo(ds.Tables[0].Rows[i]);
-                    list.Add(oVehColor.VehicleColorNum, oVehColor);
+                    longChangCaptureDepartmentInfo = new LongChang_CaptureDepartmentInfo(ds.Tables[0].Rows[i]);
+                    list.Add(longChangCaptureDepartmentInfo.CaptureDepartmentId, longChangCaptureDepartmentInfo);
 
 
                 }
@@ -51,10 +51,11 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_CaptureDepartmentInfo>();
             }
         }
 
 
     }
 }
+

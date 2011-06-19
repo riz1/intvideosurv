@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data;
-using IntVideoSurv.Entity;
 
 namespace IntVideoSurv.DataAccess
 {
-    public class LongChang_LptColorDataAccess
+    public class LongChang_ToGateTypeDataAccess
     {
-        public static DataSet GetAllLptColorInfo(Database db)
+        public static DataSet GetAllVehColorInfo(Database db)
         {
-            string cmdText = string.Format("select * from TOC_LPTCOLOR order by hpysdm");
+            string cmdText = string.Format("select * from TOC_TOGATETYPE order by KKLXDM");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -24,6 +20,7 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        
+
     }
 }
+

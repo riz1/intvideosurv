@@ -82,6 +82,10 @@
     <Compile Include="CommonDataAccess.cs" />
     <Compile Include="DisplayChannelDataAccess.cs" />
     <Compile Include="LongChang_CameraDataAccess.cs" />
+    <Compile Include="LongChang_CaptureDepartmentDataAccess.cs" />
+    <Compile Include="LongChang_InvalidTypeDataAccess.cs" />
+    <Compile Include="LongChang_RegionDataAccess.cs" />
+    <Compile Include="LongChang_ToGateTypeDataAccess.cs" />
     <Compile Include="MapDataAccess.cs" />
     <Compile Include="ObjectDataAccess.cs" />
     <Compile Include="OperateLogDataAccess.cs" />

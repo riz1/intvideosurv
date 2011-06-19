@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data;
-using IntVideoSurv.Entity;
 
 namespace IntVideoSurv.DataAccess
 {
-    public class LongChang_LptColorDataAccess
+    public class LongChang_InvalidTypeDataAccess
     {
-        public static DataSet GetAllLptColorInfo(Database db)
+        public static DataSet GetAllInvalidType(Database db)
         {
-            string cmdText = string.Format("select * from TOC_LPTCOLOR order by hpysdm");
+            string cmdText = string.Format("select * from btoc_wzyy order by WYZZBH");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -24,6 +20,6 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        
+
     }
 }

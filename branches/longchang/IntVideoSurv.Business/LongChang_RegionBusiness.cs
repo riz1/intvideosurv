@@ -10,37 +10,37 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace IntVideoSurv.Business
 {
-    public class LongChang_VehColorBusiness
+    public class LongChang_RegionBusiness
     {
         public static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static LongChang_VehColorBusiness instance;
-        public static LongChang_VehColorBusiness Instance
+        private static LongChang_RegionBusiness instance;
+        public static LongChang_RegionBusiness Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new LongChang_VehColorBusiness();
+                    instance = new LongChang_RegionBusiness();
                 }
                 return instance;
             }
         }
 
-        public Dictionary<string, LongChang_VehColorInfo> GetAllVehColorInfo(ref string errMessage)
+        public Dictionary<string, LongChang_RegionInfo> GetAllVehColorInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<string, LongChang_VehColorInfo> list = new Dictionary<string, LongChang_VehColorInfo>();
+            Dictionary<string, LongChang_RegionInfo> list = new Dictionary<string, LongChang_RegionInfo>();
             try
             {
 
-                DataSet ds = LongChang_VehColorDataAccess.GetAllVehColorInfo(db);
+                DataSet ds = LongChang_RegionDataAccess.GetAllRegionInfo(db);
 
-                LongChang_VehColorInfo oVehColor;
+                LongChang_RegionInfo longChangRegionInfo;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    oVehColor = new LongChang_VehColorInfo(ds.Tables[0].Rows[i]);
-                    list.Add(oVehColor.VehicleColorNum, oVehColor);
+                    longChangRegionInfo = new LongChang_RegionInfo(ds.Tables[0].Rows[i]);
+                    list.Add(longChangRegionInfo.RegionId, longChangRegionInfo);
 
 
                 }
@@ -51,10 +51,11 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_RegionInfo>();
             }
         }
 
 
     }
 }
+

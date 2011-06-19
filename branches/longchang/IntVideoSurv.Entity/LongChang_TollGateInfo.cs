@@ -45,7 +45,7 @@ namespace IntVideoSurv.Entity
         public LongChang_TollGateInfo(IDataReader dataReader) : base(dataReader) { }
         public LongChang_TollGateInfo(DataRow dataRow)
         {
-            tollGateID = dataRow["tgid"] is DBNull ? -1 : Convert.ToInt32(dataRow["tgid"]);
+            tollGateID = dataRow["tgid"] is DBNull ? "" : Convert.ToString(dataRow["tgid"]);
             tollParentNum = dataRow["kkfbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["kkfbh"]);
             tollNum = dataRow["kkbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["kkbh"]);
             tollName = dataRow["kkmc"] is DBNull ? "" : Convert.ToString(dataRow["kkmc"]);
@@ -67,7 +67,7 @@ namespace IntVideoSurv.Entity
         #endregion
 
         [ColumnMapping()]
-        public int tollGateID { get; set; }
+        public string tollGateID { get; set; }
         [ColumnMapping()]
         public int tollParentNum { get; set; }
         [ColumnMapping()]

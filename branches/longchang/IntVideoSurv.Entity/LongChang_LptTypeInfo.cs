@@ -24,14 +24,14 @@ namespace IntVideoSurv.Entity
         public LongChang_LptTypeInfo(IDataReader dataReader) : base(dataReader) { }
         public LongChang_LptTypeInfo(DataRow dataRow)
         {
-            PlateNumberType = dataRow["hpzldm"] is DBNull ? -1 : Convert.ToInt32(dataRow["hpzldm"]);
+            PlateNumberType = dataRow["hpzldm"] is DBNull ? "" : Convert.ToString(dataRow["hpzldm"]);
             PlateNumberName = dataRow["hpmc"] is DBNull ? "" : Convert.ToString(dataRow["hpmc"]);
 
         }
         #endregion
 
         [ColumnMapping()]
-        public int PlateNumberType { get; set; }
+        public string PlateNumberType { get; set; }
         [ColumnMapping()]
         public string PlateNumberName { get; set; }
         

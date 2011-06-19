@@ -25,14 +25,14 @@ namespace IntVideoSurv.Entity
         public LongChang_VehTypeInfo(IDataReader dataReader) : base(dataReader) { }
         public LongChang_VehTypeInfo(DataRow dataRow)
         {
-            VehicleTypeNum = dataRow["cllxdm"] is DBNull ? -1 : Convert.ToInt32(dataRow["cllxdm"]);
+            VehicleTypeNum = dataRow["cllxdm"] is DBNull ? "" : Convert.ToString(dataRow["cllxdm"]);
             VehicleType = dataRow["cllx"] is DBNull ? "" : Convert.ToString(dataRow["cllx"]);
 
         }
         #endregion
 
         [ColumnMapping()]
-        public int VehicleTypeNum { get; set; }
+        public string VehicleTypeNum { get; set; }
         [ColumnMapping()]
         public string VehicleType { get; set; }
         

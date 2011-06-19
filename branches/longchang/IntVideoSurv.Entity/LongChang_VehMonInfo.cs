@@ -40,7 +40,7 @@ namespace IntVideoSurv.Entity
         public LongChang_VehMonInfo(IDataReader dataReader) : base(dataReader) { }
         public LongChang_VehMonInfo(DataRow dataRow)
         {
-            vehMonId = dataRow["mvid"] is DBNull ? -1 : Convert.ToInt32(dataRow["mvid"]);
+            vehMonId = dataRow["mvid"] is DBNull ? "" : Convert.ToString(dataRow["mvid"]);
             vehInfoNum = dataRow["clxxbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["clxxbh"]);
             tollNum = dataRow["kkbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["kkbh"]);
             tollName = dataRow["kkmc"] is DBNull ? "" : Convert.ToString(dataRow["kkmc"]);
@@ -65,7 +65,7 @@ namespace IntVideoSurv.Entity
         #endregion
 
         [ColumnMapping()]
-        public int vehMonId { get; set; }
+        public string vehMonId { get; set; }
         [ColumnMapping()]
         public int vehInfoNum { get; set; }
         [ColumnMapping()]

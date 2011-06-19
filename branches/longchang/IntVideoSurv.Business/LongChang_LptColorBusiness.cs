@@ -26,15 +26,15 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int, LongChang_LptColorInfo> GetAllLptColorInfo(ref string errMessage)
+        public Dictionary<string, LongChang_LptColorInfo> GetAllLptColorInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, LongChang_LptColorInfo> list = new Dictionary<int, LongChang_LptColorInfo>();
+            Dictionary<string, LongChang_LptColorInfo> list = new Dictionary<string, LongChang_LptColorInfo>();
             try
             {
 
-                DataSet ds = LongChang_CameraDataAccess.GetAllCamInfo(db);
+                DataSet ds = LongChang_LptColorDataAccess.GetAllLptColorInfo(db);
 
                 LongChang_LptColorInfo oLptColor;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -51,7 +51,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_LptColorInfo>();
             }
         }
 

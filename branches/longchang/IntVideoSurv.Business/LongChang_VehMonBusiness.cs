@@ -26,11 +26,11 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int, LongChang_VehMonInfo> GetAllVehMonInfo(ref string errMessage)
+        public Dictionary<string, LongChang_VehMonInfo> GetAllVehMonInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, LongChang_VehMonInfo> list = new Dictionary<int, LongChang_VehMonInfo>();
+            Dictionary<string, LongChang_VehMonInfo> list = new Dictionary<string, LongChang_VehMonInfo>();
             try
             {
 
@@ -51,7 +51,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_VehMonInfo>();
             }
         }
 
