@@ -106,6 +106,12 @@
     <Compile Include="VideoDataAccess.cs" />
     <Compile Include="VirtualGroupDataAccess.cs" />
     <Compile Include="WindowCameraDataAccess.cs" />
+    <Compile Include="LongChang_LptColorDataAccess.cs" />
+    <Compile Include="LongChang_LptTypeDataAccess.cs" />
+    <Compile Include="LongChang_VehColorDataAccess.cs" />
+    <Compile Include="LongChang_VehTypeDataAccess.cs" />
+    <Compile Include="LongChang_TollGateDataAccess.cs" />
+    <Compile Include="LongChang_VehMonDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntVideoSurv.Entity\IntVideoSurv.Entity.csproj">
