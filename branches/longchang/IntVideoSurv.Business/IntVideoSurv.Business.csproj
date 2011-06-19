@@ -125,6 +125,12 @@
     <Compile Include="VideoBusiness.cs" />
     <Compile Include="VirtualGroupBusiness.cs" />
     <Compile Include="WindowCameraBusiness.cs" />
+    <Compile Include="LongChang_LptColorBusiness.cs" />
+    <Compile Include="LongChang_LptTypeBusiness.cs" />
+    <Compile Include="LongChang_VehColorBusiness.cs" />
+    <Compile Include="LongChang_VehTypeBusiness.cs" />
+    <Compile Include="LongChang_TollGateBusiness.cs" />
+    <Compile Include="LongChang_VehMonBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntVideoSurv.DataAccess\IntVideoSurv.DataAccess.csproj">
