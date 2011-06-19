@@ -123,7 +123,7 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.timeEdit1);
             this.Name = "CaptureLicense";
-            this.Size = new System.Drawing.Size(379, 104);
+            this.Size = new System.Drawing.Size(382, 539);
             ((System.ComponentModel.ISupportInitialize)(this.timeEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();

@@ -32,6 +32,10 @@ namespace CameraViewer.Forms
             txtUserID.Text = iu;
             txtPassword.Text = ip;
             labelPromoteInfo.Text = pi;
+            if (string.IsNullOrEmpty(iu)==false)
+            {
+                txtPassword.TabIndex = 0;
+            }
 
         }
 
@@ -49,6 +53,7 @@ namespace CameraViewer.Forms
             {
                 //登录成功日志
                 currentUser = UserBusiness.Instance.GetUserInfo(ref errMessage, InputUsername);
+
                 SystemLogBusiness.Instance.Insert(ref errMessage,new SystemLog
                                                                      {
                                                                          HappenTime =DateTime.Now,
@@ -60,6 +65,8 @@ namespace CameraViewer.Forms
                                                                          ClientUserName = currentUser.UserName
 
                                                                      });
+                Properties.Settings.Default.LastUser = currentUser.UserName;
+                Properties.Settings.Default.Save();
             }
             else
             {

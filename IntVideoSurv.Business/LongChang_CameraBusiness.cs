@@ -80,7 +80,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<int, LongChang_CameraInfo>(); ;
             }
         }
         public Dictionary<int, LongChang_CameraInfo> GetCamInfoByDeviceUserIdAndType(ref string errMessage, int userid, int type)
@@ -108,7 +108,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<int, LongChang_CameraInfo>(); ;
             }
         }
 
