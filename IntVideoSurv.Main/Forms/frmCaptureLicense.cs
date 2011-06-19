@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using CameraViewer.Player;
 using DevExpress.XtraEditors;
+using System.Threading;
 
 namespace CameraViewer.Forms
 {
@@ -18,15 +19,13 @@ namespace CameraViewer.Forms
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
             }
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
-            //V:\项目代码备份\凯智\修改的美赞美\bin\RecoderFile\View_162801(new).avi
+            //int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
+
             frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
-            //trackBarControl1.Properties.Minimum = 1;
-            //trackBarControl1.Properties.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            //trackBar1.Minimum = 0;
-           // trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            //ret = AirnoixPlayer.Avdec_Play(intPtr);
+            trackBar1.Minimum = 0;
+            trackBar1.Maximum = GetTotalFrames();
+            StartPlay = true;
 
         }
 
@@ -44,10 +43,10 @@ namespace CameraViewer.Forms
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
             trackBar1.Minimum = 0;
-            trackBar1.Maximum = _totalFrames; 
+            trackBar1.Maximum = _totalFrames;
 
 
-        }
+        }
 
         private IntPtr intPtr;
         private int frameWidth;
@@ -55,6 +54,8 @@ namespace CameraViewer.Forms
         private AirnoixPlayerState _previousState;
         private int maunulSteps = 0;
         private int _totalFrames;
+        private int Change_Frame = 1200;//第一个视频播放的帧数
+        private int Start_Frame = 5000;
         private void simpleButtonPrevious_Click(object sender, EventArgs e)
         {
             try
@@ -173,6 +174,9 @@ namespace CameraViewer.Forms
         private bool first;
         private int tmpcount;
         private int changecount;
+        private bool StartPlay;
+        private bool FirstLoad;
+        private bool IsEnd;
         private void timer1_Tick(object sender, EventArgs e)
         {
             try
@@ -180,9 +184,8 @@ namespace CameraViewer.Forms
                 //播放第一段视频
                 if(isfirstvideo==true)
                 {
-                    int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-                    if (_totalFrames == 0)
-                    {
+                   // if (_totalFrames == 0)
+                   // {
                         //int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                          if (first == true)
                         {
@@ -191,16 +194,11 @@ namespace CameraViewer.Forms
                         }
                         if (currentPos>=tmpcount)
                             currentPos -= tmpcount;
-
-                       /* if (trackBar1.Maximum == 0)
-                        {
-                            //trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                        }*/
                         if (currentPos < trackBar1.Minimum )
                         {
                             currentPos = trackBar1.Minimum;
                         }
-                        else if (currentPos > trackBar1.Maximum )
+                        else if (currentPos >= trackBar1.Maximum )
                         {
                             currentPos = trackBar1.Maximum;
                         }
@@ -208,32 +206,35 @@ namespace CameraViewer.Forms
                               trackBar1.Value = currentPos;
                         Trace.WriteLine("Value=" + trackBar1.Value);
                         isTimerChanged = true;
-                    }
+                  //  }
                 }
                 else
                 {
-                    if (AirnoixPlayer.Avdec_GetCurrentState(intPtr) == AirnoixPlayerState.PLAY_STATE_PLAY)
-                    {
+                    //if (AirnoixPlayer.Avdec_GetCurrentState(intPtr) == AirnoixPlayerState.PLAY_STATE_PLAY)
+                   // {
                         int currentPos2 = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                         if(isfirstvideo==false)
-                            currentPos2 += changecount;
-                        /*if (trackBar1.Maximum == 0)
                         {
-                            //trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                        }*/
+                            if (changecount != 0)
+                            {
+                                currentPos2 += changecount;
+                            }
+                            else currentPos2 += Change_Frame + 50;//1250
+                        }
                         if (currentPos2 < trackBar1.Minimum)
                         {
                             currentPos2 = trackBar1.Minimum;
                         }
-                        else if (currentPos2 > trackBar1.Maximum)
+                        else if (currentPos2 >= trackBar1.Maximum)
                         {
                             currentPos2 = trackBar1.Maximum;
+                            IsEnd = true;
                         }
-
-                        trackBar1.Value = currentPos2;
+                        if(IsEnd==false)
+                            trackBar1.Value = currentPos2;
                         Trace.WriteLine("Value=" + trackBar1.Value);
                         isTimerChanged = true;
-                    }
+                   // }
                 }
 
             }
@@ -248,6 +249,8 @@ namespace CameraViewer.Forms
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            int mum;
+            int count;
             AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
             if ( state == AirnoixPlayerState.PLAY_STATE_STOP)
             {
@@ -257,20 +260,43 @@ namespace CameraViewer.Forms
             if ((state == AirnoixPlayerState.PLAY_STATE_PAUSE))
             {
                 int ret = 0;//= AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
-                if ((trackBar1.Value - 1) % 30 == 0)
+                //处在第一个视频
+                if(trackBar1.Value<=Change_Frame)
                 {
-                    ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+                    //Thread.Sleep(2500);
+                    ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value + Start_Frame);
+                    mum = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                    count = trackBar1.Value + Start_Frame - mum;
+                    while (count > 0)
+                    {
+                        ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
+                        count--;
+                    }
                 }
                 else
                 {
-                    ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
-                    for (int i = 0; i < (trackBar1.Value - 1) % 30; i++)
+                    isfirstvideo = false;
+                    int i;
+                    i = trackBar1.Value - Change_Frame;
+                    if (FirstLoad == true)
+                    {
+                        ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
+                        FirstLoad = false;
+                        //Thread.Sleep(1000);
+                        ret = AirnoixPlayer.Avdec_Play(intPtr);
+                        ret = AirnoixPlayer.Avdec_Pause(intPtr);
+                       // Thread.Sleep(1500);
+                    }
+                    ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, i);
+                    mum = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                    count = i - mum;
+                    while (count > 0)
                     {
                         ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
-                    }
-                }            
+                        count--;
+                    }  
+                }
             }
-
         }
 
         private void frmCaptureLicense_FormClosed(object sender, FormClosedEventArgs e)
@@ -281,29 +307,18 @@ namespace CameraViewer.Forms
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            int totalframes;
-            int ret;
-            int value_frame;
-            totalframes=GetTotalFrames();
-            trackBar1.Minimum = 0;
-            trackBar1.Maximum = totalframes;
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
-            isfirstvideo = true;
-            
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            ret = AirnoixPlayer.Avdec_Pause(intPtr);
-            if (trackBar1.Maximum > 0)
+            //第一次播放
+            if (StartPlay==true)
             {
-                value_frame = 9924;//可更改
-                MessageBox.Show("播放从9924到9924+1200帧，然后重新播放另一个视频");
-                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, value_frame);
-                int mum = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                FirstPlay(Start_Frame);//从Start_Frame帧开始播放
+                StartPlay = false;
             }
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            
-            timer1.Enabled = true;
-            //timer2.Enabled = true;
-           first = true;
+            else
+            {
+                AirnoixPlayer.Avdec_Play(intPtr);
+            }
+
+
         }
 
         private void buttonPause_Click(object sender, EventArgs e)
@@ -320,33 +335,70 @@ namespace CameraViewer.Forms
         {
             int Maximum;
             int count;
-            intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
-            Maximum = 0;
-            Maximum += 1200;//十五秒对应的帧数
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
-            MessageBox.Show("加载第二个视频");
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            MessageBox.Show("加载第二个视频");
-                Maximum += AirnoixPlayer.Avdec_GetTotalFrames(intPtr); ;
-
-           
             
-            AirnoixPlayer.Avdec_Stop(intPtr);
+            Maximum = 0;
+            Maximum += Change_Frame;//十五秒对应的帧数
+            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
+
+            Thread.Sleep(1000);
+            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            Thread.Sleep(1000);
+            Maximum += AirnoixPlayer.Avdec_GetTotalFrames(intPtr); ;
+            AirnoixPlayer.Avdec_CloseFile(intPtr);
             return Maximum;
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
-
-            if (trackBar1.Value >=1200 && trackBar1.Value <= 1600 && isfirstvideo == true)
+            try
             {
-                int ret;
-                ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.avi", null, true);
-               // AirnoixPlayer.Avdec_Play(intPtr);
-                changecount = trackBar1.Value;
-                isfirstvideo = false;
-                timer2.Enabled = false;
+                AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
+                if (trackBar1.Value >= Change_Frame && trackBar1.Value <= Change_Frame + 100 && isfirstvideo == true && state == AirnoixPlayerState.PLAY_STATE_PLAY)
+                {
+                    int ret;
+                    ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+                    ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.avi", null, true);
+                    changecount = trackBar1.Value;
+                    isfirstvideo = false;
+                    timer2.Enabled = false;
+                }
             }
+            catch (Exception ex)
+            {
+            	
+            }
+
+        }
+        private void FirstPlay(int start_frame)
+        {
+            int totalframes;
+            int ret;
+            int count;
+            int mum;
+            isfirstvideo = true;
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
+            Thread.Sleep(1000);
+            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            ret = AirnoixPlayer.Avdec_Pause(intPtr);
+            
+            if (trackBar1.Maximum > 0)
+            {
+                Thread.Sleep(2500);
+                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, start_frame);
+                mum = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                count = start_frame - mum;
+                while (count > 0)
+                {
+                    ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
+                    count--;
+                }
+            }
+            Thread.Sleep(1000);
+            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            timer1.Enabled = true;
+            timer2.Enabled = true;
+            first = true;
+            FirstLoad = true;
+            IsEnd = false;
         }
 
     }

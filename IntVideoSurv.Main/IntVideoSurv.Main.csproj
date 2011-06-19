@@ -712,6 +712,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Resources\1.BMP" />
     <None Include="Resources\AR3.bmp" />
     <None Include="Properties\Settings.settings">

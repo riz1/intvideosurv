@@ -5,7 +5,6 @@ using System.IO;
 using System.Windows.Forms;
 using CameraViewer.Player;
 using DevExpress.XtraEditors;
-using System.Threading;
 
 namespace CameraViewer.Forms
 {
@@ -16,7 +15,6 @@ namespace CameraViewer.Forms
         private int frameHeight;
         private AirnoixPlayerState _previousState;
         private int maunulSteps = 0;
-        private object locks = new object();
         public frmPlayTwoFiles()
         {
             InitializeComponent();
@@ -25,7 +23,11 @@ namespace CameraViewer.Forms
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
             }
             intPtr = AirnoixPlayer.Avdec_Init(panelControlPlay.Handle, 0, 512, 0);
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"V:\项目代码备份\凯智\修改的美赞美\bin\RecoderFile\View_202722.264", null, false);
+
+           // int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\李太勇老师\123.avi", null, true);
+
+            //int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"V:\项目代码备份\凯智\修改的美赞美\bin\RecoderFile\View_202722.264", null, false);
+
             frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             //trackBarControl1.Properties.Minimum = 1;
@@ -41,23 +43,12 @@ namespace CameraViewer.Forms
         //播放
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            /*int ret;
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            MessageBox.Show("dd");
-            trackBarProgressing.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr); 
-            ret = AirnoixPlayer.Avdec_Pause(intPtr);
-            
+            int ret;
             if (trackBarProgressing.Maximum > 0)
             {
-                trackBarProgressing.Value = 10000;
+                trackBarProgressing.Value = 1000;
                 ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBarProgressing.Value);
             }
-
-            ret = AirnoixPlayer.Avdec_Play(intPtr);*/
-            
-
-            int ret;
-            ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBarProgressing.Value);
             ret = AirnoixPlayer.Avdec_Play(intPtr);
         }
         //关闭文件
@@ -123,10 +114,14 @@ namespace CameraViewer.Forms
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+     /*   private void timer1_Tick(object sender, EventArgs e)
         {
             
+<<<<<<< .mine
+            if (trackBarProgressing.Value == 500)
+=======
             if (trackBarProgressing.Value == 1050)
+>>>>>>> .r293
             {
                 int ret;
                 ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
@@ -135,6 +130,8 @@ namespace CameraViewer.Forms
             }
         }
 
+<<<<<<< .mine
+=======
         private void button_show_Click(object sender, EventArgs e)
         {
 
@@ -151,7 +148,8 @@ namespace CameraViewer.Forms
             }
             ret = AirnoixPlayer.Avdec_Play(intPtr);
 
-        }
+        }*/
+
 
     }
 }
