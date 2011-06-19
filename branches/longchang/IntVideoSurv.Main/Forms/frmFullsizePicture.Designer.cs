@@ -37,14 +37,15 @@
             this.pictureEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureEdit1.Location = new System.Drawing.Point(0, 0);
             this.pictureEdit1.Name = "pictureEdit1";
-            this.pictureEdit1.Size = new System.Drawing.Size(903, 588);
+            this.pictureEdit1.Size = new System.Drawing.Size(1053, 686);
             this.pictureEdit1.TabIndex = 0;
+            this.pictureEdit1.DoubleClick += new System.EventHandler(this.pictureEdit1_DoubleClick);
             // 
             // frmFullsizePicture
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(903, 588);
+            this.ClientSize = new System.Drawing.Size(1053, 686);
             this.Controls.Add(this.pictureEdit1);
             this.Name = "frmFullsizePicture";
             this.Text = "完整查看";

@@ -18,5 +18,10 @@ namespace CameraViewer.Forms
             pictureEdit1.Width = image.Width;
             pictureEdit1.Image = image;
         }
+
+        private void pictureEdit1_DoubleClick(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
