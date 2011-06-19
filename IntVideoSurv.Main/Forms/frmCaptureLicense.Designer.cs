@@ -124,36 +124,36 @@
             // 
             // pictureEditSelectedPicture
             // 
-            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(709, -1);
+            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(651, 2);
             this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
             this.pictureEditSelectedPicture.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(577, 426);
+            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(640, 360);
             this.pictureEditSelectedPicture.TabIndex = 0;
             this.pictureEditSelectedPicture.DoubleClick += new System.EventHandler(this.pictureEditSelectedPicture_DoubleClick);
             // 
             // simpleButtonPrevious
             // 
-            this.simpleButtonPrevious.Location = new System.Drawing.Point(1, 566);
+            this.simpleButtonPrevious.Location = new System.Drawing.Point(2, 409);
             this.simpleButtonPrevious.Name = "simpleButtonPrevious";
-            this.simpleButtonPrevious.Size = new System.Drawing.Size(38, 124);
+            this.simpleButtonPrevious.Size = new System.Drawing.Size(38, 108);
             this.simpleButtonPrevious.TabIndex = 1;
             this.simpleButtonPrevious.Text = "前";
             this.simpleButtonPrevious.Click += new System.EventHandler(this.simpleButtonPrevious_Click);
             // 
             // simpleButtonCurrent
             // 
-            this.simpleButtonCurrent.Location = new System.Drawing.Point(1, 696);
+            this.simpleButtonCurrent.Location = new System.Drawing.Point(2, 525);
             this.simpleButtonCurrent.Name = "simpleButtonCurrent";
-            this.simpleButtonCurrent.Size = new System.Drawing.Size(38, 124);
+            this.simpleButtonCurrent.Size = new System.Drawing.Size(38, 108);
             this.simpleButtonCurrent.TabIndex = 2;
             this.simpleButtonCurrent.Text = "中";
             this.simpleButtonCurrent.Click += new System.EventHandler(this.simpleButtonCurrent_Click);
             // 
             // simpleButtonLast
             // 
-            this.simpleButtonLast.Location = new System.Drawing.Point(1, 827);
+            this.simpleButtonLast.Location = new System.Drawing.Point(2, 642);
             this.simpleButtonLast.Name = "simpleButtonLast";
-            this.simpleButtonLast.Size = new System.Drawing.Size(38, 124);
+            this.simpleButtonLast.Size = new System.Drawing.Size(38, 108);
             this.simpleButtonLast.TabIndex = 3;
             this.simpleButtonLast.Text = "后";
             this.simpleButtonLast.Click += new System.EventHandler(this.simpleButtonLast_Click);
@@ -172,7 +172,7 @@
             this.treeListColumn5,
             this.treeListColumn6,
             this.treeListColumn7});
-            this.treeListPicturesBefore.Location = new System.Drawing.Point(47, 566);
+            this.treeListPicturesBefore.Location = new System.Drawing.Point(46, 409);
             this.treeListPicturesBefore.Name = "treeListPicturesBefore";
             this.treeListPicturesBefore.OptionsBehavior.Editable = false;
             this.treeListPicturesBefore.OptionsView.ShowButtons = false;
@@ -191,7 +191,7 @@
             this.repositoryItemPictureEdit7,
             this.repositoryItemPictureEdit8});
             this.treeListPicturesBefore.RowHeight = 96;
-            this.treeListPicturesBefore.Size = new System.Drawing.Size(1240, 124);
+            this.treeListPicturesBefore.Size = new System.Drawing.Size(1240, 108);
             this.treeListPicturesBefore.TabIndex = 6;
             this.treeListPicturesBefore.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesBefore_MouseClick);
             // 
@@ -339,7 +339,7 @@
             this.treeListColumn12,
             this.treeListColumn13,
             this.treeListColumn14});
-            this.treeListPicturesCurrent.Location = new System.Drawing.Point(47, 696);
+            this.treeListPicturesCurrent.Location = new System.Drawing.Point(46, 525);
             this.treeListPicturesCurrent.Name = "treeListPicturesCurrent";
             this.treeListPicturesCurrent.OptionsBehavior.Editable = false;
             this.treeListPicturesCurrent.OptionsView.ShowButtons = false;
@@ -358,7 +358,7 @@
             this.repositoryItemPictureEdit15,
             this.repositoryItemPictureEdit9});
             this.treeListPicturesCurrent.RowHeight = 96;
-            this.treeListPicturesCurrent.Size = new System.Drawing.Size(1240, 124);
+            this.treeListPicturesCurrent.Size = new System.Drawing.Size(1240, 108);
             this.treeListPicturesCurrent.TabIndex = 6;
             this.treeListPicturesCurrent.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesCurrent_MouseClick);
             // 
@@ -506,7 +506,7 @@
             this.treeListColumn19,
             this.treeListColumn20,
             this.treeListColumn21});
-            this.treeListPicturesAfter.Location = new System.Drawing.Point(47, 827);
+            this.treeListPicturesAfter.Location = new System.Drawing.Point(46, 642);
             this.treeListPicturesAfter.Name = "treeListPicturesAfter";
             this.treeListPicturesAfter.OptionsBehavior.Editable = false;
             this.treeListPicturesAfter.OptionsView.ShowButtons = false;
@@ -525,7 +525,7 @@
             this.repositoryItemPictureEdit23,
             this.repositoryItemPictureEdit17});
             this.treeListPicturesAfter.RowHeight = 96;
-            this.treeListPicturesAfter.Size = new System.Drawing.Size(1240, 124);
+            this.treeListPicturesAfter.Size = new System.Drawing.Size(1240, 108);
             this.treeListPicturesAfter.TabIndex = 6;
             this.treeListPicturesAfter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesAfter_MouseClick);
             // 
@@ -665,7 +665,7 @@
             // 
             this.panelControlVideo.Location = new System.Drawing.Point(5, 2);
             this.panelControlVideo.Name = "panelControlVideo";
-            this.panelControlVideo.Size = new System.Drawing.Size(700, 498);
+            this.panelControlVideo.Size = new System.Drawing.Size(640, 360);
             this.panelControlVideo.TabIndex = 7;
             // 
             // timer1
@@ -675,16 +675,16 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(1, 506);
+            this.trackBar1.Location = new System.Drawing.Point(5, 360);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(703, 45);
+            this.trackBar1.Size = new System.Drawing.Size(640, 45);
             this.trackBar1.TabIndex = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // buttonPlay
             // 
-            this.buttonPlay.Location = new System.Drawing.Point(66, 535);
+            this.buttonPlay.Location = new System.Drawing.Point(67, 379);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(65, 27);
             this.buttonPlay.TabIndex = 12;
@@ -694,7 +694,7 @@
             // 
             // buttonPause
             // 
-            this.buttonPause.Location = new System.Drawing.Point(139, 535);
+            this.buttonPause.Location = new System.Drawing.Point(140, 379);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(65, 27);
             this.buttonPause.TabIndex = 12;
@@ -704,7 +704,7 @@
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(211, 535);
+            this.buttonStop.Location = new System.Drawing.Point(212, 379);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(65, 27);
             this.buttonStop.TabIndex = 12;
@@ -714,16 +714,16 @@
             // 
             // captureLicense1
             // 
-            this.captureLicense1.Location = new System.Drawing.Point(738, 432);
+            this.captureLicense1.Location = new System.Drawing.Point(1292, 12);
             this.captureLicense1.Name = "captureLicense1";
-            this.captureLicense1.Size = new System.Drawing.Size(456, 121);
+            this.captureLicense1.Size = new System.Drawing.Size(456, 505);
             this.captureLicense1.TabIndex = 13;
             // 
             // simpleButton1
             // 
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
             this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Location = new System.Drawing.Point(1195, 462);
+            this.simpleButton1.Location = new System.Drawing.Point(1435, 673);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(92, 77);
             this.simpleButton1.TabIndex = 14;
@@ -739,13 +739,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1302, 750);
+            this.ClientSize = new System.Drawing.Size(1737, 757);
+            this.Controls.Add(this.panelControlVideo);
             this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.captureLicense1);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonPause);
             this.Controls.Add(this.buttonPlay);
-            this.Controls.Add(this.panelControlVideo);
             this.Controls.Add(this.treeListPicturesAfter);
             this.Controls.Add(this.treeListPicturesCurrent);
             this.Controls.Add(this.treeListPicturesBefore);
