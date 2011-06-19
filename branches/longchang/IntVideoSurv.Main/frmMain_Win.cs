@@ -685,16 +685,24 @@ namespace CameraViewer
             checkedComboBoxEditFaceCamera.Properties.Items.Add("当前摄像头", true);
             checkedComboBoxEditVehicleCamera.Properties.Items.Add("当前摄像头", true);
             checkedComboBoxEditEventCamera.Properties.Items.Add("当前摄像头", true);
-            foreach (var VARIABLE in _listAllCam)
+            try
             {
-                _listAllCamStr.Add(VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, VARIABLE.Value);
-                checkedComboBoxEditFaceCamera.Properties.Items.Add(
-                    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
-                checkedComboBoxEditVehicleCamera.Properties.Items.Add(
-                    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
-                checkedComboBoxEditEventCamera.Properties.Items.Add(
-                    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                foreach (var VARIABLE in _listAllCam)
+                {
+                    _listAllCamStr.Add(VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, VARIABLE.Value);
+                    checkedComboBoxEditFaceCamera.Properties.Items.Add(
+                        VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                    checkedComboBoxEditVehicleCamera.Properties.Items.Add(
+                        VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                    checkedComboBoxEditEventCamera.Properties.Items.Add(
+                        VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                }
             }
+            catch (System.Exception e)
+            {
+            	
+            }
+
             checkedComboBoxEditUserSelection.Properties.Items.Add("无", true);
             checkedComboBoxEditUserSelection.Properties.Items.Add("停止", false);
             checkedComboBoxEditUserSelection.Properties.Items.Add("跨线", false);
