@@ -183,11 +183,7 @@ namespace CameraViewer.Forms
                     int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                     if (_totalFrames == 0)
                     {
-<<<<<<< .mine
-                         currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-=======
                         //int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
->>>>>>> .r295
                          if (first == true)
                         {
                             tmpcount = currentPos;
@@ -291,7 +287,7 @@ namespace CameraViewer.Forms
             totalframes=GetTotalFrames();
             trackBar1.Minimum = 0;
             trackBar1.Maximum = totalframes;
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"E:\IntVidSurv\IntVideoSurv.Main\bin\Debug\19-06-21.avi", null, false);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
             isfirstvideo = true;
             
             ret = AirnoixPlayer.Avdec_Play(intPtr);
@@ -327,7 +323,7 @@ namespace CameraViewer.Forms
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             Maximum = 0;
             Maximum += 1200;//十五秒对应的帧数
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"E:\IntVidSurv\IntVideoSurv.Main\bin\Debug\19-33-32.avi", null, false);
+            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
             MessageBox.Show("加载第二个视频");
             ret = AirnoixPlayer.Avdec_Play(intPtr);
             MessageBox.Show("加载第二个视频");
@@ -345,7 +341,7 @@ namespace CameraViewer.Forms
             {
                 int ret;
                 ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"E:\IntVidSurv\IntVideoSurv.Main\bin\Debug\19-33-32.avi", null, true);
+                ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.avi", null, true);
                // AirnoixPlayer.Avdec_Play(intPtr);
                 changecount = trackBar1.Value;
                 isfirstvideo = false;

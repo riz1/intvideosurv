@@ -77,7 +77,7 @@ namespace IntVideoSurv.Entity
  
         public override string ToString()
         {
-            return String.Format("ID:{0}  名称:{1}  didddd:{2}  设备ID:{3}  设备名:{4}", CameraId, Name, Address, IP, TollGateName);
+            return String.Format("ID:{0}  名称:{1}  地址:{2}  设备ID:{3}  设备名:{4}", CameraId, Name, Address, IP, TollGateName);
 
         }
     }

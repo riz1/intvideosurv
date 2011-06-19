@@ -538,7 +538,7 @@ namespace CameraViewer
 
         private bool Login(string iu, string ip, string pi)
         {
-
+            iu = Properties.Settings.Default.LastUser;
             FormLogin lf = new FormLogin(iu, ip, pi);
             if (lf.ShowDialog(this) == DialogResult.OK)
             {
