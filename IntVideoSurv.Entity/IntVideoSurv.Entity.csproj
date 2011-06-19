@@ -99,6 +99,12 @@
     <Compile Include="VideoProvider.cs" />
     <Compile Include="VirtualGroupInfo.cs" />
     <Compile Include="WindowCameraInfo.cs" />
+    <Compile Include="LongChang_LptColorInfo.cs" />
+    <Compile Include="LongChang_LptTypeInfo.cs" />
+    <Compile Include="LongChang_VehColorInfo.cs" />
+    <Compile Include="LongChang_VehTypeInfo.cs" />
+    <Compile Include="LongChang_TollGateInfo.cs" />
+    <Compile Include="LongChang_VehMonInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
