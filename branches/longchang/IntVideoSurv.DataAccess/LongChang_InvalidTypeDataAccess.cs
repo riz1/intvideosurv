@@ -8,7 +8,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static DataSet GetAllInvalidType(Database db)
         {
-            string cmdText = string.Format("select * from btoc_wzyy order by WYZZBH");
+            string cmdText = string.Format("select * from btoc_wzyy order by WzyyBH");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

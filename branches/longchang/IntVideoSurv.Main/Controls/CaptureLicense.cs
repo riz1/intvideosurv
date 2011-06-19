@@ -25,6 +25,13 @@ namespace CameraViewer.Controls
         private static Dictionary<string, LongChang_VehTypeInfo> _listLongChang_VehTypeInfo =
     LongChang_VehTypeBusiness.Instance.GetAllVehTypeInfo(ref staticErrMessage);
 
+        private static Dictionary<string, LongChang_RegionInfo> _listLongChang_RegionInfo =
+LongChang_RegionBusiness.Instance.GetAllRegionInfo(ref staticErrMessage);
+        private static Dictionary<string, LongChang_CaptureDepartmentInfo> _listLongChang_CaptureDepartmentInfo =
+LongChang_CaptureDepartmentBusiness.Instance.GetAllCaptureDepartmentInfo(ref staticErrMessage);
+        private static Dictionary<string, LongChang_InvalidTypeInfo> _listLongChang_InvalidTypeInfo =
+LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessage);
+
         private void LoadBaseInfo()
         {
             cbeVehType.Properties.Items.Clear();
@@ -37,18 +44,36 @@ namespace CameraViewer.Controls
                 cbeVehType.EditValue = cbeVehType.Properties.Items[0];
             }
 
-            foreach (var v in _listLongChang_VehTypeInfo)
+            cbeRegion.Properties.Items.Clear();
+            foreach (var v in _listLongChang_RegionInfo)
             {
-                cbeVehType.Properties.Items.Add(v.Value.VehicleType);
+                cbeRegion.Properties.Items.Add(v.Value.RegionName);
             }
-            foreach (var v in _listLongChang_VehTypeInfo)
+            if (cbeRegion.Properties.Items.Count > 0)
             {
-                cbeVehType.Properties.Items.Add(v.Value.VehicleType);
+                cbeRegion.EditValue = cbeRegion.Properties.Items[0];
             }
-            foreach (var v in _listLongChang_VehTypeInfo)
+
+            cbeCaptureDepartment.Properties.Items.Clear();
+            foreach (var v in _listLongChang_CaptureDepartmentInfo)
             {
-                cbeVehType.Properties.Items.Add(v.Value.VehicleType);
+                cbeCaptureDepartment.Properties.Items.Add(v.Value.CaptureDepartmentName);
             }
+            if (cbeCaptureDepartment.Properties.Items.Count > 0)
+            {
+                cbeCaptureDepartment.EditValue = cbeCaptureDepartment.Properties.Items[0];
+            }
+
+            cbeInvalidType.Properties.Items.Clear();
+            foreach (var v in _listLongChang_InvalidTypeInfo)
+            {
+                cbeInvalidType.Properties.Items.Add(v.Value.InvalidName);
+            }
+            if (cbeInvalidType.Properties.Items.Count > 0)
+            {
+                cbeInvalidType.EditValue = cbeInvalidType.Properties.Items[0];
+            }
+
             
         }
         public CaptureLicense()

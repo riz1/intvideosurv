@@ -26,7 +26,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<string, LongChang_RegionInfo> GetAllVehColorInfo(ref string errMessage)
+        public Dictionary<string, LongChang_RegionInfo> GetAllRegionInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";

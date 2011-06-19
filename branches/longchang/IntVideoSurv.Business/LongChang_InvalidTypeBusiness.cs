@@ -26,7 +26,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<string, LongChang_InvalidTypeInfo> GetAllVehColorInfo(ref string errMessage)
+        public Dictionary<string, LongChang_InvalidTypeInfo> GetAllInvalidTypeInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
