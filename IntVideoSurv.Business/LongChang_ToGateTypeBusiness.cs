@@ -10,37 +10,37 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace IntVideoSurv.Business
 {
-    public class LongChang_VehColorBusiness
+    public class LongChang_ToGateTypeBusiness
     {
         public static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static LongChang_VehColorBusiness instance;
-        public static LongChang_VehColorBusiness Instance
+        private static LongChang_ToGateTypeBusiness instance;
+        public static LongChang_ToGateTypeBusiness Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new LongChang_VehColorBusiness();
+                    instance = new LongChang_ToGateTypeBusiness();
                 }
                 return instance;
             }
         }
 
-        public Dictionary<string, LongChang_VehColorInfo> GetAllVehColorInfo(ref string errMessage)
+        public Dictionary<string, LongChang_ToGateTypeInfo> GetAllVehColorInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<string, LongChang_VehColorInfo> list = new Dictionary<string, LongChang_VehColorInfo>();
+            Dictionary<string, LongChang_ToGateTypeInfo> list = new Dictionary<string, LongChang_ToGateTypeInfo>();
             try
             {
 
-                DataSet ds = LongChang_VehColorDataAccess.GetAllVehColorInfo(db);
+                DataSet ds = LongChang_ToGateTypeDataAccess.GetAllVehColorInfo(db);
 
-                LongChang_VehColorInfo oVehColor;
+                LongChang_ToGateTypeInfo oVehColor;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    oVehColor = new LongChang_VehColorInfo(ds.Tables[0].Rows[i]);
-                    list.Add(oVehColor.VehicleColorNum, oVehColor);
+                    oVehColor = new LongChang_ToGateTypeInfo(ds.Tables[0].Rows[i]);
+                    list.Add(oVehColor.GateCaptureTypeId, oVehColor);
 
 
                 }
@@ -51,10 +51,11 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_ToGateTypeInfo>();
             }
         }
 
 
     }
 }
+

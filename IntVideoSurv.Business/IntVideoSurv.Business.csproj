@@ -98,6 +98,10 @@
     <Compile Include="HiK\HikVideoServerDeviceDriver.cs" />
     <Compile Include="HiK\HikVisionSDK.cs" />
     <Compile Include="LongChang_CameraBusiness.cs" />
+    <Compile Include="LongChang_CaptureDepartmentBusiness.cs" />
+    <Compile Include="LongChang_InvalidTypeBusiness.cs" />
+    <Compile Include="LongChang_RegionBusiness.cs" />
+    <Compile Include="LongChang_ToGateTypeBusiness.cs" />
     <Compile Include="MapBusiness.cs" />
     <Compile Include="MonitorFolder.cs" />
     <Compile Include="DisplayChannelBusiness.cs" />

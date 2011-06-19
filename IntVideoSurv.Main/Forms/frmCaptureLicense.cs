@@ -2,15 +2,21 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using CameraViewer.Player;
 using DevExpress.XtraEditors;
-using System.Threading;
+using IntVideoSurv.Entity;
+using IntVideoSurv.Business;
 
 namespace CameraViewer.Forms
 {
     public partial class frmCaptureLicense : XtraForm
     {
+
+
+
+
         public frmCaptureLicense()
         {
             InitializeComponent();
@@ -46,7 +52,8 @@ namespace CameraViewer.Forms
             trackBar1.Maximum = _totalFrames;
 
 
-        }
+        }
+
 
         private IntPtr intPtr;
         private int frameWidth;
@@ -186,7 +193,7 @@ namespace CameraViewer.Forms
                 {
                    // if (_totalFrames == 0)
                    // {
-                        //int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                        int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                          if (first == true)
                         {
                             tmpcount = currentPos;

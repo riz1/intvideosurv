@@ -26,11 +26,11 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int, LongChang_LptTypeInfo> GetAllLptTypeInfo(ref string errMessage)
+        public Dictionary<string, LongChang_LptTypeInfo> GetAllLptTypeInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, LongChang_LptTypeInfo> list = new Dictionary<int, LongChang_LptTypeInfo>();
+            Dictionary<string, LongChang_LptTypeInfo> list = new Dictionary<string, LongChang_LptTypeInfo>();
             try
             {
 
@@ -51,7 +51,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_LptTypeInfo>();
             }
         }
 

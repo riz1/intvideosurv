@@ -26,11 +26,11 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<int, LongChang_TollGateInfo> GetAllTollGateInfo(ref string errMessage)
+        public Dictionary<string, LongChang_TollGateInfo> GetAllTollGateInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, LongChang_TollGateInfo> list = new Dictionary<int, LongChang_TollGateInfo>();
+            Dictionary<string, LongChang_TollGateInfo> list = new Dictionary<string, LongChang_TollGateInfo>();
             try
             {
 
@@ -51,14 +51,14 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_TollGateInfo>();
             }
         }
-        public Dictionary<int, LongChang_TollGateInfo> GetTollGateInfoById(ref string errMessage, int tollid)
+        public Dictionary<string, LongChang_TollGateInfo> GetTollGateInfoById(ref string errMessage, int tollid)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<int, LongChang_TollGateInfo> list = new Dictionary<int, LongChang_TollGateInfo>();
+            Dictionary<string, LongChang_TollGateInfo> list = new Dictionary<string, LongChang_TollGateInfo>();
             try
             {
 
@@ -79,7 +79,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<string, LongChang_TollGateInfo>(); 
             }
         }
 

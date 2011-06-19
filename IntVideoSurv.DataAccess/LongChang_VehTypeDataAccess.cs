@@ -12,7 +12,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static DataSet GetAllVehTypeInfo(Database db)
         {
-            string cmdText = string.Format("select * from TOG_VEHTYPE order by cllxdm");
+            string cmdText = string.Format("select * from TOC_VEHTYPE order by cllxdm");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
