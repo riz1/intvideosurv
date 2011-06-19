@@ -26,7 +26,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<string, LongChang_CaptureDepartmentInfo> GetAllVehColorInfo(ref string errMessage)
+        public Dictionary<string, LongChang_CaptureDepartmentInfo> GetAllCaptureDepartmentInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
@@ -34,7 +34,7 @@ namespace IntVideoSurv.Business
             try
             {
 
-                DataSet ds = LongChang_ToGateTypeDataAccess.GetAllVehColorInfo(db);
+                DataSet ds = LongChang_CaptureDepartmentDataAccess.GetAllCaptureDepartment(db);
 
                 LongChang_CaptureDepartmentInfo longChangCaptureDepartmentInfo;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)

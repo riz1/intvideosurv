@@ -312,55 +312,63 @@ namespace CameraViewer
         private CameraWindow careCameraWindows = null;
         private void frmMain_Win_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            try
             {
-                case Keys.Escape:
-                    Exit();
-                    return;
-                case Keys.D1:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(0, 0);
-                    break;
-                case Keys.D2:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(0, 1);
-                    break;
-                case Keys.D3:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(0, 2);
-                    break;
-                case Keys.D4:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(1, 0);
-                    break;
-                case Keys.D5:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(1, 1);
-                    break;
-                case Keys.D6:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(1, 2);
-                    break;
-                case Keys.D7:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(2, 0);
-                    break;
-                case Keys.D8:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(2, 1);
-                    break;
-                case Keys.D9:
-                    careCameraWindows = mainMultiplexer.GetCameraWindow(2, 2);
-                    break;
-                default:
-                    return;
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        Exit();
+                        return;
+                    case Keys.D1:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 0);
+                        break;
+                    case Keys.D2:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 1);
+                        break;
+                    case Keys.D3:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 2);
+                        break;
+                    case Keys.D4:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 0);
+                        break;
+                    case Keys.D5:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 1);
+                        break;
+                    case Keys.D6:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 2);
+                        break;
+                    case Keys.D7:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 0);
+                        break;
+                    case Keys.D8:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 1);
+                        break;
+                    case Keys.D9:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 2);
+                        break;
+                    default:
+                        return;
+                }
+                _listNumKeyStatus[e.KeyCode] = !_listNumKeyStatus[e.KeyCode];
+                if (_listNumKeyStatus[e.KeyCode])
+                {
+                    //¿ªÊ¼Â¼Ïñ
+                    careCameraWindows.AirnoixCamera.StartRecord();
+                }
+                else
+                {
+                    careCameraWindows.AirnoixCamera.StopRecord();
+                    frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera.VideoPath);
+                    fcl.Show();
+                    //½áÊøÂ¼Ïñ
+                }
+                ChangeButtonState(e);
+
             }
-            _listNumKeyStatus[e.KeyCode] = !_listNumKeyStatus[e.KeyCode];
-            if (_listNumKeyStatus[e.KeyCode])
+            catch (Exception)
             {
-                //¿ªÊ¼Â¼Ïñ
-                careCameraWindows.AirnoixCamera.StartRecord();
+                ;
             }
-            else
-            {
-                careCameraWindows.AirnoixCamera.StopRecord();
-                frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera.VideoPath);
-                fcl.Show();
-                //½áÊøÂ¼Ïñ
-            }
-            ChangeButtonState(e);
 
         }
 
