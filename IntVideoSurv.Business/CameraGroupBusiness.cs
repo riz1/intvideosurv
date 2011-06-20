@@ -111,6 +111,31 @@ namespace IntVideoSurv.Business
                 return new Dictionary<int, CameraInfo>();
             }
         }
+        public Dictionary<int, LongChang_CameraInfo> GetAllLongChangCameraInfo(ref string errMessage, int VirtualGroupId)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<int, LongChang_CameraInfo> list = new Dictionary<int, LongChang_CameraInfo>();
+            try
+            {
+                LongChang_CameraInfo oCameraInfo;
+                DataSet ds = CameraGroupDataAccess.GetAllLongChangCameraInfo(db, VirtualGroupId);
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    oCameraInfo = new LongChang_CameraInfo(ds.Tables[0].Rows[i]);
+                    list.Add(oCameraInfo.CameraId, oCameraInfo);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return new Dictionary<int, LongChang_CameraInfo>();
+            }
+        }
         public  int DeleteByGroupIDandCamID(ref string errMessage, int GroupID,int CameraID)
         {
             Database db = DatabaseFactory.CreateDatabase();
