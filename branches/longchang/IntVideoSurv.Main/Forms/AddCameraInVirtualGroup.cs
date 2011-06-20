@@ -46,12 +46,12 @@ namespace CameraViewer.Forms
                 }
             }*/
             listCamera = LongChang_CameraBusiness.Instance.GetAllCameraInfo(ref errMessage);
-            TreeListNode root = treeList1CameraInVirtualGroup.AppendNode(new[] { "设备名称", "0" + "R" }, -1, 0, 3, 1, CheckState.Checked);
-            root.Tag = "0" + "G";
+            TreeListNode root = treeList1CameraInVirtualGroup.AppendNode(new[] { "设备名称", "0" + ";R" }, -1, 0, 3, 1, CheckState.Checked);
+            root.Tag = "0" + ";R";
             foreach (KeyValuePair<int,LongChang_CameraInfo> item in listCamera)
             {
                 TreeListNode node = treeList1CameraInVirtualGroup.AppendNode(new[] { item.Value.TollGateName + item.Value.Name, item.Key + ";G" }, root.Id, 0, 3, 1, CheckState.Checked);
-                node.Tag = item.Key.ToString() + "G";
+                node.Tag = item.Key.ToString() + ";G";
             }
             treeList1CameraInVirtualGroup.Columns[1].Visible = false;
             treeList1CameraInVirtualGroup.ExpandAll();
