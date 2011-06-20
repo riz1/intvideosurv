@@ -27,6 +27,7 @@ namespace CameraViewer.Forms
         Dictionary<int, MapInfo> _listMapInfo;
         Dictionary<int, DecoderInfo> listDecoder;
         Dictionary<int, CameraInfo> clist = new Dictionary<int, CameraInfo>();
+        Dictionary<int, LongChang_CameraInfo> clist1 = new Dictionary<int, LongChang_CameraInfo>();
         Dictionary<int, UserInfo> listUser = new Dictionary<int, UserInfo>();
         private DisplayTypes _displaytype = DisplayTypes.DeviceManagement;
         public Dictionary<int,VirtualGroupInfo> listVirtualGroup;
@@ -1639,7 +1640,7 @@ namespace CameraViewer.Forms
 
         public void BuildVirtualGroupTree()
         {
-            listVirtualGroup =VirtualGroupBusiness.Instance.GetAllVirtualGroupInfo(ref errMessage);
+            /*listVirtualGroup =VirtualGroupBusiness.Instance.GetAllVirtualGroupInfo(ref errMessage);
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             TreeListNode node;
@@ -1668,6 +1669,46 @@ namespace CameraViewer.Forms
                         //treeListNodeC.Tag = itemcamera.Key + ";D";
                         DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, itemcamera.Value.CameraId);
                         TreeListNode treeListNodeC = treeListVirtualGroup.AppendNode(new[] { di.Name + ":" + itemcamera.Value.Name, itemcamera.Key + ";D" }, treeListNodeGQ.Id, 1, 3, 1, CheckState.Checked);
+                        treeListNodeC.Tag = itemcamera.Key + ";D";
+                    }
+                    foreach (KeyValuePair<int, UserInfo> itemuser in listUser)
+                    {
+                        TreeListNode treeListNodeU = treeListVirtualGroup.AppendNode(new[] { itemuser.Value.UserName, itemuser.Key + ";F" }, treeListNodeUQ.Id, 1, 3, 1, CheckState.Checked);
+                        treeListNodeU.Tag = itemuser.Key + ";F";
+                    }
+                }
+            }
+            treeListVirtualGroup.Columns[1].Visible = false;
+            treeListVirtualGroup.ExpandAll();
+            Cursor.Current = currentCursor;*/
+            listVirtualGroup = VirtualGroupBusiness.Instance.GetAllVirtualGroupInfo(ref errMessage);
+            Cursor currentCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            TreeListNode node;
+            TreeListNode camnode;
+
+
+            treeListVirtualGroup.Nodes.Clear();
+            TreeListNode treeListNodeRoot = treeListVirtualGroup.AppendNode(new[] { "组管理", 0 + ";A" }, -1, 0, 3, 1, CheckState.Checked);
+            treeListNodeRoot.Tag = 0 + ";A";
+            if (listVirtualGroup != null)
+            {
+
+                foreach (KeyValuePair<int, VirtualGroupInfo> item in listVirtualGroup)
+                {
+                    TreeListNode treeListNodeG = treeListVirtualGroup.AppendNode(new[] { item.Value.Name, item.Key + ";B" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeG.Tag = item.Key + ";B";
+                    TreeListNode treeListNodeGQ = treeListVirtualGroup.AppendNode(new[] { "摄像头管理", item.Key + ";C" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeGQ.Tag = item.Key + ";C";
+                    TreeListNode treeListNodeUQ = treeListVirtualGroup.AppendNode(new[] { "用户管理", item.Key + ";E" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
+                    treeListNodeUQ.Tag = item.Key + ";E";
+                    clist1 = CameraGroupBusiness.Instance.GetAllLongChangCameraInfo(ref errMessage, item.Key);
+                    listUser = UserGroupBusiness.Instance.GetAllCameraInfo(ref errMessage, item.Key);
+                    foreach (KeyValuePair<int, LongChang_CameraInfo> itemcamera in clist1)
+                    {
+                        // TreeListNode treeListNodeC = treeListVirtualGroup.AppendNode(new[] { itemcamera.Value.Name, itemcamera.Key + ";D" }, treeListNodeGQ.Id, 1, 3, 1, CheckState.Checked);
+                        //treeListNodeC.Tag = itemcamera.Key + ";D"
+                        TreeListNode treeListNodeC = treeListVirtualGroup.AppendNode(new[] { itemcamera.Value.TollGateName + ":" + itemcamera.Value.Name, itemcamera.Key + ";D" }, treeListNodeGQ.Id, 1, 3, 1, CheckState.Checked);
                         treeListNodeC.Tag = itemcamera.Key + ";D";
                     }
                     foreach (KeyValuePair<int, UserInfo> itemuser in listUser)
