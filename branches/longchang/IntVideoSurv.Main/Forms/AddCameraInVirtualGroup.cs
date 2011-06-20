@@ -17,6 +17,7 @@ namespace CameraViewer.Forms
         private string errMessage = "";
         Dictionary<int, CameraInfo> addCamera;
         Dictionary<int, GroupInfo> _listGroup = null;
+        Dictionary<int, LongChang_CameraInfo> listCamera;
         public int Groupid{get;set;}
         public AddCameraInVirtualGroup()
         {
@@ -26,7 +27,7 @@ namespace CameraViewer.Forms
         public void LoadCameraInfo()
         {
             treeList1CameraInVirtualGroup.Nodes.Clear();
-            _listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref errMessage);
+            /*_listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref errMessage);
             foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
             {
                 TreeListNode treeListNodeGroup = treeList1CameraInVirtualGroup.AppendNode(new[] { item.Value.Name, item.Key + ";G" }, -1, 0, 3, 1, CheckState.Checked);
@@ -43,6 +44,14 @@ namespace CameraViewer.Forms
                     }
 
                 }
+            }*/
+            listCamera = LongChang_CameraBusiness.Instance.GetAllCameraInfo(ref errMessage);
+            TreeListNode root = treeList1CameraInVirtualGroup.AppendNode(new[] { "设备名称", "0" + "R" }, -1, 0, 3, 1, CheckState.Checked);
+            root.Tag = "0" + "G";
+            foreach (KeyValuePair<int,LongChang_CameraInfo> item in listCamera)
+            {
+                TreeListNode node = treeList1CameraInVirtualGroup.AppendNode(new[] { item.Value.TollGateName + item.Value.Name, item.Key + ";G" }, root.Id, 0, 3, 1, CheckState.Checked);
+                node.Tag = item.Key.ToString() + "G";
             }
             treeList1CameraInVirtualGroup.Columns[1].Visible = false;
             treeList1CameraInVirtualGroup.ExpandAll();
