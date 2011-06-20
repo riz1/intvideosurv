@@ -79,6 +79,20 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static DataSet GetAllLongChangCameraInfo(Database db, int VirtualGroupId)
+        {
+            string cmdText = string.Format("select TOG_DEVICE.* from CameraGroup,TOG_DEVICE where CameraGroup.CameraID=TOG_DEVICE.tdid and CameraGroup.VirtualGroupID={0}", VirtualGroupId);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public static int DeleteByGroupIDandCamID(Database db, int GroupID,int CameraID)
         {
             StringBuilder sb = new StringBuilder();
