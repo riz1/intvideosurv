@@ -337,6 +337,14 @@ namespace CameraViewer.Forms
         {
             trackBar1.Value = trackBar1.Minimum;
             AirnoixPlayer.Avdec_Stop(intPtr);
+            timer1.Enabled = true;
+            timer2.Enabled = true;
+            first = true;
+            FirstLoad = true;
+            IsEnd = false;
+            isfirstvideo = true;
+            StartPlay = true;
+            
         }
         private  int GetTotalFrames()
         {
