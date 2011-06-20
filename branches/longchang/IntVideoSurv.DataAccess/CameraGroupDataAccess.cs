@@ -81,7 +81,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllLongChangCameraInfo(Database db, int VirtualGroupId)
         {
-            string cmdText = string.Format("select TOG_DEVICE.* from CameraGroup,TOG_DEVICE where CameraGroup.CameraID=TOG_DEVICE.tdid and CameraGroup.VirtualGroupID={0}", VirtualGroupId);
+            string cmdText = string.Format("select TOG_DEVICE.* from CameraGroup,TOG_DEVICE where CameraGroup.CameraID=TOG_DEVICE.SBBH and CameraGroup.VirtualGroupID={0}", VirtualGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
