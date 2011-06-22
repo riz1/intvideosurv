@@ -87,7 +87,6 @@
             this.buttonPlay = new System.Windows.Forms.Button();
             this.buttonPause = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
-            this.captureLicense1 = new CameraViewer.Controls.CaptureLicense();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
@@ -712,13 +711,6 @@
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
-            // captureLicense1
-            // 
-            this.captureLicense1.Location = new System.Drawing.Point(1292, 12);
-            this.captureLicense1.Name = "captureLicense1";
-            this.captureLicense1.Size = new System.Drawing.Size(456, 505);
-            this.captureLicense1.TabIndex = 13;
-            // 
             // simpleButton1
             // 
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
@@ -738,10 +730,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1737, 757);
+            this.ClientSize = new System.Drawing.Size(1370, 750);
             this.Controls.Add(this.panelControlVideo);
             this.Controls.Add(this.simpleButton1);
-            this.Controls.Add(this.captureLicense1);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonPause);
             this.Controls.Add(this.buttonPlay);
