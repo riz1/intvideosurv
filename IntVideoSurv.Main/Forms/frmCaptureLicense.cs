@@ -287,7 +287,7 @@ namespace CameraViewer.Forms
                     i = trackBar1.Value - Change_Frame;
                     if (FirstLoad == true)
                     {
-                        ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
+                        ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\李太勇老师\18-55-28.AVI", null, false);
                         FirstLoad = false;
                         //Thread.Sleep(1000);
                         ret = AirnoixPlayer.Avdec_Play(intPtr);
@@ -353,7 +353,7 @@ namespace CameraViewer.Forms
             
             Maximum = 0;
             Maximum += Change_Frame;//十五秒对应的帧数
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
+            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\李太勇老师\18-55-28.AVI", null, false);
 
             Thread.Sleep(1000);
             ret = AirnoixPlayer.Avdec_Play(intPtr);
@@ -371,7 +371,7 @@ namespace CameraViewer.Forms
                 {
                     int ret;
                     ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                    ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.avi", null, true);
+                    ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\李太勇老师\18-55-28.avi", null, true);
                     changecount = trackBar1.Value;
                     isfirstvideo = false;
                     timer2.Enabled = false;
@@ -390,7 +390,7 @@ namespace CameraViewer.Forms
             int count;
             int mum;
             isfirstvideo = true;
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"D:\李太勇老师\123.AVI", null, false);
             Thread.Sleep(1000);
             ret = AirnoixPlayer.Avdec_Play(intPtr);
             ret = AirnoixPlayer.Avdec_Pause(intPtr);
