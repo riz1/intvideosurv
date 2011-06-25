@@ -358,7 +358,7 @@ namespace CameraViewer
                 else
                 {
                     careCameraWindows.AirnoixCamera.StopRecord();
-                    frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera.VideoPath);
+                    frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera);
                     fcl.Show();
                     //½áÊøÂ¼Ïñ
                 }
@@ -890,6 +890,7 @@ namespace CameraViewer
                 airnoixCameraNew.Port = VARIABLE.Value.Port;
                 airnoixCameraNew.UserName = VARIABLE.Value.UserName;
                 airnoixCameraNew.Password = VARIABLE.Value.PassWord;
+                airnoixCameraNew.Id = VARIABLE.Key;
                 airnoixCameraNew.SaveTo = "c:\\";
                 cameraWindow.AirnoixCamera = airnoixCameraNew;
                 airnoixCameraNew.Start();
