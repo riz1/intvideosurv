@@ -23,7 +23,7 @@ namespace CameraViewer.Player
 
 
         public bool Started { get; set; }
-
+        public int Id { get; set; }
         private string _userName;
         public string UserName
         {

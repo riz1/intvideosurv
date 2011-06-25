@@ -37,16 +37,17 @@ namespace CameraViewer.Forms
 
         }
 
-        public frmCaptureLicense(string videoPath)
+        public frmCaptureLicense(AirnoixCamera airnoixCamera)
         {
             InitializeComponent();
             LoadBaseInfo();
+            _airnoixCamera = airnoixCamera;
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
             }
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, videoPath, null, true);
+            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, airnoixCamera.VideoPath, null, true);
 
             frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
@@ -57,7 +58,7 @@ namespace CameraViewer.Forms
 
         }
 
-
+        private AirnoixCamera _airnoixCamera;
         private IntPtr intPtr;
         private int frameWidth;
         private int frameHeight;
