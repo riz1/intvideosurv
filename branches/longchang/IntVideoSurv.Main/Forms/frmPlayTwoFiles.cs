@@ -32,13 +32,9 @@ namespace CameraViewer.Forms
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             //trackBarControl1.Properties.Minimum = 1;
             //trackBarControl1.Properties.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            trackBarProgressing.Minimum = 0;
-            trackBarProgressing.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            //trackBarProgressing.Minimum = 0;
+            //trackBarProgressing.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
             //MessageBox.Show(trackBarProgressing.Maximum.ToString());
-        }
-        public void PlayTheFiles(int start, int end)
-        {
-            
         }
         //播放
         private void buttonPlay_Click(object sender, EventArgs e)
