@@ -56,11 +56,18 @@ namespace IntVideoSurv.Entity
             vehicleColor = dataRow["csys"] is DBNull ? "" : Convert.ToString(dataRow["csys"]);
             vehicleType = dataRow["cllx"] is DBNull ? -1 : Convert.ToInt32(dataRow["cllx"]);
             vehicleTypeName = dataRow["cllxmc"] is DBNull ? "" : Convert.ToString(dataRow["cllxmc"]);
-            plateNumberType = dataRow["hpzl"] is DBNull ? -1 : Convert.ToInt32(dataRow["hpzl"]);
+            plateNumberType = dataRow["hpzl"] is DBNull ? "" : Convert.ToString(dataRow["hpzl"]);
             plateNumberTypeName = dataRow["hpzlmc"] is DBNull ? "" : Convert.ToString(dataRow["hpzlmc"]);
             countTime = dataRow["tjrq"] is DBNull ? "" : Convert.ToString(dataRow["tjrq"]);
             illegalReason = dataRow["wzyy"] is DBNull ? "" : Convert.ToString(dataRow["wzyy"]);
             redLightTime = dataRow["hdsj"] is DBNull ? "" : Convert.ToString(dataRow["hdsj"]);
+
+            roadNumber = dataRow["cdbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["cdbh"]);
+            roadName = dataRow["cdmc"] is DBNull ? "" : Convert.ToString(dataRow["cdmc"]);
+            collectWay = dataRow["cjfs"] is DBNull ? "" : Convert.ToString(dataRow["cjfs"]);
+            adminDivisionNumber = dataRow["dwbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dwbh"]);
+            adminDivisionName = dataRow["dwmc"] is DBNull ? "" : Convert.ToString(dataRow["dwmc"]);
+
         }
         #endregion
 
@@ -97,7 +104,7 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public string vehicleTypeName { get; set; }
         [ColumnMapping()]
-        public int plateNumberType { get; set; }
+        public string plateNumberType { get; set; }
         [ColumnMapping()]
         public string plateNumberTypeName { get; set; }
         [ColumnMapping()]
@@ -106,6 +113,17 @@ namespace IntVideoSurv.Entity
         public string illegalReason { get; set; }
         [ColumnMapping()]
         public string redLightTime { get; set; }
+
+        [ColumnMapping()]
+        public int roadNumber { get; set; }
+        [ColumnMapping()]
+        public string roadName { get; set; }
+        [ColumnMapping()]
+        public string collectWay { get; set; }
+        [ColumnMapping()]
+        public int adminDivisionNumber { get; set; }
+        [ColumnMapping()]
+        public string adminDivisionName  { get; set; }
         
     }
 }
