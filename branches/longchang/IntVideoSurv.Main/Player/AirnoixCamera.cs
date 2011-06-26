@@ -64,6 +64,8 @@ namespace CameraViewer.Player
         public int Port { get; set; }
         public string SaveTo { get; set; }
         public int StreamId { get; set; }
+        public DateTime BeginCaptureTime { get; set; }
+        public DateTime EndCaptureTime { get; set; }
 
         public AirnoixCamera(IntPtr hWnd)
         {
@@ -106,12 +108,14 @@ namespace CameraViewer.Player
             }
 
             AirnoixClient.MP4_ClientStartCapture(_camHandle);
+            BeginCaptureTime = DateTime.Now;
         }
 
         public void StopRecord()
         {
             _isRecording = false;
             AirnoixClient.MP4_ClientStopCapture(_camHandle);
+            EndCaptureTime = DateTime.Now;
             DisposeWriter();
         }
 
