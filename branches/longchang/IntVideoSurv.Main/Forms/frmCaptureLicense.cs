@@ -488,6 +488,45 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
         }
 
         #endregion
+        private string errMessage = "";
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
+            LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
+
+            vehmon.vehInfoNum = 0;
+            vehmon.tollNum = 0;
+            vehmon.tollName = "";
+            vehmon.plateColorNum = 0;
+            vehmon.plateColor = "";
+            vehmon.imageCount = 0;
+            vehmon.imageName1 = "";
+            vehmon.imageName2 = "";
+            vehmon.imageName3 = "";
+            vehmon.imageName4 = "";
+            vehmon.vedioName = "";
+            vehmon.vehicleColor = "";
+            vehmon.vehicleType = 0;
+            vehmon.vehicleTypeName = "";
+            vehmon.plateNumberTypeName = "";
+            vehmon.countTime = "";
+
+            vehmon.plateNumberType = cbeVehType.Text;
+            vehmon.plateNumber = textEdit1.Text;
+            vehmon.collectWay = "fff";//cbeCaptureType.Text;
+            vehmon.illegalReason = "dddd";//cbeInvalidType.Text;
+            vehmon.adminDivisionName = cbeCaptureDepartment.Text;
+            vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
+
+            tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id);
+            vehmon.roadNumber = tollgate.roadNum;
+            vehmon.roadName = tollgate.roadName;
+            vehmon.redLightTime = timeEdit1.Text;
+
+            int i;
+            i = LongChang_VehMonBusiness.Instance.Insert(ref errMessage, vehmon);
+
+        }
 
     }
 }

@@ -83,5 +83,27 @@ namespace IntVideoSurv.Business
             }
         }
 
+        public LongChang_TollGateInfo GetTollGateInfoByCameraId(ref string errMessage, int Id)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = LongChang_TollGateDataAccess.GetTollGateInfoByCameraId(db, Id);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    return null;
+                }
+                return new LongChang_TollGateInfo(ds.Tables[0].Rows[0]);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+
+        }
     }
 }
