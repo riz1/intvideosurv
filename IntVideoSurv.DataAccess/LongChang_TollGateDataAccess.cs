@@ -38,8 +38,6 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-<<<<<<< .mine
-
         public static DataSet GetTollGateInfoByCameraId(Database db, int id)
         {
             string cmdText = string.Format("select * from TOG_TOLLGATE where sxjbh = {0}", id);
@@ -54,23 +52,6 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-=======
-
-        public static DataSet GetTollGateInfoByCameraId(Database db, int id)
-        {
-            string cmdText = string.Format("select * from TOG_TOLLGATE where sxjbh = {0} order by tgid", id);
-            try
-            {
-                return db.ExecuteDataSet(CommandType.Text, cmdText);
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
->>>>>>> .r323
         
     }
 }

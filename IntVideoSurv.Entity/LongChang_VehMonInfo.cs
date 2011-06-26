@@ -58,13 +58,12 @@ namespace IntVideoSurv.Entity
             vehicleTypeName = dataRow["cllxmc"] is DBNull ? "" : Convert.ToString(dataRow["cllxmc"]);
             plateNumberType = dataRow["hpzl"] is DBNull ? "" : Convert.ToString(dataRow["hpzl"]);
             plateNumberTypeName = dataRow["hpzlmc"] is DBNull ? "" : Convert.ToString(dataRow["hpzlmc"]);
-            countTime = dataRow["tjrq"] is DBNull ? "" : Convert.ToString(dataRow["tjrq"]);
+            countTime = dataRow["tjrq"] is DBNull ? -1 : Convert.ToInt32(dataRow["tjrq"]);
             illegalReason = dataRow["wzyy"] is DBNull ? "" : Convert.ToString(dataRow["wzyy"]);
-            redLightTime = dataRow["hdsj"] is DBNull ? "" : Convert.ToString(dataRow["hdsj"]);
+            redLightTime = Convert.ToDateTime(dataRow["hdsj"]);//dataRow["hdsj"] is DBNull ? '2006/01/22' : ;
 
             roadNumber = dataRow["cdbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["cdbh"]);
             roadName = dataRow["cdmc"] is DBNull ? "" : Convert.ToString(dataRow["cdmc"]);
-            collectWay = dataRow["cjfs"] is DBNull ? "" : Convert.ToString(dataRow["cjfs"]);
             adminDivisionNumber = dataRow["dwbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dwbh"]);
             adminDivisionName = dataRow["dwmc"] is DBNull ? "" : Convert.ToString(dataRow["dwmc"]);
 
@@ -108,18 +107,16 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public string plateNumberTypeName { get; set; }
         [ColumnMapping()]
-        public string countTime { get; set; }
+        public int countTime { get; set; }
         [ColumnMapping()]
         public string illegalReason { get; set; }
         [ColumnMapping()]
-        public string redLightTime { get; set; }
+        public DateTime redLightTime { get; set; }
 
         [ColumnMapping()]
         public int roadNumber { get; set; }
         [ColumnMapping()]
         public string roadName { get; set; }
-        [ColumnMapping()]
-        public string collectWay { get; set; }
         [ColumnMapping()]
         public int adminDivisionNumber { get; set; }
         [ColumnMapping()]
