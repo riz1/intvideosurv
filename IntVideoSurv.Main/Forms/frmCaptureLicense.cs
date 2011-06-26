@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -9,6 +10,7 @@ using CameraViewer.Player;
 using DevExpress.XtraEditors;
 using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
+using log4net;
 
 namespace CameraViewer.Forms
 {
@@ -16,7 +18,7 @@ namespace CameraViewer.Forms
     {
 
 
-
+        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public frmCaptureLicense()
         {
@@ -25,6 +27,10 @@ namespace CameraViewer.Forms
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
+            }
+            if (!Directory.Exists(Properties.Settings.Default.CapturePictureFilePath))
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             //int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
@@ -40,11 +46,15 @@ namespace CameraViewer.Forms
         public frmCaptureLicense(AirnoixCamera airnoixCamera)
         {
             InitializeComponent();
-            LoadBaseInfo();
             _airnoixCamera = airnoixCamera;
+            LoadBaseInfo();
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
+            }
+            if (!Directory.Exists(Properties.Settings.Default.CapturePictureFilePath))
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             int ret = AirnoixPlayer.Avdec_SetFile(intPtr, airnoixCamera.VideoPath, null, true);
@@ -67,6 +77,7 @@ namespace CameraViewer.Forms
         private int _totalFrames;
         private int Change_Frame = 1200;//第一个视频播放的帧数
         private int Start_Frame = 5000;
+        private ArrayList alTempFiles = new ArrayList();
         private void simpleButtonPrevious_Click(object sender, EventArgs e)
         {
             try
@@ -149,6 +160,7 @@ namespace CameraViewer.Forms
                 ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
                 
                 images[i] = Image.FromFile(filename);
+                alTempFiles.Add(filename);
                 //ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
 
             }
@@ -313,6 +325,8 @@ namespace CameraViewer.Forms
         private void frmCaptureLicense_FormClosed(object sender, FormClosedEventArgs e)
         {
             int ret = AirnoixPlayer.Avdec_Done(intPtr);
+            //删除临时BMP文件
+            DeleteTempBmp();
         }
 
 
@@ -484,7 +498,9 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 cbeInvalidType.EditValue = cbeInvalidType.Properties.Items[0];
             }
 
-
+            teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == null
+                                 ? DateTime.Now
+                                 : _airnoixCamera.BeginCaptureTime;
         }
 
         #endregion
@@ -493,16 +509,30 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
         {
             LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
             LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
+            string captureFileName = Properties.Settings.Default.CapturePictureFilePath
+                         + @"\"+_airnoixCamera.BeginCaptureTime.ToString("yyyy-MM-dd")
+                         + @"\" + _airnoixCamera.BeginCaptureTime.ToString("HH-mm") + @"\";
+            if (!Directory.Exists(captureFileName))
+            {
+                Directory.CreateDirectory(captureFileName);
+            }
 
+
+
+            vehmon.plateNumberTypeName = cbeVehType.Text;
+            vehmon.plateNumber = textEdit1.Text;
+            vehmon.illegalReason = "dddd";//cbeInvalidType.Text;
+            vehmon.adminDivisionName = cbeCaptureDepartment.Text;
+            vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
             vehmon.vehInfoNum = 0;
             vehmon.tollNum = 0;
             vehmon.tollName = "";
             vehmon.plateColorNum = 0;
             vehmon.plateColor = "";
             vehmon.imageCount = 0;
-            vehmon.imageName1 = "";
-            vehmon.imageName2 = "";
-            vehmon.imageName3 = "";
+            vehmon.imageName1 = captureFileName + vehmon.plateNumber + "_1.jpg";
+            vehmon.imageName2 = captureFileName + vehmon.plateNumber + "_2.jpg";
+            vehmon.imageName3 = captureFileName + vehmon.plateNumber + "_3.jpg";
             vehmon.imageName4 = "";
             vehmon.vedioName = "";
             vehmon.vehicleColor = "";
@@ -510,12 +540,6 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.vehicleTypeName = "";
             vehmon.plateNumberType = "A";
             vehmon.countTime = 0;
-
-            vehmon.plateNumberTypeName = cbeVehType.Text;
-            vehmon.plateNumber = textEdit1.Text;
-            vehmon.illegalReason = "dddd";//cbeInvalidType.Text;
-            vehmon.adminDivisionName = cbeCaptureDepartment.Text;
-            vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
 
             if (_airnoixCamera == null)
             {
@@ -530,12 +554,34 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
             vehmon.roadNumber = tollgate.roadNum;
             vehmon.roadName = tollgate.roadName;
-            vehmon.redLightTime = Convert.ToDateTime(timeEdit1.Text);
+            vehmon.redLightTime = Convert.ToDateTime(teCaptureTime.Text);
 
             int i;
             i = LongChang_VehMonBusiness.Instance.Insert(ref errMessage, vehmon);
 
+            //将三张图片写入到磁盘中
+            (treeListPicturesBefore.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName1,System.Drawing.Imaging.ImageFormat.Jpeg);
+            (treeListPicturesCurrent.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName2,System.Drawing.Imaging.ImageFormat.Jpeg);
+            (treeListPicturesAfter.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName3,System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
+
+        private void DeleteTempBmp()
+        {
+            try
+            {
+                foreach (string alTempFile in alTempFiles)
+                {
+                    if (File.Exists(alTempFile))
+                    {
+                        File.Delete(alTempFile);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+            }
+        }
     }
 }

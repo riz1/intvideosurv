@@ -1,5 +1,6 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <GenerateResourceNeverLockTypeAssemblies>true</GenerateResourceNeverLockTypeAssemblies>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -307,12 +308,6 @@
     <Compile Include="Forms\frmPassword.Designer.cs">
       <DependentUpon>frmPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmSetting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmSetting.Designer.cs">
-      <DependentUpon>frmSetting.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\frmSettingProgSwitch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,6 +358,12 @@
     </Compile>
     <Compile Include="Forms\frmSettingSynGroup.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSetting.designer.cs">
+      <DependentUpon>frmSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="IWizardPage.cs">
       <SubType>Code</SubType>
@@ -557,10 +558,6 @@
       <DependentUpon>frmProgSwitchGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmSetting.resx">
-      <DependentUpon>frmSetting.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -595,6 +592,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain_Win.resx">
       <DependentUpon>frmMain_Win.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSetting.resx">
+      <DependentUpon>frmSetting.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="JustForTest.resx">

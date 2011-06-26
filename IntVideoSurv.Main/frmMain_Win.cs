@@ -365,9 +365,10 @@ namespace CameraViewer
                 ChangeButtonState(e);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ;
+                ChangeButtonState(e);
+                logger.Error(ex.ToString());
             }
 
         }

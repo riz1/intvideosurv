@@ -93,7 +93,7 @@
             this.comboBoxEdit7 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
-            this.timeEdit1 = new DevExpress.XtraEditors.TimeEdit();
+            this.teCaptureTime = new DevExpress.XtraEditors.TimeEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
@@ -153,7 +153,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit7.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.timeEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teCaptureTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit8.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
@@ -779,7 +779,7 @@
             this.groupControl4.Controls.Add(this.comboBoxEdit7);
             this.groupControl4.Controls.Add(this.labelControl18);
             this.groupControl4.Controls.Add(this.labelControl15);
-            this.groupControl4.Controls.Add(this.timeEdit1);
+            this.groupControl4.Controls.Add(this.teCaptureTime);
             this.groupControl4.Controls.Add(this.labelControl1);
             this.groupControl4.Controls.Add(this.labelControl19);
             this.groupControl4.Controls.Add(this.labelControl16);
@@ -819,16 +819,16 @@
             this.labelControl15.TabIndex = 4;
             this.labelControl15.Text = "*";
             // 
-            // timeEdit1
+            // teCaptureTime
             // 
-            this.timeEdit1.EditValue = new System.DateTime(2011, 6, 4, 0, 0, 0, 0);
-            this.timeEdit1.Location = new System.Drawing.Point(61, 82);
-            this.timeEdit1.Name = "timeEdit1";
-            this.timeEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.teCaptureTime.EditValue = new System.DateTime(2011, 6, 4, 0, 0, 0, 0);
+            this.teCaptureTime.Location = new System.Drawing.Point(61, 82);
+            this.teCaptureTime.Name = "teCaptureTime";
+            this.teCaptureTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.timeEdit1.Properties.Mask.EditMask = "G";
-            this.timeEdit1.Size = new System.Drawing.Size(148, 21);
-            this.timeEdit1.TabIndex = 0;
+            this.teCaptureTime.Properties.Mask.EditMask = "G";
+            this.teCaptureTime.Size = new System.Drawing.Size(148, 21);
+            this.teCaptureTime.TabIndex = 0;
             // 
             // labelControl1
             // 
@@ -1144,7 +1144,7 @@
             this.groupControl4.ResumeLayout(false);
             this.groupControl4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit7.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.timeEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teCaptureTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit8.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
@@ -1232,7 +1232,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit7;
         private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraEditors.LabelControl labelControl15;
-        private DevExpress.XtraEditors.TimeEdit timeEdit1;
+        private DevExpress.XtraEditors.TimeEdit teCaptureTime;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl19;
         private DevExpress.XtraEditors.LabelControl labelControl16;
