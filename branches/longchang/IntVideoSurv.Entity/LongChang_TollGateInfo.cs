@@ -51,16 +51,16 @@ namespace IntVideoSurv.Entity
             tollName = dataRow["kkmc"] is DBNull ? "" : Convert.ToString(dataRow["kkmc"]);
             tollShort = dataRow["kkjc"] is DBNull ? "" : Convert.ToString(dataRow["kkjc"]);
             tollPosition = dataRow["kkwz"] is DBNull ? "" : Convert.ToString(dataRow["kkwz"]);
-            departmentNum = dataRow["dwbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dwbh"]);
+            departmentNum = dataRow["dlbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dlbh"]);//
             administrationDivsion = dataRow["xzqh"] is DBNull ? "" : Convert.ToString(dataRow["xzqh"]);
             tollType = dataRow["kklx"] is DBNull ? -1 : Convert.ToInt32(dataRow["kklx"]);
             cameraNum = dataRow["sxjbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["sxjbh"]);
-            roadNum = dataRow["dlbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dlbh"]);
+            roadNum = dataRow["dlbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dlbh"]);//
             roadName = dataRow["dlmc"] is DBNull ? "" : Convert.ToString(dataRow["dlmc"]);
-            mapNum = dataRow["dtbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dtbh"]);
-            mapX = dataRow["dtxzb"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtxzb"]);
-            mapY = dataRow["dtyzb"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtyzb"]);
-            precision = dataRow["dtjb"] is DBNull ? -1 : Convert.ToInt32(dataRow["dtjd"]);
+            mapNum = dataRow["dtbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dtbh"]);//
+            mapX = dataRow["dtxzb"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtxzb"]);//
+            mapY = dataRow["dtyzb"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtyzb"]);//
+            precision = dataRow["dtjd"] is DBNull ? -1 : Convert.ToInt32(dataRow["dtjd"]);
             mapLatitude = dataRow["dtwd"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtwd"]);
             
         }

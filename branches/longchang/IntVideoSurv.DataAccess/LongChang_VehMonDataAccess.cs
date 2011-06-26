@@ -33,8 +33,10 @@ namespace IntVideoSurv.DataAccess
             sbValue.Append("values (");
             //sbField.Append("id");
             //sbValue.AppendFormat("'{0}'", oDecoderInfo.id);
-            sbField.Append("clxxbh");
-            sbValue.AppendFormat("{0}", oVehMon.vehInfoNum);
+            sbField.Append("mvid");
+            sbValue.AppendFormat("'{0}'", Guid.NewGuid().ToString());
+            sbField.Append(",clxxbh");
+            sbValue.AppendFormat(",{0}", oVehMon.vehInfoNum);
             sbField.Append(",kkbh");
             sbValue.AppendFormat(",{0}", oVehMon.tollNum);
             sbField.Append(",kkmc");
@@ -64,25 +66,23 @@ namespace IntVideoSurv.DataAccess
             sbField.Append(",cllxmc");
             sbValue.AppendFormat(",'{0}'", oVehMon.vehicleTypeName);
             sbField.Append(",hpzl");
-            sbValue.AppendFormat(",{0}", oVehMon.plateNumberType);
+            sbValue.AppendFormat(",'{0}'", oVehMon.plateNumberType);
             sbField.Append(",hpzlmc");
             sbValue.AppendFormat(",'{0}'", oVehMon.plateNumberTypeName);
             sbField.Append(",tjrq");
-            sbValue.AppendFormat(",{0}", oVehMon.countTime);
+            sbValue.AppendFormat(",{0}", oVehMon.countTime);//////
             sbField.Append(",wzyy");
             sbValue.AppendFormat(",'{0}'", oVehMon.illegalReason);
             sbField.Append(",cdbh");
-            sbValue.AppendFormat(",{0}", oVehMon.roadNumber);
+            sbValue.AppendFormat(",'{0}'", oVehMon.roadNumber);
             sbField.Append(",cdmc");
             sbValue.AppendFormat(",'{0}'", oVehMon.roadName);
-            sbField.Append(",cjfs");
-            sbValue.AppendFormat(",'{0}'", oVehMon.collectWay);
             sbField.Append(",dwbh");
-            sbValue.AppendFormat(",{0}", oVehMon.adminDivisionNumber);
+            sbValue.AppendFormat(",'{0}'", oVehMon.adminDivisionNumber);
             sbField.Append(",dwmc");
             sbValue.AppendFormat(",'{0}'", oVehMon.adminDivisionName);
             sbField.Append(",hdsj)");
-            sbValue.AppendFormat(",'{0}')", oVehMon.redLightTime);
+            sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS'))", oVehMon.redLightTime);///
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
 
