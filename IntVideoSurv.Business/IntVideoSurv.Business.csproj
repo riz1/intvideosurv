@@ -135,6 +135,7 @@
     <Compile Include="LongChang_VehTypeBusiness.cs" />
     <Compile Include="LongChang_TollGateBusiness.cs" />
     <Compile Include="LongChang_VehMonBusiness.cs" />
+    <Compile Include="LongChang_WzyyBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntVideoSurv.DataAccess\IntVideoSurv.DataAccess.csproj">
