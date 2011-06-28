@@ -629,7 +629,7 @@ namespace CameraViewer
             
             //******************************Â¡²ý************************//
             MakeLongChangInterface();
-            _listAllLongChang_Cam = LongChang_CameraBusiness.Instance.GetCamInfoByDeviceUserIdAndType(ref _errMessage, CurrentUser.UserId,0);
+            _listAllLongChang_Cam = LongChang_CameraBusiness.Instance.GetCamInfoByDeviceUserId(ref _errMessage, CurrentUser.UserId);
             barStaticItemCameraNo.Caption = _listAllLongChang_Cam.Count.ToString();
             LoadAllCameraInLongChang();
 

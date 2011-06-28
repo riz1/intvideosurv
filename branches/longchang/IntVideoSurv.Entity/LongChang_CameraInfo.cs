@@ -44,7 +44,7 @@ namespace IntVideoSurv.Entity
             ChannelNo = dataRow["sptdh"] is DBNull ? -1 : Convert.ToInt32(dataRow["sptdh"]);
             UserName = dataRow["dlyh"] is DBNull ? "":Convert.ToString(dataRow["dlyh"]);
             PassWord = dataRow["dlmm"] is DBNull ? "":Convert.ToString(dataRow["dlmm"]);
-
+            Type = dataRow["sblx"] is DBNull ? -1 : Convert.ToInt32(dataRow["sblx"]);
         }
         #endregion
 
@@ -74,6 +74,10 @@ namespace IntVideoSurv.Entity
         public string UserName { get; set; }
         [ColumnMapping()]
         public string PassWord { get; set; }
+
+        //2011-6-28添加，1表示枪机、2表示球机
+        [ColumnMapping()]
+        public int Type { get; set; }
  
         public override string ToString()
         {
