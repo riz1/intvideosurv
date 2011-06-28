@@ -893,6 +893,7 @@ namespace CameraViewer
                 airnoixCameraNew.Password = VARIABLE.Value.PassWord;
                 airnoixCameraNew.Id = VARIABLE.Key;
                 airnoixCameraNew.SaveTo = "c:\\";
+                airnoixCameraNew.Type = VARIABLE.Value.Type;
                 cameraWindow.AirnoixCamera = airnoixCameraNew;
                 airnoixCameraNew.Start();
 

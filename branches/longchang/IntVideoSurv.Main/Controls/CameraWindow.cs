@@ -212,6 +212,14 @@ namespace CameraViewer
 
 		}
 
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            if (_airnoixCamera!=null)
+            {
+                _airnoixCamera.DisplayPos = new Rectangle(0, 0, this.Width, this.Height);
+            }
+        }
+
 		// update position and size of the control
 		public void UpdatePosition()
 		{
