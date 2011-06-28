@@ -59,7 +59,7 @@ namespace IntVideoSurv.DataAccess
             string cmdText = string.Format("select distinct TOG_DEVICE.* " +
                 " from TOG_DEVICE,usergroup,cameragroup "+
                 " where usergroup.userid={0} and usergroup.virtualgroupid = cameragroup.virtualgroupid "+
-                " and cameragroup.cameraid=TOG_DEVICE.sbbh and TOG_DEVICE.sblx = 1 or TOG_DEVICE.sblx = 2", userId);
+                " and cameragroup.cameraid=TOG_DEVICE.sbbh and (TOG_DEVICE.sblx = 1 or TOG_DEVICE.sblx = 2)", userId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

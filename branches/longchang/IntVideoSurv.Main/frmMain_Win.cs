@@ -29,6 +29,7 @@ using log4net;
 using System.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
 using CameraViewer.Player;
+using DevExpress.XtraBars;
 
 
 namespace CameraViewer
@@ -105,6 +106,8 @@ namespace CameraViewer
             RegisterHotKey(this.Handle, 207, (int)MyKeys.Alt, (int)Keys.D7); //×¢²áÈÈ¼üAlt+1
             RegisterHotKey(this.Handle, 208, (int)MyKeys.Alt, (int)Keys.D8); //×¢²áÈÈ¼üAlt+1
             RegisterHotKey(this.Handle, 209, (int)MyKeys.Alt, (int)Keys.D9); //×¢²áÈÈ¼üAlt+1
+
+
 
         }
         private void BeginRemotingService()
@@ -619,6 +622,27 @@ namespace CameraViewer
             _listNumKeyStatus.Add(Keys.D7, false);
             _listNumKeyStatus.Add(Keys.D8, false);
             _listNumKeyStatus.Add(Keys.D9, false);
+
+            dockPanelPtzControl.Visible = false;
+            barStaticItemCurrentUser.Caption = CurrentUser.UserName;
+            barSubItemMenuView.Visibility = BarItemVisibility.Never;
+            barSubItemMenuQuery.Visibility = BarItemVisibility.Never;
+            barButtonItem8.Visibility = BarItemVisibility.Never;
+            barButtonItem9.Visibility = BarItemVisibility.Never;
+            barButtonItem10.Visibility = BarItemVisibility.Never;
+            barButtonItem11.Visibility = BarItemVisibility.Never;
+            barButtonItem12.Visibility = BarItemVisibility.Never;
+            barButtonItem13.Visibility = BarItemVisibility.Never;
+            barButtonItem14.Visibility = BarItemVisibility.Never;
+            barButtonItem15.Visibility = BarItemVisibility.Never;
+            barButtonItem16.Visibility = BarItemVisibility.Never;
+            barButtonItem17.Visibility = BarItemVisibility.Never;
+            barButtonItem18.Visibility = BarItemVisibility.Never;
+            barButtonItem19.Visibility = BarItemVisibility.Never;
+            barButtonItem20.Visibility = BarItemVisibility.Never;
+            barButtonItem21.Visibility = BarItemVisibility.Never;
+            barButtonItemPlayTwoFiles.Visibility = BarItemVisibility.Never;
+            barButtonItemGetPics.Visibility = BarItemVisibility.Never;
         }
 
         private void InitDataBaseType()
@@ -2895,7 +2919,10 @@ namespace CameraViewer
                         key = Keys.D9;
                         break;
                 }
-
+                if (careCameraWindows.AirnoixCamera==null)
+                {
+                    return;
+                }
                 _listNumKeyStatus[key] = !_listNumKeyStatus[key];
                 if (_listNumKeyStatus[key])
                 {
