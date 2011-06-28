@@ -560,9 +560,9 @@ namespace CameraViewer
             _runningDeviceList = new Dictionary<int, HikVideoServerDeviceDriver>();
             _listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref _errMessage);
             cameraView1.ListGroup = _listGroup;
-            Splash.Splash.Status = "初始化设备...";
-            _outputTv = new OutputTVDeviceDriver();
-            _outputTv.Init();
+            // Splash.Splash.Status = "初始化设备...";
+            //_outputTv = new OutputTVDeviceDriver();
+            //_outputTv.Init();
 
             Splash.Splash.Status = "获取设备信息...";
             _listDevice = DeviceBusiness.Instance.GetAllDeviceInfo(ref _errMessage);
