@@ -23,7 +23,7 @@
 // Error: Failed to resolve name 'tmLockCfg_t'
 
 
-public enum ControlType
+public enum PtzControlType
 {
     
         PTZ_REALTRANS		=	0,	/* 透明云台数据传输 */                   

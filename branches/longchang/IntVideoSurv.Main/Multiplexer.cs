@@ -938,20 +938,6 @@ namespace CameraViewer
                 isFullScreen = !isFullScreen;
                 UpdateSize();
 
-                
-                #region 更新选中窗口的视频
-
-                if (CurrentCameraWindow.AirnoixCamera!=null)
-                {
-                    if (CurrentCameraWindow.AirnoixCamera.Started)
-                    {
-                        CurrentCameraWindow.AirnoixCamera.Stop();
-                        CurrentCameraWindow.AirnoixCamera.DisplayPos = new Rectangle(0, 0, CurrentCameraWindow.Width, CurrentCameraWindow.Height);
-                        CurrentCameraWindow.AirnoixCamera.Start();
-                    }
-                }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -969,6 +955,8 @@ namespace CameraViewer
                 {
                     CurrentCameraWindow = (CameraWindow)sender;
                     SetClickON(CurrentCameraWindow);
+                    //处理
+                    OnSelectCameraWindow(e, CurrentCameraWindow);
                 }
             }
             catch (Exception ex)
@@ -1005,5 +993,19 @@ namespace CameraViewer
             cameraWindow.ClickMe = true;
             this.ResumeLayout(false);
         }
+
+        public delegate void SelectCameraWindowEventHandler(object sender, EventArgs e,CameraWindow CurrentCameraWindow);
+        //事件所需的委托           
+        //当颜色改变时触发事件          
+        public event SelectCameraWindowEventHandler SelectCameraWindow;//定义一个ColorChanged事件          
+        protected virtual void OnSelectCameraWindow(EventArgs e, CameraWindow cameraWindow)
+        {
+            //事件触发方法             
+            if (SelectCameraWindow != null)
+            {
+                //判断事件是否为空                  
+                SelectCameraWindow(this, e, cameraWindow);//触发事件              
+            }
+        } 
     }
 }
