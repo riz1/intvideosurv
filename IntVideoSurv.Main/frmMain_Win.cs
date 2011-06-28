@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
@@ -76,10 +77,10 @@ namespace CameraViewer
 #endif
             Splash.Splash.Show();
             this.Visible = false;
-            Splash.Splash.Status = "启动.Net Remoting...";
-            BeginRemotingService();
-            Splash.Splash.Status = "启动流媒体服务...";
-            BeginStreamMediaService();
+            //Splash.Splash.Status = "启动.Net Remoting...";
+            //BeginRemotingService();
+            //Splash.Splash.Status = "启动流媒体服务...";
+            //BeginStreamMediaService();
 
             InitializeComponent();
 
@@ -94,6 +95,16 @@ namespace CameraViewer
             var threadForRecognizer = new Thread(StartServerForRecognizer) { IsBackground = true };
             threadForRecognizer.Start();
 
+            //注册热键
+            RegisterHotKey(this.Handle, 201, (int)MyKeys.Alt, (int)Keys.D1); //注册热键Alt+1       
+            RegisterHotKey(this.Handle, 202, (int)MyKeys.Alt, (int)Keys.D2); //注册热键Alt+1            
+            RegisterHotKey(this.Handle, 203, (int)MyKeys.Alt, (int)Keys.D3); //注册热键Alt+1
+            RegisterHotKey(this.Handle, 204, (int)MyKeys.Alt, (int)Keys.D4); //注册热键Alt+1
+            RegisterHotKey(this.Handle, 205, (int)MyKeys.Alt, (int)Keys.D5); //注册热键Alt+1
+            RegisterHotKey(this.Handle, 206, (int)MyKeys.Alt, (int)Keys.D6); //注册热键Alt+1
+            RegisterHotKey(this.Handle, 207, (int)MyKeys.Alt, (int)Keys.D7); //注册热键Alt+1
+            RegisterHotKey(this.Handle, 208, (int)MyKeys.Alt, (int)Keys.D8); //注册热键Alt+1
+            RegisterHotKey(this.Handle, 209, (int)MyKeys.Alt, (int)Keys.D9); //注册热键Alt+1
 
         }
         private void BeginRemotingService()
@@ -303,6 +314,11 @@ namespace CameraViewer
             this.Close();
             AironixControl.TMCC_PtzClose(ptzHandle);
             AironixControl.TMCC_Done(ptzHandle);
+            for (int i = 201; i <=209; i++)
+            {
+                UnregisterHotKey(this.Handle, i); //注销热键                
+            }
+
 
         }
         private void barbtnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -312,75 +328,13 @@ namespace CameraViewer
         }
         Dictionary<Keys, bool> _listNumKeyStatus = new Dictionary<Keys, bool>();
         private CameraWindow careCameraWindows = null;
-        private void frmMain_Win_KeyDown(object sender, KeyEventArgs e)
+
+        private void ChangeButtonState(Keys key)
         {
-            try
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.Escape:
-                        Exit();
-                        return;
-                    case Keys.D1:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 0);
-                        break;
-                    case Keys.D2:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 1);
-                        break;
-                    case Keys.D3:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 2);
-                        break;
-                    case Keys.D4:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 0);
-                        break;
-                    case Keys.D5:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 1);
-                        break;
-                    case Keys.D6:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 2);
-                        break;
-                    case Keys.D7:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 0);
-                        break;
-                    case Keys.D8:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 1);
-                        break;
-                    case Keys.D9:
-                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 2);
-                        break;
-                    default:
-                        return;
-                }
-                _listNumKeyStatus[e.KeyCode] = !_listNumKeyStatus[e.KeyCode];
-                if (_listNumKeyStatus[e.KeyCode])
-                {
-                    //开始录像
-                    careCameraWindows.AirnoixCamera.StartRecord();
-                }
-                else
-                {
-                    careCameraWindows.AirnoixCamera.StopRecord();
-                    frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera);
-                    fcl.Show();
-                    //结束录像
-                }
-                ChangeButtonState(e);
-
-            }
-            catch (Exception ex)
-            {
-                ChangeButtonState(e);
-                logger.Error(ex.ToString());
-            }
-
-        }
-
-        private void ChangeButtonState(KeyEventArgs e)
-        {
-            switch (e.KeyCode)
+            switch (key)
             {
                 case Keys.D1:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD1.Appearance.ForeColor = Color.Red;
                         barButtonD1.Appearance.Font = new Font("Tahoma",12);
@@ -392,7 +346,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D2:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD2.Appearance.ForeColor = Color.Red;
                         barButtonD2.Appearance.Font = new Font("Tahoma", 12);
@@ -404,7 +358,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D3:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD3.Appearance.ForeColor = Color.Red;
                         barButtonD3.Appearance.Font = new Font("Tahoma", 12);
@@ -416,7 +370,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D4:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD4.Appearance.ForeColor = Color.Red;
                         barButtonD4.Appearance.Font = new Font("Tahoma", 12);
@@ -428,7 +382,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D5:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD5.Appearance.ForeColor = Color.Red;
                         barButtonD5.Appearance.Font = new Font("Tahoma", 12);
@@ -440,7 +394,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D6:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD6.Appearance.ForeColor = Color.Red;
                         barButtonD6.Appearance.Font = new Font("Tahoma", 12);
@@ -452,7 +406,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D7:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD7.Appearance.ForeColor = Color.Red;
                         barButtonD7.Appearance.Font = new Font("Tahoma", 12);
@@ -464,7 +418,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D8:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD8.Appearance.ForeColor = Color.Red;
                         barButtonD8.Appearance.Font = new Font("Tahoma", 12);
@@ -476,7 +430,7 @@ namespace CameraViewer
                     }
                     break;
                 case Keys.D9:
-                    if (_listNumKeyStatus[e.KeyCode])
+                    if (_listNumKeyStatus[key])
                     {
                         barButtonD9.Appearance.ForeColor = Color.Red;
                         barButtonD9.Appearance.Font = new Font("Tahoma", 12);
@@ -2761,7 +2715,7 @@ namespace CameraViewer
             PtzControl(false);
         }
 
-        #endregion
+
 
         private void up_MouseDown(object sender, MouseEventArgs e)
         {
@@ -2870,5 +2824,100 @@ namespace CameraViewer
             ptzControType = PtzControlType.PTZ_FOCUS_NEAR;
             PtzControl(false);
         }
+
+        #endregion
+
+        [DllImport("user32.dll", EntryPoint = "RegisterHotKey")]       
+        public static extern bool RegisterHotKey       
+             (       
+                IntPtr hWnd,        //要注册热键的窗口句柄       
+                int id,             //热键编号       
+                int fsModifiers,    //特殊键如：Ctrl，Alt，Shift，Window       
+                int vk              //一般键如：A B C F1，F2 等       
+             );       
+      
+        [DllImportAttribute("user32.dll", EntryPoint = "UnregisterHotKey")]       
+        public static extern bool UnregisterHotKey       
+             (       
+                 IntPtr hWnd,        //注册热键的窗口句柄       
+                int id              //热键编号上面注册热键的编号       
+             );
+        const int WM_HOTKEY = 0x312;   
+        private enum MyKeys
+        {
+            None = 0,
+            Alt = 1,
+            Ctrl = 2,
+            Shift = 4,
+            Win = 8
+        }
+        protected override void WndProc(ref Message m)
+        {
+            Keys key= Keys.D1;
+            if (m.Msg == WM_HOTKEY)
+            {
+                switch (m.WParam.ToInt32())
+                {
+                    case 201:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 0);
+                        key = Keys.D1;
+                        break;
+                    case 202:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 1);
+                        key = Keys.D2;
+                        break;
+                    case 203:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(0, 2);
+                        key = Keys.D3;
+                        break;
+                    case 204:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 0);
+                        key = Keys.D4;
+                        break;
+                    case 205:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 1);
+                        key = Keys.D5;
+                        break;
+                    case 206:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(1, 2);
+                        key = Keys.D6;
+                        break;
+                    case 207:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 0);
+                        key = Keys.D7;
+                        break;
+                    case 208:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 1);
+                        key = Keys.D8;
+                        break;
+                    case 209:
+                        careCameraWindows = mainMultiplexer.GetCameraWindow(2, 2);
+                        key = Keys.D9;
+                        break;
+                }
+
+                _listNumKeyStatus[key] = !_listNumKeyStatus[key];
+                if (_listNumKeyStatus[key])
+                {
+                    //开始录像
+                    careCameraWindows.AirnoixCamera.StartRecord();
+                    mainMultiplexer_SelectCameraWindow(null, null, careCameraWindows);
+
+                }
+                else
+                {
+                    careCameraWindows.AirnoixCamera.StopRecord();
+                    frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera);
+                    fcl.Show();
+                    //结束录像
+                }
+                ChangeButtonState(key);
+
+            }
+        
+            base.WndProc(ref m);
+        }  
+
+
     }
 }
