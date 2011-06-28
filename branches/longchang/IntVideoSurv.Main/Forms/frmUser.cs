@@ -41,6 +41,11 @@ namespace CameraViewer.Forms
             labelControl4.Visible = false;
             textEditUserName.Enabled = false;
             InitValidationRules();
+            if (userInfo.UserTypeName == "管理员")
+            {
+                lcOldPWD.Visible = teOldPWD.Visible = false;
+            }
+
         }
         #region  数据验证
         
@@ -78,7 +83,15 @@ namespace CameraViewer.Forms
 
         private void buttonOK_Click(object sender, EventArgs e)
         { 
-            string errMessage = ""; 
+            string errMessage = "";
+            if (userInfo.UserTypeName != "管理员")
+            {
+                if (teOldPWD.Text != userInfo.Password)
+                {
+                    XtraMessageBox.Show("原密码不正确!");
+                    return;
+                }
+            }
             if (!dxValidationProvider1.Validate())
             {
                 return;

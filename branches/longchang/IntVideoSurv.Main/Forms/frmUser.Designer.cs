@@ -40,11 +40,14 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.lcOldPWD = new DevExpress.XtraEditors.LabelControl();
+            this.teOldPWD = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditUserName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPasswordConfirm.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditUserType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teOldPWD.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -64,7 +67,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(37, 61);
+            this.labelControl2.Location = new System.Drawing.Point(37, 102);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(36, 14);
             this.labelControl2.TabIndex = 0;
@@ -72,7 +75,7 @@
             // 
             // textEditPassword
             // 
-            this.textEditPassword.Location = new System.Drawing.Point(113, 103);
+            this.textEditPassword.Location = new System.Drawing.Point(113, 144);
             this.textEditPassword.Name = "textEditPassword";
             this.textEditPassword.Properties.PasswordChar = '*';
             this.textEditPassword.Size = new System.Drawing.Size(117, 21);
@@ -80,7 +83,7 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(37, 106);
+            this.labelControl3.Location = new System.Drawing.Point(37, 147);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(60, 14);
             this.labelControl3.TabIndex = 0;
@@ -88,7 +91,7 @@
             // 
             // textEditPasswordConfirm
             // 
-            this.textEditPasswordConfirm.Location = new System.Drawing.Point(113, 57);
+            this.textEditPasswordConfirm.Location = new System.Drawing.Point(113, 98);
             this.textEditPasswordConfirm.Name = "textEditPasswordConfirm";
             this.textEditPasswordConfirm.Properties.PasswordChar = '*';
             this.textEditPasswordConfirm.Size = new System.Drawing.Size(117, 21);
@@ -96,7 +99,7 @@
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(37, 154);
+            this.labelControl4.Location = new System.Drawing.Point(37, 195);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(60, 14);
             this.labelControl4.TabIndex = 0;
@@ -104,7 +107,7 @@
             // 
             // comboBoxEditUserType
             // 
-            this.comboBoxEditUserType.Location = new System.Drawing.Point(113, 146);
+            this.comboBoxEditUserType.Location = new System.Drawing.Point(113, 187);
             this.comboBoxEditUserType.Name = "comboBoxEditUserType";
             this.comboBoxEditUserType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -117,7 +120,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(37, 197);
+            this.buttonOK.Location = new System.Drawing.Point(37, 238);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(87, 27);
             this.buttonOK.TabIndex = 5;
@@ -128,26 +131,44 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(142, 197);
+            this.buttonCancel.Location = new System.Drawing.Point(142, 238);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(87, 27);
             this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "取消";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // lcOldPWD
+            // 
+            this.lcOldPWD.Location = new System.Drawing.Point(37, 61);
+            this.lcOldPWD.Name = "lcOldPWD";
+            this.lcOldPWD.Size = new System.Drawing.Size(48, 14);
+            this.lcOldPWD.TabIndex = 0;
+            this.lcOldPWD.Text = "原密码：";
+            // 
+            // teOldPWD
+            // 
+            this.teOldPWD.Location = new System.Drawing.Point(112, 58);
+            this.teOldPWD.Name = "teOldPWD";
+            this.teOldPWD.Properties.PasswordChar = '*';
+            this.teOldPWD.Size = new System.Drawing.Size(117, 21);
+            this.teOldPWD.TabIndex = 3;
+            // 
             // FrmUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(266, 227);
+            this.ClientSize = new System.Drawing.Size(267, 273);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.comboBoxEditUserType);
+            this.Controls.Add(this.teOldPWD);
             this.Controls.Add(this.textEditPasswordConfirm);
             this.Controls.Add(this.textEditPassword);
             this.Controls.Add(this.textEditUserName);
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.labelControl3);
+            this.Controls.Add(this.lcOldPWD);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.MaximizeBox = false;
@@ -160,6 +181,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEditPasswordConfirm.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditUserType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teOldPWD.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,5 +200,7 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
+        private DevExpress.XtraEditors.LabelControl lcOldPWD;
+        private DevExpress.XtraEditors.TextEdit teOldPWD;
     }
 }

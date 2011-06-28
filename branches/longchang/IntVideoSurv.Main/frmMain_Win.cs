@@ -532,10 +532,14 @@ namespace CameraViewer
             {
                 if (barButtonItem1 != null)
                 {
-                    this.barButtonItem1.ItemClick -= barButtonItem1_ItemClick;
-                    this.barButtonItem1.ItemClick += this.barButtonItem1_ItemClick_UpdateUser;
+                    this.barButtonItemSystemSettingMenu.ItemClick -= barButtonItem5_ItemClick;
+                    this.barButtonItemSystemSettingMenu.ItemClick += this.barButtonItem1_ItemClick_UpdateUser;
                 }
-
+                if (barButtonItemSystemSetting != null)
+                {
+                    this.barButtonItemSystemSetting.ItemClick -= barButtonItem3_ItemClick_1;
+                    this.barButtonItemSystemSetting.ItemClick += this.barButtonItem1_ItemClick_UpdateUser;
+                }
             }
         }
 
