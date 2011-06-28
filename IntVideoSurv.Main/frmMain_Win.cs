@@ -301,6 +301,8 @@ namespace CameraViewer
         {
 
             this.Close();
+            AironixControl.TMCC_PtzClose(ptzHandle);
+            AironixControl.TMCC_Done(ptzHandle);
 
         }
         private void barbtnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -2689,5 +2691,184 @@ namespace CameraViewer
             test.ShowDialog(this);
         }
 
+
+
+        #region Çò»ú¿ØÖÆ
+        private IntPtr ptzHandle = AironixControl.TMCC_Init(0);
+        private uint ptzSpeed = 1;
+        private void mainMultiplexer_SelectCameraWindow(object sender, EventArgs e, CameraWindow CurrentCameraWindow)
+        {
+            if (CurrentCameraWindow.AirnoixCamera == null)
+            {
+                if (dockPanelPtzControl.Visible)
+                {
+                    AironixControl.TMCC_Done(ptzHandle);
+                    dockPanelPtzControl.Visible = false;
+                }
+                return;
+            }
+            if (CurrentCameraWindow.AirnoixCamera.Type == 1)
+            {
+                AironixControl.TMCC_Done(ptzHandle);
+                dockPanelPtzControl.Visible = false;
+            }
+            else if (CurrentCameraWindow.AirnoixCamera.Type == 2)
+            {
+                ptzHandle = AironixControl.TMCC_Init(0);
+                tmConnectInfo_t connectInfo = new tmConnectInfo_t();
+                connectInfo.pIp = CurrentCameraWindow.AirnoixCamera.Ip;
+                connectInfo.iPort = CurrentCameraWindow.AirnoixCamera.Port;
+                connectInfo.dwSize = 236;
+                connectInfo.iUserLevel = 5;
+                connectInfo.szUser = CurrentCameraWindow.AirnoixCamera.UserName;
+                connectInfo.szPass = CurrentCameraWindow.AirnoixCamera.Password;
+                connectInfo.pUserContext = "";
+                int iret = AironixControl.TMCC_Connect(ptzHandle, ref connectInfo, true);
+                if (iret!=0) return;
+                iret = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
+                if (iret != 0) return;
+                dockPanelPtzControl.Tag = CurrentCameraWindow.AirnoixCamera;
+                dockPanelPtzControl.Visible = true;
+
+            }
+
+
+        }
+
+        private PtzControlType ptzControType;
+
+        private void PtzControl(bool start)
+        {
+            uint.TryParse(textEditPtzSpeed.Text, out ptzSpeed);
+            AironixControl.TMCC_PtzControl(ptzHandle, (uint)ptzControType, start? (uint)1:(uint)0, ptzSpeed);
+        }
+
+        private void sbZoomAdd_Click(object sender, EventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_ZOOM_OUT;
+            PtzControl(true);
+        }
+
+        private void right_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_RIGHT;
+            PtzControl(true);
+        }
+
+        private void right_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_RIGHT;
+            PtzControl(false);
+        }
+
+        #endregion
+
+        private void up_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_UP;
+            PtzControl(true);
+        }
+
+        private void up_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_UP;
+            PtzControl(false);
+        }
+
+        private void left_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_LEFT;
+            PtzControl(false);
+        }
+
+        private void left_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_LEFT;
+            PtzControl(true);
+        }
+
+        private void Down_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_DOWN;
+            PtzControl(true);
+        }
+
+        private void Down_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_DOWN;
+            PtzControl(false);
+        }
+
+        private void sbZoomAdd_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_ZOOM_IN;
+            PtzControl(true);
+        }
+
+        private void sbZoomAdd_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_ZOOM_IN;
+            PtzControl(false);
+        }
+
+        private void sbZoomSub_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_ZOOM_OUT;
+            PtzControl(true);
+        }
+
+        private void sbZoomSub_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_ZOOM_OUT;
+            PtzControl(false);
+        }
+
+        private void sbIRISAdd_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_IRIS_ENLARGE;
+            PtzControl(false);
+        }
+
+        private void sbIRISAdd_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_IRIS_ENLARGE;
+            PtzControl(true);
+        }
+
+        private void sbIRISSub_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_IRIS_SHRINK;
+            PtzControl(true);
+        }
+
+        private void sbIRISSub_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_IRIS_SHRINK;
+            PtzControl(false);
+        }
+
+        private void sbFOCUSAdd_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_FOCUS_FAR;
+            PtzControl(false);
+        }
+
+        private void sbFOCUSAdd_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_FOCUS_FAR;
+            PtzControl(true);
+        }
+
+        private void sbFOCUSSub_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_FOCUS_NEAR;
+            PtzControl(true);
+        }
+
+        private void sbFOCUSSub_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_FOCUS_NEAR;
+            PtzControl(false);
+        }
     }
 }
