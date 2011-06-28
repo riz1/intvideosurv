@@ -35,7 +35,7 @@ namespace CameraViewer
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barMenu = new DevExpress.XtraBars.Bar();
             this.barSubItemMenuSystem = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSystemSettingMenu = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItemMenuView = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItemResultView = new DevExpress.XtraBars.BarButtonItem();
@@ -43,7 +43,7 @@ namespace CameraViewer
             this.barSubItemMenuQuery = new DevExpress.XtraBars.BarSubItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSystemSetting = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
@@ -390,8 +390,8 @@ namespace CameraViewer
             this.barSubItem3,
             this.barSubItemMenuQuery,
             this.barSubItem1,
-            this.barButtonItem3,
-            this.barButtonItem5,
+            this.barButtonItemSystemSetting,
+            this.barButtonItemSystemSettingMenu,
             this.barButtonItem7,
             this.barButtonItemResultView,
             this.barButtonItemAlarmView,
@@ -458,16 +458,16 @@ namespace CameraViewer
             this.barSubItemMenuSystem.Caption = "系统(&S)";
             this.barSubItemMenuSystem.Id = 9;
             this.barSubItemMenuSystem.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSystemSettingMenu),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7)});
             this.barSubItemMenuSystem.Name = "barSubItemMenuSystem";
             // 
-            // barButtonItem5
+            // barButtonItemSystemSettingMenu
             // 
-            this.barButtonItem5.Caption = "系统设置";
-            this.barButtonItem5.Id = 15;
-            this.barButtonItem5.Name = "barButtonItem5";
-            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
+            this.barButtonItemSystemSettingMenu.Caption = "系统设置";
+            this.barButtonItemSystemSettingMenu.Id = 15;
+            this.barButtonItemSystemSettingMenu.Name = "barButtonItemSystemSettingMenu";
+            this.barButtonItemSystemSettingMenu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
             // 
             // barButtonItem7
             // 
@@ -518,7 +518,7 @@ namespace CameraViewer
             this.bar3.DockRow = 1;
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSystemSetting),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem9),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem10),
@@ -547,12 +547,12 @@ namespace CameraViewer
             this.bar3.Offset = 4;
             this.bar3.Text = "Custom 3";
             // 
-            // barButtonItem3
+            // barButtonItemSystemSetting
             // 
-            this.barButtonItem3.Caption = "系统设置";
-            this.barButtonItem3.Id = 14;
-            this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick_1);
+            this.barButtonItemSystemSetting.Caption = "系统设置";
+            this.barButtonItemSystemSetting.Id = 14;
+            this.barButtonItemSystemSetting.Name = "barButtonItemSystemSetting";
+            this.barButtonItemSystemSetting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick_1);
             // 
             // barButtonItem8
             // 
@@ -2998,8 +2998,8 @@ namespace CameraViewer
         private DevExpress.XtraBars.BarSubItem barSubItem3;
         private DevExpress.XtraBars.BarSubItem barSubItemMenuQuery;
         private DevExpress.XtraBars.BarSubItem barSubItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemSystemSetting;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemSystemSettingMenu;
         private DevExpress.XtraBars.BarButtonItem barButtonItem7;
         private DevExpress.XtraBars.BarButtonItem barButtonItemResultView;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAlarmView;

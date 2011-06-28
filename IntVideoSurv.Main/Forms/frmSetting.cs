@@ -52,7 +52,22 @@ namespace CameraViewer.Forms
             BuildVirtualGroupTree();
             showVirtualGroupInfo();
 
+            //针对隆昌，隐藏不必要的信息
+
+            FilterInterFaceForLongChang();
         }
+
+        private void FilterInterFaceForLongChang()
+        {
+            nbDevice.Visible = false;
+            nbMap.Visible = false;
+            navBarItem2.Visible = false;
+            navBarItem3.Visible = false;
+            nbLog.Visible = false;
+            _displaytype = DisplayTypes.UserManagement;
+            DisplayRightPanel();
+        }
+
         /// <summary>
         /// 显示识别器信息
         /// </summary>
