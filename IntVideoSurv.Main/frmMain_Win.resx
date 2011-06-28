@@ -223,7 +223,7 @@
         vOE37zPWipGf/9k=
 </value>
   </data>
-  <data name="button1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="up.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAn9JREFUaEPtWD1I
@@ -240,7 +240,7 @@
         fh7vSAjeQEc6ing/xifgE/AJ+AR8Aj4Bn4BBAnfWQdE1gcv4owAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="up.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwg
         JC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIy
@@ -722,39 +722,4 @@
   <metadata name="timerTest.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>173, 56</value>
   </metadata>
-  <data name="up.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAn9JREFUaEPtWD1I
-        HEEYPX+iRCGcMQaFFAohIaCkUCxCCn9AbLQQRGwMCCm0CKQJ2Ag2NolWYmMjpAjYpLSRFMFGsDEBCxEU
-        xSgoqIhRg1HfgxtYDvdmZ/abuy1m4XHFzve+997uzc+mUv7yCfgEXCZQBvJilw1ccVN0OzANfACeuGrk
-        ircVxGvALXAGTADlrppJ89aC8HtGPA0Qh0CfdCMXfA9AOg5cZRmgiVXgpYumkpw9INu/RzwN3ADzQFqy
-        oSTXK5CthIhXr9IF7vNPXSLZWIKLqc5lUlZiw363MK5NoqkUB6fMUeBUk37Q0BLGPpMSEJfnLQg2DcTT
-        yDXwBXgYt3nceqa4aChePYlj1A3GFRCnngvTZCZN3Xsfdv8X6pviiLCtLUJhP3BkmX7Q0DdwVNsKsa17
-        jUIuTLbJB+suwfMJyNvUWoVmXwEuTBIGyLEHdNmmaVLHlD4CfwXFqxB+grPBRIzN2E4UbTsQr6bWGXBX
-        2AiLUlOPQT8ciVdPgVvvd1HEmI6pRAEPJ5Lvfdj/Zx19WkwF5hrPKXMIkJgyo/7peZ54KmWiGUS/Hb86
-        2cb+oR/PFTxfxLpqUL2QZ/HKzAH68nxhfZWicgzgQhP10UuP4/niua2DbhRygZEWZcL3H/15znhkauIF
-        CpYLLF4ZPYeOESDy9yW6nQXo3iQtl2N53uC5Q3txynwPnCRIvAqG5446nQPOOrqDucukc3Hzg8CwzgC3
-        yWGfRQolPNiXu4GcVyPu/kng66NMfNYZ4F7f9YbN9klyozegM8D7vQD35jvAbkKwAR1TwOMoBrj/4Fc2
-        fh7vSAjeQEc6ing/xifgE/AJ+AR8Aj4Bn4BBAnfWQdE1gcv4owAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="up.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwg
-        JC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIy
-        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAfACADASIAAhEBAxEB/8QA
-        HwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIh
-        MUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVW
-        V1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXG
-        x8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQF
-        BgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAV
-        YnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOE
-        hYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq
-        8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD0L7Qf+ev/AI9VTUtYh0rTp765mIihXJwck9gB+Nc55/1ri/Hm
-        qlkg05GPP72T+QH8z+VWSewJdiRFdJwysAQQ3UUv2g/89f1rzHwdqxu9FWB2Jltj5Z/3f4f8PwrofPPv
-        QIwP7T+lVPJ0r7W95La/a7l+S1ycovsqDj88/hXP+fd/88T/AN9ijz7v/nif++xQB0Numm2dw9zZQvbS
-        OMPEjFom98HkH8SPYVa/tP6Vynn3f/PE/wDfYo8+77wkf8DFMD//2Q==
-</value>
-  </data>
 </root>
