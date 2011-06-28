@@ -41,7 +41,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetCamInfoByDeviceType(Database db, int type)
         {
-            string cmdText = string.Format("select * from TOG_DEVICE where sblx = {0}", type);
+            string cmdText = string.Format("select distinct * from TOG_DEVICE where sblx = {0}", type);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -56,7 +56,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetCamInfoByDeviceUserId(Database db,int userId)
         {
-            string cmdText = string.Format("select TOG_DEVICE.* "+
+            string cmdText = string.Format("select distinct TOG_DEVICE.* " +
                 " from TOG_DEVICE,usergroup,cameragroup "+
                 " where usergroup.userid={0} and usergroup.virtualgroupid = cameragroup.virtualgroupid "+
                 " and cameragroup.cameraid=TOG_DEVICE.sbbh and TOG_DEVICE.sblx = 1 or TOG_DEVICE.sblx = 2", userId);
