@@ -116,6 +116,7 @@
     <Compile Include="LongChang_VehTypeDataAccess.cs" />
     <Compile Include="LongChang_TollGateDataAccess.cs" />
     <Compile Include="LongChang_VehMonDataAccess.cs" />
+    <Compile Include="LongChang_WzyyDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntVideoSurv.Entity\IntVideoSurv.Entity.csproj">
