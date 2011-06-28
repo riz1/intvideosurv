@@ -394,6 +394,7 @@
     <Compile Include="Player\AirnoixCamera.cs" />
     <Compile Include="Player\AirnoixClient.cs" />
     <Compile Include="Player\AirnoixPlayer.cs" />
+    <Compile Include="Player\AironixControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -709,6 +710,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Down1.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

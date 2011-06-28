@@ -83,7 +83,7 @@ namespace IntVideoSurv.Business
                 return new Dictionary<int, LongChang_CameraInfo>(); ;
             }
         }
-        public Dictionary<int, LongChang_CameraInfo> GetCamInfoByDeviceUserIdAndType(ref string errMessage, int userid, int type)
+        public Dictionary<int, LongChang_CameraInfo> GetCamInfoByDeviceUserId(ref string errMessage, int userid)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
@@ -91,7 +91,7 @@ namespace IntVideoSurv.Business
             try
             {
 
-                DataSet ds = LongChang_CameraDataAccess.GetCamInfoByDeviceUserIdAndType(db, userid, type);
+                DataSet ds = LongChang_CameraDataAccess.GetCamInfoByDeviceUserId(db, userid);
 
                 LongChang_CameraInfo oCamera;
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)

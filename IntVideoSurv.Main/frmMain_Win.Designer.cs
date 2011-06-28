@@ -232,6 +232,12 @@ namespace CameraViewer
             this.checkedComboBoxEditFaceCamera = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.radioGroupFace = new DevExpress.XtraEditors.RadioGroup();
+            this.dockPanelPtzControl = new DevExpress.XtraBars.Docking.DockPanel();
+            this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.Down = new System.Windows.Forms.Button();
+            this.right = new System.Windows.Forms.Button();
+            this.left = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
@@ -253,6 +259,7 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
+            this.up = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -342,6 +349,8 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeFace.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditFaceCamera.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroupFace.Properties)).BeginInit();
+            this.dockPanelPtzControl.SuspendLayout();
+            this.controlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             this.cmIcon.SuspendLayout();
             this.SuspendLayout();
@@ -825,7 +834,8 @@ namespace CameraViewer
             this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockPanelResult,
             this.dockPanel1,
-            this.dockPanelAlarm});
+            this.dockPanelAlarm,
+            this.dockPanelPtzControl});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
             "DevExpress.XtraBars.StandaloneBarDockControl",
@@ -2463,6 +2473,78 @@ namespace CameraViewer
             this.radioGroupFace.TabIndex = 0;
             this.radioGroupFace.SelectedIndexChanged += new System.EventHandler(this.radioGroupFace_SelectedIndexChanged);
             // 
+            // dockPanelPtzControl
+            // 
+            this.dockPanelPtzControl.Controls.Add(this.controlContainer1);
+            this.dockPanelPtzControl.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
+            this.dockPanelPtzControl.FloatLocation = new System.Drawing.Point(1056, 470);
+            this.dockPanelPtzControl.FloatSize = new System.Drawing.Size(213, 300);
+            this.dockPanelPtzControl.ID = new System.Guid("81e2c162-0411-4e09-a61a-918052f10543");
+            this.dockPanelPtzControl.Location = new System.Drawing.Point(0, 0);
+            this.dockPanelPtzControl.Name = "dockPanelPtzControl";
+            this.dockPanelPtzControl.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanelPtzControl.Size = new System.Drawing.Size(213, 300);
+            this.dockPanelPtzControl.Text = "球机控制";
+            // 
+            // controlContainer1
+            // 
+            this.controlContainer1.Controls.Add(this.Down);
+            this.controlContainer1.Controls.Add(this.right);
+            this.controlContainer1.Controls.Add(this.left);
+            this.controlContainer1.Controls.Add(this.button1);
+            this.controlContainer1.Location = new System.Drawing.Point(3, 22);
+            this.controlContainer1.Name = "controlContainer1";
+            this.controlContainer1.Size = new System.Drawing.Size(207, 275);
+            this.controlContainer1.TabIndex = 0;
+            // 
+            // Down
+            // 
+            this.Down.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Down.BackgroundImage")));
+            this.Down.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Down.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Down.Image = global::CameraViewer.Properties.Resources.Down;
+            this.Down.Location = new System.Drawing.Point(68, 91);
+            this.Down.Name = "Down";
+            this.Down.Size = new System.Drawing.Size(35, 33);
+            this.Down.TabIndex = 7;
+            this.Down.UseVisualStyleBackColor = true;
+            // 
+            // right
+            // 
+            this.right.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("right.BackgroundImage")));
+            this.right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.right.Image = ((System.Drawing.Image)(resources.GetObject("right.Image")));
+            this.right.Location = new System.Drawing.Point(107, 55);
+            this.right.Name = "right";
+            this.right.Size = new System.Drawing.Size(38, 34);
+            this.right.TabIndex = 6;
+            this.right.UseVisualStyleBackColor = true;
+            // 
+            // left
+            // 
+            this.left.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("left.BackgroundImage")));
+            this.left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.left.Image = ((System.Drawing.Image)(resources.GetObject("left.Image")));
+            this.left.Location = new System.Drawing.Point(26, 58);
+            this.left.Name = "left";
+            this.left.Size = new System.Drawing.Size(36, 31);
+            this.left.TabIndex = 4;
+            this.left.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(68, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(35, 30);
+            this.button1.TabIndex = 2;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // barButtonItem1
             // 
             this.barButtonItem1.Caption = "系统配置(&S)";
@@ -2609,6 +2691,18 @@ namespace CameraViewer
             // 
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
+            // up
+            // 
+            this.up.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("up.BackgroundImage")));
+            this.up.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.up.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.up.Image = ((System.Drawing.Image)(resources.GetObject("up.Image")));
+            this.up.Location = new System.Drawing.Point(45, 1);
+            this.up.Name = "up";
+            this.up.Size = new System.Drawing.Size(35, 30);
+            this.up.TabIndex = 1;
+            this.up.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2725,6 +2819,8 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeFace.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditFaceCamera.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroupFace.Properties)).EndInit();
+            this.dockPanelPtzControl.ResumeLayout(false);
+            this.controlContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             this.cmIcon.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -2956,6 +3052,13 @@ namespace CameraViewer
         private DevExpress.XtraBars.BarButtonItem barButtonItem20;
         private DevExpress.XtraBars.BarButtonItem barButtonItem21;
         private DevExpress.XtraBars.BarButtonItem barButtonItemPlayTwoFiles;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanelPtzControl;
+        private DevExpress.XtraBars.Docking.ControlContainer controlContainer1;
+        public Button up;
+        public Button button1;
+        public Button left;
+        public Button right;
+        public Button Down;
         
     }
 }
