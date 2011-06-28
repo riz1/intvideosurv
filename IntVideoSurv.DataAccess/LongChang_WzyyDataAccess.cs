@@ -26,7 +26,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static int Insert(Database db, LongChang_WzyyInfo oWzyy)
         {
-
+           
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
             sbField.Append("INSERT INTO  BTOC_WZYY(");
@@ -34,14 +34,14 @@ namespace IntVideoSurv.DataAccess
             //sbField.Append("id");
             //sbValue.AppendFormat("'{0}'", oDecoderInfo.id);
             sbField.Append("wzyybh");
-            sbValue.AppendFormat("'{0}'", Guid.NewGuid().ToString("N"));
+            sbValue.AppendFormat("'{0}'", oWzyy.illeagalReasonNum);
             sbField.Append(",wzyy");
             sbValue.AppendFormat(",'{0}'", oWzyy.illeagalReason);
             sbField.Append(",px");
             sbValue.AppendFormat(",{0}", oWzyy.sorting);
             sbField.Append(",ztbj");
             sbValue.AppendFormat(",'{0}'", oWzyy.stateTag);
-            sbField.Append(",wzyy)");
+            sbField.Append(",bz)");
             sbValue.AppendFormat(",'{0}')", oWzyy.remarks);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
