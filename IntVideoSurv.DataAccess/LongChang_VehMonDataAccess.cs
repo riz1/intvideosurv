@@ -24,7 +24,7 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        public static int Insert(Database db, LongChang_VehMonInfo oVehMon)
+        public static string Insert(Database db, LongChang_VehMonInfo oVehMon)
         {
             
             StringBuilder sbField = new StringBuilder();
@@ -85,12 +85,17 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS'))", oVehMon.redLightTime);///
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
-
+            string strsql;
 
             try
             {
                 cmdText = cmdText.Replace("\r\n", "");
-                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+                db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+                strsql = "select MVID   from   TOG_VEHMON   where  MVID=(select   max(MVID)   from   TOG_VEHMON)";
+
+                string id = db.ExecuteScalar(CommandType.Text, strsql).ToString();
+                return id;
 
             }
             catch (Exception ex)

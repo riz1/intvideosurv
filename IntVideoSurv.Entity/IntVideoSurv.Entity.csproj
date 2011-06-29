@@ -110,6 +110,7 @@
     <Compile Include="LongChang_TollGateInfo.cs" />
     <Compile Include="LongChang_VehMonInfo.cs" />
     <Compile Include="LongChang_WzyyInfo.cs" />
+    <Compile Include="LongChang_UserVehMonInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
