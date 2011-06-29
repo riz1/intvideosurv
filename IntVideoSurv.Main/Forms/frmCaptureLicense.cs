@@ -556,6 +556,8 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.imageName3 = captureFileName + vehmon.plateNumber + "_3.jpg";
             vehmon.imageName4 = "";
             vehmon.vedioName = "";
+            vehmon.vedioName1 = "";
+            vehmon.vedioName2 = "";
             vehmon.vehicleColor = "";
             vehmon.vehicleType = 0;
             vehmon.vehicleTypeName = "";

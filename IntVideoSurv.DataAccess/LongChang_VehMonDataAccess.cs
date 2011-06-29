@@ -59,6 +59,10 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat(",'{0}'", oVehMon.imageName4);
             sbField.Append(",spmc");
             sbValue.AppendFormat(",'{0}'", oVehMon.vedioName);
+            sbField.Append(",spmc1");
+            sbValue.AppendFormat(",'{0}'", oVehMon.vedioName1);
+            sbField.Append(",spmc2");
+            sbValue.AppendFormat(",'{0}'", oVehMon.vedioName2);
             sbField.Append(",csys");
             sbValue.AppendFormat(",'{0}'", oVehMon.vehicleColor);
             sbField.Append(",cllx");
