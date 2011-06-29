@@ -531,7 +531,6 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
             LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();
             LongChang_UserVehMonInfo uservehmon = new LongChang_UserVehMonInfo();
-            UserInfo user = new UserInfo();
             string captureFileName = Properties.Settings.Default.CapturePictureFilePath
                          + @"\"+_airnoixCamera.BeginCaptureTime.ToString("yyyy-MM-dd")
                          + @"\" + _airnoixCamera.BeginCaptureTime.ToString("HH-mm") + @"\";
@@ -581,9 +580,8 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             i = LongChang_VehMonBusiness.Instance.Insert(ref errMessage, vehmon);
             
             //写入uservehmon信息
-            user = LongChang_UserVehMonBusiness.Instance.GetUserInfoByCameraId(ref errMessage, _airnoixCamera.Id);
             uservehmon.VehMonId = i;
-            uservehmon.UserId = user.UserId;
+            uservehmon.UserId = MainForm.CurrentUser.UserId;
             uservehmon.TheTime = DateTime.Now;
             LongChang_UserVehMonBusiness.Instance.Insert(ref errMessage, uservehmon);
             //将三张图片写入到磁盘中
