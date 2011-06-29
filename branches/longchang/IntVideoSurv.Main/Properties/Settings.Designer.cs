@@ -139,5 +139,17 @@ namespace CameraViewer.Properties {
                 this["LastUser"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("x:\\;y:\\;z:\\")]
+        public string RecordPath {
+            get {
+                return ((string)(this["RecordPath"]));
+            }
+            set {
+                this["RecordPath"] = value;
+            }
+        }
     }
 }

@@ -30,6 +30,7 @@ using System.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
 using CameraViewer.Player;
 using DevExpress.XtraBars;
+using CameraViewer.Tools;
 
 
 namespace CameraViewer
@@ -643,7 +644,7 @@ namespace CameraViewer
             barButtonItem17.Visibility = BarItemVisibility.Never;
             barButtonItem18.Visibility = BarItemVisibility.Never;
             barButtonItem19.Visibility = BarItemVisibility.Never;
-            barButtonItem20.Visibility = BarItemVisibility.Never;
+            barButtonItem20.Visibility = BarItemVisibility.Always;
             barButtonItem21.Visibility = BarItemVisibility.Never;
             barButtonItemPlayTwoFiles.Visibility = BarItemVisibility.Never;
             barButtonItemGetPics.Visibility = BarItemVisibility.Never;
@@ -2656,7 +2657,7 @@ namespace CameraViewer
 
         private void barButtonItem20_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Image xx = airnoixCamera.CaptureImage();
+            RelatedFile relatedFile = new RelatedFile("192.168.1.6",1,DateTime.Now,15);
         }
 
         private void barButtonItem21_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
