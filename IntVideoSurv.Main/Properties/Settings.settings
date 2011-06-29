@@ -35,5 +35,8 @@
     <Setting Name="RecordPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">x:\;y:\;z:\</Value>
     </Setting>
+    <Setting Name="RecordTempVideoPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d:\RecordTempVideoPath</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

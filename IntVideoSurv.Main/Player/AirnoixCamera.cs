@@ -157,8 +157,8 @@ namespace CameraViewer.Player
                         _header = new byte[len];
                         Array.Copy(_buf, 0, _header, 0, len);
                         var now = DateTime.Now;
-                        var file = now.ToString("HH-mm-ss") + ".mkv";
-                        var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file);
+                        var file = Ip + now.ToString("HH-mm-ss") + ".mkv";
+                        var path = Path.Combine(Properties.Settings.Default.RecordTempVideoPath,file);
                         VideoPath = path;
                         _writer = new BinaryWriter(File.OpenWrite(path));
                         _writer.Write(_header);
