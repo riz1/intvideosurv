@@ -173,29 +173,56 @@ namespace CameraViewer.Forms
 
         private void treeListPicturesBefore_MouseClick(object sender, MouseEventArgs e)
         {
-            if (treeListPicturesBefore.FocusedNode.GetValue(0)==null)
+            try
             {
-                return;
+                if (treeListPicturesBefore.FocusedNode.GetValue(0) == null)
+                {
+                    return;
+                }
+                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
             }
-            pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
+            catch (Exception)
+            {
+                
+                ;
+            }
+
         }
 
         private void treeListPicturesCurrent_MouseClick(object sender, MouseEventArgs e)
         {
-            if (treeListPicturesCurrent.FocusedNode.GetValue(0) == null)
+            try
             {
-                return;
+                if (treeListPicturesCurrent.FocusedNode.GetValue(0) == null)
+                {
+                    return;
+                }
+                pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
             }
-            pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
+            catch (Exception)
+            {
+                
+                ;
+            }
+
         }
 
         private void treeListPicturesAfter_MouseClick(object sender, MouseEventArgs e)
         {
-            if (treeListPicturesAfter.FocusedNode.GetValue(0) == null)
+            try
             {
-                return;
+                if (treeListPicturesAfter.FocusedNode.GetValue(0) == null)
+                {
+                    return;
+                }
+                pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
             }
-            pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
+            catch (Exception)
+            {
+                
+                ;
+            }
+
         }
 
         private void pictureEditSelectedPicture_DoubleClick(object sender, EventArgs e)
@@ -442,11 +469,27 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             {
                 cbeInvalidType.EditValue = cbeInvalidType.Properties.Items[0];
             }
-
+            if (_airnoixCamera==null)
+            {
+                return;
+            }
             comboBoxEditRoadName.Properties.Items.Clear();
             foreach (var v in _listLongChang_TollGateInfo)
             {
-                comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);
+                bool isexisted = false;
+                foreach (var VARIABLE in comboBoxEditRoadName.Properties.Items)
+                {
+                    if (VARIABLE.ToString()==v.Value.roadName)
+                    {
+                        isexisted = true;
+                        break;
+                    }
+                }
+                if (!isexisted)
+                {
+                    comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);  
+                }
+
             }
             if (comboBoxEditRoadName.Properties.Items.Count > 0)
             {
@@ -460,11 +503,13 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             }
             if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
             {
-                MessageBox.Show("没有对应的卡口信息");
-                return;
+                comboBoxEditRoadName.Text = "未知";
             }
-            comboBoxEditRoadName.Text = tollgate.roadName;
-            comboBoxEditRoadName.Enabled = false;
+            else
+            {
+                comboBoxEditRoadName.Text = tollgate.roadName;                
+            }
+
 
             if (_airnoixCamera == null) return;
             teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == null
