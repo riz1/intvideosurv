@@ -46,21 +46,21 @@ namespace IntVideoSurv.Entity
         public LongChang_TollGateInfo(DataRow dataRow)
         {
             tollGateID = dataRow["tgid"] is DBNull ? "" : Convert.ToString(dataRow["tgid"]);
-            tollParentNum = dataRow["kkfbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["kkfbh"]);
-            tollNum = dataRow["kkbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["kkbh"]);
+            tollParentNum = dataRow["kkfbh"] is DBNull ? "" : Convert.ToString(dataRow["kkfbh"]);
+            tollNum = dataRow["kkbh"] is DBNull ? "" : Convert.ToString(dataRow["kkbh"]);
             tollName = dataRow["kkmc"] is DBNull ? "" : Convert.ToString(dataRow["kkmc"]);
             tollShort = dataRow["kkjc"] is DBNull ? "" : Convert.ToString(dataRow["kkjc"]);
             tollPosition = dataRow["kkwz"] is DBNull ? "" : Convert.ToString(dataRow["kkwz"]);
-            departmentNum = dataRow["dlbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dlbh"]);//
+            departmentNum = dataRow["dwbh"] is DBNull ? "" : Convert.ToString(dataRow["dwbh"]);//
             administrationDivsion = dataRow["xzqh"] is DBNull ? "" : Convert.ToString(dataRow["xzqh"]);
-            tollType = dataRow["kklx"] is DBNull ? -1 : Convert.ToInt32(dataRow["kklx"]);
+            tollType = dataRow["kklx"] is DBNull ? "" : Convert.ToString(dataRow["kklx"]);
             cameraNum = dataRow["sxjbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["sxjbh"]);
-            roadNum = dataRow["dlbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dlbh"]);//
+            roadNum = dataRow["dlbh"] is DBNull ? "" : Convert.ToString(dataRow["dlbh"]);//
             roadName = dataRow["dlmc"] is DBNull ? "" : Convert.ToString(dataRow["dlmc"]);
-            mapNum = dataRow["dtbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dtbh"]);//
+            mapNum = dataRow["dtbh"] is DBNull ? "" : Convert.ToString(dataRow["dtbh"]);//
             mapX = dataRow["dtxzb"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtxzb"]);//
             mapY = dataRow["dtyzb"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtyzb"]);//
-            precision = dataRow["dtjd"] is DBNull ? -1 : Convert.ToInt32(dataRow["dtjd"]);
+            precision = dataRow["dtjd"] is DBNull ? "" : Convert.ToString(dataRow["dtjd"]);
             mapLatitude = dataRow["dtwd"] is DBNull ? -1 : Convert.ToSingle(dataRow["dtwd"]);
             
         }
@@ -69,9 +69,9 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public string tollGateID { get; set; }
         [ColumnMapping()]
-        public int tollParentNum { get; set; }
+        public string tollParentNum { get; set; }
         [ColumnMapping()]
-        public int tollNum { get; set; }
+        public string tollNum { get; set; }
         [ColumnMapping()]
         public string tollName { get; set; }
         [ColumnMapping()]
@@ -79,25 +79,25 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public string tollPosition { get; set; }
         [ColumnMapping()]
-        public int departmentNum { get; set; }
+        public string departmentNum { get; set; }
         [ColumnMapping()]
         public string administrationDivsion { get; set; }
         [ColumnMapping()]
-        public int tollType { get; set; }
+        public string tollType { get; set; }
         [ColumnMapping()]
         public int cameraNum { get; set; }
         [ColumnMapping()]
-        public int roadNum { get; set; }
+        public string roadNum { get; set; }
         [ColumnMapping()]
         public string roadName { get; set; }
         [ColumnMapping()]
-        public int mapNum { get; set; }
+        public string mapNum { get; set; }
         [ColumnMapping()]
         public float mapX { get; set; }
         [ColumnMapping()]
         public float mapY { get; set; }
         [ColumnMapping()]
-        public int precision { get; set; }
+        public string precision { get; set; }
         [ColumnMapping()]
         public float mapLatitude { get; set; }
         

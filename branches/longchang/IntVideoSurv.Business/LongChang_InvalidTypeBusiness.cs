@@ -55,6 +55,29 @@ namespace IntVideoSurv.Business
             }
         }
 
+        public LongChang_InvalidTypeInfo GetInvalidTypeInfoByWzyy(ref string errMessage, string wzyy)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = LongChang_InvalidTypeDataAccess.GetInvalidTypeByWzyy(db, wzyy);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    return null;
+                }
+                LongChang_InvalidTypeInfo decoderInfo = new LongChang_InvalidTypeInfo(ds.Tables[0].Rows[0]);
+                return decoderInfo;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+        }
+
 
     }
 }

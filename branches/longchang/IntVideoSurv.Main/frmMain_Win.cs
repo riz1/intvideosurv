@@ -638,7 +638,7 @@ namespace CameraViewer
             barButtonItem12.Visibility = BarItemVisibility.Never;
             barButtonItem13.Visibility = BarItemVisibility.Never;
             barButtonItem14.Visibility = BarItemVisibility.Never;
-            barButtonItem15.Visibility = BarItemVisibility.Never;
+            barButtonItem15.Visibility = BarItemVisibility.Always;
             barButtonItem16.Visibility = BarItemVisibility.Never;
             barButtonItem17.Visibility = BarItemVisibility.Never;
             barButtonItem18.Visibility = BarItemVisibility.Never;

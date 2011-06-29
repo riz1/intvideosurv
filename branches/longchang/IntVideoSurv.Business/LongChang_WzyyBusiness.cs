@@ -26,7 +26,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public Dictionary<string, LongChang_WzyyInfo> GetAllVehTypeInfo(ref string errMessage)
+        public Dictionary<string, LongChang_WzyyInfo> GetAllWzyyInfo(ref string errMessage)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";

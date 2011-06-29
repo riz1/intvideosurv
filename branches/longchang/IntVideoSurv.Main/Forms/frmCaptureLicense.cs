@@ -400,6 +400,7 @@ LongChang_CaptureDepartmentBusiness.Instance.GetAllCaptureDepartmentInfo(ref sta
         private static Dictionary<string, LongChang_InvalidTypeInfo> _listLongChang_InvalidTypeInfo =
 LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessage);
 
+
         private void LoadBaseInfo()
         {
             cbeVehType.Properties.Items.Clear();
@@ -442,6 +443,30 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 cbeInvalidType.EditValue = cbeInvalidType.Properties.Items[0];
             }
 
+            comboBoxEditRoadName.Properties.Items.Clear();
+            foreach (var v in _listLongChang_TollGateInfo)
+            {
+                comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);
+            }
+            if (comboBoxEditRoadName.Properties.Items.Count > 0)
+            {
+                comboBoxEditRoadName.EditValue = comboBoxEditRoadName.Properties.Items[0];
+            }
+            LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
+            if (_airnoixCamera == null)
+            {
+                MessageBox.Show("此摄像头不存在");
+                return;
+            }
+            if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
+            {
+                MessageBox.Show("没有对应的卡口信息");
+                return;
+            }
+            comboBoxEditRoadName.Text = tollgate.roadName;
+            comboBoxEditRoadName.Enabled = false;
+
+            if (_airnoixCamera == null) return;
             teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == null
                                  ? DateTime.Now
                                  : _airnoixCamera.BeginCaptureTime;
@@ -453,6 +478,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
         {
             LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
             LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
+            LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();
             string captureFileName = Properties.Settings.Default.CapturePictureFilePath
                          + @"\"+_airnoixCamera.BeginCaptureTime.ToString("yyyy-MM-dd")
                          + @"\" + _airnoixCamera.BeginCaptureTime.ToString("HH-mm") + @"\";
@@ -465,7 +491,9 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
             vehmon.plateNumberTypeName = cbeVehType.Text;
             vehmon.plateNumber = textEdit1.Text;
-            vehmon.illegalReason = "dddd";//cbeInvalidType.Text;
+            vehmon.illegalReason = cbeInvalidType.Text;
+            reason = LongChang_InvalidTypeBusiness.Instance.GetInvalidTypeInfoByWzyy(ref errMessage, vehmon.illegalReason);
+            MessageBox.Show(reason.InvalidId.ToString());
             vehmon.adminDivisionName = cbeCaptureDepartment.Text;
             vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
             vehmon.vehInfoNum = 0;
@@ -496,7 +524,6 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 return;
             }
 
-            vehmon.roadNumber = tollgate.roadNum;
             vehmon.roadName = tollgate.roadName;
             vehmon.redLightTime = Convert.ToDateTime(teCaptureTime.Text);
 
@@ -527,5 +554,6 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 logger.Error(ex.ToString());
             }
         }
+
     }
 }
