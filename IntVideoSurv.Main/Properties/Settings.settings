@@ -35,8 +35,11 @@
     <Setting Name="RecordPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">x:\;y:\;z:\</Value>
     </Setting>
-    <Setting Name="RecordTempVideoPath" Type="System.String" Scope="Application">
+    <Setting Name="RecordTempVideoPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">d:\RecordTempVideoPath</Value>
+    </Setting>
+    <Setting Name="PreVideoSeconds" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
     </Setting>
   </Settings>
 </SettingsFile>

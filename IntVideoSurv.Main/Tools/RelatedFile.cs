@@ -105,7 +105,7 @@ namespace CameraViewer.Tools
                 }
                 DirectoryInfo Dir = new DirectoryInfo(path);
 
-                foreach (FileInfo fileInfo in Dir.GetFiles(hstrhour2+"*.mkv").Union(Dir.GetFiles(hstrhour2+"*.avi").Union(Dir.GetFiles(hstrhour1+"*.avi").Union(Dir.GetFiles(hstrhour1+"*.avi")))))//查找文件
+                foreach (FileInfo fileInfo in Dir.GetFiles(hstrhour2+"*.mkv").Union(Dir.GetFiles(hstrhour2+"*.avi").Union(Dir.GetFiles(hstrhour1+"*.mkv").Union(Dir.GetFiles(hstrhour1+"*.avi")))))//查找文件
                 {
                     listVideoFiles.Add(fileInfo);
                 }

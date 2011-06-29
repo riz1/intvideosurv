@@ -152,12 +152,27 @@ namespace CameraViewer.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("d:\\RecordTempVideoPath")]
         public string RecordTempVideoPath {
             get {
                 return ((string)(this["RecordTempVideoPath"]));
+            }
+            set {
+                this["RecordTempVideoPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int PreVideoSeconds {
+            get {
+                return ((int)(this["PreVideoSeconds"]));
+            }
+            set {
+                this["PreVideoSeconds"] = value;
             }
         }
     }
