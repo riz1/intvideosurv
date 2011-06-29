@@ -643,12 +643,12 @@ namespace CameraViewer
             barButtonItem12.Visibility = BarItemVisibility.Never;
             barButtonItem13.Visibility = BarItemVisibility.Never;
             barButtonItem14.Visibility = BarItemVisibility.Never;
-            barButtonItem15.Visibility = BarItemVisibility.Always;
+            barButtonItem15.Visibility = BarItemVisibility.Never;
             barButtonItem16.Visibility = BarItemVisibility.Never;
             barButtonItem17.Visibility = BarItemVisibility.Never;
             barButtonItem18.Visibility = BarItemVisibility.Never;
             barButtonItem19.Visibility = BarItemVisibility.Never;
-            barButtonItem20.Visibility = BarItemVisibility.Always;
+            barButtonItem20.Visibility = BarItemVisibility.Never;
             barButtonItem21.Visibility = BarItemVisibility.Never;
             barButtonItemPlayTwoFiles.Visibility = BarItemVisibility.Never;
             barButtonItemGetPics.Visibility = BarItemVisibility.Never;
@@ -2696,7 +2696,13 @@ namespace CameraViewer
             }
             if (CurrentCameraWindow.AirnoixCamera.Type == 1)
             {
-                AironixControl.TMCC_Done(ptzHandle);
+                if (AironixControl.TMCC_IsConnect(ptzHandle))
+                {
+                    int iret = AironixControl.TMCC_PtzClose(ptzHandle);
+                    iret = AironixControl.TMCC_DisConnect(ptzHandle);
+                    iret = AironixControl.TMCC_Done(ptzHandle);
+                }
+                
                 dockPanelPtzControl.Visible = false;
             }
             else if (CurrentCameraWindow.AirnoixCamera.Type == 2)

@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
 using log4net;
+using CameraViewer.Tools;
 
 namespace CameraViewer.Forms
 {
@@ -43,6 +44,8 @@ namespace CameraViewer.Forms
 
         }
 
+        private RelatedFile _relatedFile; 
+
         public frmCaptureLicense(AirnoixCamera airnoixCamera)
         {
             InitializeComponent();
@@ -56,6 +59,9 @@ namespace CameraViewer.Forms
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
+            //获取所有相关的视频文件
+            _relatedFile = new RelatedFile(_airnoixCamera.Ip, 1, _airnoixCamera.BeginCaptureTime, Properties.Settings.Default.PreVideoSeconds);
+
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             int ret = AirnoixPlayer.Avdec_SetFile(intPtr, airnoixCamera.VideoPath, null, true);
 
