@@ -66,6 +66,8 @@ namespace IntVideoSurv.Entity
             roadName = dataRow["cdmc"] is DBNull ? "" : Convert.ToString(dataRow["cdmc"]);
             adminDivisionNumber = dataRow["dwbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dwbh"]);
             adminDivisionName = dataRow["dwmc"] is DBNull ? "" : Convert.ToString(dataRow["dwmc"]);
+            vedioName1 = dataRow["spmc1"] is DBNull ? "" : Convert.ToString(dataRow["spmc1"]);
+            vedioName2 = dataRow["spmc2"] is DBNull ? "" : Convert.ToString(dataRow["spmc2"]);
 
         }
         #endregion
@@ -121,6 +123,10 @@ namespace IntVideoSurv.Entity
         public int adminDivisionNumber { get; set; }
         [ColumnMapping()]
         public string adminDivisionName  { get; set; }
+        [ColumnMapping()]
+        public string vedioName1 { get; set; }
+        [ColumnMapping()]
+        public string vedioName2 { get; set; }
         
     }
 }
