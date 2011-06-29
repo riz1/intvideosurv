@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCaptureLicense));
             this.pictureEditSelectedPicture = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonPrevious = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonCurrent = new DevExpress.XtraEditors.SimpleButton();
@@ -956,6 +957,7 @@
             this.Controls.Add(this.simpleButtonPrevious);
             this.Controls.Add(this.pictureEditSelectedPicture);
             this.Controls.Add(this.trackBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCaptureLicense";
             this.Text = "证据截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureLicense_FormClosed);

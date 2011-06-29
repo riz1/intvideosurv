@@ -38,7 +38,7 @@ namespace CameraViewer.Forms
             this.pnBottom = new DevExpress.XtraEditors.PanelControl();
             this.pbBtContainer = new DevExpress.XtraEditors.PanelControl();
             this.btnNext = new DevExpress.XtraEditors.SimpleButton();
-            this.btnBack = new System.Windows.Forms.Button();
+            this.btnBack = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.pnTop = new DevExpress.XtraEditors.PanelControl();
             this.deviceDescription1 = new CameraViewer.Forms.DeviceDescription();
@@ -155,7 +155,6 @@ namespace CameraViewer.Forms
             this.btnBack.Size = new System.Drawing.Size(87, 25);
             this.btnBack.TabIndex = 1;
             this.btnBack.Text = "<ÉÏÒ»²½";
-            this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Visible = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -226,7 +225,7 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnNext;
         private DevExpress.XtraEditors.PanelControl pnTop;
-        private System.Windows.Forms.Button btnBack;
+        private DevExpress.XtraEditors.SimpleButton btnBack;
         private DevExpress.XtraEditors.PanelControl pbBtContainer;
         private DeviceDescription deviceDescription1;
 

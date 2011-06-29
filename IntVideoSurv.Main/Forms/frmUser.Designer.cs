@@ -37,8 +37,8 @@
             this.textEditPasswordConfirm = new DevExpress.XtraEditors.TextEdit();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.comboBoxEditUserType = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonOK = new DevExpress.XtraEditors.SimpleButton();
+            this.buttonCancel = new DevExpress.XtraEditors.SimpleButton();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.lcOldPWD = new DevExpress.XtraEditors.LabelControl();
             this.teOldPWD = new DevExpress.XtraEditors.TextEdit();
@@ -125,7 +125,6 @@
             this.buttonOK.Size = new System.Drawing.Size(87, 27);
             this.buttonOK.TabIndex = 5;
             this.buttonOK.Text = "确定";
-            this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -136,7 +135,6 @@
             this.buttonCancel.Size = new System.Drawing.Size(87, 27);
             this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "取消";
-            this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // lcOldPWD
             // 
@@ -197,8 +195,8 @@
         private DevExpress.XtraEditors.TextEdit textEditPasswordConfirm;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditUserType;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
+        private DevExpress.XtraEditors.SimpleButton buttonOK;
+        private DevExpress.XtraEditors.SimpleButton buttonCancel;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
         private DevExpress.XtraEditors.LabelControl lcOldPWD;
         private DevExpress.XtraEditors.TextEdit teOldPWD;

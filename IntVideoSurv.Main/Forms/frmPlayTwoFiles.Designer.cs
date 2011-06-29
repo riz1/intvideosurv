@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.panelControlPlay = new DevExpress.XtraEditors.PanelControl();
             this.trackBarProgressing = new System.Windows.Forms.TrackBar();
-            this.buttonPlay = new System.Windows.Forms.Button();
-            this.buttonPause = new System.Windows.Forms.Button();
-            this.buttonStop = new System.Windows.Forms.Button();
+            this.buttonPlay = new DevExpress.XtraEditors.SimpleButton();
+            this.buttonPause = new DevExpress.XtraEditors.SimpleButton();
+            this.buttonStop = new DevExpress.XtraEditors.SimpleButton();
             this.timerPlay = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControlPlay)).BeginInit();
@@ -62,7 +62,6 @@
             this.buttonPlay.Size = new System.Drawing.Size(115, 27);
             this.buttonPlay.TabIndex = 2;
             this.buttonPlay.Text = "播放";
-            this.buttonPlay.UseVisualStyleBackColor = true;
             this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
             // buttonPause
@@ -72,7 +71,6 @@
             this.buttonPause.Size = new System.Drawing.Size(115, 27);
             this.buttonPause.TabIndex = 2;
             this.buttonPause.Text = "暂停";
-            this.buttonPause.UseVisualStyleBackColor = true;
             this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
             // 
             // buttonStop
@@ -82,7 +80,6 @@
             this.buttonStop.Size = new System.Drawing.Size(115, 27);
             this.buttonStop.TabIndex = 2;
             this.buttonStop.Text = "停止";
-            this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // timerPlay
@@ -121,9 +118,9 @@
 
         private DevExpress.XtraEditors.PanelControl panelControlPlay;
         private System.Windows.Forms.TrackBar trackBarProgressing;
-        private System.Windows.Forms.Button buttonPlay;
-        private System.Windows.Forms.Button buttonPause;
-        private System.Windows.Forms.Button buttonStop;
+        private DevExpress.XtraEditors.SimpleButton buttonPlay;
+        private DevExpress.XtraEditors.SimpleButton buttonPause;
+        private DevExpress.XtraEditors.SimpleButton buttonStop;
         private System.Windows.Forms.Timer timerPlay;
         private System.Windows.Forms.Timer timer1;
     }

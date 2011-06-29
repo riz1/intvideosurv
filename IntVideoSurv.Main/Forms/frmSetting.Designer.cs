@@ -96,16 +96,16 @@ namespace CameraViewer.Forms
             this.splitContainerControl6 = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControlUserData = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.buttonUserUpdate = new System.Windows.Forms.Button();
-            this.buttonUserDelete = new System.Windows.Forms.Button();
-            this.buttonUserAdd = new System.Windows.Forms.Button();
+            this.buttonUserUpdate = new DevExpress.XtraEditors.SimpleButton();
+            this.buttonUserDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.buttonUserAdd = new DevExpress.XtraEditors.SimpleButton();
             this.gcLogManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl3 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl4 = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeViewCameraInLogManagement = new System.Windows.Forms.TreeView();
             this.checkBoxUser = new System.Windows.Forms.CheckBox();
             this.splitContainerControl5 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.buttonSearchLog = new System.Windows.Forms.Button();
+            this.buttonSearchLog = new DevExpress.XtraEditors.SimpleButton();
             this.dateEditEndDate = new DevExpress.XtraEditors.DateEdit();
             this.dateEditBeginDate = new DevExpress.XtraEditors.DateEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -126,8 +126,8 @@ namespace CameraViewer.Forms
             this.Camera = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Monitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SplitScreen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonAddSynGroup = new System.Windows.Forms.Button();
-            this.buttonDeleteSynGroup = new System.Windows.Forms.Button();
+            this.buttonAddSynGroup = new DevExpress.XtraEditors.SimpleButton();
+            this.buttonDeleteSynGroup = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.treeViewSynGroup = new System.Windows.Forms.TreeView();
             this.contextMenuStripSynGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -150,8 +150,8 @@ namespace CameraViewer.Forms
             this.pcMapPreview = new DevExpress.XtraEditors.PanelControl();
             this.pictureBoxMap = new System.Windows.Forms.PictureBox();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.btnBrowserMap = new System.Windows.Forms.Button();
-            this.btnAddMap = new System.Windows.Forms.Button();
+            this.btnBrowserMap = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddMap = new DevExpress.XtraEditors.SimpleButton();
             this.teMapName = new DevExpress.XtraEditors.TextEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.pcMapTreeview = new DevExpress.XtraEditors.PanelControl();
@@ -186,8 +186,8 @@ namespace CameraViewer.Forms
             this.tvDisplayChannel = new System.Windows.Forms.TreeView();
             this.gcProgSwitchManagement = new DevExpress.XtraEditors.GroupControl();
             this.pcProgSwitchDisplay = new DevExpress.XtraEditors.PanelControl();
-            this.btnDeleteProgSwitchDetail = new System.Windows.Forms.Button();
-            this.btnAddProgSwitchDetail = new System.Windows.Forms.Button();
+            this.btnDeleteProgSwitchDetail = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddProgSwitchDetail = new DevExpress.XtraEditors.SimpleButton();
             this.lblProgSwitchName = new System.Windows.Forms.Label();
             this.pcTickTimeInProgSwitch = new DevExpress.XtraEditors.PanelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
@@ -207,8 +207,8 @@ namespace CameraViewer.Forms
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gcGroupSwitchManagement = new DevExpress.XtraEditors.GroupControl();
             this.pcGroupSwitchDisplay = new DevExpress.XtraEditors.PanelControl();
-            this.btnDeleteGroupSwitchDetail = new System.Windows.Forms.Button();
-            this.btnAddGroupSwitchDetail = new System.Windows.Forms.Button();
+            this.btnDeleteGroupSwitchDetail = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddGroupSwitchDetail = new DevExpress.XtraEditors.SimpleButton();
             this.lblGroupSwitchName = new System.Windows.Forms.Label();
             this.pcTickTime = new DevExpress.XtraEditors.PanelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
@@ -979,7 +979,6 @@ namespace CameraViewer.Forms
             this.buttonUserUpdate.Size = new System.Drawing.Size(72, 27);
             this.buttonUserUpdate.TabIndex = 2;
             this.buttonUserUpdate.Text = "更新";
-            this.buttonUserUpdate.UseVisualStyleBackColor = true;
             this.buttonUserUpdate.Click += new System.EventHandler(this.buttonUserUpdate_Click);
             // 
             // buttonUserDelete
@@ -989,7 +988,6 @@ namespace CameraViewer.Forms
             this.buttonUserDelete.Size = new System.Drawing.Size(72, 27);
             this.buttonUserDelete.TabIndex = 1;
             this.buttonUserDelete.Text = "删除";
-            this.buttonUserDelete.UseVisualStyleBackColor = true;
             this.buttonUserDelete.Click += new System.EventHandler(this.buttonUserDelete_Click);
             // 
             // buttonUserAdd
@@ -999,7 +997,6 @@ namespace CameraViewer.Forms
             this.buttonUserAdd.Size = new System.Drawing.Size(72, 27);
             this.buttonUserAdd.TabIndex = 0;
             this.buttonUserAdd.Text = "添加";
-            this.buttonUserAdd.UseVisualStyleBackColor = true;
             this.buttonUserAdd.Click += new System.EventHandler(this.buttonUserAdd_Click);
             // 
             // gcLogManagement
@@ -1093,7 +1090,6 @@ namespace CameraViewer.Forms
             this.buttonSearchLog.Size = new System.Drawing.Size(106, 55);
             this.buttonSearchLog.TabIndex = 4;
             this.buttonSearchLog.Text = "查询";
-            this.buttonSearchLog.UseVisualStyleBackColor = true;
             this.buttonSearchLog.Click += new System.EventHandler(this.buttonSearchLog_Click);
             // 
             // dateEditEndDate
@@ -1317,7 +1313,6 @@ namespace CameraViewer.Forms
             this.buttonAddSynGroup.Size = new System.Drawing.Size(75, 23);
             this.buttonAddSynGroup.TabIndex = 9;
             this.buttonAddSynGroup.Text = "=》";
-            this.buttonAddSynGroup.UseVisualStyleBackColor = true;
             this.buttonAddSynGroup.Click += new System.EventHandler(this.buttonAddSynGroup_Click);
             // 
             // buttonDeleteSynGroup
@@ -1327,7 +1322,6 @@ namespace CameraViewer.Forms
             this.buttonDeleteSynGroup.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteSynGroup.TabIndex = 10;
             this.buttonDeleteSynGroup.Text = "《=";
-            this.buttonDeleteSynGroup.UseVisualStyleBackColor = true;
             this.buttonDeleteSynGroup.Click += new System.EventHandler(this.buttonDeleteSynGroup_Click);
             // 
             // groupControl3
@@ -1581,7 +1575,6 @@ namespace CameraViewer.Forms
             this.btnBrowserMap.Size = new System.Drawing.Size(75, 23);
             this.btnBrowserMap.TabIndex = 3;
             this.btnBrowserMap.Text = "浏览...";
-            this.btnBrowserMap.UseVisualStyleBackColor = true;
             this.btnBrowserMap.Click += new System.EventHandler(this.btnBrowserMap_Click);
             // 
             // btnAddMap
@@ -1591,7 +1584,6 @@ namespace CameraViewer.Forms
             this.btnAddMap.Size = new System.Drawing.Size(75, 23);
             this.btnAddMap.TabIndex = 2;
             this.btnAddMap.Text = "添加地图";
-            this.btnAddMap.UseVisualStyleBackColor = true;
             this.btnAddMap.Click += new System.EventHandler(this.btnAddMap_Click);
             // 
             // teMapName
@@ -1961,7 +1953,6 @@ namespace CameraViewer.Forms
             this.btnDeleteProgSwitchDetail.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteProgSwitchDetail.TabIndex = 23;
             this.btnDeleteProgSwitchDetail.Text = "《=";
-            this.btnDeleteProgSwitchDetail.UseVisualStyleBackColor = true;
             this.btnDeleteProgSwitchDetail.Click += new System.EventHandler(this.btnDeleteProgSwitchDetail_Click);
             // 
             // btnAddProgSwitchDetail
@@ -1971,7 +1962,6 @@ namespace CameraViewer.Forms
             this.btnAddProgSwitchDetail.Size = new System.Drawing.Size(75, 23);
             this.btnAddProgSwitchDetail.TabIndex = 22;
             this.btnAddProgSwitchDetail.Text = "=》";
-            this.btnAddProgSwitchDetail.UseVisualStyleBackColor = true;
             this.btnAddProgSwitchDetail.Click += new System.EventHandler(this.btnAddProgSwitchDetail_Click);
             // 
             // lblProgSwitchName
@@ -2152,7 +2142,6 @@ namespace CameraViewer.Forms
             this.btnDeleteGroupSwitchDetail.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteGroupSwitchDetail.TabIndex = 16;
             this.btnDeleteGroupSwitchDetail.Text = "《=";
-            this.btnDeleteGroupSwitchDetail.UseVisualStyleBackColor = true;
             this.btnDeleteGroupSwitchDetail.Click += new System.EventHandler(this.btnDeleteGroupSwitchDetail_Click);
             // 
             // btnAddGroupSwitchDetail
@@ -2162,7 +2151,6 @@ namespace CameraViewer.Forms
             this.btnAddGroupSwitchDetail.Size = new System.Drawing.Size(75, 23);
             this.btnAddGroupSwitchDetail.TabIndex = 15;
             this.btnAddGroupSwitchDetail.Text = "=》";
-            this.btnAddGroupSwitchDetail.UseVisualStyleBackColor = true;
             this.btnAddGroupSwitchDetail.Click += new System.EventHandler(this.btnAddGroupSwitchDetail_Click);
             // 
             // lblGroupSwitchName
@@ -2610,8 +2598,8 @@ namespace CameraViewer.Forms
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSynGroup;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemAddSynGroup;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDeleteSynGroup;
-        private System.Windows.Forms.Button buttonDeleteSynGroup;
-        private System.Windows.Forms.Button buttonAddSynGroup;
+        private DevExpress.XtraEditors.SimpleButton buttonDeleteSynGroup;
+        private DevExpress.XtraEditors.SimpleButton buttonAddSynGroup;
         private System.Windows.Forms.TreeView treeViewSynGroup;
         private DevExpress.XtraEditors.GroupControl gcSynGroupManagement;
         private System.Windows.Forms.TreeView treeViewSynGroupCamera;
@@ -2628,16 +2616,16 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditLogType;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditSubLogType;
-        private System.Windows.Forms.Button buttonSearchLog;
+        private DevExpress.XtraEditors.SimpleButton buttonSearchLog;
         private DevExpress.XtraEditors.DateEdit dateEditEndDate;
         private DevExpress.XtraEditors.DateEdit dateEditBeginDate;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private System.Windows.Forms.DataGridView dataGridViewLog;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl6;
-        private System.Windows.Forms.Button buttonUserAdd;
-        private System.Windows.Forms.Button buttonUserUpdate;
-        private System.Windows.Forms.Button buttonUserDelete;
+        private DevExpress.XtraEditors.SimpleButton buttonUserAdd;
+        private DevExpress.XtraEditors.SimpleButton buttonUserUpdate;
+        private DevExpress.XtraEditors.SimpleButton buttonUserDelete;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerDeviceAndMonitor;
         private System.Windows.Forms.TreeView treeViewMonitor;
         private DevExpress.XtraEditors.GroupControl gcDevice;
@@ -2647,8 +2635,8 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.GroupControl gcProgSwitchManagement;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.TextEdit teGroupSwitchTick;
-        private System.Windows.Forms.Button btnDeleteGroupSwitchDetail;
-        private System.Windows.Forms.Button btnAddGroupSwitchDetail;
+        private DevExpress.XtraEditors.SimpleButton btnDeleteGroupSwitchDetail;
+        private DevExpress.XtraEditors.SimpleButton btnAddGroupSwitchDetail;
         private DevExpress.XtraEditors.GroupControl gcSynGroup;
         private System.Windows.Forms.TreeView tvSynGroupTop;
         private DevExpress.XtraEditors.GroupControl gcGroupSwitchGroup;
@@ -2659,8 +2647,8 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.PanelControl pcTickTimeInProgSwitch;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.TextEdit teTickTimeInProgSwitch;
-        private System.Windows.Forms.Button btnDeleteProgSwitchDetail;
-        private System.Windows.Forms.Button btnAddProgSwitchDetail;
+        private DevExpress.XtraEditors.SimpleButton btnDeleteProgSwitchDetail;
+        private DevExpress.XtraEditors.SimpleButton btnAddProgSwitchDetail;
         private DevExpress.XtraEditors.GroupControl gcDeviceInProSwitchManagement;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private System.Windows.Forms.TreeView tvProgSwitch;
@@ -2704,10 +2692,10 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.GroupControl gcMap;
         private DevExpress.XtraEditors.PanelControl pcMapPreview;
         private DevExpress.XtraEditors.PanelControl pcMapTreeview;
-        private System.Windows.Forms.Button btnAddMap;
+        private DevExpress.XtraEditors.SimpleButton btnAddMap;
         private DevExpress.XtraEditors.TextEdit teMapName;
         private DevExpress.XtraEditors.PanelControl panelControl2;
-        private System.Windows.Forms.Button btnBrowserMap;
+        private DevExpress.XtraEditors.SimpleButton btnBrowserMap;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.OpenFileDialog openMapFileDialog;
         private System.Windows.Forms.PictureBox pictureBoxMap;

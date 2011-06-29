@@ -18,9 +18,9 @@ namespace CameraViewer
 	{
 		private Control currentControl = null;
 		private System.Windows.Forms.TabControl tabControl;
-		private System.Windows.Forms.Button cancelButton;
-		private System.Windows.Forms.Button okButton;
-		private System.Windows.Forms.Button applyButton;
+		private DevExpress.XtraEditors.SimpleButton cancelButton;
+		private DevExpress.XtraEditors.SimpleButton okButton;
+		private DevExpress.XtraEditors.SimpleButton applyButton;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -71,9 +71,9 @@ namespace CameraViewer
 		private void InitializeComponent()
 		{
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
-            this.applyButton = new System.Windows.Forms.Button();
+            this.cancelButton = new DevExpress.XtraEditors.SimpleButton();
+            this.okButton = new DevExpress.XtraEditors.SimpleButton();
+            this.applyButton = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
             // 
             // tabControl
@@ -92,7 +92,6 @@ namespace CameraViewer
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Location = new System.Drawing.Point(734, 511);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(90, 25);
@@ -102,7 +101,6 @@ namespace CameraViewer
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.okButton.Location = new System.Drawing.Point(638, 511);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(90, 25);
@@ -113,7 +111,6 @@ namespace CameraViewer
             // applyButton
             // 
             this.applyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.applyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.applyButton.Location = new System.Drawing.Point(532, 511);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(90, 25);
