@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
@@ -108,7 +109,10 @@ namespace CameraViewer
             RegisterHotKey(this.Handle, 208, (int)MyKeys.Alt, (int)Keys.D8); //注册热键Alt+1
             RegisterHotKey(this.Handle, 209, (int)MyKeys.Alt, (int)Keys.D9); //注册热键Alt+1
 
-
+            if (!Directory.Exists(Properties.Settings.Default.RecordTempVideoPath))
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.RecordTempVideoPath);
+            }
 
         }
         private void BeginRemotingService()
@@ -2948,6 +2952,43 @@ namespace CameraViewer
             }
         
             base.WndProc(ref m);
+        }
+
+        private void timerForDeleteTempFiles_Tick(object sender, EventArgs e)
+        {
+            DirectoryInfo Dir = new DirectoryInfo(Properties.Settings.Default.CapturePictureTempPath);
+            
+            //删除临时的图片文件
+            foreach (FileInfo fileInfo in Dir.GetFiles("*.bmp"))//查找文件
+            {
+                if(fileInfo.LastAccessTime.AddSeconds(345600)<DateTime.Now)
+                {
+                    try
+                    {
+                        File.Delete(fileInfo.FullName);
+                    }
+                    catch (Exception ex)
+                    {
+                       logger.Error(ex.ToString());
+                    }
+                }
+            }
+            //删除临时的视频文件
+            Dir = new DirectoryInfo(Properties.Settings.Default.RecordTempVideoPath);
+            foreach (FileInfo fileInfo in Dir.GetFiles("*.avi").Union(Dir.GetFiles("*.mkv")) )//查找文件
+            {
+                if(fileInfo.LastAccessTime.AddSeconds(1000)<DateTime.Now)
+                {
+                    try
+                    {
+                        File.Delete(fileInfo.FullName);
+                    }
+                    catch (Exception ex)
+                    {
+                       logger.Error(ex.ToString());
+                    }
+                }
+            }
         }  
 
 

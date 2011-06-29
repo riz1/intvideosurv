@@ -151,5 +151,14 @@ namespace CameraViewer.Properties {
                 this["RecordPath"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\RecordTempVideoPath")]
+        public string RecordTempVideoPath {
+            get {
+                return ((string)(this["RecordTempVideoPath"]));
+            }
+        }
     }
 }

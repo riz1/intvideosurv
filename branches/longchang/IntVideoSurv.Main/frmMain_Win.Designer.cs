@@ -270,6 +270,7 @@ namespace CameraViewer
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
+            this.timerForDeleteTempFiles = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -2828,6 +2829,12 @@ namespace CameraViewer
             // 
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
+            // timerForDeleteTempFiles
+            // 
+            this.timerForDeleteTempFiles.Enabled = true;
+            this.timerForDeleteTempFiles.Interval = 200000;
+            this.timerForDeleteTempFiles.Tick += new System.EventHandler(this.timerForDeleteTempFiles_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -3196,6 +3203,7 @@ namespace CameraViewer
         private DevExpress.XtraEditors.SimpleButton sbIRISAdd;
         private DevExpress.XtraEditors.SimpleButton sbZoomSub;
         private DevExpress.XtraEditors.SimpleButton sbZoomAdd;
+        private Timer timerForDeleteTempFiles;
         
     }
 }
