@@ -55,7 +55,7 @@ namespace IntVideoSurv.Business
             }
         }
 
-        public int Insert(ref string errMessage, LongChang_VehMonInfo vehmon)
+        public string Insert(ref string errMessage, LongChang_VehMonInfo vehmon)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
@@ -68,7 +68,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return -1;
+                return "";
             }
         }
 

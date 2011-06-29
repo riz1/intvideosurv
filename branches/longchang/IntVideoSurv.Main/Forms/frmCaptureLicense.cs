@@ -530,6 +530,8 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
             LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
             LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();
+            LongChang_UserVehMonInfo uservehmon = new LongChang_UserVehMonInfo();
+            UserInfo user = new UserInfo();
             string captureFileName = Properties.Settings.Default.CapturePictureFilePath
                          + @"\"+_airnoixCamera.BeginCaptureTime.ToString("yyyy-MM-dd")
                          + @"\" + _airnoixCamera.BeginCaptureTime.ToString("HH-mm") + @"\";
@@ -538,13 +540,10 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 Directory.CreateDirectory(captureFileName);
             }
 
-
-
             vehmon.plateNumberTypeName = cbeVehType.Text;
             vehmon.plateNumber = textEdit1.Text;
             vehmon.illegalReason = cbeInvalidType.Text;
             reason = LongChang_InvalidTypeBusiness.Instance.GetInvalidTypeInfoByWzyy(ref errMessage, vehmon.illegalReason);
-            MessageBox.Show(reason.InvalidId.ToString());
             vehmon.adminDivisionName = cbeCaptureDepartment.Text;
             vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
             vehmon.vehInfoNum = 0;
@@ -577,10 +576,16 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
             vehmon.roadName = tollgate.roadName;
             vehmon.redLightTime = Convert.ToDateTime(teCaptureTime.Text);
-
-            int i;
+            //写入vehmon信息
+            string i;
             i = LongChang_VehMonBusiness.Instance.Insert(ref errMessage, vehmon);
-
+            
+            //写入uservehmon信息
+            user = LongChang_UserVehMonBusiness.Instance.GetUserInfoByCameraId(ref errMessage, _airnoixCamera.Id);
+            uservehmon.VehMonId = i;
+            uservehmon.UserId = user.UserId;
+            uservehmon.TheTime = DateTime.Now;
+            LongChang_UserVehMonBusiness.Instance.Insert(ref errMessage, uservehmon);
             //将三张图片写入到磁盘中
             (treeListPicturesBefore.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName1,System.Drawing.Imaging.ImageFormat.Jpeg);
             (treeListPicturesCurrent.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName2,System.Drawing.Imaging.ImageFormat.Jpeg);
