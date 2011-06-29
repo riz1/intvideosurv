@@ -19,7 +19,7 @@ namespace CameraViewer.Forms
 
 
         private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        private const int PicNum = 5;
         public frmCaptureLicense()
         {
             InitializeComponent();
@@ -84,7 +84,7 @@ namespace CameraViewer.Forms
             {
                 treeListPicturesBefore.Nodes.Clear();
                 Image[] images = GetImages();
-                treeListPicturesBefore.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+                treeListPicturesBefore.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
             }
             catch (Exception)
             {
@@ -100,7 +100,7 @@ namespace CameraViewer.Forms
             {
                 treeListPicturesCurrent.Nodes.Clear();
                 Image[] images = GetImages();
-                treeListPicturesCurrent.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+                treeListPicturesCurrent.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
             }
             catch (Exception)
             {
@@ -115,7 +115,7 @@ namespace CameraViewer.Forms
             {
                 treeListPicturesAfter.Nodes.Clear();
                 Image[] images = GetImages();
-                treeListPicturesAfter.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4], images[5], images[6] }, -1);
+                treeListPicturesAfter.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
             }
             catch (Exception)
             {
@@ -138,7 +138,7 @@ namespace CameraViewer.Forms
                 }
 
             }
-            if (_totalFrames - currentPos <= 7)
+            if (_totalFrames - currentPos <= PicNum)
             {
                 for (int i = 0; i < _totalFrames - currentPos; i++)
                 {
@@ -150,8 +150,8 @@ namespace CameraViewer.Forms
                 frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
                 frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             }
-            Image[] images = new Image[7];
-            for (int i = 0; i < 7; i++)
+            Image[] images = new Image[PicNum];
+            for (int i = 0; i < PicNum; i++)
             {
                 string fmt = string.Format("BMP {0:0000}{1:0000}{2:0000}", frameWidth, frameHeight, 24);
                 string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
