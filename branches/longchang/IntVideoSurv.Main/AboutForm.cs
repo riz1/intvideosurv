@@ -1,6 +1,6 @@
 // Camera Vision
 //
-// Copyright © Andrew Kirillov, 2005-2006
+// Copyright ?Andrew Kirillov, 2005-2006
 // andrew.kirillov@gmail.com
 //
 using System;
@@ -17,7 +17,7 @@ namespace CameraViewer
 	public class AboutForm : System.Windows.Forms.Form
 	{
 		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.Button okButton;
+		private DevExpress.XtraEditors.SimpleButton okButton;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.Label label2;
@@ -65,7 +65,7 @@ namespace CameraViewer
 		private void InitializeComponent()
 		{
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.okButton = new System.Windows.Forms.Button();
+			this.okButton = new DevExpress.XtraEditors.SimpleButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -89,7 +89,6 @@ namespace CameraViewer
 			// 
 			this.okButton.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
 			this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.okButton.Location = new System.Drawing.Point(160, 150);
 			this.okButton.Name = "okButton";
 			this.okButton.TabIndex = 1;
@@ -141,7 +140,7 @@ namespace CameraViewer
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(275, 16);
 			this.label3.TabIndex = 5;
-			this.label3.Text = "Copyright © 2005, Andrew Kirillov, All rights reserved";
+			this.label3.Text = "Copyright ?2005, Andrew Kirillov, All rights reserved";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// siteLink

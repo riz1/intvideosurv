@@ -989,13 +989,11 @@ namespace CameraViewer
             // 
             this.Down.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Down.BackgroundImage")));
             this.Down.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Down.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Down.Image = ((System.Drawing.Image)(resources.GetObject("Down.Image")));
             this.Down.Location = new System.Drawing.Point(75, 107);
             this.Down.Name = "Down";
             this.Down.Size = new System.Drawing.Size(35, 30);
             this.Down.TabIndex = 17;
-            this.Down.UseVisualStyleBackColor = true;
             this.Down.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Down_MouseDown);
             this.Down.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Down_MouseUp);
             // 
@@ -1013,13 +1011,11 @@ namespace CameraViewer
             // 
             this.right.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("right.BackgroundImage")));
             this.right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.right.Image = ((System.Drawing.Image)(resources.GetObject("right.Image")));
             this.right.Location = new System.Drawing.Point(111, 74);
             this.right.Name = "right";
             this.right.Size = new System.Drawing.Size(35, 30);
             this.right.TabIndex = 16;
-            this.right.UseVisualStyleBackColor = true;
             this.right.MouseDown += new System.Windows.Forms.MouseEventHandler(this.right_MouseDown);
             this.right.MouseUp += new System.Windows.Forms.MouseEventHandler(this.right_MouseUp);
             // 
@@ -1027,13 +1023,11 @@ namespace CameraViewer
             // 
             this.left.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("left.BackgroundImage")));
             this.left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.left.Image = ((System.Drawing.Image)(resources.GetObject("left.Image")));
             this.left.Location = new System.Drawing.Point(40, 74);
             this.left.Name = "left";
             this.left.Size = new System.Drawing.Size(35, 30);
             this.left.TabIndex = 15;
-            this.left.UseVisualStyleBackColor = true;
             this.left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.left_MouseDown);
             this.left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.left_MouseUp);
             // 
@@ -1049,13 +1043,11 @@ namespace CameraViewer
             // 
             this.up.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("up.BackgroundImage")));
             this.up.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.up.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.up.Image = ((System.Drawing.Image)(resources.GetObject("up.Image")));
             this.up.Location = new System.Drawing.Point(75, 40);
             this.up.Name = "up";
             this.up.Size = new System.Drawing.Size(35, 30);
             this.up.TabIndex = 1;
-            this.up.UseVisualStyleBackColor = true;
             this.up.MouseDown += new System.Windows.Forms.MouseEventHandler(this.up_MouseDown);
             this.up.MouseUp += new System.Windows.Forms.MouseEventHandler(this.up_MouseUp);
             // 
@@ -3191,10 +3183,10 @@ namespace CameraViewer
         private DevExpress.XtraBars.Docking.ControlContainer controlContainer1;
         private DevExpress.XtraEditors.TextEdit textEditPtzSpeed;
         private DevExpress.XtraEditors.LabelControl labelControl14;
-        public Button Down;
-        public Button right;
-        public Button left;
-        public Button up;
+        private System.Windows.Forms.Button Down;
+        private System.Windows.Forms.Button right;
+        private System.Windows.Forms.Button left;
+        private System.Windows.Forms.Button up;
         private DevExpress.XtraEditors.LabelControl labelControl17;
         private DevExpress.XtraEditors.SimpleButton sbFOCUSSub;
         private DevExpress.XtraEditors.LabelControl labelControl16;

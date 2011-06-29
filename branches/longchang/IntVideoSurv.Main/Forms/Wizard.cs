@@ -22,10 +22,10 @@ namespace CameraViewer
 
 		private System.Windows.Forms.Panel descPannel;
 		private System.Windows.Forms.Panel controlPanel;
-		private System.Windows.Forms.Button cancelButton;
-		private System.Windows.Forms.Button finishButton;
-		private System.Windows.Forms.Button nextButton;
-		private System.Windows.Forms.Button backButton;
+		private DevExpress.XtraEditors.SimpleButton cancelButton;
+		private DevExpress.XtraEditors.SimpleButton finishButton;
+		private DevExpress.XtraEditors.SimpleButton nextButton;
+		private DevExpress.XtraEditors.SimpleButton backButton;
 		private System.Windows.Forms.PictureBox line1;
 		private System.Windows.Forms.PictureBox line2;
         private System.Windows.Forms.Label descriptionLabel;
@@ -72,13 +72,13 @@ namespace CameraViewer
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.workPanel = new System.Windows.Forms.Panel();
-            this.nextButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
+            this.nextButton = new DevExpress.XtraEditors.SimpleButton();
+            this.cancelButton = new DevExpress.XtraEditors.SimpleButton();
             this.line3 = new System.Windows.Forms.PictureBox();
             this.line2 = new System.Windows.Forms.PictureBox();
             this.line1 = new System.Windows.Forms.PictureBox();
-            this.finishButton = new System.Windows.Forms.Button();
-            this.backButton = new System.Windows.Forms.Button();
+            this.finishButton = new DevExpress.XtraEditors.SimpleButton();
+            this.backButton = new DevExpress.XtraEditors.SimpleButton();
             this.descPannel.SuspendLayout();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.line3)).BeginInit();
@@ -128,7 +128,6 @@ namespace CameraViewer
             // nextButton
             // 
             this.nextButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nextButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nextButton.Image = global::CameraViewer.Properties.Resources.btn;
             this.nextButton.Location = new System.Drawing.Point(178, 16);
             this.nextButton.Name = "nextButton";
@@ -141,7 +140,6 @@ namespace CameraViewer
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Image = global::CameraViewer.Properties.Resources.btn;
             this.cancelButton.Location = new System.Drawing.Point(362, 16);
             this.cancelButton.Name = "cancelButton";
@@ -183,7 +181,6 @@ namespace CameraViewer
             // finishButton
             // 
             this.finishButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.finishButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.finishButton.Image = global::CameraViewer.Properties.Resources.btn;
             this.finishButton.Location = new System.Drawing.Point(282, 16);
             this.finishButton.Name = "finishButton";
@@ -195,7 +192,6 @@ namespace CameraViewer
             // backButton
             // 
             this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backButton.Image = global::CameraViewer.Properties.Resources.btn;
             this.backButton.Location = new System.Drawing.Point(98, 16);
             this.backButton.Name = "backButton";

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new DevExpress.XtraEditors.SimpleButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +50,6 @@
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "YUV->RGB";
-            this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
@@ -80,7 +79,7 @@
         #endregion
 
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private System.Windows.Forms.Button button1;
+        private DevExpress.XtraEditors.SimpleButton button1;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
