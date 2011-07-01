@@ -70,7 +70,7 @@ namespace CameraViewer
 
         public MainForm()
         {
-#if DEBUG
+#if !DEBUG
             while (Login(_inputUsername, _inputPassword, PromoteInfo) != true)
             {
                 PromoteInfo = "请输入正确的用户名和密码!";
@@ -644,12 +644,12 @@ namespace CameraViewer
             barButtonItem13.Visibility = BarItemVisibility.Never;
             barButtonItem14.Visibility = BarItemVisibility.Never;
             barButtonItem15.Visibility = BarItemVisibility.Never;
-            barButtonItem16.Visibility = BarItemVisibility.Never;
+            barButtonItem16.Visibility = BarItemVisibility.Always;
             barButtonItem17.Visibility = BarItemVisibility.Never;
             barButtonItem18.Visibility = BarItemVisibility.Never;
             barButtonItem19.Visibility = BarItemVisibility.Never;
             barButtonItem20.Visibility = BarItemVisibility.Never;
-            barButtonItem21.Visibility = BarItemVisibility.Never;
+            barButtonItem21.Visibility = BarItemVisibility.Always;
             barButtonItemPlayTwoFiles.Visibility = BarItemVisibility.Never;
             barButtonItemGetPics.Visibility = BarItemVisibility.Never;
         }
@@ -2619,9 +2619,8 @@ namespace CameraViewer
 
         private void barButtonItem16_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string str ="";
-            TTestInfoBusiness.Instance.Insert(ref str, new TTestInfo() {Id = 1, ts = DateTime.Now});
-            List<TTestInfo> list = TTestInfoBusiness.Instance.GetAllTTestInfo(ref str);
+            frmCaptureLicensexx frm = new frmCaptureLicensexx();
+            frm.ShowDialog();
         }
 
         private AirnoixCamera airnoixCamera;
@@ -2664,11 +2663,19 @@ namespace CameraViewer
             RelatedFile relatedFile = new RelatedFile("192.168.1.6",1,DateTime.Now,15);
         }
 
+        private IntPtr retIntPtr;
         private void barButtonItem21_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            airnoixCamera.Stop();
-            airnoixCamera.DisplayPos = new Rectangle(0, 0, mainMultiplexer.GetCurrentCameraWindow().Width, mainMultiplexer.GetCurrentCameraWindow().Height);
-            airnoixCamera.Start();
+            Debug.WriteLine("Before Init\t"+DateTime.Now.ToString());
+            IntPtr myIntPtr = mainMultiplexer.GetCameraWindow(0,2).Handle;
+            retIntPtr = AirnoixPlayer.Avdec_Init(myIntPtr, 0, 512, 0);
+            int ret = AirnoixPlayer.Avdec_SetFile(retIntPtr, @"Y:\data(Server@ASIPCAM(192.168.1.6))\2011-06-30\ch01ch\19-48-05_N(16).mkv", null, false);
+            Thread.Sleep(40);
+            int frames = AirnoixPlayer.Avdec_GetTotalFrames(retIntPtr);
+            ret = AirnoixPlayer.Avdec_SetCurrentPosition(retIntPtr,600);
+            ret = AirnoixPlayer.Avdec_Play(retIntPtr);
+            Debug.WriteLine("Before Init\t" + DateTime.Now.ToString() + "\tFrames=" + frames);
+            //ret = AirnoixPlayer.Avdec_Done(retIntPtr);
 
         }
 
@@ -2995,6 +3002,16 @@ namespace CameraViewer
                     }
                 }
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (retIntPtr!=null)
+            {
+                int totalframe = AirnoixPlayer.Avdec_GetTotalFrames(retIntPtr);
+                barStaticItem7.Caption = "总帧数："+ totalframe +"\t当前帧"+AirnoixPlayer.Avdec_GetCurrentPosition(retIntPtr).ToString();
+            }
+
         }  
 
 

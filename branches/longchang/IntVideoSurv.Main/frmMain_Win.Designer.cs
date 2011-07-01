@@ -271,6 +271,8 @@ namespace CameraViewer
             this.timerCurretnTime = new System.Windows.Forms.Timer(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
             this.timerForDeleteTempFiles = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.barStaticItem7 = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -431,9 +433,10 @@ namespace CameraViewer
             this.barButtonItem19,
             this.barButtonItem20,
             this.barButtonItem21,
-            this.barButtonItemPlayTwoFiles});
+            this.barButtonItemPlayTwoFiles,
+            this.barStaticItem7});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 57;
+            this.barManager1.MaxItemId = 58;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.barManager1.StatusBar = this.bar4;
@@ -737,7 +740,8 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem4),
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItemCurrentTime),
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem5),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItemNetStatus)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItemNetStatus),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem7)});
             this.bar4.OptionsBar.AllowQuickCustomization = false;
             this.bar4.OptionsBar.DrawDragBorder = false;
             this.bar4.OptionsBar.UseWholeRow = true;
@@ -2835,6 +2839,19 @@ namespace CameraViewer
             this.timerForDeleteTempFiles.Interval = 200000;
             this.timerForDeleteTempFiles.Tick += new System.EventHandler(this.timerForDeleteTempFiles_Tick);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // barStaticItem7
+            // 
+            this.barStaticItem7.Caption = "barStaticItem7";
+            this.barStaticItem7.Id = 57;
+            this.barStaticItem7.Name = "barStaticItem7";
+            this.barStaticItem7.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -3204,6 +3221,8 @@ namespace CameraViewer
         private DevExpress.XtraEditors.SimpleButton sbZoomSub;
         private DevExpress.XtraEditors.SimpleButton sbZoomAdd;
         private Timer timerForDeleteTempFiles;
+        private Timer timer1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem7;
         
     }
 }

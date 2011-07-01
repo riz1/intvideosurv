@@ -43,7 +43,13 @@ namespace CameraViewer.Forms
             StartPlay = true;
 
         }
-
+        private enum PlayState
+        {
+            FirstVideoState = 1,
+            SecondVideoState = 2,
+            ThirdVideoState = 3
+        }
+        private PlayState play_state;
         private RelatedFile _relatedFile; 
 
         public frmCaptureLicense(AirnoixCamera airnoixCamera)
@@ -62,16 +68,147 @@ namespace CameraViewer.Forms
             //获取所有相关的视频文件
             _relatedFile = new RelatedFile(_airnoixCamera.Ip, 1, _airnoixCamera.BeginCaptureTime, Properties.Settings.Default.PreVideoSeconds);
 
-            intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, airnoixCamera.VideoPath, null, true);
+            //_relatedFile = new RelatedFile();
 
-            frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
-            frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
-            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            listBoxControl1.Items.Clear();
+            if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
+            {
+                listBoxControl1.Items.Add("1");
+            }
+            if(_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
+            {
+                listBoxControl1.Items.Add("2");
+            }
+            listBoxControl1.Items.Add("3");
+
+            intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
+            int ret = 0;
+            if (File.Exists(_airnoixCamera.VideoPath))
+            {
+                listBoxControl1.SelectedIndex = listBoxControl1.Items.Count - 1;
+                PlayMyVideoFile();
+            }
             trackBar1.Minimum = 0;
             trackBar1.Maximum = _totalFrames;
             timer1.Start();
 
+        }
+
+        private void PlayReletedFile2()
+        {
+            //FileInfo fi = new FileInfo(_relatedFile.RelatedFile1);
+            //DateTime oldWriteDateTime = fi.LastWriteTime;
+            //while (true)
+            //{
+            //    fi = new FileInfo(_relatedFile.RelatedFile1);
+            //    if (fi.LastWriteTime == oldWriteDateTime)
+            //    {
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        oldWriteDateTime = fi.LastWriteTime;
+            //    }
+            //    Thread.Sleep(40);
+            //    if (UseWaitCursor == false)
+            //    {
+            //        UseWaitCursor = true;
+            //    }
+
+            //}
+            int ret;
+            video2FrameValid = false;
+            ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile2, null, true);
+            ret = AirnoixPlayer.Avdec_Pause(intPtr);
+            Thread.Sleep(40);
+            _totalFrames = 0;
+            int frames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            if (frames > _relatedFile.RelatedStartFramePosition2 + _relatedFile.RelatedFrames2)
+            {
+                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, _relatedFile.RelatedStartFramePosition2);
+                if (ret == 0)
+                {
+                    _totalFrames = _relatedFile.RelatedFrames2;
+                    video2FrameValid = true;
+                }
+            }
+
+            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            play_state = PlayState.SecondVideoState;
+            trackBar1.Maximum = _totalFrames;
+
+        }
+        private void PlayReletedFile1()
+        {
+            //FileInfo fi = new FileInfo(_relatedFile.RelatedFile1);
+            //DateTime oldWriteDateTime = fi.LastWriteTime;
+            //while (true)
+            //{
+            //    fi = new FileInfo(_relatedFile.RelatedFile1);
+            //    if (fi.LastWriteTime == oldWriteDateTime)
+            //    {
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        oldWriteDateTime = fi.LastWriteTime;
+            //    }
+            //    Thread.Sleep(40);
+            //    if (UseWaitCursor == false)
+            //    {
+            //        UseWaitCursor = true;
+            //    }
+
+            //}
+            int ret;
+            video1FrameValid = false;
+            ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile1, null, true);
+            ret = AirnoixPlayer.Avdec_Pause(intPtr);
+            Thread.Sleep(40);
+            _totalFrames = 0;
+            int frames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            if (frames > _relatedFile.RelatedStartFramePosition1 + _relatedFile.RelatedFrames1)
+            {
+                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, _relatedFile.RelatedStartFramePosition1);
+                if (ret==0)
+                {
+                    _totalFrames = _relatedFile.RelatedFrames1;
+                    video1FrameValid = true;
+                }
+            }
+
+            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            play_state = PlayState.FirstVideoState;
+            trackBar1.Maximum = _totalFrames;
+        }
+
+        private bool video1FrameValid;
+        private bool video2FrameValid;
+        private void PlayMyVideoFile()
+        {
+            int ret;
+            ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, true);
+            play_state = PlayState.ThirdVideoState;  
+            _totalFrames =  GetFrames(_airnoixCamera.VideoPath);
+            trackBar1.Maximum = _totalFrames;
+        }
+
+        private int GetFrames(string videofile)
+        {
+            IntPtr memoryHandle = new IntPtr(0x4321);
+            IntPtr memoryIntPtr = AirnoixPlayer.Avdec_Init(memoryHandle,0, 512, 0);
+            int ret = AirnoixPlayer.Avdec_SetFile(memoryIntPtr, videofile, null, true);
+            Thread.Sleep(40);
+            ret = AirnoixPlayer.Avdec_Pause(memoryIntPtr);
+            frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
+            frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
+            int frames = AirnoixPlayer.Avdec_GetTotalFrames(memoryIntPtr);
+            ret = AirnoixPlayer.Avdec_CloseFile(memoryIntPtr);
+            ret = AirnoixPlayer.Avdec_Done(memoryIntPtr);
+            return frames;
         }
 
         private AirnoixCamera _airnoixCamera;
@@ -92,9 +229,9 @@ namespace CameraViewer.Forms
                 Image[] images = GetImages();
                 treeListPicturesBefore.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
+                logger.Error(ex.ToString());
                 return;
             }
 
@@ -108,9 +245,9 @@ namespace CameraViewer.Forms
                 Image[] images = GetImages();
                 treeListPicturesCurrent.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
+                logger.Error(ex.ToString());
                 return;
             }
         }
@@ -123,9 +260,9 @@ namespace CameraViewer.Forms
                 Image[] images = GetImages();
                 treeListPicturesAfter.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
+                logger.Error(ex.ToString());
                 return;
             }
         }
@@ -159,7 +296,7 @@ namespace CameraViewer.Forms
             Image[] images = new Image[PicNum];
             for (int i = 0; i < PicNum; i++)
             {
-                string fmt = string.Format("BMP {0:0000}{1:0000}{2:0000}", frameWidth, frameHeight, 24);
+                string fmt = string.Format("JPG {0:0000}{1:0000}{2:0000}", frameWidth>0?frameWidth:1280, frameHeight>0?frameHeight:720, 24);
                 string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
                 ret = AirnoixPlayer.Avdec_Play(intPtr);
                 ret = AirnoixPlayer.Avdec_Pause(intPtr);
@@ -253,19 +390,90 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (_totalFrames==0)
-                {
-                    _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                    trackBar1.Maximum = _totalFrames;
-                }
+                int ret = 0;
+
+
                 int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-                if (currentPos <= trackBar1.Maximum)
+
+                switch (play_state)
                 {
-                    trackBar1.Value = currentPos;                    
+                       case PlayState.FirstVideoState:
+                        if (video1FrameValid)
+                        {
+                            trackBar1.Value = currentPos - _relatedFile.RelatedStartFramePosition1;
+                        } 
+                        else 
+                        {
+                            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+                            trackBar1.Maximum = _totalFrames;
+                        }
+                        break;
+                       case PlayState.SecondVideoState:
+                        if (video2FrameValid)
+                        {
+                            trackBar1.Value = currentPos - _relatedFile.RelatedStartFramePosition2;
+                        }
+                        else 
+                        {
+                            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+                            trackBar1.Maximum = _totalFrames;
+                        }
+                        break;
+                       case PlayState.ThirdVideoState:
+                        
+                        if (_totalFrames != AirnoixPlayer.Avdec_GetTotalFrames(intPtr))
+                        {
+                            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+                            trackBar1.Maximum = _totalFrames;
+                        }
+                        trackBar1.Value = currentPos; 
+                        break;
                 }
+                //switch ()
+                //{
+                //    
+                //        if (currentPos <= trackBar1.Maximum)
+                //        {
+                //            trackBar1.Value = currentPos;
+                //        }
+                //        if ((AirnoixPlayer.Avdec_GetCurrentState(intPtr)==AirnoixPlayerState.PLAY_STATE_STOP))
+                //        {
+                //            if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
+                //            {
+                //                ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+                //                ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile2, null, false);
+                //                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, _relatedFile.RelatedStartFramePosition2);
+                //                ret = AirnoixPlayer.Avdec_Play(intPtr);
+                //                play_state = PlayState.SecondVideoState;
+                //            }
+                //            else
+                //            {
+                //                ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+                //                ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, true);
+                //                play_state = PlayState.ThirdVideoState;
+                //            }
+                //        }
+                //        break;
+                //    case PlayState.SecondVideoState:
+                //        if (_relatedFile.RelatedFrames1 + currentPos <= trackBar1.Maximum)
+                //        {
+                //            trackBar1.Value = _relatedFile.RelatedFrames1 + currentPos;
+                //        }
+                //        if ((currentPos > _relatedFile.RelatedStartFramePosition2 + _relatedFile.RelatedFrames2) || (AirnoixPlayer.Avdec_GetCurrentState(intPtr) == AirnoixPlayerState.PLAY_STATE_STOP))
+                //        {
+                //                ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+                //                ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, true);
+                //                play_state = PlayState.ThirdVideoState;
+                //        }
+                //        break;
+                //    case PlayState.ThirdVideoState:
+                //        if (_relatedFile.RelatedFrames1 + _relatedFile.RelatedFrames2 + currentPos <= trackBar1.Maximum)
+                //        {
+                //            trackBar1.Value = _relatedFile.RelatedFrames1 + _relatedFile.RelatedFrames2 + currentPos;
+                //        }
+                //        break;
 
- 
-
+                //}
             }
             catch (Exception ex)
             {
@@ -608,6 +816,22 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
+            }
+        }
+
+        private void listBoxControl1_DoubleClick(object sender, EventArgs e)
+        {
+            switch ((string)(listBoxControl1.Items[listBoxControl1.SelectedIndex]))
+            {
+                case "1":
+                    PlayReletedFile1();
+                    break;
+                case "2":
+                    PlayReletedFile2();
+                    break;
+                case "3":
+                    PlayMyVideoFile();
+                    break;
             }
         }
 
