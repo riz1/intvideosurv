@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  UserGroup(");
+            sbField.Append("INSERT INTO  IVS_usergroup(");
             sbValue.Append("values (");
             //sbField.Append("id");
             //sbValue.AppendFormat("{0}", id);
@@ -42,7 +42,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO UserGroup(");
+            sbField.Append("INSERT INTO IVS_usergroup(");
             sbValue.Append("values (");
             sbField.Append("VirtualGroupID");
             sbValue.AppendFormat("{0}", oUserGroup.VirtualGroupID);
@@ -65,7 +65,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, UserGroupInfo oUserGroup)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update UserGroup set");
+            sb.Append("update IVS_usergroup set");
             sb.AppendFormat("VirtualGroupID={0} ", oUserGroup.VirtualGroupID);
             sb.AppendFormat(",UserID={0} ", oUserGroup.UserID);
             sb.AppendFormat(" where ID={0})", oUserGroup.ID);
@@ -85,7 +85,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteUser(Database db, int userid)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from UserGroup ");
+            sb.Append("delete from IVS_usergroup ");
             sb.AppendFormat(" where UserID={0}", userid);
             string cmdText = sb.ToString();
             try
@@ -103,7 +103,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int ID)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from UserGroup ");
+            sb.Append("delete from IVS_usergroup ");
             sb.AppendFormat(" where ID={0}", ID);
             string cmdText = sb.ToString();
             try
@@ -121,7 +121,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByVirtualGroupID(Database db, int ID)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from UserGroup ");
+            sb.Append("delete from IVS_usergroup ");
             sb.AppendFormat(" where VirtualGroupID={0}", ID);
             string cmdText = sb.ToString();
             try
@@ -138,7 +138,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllCameraInfo(Database db, int VirtualGroupId)
         {
-            string cmdText = string.Format("select b.* from UserGroup a,UserInfo b where a.UserID=b.userid and a.VirtualGroupID={0}", VirtualGroupId);
+            string cmdText = string.Format("select b.* from IVS_usergroup a,IVS_UserInfo b where a.UserID=b.userid and a.VirtualGroupID={0}", VirtualGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -152,7 +152,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetTheUser(Database db, int userid)
         {
-            string cmdText = string.Format("select * from UserGroup where UserID={0}", userid);
+            string cmdText = string.Format("select * from IVS_usergroup where UserID={0}", userid);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -166,7 +166,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCameraInfoByUserId(Database db, int userid)
         {
-            string cmdText = string.Format("select * from CameraInfo where CameraId in (select CameraID from CameraGroup where VirtualGroupID in (select VirtualGroupID from UserGroup where UserID={0}))", userid);
+            string cmdText = string.Format("select * from IVS_CameraInfo where CameraId in (select CameraID from IVS_CameraGroup where VirtualGroupID in (select VirtualGroupID from IVS_usergroup where UserID={0}))", userid);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

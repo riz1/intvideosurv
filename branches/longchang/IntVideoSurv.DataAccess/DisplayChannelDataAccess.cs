@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
 
         public static int GetMaxDisplayChannelId(Database db)
         {
-            string cmdText = "select max(DisplayChannelId) from displayChannelInfo";
+            string cmdText = "select max(DisplayChannelId) from IVS_displayChannelInfo";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -32,7 +32,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO DisplayChannelInfo(");
+            sbField.Append("INSERT INTO IVS_displayChannelInfo(");
             sbValue.Append("values(");
             sbField.Append("DisplayChannelName,");
             sbValue.AppendFormat("'{0}',", displayChannelInfo.DisplayChannelName);
@@ -58,7 +58,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, DisplayChannelInfo displayChannelInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update displayChannelInfo set");
+            sb.Append("update IVS_displayChannelInfo set");
             sb.AppendFormat(" DisplayChannelName='{0}'", displayChannelInfo.DisplayChannelName);
             sb.AppendFormat(" where DisplayChannelId={0})", displayChannelInfo.DisplayChannelId);
             string cmdText = sb.ToString();
@@ -79,7 +79,7 @@ namespace IntVideoSurv.DataAccess
         public static int UpdateSplitScreenById(Database db, int id, int splitScreenNo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update displayChannelInfo set");
+            sb.Append("update IVS_displayChannelInfo set");
             sb.AppendFormat(" SplitScreenNo={0}", splitScreenNo);
             sb.AppendFormat(" where DisplayChannelId={0}", id);
             string cmdText = sb.ToString();
@@ -117,7 +117,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllDisplayChannelInfos(Database db)
         {
-            string cmdText = string.Format("select * from displayChannelInfo order by DecodeCardNo, DisplayChannelId");
+            string cmdText = string.Format("select * from IVS_displayChannelInfo order by DecodeCardNo, DisplayChannelId");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -132,7 +132,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetDisplayChannelInfoById(Database db,int displayChannelId)
         {
-            string cmdText = string.Format("select * from displayChannelInfo where DisplayChannelId={0}", displayChannelId);
+            string cmdText = string.Format("select * from IVS_displayChannelInfo where DisplayChannelId={0}", displayChannelId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

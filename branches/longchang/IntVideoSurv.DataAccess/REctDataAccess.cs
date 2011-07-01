@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  REct(");
+            sbField.Append("INSERT INTO  IVS_REct(");
             sbValue.Append("values (");
             //sbField.Append("RectID");
             //sbValue.AppendFormat("'{0}'", oRect.RectID);
@@ -36,12 +36,12 @@ namespace IntVideoSurv.DataAccess
                 string strsql = "";
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('REct')";
+                    strsql = "SELECT     ident_current('IVS_REct')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   REct   where  rowid=(select   max(rowid)   from   REct)";
+                    "select ID   from   IVS_REct   where  rowid=(select   max(rowid)   from   IVS_REct)";
                 }
 
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());

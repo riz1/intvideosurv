@@ -62,7 +62,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetUserInfoByCameraId(Database db, int cameraid)
         {
 
-            string cmdText = string.Format("select * from USERINFO where username in (select DLYH from TOG_DEVICE where SBBH={0})", cameraid);
+            string cmdText = string.Format("select * from IVS_UserInfo where username in (select DLYH from TOG_DEVICE where SBBH={0})", cameraid);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

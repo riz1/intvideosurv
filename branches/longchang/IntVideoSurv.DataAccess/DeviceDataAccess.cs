@@ -12,7 +12,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static int GetMaxDeviceId(Database db)
         {
-            string cmdText = "select max(DeviceId) from DeviceInfo";
+            string cmdText = "select max(DeviceId) from IVS_DeviceInfo";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -29,7 +29,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  DeviceInfo(");
+            sbField.Append("INSERT INTO  IVS_DeviceInfo(");
             sbValue.Append("values(");
             sbField.Append("Name");
             sbValue.AppendFormat("'{0}'", oDeviceInfo.Name);
@@ -80,7 +80,7 @@ namespace IntVideoSurv.DataAccess
         {
 
             StringBuilder sbValue = new StringBuilder();
-            sbValue.Append("update DeviceInfo set ");
+            sbValue.Append("update IVS_DeviceInfo set ");
             sbValue.AppendFormat("Name='{0}'", oDeviceInfo.Name);
             sbValue.AppendFormat(",source='{0}'", oDeviceInfo.source);
             sbValue.AppendFormat(",login='{0}'", oDeviceInfo.login);
@@ -114,7 +114,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int DeviceId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from DeviceInfo ");
+            sb.Append("delete from IVS_DeviceInfo ");
             sb.AppendFormat(" where DeviceId={0}", DeviceId);
             string cmdText = sb.ToString();
             try
@@ -132,7 +132,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByGroupId(Database db, int GroupId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from DeviceInfo ");
+            sb.Append("delete from IVS_DeviceInfo ");
             sb.AppendFormat(" where GroupId={0}", GroupId);
             string cmdText = sb.ToString();
             try
@@ -149,7 +149,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllDeviceInfo(Database db)
         {
-            string cmdText = string.Format("select * from DeviceInfo order by DeviceId");
+            string cmdText = string.Format("select * from IVS_DeviceInfo order by DeviceId");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -163,7 +163,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetDeviceInfoByDeviceId(Database db, int deviceId)
         {
-            string cmdText = string.Format("select * from DeviceInfo where DeviceId={0} order by DeviceId", deviceId);
+            string cmdText = string.Format("select * from IVS_DeviceInfo where DeviceId={0} order by DeviceId", deviceId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -177,7 +177,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetDeviceInfoByDeviceName(Database db, string deviceName)
         {
-            string cmdText = string.Format("select * from DeviceInfo where Name='{0}' order by DeviceId", deviceName);
+            string cmdText = string.Format("select * from IVS_DeviceInfo where Name='{0}' order by DeviceId", deviceName);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -192,7 +192,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetDeviceInfoByGroupId(Database db, int groupId)
         {
-            string cmdText = string.Format("select * from DeviceInfo where GroupId={0} order by DeviceId", groupId);
+            string cmdText = string.Format("select * from IVS_DeviceInfo where GroupId={0} order by DeviceId", groupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -207,9 +207,9 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetDisplayDeviceById(Database db, int deviceId)
         {
-            string cmdText = string.Format("select deviceID as 索引号, DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
-                "login as 登录名,DeviceInfo.description as 描述,GroupInfo.Name as 组名 "+
-                "from (DeviceInfo left join GroupInfo on (DeviceInfo.GroupId=GroupInfo.GroupId)) where DeviceId={0}", deviceId);
+            string cmdText = string.Format("select deviceID as 索引号, IVS_DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
+                "login as 登录名,IVS_DeviceInfo.description as 描述,IVS_GroupInfo.Name as 组名 "+
+                "from (IVS_DeviceInfo left join IVS_GroupInfo on (IVS_DeviceInfo.GroupId=IVS_GroupInfo.GroupId)) where DeviceId={0}", deviceId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -224,9 +224,9 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetDisplayDeviceByGroupId(Database db, int groupId)
         {
             string cmdText = string.Format(
-                "select deviceID as 索引号, DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
-                "login as 登录名,DeviceInfo.description as 描述,GroupInfo.Name as 组名 "+
-                "from (DeviceInfo left join GroupInfo on (DeviceInfo.GroupId=GroupInfo.GroupId)) where DeviceInfo.GroupId={0} order by DeviceId", groupId);
+                "select deviceID as 索引号, IVS_DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
+                "login as 登录名,IVS_DeviceInfo.description as 描述,IVS_GroupInfo.Name as 组名 "+
+                "from (IVS_DeviceInfo left join IVS_GroupInfo on (IVS_DeviceInfo.GroupId=IVS_GroupInfo.GroupId)) where IVS_DeviceInfo.GroupId={0} order by DeviceId", groupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -239,9 +239,9 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllDisplayDeviceByDeviceList(Database db,string devicelist)
         {
-            string cmdText = string.Format("select deviceID as 索引号, DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
-                "login as 登录名,DeviceInfo.description as 描述,GroupInfo.Name as 组名 "+
-                " from  (DeviceInfo left join GroupInfo on (DeviceInfo.GroupId=GroupInfo.GroupId)) where DeviceId in {0} order by DeviceId", devicelist);
+            string cmdText = string.Format("select deviceID as 索引号, IVS_DeviceInfo.name as 设备名, source as IP地址, port as 端口, "+
+                "login as 登录名,IVS_DeviceInfo.description as 描述,IVS_GroupInfo.Name as 组名 "+
+                " from  (IVS_DeviceInfo left join IVS_GroupInfo on (IVS_DeviceInfo.GroupId=IVS_GroupInfo.GroupId)) where DeviceId in {0} order by DeviceId", devicelist);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

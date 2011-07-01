@@ -10,7 +10,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static int GetMaxSystemLogId(Database db)
         {
-            string cmdText = "select max(Id) from SystemLog";
+            string cmdText = "select max(Id) from IVS_SystemLog";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -27,7 +27,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  SystemLog(");
+            sbField.Append("INSERT INTO  IVS_SystemLog(");
             sbValue.Append("values(");
             sbField.Append("Happentime");
             sbValue.AppendFormat("'{0}'", systemLog.HappenTime);
@@ -69,7 +69,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int systemLogId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from SystemLog ");
+            sb.Append("delete from IVS_SystemLog ");
             sb.AppendFormat(" where Id={0}", systemLogId);
             string cmdText = sb.ToString();
             try
@@ -87,7 +87,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllSystemLogs(Database db)
         {
-            string cmdText = string.Format("select * from SystemLog order by Id");
+            string cmdText = string.Format("select * from IVS_SystemLog order by Id");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -101,7 +101,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetSystemLogs(Database db, string filter)
         {
-            string cmdText = string.Format("select ID as 索引号, happentime as 发生时间,clientusername as 用户名, systemtypename as 操作类型, content as 内容 from SystemLog {0} order by Id", filter);
+            string cmdText = string.Format("select ID as 索引号, happentime as 发生时间,clientusername as 用户名, systemtypename as 操作类型, content as 内容 from IVS_SystemLog {0} order by Id", filter);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -115,7 +115,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetSystemLogTypes(Database db)
         {
-            string cmdText = string.Format("select distinct systemtypename from SystemLog");
+            string cmdText = string.Format("select distinct systemtypename from IVS_SystemLog");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

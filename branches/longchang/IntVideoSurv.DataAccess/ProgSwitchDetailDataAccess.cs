@@ -9,12 +9,12 @@ namespace IntVideoSurv.DataAccess
     {
         public static DataSet GetProgSwitchDetailByProgSwitchId(Database db, int progSwitchId)
         {
-            string cmdText = string.Format("select ProgSwitchDetail.Id as ProgSwitchDetailId, ProgSwitchDetail.CameraId as CameraId, CameraInfo.Name as CameraName," +
-                "ProgSwitchDetail.TickTime as TickTime, DeviceInfo.DeviceId as DeviceId, DeviceInfo.Name as DeviceName " +
+            string cmdText = string.Format("select IVS_ProgSwitchDetail.Id as ProgSwitchDetailId, IVS_ProgSwitchDetail.CameraId as CameraId, IVS_CameraInfo.Name as CameraName," +
+                "IVS_ProgSwitchDetail.TickTime as TickTime, IVS_DeviceInfo.DeviceId as DeviceId, IVS_DeviceInfo.Name as DeviceName " +
                 " from " +
-                "((ProgSwitchDetail inner join CameraInfo on ProgSwitchDetail.CameraId = CameraInfo.CameraId)  " +
-                "inner join DeviceInfo on CameraInfo.DeviceId = DeviceInfo.DeviceId ) " +
-                "where ProgSwitchDetail.ProgSwitchId={0} order by ProgSwitchDetail.Id", progSwitchId);
+                "((IVS_ProgSwitchDetail inner join IVS_CameraInfo on IVS_ProgSwitchDetail.CameraId = IVS_CameraInfo.CameraId)  " +
+                "inner join IVS_DeviceInfo on IVS_CameraInfo.DeviceId = IVS_DeviceInfo.DeviceId ) " +
+                "where IVS_ProgSwitchDetail.ProgSwitchId={0} order by IVS_ProgSwitchDetail.Id", progSwitchId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -29,12 +29,12 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetProgSwitchDetailByDetailId(Database db, int detailId)
         {
-            string cmdText = string.Format("select ProgSwitchDetail.Id as ProgSwitchDetailId, ProgSwitchDetail.CameraId as CameraId, CameraInfo.Name as CameraName," +
-                "ProgSwitchDetail.TickTime as TickTime, DeviceInfo.DeviceId as DeviceId, DeviceInfo.Name as DeviceName " +
+            string cmdText = string.Format("select IVS_ProgSwitchDetail.Id as ProgSwitchDetailId, IVS_ProgSwitchDetail.CameraId as CameraId, IVS_CameraInfo.Name as CameraName," +
+                "IVS_ProgSwitchDetail.TickTime as TickTime, IVS_DeviceInfo.DeviceId as DeviceId, IVS_DeviceInfo.Name as DeviceName " +
                 " from " +
-                "((ProgSwitchDetail inner join CameraInfo on ProgSwitchDetail.CameraId = CameraInfo.CameraId)  " +
-                "inner join DeviceInfo on CameraInfo.DeviceId = DeviceInfo.DeviceId ) " +
-                "where ProgSwitchDetail.Id={0}", detailId);
+                "((IVS_ProgSwitchDetail inner join IVS_CameraInfo on IVS_ProgSwitchDetail.CameraId = IVS_CameraInfo.CameraId)  " +
+                "inner join IVS_DeviceInfo on IVS_CameraInfo.DeviceId = IVS_DeviceInfo.DeviceId ) " +
+                "where IVS_ProgSwitchDetail.Id={0}", detailId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -49,12 +49,12 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllProgSwitchDetailInfos(Database db)
         {
-            string cmdText = string.Format("select ProgSwitchDetail.Id as ProgSwitchDetailId, ProgSwitchDetail.CameraId as CameraId, CameraInfo.Name as CameraName," +
-                "ProgSwitchDetail.TickTime as TickTime, DeviceInfo.DeviceId as DeviceId, DeviceInfo.Name as DeviceName " +
+            string cmdText = string.Format("select IVS_ProgSwitchDetail.Id as ProgSwitchDetailId, IVS_ProgSwitchDetail.CameraId as CameraId, IVS_CameraInfo.Name as CameraName," +
+                "IVS_ProgSwitchDetail.TickTime as TickTime, IVS_DeviceInfo.DeviceId as DeviceId, IVS_DeviceInfo.Name as DeviceName " +
                 " from " +
-                "((ProgSwitchDetail inner join CameraInfo on ProgSwitchDetail.CameraId = CameraInfo.CameraId)  " +
-                "inner join DeviceInfo on CameraInfo.DeviceId = DeviceInfo.DeviceId ) " +
-                "order by ProgSwitchDetail.Id");
+                "((IVS_ProgSwitchDetail inner join IVS_CameraInfo on IVS_ProgSwitchDetail.CameraId = IVS_CameraInfo.CameraId)  " +
+                "inner join IVS_DeviceInfo on IVS_CameraInfo.DeviceId = IVS_DeviceInfo.DeviceId ) " +
+                "order by IVS_ProgSwitchDetail.Id");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -70,7 +70,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int id)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from [ProgSwitchDetail] ");
+            sb.Append("delete from [IVS_ProgSwitchDetail] ");
             sb.AppendFormat(" where [Id]={0}", id);
             string cmdText = sb.ToString();
             try
@@ -95,7 +95,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  [ProgSwitchDetail](");
+            sbField.Append("INSERT INTO  [IVS_ProgSwitchDetail](");
             sbValue.Append("values (");
             sbField.Append("[ProgSwitchId]");
             sbValue.AppendFormat("{0}", progSwitchid);
@@ -126,7 +126,7 @@ namespace IntVideoSurv.DataAccess
         public static bool IsExisted(Database db, int progSwitchid, int cameraId)
         {
             String strSqlExisted =
-                String.Format("select count(*) from ProgSwitchDetail where ProgSwitchId={0} and CameraId={1}",
+                String.Format("select count(*) from IVS_ProgSwitchDetail where ProgSwitchId={0} and CameraId={1}",
                               progSwitchid, cameraId);
             try
             {
@@ -143,7 +143,7 @@ namespace IntVideoSurv.DataAccess
         public static int UpdateTickTimeById(Database db, int id, int tickTime)
         {
 
-            string cmdText = string.Format("update [ProgSwitchDetail] set [TickTime]={0} where [Id] = {1}", tickTime, id);
+            string cmdText = string.Format("update [IVS_ProgSwitchDetail] set [TickTime]={0} where [Id] = {1}", tickTime, id);
 
 
             try

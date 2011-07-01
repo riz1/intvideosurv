@@ -12,7 +12,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static bool IsTaskExisted(Database db, int taskId)
         {
-            string cmdText = string.Format("select count(*) from TaskInfo where TaskId={0}",taskId);
+            string cmdText = string.Format("select count(*) from IVS_TaskInfo where TaskId={0}",taskId);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString())>0;
@@ -29,7 +29,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  TaskInfo(");
+            sbField.Append("INSERT INTO  IVS_TaskInfo(");
             sbValue.Append("values(");
             sbField.Append("TaskId");
             sbValue.AppendFormat("{0}", taskInfo.TaskId);
@@ -68,7 +68,7 @@ namespace IntVideoSurv.DataAccess
         {
 
             StringBuilder sbValue = new StringBuilder();
-            sbValue.Append("update TaskInfo set ");
+            sbValue.Append("update IVS_TaskInfo set ");
 
             sbValue.AppendFormat("Status={0}", status);
             if (DataBaseParas.DBType == MyDBType.SqlServer)
@@ -99,7 +99,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int taskId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from TaskInfo ");
+            sb.Append("delete from IVS_TaskInfo ");
             sb.AppendFormat(" where TaskId={0}", taskId);
             string cmdText = sb.ToString();
             try

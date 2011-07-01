@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  Vehicle(");
+            sbField.Append("INSERT INTO  IVS_Vehicle(");
             sbValue.Append("values (");
             sbField.Append("VehicleID");
             sbValue.AppendFormat("{0}", oVehicle.VehicleID);
@@ -78,7 +78,7 @@ namespace IntVideoSurv.DataAccess
                 cmdText = cmdText.Replace("\r\n", "");
                 return db.ExecuteNonQuery(CommandType.Text, cmdText);
                 //获得倒数第二条记录
-                //int id = int.Parse(db.ExecuteScalar(CommandType.Text, "select top 2 VehicleID from Vehicle").ToString());
+                //int id = int.Parse(db.ExecuteScalar(CommandType.Text, "select top 2 VehicleID from IVS_Vehicle").ToString());
                 //return id;
             }
             catch (Exception ex)
@@ -89,7 +89,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static int GetVehicleCountByPlateNumber(Database db, string number)
         {
-            string cmdText = string.Format("select count(platenumber) from Vehicle where platenumber='{0}'", number);
+            string cmdText = string.Format("select count(platenumber) from IVS_Vehicle where platenumber='{0}'", number);
             try
             {
                 return int.Parse(db.ExecuteDataSet(CommandType.Text, cmdText).ToString());
@@ -104,12 +104,12 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetVehicleCustom(Database db, string str)
         {
             string cmdText = string.Format(
-                "select Vehicle.VehicleID,Vehicle.platenumber,Vehicle.speed,Vehicle.stemagainst,Vehicle.stop,Vehicle.accident"+
-                ",Vehicle.linechange,Vehicle.platecolor,Vehicle.vehiclecolor,Vehicle.PictureID,Vehicle.RectId"+
-                ",Vehicle.confidence,VideoInfo.ID as VideoId " +
-                "from Vehicle,CapturePicture,VideoInfo " +
-                "where Vehicle.PictureID=CapturePicture.PictureID and " +
-                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.Datetime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "select IVS_Vehicle.VehicleID,IVS_Vehicle.platenumber,IVS_Vehicle.speed,IVS_Vehicle.stemagainst,IVS_Vehicle.stop,IVS_Vehicle.accident"+
+                ",IVS_Vehicle.linechange,IVS_Vehicle.platecolor,IVS_Vehicle.vehiclecolor,IVS_Vehicle.PictureID,IVS_Vehicle.RectId"+
+                ",IVS_Vehicle.confidence,IVS_VideoInfo.ID as VideoId " +
+                "from IVS_Vehicle,IVS_CapturePicture,IVS_VideoInfo " +
+                "where IVS_Vehicle.PictureID=IVS_CapturePicture.PictureID and " +
+                "IVS_CapturePicture.CameraID = IVS_VideoInfo.CameraId and (IVS_CapturePicture.Datetime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -122,11 +122,11 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetVehicleCustom(Database db, string str, int pageno,int pagesize)
         {
-            string fields = " Vehicle.VehicleID,Vehicle.platenumber,Vehicle.speed,Vehicle.stemagainst,Vehicle.stop,Vehicle.accident,Vehicle.linechange,Vehicle.platecolor,Vehicle.vehiclecolor,Vehicle.pictureID,Vehicle.RectId,Vehicle.confidence,VideoInfo.ID as VideoId ";
-            string tables = " Vehicle,CapturePicture,VideoInfo ";
+            string fields = " IVS_Vehicle.VehicleID,IVS_Vehicle.platenumber,IVS_Vehicle.speed,IVS_Vehicle.stemagainst,IVS_Vehicle.stop,IVS_Vehicle.accident,IVS_Vehicle.linechange,IVS_Vehicle.platecolor,IVS_Vehicle.vehiclecolor,IVS_Vehicle.pictureID,IVS_Vehicle.RectId,IVS_Vehicle.confidence,IVS_VideoInfo.ID as VideoId ";
+            string tables = " IVS_Vehicle,IVS_CapturePicture,IVS_VideoInfo ";
             string condition = string.Format(
-                " Vehicle.PictureID=CapturePicture.PictureID and " +
-                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.Datetime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                " IVS_Vehicle.PictureID=IVS_CapturePicture.PictureID and " +
+                "IVS_CapturePicture.CameraID = IVS_VideoInfo.CameraId and (IVS_CapturePicture.Datetime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " Datetime ";
             byte ordertype = 1;
             string pkcolumn = " VehicleID ";
@@ -161,10 +161,10 @@ namespace IntVideoSurv.DataAccess
         {
             str = str.Replace("''", "'");
             string cmdText = string.Format(
-                "select count(distinct Vehicle.VehicleID) " +
-                "from Vehicle,CapturePicture,VideoInfo " +
-                "where Vehicle.PictureID=CapturePicture.PictureID and " +
-                "CapturePicture.CameraID = VideoInfo.CameraId and (CapturePicture.Datetime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "select count(distinct IVS_Vehicle.VehicleID) " +
+                "from IVS_Vehicle,IVS_CapturePicture,IVS_VideoInfo " +
+                "where IVS_Vehicle.PictureID=IVS_CapturePicture.PictureID and " +
+                "IVS_CapturePicture.CameraID = IVS_VideoInfo.CameraId and (IVS_CapturePicture.Datetime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());

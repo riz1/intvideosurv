@@ -15,7 +15,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  CapturePicture(");
+            sbField.Append("INSERT INTO  IVS_CapturePicture(");
             sbValue.Append("values (");
             //sbField.Append("PictureID");
             //sbValue.AppendFormat("'{0}'", ocapturePicture.PictureID);
@@ -46,12 +46,12 @@ namespace IntVideoSurv.DataAccess
                 string strsql = "";
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('CapturePicture')";
+                    strsql = "SELECT     ident_current('IVS_CapturePicture')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   CapturePicture   where  rowid=(select   max(rowid)   from   CapturePicture)";
+                    "select ID   from   IVS_CapturePicture   where  rowid=(select   max(rowid)   from   IVS_CapturePicture)";
                 }
 
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
@@ -65,7 +65,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCapturePicture(Database db, int cameraId, DateTime dt)
         {
-            string cmdText = string.Format("select * from CapturePicture where CameraID={0} and Datetime={1}", cameraId,dt);
+            string cmdText = string.Format("select * from IVS_CapturePicture where CameraID={0} and Datetime={1}", cameraId,dt);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -79,7 +79,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCapturePicture(Database db, int id)
         {
-            string cmdText = string.Format("select * from CapturePicture where PictureID={0}", id);
+            string cmdText = string.Format("select * from IVS_CapturePicture where PictureID={0}", id);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -94,7 +94,7 @@ namespace IntVideoSurv.DataAccess
 
         public static bool IsExistCapturePicture(Database db, int id, DateTime dt)
         {
-            string cmdText = string.Format("select count(*) from CapturePicture where CameraID={0} and Datetime={1}", id, dt);
+            string cmdText = string.Format("select count(*) from IVS_CapturePicture where CameraID={0} and Datetime={1}", id, dt);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString()) > 0;

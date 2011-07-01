@@ -17,7 +17,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO DefaultCardOut(");
+            sbField.Append("INSERT INTO IVS_DefaultCardOut(");
             sbValue.Append("values(");
             sbField.Append("CameraId,");
             sbValue.AppendFormat("{0},", defaultCardOut.CameraId);
@@ -41,7 +41,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, DefaultCardOut defaultCardOut)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update DefaultCardOut set");
+            sb.Append("update IVS_DefaultCardOut set");
             sb.AppendFormat(" cameraid={0},", defaultCardOut.CameraId);
             sb.AppendFormat(" DisplayChannelId={0},", defaultCardOut.DisplayChannelId);
             sb.AppendFormat(" DisplaySplitScreenNo={0},", defaultCardOut.DisplaySplitScreenNo);
@@ -63,7 +63,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int defaultCardOutId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from DefaultCardOut ");
+            sb.Append("delete from IVS_DefaultCardOut ");
             sb.AppendFormat(" where id={0}", defaultCardOutId);
             string cmdText = sb.ToString();
             try
@@ -82,14 +82,14 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetAllDefaultCardOuts(Database db)
         {
             string cmdText = string.Format(
-                "select DefaultCardOut.Id as Id, DefaultCardOut.CameraId as CameraId, "+
-                "DefaultCardOut.DisplayChannelId as DisplayChannelId, DefaultCardOut.DisplaySplitScreenNo as DisplaySplitScreenNo, " +
-                "DisplayChannelInfo.DisplayChannelName as DisplayChannelName, " +
-                "DisplayChannelInfo.DecodeCardNo as DecodeCardNo, " +
-                "DisplayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard, " +
-                "DisplayChannelInfo.SplitScreenNo as SplitScreenNo " +
-                "from ( DefaultCardOut inner join displayChannelInfo on DisplayChannelInfo.DisplayChannelId = DefaultCardOut.DisplayChannelId )"+
-                "order by DefaultCardOut.DisplayChannelId,DefaultCardOut.DisplaySplitScreenNo");
+                "select IVS_DefaultCardOut.Id as Id, IVS_DefaultCardOut.CameraId as CameraId, "+
+                "IVS_DefaultCardOut.DisplayChannelId as DisplayChannelId, IVS_DefaultCardOut.DisplaySplitScreenNo as DisplaySplitScreenNo, " +
+                "IVS_displayChannelInfo.DisplayChannelName as DisplayChannelName, " +
+                "IVS_displayChannelInfo.DecodeCardNo as DecodeCardNo, " +
+                "IVS_displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard, " +
+                "IVS_displayChannelInfo.SplitScreenNo as SplitScreenNo " +
+                "from ( IVS_DefaultCardOut inner join IVS_displayChannelInfo on IVS_displayChannelInfo.DisplayChannelId = IVS_DefaultCardOut.DisplayChannelId )"+
+                "order by IVS_DefaultCardOut.DisplayChannelId,IVS_DefaultCardOut.DisplaySplitScreenNo");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -105,15 +105,15 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetDefaultCardOutById(Database db, int defaultCardOutId)
         {
             string cmdText = string.Format(
-                "select DefaultCardOut.Id as Id, DefaultCardOut.CameraId as CameraId, " +
-                "DefaultCardOut.DisplayChannelId as DisplayChannelId, DefaultCardOut.DisplaySplitScreenNo as DisplaySplitScreenNo, " +
-                "DisplayChannelInfo.DisplayChannelName as DisplayChannelName, " +
-                "DisplayChannelInfo.DecodeCardNo as DecodeCardNo, " +
-                "DisplayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard, " +
-                "DisplayChannelInfo.SplitScreenNo as SplitScreenNo " +
-                "from ( DefaultCardOut inner join displayChannelInfo on DisplayChannelInfo.DisplayChannelId = DefaultCardOut.DisplayChannelId )" +
-                "where DefaultCardOut.id={0} " +
-                "order by DefaultCardOut.DisplayChannelId,DefaultCardOut.DisplaySplitScreenNo", defaultCardOutId); 
+                "select IVS_DefaultCardOut.Id as Id, IVS_DefaultCardOut.CameraId as CameraId, " +
+                "IVS_DefaultCardOut.DisplayChannelId as DisplayChannelId, IVS_DefaultCardOut.DisplaySplitScreenNo as DisplaySplitScreenNo, " +
+                "IVS_displayChannelInfo.DisplayChannelName as DisplayChannelName, " +
+                "IVS_displayChannelInfo.DecodeCardNo as DecodeCardNo, " +
+                "IVS_displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard, " +
+                "IVS_displayChannelInfo.SplitScreenNo as SplitScreenNo " +
+                "from ( IVS_DefaultCardOut inner join IVS_displayChannelInfo on IVS_displayChannelInfo.DisplayChannelId = IVS_DefaultCardOut.DisplayChannelId )" +
+                "where IVS_DefaultCardOut.id={0} " +
+                "order by IVS_DefaultCardOut.DisplayChannelId,IVS_DefaultCardOut.DisplaySplitScreenNo", defaultCardOutId); 
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

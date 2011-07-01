@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
 
         public static int GetMaxGroupId(Database db)
         {
-            string cmdText = "select max(GroupId) from GroupInfo";
+            string cmdText = "select max(GroupId) from IVS_GroupInfo";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -32,7 +32,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO GroupInfo(");
+            sbField.Append("INSERT INTO IVS_GroupInfo(");
             sbValue.Append("values(");
             sbField.Append("Name");
             sbValue.AppendFormat("'{0}'", oGroupInfo.Name);
@@ -59,7 +59,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, GroupInfo oGroupInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update GroupInfo set");
+            sb.Append("update IVS_GroupInfo set");
             sb.AppendFormat(" Name='{0}'", oGroupInfo.Name);
             sb.AppendFormat(",Description='{0}'", oGroupInfo.Description);
             sb.AppendFormat(",ParentId={0}", oGroupInfo.ParentId);
@@ -83,7 +83,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int groupId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from GroupInfo ");
+            sb.Append("delete from IVS_GroupInfo ");
             sb.AppendFormat(" where GroupId={0}", groupId);
             string cmdText = sb.ToString();
             try
@@ -101,7 +101,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllGroupInfo(Database db)
         {
-            string cmdText = string.Format("select * from GroupInfo order by ParentId");
+            string cmdText = string.Format("select * from IVS_GroupInfo order by ParentId");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -115,7 +115,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetGroupInfoByGroupId(Database db, int groupId)
         {
-            string cmdText = string.Format("select * from GroupInfo where GroupId={0} ", groupId);
+            string cmdText = string.Format("select * from IVS_GroupInfo where GroupId={0} ", groupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -130,7 +130,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetGroupInfoByGroupName(Database db, string groupName)
         {
-            string cmdText = string.Format("select * from GroupInfo where Name='{0}' ", groupName);
+            string cmdText = string.Format("select * from IVS_GroupInfo where Name='{0}' ", groupName);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

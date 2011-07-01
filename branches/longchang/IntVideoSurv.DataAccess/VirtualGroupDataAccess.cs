@@ -13,7 +13,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  VirtualGroup(");
+            sbField.Append("INSERT INTO  IVS_VirtualGroup(");
             sbValue.Append("values (");
             //sbField.Append("[ID]");
             //sbValue.AppendFormat("{0}", oVirtualGroup.ID);
@@ -30,12 +30,12 @@ namespace IntVideoSurv.DataAccess
 
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('VirtualGroup')";
+                    strsql = "SELECT     ident_current('IVS_VirtualGroup')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   VirtualGroup   where  rowid=(select   max(rowid)   from   VirtualGroup)";
+                    "select ID   from   IVS_VirtualGroup   where  rowid=(select   max(rowid)   from   IVS_VirtualGroup)";
                 }
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
                 return id;
@@ -50,7 +50,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByGroupID(Database db, int GroupID)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from VirtualGroup ");
+            sb.Append("delete from IVS_VirtualGroup ");
             sb.AppendFormat(" where ID={0}", GroupID);
             string cmdText = sb.ToString();
             try
@@ -68,7 +68,7 @@ namespace IntVideoSurv.DataAccess
         //
         public static DataSet GetAllVirtualGroupInfo(Database db)
         {
-            string cmdText = string.Format("select * from VirtualGroup order by ID");
+            string cmdText = string.Format("select * from IVS_VirtualGroup order by ID");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

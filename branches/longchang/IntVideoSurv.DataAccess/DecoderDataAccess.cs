@@ -28,7 +28,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  DecoderCamera(");
+            sbField.Append("INSERT INTO  IVS_DecoderCamera(");
             sbValue.Append("values (");
             //sbField.Append("id");
             //sbValue.AppendFormat("{0}", id);
@@ -156,7 +156,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteCameras(Database db, int CameraId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from DecoderCamera ");
+            sb.Append("delete from IVS_DecoderCamera ");
             sb.AppendFormat(" where camera={0}", CameraId);
             string cmdText = sb.ToString();
             try
@@ -174,7 +174,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByDecoderId(Database db, int DecoderId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from DecoderCamera ");
+            sb.Append("delete from IVS_DecoderCamera ");
             sb.AppendFormat(" where decoder={0}", DecoderId);
             string cmdText = sb.ToString();
             try
@@ -250,7 +250,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetCameraInfoByDecoderId(Database db,int DecoderId)
         {
 
-            string cmdText = string.Format("select * from CameraInfo where CameraId in (select camera from DecoderCamera where decoder={0})", DecoderId);
+            string cmdText = string.Format("select * from IVS_CameraInfo where CameraId in (select camera from IVS_DecoderCamera where decoder={0})", DecoderId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -265,7 +265,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetDeviceInfoByCameraId(Database db, int Id)
         {
 
-            string cmdText = string.Format("select * from DeviceInfo where DeviceId in (select DeviceId from CameraInfo where CameraId={0})", Id);
+            string cmdText = string.Format("select * from IVS_DeviceInfo where DeviceId in (select DeviceId from IVS_CameraInfo where CameraId={0})", Id);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -280,7 +280,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetCamInfoByCameraId(Database db, int CameraId)
         {
 
-            string cmdText = string.Format("select * from CameraInfo where CameraId={0} order by CameraId", CameraId);
+            string cmdText = string.Format("select * from IVS_CameraInfo where CameraId={0} order by CameraId", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -295,7 +295,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetTheCamera(Database db,int CameraId)
         {
 
-            string cmdText = string.Format("select * from DecoderCamera where camera={0}", CameraId);
+            string cmdText = string.Format("select * from IVS_DecoderCamera where camera={0}", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

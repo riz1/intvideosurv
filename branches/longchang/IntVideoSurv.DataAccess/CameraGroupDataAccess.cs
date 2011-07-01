@@ -13,7 +13,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO CameraGroup(");
+            sbField.Append("INSERT INTO IVS_CameraGroup(");
             sbValue.Append("values (");
            // sbField.Append("[ID]");
             //sbValue.AppendFormat("{0}", oCameraGroup.ID);
@@ -31,12 +31,12 @@ namespace IntVideoSurv.DataAccess
 
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('CameraGroup')";
+                    strsql = "SELECT     ident_current('IVS_CameraGroup')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   CameraGroup   where  rowid=(select   max(rowid)   from   CameraGroup)";
+                    "select ID   from   IVS_CameraGroup   where  rowid=(select   max(rowid)   from   IVS_CameraGroup)";
                 }
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
                 return id;
@@ -50,7 +50,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByVirtualGroupID(Database db, int GroupID)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from CameraGroup ");
+            sb.Append("delete from IVS_CameraGroup ");
             sb.AppendFormat(" where VirtualGroupID={0}", GroupID);
             string cmdText = sb.ToString();
             try
@@ -67,7 +67,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllCameraInfo(Database db,int VirtualGroupId)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from CameraGroup,CameraInfo, DeviceInfo where CameraGroup.CameraID=CameraInfo.CameraId and CameraGroup.VirtualGroupID={0} and CameraInfo.deviceid =  DeviceInfo.deviceid", VirtualGroupId);
+            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from IVS_CameraGroup,IVS_CameraInfo, IVS_DeviceInfo where IVS_CameraGroup.CameraID=IVS_CameraInfo.CameraId and IVS_CameraGroup.VirtualGroupID={0} and IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid", VirtualGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -81,7 +81,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllLongChangCameraInfo(Database db, int VirtualGroupId)
         {
-            string cmdText = string.Format("select TOG_DEVICE.* from CameraGroup,TOG_DEVICE where CameraGroup.CameraID=TOG_DEVICE.SBBH and CameraGroup.VirtualGroupID={0}", VirtualGroupId);
+            string cmdText = string.Format("select TOG_DEVICE.* from IVS_CameraGroup,TOG_DEVICE where IVS_CameraGroup.CameraID=TOG_DEVICE.SBBH and IVS_CameraGroup.VirtualGroupID={0}", VirtualGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -99,12 +99,12 @@ namespace IntVideoSurv.DataAccess
             //删除整个组
             if(CameraID==-1)
             {
-                sb.Append("delete from VirtualGroup ");
+                sb.Append("delete from IVS_VirtualGroup ");
                 sb.AppendFormat(" where VirtualGroupID={0}", GroupID);
 
             }
             else{
-                sb.Append("delete from VirtualGroup ");
+                sb.Append("delete from IVS_VirtualGroup ");
                 sb.AppendFormat(" where VirtualGroupID={0} and CameraID={1}", GroupID, CameraID);
             }
 
@@ -124,7 +124,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByCamID(Database db, int CameraID)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from CameraGroup ");
+            sb.Append("delete from IVS_CameraGroup ");
             sb.AppendFormat(" where  CameraID={0}", CameraID);
 
 
@@ -143,7 +143,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCamInfoByID(Database db, int CameraID, int GroupID)
         {
-            string cmdText = string.Format("select * from CameraGroup where CameraID={0} and VirtualGroupID={1}", CameraID, GroupID);
+            string cmdText = string.Format("select * from IVS_CameraGroup where CameraID={0} and VirtualGroupID={1}", CameraID, GroupID);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

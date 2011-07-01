@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  TempPicture(");
+            sbField.Append("INSERT INTO  IVS_TempPicture(");
             sbValue.Append("values (");
             //sbField.Append("PictureID");
             //sbValue.AppendFormat("'{0}'", oTempPicture.PictureID);
@@ -44,17 +44,17 @@ namespace IntVideoSurv.DataAccess
             {
                 cmdText = cmdText.Replace("\r\n", "");
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
-                //string cmdText2 = "select max(PictureID) from TempPicture";
+                //string cmdText2 = "select max(PictureID) from IVS_TempPicture";
                 //return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText2).ToString());
                 string strsql = "";
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('TempPicture')";
+                    strsql = "SELECT     ident_current('IVS_TempPicture')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   TempPicture   where  rowid=(select   max(rowid)   from   TempPicture)";
+                    "select ID   from   IVS_TempPicture   where  rowid=(select   max(rowid)   from   IVS_TempPicture)";
                 }
 
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
@@ -69,7 +69,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetTempPicture(Database db, TempPicture oTempPicture)
         {
-            string cmdText = string.Format("select * from TempPicture where CameraId={0} and DateTime='{1}'", oTempPicture.CameraID,oTempPicture.Datetime);
+            string cmdText = string.Format("select * from IVS_TempPicture where CameraId={0} and DateTime='{1}'", oTempPicture.CameraID,oTempPicture.Datetime);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -84,7 +84,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetTempPicture(Database db, int cameraId, DateTime captureTime)
         {
-            string cmdText = string.Format("select * from TempPicture where CameraId={0} and DateTime='{1}'", cameraId, captureTime);
+            string cmdText = string.Format("select * from IVS_TempPicture where CameraId={0} and DateTime='{1}'", cameraId, captureTime);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -99,7 +99,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteTempPicture(Database db, int pictureId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from TempPicture ");
+            sb.Append("delete from IVS_TempPicture ");
             sb.AppendFormat(" where PictureId={0}", pictureId);
             string cmdText = sb.ToString();
             try

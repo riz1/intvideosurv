@@ -12,7 +12,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static int GetMaxCameraId(Database db)
         {
-            string cmdText = "select max(CameraId) from CameraInfo";
+            string cmdText = "select max(CameraId) from IVS_CameraInfo";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -24,7 +24,7 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        private const string INSERT_CAMERA = "INSERT INTO CameraInfo()";
+        private const string INSERT_CAMERA = "INSERT INTO IVS_CameraInfo()";
         public static int Insert(Database db, CameraInfo oCameraInfo)
         {
             StringBuilder sbField = new StringBuilder();
@@ -32,7 +32,7 @@ namespace IntVideoSurv.DataAccess
             int i;
             if (oCameraInfo.IsValid) i = 1;
             else i = 0;
-            sbField.Append("INSERT INTO CameraInfo(");
+            sbField.Append("INSERT INTO IVS_CameraInfo(");
             sbValue.Append("values(");
             sbField.Append("DeviceId");
             sbValue.AppendFormat("{0}", oCameraInfo.DeviceId);
@@ -86,7 +86,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, CameraInfo oCameraInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update CameraInfo set");
+            sb.Append("update IVS_CameraInfo set");
             sb.AppendFormat(" Name='{0}'", oCameraInfo.Name);
             sb.AppendFormat(",Description='{0}'", oCameraInfo.Description);
             sb.AppendFormat(",IsValid={0}", oCameraInfo.IsValid);
@@ -122,7 +122,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int CameraId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from CameraInfo ");
+            sb.Append("delete from IVS_CameraInfo ");
             sb.AppendFormat(" where CameraId={0}", CameraId);
             string cmdText = sb.ToString();
             try
@@ -141,7 +141,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByDeviceId(Database db, int DeviceId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from CameraInfo ");
+            sb.Append("delete from IVS_CameraInfo ");
             sb.AppendFormat(" where DeviceId={0}", DeviceId);
             string cmdText = sb.ToString();
             try
@@ -160,7 +160,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllCamInfo(Database db)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from (CameraInfo inner join DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid) order by CameraId");
+            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from (CameraInfo inner join IVS_DeviceInfo on CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) order by CameraId");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -174,7 +174,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCamInfoByCameraId(Database db, int CameraId)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from (CameraInfo inner join DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid) where CameraId={0} ", CameraId);
+            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from (IVS_CameraInfo inner join IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) where CameraId={0} ", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -188,7 +188,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCamInfoByDeviceIdAndCameraName(Database db, int deviceId, string cameraName)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from (CameraInfo inner join DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid) where CameraInfo.deviceid={0} and CameraInfo.Name='{1}'", deviceId, cameraName);
+            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from (IVS_CameraInfo inner join IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) where IVS_CameraInfo.deviceid={0} and IVS_CameraInfo.Name='{1}'", deviceId, cameraName);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -202,7 +202,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCamInfoByDeviceId(Database db, int DeviceId)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from (CameraInfo inner join DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid) where DeviceInfo.DeviceId={0} order by CameraId", DeviceId);
+            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from (IVS_CameraInfo inner join IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) where IVS_DeviceInfo.DeviceId={0} order by CameraId", DeviceId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -217,7 +217,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetCamInfoBySynGroupId(Database db, int synGroupId)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from ((CameraInfo inner join syncamera on CameraInfo.Cameraid = syncamera.cameraid ) inner join  DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid) where syncamera.syngroupid={0} order by CameraInfo.Cameraid;", synGroupId);
+            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from ((IVS_CameraInfo inner join syncamera on IVS_CameraInfo.Cameraid = syncamera.cameraid ) inner join  IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) where syncamera.syngroupid={0} order by IVS_CameraInfo.Cameraid;", synGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -232,7 +232,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetCamInfoByChangeSynGroupId(Database db, int synGroupId)
         {
-            string cmdText = string.Format("select CameraInfo.*,DeviceInfo.Name as DeviceName from ((CameraInfo inner join changesyncamera on CameraInfo.cameraid = changesyncamera.cameraid ) inner join  DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid) where changesyncamera.syngroupid={0} order by CameraInfo.Cameraid;", synGroupId);
+            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from ((IVS_CameraInfo inner join changesyncamera on IVS_CameraInfo.cameraid = changesyncamera.cameraid ) inner join  IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) where changesyncamera.syngroupid={0} order by IVS_CameraInfo.Cameraid;", synGroupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -247,18 +247,18 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllCamInfoByUsername(Database db, string userName)
         {
-            string cmdText = string.Format("select CameraInfo.CameraId as CameraId,CameraInfo.Name as CameraName,CameraInfo.Description as CameraDescription,CameraInfo.IsValid as IsCameraValid,"+
-                "CameraInfo.ChannelNo as MasterChannelNo, CameraInfo.ConnURL as ConnURL, CameraInfo.IsDetectMotion as IsDetect,CameraInfo.StreamType as StreamType," +
-                "DeviceInfo.Name as DeviceName,DeviceInfo.DeviceId as DeviceId,DeviceInfo.Source as DeviceIP, DeviceInfo.ProviderName as DeviceType, DeviceInfo.Port as DevicePort,DeviceInfo.login as DeviceLoginName,DeviceInfo.pwd as DeviceLoginPassword," +
-                "GroupInfo.Name as GroupName,GroupInfo.GroupId as GroupId "+
-                "from ((((((CameraInfo inner join DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid) "+
-                "inner join GroupInfo on DeviceInfo.GroupId = GroupInfo.GroupId) "+
-                "inner join CameraAuthority on CameraInfo.CameraId=CameraAuthority.CameraId) "+
+            string cmdText = string.Format("select IVS_CameraInfo.CameraId as CameraId,IVS_CameraInfo.Name as CameraName,IVS_CameraInfo.Description as CameraDescription,IVS_CameraInfo.IsValid as IsCameraValid,"+
+                "IVS_CameraInfo.ChannelNo as MasterChannelNo, IVS_CameraInfo.ConnURL as ConnURL, IVS_CameraInfo.IsDetectMotion as IsDetect,IVS_CameraInfo.StreamType as StreamType," +
+                "IVS_DeviceInfo.Name as DeviceName,IVS_DeviceInfo.DeviceId as DeviceId,IVS_DeviceInfo.Source as DeviceIP, IVS_DeviceInfo.ProviderName as DeviceType, IVS_DeviceInfo.Port as DevicePort,IVS_DeviceInfo.login as DeviceLoginName,IVS_DeviceInfo.pwd as DeviceLoginPassword," +
+                "IVS_GroupInfo.Name as GroupName,IVS_GroupInfo.GroupId as GroupId "+
+                "from ((((((IVS_CameraInfo inner join IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) "+
+                "inner join IVS_GroupInfo on IVS_DeviceInfo.GroupId = IVS_GroupInfo.GroupId) "+
+                "inner join CameraAuthority on IVS_CameraInfo.CameraId=CameraAuthority.CameraId) "+
                 "inner join AuthorityGroup on AuthorityGroup.AuthorityId= CameraAuthority.AuthorityId) " +
                 "inner join UserAuthority on AuthorityGroup.AuthorityId = UserAuthority.AuthorityId) " +
-                "inner join UserInfo on UserInfo.UserId = UserAuthority.UserId) " +
-                "where Userinfo.username='{0}' " +
-                "order by CameraInfo.CameraId", userName);
+                "inner join IVS_UserInfo on IVS_UserInfo.UserId = UserAuthority.UserId) " +
+                "where IVS_UserInfo.username='{0}' " +
+                "order by IVS_CameraInfo.CameraId", userName);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

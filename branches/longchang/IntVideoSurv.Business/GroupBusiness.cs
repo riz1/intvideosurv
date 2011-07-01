@@ -147,7 +147,7 @@ namespace IntVideoSurv.Business
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
+                return new Dictionary<int, GroupInfo>();
             }
         }
         public  GroupInfo GetGroupInfoByGroupId(ref string errMessage, int groupId)

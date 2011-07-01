@@ -57,9 +57,9 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetCamInfoByDeviceUserId(Database db,int userId)
         {
             string cmdText = string.Format("select distinct TOG_DEVICE.* " +
-                " from TOG_DEVICE,usergroup,cameragroup "+
-                " where usergroup.userid={0} and usergroup.virtualgroupid = cameragroup.virtualgroupid "+
-                " and cameragroup.cameraid=TOG_DEVICE.sbbh and (TOG_DEVICE.sblx = 1 or TOG_DEVICE.sblx = 2)", userId);
+                " from TOG_DEVICE,IVS_usergroup,IVS_CameraGroup "+
+                " where IVS_usergroup.userid={0} and IVS_usergroup.virtualgroupid = IVS_CameraGroup.virtualgroupid "+
+                " and IVS_CameraGroup.cameraid=TOG_DEVICE.sbbh and (TOG_DEVICE.sblx = 1 or TOG_DEVICE.sblx = 2)", userId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
