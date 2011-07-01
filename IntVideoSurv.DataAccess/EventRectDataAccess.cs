@@ -58,9 +58,9 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetEventRectCustom(Database db, int objectid)
         {
             string cmdText = string.Format(
-                "select EventRectInfo.EventRectId,EventRectInfo.x,EventRectInfo.y,EventRectInfo.w,EventRectInfo.h,EventRectInfo.ObjectId " +
-                "from EventRectInfo " +
-                "where EventRectInfo.ObjectId={0} order by EventRectId",objectid);
+                "select IVS_EventRectInfo.EventRectId,IVS_EventRectInfo.x,IVS_EventRectInfo.y,IVS_EventRectInfo.w,IVS_EventRectInfo.h,IVS_EventRectInfo.ObjectId " +
+                "from IVS_EventRectInfo " +
+                "where IVS_EventRectInfo.ObjectId={0} order by EventRectId",objectid);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -74,9 +74,9 @@ namespace IntVideoSurv.DataAccess
         public static int GetEventRectCustomQuantity(Database db, int objectid)
         {
             string cmdText = string.Format(
-                "select count(distinct EventRectInfo.EventRectId) " +
-                "from EventRectInfo " +
-                "where EventRectInfo.ObjectId={0}",objectid);
+                "select count(distinct IVS_EventRectInfo.EventRectId) " +
+                "from IVS_EventRectInfo " +
+                "where IVS_EventRectInfo.ObjectId={0}",objectid);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -90,11 +90,11 @@ namespace IntVideoSurv.DataAccess
 
         /*public static DataSet GetEventRectCustom(Database db, string str, int pageno, int pagesize)
         {
-            string fields = " EventRectInfo.EventRectId,EventRectInfo.x,EventRectInfo.y,EventRectInfo.w,EventRectInfo.h,EventRectInfo.ObjectId ";
-            string tables = " EventInfo ";
+            string fields = " IVS_EventRectInfo.EventRectId,IVS_EventRectInfo.x,IVS_EventRectInfo.y,IVS_EventRectInfo.w,IVS_EventRectInfo.h,IVS_EventRectInfo.ObjectId ";
+            string tables = " IVS_EventInfo ";
             string condition = string.Format(
-                " EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                " IVS_EventInfo.PictureId=IVS_CapturePicture.PictureId and " +
+                "IVS_CapturePicture.CameraId = IVS_VideoInfo.CameraId and (IVS_CapturePicture.DateTime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " DateTime ";
             byte ordertype = 1;
             string pkcolumn = " EventId ";

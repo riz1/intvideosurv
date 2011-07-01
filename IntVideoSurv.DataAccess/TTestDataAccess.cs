@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  TTest(");
+            sbField.Append("INSERT INTO  IVS_TTest(");
             sbValue.Append("values (");
             //sbField.Append("RectID");
             //sbValue.AppendFormat("'{0}'", oRect.RectID);
@@ -39,7 +39,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetTTestInfo(Database db)
         {
-            string cmdText = string.Format("select * from ttest");
+            string cmdText = string.Format("select * from IVS_TTest");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

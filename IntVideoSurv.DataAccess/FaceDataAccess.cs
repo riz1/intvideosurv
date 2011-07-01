@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  Face](");
+            sbField.Append("INSERT INTO  IVS_Face](");
             sbValue.Append("values (");
             //sbField.Append("FaceID]");
             //sbValue.AppendFormat("'{0}'", oFace.FaceID);
@@ -35,12 +35,12 @@ namespace IntVideoSurv.DataAccess
                 string strsql = "";
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('Face')";
+                    strsql = "SELECT     ident_current('IVS_Face')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   Face   where  rowid=(select   max(rowid)   from   Face)";
+                    "select ID   from   IVS_Face   where  rowid=(select   max(rowid)   from   IVS_Face)";
                 }
 
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
@@ -57,10 +57,10 @@ namespace IntVideoSurv.DataAccess
         {
             str = str.Replace("''", "'");
             string cmdText = string.Format(
-                "select Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId " +
-                "from Face,CapturePicture,VideoInfo " +
-                "where Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime] between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.DateTime] desc", str);
+                "select IVS_Face.FaceId,IVS_Face.Score,IVS_Face.RectId, IVS_Face.FacePath,IVS_Face.PictureId,IVS_VideoInfo.Id as VideoId " +
+                "from IVS_Face,IVS_CapturePicture,IVS_VideoInfo " +
+                "where IVS_Face.PictureId=IVS_CapturePicture.PictureId and " +
+                "IVS_CapturePicture.CameraId = IVS_VideoInfo.CameraId and (IVS_CapturePicture.DateTime] between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0} order by IVS_CapturePicture.DateTime] desc", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -75,10 +75,10 @@ namespace IntVideoSurv.DataAccess
         {
             str = str.Replace("''", "'");
             string cmdText = string.Format(
-                "select count(distinct Face.FaceId) " +
-                "from Face,CapturePicture,VideoInfo " +
-                "where Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0}", str);
+                "select count(distinct IVS_Face.FaceId) " +
+                "from IVS_Face,IVS_CapturePicture,IVS_VideoInfo " +
+                "where IVS_Face.PictureId=IVS_CapturePicture.PictureId and " +
+                "IVS_CapturePicture.CameraId = IVS_VideoInfo.CameraId and (IVS_CapturePicture.DateTime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0}", str);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -91,11 +91,11 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetFaceCustom(Database db, string str, int pageno,int pagesize)
         {
-            string fields = " Face.FaceId,Face.Score,Face.RectId, Face.FacePath,Face.PictureId,VideoInfo.Id as VideoId ";
-            string tables = " Face,CapturePicture,VideoInfo ";
+            string fields = " IVS_Face.FaceId,IVS_Face.Score,IVS_Face.RectId, IVS_Face.FacePath,IVS_Face.PictureId,IVS_VideoInfo.Id as VideoId ";
+            string tables = " IVS_Face,IVS_CapturePicture,IVS_VideoInfo ";
             string condition=string.Format(
-                " Face.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                " IVS_Face.PictureId=IVS_CapturePicture.PictureId and " +
+                "IVS_CapturePicture.CameraId = IVS_VideoInfo.CameraId and (IVS_CapturePicture.DateTime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " DateTime ";
             byte ordertype = 1;
             string pkcolumn = " FaceId ";
@@ -120,7 +120,7 @@ namespace IntVideoSurv.DataAccess
             }
             else if (DataBaseParas.DBType == MyDBType.Oracle)
             {
-                //select * from (select a.*,rownum rn  from face a where rownum <= 40) where rn >= 20 order by faceid desc; 
+                //select * from (select a.*,rownum rn  from IVS_Face a where rownum <= 40) where rn >= 20 order by faceid desc; 
                 cmdText = string.Format("SELECT * FROM (select {0},rownum rn from {1} where rownum <={2} and {3} order by {4}) where rn>={5} order by faceid", 
                     fields, tables, pageno * pagesize,condition, pkcolumn,(pageno - 1) * pagesize);
 

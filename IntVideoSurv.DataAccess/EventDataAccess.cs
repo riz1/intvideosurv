@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  EventInfo(");
+            sbField.Append("INSERT INTO  IVS_EventInfo(");
             sbValue.Append("values (");
             sbField.Append("CarNum");
             sbValue.AppendFormat("{0}", oEvent.CarNum);
@@ -32,12 +32,12 @@ namespace IntVideoSurv.DataAccess
                 string strsql = "";
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('EventInfo')";
+                    strsql = "SELECT     ident_current('IVS_EventInfo')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   EventInfo   where  rowid=(select   max(rowid)   from   EventInfo)";
+                    "select ID   from   IVS_EventInfo   where  rowid=(select   max(rowid)   from   IVS_EventInfo)";
                 }
 
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
@@ -54,10 +54,10 @@ namespace IntVideoSurv.DataAccess
         {
             str = str.Replace("''", "'");
             string cmdText = string.Format(
-                "select EventInfo.EventId,EventInfo.CarNum,EventInfo.Congestion,EventInfo.PictureId,VideoInfo.id AS VideoId " +
-                "from EventInfo,CapturePicture,VideoInfo " +
-                "where EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} order by CapturePicture.DateTime desc", str);
+                "select IVS_EventInfo.EventId,IVS_EventInfo.CarNum,IVS_EventInfo.Congestion,IVS_EventInfo.PictureId,IVS_VideoInfo.id AS VideoId " +
+                "from IVS_EventInfo,IVS_CapturePicture,IVS_VideoInfo " +
+                "where IVS_EventInfo.PictureId=IVS_CapturePicture.PictureId and " +
+                "IVS_CapturePicture.CameraId = IVS_VideoInfo.CameraId and (IVS_CapturePicture.DateTime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0} order by IVS_CapturePicture.DateTime desc", str);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -72,10 +72,10 @@ namespace IntVideoSurv.DataAccess
         {
             str = str.Replace("''", "'");
             string cmdText = string.Format(
-                "select count(distinct EventInfo.EventId) " +
-                "from EventInfo,CapturePicture,VideoInfo " +
-                "where EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0};", str);
+                "select count(distinct IVS_EventInfo.EventId) " +
+                "from IVS_EventInfo,IVS_CapturePicture,IVS_VideoInfo " +
+                "where IVS_EventInfo.PictureId=IVS_CapturePicture.PictureId and " +
+                "IVS_CapturePicture.CameraId = IVS_VideoInfo.CameraId and (IVS_CapturePicture.DateTime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0};", str);
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -89,11 +89,11 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetEventCustom(Database db, string str, int pageno, int pagesize)
         {
-            string fields = " EventInfo.EventId,EventInfo.CarNum,EventInfo.Congestion,EventInfo.PictureId,VideoInfo.Id as VideoId ";
-            string tables = " EventInfo,CapturePicture,VideoInfo ";
+            string fields = " IVS_EventInfo.EventId,IVS_EventInfo.CarNum,IVS_EventInfo.Congestion,IVS_EventInfo.PictureId,IVS_VideoInfo.Id as VideoId ";
+            string tables = " IVS_EventInfo,IVS_CapturePicture,IVS_VideoInfo ";
             string condition = string.Format(
-                " EventInfo.PictureId=CapturePicture.PictureId and " +
-                "CapturePicture.CameraId = VideoInfo.CameraId and (CapturePicture.DateTime between VideoInfo.CaptureTimeBegin and VideoInfo.CaptureTimeEnd) {0} ", str);
+                " IVS_EventInfo.PictureId=IVS_CapturePicture.PictureId and " +
+                "IVS_CapturePicture.CameraId = IVS_VideoInfo.CameraId and (IVS_CapturePicture.DateTime between IVS_VideoInfo.CaptureTimeBegin and IVS_VideoInfo.CaptureTimeEnd) {0} ", str);
             string ordercolumn = " DateTime ";
             byte ordertype = 1;
             string pkcolumn = " EventId ";

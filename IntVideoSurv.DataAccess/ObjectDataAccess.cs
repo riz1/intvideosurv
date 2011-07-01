@@ -15,7 +15,7 @@ namespace IntVideoSurv.DataAccess
             int i;
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  ObjectInfo(");
+            sbField.Append("INSERT INTO  IVS_ObjectInfo(");
             sbValue.Append("values (");
             sbField.Append("ObjectId");
             sbValue.AppendFormat("{0}", oObject.ObjectId);
@@ -46,12 +46,12 @@ namespace IntVideoSurv.DataAccess
                 string strsql = "";
                 if (DataBaseParas.DBType == MyDBType.SqlServer)
                 {
-                    strsql = "SELECT     ident_current('ObjectInfo')";
+                    strsql = "SELECT     ident_current('IVS_ObjectInfo')";
                 }
                 else if (DataBaseParas.DBType == MyDBType.Oracle)
                 {
                     strsql =
-                    "select ID   from   ObjectInfo   where  rowid=(select   max(rowid)   from   ObjectInfo)";
+                    "select ID   from   IVS_ObjectInfo   where  rowid=(select   max(rowid)   from   IVS_ObjectInfo)";
                 }
 
                 int id = int.Parse(db.ExecuteScalar(CommandType.Text, strsql).ToString());
@@ -67,9 +67,9 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetObjectCustom(Database db, int eventid)
         {
             string cmdText = string.Format(
-                "select ObjectInfo.ObjectId,ObjectInfo.stop,ObjectInfo.illegalDir,ObjectInfo.CrossLine,ObjectInfo.changeChannel,ObjectInfo.EventId " +
-                "from ObjectInfo " +
-                "where ObjectInfo.EventId={0} order by ObjectId", eventid);
+                "select IVS_ObjectInfo.ObjectId,IVS_ObjectInfo.stop,IVS_ObjectInfo.illegalDir,IVS_ObjectInfo.CrossLine,IVS_ObjectInfo.changeChannel,IVS_ObjectInfo.EventId " +
+                "from IVS_ObjectInfo " +
+                "where IVS_ObjectInfo.EventId={0} order by ObjectId", eventid);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

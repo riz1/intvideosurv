@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
 
         public static int GetMaxSynGroupId(Database db)
         {
-            string cmdText = "select max(SynGroupId) from SynGroup";
+            string cmdText = "select max(SynGroupId) from IVS_SynGroup";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -29,9 +29,9 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetAllCameraBySynGroupId(Database db, int SynGroupId)
         {
 
-            string cmdText = string.Format(@"SELECT SynCamera.CameraId as CameraId, SynCamera.SynGroupId as SynGroupId, displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard, "+
-                "displayChannelInfo.DecodeCardNo as DecodeCardNo,displayChannelInfo.SplitScreenNo as SplitScreenNo,displayChannelInfo.DisplayChannelId as DisplayChannelId ,SynCamera.DisplaySplitScreenNo as DisplaySplitScreenNo "
-                +"FROM SynCamera INNER JOIN displayChannelInfo ON SynCamera.DisplayChannelId = displayChannelInfo.DisplayChannelId  where SynCamera.SynGroupId={0} order by SynCamera.CameraId", SynGroupId);
+            string cmdText = string.Format(@"SELECT SynCamera.CameraId as CameraId, SynCamera.SynGroupId as SynGroupId, IVS_displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard, "+
+                "IVS_displayChannelInfo.DecodeCardNo as DecodeCardNo,IVS_displayChannelInfo.SplitScreenNo as SplitScreenNo,IVS_displayChannelInfo.DisplayChannelId as DisplayChannelId ,SynCamera.DisplaySplitScreenNo as DisplaySplitScreenNo "
+                +"FROM SynCamera INNER JOIN IVS_displayChannelInfo ON SynCamera.DisplayChannelId = IVS_displayChannelInfo.DisplayChannelId  where SynCamera.SynGroupId={0} order by SynCamera.CameraId", SynGroupId);
 
 
 
@@ -51,7 +51,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO SynGroup(");
+            sbField.Append("INSERT INTO IVS_SynGroup(");
             sbValue.Append("values(");
             sbField.Append("Name");
             sbValue.AppendFormat("'{0}'", oGroupInfo.Name);
@@ -72,7 +72,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, SynGroup oGroupInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update SynGroup set");
+            sb.Append("update IVS_SynGroup set");
             sb.AppendFormat(" Name='{0}'", oGroupInfo.Name);
             sb.AppendFormat(",Description='{0}'", oGroupInfo.Description);
             sb.AppendFormat(" where GroupID={0})", oGroupInfo.SynGroupId);
@@ -93,7 +93,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int groupId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from SynGroup ");
+            sb.Append("delete from IVS_SynGroup ");
             sb.AppendFormat(" where SynGroupID={0}", groupId);
             string cmdText = sb.ToString();
             try
@@ -111,7 +111,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllSynGroupInfo(Database db)
         {
-            string cmdText = string.Format("select * from SynGroup order by SynGroupId");
+            string cmdText = string.Format("select * from IVS_SynGroup order by SynGroupId");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -125,7 +125,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetSynGroupBySynGroupId(Database db, int groupId)
         {
-            string cmdText = string.Format("select * from SynGroup where SynGroupId={0} ", groupId);
+            string cmdText = string.Format("select * from IVS_SynGroup where SynGroupId={0} ", groupId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -140,7 +140,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetSynGroupBySynGroupName(Database db, string groupName)
         {
-            string cmdText = string.Format("select * from SynGroup where name=\'{0}\' ", groupName);
+            string cmdText = string.Format("select * from IVS_SynGroup where name=\'{0}\' ", groupName);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

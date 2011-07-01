@@ -13,7 +13,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static int GetMaxSystemLogId(Database db)
         {
-            string cmdText = "select max(Id) from OperateLog";
+            string cmdText = "select max(Id) from IVS_OperateLog";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -30,7 +30,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  OperateLog(");
+            sbField.Append("INSERT INTO  IVS_OperateLog(");
             sbValue.Append("values(");
             sbField.Append("GroupID");
             sbValue.AppendFormat("{0}", operateLog.GroupId);
@@ -78,7 +78,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int operateLogId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from OperateLog ");
+            sb.Append("delete from IVS_OperateLog ");
             sb.AppendFormat(" where Id={0}", operateLogId);
             string cmdText = sb.ToString();
             try
@@ -96,7 +96,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllOperateLogs(Database db)
         {
-            string cmdText = string.Format("select * from OperateLog order by Id");
+            string cmdText = string.Format("select * from IVS_OperateLog order by Id");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -110,11 +110,11 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetOperateLogs(Database db, string filter)
         {
-            string cmdText = string.Format("select  ID as 索引号,GroupInfo.name as 组名,deviceinfo.name as 设备名称, CameraInfo.Name as 摄像头名, "+
+            string cmdText = string.Format("select  ID as 索引号,IVS_GroupInfo.name as 组名,IVS_DeviceInfo.name as 设备名称, IVS_CameraInfo.Name as 摄像头名, "+
                 "happentime as 发生时间,clientusername as 用户名, operatetypename as 操作类型, "+
-                "content as 内容  from ((( OperateLog left join deviceinfo on OperateLog.DeviceID = deviceinfo.deviceid) " +
-                "left join CameraInfo on CameraInfo.CameraId=OperateLog.CameraId) left join GroupInfo on GroupInfo.GroupId=OperateLog.GroupId) " +
-                "{0} order by OperateLog.Id", filter);
+                "content as 内容  from ((( IVS_OperateLog left join IVS_DeviceInfo on IVS_OperateLog.DeviceID = IVS_DeviceInfo.deviceid) " +
+                "left join IVS_CameraInfo on IVS_CameraInfo.CameraId=IVS_OperateLog.CameraId) left join IVS_GroupInfo on IVS_GroupInfo.GroupId=IVS_OperateLog.GroupId) " +
+                "{0} order by IVS_OperateLog.Id", filter);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -128,7 +128,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetOperateLogTypes(Database db)
         {
-            string cmdText = string.Format("select distinct operatetypename from OperateLog");
+            string cmdText = string.Format("select distinct operatetypename from IVS_OperateLog");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

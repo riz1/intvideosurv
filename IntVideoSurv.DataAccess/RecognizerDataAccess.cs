@@ -11,7 +11,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static int GetMaxRecognizerId(Database db)
         {
-            string cmdText = "select max(Id) from RecognizerInfo";
+            string cmdText = "select max(Id) from IVS_RecognizerInfo";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -27,7 +27,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  RecognizerCamera(");
+            sbField.Append("INSERT INTO  IVS_RecognizerCamera(");
             sbValue.Append("values (");
             //sbField.Append("id");
             //sbValue.AppendFormat("{0}", id);
@@ -56,7 +56,7 @@ namespace IntVideoSurv.DataAccess
             
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  RecognizerInfo(");
+            sbField.Append("INSERT INTO  IVS_RecognizerInfo(");
             sbValue.Append("values (");
             //sbField.Append("id");
             //sbValue.AppendFormat("'{0}'", oDecoderInfo.id);
@@ -89,7 +89,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, RecognizerInfo oRecognizerInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update RecognizerInfo set");
+            sb.Append("update IVS_RecognizerInfo set");
             sb.AppendFormat(" Name='{0}'", oRecognizerInfo.Name);
             //sb.AppendFormat(",id='{0}'", oDecoderInfo.id);
             sb.AppendFormat(",Ip='{0}'", oRecognizerInfo.Ip);
@@ -114,7 +114,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int RecognizerId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from RecognizerInfo ");
+            sb.Append("delete from IVS_RecognizerInfo ");
             sb.AppendFormat(" where Id={0}", RecognizerId);
             string cmdText = sb.ToString();
             try
@@ -132,7 +132,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteCameras(Database db, int CameraId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from RecognizerCamera ");
+            sb.Append("delete from IVS_RecognizerCamera ");
             sb.AppendFormat(" where camera={0}", CameraId);
             string cmdText = sb.ToString();
             try
@@ -150,7 +150,7 @@ namespace IntVideoSurv.DataAccess
         public static int DeleteByRecognizerId(Database db, int RecognizerId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from RecognizerCamera ");
+            sb.Append("delete from IVS_RecognizerCamera ");
             sb.AppendFormat(" where recognizer={0}", RecognizerId);
             string cmdText = sb.ToString();
             try
@@ -167,7 +167,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetAllRecInfo(Database db)
         {
-            string cmdText = string.Format("select * from RecognizerInfo order by Id");
+            string cmdText = string.Format("select * from IVS_RecognizerInfo order by Id");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -180,7 +180,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetRecognizerInfoByRecognizerId(Database db, int RecognizerId)
         {
-            string cmdText = string.Format("select * from RecognizerInfo where Id={0}", RecognizerId);
+            string cmdText = string.Format("select * from IVS_RecognizerInfo where Id={0}", RecognizerId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -195,7 +195,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetRecognizerInfoByRecognizerIP(Database db, string IP)
         {
-            string cmdText = string.Format("select * from RecognizerInfo where Ip='{0}'", IP);
+            string cmdText = string.Format("select * from IVS_RecognizerInfo where Ip='{0}'", IP);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -211,7 +211,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetRecognizerInfoByName(Database db, string Name)
         {
-            string cmdText = string.Format("select * from RecognizerInfo where Name='{0}' order by Id", Name);
+            string cmdText = string.Format("select * from IVS_RecognizerInfo where Name='{0}' order by Id", Name);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -225,8 +225,8 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCameraInfoByRecognizerId(Database db, int RecognizerId)
         {
-            //,DeviceInfo.Name as DeviceName from (CameraInfo inner join DeviceInfo on CameraInfo.deviceid =  DeviceInfo.deviceid)
-            string cmdText = string.Format("select CameraInfo.*, DeviceInfo.Name as DeviceName from CameraInfo,DeviceInfo where CameraInfo.deviceid =  DeviceInfo.deviceid and CameraId in (select camera from RecognizerCamera where recognizer={0})", RecognizerId);
+            //,IVS_DeviceInfo.Name as DeviceName from (IVS_CameraInfo inner join IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid)
+            string cmdText = string.Format("select IVS_CameraInfo.*, IVS_DeviceInfo.Name as DeviceName from IVS_CameraInfo,IVS_DeviceInfo where IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid and CameraId in (select camera from IVS_RecognizerCamera where recognizer={0})", RecognizerId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -241,7 +241,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetDeviceInfoByCameraId(Database db, int Id)
         {
 
-            string cmdText = string.Format("select * from DeviceInfo where DeviceId in (select DeviceId from CameraInfo where CameraId={0})", Id);
+            string cmdText = string.Format("select * from IVS_DeviceInfo where DeviceId in (select DeviceId from IVS_CameraInfo where CameraId={0})", Id);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -256,7 +256,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetCamInfoByCameraId(Database db, int CameraId)
         {
 
-            string cmdText = string.Format("select CameraInfo.*, DeviceInfo.Name as DeviceName from CameraInfo,DeviceInfo where CameraInfo.deviceid =  DeviceInfo.deviceid and CameraId={0} order by CameraId", CameraId);
+            string cmdText = string.Format("select IVS_CameraInfo.*, IVS_DeviceInfo.Name as DeviceName from IVS_CameraInfo,IVS_DeviceInfo where IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid and CameraId={0} order by CameraId", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -271,7 +271,7 @@ namespace IntVideoSurv.DataAccess
         public static DataSet GetTheCamera(Database db, int CameraId)
         {
 
-            string cmdText = string.Format("select * from RecognizerCamera where Camera={0}", CameraId);
+            string cmdText = string.Format("select * from IVS_RecognizerCamera where Camera={0}", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -285,7 +285,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetRecognizerInfoByCameraId(Database db,int CameraId)
         {
-            string cmdText = string.Format("select * from RecognizerInfo where Id in (select Recognizer from RecognizerCamera where Camera = {0})", CameraId);
+            string cmdText = string.Format("select * from IVS_RecognizerInfo where Id in (select Recognizer from IVS_RecognizerCamera where Camera = {0})", CameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

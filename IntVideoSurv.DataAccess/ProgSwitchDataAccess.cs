@@ -14,7 +14,7 @@ namespace IntVideoSurv.DataAccess
 
         public static int GetMaxProgSwitchId(Database db)
         {
-            string cmdText = "select max(Id) from ProgSwitch";
+            string cmdText = "select max(Id) from IVS_ProgSwitch";
             try
             {
                 return int.Parse(db.ExecuteScalar(CommandType.Text, cmdText).ToString());
@@ -32,7 +32,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO ProgSwitch(");
+            sbField.Append("INSERT INTO IVS_ProgSwitch(");
             sbValue.Append("values(");
             sbField.Append("Name");
             sbValue.AppendFormat("'{0}'", progSwitchInfo.Name);
@@ -57,7 +57,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, ProgSwitchInfo progSwitchInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update ProgSwitch set");
+            sb.Append("update IVS_ProgSwitch set");
             sb.AppendFormat(" Name='{0}'", progSwitchInfo.Name);
             sb.AppendFormat(",Description='{0}'", progSwitchInfo.Description);
             sb.AppendFormat(",DisplaySplitScreenNo={0}", progSwitchInfo.DisplaySplitScreenNo);
@@ -80,7 +80,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int groupId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from ProgSwitch ");
+            sb.Append("delete from IVS_ProgSwitch ");
             sb.AppendFormat(" where ID={0}", groupId);
             string cmdText = sb.ToString();
             try
@@ -98,12 +98,12 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllProgSwitchInfo(Database db)
         {
-            string cmdText = string.Format("select ProgSwitch.id as Id,ProgSwitch.name as Name, "+
-                "ProgSwitch.Description as Description, displayChannelInfo.DisplayChannelId as DisplayChannelId, " +
-                "displayChannelInfo.DisplayChannelName as DisplayChannelName, "+
-                "ProgSwitch.DisplaySplitScreenNo as DisplaySplitScreenNo, " + 
-                "displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard " +
-                "from (ProgSwitch inner join displayChannelInfo on ProgSwitch.DisplayChannelId = displayChannelInfo.DisplayChannelId) order by ProgSwitch.id ");
+            string cmdText = string.Format("select IVS_ProgSwitch.id as Id,IVS_ProgSwitch.name as Name, "+
+                "IVS_ProgSwitch.Description as Description, IVS_displayChannelInfo.DisplayChannelId as DisplayChannelId, " +
+                "IVS_displayChannelInfo.DisplayChannelName as DisplayChannelName, "+
+                "IVS_ProgSwitch.DisplaySplitScreenNo as DisplaySplitScreenNo, " + 
+                "IVS_displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard " +
+                "from (IVS_ProgSwitch inner join IVS_displayChannelInfo on IVS_ProgSwitch.DisplayChannelId = IVS_displayChannelInfo.DisplayChannelId) order by IVS_ProgSwitch.id ");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -117,12 +117,12 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetProgSwitchById(Database db, int progSwitchId)
         {
-            string cmdText = string.Format("select ProgSwitch.id as Id,ProgSwitch.name as Name, "+
-                "ProgSwitch.Description as Description, displayChannelInfo.DisplayChannelId as DisplayChannelId, " +
-                "displayChannelInfo.DisplayChannelName as DisplayChannelName, "+
-                "ProgSwitch.DisplaySplitScreenNo as DisplaySplitScreenNo, " + 
-                "displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard  " +
-                "from (ProgSwitch inner join displayChannelInfo on ProgSwitch.DisplayChannelId = displayChannelInfo.DisplayChannelId) where ProgSwitch.id={0} ", progSwitchId);
+            string cmdText = string.Format("select IVS_ProgSwitch.id as Id,IVS_ProgSwitch.name as Name, "+
+                "IVS_ProgSwitch.Description as Description, IVS_displayChannelInfo.DisplayChannelId as DisplayChannelId, " +
+                "IVS_displayChannelInfo.DisplayChannelName as DisplayChannelName, "+
+                "IVS_ProgSwitch.DisplaySplitScreenNo as DisplaySplitScreenNo, " + 
+                "IVS_displayChannelInfo.DispalyChannelNoInCurrentCard as DispalyChannelNoInCurrentCard  " +
+                "from (IVS_ProgSwitch inner join IVS_displayChannelInfo on IVS_ProgSwitch.DisplayChannelId = IVS_displayChannelInfo.DisplayChannelId) where IVS_ProgSwitch.id={0} ", progSwitchId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

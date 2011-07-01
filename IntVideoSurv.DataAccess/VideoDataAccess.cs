@@ -16,7 +16,7 @@ namespace IntVideoSurv.DataAccess
 
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO  VideoInfo(");
+            sbField.Append("INSERT INTO  IVS_VideoInfo(");
             sbValue.Append("values (");
             sbField.Append("CameraId");
             sbValue.AppendFormat("{0}", videoInfo.CameraId);
@@ -72,7 +72,7 @@ namespace IntVideoSurv.DataAccess
                     }
                 }
                 //删除出数据库中的记录
-                sb.Append("delete from VideoInfo ");
+                sb.Append("delete from IVS_VideoInfo ");
                 sb.AppendFormat(" where Id={0}", id);
                 string cmdText = sb.ToString();
                 return db.ExecuteNonQuery(CommandType.Text, cmdText);
@@ -88,7 +88,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetVideoInfoById(Database db, int id)
         {
-            string cmdText = string.Format("select * from VideoInfo where Id={0} order by Id", id);
+            string cmdText = string.Format("select * from IVS_VideoInfo where Id={0} order by Id", id);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -103,7 +103,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetVideoInfoByCamera(Database db, int cameraId)
         {
-            string cmdText = string.Format("select * from VideoInfo where CameraId={0} order by Id", cameraId);
+            string cmdText = string.Format("select * from IVS_VideoInfo where CameraId={0} order by Id", cameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -118,7 +118,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetVideoInfoByCameraDateTime(Database db, int cameraId, DateTime captureBeginTime, DateTime captureEndTime)
         {
-            string cmdText = string.Format("select * from VideoInfo where CameraId={0} and captureBeginTime >='{1}' and captureEndTime<'{2}' order by Id", cameraId,captureBeginTime,captureEndTime);
+            string cmdText = string.Format("select * from IVS_VideoInfo where CameraId={0} and captureBeginTime >='{1}' and captureEndTime<'{2}' order by Id", cameraId,captureBeginTime,captureEndTime);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

@@ -13,7 +13,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO MapInfo(");
+            sbField.Append("INSERT INTO IVS_MapInfo(");
             sbValue.Append("values(");
             sbField.Append("Name");
             sbValue.AppendFormat("'{0}'", mapInfo.Name);
@@ -38,7 +38,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, MapInfo mapInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update MapInfo set");
+            sb.Append("update IVS_MapInfo set");
             sb.AppendFormat(" Name={0}", mapInfo.Name);
             sb.AppendFormat(",X={0}", mapInfo.Width);
             sb.AppendFormat(",Y={0} ", mapInfo.Height);
@@ -61,7 +61,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int mapId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from MapInfo ");
+            sb.Append("delete from IVS_MapInfo ");
             sb.AppendFormat(" where Id={0}", mapId);
             string cmdText = sb.ToString();
             try
@@ -79,7 +79,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllMapInfo(Database db)
         {
-            string cmdText = string.Format("select * from MapInfo");
+            string cmdText = string.Format("select * from IVS_MapInfo");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

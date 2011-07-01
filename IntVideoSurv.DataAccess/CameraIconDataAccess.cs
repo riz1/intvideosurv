@@ -15,7 +15,7 @@ namespace IntVideoSurv.DataAccess
         {
             StringBuilder sbField = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
-            sbField.Append("INSERT INTO CameraIconInfo(");
+            sbField.Append("INSERT INTO IVS_CameraIconInfo(");
             sbValue.Append("values(");
             sbField.Append("CameraId");
             sbValue.AppendFormat("{0}", cameraIconInfo.CameraId);
@@ -46,7 +46,7 @@ namespace IntVideoSurv.DataAccess
         public static int Update(Database db, CameraIconInfo cameraIconInfo)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("update CameraIconInfo set");
+            sb.Append("update IVS_CameraIconInfo set");
             sb.AppendFormat(" IconIndex={0}", cameraIconInfo.IconIndex);
             sb.AppendFormat(",ToolTip='{0}'", cameraIconInfo.ToolTip);
             sb.AppendFormat(",X={0}", cameraIconInfo.X);
@@ -70,7 +70,7 @@ namespace IntVideoSurv.DataAccess
         public static int Delete(Database db, int cameraId)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("delete from CameraIconInfo ");
+            sb.Append("delete from IVS_CameraIconInfo ");
             sb.AppendFormat(" where CameraId={0}", cameraId);
             string cmdText = sb.ToString();
             try
@@ -88,7 +88,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetAllCameraIconInfo(Database db)
         {
-            string cmdText = string.Format("select CameraIconInfo.*,CameraInfo.Name as CameraName from (CameraIconInfo inner join CameraInfo on CameraIconInfo.CameraId =  CameraInfo.CameraId) order by CameraInfo.CameraId");
+            string cmdText = string.Format("select IVS_CameraIconInfo.*,IVS_CameraInfo.Name as CameraName from (IVS_CameraIconInfo inner join IVS_CameraInfo on IVS_CameraIconInfo.CameraId =  IVS_CameraInfo.CameraId) order by IVS_CameraInfo.CameraId");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -102,7 +102,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCameraIconInfoByCameraId(Database db, int cameraId)
         {
-            string cmdText = string.Format("select CameraIconInfo.*,CameraInfo.Name as CameraInfo from (CameraIconInfo inner join CameraInfo on CameraIconInfo.CameraId =  CameraInfo.CameraId) where CameraInfo.CameraId={0}", cameraId);
+            string cmdText = string.Format("select IVS_CameraIconInfo.*,IVS_CameraInfo.Name as IVS_CameraInfo from (IVS_CameraIconInfo inner join IVS_CameraInfo on IVS_CameraIconInfo.CameraId =  IVS_CameraInfo.CameraId) where IVS_CameraInfo.CameraId={0}", cameraId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -116,7 +116,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetCameraIconInfoByMapId(Database db, int mapId)
         {
-            string cmdText = string.Format("select CameraIconInfo.*,CameraInfo.Name as CameraInfo from (CameraIconInfo inner join CameraInfo on CameraIconInfo.CameraId =  CameraInfo.CameraId) where CameraIconInfo.map={0}", mapId);
+            string cmdText = string.Format("select IVS_CameraIconInfo.*,IVS_CameraInfo.Name as IVS_CameraInfo from (IVS_CameraIconInfo inner join IVS_CameraInfo on IVS_CameraIconInfo.CameraId =  IVS_CameraInfo.CameraId) where IVS_CameraIconInfo.map={0}", mapId);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
