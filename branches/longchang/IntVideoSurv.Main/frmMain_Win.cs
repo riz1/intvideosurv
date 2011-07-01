@@ -70,7 +70,7 @@ namespace CameraViewer
 
         public MainForm()
         {
-#if !DEBUG
+#if DEBUG
             while (Login(_inputUsername, _inputPassword, PromoteInfo) != true)
             {
                 PromoteInfo = "请输入正确的用户名和密码!";
@@ -644,12 +644,12 @@ namespace CameraViewer
             barButtonItem13.Visibility = BarItemVisibility.Never;
             barButtonItem14.Visibility = BarItemVisibility.Never;
             barButtonItem15.Visibility = BarItemVisibility.Never;
-            barButtonItem16.Visibility = BarItemVisibility.Always;
+            barButtonItem16.Visibility = BarItemVisibility.Never;
             barButtonItem17.Visibility = BarItemVisibility.Never;
             barButtonItem18.Visibility = BarItemVisibility.Never;
             barButtonItem19.Visibility = BarItemVisibility.Never;
             barButtonItem20.Visibility = BarItemVisibility.Never;
-            barButtonItem21.Visibility = BarItemVisibility.Always;
+            barButtonItem21.Visibility = BarItemVisibility.Never;
             barButtonItemPlayTwoFiles.Visibility = BarItemVisibility.Never;
             barButtonItemGetPics.Visibility = BarItemVisibility.Never;
         }
@@ -3006,11 +3006,7 @@ namespace CameraViewer
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (retIntPtr!=null)
-            {
-                int totalframe = AirnoixPlayer.Avdec_GetTotalFrames(retIntPtr);
-                barStaticItem7.Caption = "总帧数："+ totalframe +"\t当前帧"+AirnoixPlayer.Avdec_GetCurrentPosition(retIntPtr).ToString();
-            }
+
 
         }  
 
