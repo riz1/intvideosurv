@@ -26,6 +26,12 @@ namespace CameraViewer.Tools
 
         ArrayList PathList= new ArrayList();
         public static int fps = 25;
+
+        public RelatedFile()
+        {
+            
+        }
+
         public RelatedFile(string ip,int channel,DateTime captureTime, int seconds)
         {
             

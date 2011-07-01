@@ -110,6 +110,7 @@
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.cbeVehType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
+            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -155,11 +156,12 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEditSelectedPicture
             // 
-            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(532, 2);
+            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(584, 2);
             this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
             this.pictureEditSelectedPicture.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             this.pictureEditSelectedPicture.Size = new System.Drawing.Size(512, 288);
@@ -224,7 +226,7 @@
             this.repositoryItemPictureEdit7,
             this.repositoryItemPictureEdit8});
             this.treeListPicturesBefore.RowHeight = 96;
-            this.treeListPicturesBefore.Size = new System.Drawing.Size(720, 108);
+            this.treeListPicturesBefore.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesBefore.TabIndex = 6;
             this.treeListPicturesBefore.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesBefore_MouseClick);
             // 
@@ -363,7 +365,7 @@
             this.repositoryItemPictureEdit15,
             this.repositoryItemPictureEdit9});
             this.treeListPicturesCurrent.RowHeight = 96;
-            this.treeListPicturesCurrent.Size = new System.Drawing.Size(720, 108);
+            this.treeListPicturesCurrent.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesCurrent.TabIndex = 6;
             this.treeListPicturesCurrent.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesCurrent_MouseClick);
             // 
@@ -502,7 +504,7 @@
             this.repositoryItemPictureEdit23,
             this.repositoryItemPictureEdit17});
             this.treeListPicturesAfter.RowHeight = 96;
-            this.treeListPicturesAfter.Size = new System.Drawing.Size(720, 108);
+            this.treeListPicturesAfter.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesAfter.TabIndex = 6;
             this.treeListPicturesAfter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesAfter_MouseClick);
             // 
@@ -683,7 +685,7 @@
             this.groupControl4.Controls.Add(this.labelControl1);
             this.groupControl4.Controls.Add(this.labelControl19);
             this.groupControl4.Controls.Add(this.labelControl16);
-            this.groupControl4.Location = new System.Drawing.Point(772, 517);
+            this.groupControl4.Location = new System.Drawing.Point(824, 517);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(273, 86);
             this.groupControl4.TabIndex = 17;
@@ -754,7 +756,7 @@
             this.groupControl3.Controls.Add(this.labelControl14);
             this.groupControl3.Controls.Add(this.labelControl12);
             this.groupControl3.Controls.Add(this.cbeCaptureDepartment);
-            this.groupControl3.Location = new System.Drawing.Point(772, 605);
+            this.groupControl3.Location = new System.Drawing.Point(824, 605);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(209, 81);
             this.groupControl3.TabIndex = 18;
@@ -822,7 +824,7 @@
             this.groupControl2.Controls.Add(this.labelControl7);
             this.groupControl2.Controls.Add(this.labelControl9);
             this.groupControl2.Controls.Add(this.labelControl2);
-            this.groupControl2.Location = new System.Drawing.Point(772, 436);
+            this.groupControl2.Location = new System.Drawing.Point(824, 436);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(272, 77);
             this.groupControl2.TabIndex = 15;
@@ -872,7 +874,7 @@
             this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.textEdit1);
             this.groupControl1.Controls.Add(this.cbeVehType);
-            this.groupControl1.Location = new System.Drawing.Point(772, 347);
+            this.groupControl1.Location = new System.Drawing.Point(824, 347);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(272, 88);
             this.groupControl1.TabIndex = 16;
@@ -927,18 +929,27 @@
             // 
             this.buttonSave.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.buttonSave.Appearance.Options.UseFont = true;
-            this.buttonSave.Location = new System.Drawing.Point(986, 612);
+            this.buttonSave.Location = new System.Drawing.Point(1038, 612);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(61, 64);
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "保存";
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // listBoxControl1
+            // 
+            this.listBoxControl1.Location = new System.Drawing.Point(523, 2);
+            this.listBoxControl1.Name = "listBoxControl1";
+            this.listBoxControl1.Size = new System.Drawing.Size(55, 288);
+            this.listBoxControl1.TabIndex = 19;
+            this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
+            // 
             // frmCaptureLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1052, 695);
+            this.ClientSize = new System.Drawing.Size(1099, 695);
+            this.Controls.Add(this.listBoxControl1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
@@ -1010,6 +1021,7 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1097,6 +1109,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbeVehType;
         private DevExpress.XtraEditors.SimpleButton buttonSave;
         private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
 
     }
 }
