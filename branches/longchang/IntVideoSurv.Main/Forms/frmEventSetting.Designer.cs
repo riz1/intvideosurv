@@ -39,8 +39,8 @@
             this.checkEditDrawDirection = new DevExpress.XtraEditors.CheckEdit();
             this.checkEditDrawObjs = new DevExpress.XtraEditors.CheckEdit();
             this.checkEditDrawTrack = new DevExpress.XtraEditors.CheckEdit();
-            this.textBoxMinarea = new System.Windows.Forms.TextBox();
-            this.textBoxiMaxObjNum = new System.Windows.Forms.TextBox();
+            this.textBoxMinarea = new DevExpress.XtraEditors.TextEdit();
+            this.textBoxiMaxObjNum = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
@@ -265,10 +265,10 @@
         private DevExpress.XtraEditors.CheckEdit checkEditDrawDirection;
         private DevExpress.XtraEditors.CheckEdit checkEditDrawObjs;
         private DevExpress.XtraEditors.CheckEdit checkEditDrawTrack;
-        private System.Windows.Forms.TextBox textBoxiMaxObjNum;
+        private DevExpress.XtraEditors.TextEdit textBoxiMaxObjNum;
         private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
         private DevExpress.XtraEditors.SimpleButton simpleButtonOk;
-        private System.Windows.Forms.TextBox textBoxMinarea;
+        private DevExpress.XtraEditors.TextEdit textBoxMinarea;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.CheckEdit checkEditflagStop;
     }

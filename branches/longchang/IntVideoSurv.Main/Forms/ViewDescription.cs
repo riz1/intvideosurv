@@ -23,21 +23,21 @@ namespace CameraViewer
 	{
 		private View view = null;
 		private bool completed = false;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox nameBox;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox descriptionBox;
+		private DevExpress.XtraEditors.LabelControl label1;
+        private System.Windows.Forms.TextBox nameBox;
+		private DevExpress.XtraEditors.LabelControl label2;
+        private System.Windows.Forms.TextBox descriptionBox;
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TextBox cellWidthBox;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.TextBox cellHeightBox;
+		private DevExpress.XtraEditors.LabelControl label3;
+		private DevExpress.XtraEditors.LabelControl label4;
+		private DevExpress.XtraEditors.LabelControl label5;
+		private DevExpress.XtraEditors.TextEdit cellWidthBox;
+		private DevExpress.XtraEditors.LabelControl label6;
+		private DevExpress.XtraEditors.TextEdit cellHeightBox;
 		private System.Windows.Forms.ComboBox rowsCombo;
 		private System.Windows.Forms.ComboBox colsCombo;
         public int ControlWidth { get; set; }
@@ -109,19 +109,19 @@ namespace CameraViewer
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.label1 = new System.Windows.Forms.Label();
-			this.nameBox = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.descriptionBox = new System.Windows.Forms.TextBox();
+			this.label1 = new DevExpress.XtraEditors.LabelControl();
+            this.nameBox = new System.Windows.Forms.TextBox();
+			this.label2 = new DevExpress.XtraEditors.LabelControl();
+            this.descriptionBox = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.cellHeightBox = new System.Windows.Forms.TextBox();
-			this.label6 = new System.Windows.Forms.Label();
-			this.cellWidthBox = new System.Windows.Forms.TextBox();
-			this.label5 = new System.Windows.Forms.Label();
+			this.cellHeightBox = new DevExpress.XtraEditors.TextEdit();
+			this.label6 = new DevExpress.XtraEditors.LabelControl();
+			this.cellWidthBox = new DevExpress.XtraEditors.TextEdit();
+			this.label5 = new DevExpress.XtraEditors.LabelControl();
 			this.rowsCombo = new System.Windows.Forms.ComboBox();
-			this.label4 = new System.Windows.Forms.Label();
+			this.label4 = new DevExpress.XtraEditors.LabelControl();
 			this.colsCombo = new System.Windows.Forms.ComboBox();
-			this.label3 = new System.Windows.Forms.Label();
+			this.label3 = new DevExpress.XtraEditors.LabelControl();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 

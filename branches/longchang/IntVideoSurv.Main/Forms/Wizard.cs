@@ -28,7 +28,7 @@ namespace CameraViewer
 		private DevExpress.XtraEditors.SimpleButton backButton;
 		private System.Windows.Forms.PictureBox line1;
 		private System.Windows.Forms.PictureBox line2;
-        private System.Windows.Forms.Label descriptionLabel;
+        private DevExpress.XtraEditors.LabelControl descriptionLabel;
 		private System.Windows.Forms.PictureBox line3;
 		private System.Windows.Forms.Panel workPanel;
 		/// <summary>
@@ -69,7 +69,7 @@ namespace CameraViewer
 		private void InitializeComponent()
 		{
             this.descPannel = new System.Windows.Forms.Panel();
-            this.descriptionLabel = new System.Windows.Forms.Label();
+            this.descriptionLabel = new DevExpress.XtraEditors.LabelControl();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.workPanel = new System.Windows.Forms.Panel();
             this.nextButton = new DevExpress.XtraEditors.SimpleButton();

@@ -15,13 +15,13 @@ using CameraViewer.Tools;
 
 namespace CameraViewer.Forms
 {
-    public partial class frmCaptureLicense : XtraForm
+    public partial class frmCaptureHistroyLicense : XtraForm
     {
 
 
         private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const int PicNum = 5;
-        public frmCaptureLicense()
+        public frmCaptureHistroyLicense()
         {
             InitializeComponent();
             LoadBaseInfo();
@@ -52,7 +52,7 @@ namespace CameraViewer.Forms
         private PlayState play_state;
         private RelatedFile _relatedFile; 
 
-        public frmCaptureLicense(AirnoixCamera airnoixCamera)
+        public frmCaptureHistroyLicense(AirnoixCamera airnoixCamera)
         {
             InitializeComponent();
             _airnoixCamera = airnoixCamera;
@@ -507,7 +507,7 @@ namespace CameraViewer.Forms
             }
         }
 
-        private void frmCaptureLicense_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmCaptureHistroyLicense_FormClosed(object sender, FormClosedEventArgs e)
         {
             int ret = AirnoixPlayer.Avdec_Done(intPtr);
             //删除临时BMP文件
@@ -836,7 +836,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             }
         }
 
-        private void frmCaptureLicense_KeyDown(object sender, KeyEventArgs e)
+        private void frmCaptureHistroyLicense_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt&&e.KeyCode==Keys.A)
             {

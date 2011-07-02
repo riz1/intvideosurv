@@ -20,10 +20,10 @@ namespace CameraViewer
 		private DevExpress.XtraEditors.SimpleButton okButton;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.PictureBox pictureBox2;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label3;
+		private DevExpress.XtraEditors.LabelControl label2;
+		private DevExpress.XtraEditors.LabelControl label3;
 		private System.Windows.Forms.LinkLabel siteLink;
-		private System.Windows.Forms.Label label1;
+		private DevExpress.XtraEditors.LabelControl label1;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -67,10 +67,10 @@ namespace CameraViewer
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.okButton = new DevExpress.XtraEditors.SimpleButton();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.label1 = new System.Windows.Forms.Label();
+			this.label1 = new DevExpress.XtraEditors.LabelControl();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new DevExpress.XtraEditors.LabelControl();
+			this.label3 = new DevExpress.XtraEditors.LabelControl();
 			this.siteLink = new System.Windows.Forms.LinkLabel();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -132,7 +132,6 @@ namespace CameraViewer
 			this.label2.Size = new System.Drawing.Size(122, 15);
 			this.label2.TabIndex = 4;
 			this.label2.Text = "Camera Vision 1.0.0";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// label3
 			// 
@@ -141,7 +140,6 @@ namespace CameraViewer
 			this.label3.Size = new System.Drawing.Size(275, 16);
 			this.label3.TabIndex = 5;
 			this.label3.Text = "Copyright ?2005, Andrew Kirillov, All rights reserved";
-			this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// siteLink
 			// 
