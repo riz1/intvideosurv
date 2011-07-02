@@ -835,5 +835,20 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             }
         }
 
+        private void frmCaptureLicense_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt&&e.KeyCode==Keys.A)
+            {
+                simpleButtonPrevious_Click(sender, null);
+            }
+            else if (e.Alt && e.KeyCode == Keys.S)
+            {
+                simpleButtonCurrent_Click(sender, null);
+            }
+            else if (e.Alt && e.KeyCode == Keys.D)
+            {
+                simpleButtonLast_Click(sender, null);
+            }
+        }
     }
 }
