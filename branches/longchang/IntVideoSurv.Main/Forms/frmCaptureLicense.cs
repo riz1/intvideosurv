@@ -740,8 +740,8 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();
             LongChang_UserVehMonInfo uservehmon = new LongChang_UserVehMonInfo();
             string captureFileName = Properties.Settings.Default.CapturePictureFilePath
-                         + @"\"+_airnoixCamera.BeginCaptureTime.ToString("yyyy-MM-dd")
-                         + @"\" + _airnoixCamera.BeginCaptureTime.ToString("HH-mm") + @"\";
+                                     + @"\" + _airnoixCamera.BeginCaptureTime.ToString(@"yyyy\MM\dd")
+                                     + @"\";
             if (!Directory.Exists(captureFileName))
             {
                 Directory.CreateDirectory(captureFileName);
@@ -759,9 +759,9 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.plateColorNum = 0;
             vehmon.plateColor = "";
             vehmon.imageCount = 0;
-            vehmon.imageName1 = captureFileName + vehmon.plateNumber + "_1.jpg";
-            vehmon.imageName2 = captureFileName + vehmon.plateNumber + "_2.jpg";
-            vehmon.imageName3 = captureFileName + vehmon.plateNumber + "_3.jpg";
+            vehmon.imageName1 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_1.jpg";
+            vehmon.imageName2 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_2.jpg";
+            vehmon.imageName3 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_3.jpg";
             vehmon.imageName4 = "";
             vehmon.vedioName = "";
             vehmon.vedioName1 = "";

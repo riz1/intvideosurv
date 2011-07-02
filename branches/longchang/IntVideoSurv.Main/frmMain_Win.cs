@@ -2868,9 +2868,47 @@ namespace CameraViewer
         private void sbFOCUSSub_MouseUp(object sender, MouseEventArgs e)
         {
             ptzControType = PtzControlType.PTZ_FOCUS_NEAR;
-            PtzControl(false);
+            PtzControl(true);
         }
 
+        private void sbCallGlobalCameraPosition_Click(object sender, EventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_SET_PRESET;
+            int positionIndex = 99;
+            bool isConcertSuccessful = int.TryParse(cbePreset.Text, out positionIndex);
+            if (!isConcertSuccessful)
+            {
+                positionIndex = 99;
+            }
+            for (uint i = 0; i < 16; i++)
+            {
+                int ret = AironixControl.TMCC_PtzPreset(ptzHandle, (uint)ptzControType, i+1, ptzSpeed);                
+            }
+
+        }
+        private void sbSaveGlobalCameraPosition_Click(object sender, EventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_GOTO_PRESET;
+            int positionIndex = 99;
+            bool isConcertSuccessful = int.TryParse(cbePreset.Text, out positionIndex);
+            if (!isConcertSuccessful)
+            {
+                positionIndex = 99;
+            }
+            int ret = AironixControl.TMCC_PtzPreset(ptzHandle, (uint)ptzControType, (uint)positionIndex, ptzSpeed);
+        }
+
+        private void sbDeleteGlobalCameraPosition_Click(object sender, EventArgs e)
+        {
+            ptzControType = PtzControlType.PTZ_CLE_PRESET;
+            int positionIndex = 99;
+            bool isConcertSuccessful = int.TryParse(cbePreset.Text, out positionIndex);
+            if (!isConcertSuccessful)
+            {
+                positionIndex = 99;
+            }
+            int ret = AironixControl.TMCC_PtzPreset(ptzHandle, (uint)ptzControType, (uint)positionIndex, ptzSpeed);
+        }
         #endregion
 
         [DllImport("user32.dll", EntryPoint = "RegisterHotKey")]       
@@ -3008,7 +3046,11 @@ namespace CameraViewer
         {
 
 
-        }  
+        }
+
+
+
+ 
 
 
     }

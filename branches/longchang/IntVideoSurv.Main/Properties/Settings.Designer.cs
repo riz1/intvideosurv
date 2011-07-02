@@ -175,5 +175,17 @@ namespace CameraViewer.Properties {
                 this["PreVideoSeconds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int GlobalCameraResetPosition {
+            get {
+                return ((int)(this["GlobalCameraResetPosition"]));
+            }
+            set {
+                this["GlobalCameraResetPosition"] = value;
+            }
+        }
     }
 }
