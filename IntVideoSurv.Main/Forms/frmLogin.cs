@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using DevExpress.XtraEditors;
 using IntVideoSurv.Business;
 using IntVideoSurv.Entity;
 
@@ -14,7 +15,7 @@ using IntVideoSurv.Entity;
 namespace CameraViewer.Forms
 {
 
-    public partial class FormLogin : Form
+    public partial class FormLogin : XtraForm
     {
         public UserInfo currentUser = new UserInfo();
         public bool isLoginOK = false;

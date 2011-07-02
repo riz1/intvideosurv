@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace CameraViewer.Forms
 {
-    public partial class frmHistoryCaptureCondition : Form
+    public partial class frmHistoryCaptureCondition : XtraForm
     {
         public frmHistoryCaptureCondition()
         {
