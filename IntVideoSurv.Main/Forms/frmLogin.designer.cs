@@ -31,12 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtUserID = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.lblLoginInfo = new System.Windows.Forms.Label();
-            this.labelPromoteInfo = new System.Windows.Forms.Label();
+            this.label1 = new DevExpress.XtraEditors.LabelControl();
+            this.label2 = new DevExpress.XtraEditors.LabelControl();
+            this.txtUserID = new DevExpress.XtraEditors.TextEdit();
+            this.txtPassword = new DevExpress.XtraEditors.TextEdit();
+            this.lblLoginInfo = new DevExpress.XtraEditors.LabelControl();
+            this.labelPromoteInfo = new DevExpress.XtraEditors.LabelControl();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -61,19 +63,17 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(36, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 12);
+            this.label1.Size = new System.Drawing.Size(40, 14);
             this.label1.TabIndex = 2;
             this.label1.Text = "用户名:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(36, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 12);
+            this.label2.Size = new System.Drawing.Size(36, 14);
             this.label2.TabIndex = 3;
             this.label2.Text = "密  码:";
             // 
@@ -88,26 +88,23 @@
             // 
             this.txtPassword.Location = new System.Drawing.Point(111, 54);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(100, 21);
             this.txtPassword.TabIndex = 5;
             // 
             // lblLoginInfo
             // 
-            this.lblLoginInfo.AutoSize = true;
-            this.lblLoginInfo.ForeColor = System.Drawing.Color.Red;
+            this.lblLoginInfo.Appearance.ForeColor = System.Drawing.Color.Red;
             this.lblLoginInfo.Location = new System.Drawing.Point(61, 93);
             this.lblLoginInfo.Name = "lblLoginInfo";
-            this.lblLoginInfo.Size = new System.Drawing.Size(0, 12);
+            this.lblLoginInfo.Size = new System.Drawing.Size(0, 14);
             this.lblLoginInfo.TabIndex = 6;
             // 
             // labelPromoteInfo
             // 
-            this.labelPromoteInfo.AutoSize = true;
-            this.labelPromoteInfo.ForeColor = System.Drawing.Color.Red;
+            this.labelPromoteInfo.Appearance.ForeColor = System.Drawing.Color.Red;
             this.labelPromoteInfo.Location = new System.Drawing.Point(49, 93);
             this.labelPromoteInfo.Name = "labelPromoteInfo";
-            this.labelPromoteInfo.Size = new System.Drawing.Size(0, 12);
+            this.labelPromoteInfo.Size = new System.Drawing.Size(0, 14);
             this.labelPromoteInfo.TabIndex = 7;
             // 
             // FormLogin
@@ -130,6 +127,8 @@
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "登录窗口";
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,11 +138,11 @@
 
         private DevExpress.XtraEditors.SimpleButton btnLogin;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtUserID;
-        private System.Windows.Forms.TextBox txtPassword;
-        public System.Windows.Forms.Label lblLoginInfo;
-        private System.Windows.Forms.Label labelPromoteInfo;
+        private DevExpress.XtraEditors.LabelControl label1;
+        private DevExpress.XtraEditors.LabelControl label2;
+        private DevExpress.XtraEditors.TextEdit txtUserID;
+        private DevExpress.XtraEditors.TextEdit txtPassword;
+        public DevExpress.XtraEditors.LabelControl lblLoginInfo;
+        private DevExpress.XtraEditors.LabelControl labelPromoteInfo;
     }
 }

@@ -212,6 +212,12 @@
     <Compile Include="Forms\AddVirtualGroup.Designer.cs">
       <DependentUpon>AddVirtualGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmCaptureHistroyLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCaptureHistroyLicense.designer.cs">
+      <DependentUpon>frmCaptureHistroyLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmCaptureLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,6 +271,12 @@
     </Compile>
     <Compile Include="Forms\frmGroupSwitchGroup.designer.cs">
       <DependentUpon>frmGroupSwitchGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmHistoryCaptureCondition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmHistoryCaptureCondition.Designer.cs">
+      <DependentUpon>frmHistoryCaptureCondition.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmLogin.cs">
       <SubType>Form</SubType>
@@ -502,6 +514,10 @@
       <DependentUpon>AddVirtualGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCaptureHistroyLicense.resx">
+      <DependentUpon>frmCaptureHistroyLicense.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCaptureLicense.resx">
       <DependentUpon>frmCaptureLicense.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -544,6 +560,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmGroupSwitchGroup.resx">
       <DependentUpon>frmGroupSwitchGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmHistoryCaptureCondition.resx">
+      <DependentUpon>frmHistoryCaptureCondition.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">

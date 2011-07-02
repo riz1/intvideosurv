@@ -25,11 +25,11 @@ namespace CameraViewer
 		private Camera camera = null;
 		private bool completed = false;
 
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox descriptionBox;
-		private System.Windows.Forms.TextBox nameBox;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label3;
+		private DevExpress.XtraEditors.LabelControl label2;
+        private System.Windows.Forms.TextBox descriptionBox;
+        private System.Windows.Forms.TextBox nameBox;
+		private DevExpress.XtraEditors.LabelControl label1;
+		private DevExpress.XtraEditors.LabelControl label3;
 		private System.Windows.Forms.ComboBox videoSourceCombo;
 		/// <summary> 
 		/// Required designer variable.
@@ -122,11 +122,11 @@ namespace CameraViewer
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.label2 = new System.Windows.Forms.Label();
+            this.label2 = new DevExpress.XtraEditors.LabelControl();
             this.descriptionBox = new System.Windows.Forms.TextBox();
             this.nameBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new DevExpress.XtraEditors.LabelControl();
+            this.label3 = new DevExpress.XtraEditors.LabelControl();
             this.videoSourceCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -144,7 +144,7 @@ namespace CameraViewer
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionBox.Location = new System.Drawing.Point(10, 60);
-            this.descriptionBox.Multiline = true;
+		    this.descriptionBox.Multiline = true;
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.Size = new System.Drawing.Size(300, 80);
             this.descriptionBox.TabIndex = 3;
