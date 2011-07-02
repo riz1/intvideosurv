@@ -6,11 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using IntVideoSurv.Business;
 
 namespace CameraViewer
 {
-    public partial class JustForTest : Form
+    public partial class JustForTest : XtraForm
     {
         public JustForTest()
         {
