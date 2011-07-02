@@ -161,7 +161,7 @@
             // 
             // pictureEditSelectedPicture
             // 
-            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(584, 2);
+            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(616, 2);
             this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
             this.pictureEditSelectedPicture.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             this.pictureEditSelectedPicture.Size = new System.Drawing.Size(512, 288);
@@ -170,29 +170,35 @@
             // 
             // simpleButtonPrevious
             // 
+            this.simpleButtonPrevious.Appearance.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.simpleButtonPrevious.Appearance.Options.UseFont = true;
             this.simpleButtonPrevious.Location = new System.Drawing.Point(2, 347);
             this.simpleButtonPrevious.Name = "simpleButtonPrevious";
-            this.simpleButtonPrevious.Size = new System.Drawing.Size(38, 108);
+            this.simpleButtonPrevious.Size = new System.Drawing.Size(71, 108);
             this.simpleButtonPrevious.TabIndex = 1;
-            this.simpleButtonPrevious.Text = "前";
+            this.simpleButtonPrevious.Text = "前(&A)";
             this.simpleButtonPrevious.Click += new System.EventHandler(this.simpleButtonPrevious_Click);
             // 
             // simpleButtonCurrent
             // 
+            this.simpleButtonCurrent.Appearance.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.simpleButtonCurrent.Appearance.Options.UseFont = true;
             this.simpleButtonCurrent.Location = new System.Drawing.Point(2, 463);
             this.simpleButtonCurrent.Name = "simpleButtonCurrent";
-            this.simpleButtonCurrent.Size = new System.Drawing.Size(38, 108);
+            this.simpleButtonCurrent.Size = new System.Drawing.Size(71, 108);
             this.simpleButtonCurrent.TabIndex = 2;
-            this.simpleButtonCurrent.Text = "中";
+            this.simpleButtonCurrent.Text = "中(S)";
             this.simpleButtonCurrent.Click += new System.EventHandler(this.simpleButtonCurrent_Click);
             // 
             // simpleButtonLast
             // 
+            this.simpleButtonLast.Appearance.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.simpleButtonLast.Appearance.Options.UseFont = true;
             this.simpleButtonLast.Location = new System.Drawing.Point(2, 580);
             this.simpleButtonLast.Name = "simpleButtonLast";
-            this.simpleButtonLast.Size = new System.Drawing.Size(38, 108);
+            this.simpleButtonLast.Size = new System.Drawing.Size(71, 108);
             this.simpleButtonLast.TabIndex = 3;
-            this.simpleButtonLast.Text = "后";
+            this.simpleButtonLast.Text = "后(&D)";
             this.simpleButtonLast.Click += new System.EventHandler(this.simpleButtonLast_Click);
             // 
             // treeListPicturesBefore
@@ -207,7 +213,7 @@
             this.treeListColumn3,
             this.treeListColumn4,
             this.treeListColumn5});
-            this.treeListPicturesBefore.Location = new System.Drawing.Point(46, 347);
+            this.treeListPicturesBefore.Location = new System.Drawing.Point(78, 347);
             this.treeListPicturesBefore.Name = "treeListPicturesBefore";
             this.treeListPicturesBefore.OptionsBehavior.Editable = false;
             this.treeListPicturesBefore.OptionsView.ShowButtons = false;
@@ -346,7 +352,7 @@
             this.treeListColumn10,
             this.treeListColumn11,
             this.treeListColumn12});
-            this.treeListPicturesCurrent.Location = new System.Drawing.Point(46, 463);
+            this.treeListPicturesCurrent.Location = new System.Drawing.Point(78, 463);
             this.treeListPicturesCurrent.Name = "treeListPicturesCurrent";
             this.treeListPicturesCurrent.OptionsBehavior.Editable = false;
             this.treeListPicturesCurrent.OptionsView.ShowButtons = false;
@@ -485,7 +491,7 @@
             this.treeListColumn17,
             this.treeListColumn18,
             this.treeListColumn19});
-            this.treeListPicturesAfter.Location = new System.Drawing.Point(46, 580);
+            this.treeListPicturesAfter.Location = new System.Drawing.Point(78, 580);
             this.treeListPicturesAfter.Name = "treeListPicturesAfter";
             this.treeListPicturesAfter.OptionsBehavior.Editable = false;
             this.treeListPicturesAfter.OptionsView.ShowButtons = false;
@@ -685,9 +691,9 @@
             this.groupControl4.Controls.Add(this.labelControl1);
             this.groupControl4.Controls.Add(this.labelControl19);
             this.groupControl4.Controls.Add(this.labelControl16);
-            this.groupControl4.Location = new System.Drawing.Point(824, 517);
+            this.groupControl4.Location = new System.Drawing.Point(856, 517);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(273, 86);
+            this.groupControl4.Size = new System.Drawing.Size(272, 86);
             this.groupControl4.TabIndex = 17;
             this.groupControl4.Text = "违法地点";
             // 
@@ -756,9 +762,9 @@
             this.groupControl3.Controls.Add(this.labelControl14);
             this.groupControl3.Controls.Add(this.labelControl12);
             this.groupControl3.Controls.Add(this.cbeCaptureDepartment);
-            this.groupControl3.Location = new System.Drawing.Point(824, 605);
+            this.groupControl3.Location = new System.Drawing.Point(856, 605);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(209, 81);
+            this.groupControl3.Size = new System.Drawing.Size(187, 81);
             this.groupControl3.TabIndex = 18;
             this.groupControl3.Text = "单位信息";
             // 
@@ -769,7 +775,7 @@
             this.cbeRegion.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbeRegion.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeRegion.Size = new System.Drawing.Size(127, 21);
+            this.cbeRegion.Size = new System.Drawing.Size(104, 21);
             this.cbeRegion.TabIndex = 10;
             // 
             // labelControl13
@@ -784,7 +790,7 @@
             // labelControl11
             // 
             this.labelControl11.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.labelControl11.Location = new System.Drawing.Point(193, 29);
+            this.labelControl11.Location = new System.Drawing.Point(171, 33);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(7, 14);
             this.labelControl11.TabIndex = 4;
@@ -802,7 +808,7 @@
             // labelControl12
             // 
             this.labelControl12.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.labelControl12.Location = new System.Drawing.Point(194, 56);
+            this.labelControl12.Location = new System.Drawing.Point(171, 56);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(7, 14);
             this.labelControl12.TabIndex = 4;
@@ -815,7 +821,7 @@
             this.cbeCaptureDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbeCaptureDepartment.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeCaptureDepartment.Size = new System.Drawing.Size(127, 21);
+            this.cbeCaptureDepartment.Size = new System.Drawing.Size(105, 21);
             this.cbeCaptureDepartment.TabIndex = 9;
             // 
             // groupControl2
@@ -824,9 +830,9 @@
             this.groupControl2.Controls.Add(this.labelControl7);
             this.groupControl2.Controls.Add(this.labelControl9);
             this.groupControl2.Controls.Add(this.labelControl2);
-            this.groupControl2.Location = new System.Drawing.Point(824, 436);
+            this.groupControl2.Location = new System.Drawing.Point(856, 436);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(272, 77);
+            this.groupControl2.Size = new System.Drawing.Size(271, 77);
             this.groupControl2.TabIndex = 15;
             this.groupControl2.Text = "违法原因";
             // 
@@ -874,9 +880,9 @@
             this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.textEdit1);
             this.groupControl1.Controls.Add(this.cbeVehType);
-            this.groupControl1.Location = new System.Drawing.Point(824, 347);
+            this.groupControl1.Location = new System.Drawing.Point(856, 347);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(272, 88);
+            this.groupControl1.Size = new System.Drawing.Size(271, 88);
             this.groupControl1.TabIndex = 16;
             this.groupControl1.Text = "号牌信息";
             // 
@@ -927,20 +933,20 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.buttonSave.Appearance.Font = new System.Drawing.Font("Tahoma", 16F);
             this.buttonSave.Appearance.Options.UseFont = true;
-            this.buttonSave.Location = new System.Drawing.Point(1038, 612);
+            this.buttonSave.Location = new System.Drawing.Point(1049, 609);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(61, 64);
+            this.buttonSave.Size = new System.Drawing.Size(79, 75);
             this.buttonSave.TabIndex = 11;
-            this.buttonSave.Text = "保存";
+            this.buttonSave.Text = "保存(&F)";
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // listBoxControl1
             // 
             this.listBoxControl1.Location = new System.Drawing.Point(523, 2);
             this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(55, 288);
+            this.listBoxControl1.Size = new System.Drawing.Size(87, 288);
             this.listBoxControl1.TabIndex = 19;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             // 
@@ -948,7 +954,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1099, 695);
+            this.ClientSize = new System.Drawing.Size(1133, 689);
             this.Controls.Add(this.listBoxControl1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupControl4);
@@ -969,9 +975,11 @@
             this.Controls.Add(this.pictureEditSelectedPicture);
             this.Controls.Add(this.trackBar1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "frmCaptureLicense";
             this.Text = "证据截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureLicense_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCaptureLicense_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).EndInit();
