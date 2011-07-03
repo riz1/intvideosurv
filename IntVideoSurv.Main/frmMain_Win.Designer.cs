@@ -69,6 +69,7 @@ namespace CameraViewer
             this.barButtonItem20 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem21 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemPlayTwoFiles = new DevExpress.XtraBars.BarButtonItem();
+            this.bbiHistroyVideoCondition = new DevExpress.XtraBars.BarButtonItem();
             this.bar4 = new DevExpress.XtraBars.Bar();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItemCurrentUser = new DevExpress.XtraBars.BarStaticItem();
@@ -440,9 +441,10 @@ namespace CameraViewer
             this.barButtonItem20,
             this.barButtonItem21,
             this.barButtonItemPlayTwoFiles,
-            this.barStaticItem7});
+            this.barStaticItem7,
+            this.bbiHistroyVideoCondition});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 58;
+            this.barManager1.MaxItemId = 59;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.barManager1.StatusBar = this.bar4;
@@ -553,7 +555,8 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem19),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem20),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem21),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPlayTwoFiles)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPlayTwoFiles),
+            new DevExpress.XtraBars.LinkPersistInfo(this.bbiHistroyVideoCondition)});
             this.bar3.Offset = 4;
             this.bar3.Text = "Custom 3";
             // 
@@ -566,28 +569,28 @@ namespace CameraViewer
             // 
             // barButtonItem8
             // 
-            this.barButtonItem8.Caption = "·¢ËÍÃüÁî1";
+            this.barButtonItem8.Caption = "ÃüÁî1";
             this.barButtonItem8.Id = 30;
             this.barButtonItem8.Name = "barButtonItem8";
             this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick_1);
             // 
             // barButtonItem9
             // 
-            this.barButtonItem9.Caption = "·¢ËÍÃüÁî2";
+            this.barButtonItem9.Caption = "ÃüÁî2";
             this.barButtonItem9.Id = 31;
             this.barButtonItem9.Name = "barButtonItem9";
             this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
             // 
             // barButtonItem10
             // 
-            this.barButtonItem10.Caption = "·¢ËÍÃüÁî3";
+            this.barButtonItem10.Caption = "ÃüÁî3";
             this.barButtonItem10.Id = 32;
             this.barButtonItem10.Name = "barButtonItem10";
             this.barButtonItem10.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem10_ItemClick);
             // 
             // barButtonItem11
             // 
-            this.barButtonItem11.Caption = "·¢ËÍÃüÁî4";
+            this.barButtonItem11.Caption = "ÃüÁî4";
             this.barButtonItem11.Id = 33;
             this.barButtonItem11.Name = "barButtonItem11";
             this.barButtonItem11.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem11_ItemClick);
@@ -729,6 +732,13 @@ namespace CameraViewer
             this.barButtonItemPlayTwoFiles.Id = 56;
             this.barButtonItemPlayTwoFiles.Name = "barButtonItemPlayTwoFiles";
             this.barButtonItemPlayTwoFiles.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPlayTwoFiles_ItemClick);
+            // 
+            // bbiHistroyVideoCondition
+            // 
+            this.bbiHistroyVideoCondition.Caption = "ÀúÊ·ÊÓÆµ";
+            this.bbiHistroyVideoCondition.Id = 58;
+            this.bbiHistroyVideoCondition.Name = "bbiHistroyVideoCondition";
+            this.bbiHistroyVideoCondition.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiHistroyVideoCondition_ItemClick);
             // 
             // bar4
             // 
@@ -3303,6 +3313,7 @@ namespace CameraViewer
         private DevExpress.XtraEditors.SimpleButton sbSaveGlobalCameraPosition;
         private DevExpress.XtraEditors.SimpleButton sbDeleteAllGlobalCameraPosition;
         private DevExpress.XtraEditors.LabelControl labelControl18;
+        private DevExpress.XtraBars.BarButtonItem bbiHistroyVideoCondition;
         
     }
 }

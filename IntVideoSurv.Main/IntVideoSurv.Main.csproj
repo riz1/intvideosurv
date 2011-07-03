@@ -451,7 +451,9 @@
     <Compile Include="Tools\GroupCollection.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tools\HistroyVideoFile.cs" />
     <Compile Include="Tools\RelatedFile.cs" />
+    <Compile Include="Tools\RelatedHistroyVideoFile.cs" />
     <Compile Include="Tools\RunningPool.cs">
       <SubType>Code</SubType>
     </Compile>
