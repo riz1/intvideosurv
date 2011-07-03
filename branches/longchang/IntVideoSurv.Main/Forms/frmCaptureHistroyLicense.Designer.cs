@@ -77,13 +77,12 @@
             this.repositoryItemPictureEdit22 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit23 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.panelControlVideo = new DevExpress.XtraEditors.PanelControl();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerForUpdateTrack = new System.Windows.Forms.Timer(this.components);
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.buttonPlay = new DevExpress.XtraEditors.SimpleButton();
             this.buttonPause = new DevExpress.XtraEditors.SimpleButton();
             this.buttonStop = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.comboBoxEditRoadName = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
@@ -110,7 +109,14 @@
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.cbeVehType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
-            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gcID = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gcCameraName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gcTime = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gcVideoFile = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gcCameraTag = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -156,15 +162,16 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEditSelectedPicture
             // 
-            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(616, 2);
+            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(711, 2);
             this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
             this.pictureEditSelectedPicture.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(512, 288);
+            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(417, 288);
             this.pictureEditSelectedPicture.TabIndex = 0;
             this.pictureEditSelectedPicture.DoubleClick += new System.EventHandler(this.pictureEditSelectedPicture_DoubleClick);
             // 
@@ -627,10 +634,10 @@
             this.panelControlVideo.Size = new System.Drawing.Size(512, 288);
             this.panelControlVideo.TabIndex = 7;
             // 
-            // timer1
+            // timerForUpdateTrack
             // 
-            this.timer1.Interval = 20;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerForUpdateTrack.Interval = 20;
+            this.timerForUpdateTrack.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // trackBar1
             // 
@@ -677,11 +684,6 @@
             this.simpleButton1.Size = new System.Drawing.Size(92, 77);
             this.simpleButton1.TabIndex = 14;
             this.simpleButton1.Text = "保存";
-            // 
-            // timer2
-            // 
-            this.timer2.Interval = 30;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // groupControl4
             // 
@@ -942,20 +944,92 @@
             this.buttonSave.Text = "保存(&F)";
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // listBoxControl1
+            // gridControl1
             // 
-            this.listBoxControl1.Location = new System.Drawing.Point(523, 2);
-            this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(87, 288);
-            this.listBoxControl1.TabIndex = 19;
-            this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
+            this.gridControl1.Location = new System.Drawing.Point(523, 2);
+            this.gridControl1.MainView = this.bandedGridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(189, 305);
+            this.gridControl1.TabIndex = 19;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.bandedGridView1});
+            // 
+            // bandedGridView1
+            // 
+            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1});
+            this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.gcID,
+            this.gcCameraName,
+            this.gcTime,
+            this.gcVideoFile,
+            this.gcCameraTag});
+            this.bandedGridView1.GridControl = this.gridControl1;
+            this.bandedGridView1.Name = "bandedGridView1";
+            this.bandedGridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.bandedGridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.bandedGridView1.OptionsBehavior.Editable = false;
+            this.bandedGridView1.OptionsBehavior.ReadOnly = true;
+            this.bandedGridView1.OptionsView.ShowBands = false;
+            this.bandedGridView1.OptionsView.ShowGroupPanel = false;
+            this.bandedGridView1.OptionsView.ShowIndicator = false;
+            this.bandedGridView1.DoubleClick += new System.EventHandler(this.bandedGridView1_DoubleClick);
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.Caption = "gridBand1";
+            this.gridBand1.Columns.Add(this.gcID);
+            this.gridBand1.Columns.Add(this.gcCameraName);
+            this.gridBand1.Columns.Add(this.gcTime);
+            this.gridBand1.Columns.Add(this.gcVideoFile);
+            this.gridBand1.Columns.Add(this.gcCameraTag);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.Width = 171;
+            // 
+            // gcID
+            // 
+            this.gcID.Caption = "编号";
+            this.gcID.FieldName = "编号";
+            this.gcID.Name = "gcID";
+            this.gcID.Visible = true;
+            this.gcID.Width = 32;
+            // 
+            // gcCameraName
+            // 
+            this.gcCameraName.Caption = "摄像头";
+            this.gcCameraName.FieldName = "摄像头";
+            this.gcCameraName.Name = "gcCameraName";
+            this.gcCameraName.Visible = true;
+            this.gcCameraName.Width = 70;
+            // 
+            // gcTime
+            // 
+            this.gcTime.Caption = "时间";
+            this.gcTime.DisplayFormat.FormatString = "dd日HH:mm";
+            this.gcTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gcTime.FieldName = "时间";
+            this.gcTime.Name = "gcTime";
+            this.gcTime.Visible = true;
+            this.gcTime.Width = 69;
+            // 
+            // gcVideoFile
+            // 
+            this.gcVideoFile.Caption = "文件";
+            this.gcVideoFile.FieldName = "文件";
+            this.gcVideoFile.Name = "gcVideoFile";
+            // 
+            // gcCameraTag
+            // 
+            this.gcCameraTag.Caption = "CameraTag";
+            this.gcCameraTag.FieldName = "CameraTag";
+            this.gcCameraTag.Name = "gcCameraTag";
             // 
             // frmCaptureHistroyLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 689);
-            this.Controls.Add(this.listBoxControl1);
+            this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
@@ -977,6 +1051,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "frmCaptureHistroyLicense";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "证据截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureHistroyLicense_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCaptureHistroyLicense_KeyDown);
@@ -1029,7 +1104,8 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1084,13 +1160,12 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit23;
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit24;
         private DevExpress.XtraEditors.PanelControl panelControlVideo;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerForUpdateTrack;
         private System.Windows.Forms.TrackBar trackBar1;
         private DevExpress.XtraEditors.SimpleButton buttonPlay;
         private DevExpress.XtraEditors.SimpleButton buttonPause;
         private DevExpress.XtraEditors.SimpleButton buttonStop;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private System.Windows.Forms.Timer timer2;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditRoadName;
         private DevExpress.XtraEditors.LabelControl labelControl18;
@@ -1117,7 +1192,14 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbeVehType;
         private DevExpress.XtraEditors.SimpleButton buttonSave;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcID;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcCameraName;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcTime;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcVideoFile;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcCameraTag;
 
     }
 }

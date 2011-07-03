@@ -44,9 +44,9 @@
             // btnLogin
             // 
             this.btnLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnLogin.Location = new System.Drawing.Point(38, 120);
+            this.btnLogin.Location = new System.Drawing.Point(44, 140);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(87, 27);
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "登录";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -54,16 +54,16 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(136, 120);
+            this.btnCancel.Location = new System.Drawing.Point(159, 140);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(87, 27);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(36, 19);
+            this.label1.Location = new System.Drawing.Point(42, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 14);
             this.label1.TabIndex = 2;
@@ -71,7 +71,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(36, 57);
+            this.label2.Location = new System.Drawing.Point(42, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 14);
             this.label2.TabIndex = 3;
@@ -79,22 +79,24 @@
             // 
             // txtUserID
             // 
-            this.txtUserID.Location = new System.Drawing.Point(111, 16);
+            this.txtUserID.Location = new System.Drawing.Point(129, 19);
             this.txtUserID.Name = "txtUserID";
-            this.txtUserID.Size = new System.Drawing.Size(100, 21);
+            this.txtUserID.Size = new System.Drawing.Size(117, 21);
             this.txtUserID.TabIndex = 0;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(111, 54);
+            this.txtPassword.EditValue = "";
+            this.txtPassword.Location = new System.Drawing.Point(129, 63);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(100, 21);
+            this.txtPassword.Properties.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(117, 21);
             this.txtPassword.TabIndex = 5;
             // 
             // lblLoginInfo
             // 
             this.lblLoginInfo.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.lblLoginInfo.Location = new System.Drawing.Point(61, 93);
+            this.lblLoginInfo.Location = new System.Drawing.Point(71, 108);
             this.lblLoginInfo.Name = "lblLoginInfo";
             this.lblLoginInfo.Size = new System.Drawing.Size(0, 14);
             this.lblLoginInfo.TabIndex = 6;
@@ -102,7 +104,7 @@
             // labelPromoteInfo
             // 
             this.labelPromoteInfo.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.labelPromoteInfo.Location = new System.Drawing.Point(49, 93);
+            this.labelPromoteInfo.Location = new System.Drawing.Point(57, 108);
             this.labelPromoteInfo.Name = "labelPromoteInfo";
             this.labelPromoteInfo.Size = new System.Drawing.Size(0, 14);
             this.labelPromoteInfo.TabIndex = 7;
@@ -110,9 +112,9 @@
             // FormLogin
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 167);
+            this.ClientSize = new System.Drawing.Size(295, 195);
             this.Controls.Add(this.labelPromoteInfo);
             this.Controls.Add(this.lblLoginInfo);
             this.Controls.Add(this.txtPassword);

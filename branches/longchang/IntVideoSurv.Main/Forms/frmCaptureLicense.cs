@@ -735,6 +735,16 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
         private string errMessage = "";
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            if (treeListPicturesBefore.FocusedNode == null || treeListPicturesCurrent.FocusedNode == null || treeListPicturesAfter.FocusedNode == null)
+            {
+                XtraMessageBox.Show("三张照片未完全生成!");
+                return;
+            }
+            if (textEdit1.Text.Length < 7)
+            {
+                XtraMessageBox.Show("录入的车牌号不正确!");
+                return;
+            }
             LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
             LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
             LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();

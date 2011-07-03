@@ -3048,10 +3048,12 @@ namespace CameraViewer
 
         }
 
-
-
- 
-
-
+        private void bbiHistroyVideoCondition_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frmHistoryCaptureCondition frmhcc= new frmHistoryCaptureCondition();
+            frmhcc.ShowDialog();
+            frmCaptureHistroyLicense fchl = new frmCaptureHistroyLicense(frmhcc);
+            fchl.Show();
+        }
     }
 }
