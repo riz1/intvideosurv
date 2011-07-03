@@ -753,12 +753,12 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             reason = LongChang_InvalidTypeBusiness.Instance.GetInvalidTypeInfoByWzyy(ref errMessage, vehmon.illegalReason);
             vehmon.adminDivisionName = cbeCaptureDepartment.Text;
             vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
-            vehmon.vehInfoNum = 0;
-            vehmon.tollNum = 0;
-            vehmon.tollName = "";
+            //vehmon.vehInfoNum = 0;//CLXXBH_SEQ.NEXTVAL
+            vehmon.tollNum = 1000;
+            vehmon.tollName = "测试路口";
             vehmon.plateColorNum = 0;
             vehmon.plateColor = "";
-            vehmon.imageCount = 0;
+            vehmon.imageCount = 3;
             vehmon.imageName1 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_1.jpg";
             vehmon.imageName2 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_2.jpg";
             vehmon.imageName3 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_3.jpg";
@@ -798,6 +798,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             (treeListPicturesBefore.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName1,System.Drawing.Imaging.ImageFormat.Jpeg);
             (treeListPicturesCurrent.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName2,System.Drawing.Imaging.ImageFormat.Jpeg);
             (treeListPicturesAfter.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName3,System.Drawing.Imaging.ImageFormat.Jpeg);
+            MessageBox.Show("保存成功");
             this.Close();
         }
 
