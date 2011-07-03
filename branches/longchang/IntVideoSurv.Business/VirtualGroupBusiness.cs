@@ -81,5 +81,23 @@ namespace IntVideoSurv.Business
                 return null;
             }
         }
+        public int ChangeVirtualGroup(ref string errMessage,int Gid,string newname)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return VirtualGroupDataAccess.ChangeVirtualGroup(db,Gid,newname);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+            
+        }
     }
 }

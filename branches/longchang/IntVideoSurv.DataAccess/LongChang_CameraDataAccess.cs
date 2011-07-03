@@ -53,7 +53,24 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static int Delete(Database db, int CameraId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from TOG_DEVICE ");
+            sb.AppendFormat(" where SBBH={0}", CameraId);
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
         public static DataSet GetCamInfoByDeviceUserId(Database db,int userId)
         {
             string cmdText = string.Format("select distinct TOG_DEVICE.* " +
@@ -70,24 +87,6 @@ namespace IntVideoSurv.DataAccess
 
                 throw ex;
             }
-        }
-        public static int Delete(Database db, int CameraId)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("delete from TOG_DEVICE ");
-            sb.AppendFormat(" where SBBH={0}",CameraId);
-            string cmdText = sb.ToString();
-            try
-            {
-                return db.ExecuteNonQuery(CommandType.Text, cmdText);
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
         }
         public static string Insert(Database db, LongChang_CameraInfo oCameraInfo)
         {

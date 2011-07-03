@@ -80,5 +80,20 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static int ChangeVirtualGroup(Database db,int Gid,string newname)
+        {
+            string cmdText = string.Format("update IVS_VIRTUALGROUP set name='{0}' where ID={1}",newname,Gid);
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+        }
     }
 }
