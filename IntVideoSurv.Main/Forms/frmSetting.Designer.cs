@@ -30,7 +30,7 @@ namespace CameraViewer.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetting));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -599,7 +599,7 @@ namespace CameraViewer.Forms
             // gcDeviceManagement
             // 
             this.gcDeviceManagement.Controls.Add(this.splitContainerControl1);
-            this.gcDeviceManagement.Location = new System.Drawing.Point(254, 87);
+            this.gcDeviceManagement.Location = new System.Drawing.Point(401, 94);
             this.gcDeviceManagement.Name = "gcDeviceManagement";
             this.gcDeviceManagement.Size = new System.Drawing.Size(159, 170);
             this.gcDeviceManagement.TabIndex = 31;
@@ -974,7 +974,7 @@ namespace CameraViewer.Forms
             // gcUserManagement
             // 
             this.gcUserManagement.Controls.Add(this.splitContainerControl6);
-            this.gcUserManagement.Location = new System.Drawing.Point(153, 7);
+            this.gcUserManagement.Location = new System.Drawing.Point(374, 18);
             this.gcUserManagement.Name = "gcUserManagement";
             this.gcUserManagement.Size = new System.Drawing.Size(186, 119);
             this.gcUserManagement.TabIndex = 8;
@@ -1616,9 +1616,9 @@ namespace CameraViewer.Forms
             // gcSearchManagement
             // 
             this.gcSearchManagement.Controls.Add(this.splitContainerControl10);
-            this.gcSearchManagement.Location = new System.Drawing.Point(120, 70);
+            this.gcSearchManagement.Location = new System.Drawing.Point(544, 70);
             this.gcSearchManagement.Name = "gcSearchManagement";
-            this.gcSearchManagement.Size = new System.Drawing.Size(760, 183);
+            this.gcSearchManagement.Size = new System.Drawing.Size(336, 183);
             this.gcSearchManagement.TabIndex = 37;
             this.gcSearchManagement.Text = "查询管理";
             // 
@@ -1639,7 +1639,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl10.Panel2.Controls.Add(this.teStartTime);
             this.splitContainerControl10.Panel2.Controls.Add(this.teEndTime);
             this.splitContainerControl10.Panel2.Text = "Panel2";
-            this.splitContainerControl10.Size = new System.Drawing.Size(756, 158);
+            this.splitContainerControl10.Size = new System.Drawing.Size(332, 158);
             this.splitContainerControl10.SplitterPosition = 108;
             this.splitContainerControl10.TabIndex = 0;
             this.splitContainerControl10.Text = "splitContainerControl10";
@@ -1651,7 +1651,7 @@ namespace CameraViewer.Forms
             this.gridControlSearch.MainView = this.gridView7;
             this.gridControlSearch.MenuManager = this.barManager1;
             this.gridControlSearch.Name = "gridControlSearch";
-            this.gridControlSearch.Size = new System.Drawing.Size(756, 108);
+            this.gridControlSearch.Size = new System.Drawing.Size(332, 108);
             this.gridControlSearch.TabIndex = 0;
             this.gridControlSearch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView7});
@@ -2415,9 +2415,9 @@ namespace CameraViewer.Forms
             // 
             // Tick
             // 
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Tick.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Tick.DefaultCellStyle = dataGridViewCellStyle2;
             this.Tick.HeaderText = "时间间隔(秒)";
             this.Tick.Name = "Tick";
             // 
