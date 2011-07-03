@@ -151,6 +151,7 @@ namespace IntVideoSurv.Business
             }
 
         }
+
         public string Insert(ref string errMessage, LongChang_CameraInfo oCameraInfo)
         {
             Database db = DatabaseFactory.CreateDatabase();

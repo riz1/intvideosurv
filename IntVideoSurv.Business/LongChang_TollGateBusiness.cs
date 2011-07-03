@@ -105,5 +105,45 @@ namespace IntVideoSurv.Business
             }
 
         }
+        public LongChang_TollGateInfo GetTollGateInfoByKaKouID(ref string errMessage, string Id)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = LongChang_TollGateDataAccess.GetTollGateInfoByKKBh(db, Id);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    return null;
+                }
+                return new LongChang_TollGateInfo(ds.Tables[0].Rows[0]);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return null;
+            }
+
+        }
+        public int Delete(ref string errMessage, string TollId)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                int iRtn = LongChang_TollGateDataAccess.Delete(db, TollId);
+
+                return iRtn;
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
     }
 }

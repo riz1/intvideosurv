@@ -212,6 +212,12 @@
     <Compile Include="Forms\AddVirtualGroup.Designer.cs">
       <DependentUpon>AddVirtualGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ChangeVirtualGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChangeVirtualGroup.Designer.cs">
+      <DependentUpon>ChangeVirtualGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmAddToGDevice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -520,6 +526,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddVirtualGroup.resx">
       <DependentUpon>AddVirtualGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChangeVirtualGroup.resx">
+      <DependentUpon>ChangeVirtualGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAddToGDevice.resx">

@@ -52,6 +52,38 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+        public static int Delete(Database db, string TollId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from TOG_TOLLGATE");
+            sb.AppendFormat(" where KKBH='{0}'", TollId);
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        public static DataSet GetTollGateInfoByKKBh(Database db, string tollid)
+        {
+            string cmdText = string.Format("select * from TOG_TOLLGATE where kkbh = '{0}' order by tgid", tollid);
+            try
+            {
+                return db.ExecuteDataSet(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         
     }
 }
