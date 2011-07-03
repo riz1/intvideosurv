@@ -750,7 +750,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();
             LongChang_UserVehMonInfo uservehmon = new LongChang_UserVehMonInfo();
             string captureFileName = Properties.Settings.Default.CapturePictureFilePath
-                                     + @"\" + _airnoixCamera.BeginCaptureTime.ToString(@"yyyy\MM\dd")
+                                     + @"\" + _airnoixCamera.BeginCaptureTime.ToString(@"yyyy\\MM\\dd")
                                      + @"\";
             if (!Directory.Exists(captureFileName))
             {
@@ -805,14 +805,31 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             uservehmon.TheTime = DateTime.Now;
             LongChang_UserVehMonBusiness.Instance.Insert(ref errMessage, uservehmon);
             //将三张图片写入到磁盘中
-            (treeListPicturesBefore.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName1,System.Drawing.Imaging.ImageFormat.Jpeg);
-            (treeListPicturesCurrent.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName2,System.Drawing.Imaging.ImageFormat.Jpeg);
-            (treeListPicturesAfter.FocusedNode.GetValue(0) as Image).Save(vehmon.imageName3,System.Drawing.Imaging.ImageFormat.Jpeg);
+            Image image1 = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
+            Image image2 = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
+            Image image3 = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
+            image1 = AddTextInImage(image1, vehmon.tollName, 18, Color.White, 8, 46);
+            image2 = AddTextInImage(image2, vehmon.tollName, 18, Color.White, 8, 46);
+            image3 = AddTextInImage(image3, vehmon.tollName, 18, Color.White, 8, 46);
+            image1.Save(vehmon.imageName1, System.Drawing.Imaging.ImageFormat.Jpeg);
+            image2.Save(vehmon.imageName2, System.Drawing.Imaging.ImageFormat.Jpeg);
+            image3.Save(vehmon.imageName3, System.Drawing.Imaging.ImageFormat.Jpeg);
             XtraMessageBox.Show("保存成功");
             this.Close();
         }
 
+        private Image AddTextInImage(Image image, string addText, int fonesize, Color brushColor, int x, int y)
+        {
 
+            Graphics g = Graphics.FromImage(image);
+            g.DrawImage(image, 0, 0, image.Width, image.Height);
+            Font f = new Font("Verdana", fonesize);
+            Brush b = new SolidBrush(brushColor);
+
+            g.DrawString(addText, f, b, x, y);
+            g.Dispose();
+            return image;
+        }
         private void DeleteTempBmp()
         {
             try

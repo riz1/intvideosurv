@@ -111,6 +111,7 @@
             this.cbeVehType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
             this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -875,6 +876,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.labelControl6);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl3);
@@ -949,6 +951,15 @@
             this.listBoxControl1.Size = new System.Drawing.Size(87, 288);
             this.listBoxControl1.TabIndex = 19;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.labelControl4.Location = new System.Drawing.Point(193, 38);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(7, 14);
+            this.labelControl4.TabIndex = 4;
+            this.labelControl4.Text = "*";
             // 
             // frmCaptureLicense
             // 
@@ -1119,6 +1130,7 @@
         private DevExpress.XtraEditors.SimpleButton buttonSave;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
 
     }
 }
