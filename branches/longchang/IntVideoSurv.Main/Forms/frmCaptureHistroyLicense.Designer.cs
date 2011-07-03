@@ -99,7 +99,6 @@
             this.cbeCaptureDepartment = new DevExpress.XtraEditors.ComboBoxEdit();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.cbeInvalidType = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
@@ -171,7 +170,7 @@
             this.pictureEditSelectedPicture.Location = new System.Drawing.Point(711, 2);
             this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
             this.pictureEditSelectedPicture.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(417, 288);
+            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(507, 305);
             this.pictureEditSelectedPicture.TabIndex = 0;
             this.pictureEditSelectedPicture.DoubleClick += new System.EventHandler(this.pictureEditSelectedPicture_DoubleClick);
             // 
@@ -695,7 +694,7 @@
             this.groupControl4.Controls.Add(this.labelControl16);
             this.groupControl4.Location = new System.Drawing.Point(856, 517);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(272, 86);
+            this.groupControl4.Size = new System.Drawing.Size(349, 86);
             this.groupControl4.TabIndex = 17;
             this.groupControl4.Text = "违法地点";
             // 
@@ -829,12 +828,11 @@
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.cbeInvalidType);
-            this.groupControl2.Controls.Add(this.labelControl7);
             this.groupControl2.Controls.Add(this.labelControl9);
             this.groupControl2.Controls.Add(this.labelControl2);
             this.groupControl2.Location = new System.Drawing.Point(856, 436);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(271, 77);
+            this.groupControl2.Size = new System.Drawing.Size(348, 77);
             this.groupControl2.TabIndex = 15;
             this.groupControl2.Text = "违法原因";
             // 
@@ -847,15 +845,6 @@
             this.cbeInvalidType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbeInvalidType.Size = new System.Drawing.Size(177, 21);
             this.cbeInvalidType.TabIndex = 6;
-            // 
-            // labelControl7
-            // 
-            this.labelControl7.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.labelControl7.Location = new System.Drawing.Point(324, 69);
-            this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(7, 14);
-            this.labelControl7.TabIndex = 4;
-            this.labelControl7.Text = "*";
             // 
             // labelControl9
             // 
@@ -884,7 +873,7 @@
             this.groupControl1.Controls.Add(this.cbeVehType);
             this.groupControl1.Location = new System.Drawing.Point(856, 347);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(271, 88);
+            this.groupControl1.Size = new System.Drawing.Size(348, 88);
             this.groupControl1.TabIndex = 16;
             this.groupControl1.Text = "号牌信息";
             // 
@@ -939,7 +928,7 @@
             this.buttonSave.Appearance.Options.UseFont = true;
             this.buttonSave.Location = new System.Drawing.Point(1049, 609);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(79, 75);
+            this.buttonSave.Size = new System.Drawing.Size(156, 75);
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "保存(&F)";
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -1028,7 +1017,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1133, 689);
+            this.ClientSize = new System.Drawing.Size(1217, 705);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupControl4);
@@ -1051,8 +1040,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "frmCaptureHistroyLicense";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "证据截图";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "历史违章截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureHistroyLicense_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCaptureHistroyLicense_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).EndInit();
@@ -1182,7 +1171,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbeCaptureDepartment;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.ComboBoxEdit cbeInvalidType;
-        private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl labelControl6;
