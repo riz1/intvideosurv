@@ -700,7 +700,6 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             image3.Save(vehmon.imageName3, System.Drawing.Imaging.ImageFormat.Jpeg);
             AirnoixPlayer.Avdec_Stop(intPtr);
             AirnoixPlayer.Avdec_CloseFile(intPtr);
-            AirnoixPlayer.Avdec_Done(intPtr);
 
             try
             {
@@ -717,7 +716,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 //{
                 //    File.Copy(_airnoixCamera.VideoPath,vehmon.vedioName);
                 //}
-                //XtraMessageBox.Show("保存成功!");
+                XtraMessageBox.Show("保存成功!");
             }
             catch (Exception)
             {
