@@ -131,9 +131,9 @@ namespace CameraViewer.Forms
 
             int ret = AirnoixPlayer.Avdec_Pause(intPtr);
             int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-            if (currentPos >= 3)
+            if (currentPos >= 9)
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     AirnoixPlayer.Avdec_StepFrame(intPtr, false);                    
                 }
@@ -141,7 +141,7 @@ namespace CameraViewer.Forms
             }
             if (_totalFrames - currentPos <= PicNum)
             {
-                for (int i = 0; i < _totalFrames - currentPos; i++)
+                for (int i = 0; i < 3*(_totalFrames - currentPos); i++)
                 {
                     AirnoixPlayer.Avdec_StepFrame(intPtr, false);
                 }
@@ -157,6 +157,7 @@ namespace CameraViewer.Forms
                 string fmt = string.Format("JPG {0:0000}{1:0000}{2:0000}", frameWidth>0?frameWidth:1280, frameHeight>0?frameHeight:720, 24);
                 string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
                 ret = AirnoixPlayer.Avdec_Play(intPtr);
+                Thread.Sleep(80);
                 ret = AirnoixPlayer.Avdec_Pause(intPtr);
                 ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
                 
@@ -174,11 +175,11 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (treeListPicturesBefore.FocusedNode.GetValue(0) == null)
+                if (treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
                 }
-                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
+                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
 
             }
             catch (Exception)
@@ -193,11 +194,11 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (treeListPicturesCurrent.FocusedNode.GetValue(0) == null)
+                if (treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
                 }
-                pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
+                pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) as Image;
             }
             catch (Exception)
             {
@@ -211,11 +212,11 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (treeListPicturesAfter.FocusedNode.GetValue(0) == null)
+                if (treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
                 }
-                pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
+                pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) as Image;
             }
             catch (Exception)
             {
@@ -533,13 +534,15 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 _selectedCamera = (LongChang_CameraInfo)(this.bandedGridView1.GetRowCellValue(getSelectedRow, "CameraTag"));
                 _selectedFile = (string)(this.bandedGridView1.GetRowCellValue(getSelectedRow, "文件"));
                 _beginCaptureTime = (DateTime)(this.bandedGridView1.GetRowCellValue(getSelectedRow, "时间"));
-                AirnoixPlayer.Avdec_CloseFile(intPtr);
-                AirnoixPlayer.Avdec_SetFile(intPtr, _selectedFile, null, false);
+                int ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
+                Thread.Sleep(40);
+                ret =AirnoixPlayer.Avdec_SetFile(intPtr, _selectedFile, null, false);
+                Thread.Sleep(40);
                 frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
                 frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
                 trackBar1.Minimum = 0;
                 trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                AirnoixPlayer.Avdec_Play(intPtr);
+                ret =AirnoixPlayer.Avdec_Play(intPtr);
                 if (timerForUpdateTrack.Enabled==false)
                 {
                     timerForUpdateTrack.Enabled = true;

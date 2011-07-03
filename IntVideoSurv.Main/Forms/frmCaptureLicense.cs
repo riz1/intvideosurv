@@ -96,43 +96,13 @@ namespace CameraViewer.Forms
 
         private void PlayReletedFile2()
         {
-            //FileInfo fi = new FileInfo(_relatedFile.RelatedFile1);
-            //DateTime oldWriteDateTime = fi.LastWriteTime;
-            //while (true)
-            //{
-            //    fi = new FileInfo(_relatedFile.RelatedFile1);
-            //    if (fi.LastWriteTime == oldWriteDateTime)
-            //    {
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        oldWriteDateTime = fi.LastWriteTime;
-            //    }
-            //    Thread.Sleep(40);
-            //    if (UseWaitCursor == false)
-            //    {
-            //        UseWaitCursor = true;
-            //    }
-
-            //}
             int ret;
             video2FrameValid = false;
             ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
             ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile2, null, true);
             ret = AirnoixPlayer.Avdec_Pause(intPtr);
             Thread.Sleep(40);
-            _totalFrames = 0;
-            int frames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            if (frames > _relatedFile.RelatedStartFramePosition2 + _relatedFile.RelatedFrames2)
-            {
-                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, _relatedFile.RelatedStartFramePosition2);
-                if (ret == 0)
-                {
-                    _totalFrames = _relatedFile.RelatedFrames2;
-                    video2FrameValid = true;
-                }
-            }
+            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
 
             ret = AirnoixPlayer.Avdec_Play(intPtr);
             play_state = PlayState.SecondVideoState;
@@ -141,43 +111,14 @@ namespace CameraViewer.Forms
         }
         private void PlayReletedFile1()
         {
-            //FileInfo fi = new FileInfo(_relatedFile.RelatedFile1);
-            //DateTime oldWriteDateTime = fi.LastWriteTime;
-            //while (true)
-            //{
-            //    fi = new FileInfo(_relatedFile.RelatedFile1);
-            //    if (fi.LastWriteTime == oldWriteDateTime)
-            //    {
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        oldWriteDateTime = fi.LastWriteTime;
-            //    }
-            //    Thread.Sleep(40);
-            //    if (UseWaitCursor == false)
-            //    {
-            //        UseWaitCursor = true;
-            //    }
 
-            //}
             int ret;
             video1FrameValid = false;
             ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile1, null, true);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile1, null, false);
             ret = AirnoixPlayer.Avdec_Pause(intPtr);
             Thread.Sleep(40);
-            _totalFrames = 0;
-            int frames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            if (frames > _relatedFile.RelatedStartFramePosition1 + _relatedFile.RelatedFrames1)
-            {
-                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, _relatedFile.RelatedStartFramePosition1);
-                if (ret==0)
-                {
-                    _totalFrames = _relatedFile.RelatedFrames1;
-                    video1FrameValid = true;
-                }
-            }
+            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
 
             ret = AirnoixPlayer.Avdec_Play(intPtr);
             play_state = PlayState.FirstVideoState;
@@ -190,10 +131,14 @@ namespace CameraViewer.Forms
         {
             int ret;
             ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, true);
-            play_state = PlayState.ThirdVideoState;  
-            _totalFrames =  GetFrames(_airnoixCamera.VideoPath);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, false);
+            play_state = PlayState.ThirdVideoState;
+            Thread.Sleep(40);
+            frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
+            frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
+            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
             trackBar1.Maximum = _totalFrames;
+            ret = AirnoixPlayer.Avdec_Play(intPtr);
         }
 
         private int GetFrames(string videofile)
@@ -273,9 +218,9 @@ namespace CameraViewer.Forms
 
             int ret = AirnoixPlayer.Avdec_Pause(intPtr);
             int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-            if (currentPos >= 3)
+            if (currentPos >= 9)
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     AirnoixPlayer.Avdec_StepFrame(intPtr, false);                    
                 }
@@ -283,7 +228,7 @@ namespace CameraViewer.Forms
             }
             if (_totalFrames - currentPos <= PicNum)
             {
-                for (int i = 0; i < _totalFrames - currentPos; i++)
+                for (int i = 0; i < 3*(_totalFrames - currentPos); i++)
                 {
                     AirnoixPlayer.Avdec_StepFrame(intPtr, false);
                 }
@@ -299,6 +244,7 @@ namespace CameraViewer.Forms
                 string fmt = string.Format("JPG {0:0000}{1:0000}{2:0000}", frameWidth>0?frameWidth:1280, frameHeight>0?frameHeight:720, 24);
                 string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
                 ret = AirnoixPlayer.Avdec_Play(intPtr);
+                Thread.Sleep(80);
                 ret = AirnoixPlayer.Avdec_Pause(intPtr);
                 ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
                 
@@ -318,15 +264,15 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (treeListPicturesBefore.FocusedNode.GetValue(0) == null)
+                if (treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
                 }
-                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
+                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
             }
             catch (Exception)
             {
-                
+
                 ;
             }
 
@@ -336,11 +282,11 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (treeListPicturesCurrent.FocusedNode.GetValue(0) == null)
+                if (treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
                 }
-                pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
+                pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) as Image;
             }
             catch (Exception)
             {
@@ -354,11 +300,11 @@ namespace CameraViewer.Forms
         {
             try
             {
-                if (treeListPicturesAfter.FocusedNode.GetValue(0) == null)
+                if (treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
                 }
-                pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
+                pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) as Image;
             }
             catch (Exception)
             {
@@ -394,86 +340,21 @@ namespace CameraViewer.Forms
 
 
                 int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-
-                switch (play_state)
+                if (currentPos > _totalFrames || _totalFrames==0)
                 {
-                       case PlayState.FirstVideoState:
-                        if (video1FrameValid)
-                        {
-                            trackBar1.Value = currentPos - _relatedFile.RelatedStartFramePosition1;
-                        } 
-                        else 
-                        {
-                            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                            trackBar1.Maximum = _totalFrames;
-                        }
-                        break;
-                       case PlayState.SecondVideoState:
-                        if (video2FrameValid)
-                        {
-                            trackBar1.Value = currentPos - _relatedFile.RelatedStartFramePosition2;
-                        }
-                        else 
-                        {
-                            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                            trackBar1.Maximum = _totalFrames;
-                        }
-                        break;
-                       case PlayState.ThirdVideoState:
-                        
-                        if (_totalFrames != AirnoixPlayer.Avdec_GetTotalFrames(intPtr))
-                        {
-                            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                            trackBar1.Maximum = _totalFrames;
-                        }
-                        trackBar1.Value = currentPos; 
-                        break;
+                    _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+                    trackBar1.Maximum = _totalFrames;
                 }
-                //switch ()
-                //{
-                //    
-                //        if (currentPos <= trackBar1.Maximum)
-                //        {
-                //            trackBar1.Value = currentPos;
-                //        }
-                //        if ((AirnoixPlayer.Avdec_GetCurrentState(intPtr)==AirnoixPlayerState.PLAY_STATE_STOP))
-                //        {
-                //            if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
-                //            {
-                //                ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                //                ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile2, null, false);
-                //                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, _relatedFile.RelatedStartFramePosition2);
-                //                ret = AirnoixPlayer.Avdec_Play(intPtr);
-                //                play_state = PlayState.SecondVideoState;
-                //            }
-                //            else
-                //            {
-                //                ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                //                ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, true);
-                //                play_state = PlayState.ThirdVideoState;
-                //            }
-                //        }
-                //        break;
-                //    case PlayState.SecondVideoState:
-                //        if (_relatedFile.RelatedFrames1 + currentPos <= trackBar1.Maximum)
-                //        {
-                //            trackBar1.Value = _relatedFile.RelatedFrames1 + currentPos;
-                //        }
-                //        if ((currentPos > _relatedFile.RelatedStartFramePosition2 + _relatedFile.RelatedFrames2) || (AirnoixPlayer.Avdec_GetCurrentState(intPtr) == AirnoixPlayerState.PLAY_STATE_STOP))
-                //        {
-                //                ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                //                ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, true);
-                //                play_state = PlayState.ThirdVideoState;
-                //        }
-                //        break;
-                //    case PlayState.ThirdVideoState:
-                //        if (_relatedFile.RelatedFrames1 + _relatedFile.RelatedFrames2 + currentPos <= trackBar1.Maximum)
-                //        {
-                //            trackBar1.Value = _relatedFile.RelatedFrames1 + _relatedFile.RelatedFrames2 + currentPos;
-                //        }
-                //        break;
+                if (currentPos>trackBar1.Maximum)
+                {
+                    trackBar1.Value = trackBar1.Maximum;                    
+                }
+                else
+                {
+                    trackBar1.Value = currentPos;
+                }
 
-                //}
+
             }
             catch (Exception ex)
             {
@@ -877,6 +758,23 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             else if (e.Alt && e.KeyCode == Keys.D)
             {
                 simpleButtonLast_Click(sender, null);
+            }
+        }
+
+        private void treeListPicturesBefore_FocusedColumnChanged(object sender, DevExpress.XtraTreeList.FocusedColumnChangedEventArgs e)
+        {
+            try
+            {
+                if (treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) == null)
+                {
+                    return;
+                }
+                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
+            }
+            catch (Exception)
+            {
+
+                ;
             }
         }
     }

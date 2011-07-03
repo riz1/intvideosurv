@@ -104,6 +104,7 @@
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -111,7 +112,6 @@
             this.cbeVehType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
             this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -235,6 +235,7 @@
             this.treeListPicturesBefore.RowHeight = 96;
             this.treeListPicturesBefore.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesBefore.TabIndex = 6;
+            this.treeListPicturesBefore.FocusedColumnChanged += new DevExpress.XtraTreeList.FocusedColumnChangedEventHandler(this.treeListPicturesBefore_FocusedColumnChanged);
             this.treeListPicturesBefore.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesBefore_MouseClick);
             // 
             // treeListColumn1
@@ -888,6 +889,15 @@
             this.groupControl1.TabIndex = 16;
             this.groupControl1.Text = "号牌信息";
             // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.labelControl4.Location = new System.Drawing.Point(193, 38);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(7, 14);
+            this.labelControl4.TabIndex = 4;
+            this.labelControl4.Text = "*";
+            // 
             // labelControl6
             // 
             this.labelControl6.Appearance.ForeColor = System.Drawing.Color.Red;
@@ -951,15 +961,6 @@
             this.listBoxControl1.Size = new System.Drawing.Size(87, 288);
             this.listBoxControl1.TabIndex = 19;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.labelControl4.Location = new System.Drawing.Point(193, 38);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(7, 14);
-            this.labelControl4.TabIndex = 4;
-            this.labelControl4.Text = "*";
             // 
             // frmCaptureLicense
             // 
