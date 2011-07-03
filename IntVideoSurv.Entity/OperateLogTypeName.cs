@@ -60,5 +60,8 @@ namespace IntVideoSurv.Entity
 
         public const string UserAddInVirtualGroup = "添加用户到VirtualGroup";
         public const string UserDeleteInVirtualGroup = "删除在virtualgroup中的用户";
+        //
+        public const string ToGDeviceAdd = "添加ToGDevice";
+        public const string ToGDeviceDelete = "删除ToGDevice";
     }
 }

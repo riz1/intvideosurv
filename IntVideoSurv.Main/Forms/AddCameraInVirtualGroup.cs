@@ -26,25 +26,6 @@ namespace CameraViewer.Forms
         }
         public void LoadCameraInfo()
         {
-            treeList1CameraInVirtualGroup.Nodes.Clear();
-            /*_listGroup = GroupBusiness.Instance.GetAllGroupInfos(ref errMessage);
-            foreach (KeyValuePair<int, GroupInfo> item in _listGroup)
-            {
-                TreeListNode treeListNodeGroup = treeList1CameraInVirtualGroup.AppendNode(new[] { item.Value.Name, item.Key + ";G" }, -1, 0, 3, 1, CheckState.Checked);
-                treeListNodeGroup.Tag = item.Key.ToString() + ";G";
-                foreach (var vDevice in item.Value.ListDevice)
-                {
-                    TreeListNode treeListNodeDevice = treeList1CameraInVirtualGroup.AppendNode(new[] { vDevice.Value.Name, vDevice.Key + ";D" }, treeListNodeGroup.Id, 1, 3, 1, CheckState.Checked);
-                    treeListNodeDevice.Tag = vDevice.Key.ToString() + ";D";
-                    foreach (var vCamera in vDevice.Value.ListCamera)
-                    {
-                        TreeListNode treeListNodeCamera = treeList1CameraInVirtualGroup.AppendNode(new[] { vCamera.Value.Name, vCamera.Key + ";C" }, treeListNodeDevice.Id, 1, 3, 1, CheckState.Checked);
-                        treeListNodeCamera.Tag = vCamera.Key.ToString() + ";C";
-
-                    }
-
-                }
-            }*/
             listCamera = LongChang_CameraBusiness.Instance.GetAllCameraInfo(ref errMessage);
             TreeListNode root = treeList1CameraInVirtualGroup.AppendNode(new[] { "设备名称", "0" + ";R" }, -1, 0, 3, 1, CheckState.Checked);
             root.Tag = "0" + ";R";

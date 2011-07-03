@@ -37,7 +37,7 @@ namespace IntVideoSurv.Entity
             TollGateId = dataRow["kkbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["kkbh"]);
             TollGateName = dataRow["kkmc"] is DBNull ? "":Convert.ToString(dataRow["kkmc"]);
             UpperDeviceId = dataRow["fsbbh"] is DBNull ? -1 : Convert.ToInt32(dataRow["fsbbh"]);
-            DeviceType = dataRow["sblx"] is DBNull ? -1 : Convert.ToInt32(dataRow["sblx"]);
+            //DeviceType = dataRow["sblx"] is DBNull ? -1 : Convert.ToInt32(dataRow["sblx"]);
             Address = dataRow["azwz"] is DBNull ? "":Convert.ToString(dataRow["azwz"]);
             IP = dataRow["sbip"] is DBNull ? "":Convert.ToString(dataRow["sbip"]);
             Port = dataRow["dkh"] is DBNull ? -1 : Convert.ToInt32(dataRow["dkh"]);
