@@ -77,6 +77,9 @@ namespace CameraViewer.Forms
         private int frameHeight;
         private AirnoixPlayerState _previousState;
         private int _totalFrames;
+        private string videoFile;
+        private string videoFile1;
+        private string videoFile2;
         private void simpleButtonPrevious_Click(object sender, EventArgs e)
         {
             try
@@ -86,6 +89,7 @@ namespace CameraViewer.Forms
                 treeListPicturesBefore.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
                 int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
                 teCaptureTime.EditValue = _beginCaptureTime.AddSeconds(currentPos / fps);
+                videoFile = _selectedFile;
             }
             catch (Exception ex)
             {
@@ -102,6 +106,7 @@ namespace CameraViewer.Forms
                 treeListPicturesCurrent.Nodes.Clear();
                 Image[] images = GetImages();
                 treeListPicturesCurrent.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
+                videoFile1 = _selectedFile;
             }
             catch (Exception ex)
             {
@@ -117,6 +122,7 @@ namespace CameraViewer.Forms
                 treeListPicturesAfter.Nodes.Clear();
                 Image[] images = GetImages();
                 treeListPicturesAfter.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
+                videoFile2 = _selectedFile;
             }
             catch (Exception ex)
             {
@@ -441,14 +447,14 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.tollName = "成都市西门车站营门口路11190号";
             vehmon.plateColorNum = 0;
             vehmon.plateColor = "";
-            vehmon.imageCount = 0;
+            vehmon.imageCount = 3;
             vehmon.imageName1 = captureFileName + ((DateTime)teCaptureTime.EditValue).ToString("HHmmss") + "_" + vehmon.plateNumber + "_1.jpg";
             vehmon.imageName2 = captureFileName + ((DateTime)teCaptureTime.EditValue).ToString("HHmmss") + "_" + vehmon.plateNumber + "_2.jpg";
             vehmon.imageName3 = captureFileName + ((DateTime)teCaptureTime.EditValue).ToString("HHmmss") + "_" + vehmon.plateNumber + "_3.jpg";
             vehmon.imageName4 = "";
-            vehmon.vedioName = "";
-            vehmon.vedioName1 = "";
-            vehmon.vedioName2 = "";
+            vehmon.vedioName = captureFileName+_selectedCamera.IP+Path.GetFileName(videoFile);
+            vehmon.vedioName1 = captureFileName + _selectedCamera.IP + Path.GetFileName(videoFile1);
+            vehmon.vedioName2 = captureFileName + _selectedCamera.IP + Path.GetFileName(videoFile2);
             vehmon.vehicleColor = "";
             vehmon.vehicleType = 0;
             vehmon.vehicleTypeName = "";
@@ -487,6 +493,28 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             image1.Save(vehmon.imageName1, System.Drawing.Imaging.ImageFormat.Jpeg);
             image2.Save(vehmon.imageName2, System.Drawing.Imaging.ImageFormat.Jpeg);
             image3.Save(vehmon.imageName3, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            try
+            {
+                ////拷贝视频文件
+                //if (videoFile != null && File.Exists(videoFile))
+                //{
+                //    File.Copy(videoFile, vehmon.vedioName);
+                //}
+                //if (videoFile1 != null && File.Exists(videoFile1) && (videoFile != videoFile1))
+                //{
+                //    File.Copy(videoFile1, vehmon.vedioName1);
+                //}
+                //if (videoFile2 != null && File.Exists(videoFile2)&& (videoFile2 != videoFile1)&& (videoFile2 != videoFile))
+                //{
+                //    File.Copy(videoFile2, vehmon.vedioName2);
+                //}
+                //XtraMessageBox.Show("保存成功!");
+            }
+            catch (Exception)
+            {
+                XtraMessageBox.Show("违章记录保存成功，视频文件拷贝失败!"); ;
+            }
 
             //重置图片
             treeListPicturesBefore.Nodes.Clear();
