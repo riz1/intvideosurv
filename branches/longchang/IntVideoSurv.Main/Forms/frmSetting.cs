@@ -1911,7 +1911,8 @@ namespace CameraViewer.Forms
         //修改组
         private void barButtonItemEditVirtualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+           // ChangeVirtualGroup frmcv = new ChangeVirtualGroup();
+           // frmcv.Show();
         }
         //组中添加摄像头
         private void barButtonItemAddCameraInVritualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -2092,6 +2093,80 @@ namespace CameraViewer.Forms
         {
             _displaytype = DisplayTypes.TollGateManagement;
             DisplayRightPanel();
+        }
+
+        private void button_Delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (XtraMessageBox.Show("确实要删除摄像头?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    int CameraID = Convert.ToInt32(gridViewToGDevice.GetFocusedRowCellValue("设备编号").ToString());
+                    LongChang_CameraInfo ci = LongChang_CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, CameraID);
+                    String cnt = ci.ToString();
+                    LongChang_CameraBusiness.Instance.Delete(ref errMessage, CameraID);
+                    OperateLogBusiness.Instance.Insert(ref errMessage,
+                                                       new OperateLog
+                                                       {
+                                                           ClientUserId = MainForm.CurrentUser.UserId,
+                                                           ClientUserName = MainForm.CurrentUser.UserName,
+                                                           Content = ci.ToString(),
+                                                           HappenTime = DateTime.Now,
+                                                           OperateTypeId = (int)(OperateLogTypeId.ToGDeviceDelete),
+                                                           OperateTypeName = OperateLogTypeName.ToGDeviceDelete,
+                                                           OperateUserName = MainForm.CurrentUser.UserName
+                                                       });
+                    
+                }
+                showLongChangCameraInfo();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+
+        }
+
+        private void TollGate_Delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (XtraMessageBox.Show("确实要删除卡口?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    string TollID = gridView_TollGate.GetFocusedRowCellValue("卡口编号").ToString();
+                    LongChang_TollGateInfo ki = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouID(ref errMessage, TollID);
+                    String cnt = ki.ToString();
+                    LongChang_TollGateBusiness.Instance.Delete(ref errMessage, TollID);
+                    OperateLogBusiness.Instance.Insert(ref errMessage,
+                                                       new OperateLog
+                                                       {
+                                                           ClientUserId = MainForm.CurrentUser.UserId,
+                                                           ClientUserName = MainForm.CurrentUser.UserName,
+                                                           Content = ki.ToString(),
+                                                           HappenTime = DateTime.Now,
+                                                           OperateTypeId = (int)(OperateLogTypeId.ToGDeviceDelete),
+                                                           OperateTypeName = OperateLogTypeName.ToGDeviceDelete,
+                                                           OperateUserName = MainForm.CurrentUser.UserName
+                                                       });
+                    
+                }
+                showLongChangCameraInfo();
+
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+        //修改组名
+        private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            int Gid = int.Parse(treeListVirtualGroup.FocusedNode.Tag.ToString().Split(';')[0]);
+            int err;
+            ChangeVirtualGroup frmch=new ChangeVirtualGroup();
+            frmch.Gid = Gid;
+            frmch.ShowDialog(this);
+            BuildVirtualGroupTree();
         }
     }
     public enum DisplayTypes
