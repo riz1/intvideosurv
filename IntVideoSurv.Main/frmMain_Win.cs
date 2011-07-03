@@ -531,7 +531,7 @@ namespace CameraViewer
 
         #region 界面过滤
 
-        private void FilterInterface()
+        /*private void FilterInterface()
         {
             if (CurrentUser.UserTypeName != "管理员")
             {
@@ -552,14 +552,14 @@ namespace CameraViewer
         {
             var frmUser = new FrmUser(CurrentUser);
             frmUser.ShowDialog();
-        }
+        }*/
 
         #endregion
 
         private void frmMain_Win_Load(object sender, EventArgs e)
         {
             this.Visible = false;
-            FilterInterface();
+            //FilterInterface();
             InitDataBaseType();
             Splash.Splash.Status = "获取群组信息...";
             _runningDeviceList = new Dictionary<int, HikVideoServerDeviceDriver>();

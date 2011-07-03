@@ -36,7 +36,7 @@ namespace IntVideoSurv.DataAccess
             sbField.Append("mvid");
             sbValue.AppendFormat("'{0}'", Guid.NewGuid().ToString("N"));
             sbField.Append(",clxxbh");
-            sbValue.AppendFormat(",{0}", oVehMon.vehInfoNum);
+            sbValue.AppendFormat(",{0}", "CLXXBH_SEQ.nextval".ToString());
             sbField.Append(",kkbh");
             sbValue.AppendFormat(",{0}", oVehMon.tollNum);
             sbField.Append(",kkmc");

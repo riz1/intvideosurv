@@ -51,10 +51,8 @@ namespace CameraViewer.Forms
             //
             BuildVirtualGroupTree();
             showVirtualGroupInfo();
-            //显示摄像头
-            showLongChangCameraInfo();
-            //显示卡口
-            showLongChangTollGateInfo();
+            //查询用户显示
+            loadUserInfo();
             //针对隆昌，隐藏不必要的信息
 
             FilterInterFaceForLongChang();
@@ -62,13 +60,30 @@ namespace CameraViewer.Forms
 
         private void FilterInterFaceForLongChang()
         {
-            nbDevice.Visible = false;
-            nbMap.Visible = false;
-            navBarItem2.Visible = false;
-            navBarItem3.Visible = false;
-            nbLog.Visible = false;
-            _displaytype = DisplayTypes.UserManagement;
-            DisplayRightPanel();
+            if (MainForm.CurrentUser.UserTypeId == 1)//管理员
+            {
+                nbDevice.Visible = false;
+                nbMap.Visible = false;
+                navBarItem2.Visible = false;
+                navBarItem3.Visible = false;
+                nbLog.Visible = false;
+                nbCode.Visible = false;
+                _displaytype = DisplayTypes.UserManagement;
+                DisplayRightPanel();
+            }
+            else if (MainForm.CurrentUser.UserTypeId == 2)//操作员
+            {
+                nbUser.Visible = false;
+                nbVirtualGroup.Visible = false;
+                nbDevice.Visible = false;
+                nbMap.Visible = false;
+                navBarItem2.Visible = false;
+                navBarItem3.Visible = false;
+                nbLog.Visible = false;
+                _displaytype = DisplayTypes.UserManagement;
+                DisplayRightPanel();
+            }
+            
         }
 
         /// <summary>
@@ -417,14 +432,15 @@ namespace CameraViewer.Forms
             gcDisplayChannelManagement.Visible = false;
             gcMap.Visible = false;
             gcSkin.Visible = false;
+            //查询管理
+            gcSearchManagement.Visible = false;
             //解码器
             DecoderManagement.Visible = false;
             //识别器
             RecognizerManagement.Visible = false;
             //组管理
             gcVritualGroupManegement.Visible = false;
-            gcTogDeviceManagement.Visible = false;
-            groupControl_TollGate.Visible = false;
+
             switch (_displaytype)
             {
                 case DisplayTypes.DeviceManagement:
@@ -485,15 +501,10 @@ namespace CameraViewer.Forms
                     gcVritualGroupManegement.Dock = DockStyle.Fill;
                     gridView6.OptionsView.ShowGroupPanel = false;
                     break;
-                case DisplayTypes.ToGDeviceManagement:
-                    gcTogDeviceManagement.Visible = true;
-                    gcTogDeviceManagement.Dock = DockStyle.Fill;
-                    gridViewToGDevice.OptionsView.ShowGroupPanel = false;
-                    break;
-                case DisplayTypes.TollGateManagement:
-                    groupControl_TollGate.Visible = true;
-                    groupControl_TollGate.Dock = DockStyle.Fill;
-                    gridView_TollGate.OptionsView.ShowGroupPanel = false;
+                case DisplayTypes.SearchManagement:
+                    gcSearchManagement.Visible = true;
+                    gcSearchManagement.Dock = DockStyle.Fill;
+                    gridView7.OptionsView.ShowGroupPanel = false;
                     break;
             }
 
@@ -1924,126 +1935,66 @@ namespace CameraViewer.Forms
             gridView6.Columns["组名称"].Width = 40;
 
         }
-        void showLongChangCameraInfo()
+
+        private void nbSearch_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            Dictionary<int, LongChang_CameraInfo> listLongChangcl;
-            listLongChangcl = LongChang_CameraBusiness.Instance.GetAllCameraInfo(ref errMessage);
-
-            var dataTable = new System.Data.DataTable("LongChangCameraInfo");
-            dataTable.Columns.Add("设备编号", typeof(int));
-            dataTable.Columns.Add("设备名称", typeof(string));
-            dataTable.Columns.Add("IP地址", typeof(string));
-            dataTable.Columns.Add("端口号", typeof(int));
-            dataTable.Columns.Add("登陆用户", typeof(string));
-            dataTable.Columns.Add("登陆密码", typeof(string));
-            dataTable.Columns.Add("设备类型", typeof(string));
-            string str;
-            foreach (var node in listLongChangcl)
-            {
-                if (node.Value.Type == 1)
-                    str = "枪机";
-                else
-                    str = "球机";
-                dataTable.Rows.Add(node.Value.CameraId, node.Value.Name,node.Value.IP,node.Value.Port,node.Value.UserName,node.Value.PassWord,str);
-            }
-
-            gridControlTogDevice.DataSource = dataTable;
-            gridControlTogDevice.MainView.PopulateColumns();
-            gridViewToGDevice.Columns["设备编号"].Width = 40;
-            gridViewToGDevice.Columns["设备名称"].Width = 40;
-            gridViewToGDevice.Columns["IP地址"].Width = 40;
-            gridViewToGDevice.Columns["端口号"].Width = 40;
-            gridViewToGDevice.Columns["登陆用户"].Width = 40;
-            gridViewToGDevice.Columns["登陆密码"].Width = 40;
-            gridViewToGDevice.Columns["设备类型"].Width = 40;
-        }
-        //
-        void showLongChangTollGateInfo()
-        {
-            Dictionary<string, LongChang_TollGateInfo> listLongChangtl;
-            listLongChangtl = LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref errMessage);
-
-            var dataTable = new System.Data.DataTable("LongChangTollGateInfo");
-            dataTable.Columns.Add("卡口编号", typeof(string));
-            dataTable.Columns.Add("卡口名称", typeof(string));
-            dataTable.Columns.Add("卡口简称", typeof(string));
-            dataTable.Columns.Add("卡口位置", typeof(string));
-            dataTable.Columns.Add("管辖单位编号", typeof(string));
-            dataTable.Columns.Add("行政区划", typeof(string));
-            dataTable.Columns.Add("卡口类型", typeof(string));
-            dataTable.Columns.Add("摄像机编号", typeof(int));
-            dataTable.Columns.Add("道路编号", typeof(string));
-            dataTable.Columns.Add("道路名称", typeof(string));
-
-            string str;
-            foreach (var node in listLongChangtl)
-            {
-                dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
-                    node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType,node.Value.cameraNum,node.Value.roadNum,node.Value.roadName);
-            }
-
-            gridControl_TollGateManagement.DataSource = dataTable;
-            gridControlTogDevice.MainView.PopulateColumns();
-            gridView_TollGate.Columns["卡口编号"].Width = 30;
-            gridView_TollGate.Columns["卡口名称"].Width = 30;
-            gridView_TollGate.Columns["卡口简称"].Width = 30;
-            gridView_TollGate.Columns["卡口位置"].Width = 30;
-            gridView_TollGate.Columns["管辖单位编号"].Width = 30;
-            gridView_TollGate.Columns["行政区划"].Width = 30;
-            gridView_TollGate.Columns["卡口类型"].Width = 30;
-            gridView_TollGate.Columns["摄像机编号"].Width = 30;
-            gridView_TollGate.Columns["道路编号"].Width = 30;
-            gridView_TollGate.Columns["道路名称"].Width = 30;
-        }
-
-        private void nbTogDeviceManagement_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
-        {
-            _displaytype = DisplayTypes.ToGDeviceManagement;
+            _displaytype = DisplayTypes.SearchManagement;
             DisplayRightPanel();
         }
-        //删除ToGDevice
-        private void simpleButton2_Click(object sender, EventArgs e)
+        Dictionary<int,UserInfo> listuser = new Dictionary<int,UserInfo>();
+        private void loadUserInfo()
         {
-            try
+
+            if (MainForm.CurrentUser.UserTypeId == 1)//管理员
             {
-                if (XtraMessageBox.Show("确实要删除摄像头?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                listuser = UserBusiness.Instance.GetAllUserInfo(ref errMessage);
+                foreach (var v in listuser)
                 {
-                    int CameraID = Convert.ToInt32(gridViewToGDevice.GetFocusedRowCellValue("设备编号").ToString());
-                    LongChang_CameraInfo ci = LongChang_CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, CameraID);
-                    String cnt = ci.ToString();
-                    LongChang_CameraBusiness.Instance.Delete(ref errMessage, CameraID);
-                    OperateLogBusiness.Instance.Insert(ref errMessage,
-                                                       new OperateLog
-                                                       {
-                                                           ClientUserId = MainForm.CurrentUser.UserId,
-                                                           ClientUserName = MainForm.CurrentUser.UserName,
-                                                           Content = ci.ToString(),
-                                                           HappenTime = DateTime.Now,
-                                                           OperateTypeId = (int)(OperateLogTypeId.ToGDeviceDelete),
-                                                           OperateTypeName = OperateLogTypeName.ToGDeviceDelete,
-                                                           OperateUserName = MainForm.CurrentUser.UserName
-                                                       });
-                    showLongChangCameraInfo();
+                    comboBoxEditUser.Properties.Items.Add(v.Value.UserName);
+                    comboBoxEditUser.Properties.Tag = v.Key.ToString();
                 }
 
             }
-            catch (Exception ex)
+            else if (MainForm.CurrentUser.UserTypeId == 2)//操作员
             {
-                return;
+                comboBoxEditUser.Properties.Items.Add(MainForm.CurrentUser.UserName);
+                comboBoxEditUser.Properties.Tag = MainForm.CurrentUser.UserId.ToString();
             }
         }
-        //添加ToGDevice
-        private void simpleButton3_Click(object sender, EventArgs e)
-        {
 
+        private void simpleButtonSearch_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, string> listIllegalreason = new Dictionary<string, string>();
+            DateTime startTime = DateTime.Parse(teStartTime.EditValue.ToString());
+            DateTime endTime = DateTime.Parse(teEndTime.EditValue.ToString());
+
+            if (DateTime.Compare(startTime,endTime)>0)
+            {
+                MessageBox.Show("起始时间不能大于终止时间");
+                return;
+            }
+            listIllegalreason = LongChang_UserVehMonBusiness.Instance.GetTimeAndIllegalreasonByUserId(ref errMessage, "1",startTime ,endTime);
+            var datatable = new System.Data.DataTable("Search");
+            datatable.Columns.Add("用户名", typeof(string));
+            datatable.Columns.Add("抓拍违法行为", typeof(string));
+            datatable.Columns.Add("时间", typeof(string));
+            foreach(var v in listIllegalreason)
+            {
+                datatable.Rows.Add(comboBoxEditUser.Text, v.Value.ToString(),v.Key.ToString());
+            }
+            gridControlSearch.DataSource = datatable;
+            gridControlSearch.MainView.PopulateColumns();
+            gridView7.Columns["用户名"].Width = 50;
+            gridView7.Columns["抓拍违法行为"].Width = 200;
+            gridView7.Columns["时间"].Width = 100;
+            
         }
 
-        private void nbTollGate_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void nbCode_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            _displaytype = DisplayTypes.TollGateManagement;
-            DisplayRightPanel();
+            var frmUser = new FrmUser(MainForm.CurrentUser);
+            frmUser.ShowDialog();
         }
-
 
     }
     public enum DisplayTypes
@@ -2060,7 +2011,7 @@ namespace CameraViewer.Forms
         DecoderManagement = 1024,
         RecognizerManagement = 2048,
         VirtualGroupManagement = 4096,
-        ToGDeviceManagement=3,
-        TollGateManagement=5
+        SearchManagement = 8192
+
     }
 }
