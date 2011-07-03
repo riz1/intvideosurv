@@ -3050,10 +3050,15 @@ namespace CameraViewer
 
         private void bbiHistroyVideoCondition_ItemClick(object sender, ItemClickEventArgs e)
         {
+            UseWaitCursor = true;
             frmHistoryCaptureCondition frmhcc= new frmHistoryCaptureCondition();
+            UseWaitCursor = false;
             frmhcc.ShowDialog();
+            UseWaitCursor = true;
             frmCaptureHistroyLicense fchl = new frmCaptureHistroyLicense(frmhcc);
+            UseWaitCursor = false;
             fchl.Show();
+
         }
     }
 }
