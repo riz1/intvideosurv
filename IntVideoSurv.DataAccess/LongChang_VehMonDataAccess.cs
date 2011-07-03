@@ -44,6 +44,12 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat(",'{0}'", oVehMon.tollName);
             sbField.Append(",hphm");
             sbValue.AppendFormat(",'{0}'", oVehMon.plateNumber);
+            sbField.Append(",fxbh");
+            sbValue.AppendFormat(",'{0}'", "100000".ToString());
+            sbField.Append(",fxmc");
+            sbValue.AppendFormat(",'{0}'", "出城".ToString());
+            sbField.Append(",cdbh");
+            sbValue.AppendFormat(",'{0}'", "10000001".ToString());
             sbField.Append(",hpysbh");
             sbValue.AppendFormat(",{0}", oVehMon.plateColorNum);
             sbField.Append(",hpys");
@@ -78,16 +84,16 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat(",{0}", oVehMon.countTime);//////
             sbField.Append(",wzyy");
             sbValue.AppendFormat(",'{0}'", oVehMon.illegalReason);
-            sbField.Append(",cdbh");
-            sbValue.AppendFormat(",'{0}'", oVehMon.roadNumber);
             sbField.Append(",cdmc");
             sbValue.AppendFormat(",'{0}'", oVehMon.roadName);
             sbField.Append(",dwbh");
             sbValue.AppendFormat(",'{0}'", oVehMon.adminDivisionNumber);
             sbField.Append(",dwmc");
             sbValue.AppendFormat(",'{0}'", oVehMon.adminDivisionName);
-            sbField.Append(",hdsj)");
-            sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS'))", oVehMon.redLightTime);///
+            sbField.Append(",hdsj");
+            sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS')", oVehMon.redLightTime);///
+            sbField.Append(",jgsk)");
+            sbValue.AppendFormat(",to_date('{0}','YYYY/MM/DD HH24:MI:SS'))", oVehMon.redLightTime);
 
             string cmdText = sbField.ToString() + " " + sbValue.ToString();
             string strsql;

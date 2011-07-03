@@ -83,7 +83,7 @@ namespace CameraViewer.Forms
                 nbLog.Visible = false;
                 nbTogDevice.Visible = false;
                 nbTollGate.Visible = false;
-                _displaytype = DisplayTypes.UserManagement;
+                _displaytype = DisplayTypes.SkinManagement;
                 DisplayRightPanel();
             }
             
@@ -446,6 +446,7 @@ namespace CameraViewer.Forms
             //
             gcTogDeviceManagement.Visible = false;
             groupControl_TollGate.Visible = false;
+            gcCodeManagement.Visible = false;
             switch (_displaytype)
             {
                 case DisplayTypes.DeviceManagement:
@@ -520,6 +521,10 @@ namespace CameraViewer.Forms
                     groupControl_TollGate.Visible = true;
                     groupControl_TollGate.Dock = DockStyle.Fill;
                     gridView_TollGate.OptionsView.ShowGroupPanel = false;
+                    break;
+                case DisplayTypes.CodeManagement:
+                    gcCodeManagement.Visible = true;
+                    gcCodeManagement.Dock = DockStyle.Fill;
                     break;
             }
 
@@ -1189,16 +1194,6 @@ namespace CameraViewer.Forms
         {
             _displaytype = DisplayTypes.DecoderManagement;
             DisplayRightPanel();
-
-        }
-
-        private void DecoderManagement_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void frmSetting_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -1960,7 +1955,10 @@ namespace CameraViewer.Forms
         Dictionary<int,UserInfo> listuser = new Dictionary<int,UserInfo>();
         private void loadUserInfo()
         {
-
+            DateTime dt = DateTime.Now;
+            teStartTime.EditValue = dt.Year.ToString() + "/" + dt.Month.ToString() + "/" + "01" + " " + "00:00:00";
+            teEndTime.EditValue = dt.Year.ToString() + "/" + dt.Month.ToString() + "/" + dt.Day.ToString() + " " + dt.Hour.ToString() + ":" + dt.Minute.ToString() + ":" + dt.Second.ToString();
+            comboBoxEditUser.Text = "admin";
             if (MainForm.CurrentUser.UserTypeId == 1)//管理员
             {
                 listuser = UserBusiness.Instance.GetAllUserInfo(ref errMessage);
@@ -1973,6 +1971,7 @@ namespace CameraViewer.Forms
             }
             else if (MainForm.CurrentUser.UserTypeId == 2)//操作员
             {
+                gcUserManagement.Visible = false;
                 comboBoxEditUser.Properties.Items.Add(MainForm.CurrentUser.UserName);
                 comboBoxEditUser.Properties.Tag = MainForm.CurrentUser.UserId.ToString();
             }
@@ -1980,6 +1979,8 @@ namespace CameraViewer.Forms
 
         private void simpleButtonSearch_Click(object sender, EventArgs e)
         {
+            int i;
+            DataSet ds = new DataSet();
             Dictionary<string, string> listIllegalreason = new Dictionary<string, string>();
             DateTime startTime = DateTime.Parse(teStartTime.EditValue.ToString());
             DateTime endTime = DateTime.Parse(teEndTime.EditValue.ToString());
@@ -1989,27 +1990,33 @@ namespace CameraViewer.Forms
                 MessageBox.Show("起始时间不能大于终止时间");
                 return;
             }
-            listIllegalreason = LongChang_UserVehMonBusiness.Instance.GetTimeAndIllegalreasonByUserId(ref errMessage, "1",startTime ,endTime);
+            ds = LongChang_UserVehMonBusiness.Instance.GetTimeAndIllegalreasonByUserId(ref errMessage, "1",startTime ,endTime);
             var datatable = new System.Data.DataTable("Search");
+            datatable.Columns.Add("编号", typeof(int));
             datatable.Columns.Add("用户名", typeof(string));
             datatable.Columns.Add("抓拍违法行为", typeof(string));
             datatable.Columns.Add("时间", typeof(string));
-            foreach(var v in listIllegalreason)
+            datatable.Columns.Add("地点", typeof(string));
+            for (i = 0; i < ds.Tables[0].Rows.Count;i++ )
             {
-                datatable.Rows.Add(comboBoxEditUser.Text, v.Value.ToString(),v.Key.ToString());
+                datatable.Rows.Add(i + 1, comboBoxEditUser.Text, ds.Tables[0].Rows[i][0].ToString(), ds.Tables[0].Rows[i][1].ToString(),ds.Tables[0].Rows[i][2].ToString());
             }
             gridControlSearch.DataSource = datatable;
             gridControlSearch.MainView.PopulateColumns();
-            gridView7.Columns["用户名"].Width = 50;
-            gridView7.Columns["抓拍违法行为"].Width = 200;
-            gridView7.Columns["时间"].Width = 100;
+            gridView7.Columns["编号"].Width = 20;
+            gridView7.Columns["用户名"].Width = 40;
+            gridView7.Columns["抓拍违法行为"].Width = 140;
+            gridView7.Columns["时间"].Width = 70;
+            gridView7.Columns["地点"].Width = 60;
             
         }
 
         private void nbCode_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            var frmUser = new FrmUser(MainForm.CurrentUser);
-            frmUser.ShowDialog();
+            _displaytype = DisplayTypes.CodeManagement;
+            textBoxName.Text = MainForm.CurrentUser.UserName;
+            textBoxName.Enabled = false;
+            DisplayRightPanel();
         }
 
         void showLongChangCameraInfo()
@@ -2093,6 +2100,31 @@ namespace CameraViewer.Forms
         {
             _displaytype = DisplayTypes.TollGateManagement;
             DisplayRightPanel();
+        }
+
+        private void simpleButtonOK_Click(object sender, EventArgs e)
+        {
+            if (textBoxFormerCode.Text!=MainForm.CurrentUser.Password.ToString())
+            {
+                MessageBox.Show("原密码不对");
+                return;
+            } 
+            else
+            {
+                if (textBoxNowCode.Text!=textBoxNowCodeFirm.Text)
+                {
+                    MessageBox.Show("新密码不匹配");
+                    return;
+                }
+                string code = textBoxNowCode.Text;
+                UserBusiness.Instance.UpdatePassword(ref errMessage, MainForm.CurrentUser.UserId, code);
+                MessageBox.Show("修改密码成功");
+            }
+        }
+
+        private void gcVritualGroupManegement_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void button_Delete_Click(object sender, EventArgs e)
@@ -2185,6 +2217,7 @@ namespace CameraViewer.Forms
         VirtualGroupManagement = 4096,
         SearchManagement = 8192,
         ToGDeviceManagement=3,
-        TollGateManagement=5
+        TollGateManagement=5,
+        CodeManagement=7
     }
 }
