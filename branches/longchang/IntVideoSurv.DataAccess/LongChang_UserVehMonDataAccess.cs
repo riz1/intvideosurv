@@ -76,7 +76,7 @@ namespace IntVideoSurv.DataAccess
         }
         public static DataSet GetTimeAndIllegalreasonByUserId(Database db, string userid, DateTime starttime, DateTime endtime)
         {
-            string cmdText = string.Format("select TOG_VEHMON.WZYY,IVS_USERVEHMON.TIME from IVS_USERVEHMON,TOG_VEHMON where IVS_USERVEHMON.VEHMONID=TOG_VEHMON.MVID and IVS_USERVEHMON.USERID='{0}' and IVS_USERVEHMON.TIME between to_date('{1}','YYYY/MM/DD HH24:MI:SS') and to_date('{2}','YYYY/MM/DD HH24:MI:SS')", userid, starttime, endtime);
+            string cmdText = string.Format("select TOG_VEHMON.WZYY,IVS_USERVEHMON.TIME,TOG_VEHMON.CDMC from IVS_USERVEHMON,TOG_VEHMON where IVS_USERVEHMON.VEHMONID=TOG_VEHMON.MVID and IVS_USERVEHMON.USERID='{0}' and IVS_USERVEHMON.TIME between to_date('{1}','YYYY/MM/DD HH24:MI:SS') and to_date('{2}','YYYY/MM/DD HH24:MI:SS')", userid, starttime, endtime);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

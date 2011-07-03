@@ -93,27 +93,27 @@ namespace IntVideoSurv.Business
             }
 
         }
-        public Dictionary<string,string> GetTimeAndIllegalreasonByUserId(ref string errMessage, string userid ,DateTime starttime,DateTime endtime)
+        public DataSet GetTimeAndIllegalreasonByUserId(ref string errMessage, string userid ,DateTime starttime,DateTime endtime)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
-            Dictionary<string, string> listIllegalreason = new Dictionary<string, string>();
+            //Dictionary<string, string> listIllegalreason = new Dictionary<string, string>();
             try
             {
                 DataSet ds = LongChang_UserVehMonDataAccess.GetTimeAndIllegalreasonByUserId(db, userid,starttime,endtime);
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                /*for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     listIllegalreason.Add(ds.Tables[0].Rows[i][1].ToString(),ds.Tables[0].Rows[i][0].ToString());
 
 
-                }
-                return listIllegalreason;
+                }*/
+                return ds;
             }
             catch (Exception ex)
             {
                 errMessage = ex.Message + ex.StackTrace;
                 logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return new Dictionary<string, string>();
+                return new DataSet();
             }
 
         }
