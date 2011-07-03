@@ -70,27 +70,27 @@ namespace CameraViewer.Forms
 
             //_relatedFile = new RelatedFile();
 
-            listBoxControl1.Items.Clear();
+            listBoxVideoFiles.Items.Clear();
             if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
             {
-                listBoxControl1.Items.Add("1");
+                listBoxVideoFiles.Items.Add("1");
             }
             if(_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
             {
-                listBoxControl1.Items.Add("2");
+                listBoxVideoFiles.Items.Add("2");
             }
-            listBoxControl1.Items.Add("3");
+            listBoxVideoFiles.Items.Add("3");
 
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             int ret = 0;
             if (File.Exists(_airnoixCamera.VideoPath))
             {
-                listBoxControl1.SelectedIndex = listBoxControl1.Items.Count - 1;
+                listBoxVideoFiles.SelectedIndex = listBoxVideoFiles.Items.Count - 1;
                 PlayMyVideoFile();
             }
             trackBar1.Minimum = 0;
             trackBar1.Maximum = _totalFrames;
-            timer1.Start();
+            timerForUpdatingTrack.Start();
 
         }
 
@@ -421,7 +421,7 @@ namespace CameraViewer.Forms
         {
             trackBar1.Value = trackBar1.Minimum;
             AirnoixPlayer.Avdec_Stop(intPtr);
-            timer1.Enabled = true;
+            timerForUpdatingTrack.Enabled = true;
             timer2.Enabled = true;
             first = true;
             FirstLoad = true;
@@ -493,7 +493,7 @@ namespace CameraViewer.Forms
             }
             Thread.Sleep(1000);
             ret = AirnoixPlayer.Avdec_Play(intPtr);
-            timer1.Enabled = true;
+            timerForUpdatingTrack.Enabled = true;
             timer2.Enabled = true;
             first = true;
             FirstLoad = true;
@@ -616,6 +616,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
         private string errMessage = "";
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            
             if (treeListPicturesBefore.FocusedNode == null || treeListPicturesCurrent.FocusedNode == null || treeListPicturesAfter.FocusedNode == null)
             {
                 XtraMessageBox.Show("三张照片未完全生成!");
@@ -654,9 +655,11 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.imageName2 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_2.jpg";
             vehmon.imageName3 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_3.jpg";
             vehmon.imageName4 = "";
-            vehmon.vedioName = "";
-            vehmon.vedioName1 = "";
-            vehmon.vedioName2 = "";
+            vehmon.vedioName = captureFileName + Path.GetFileName(_airnoixCamera.VideoPath);
+            vehmon.vedioName1 = _relatedFile.RelatedFile1 != null
+                                    ? captureFileName + Path.GetFileName(_relatedFile.RelatedFile1)
+                                    : null;
+            vehmon.vedioName2 = _relatedFile.RelatedFile2 != null ? captureFileName + Path.GetFileName(_relatedFile.RelatedFile2) : null;;
             vehmon.vehicleColor = "";
             vehmon.vehicleType = 0;
             vehmon.vehicleTypeName = "";
@@ -695,8 +698,38 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             image1.Save(vehmon.imageName1, System.Drawing.Imaging.ImageFormat.Jpeg);
             image2.Save(vehmon.imageName2, System.Drawing.Imaging.ImageFormat.Jpeg);
             image3.Save(vehmon.imageName3, System.Drawing.Imaging.ImageFormat.Jpeg);
-            XtraMessageBox.Show("保存成功");
-            this.Close();
+            AirnoixPlayer.Avdec_Stop(intPtr);
+            AirnoixPlayer.Avdec_CloseFile(intPtr);
+            AirnoixPlayer.Avdec_Done(intPtr);
+
+            try
+            {
+                ////拷贝视频文件
+                //if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
+                //{
+                //    File.Copy(_relatedFile.RelatedFile1,vehmon.vedioName1);
+                //}
+                //if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
+                //{
+                //    File.Copy(_relatedFile.RelatedFile2,vehmon.vedioName2);
+                //}
+                //if (_airnoixCamera.VideoPath != null && File.Exists(_airnoixCamera.VideoPath))
+                //{
+                //    File.Copy(_airnoixCamera.VideoPath,vehmon.vedioName);
+                //}
+                //XtraMessageBox.Show("保存成功!");
+            }
+            catch (Exception)
+            {
+                XtraMessageBox.Show("违章记录保存成功，视频文件拷贝失败!");;
+            }
+            finally
+            {
+                this.Close();                
+            }
+
+            
+
         }
 
         private Image AddTextInImage(Image image, string addText, int fonesize, Color brushColor, int x, int y)
@@ -731,7 +764,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
         private void listBoxControl1_DoubleClick(object sender, EventArgs e)
         {
-            switch ((string)(listBoxControl1.Items[listBoxControl1.SelectedIndex]))
+            switch ((string)(listBoxVideoFiles.Items[listBoxVideoFiles.SelectedIndex]))
             {
                 case "1":
                     PlayReletedFile1();

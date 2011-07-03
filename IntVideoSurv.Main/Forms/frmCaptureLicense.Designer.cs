@@ -77,7 +77,7 @@
             this.repositoryItemPictureEdit22 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit23 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.panelControlVideo = new DevExpress.XtraEditors.PanelControl();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerForUpdatingTrack = new System.Windows.Forms.Timer(this.components);
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.buttonPlay = new DevExpress.XtraEditors.SimpleButton();
             this.buttonPause = new DevExpress.XtraEditors.SimpleButton();
@@ -111,7 +111,7 @@
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.cbeVehType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
-            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
+            this.listBoxVideoFiles = new DevExpress.XtraEditors.ListBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -157,7 +157,7 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEditSelectedPicture
@@ -629,10 +629,10 @@
             this.panelControlVideo.Size = new System.Drawing.Size(512, 288);
             this.panelControlVideo.TabIndex = 7;
             // 
-            // timer1
+            // timerForUpdatingTrack
             // 
-            this.timer1.Interval = 20;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerForUpdatingTrack.Interval = 20;
+            this.timerForUpdatingTrack.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // trackBar1
             // 
@@ -954,20 +954,20 @@
             this.buttonSave.Text = "保存(&F)";
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // listBoxControl1
+            // listBoxVideoFiles
             // 
-            this.listBoxControl1.Location = new System.Drawing.Point(523, 2);
-            this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(87, 288);
-            this.listBoxControl1.TabIndex = 19;
-            this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
+            this.listBoxVideoFiles.Location = new System.Drawing.Point(523, 2);
+            this.listBoxVideoFiles.Name = "listBoxVideoFiles";
+            this.listBoxVideoFiles.Size = new System.Drawing.Size(87, 288);
+            this.listBoxVideoFiles.TabIndex = 19;
+            this.listBoxVideoFiles.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             // 
             // frmCaptureLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 689);
-            this.Controls.Add(this.listBoxControl1);
+            this.Controls.Add(this.listBoxVideoFiles);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
@@ -1042,7 +1042,7 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1097,7 +1097,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit23;
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit24;
         private DevExpress.XtraEditors.PanelControl panelControlVideo;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerForUpdatingTrack;
         private System.Windows.Forms.TrackBar trackBar1;
         private DevExpress.XtraEditors.SimpleButton buttonPlay;
         private DevExpress.XtraEditors.SimpleButton buttonPause;
@@ -1130,7 +1130,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbeVehType;
         private DevExpress.XtraEditors.SimpleButton buttonSave;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
+        private DevExpress.XtraEditors.ListBoxControl listBoxVideoFiles;
         private DevExpress.XtraEditors.LabelControl labelControl4;
 
     }
