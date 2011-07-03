@@ -35,7 +35,7 @@ namespace IntVideoSurv.DataAccess
             //sbField.Append("id");
             //sbValue.AppendFormat("'{0}'", oDecoderInfo.id);
             sbField.Append("mvid");
-            sbValue.AppendFormat("'{0}'", Guid.NewGuid().ToString("N"));
+            sbValue.AppendFormat("'{0}'", Guid.NewGuid().ToString("N").ToUpper());
             sbField.Append(",clxxbh");
             sbValue.AppendFormat(",{0}", "CLXXBH_SEQ.nextval".ToString());
             sbField.Append(",kkbh");
