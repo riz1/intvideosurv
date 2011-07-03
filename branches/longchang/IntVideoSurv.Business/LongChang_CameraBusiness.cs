@@ -133,6 +133,40 @@ namespace IntVideoSurv.Business
                 return null;
             }
         }
+        public int Delete(ref string errMessage, int CameraId)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                int iRtn = LongChang_CameraDataAccess.Delete(db, CameraId);
+
+                return iRtn;
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+        }
+        public string Insert(ref string errMessage, LongChang_CameraInfo oCameraInfo)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return LongChang_CameraDataAccess.Insert(db, oCameraInfo);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return "";
+            }
+        }
 
 
     }

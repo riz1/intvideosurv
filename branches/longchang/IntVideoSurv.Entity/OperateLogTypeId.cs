@@ -61,7 +61,9 @@ namespace IntVideoSurv.Entity
         //user
         UserAddInVirtualGroup = 2401,
         UserDeleteVirtualGroup,
-
+        //
+        ToGDeviceAdd=2501,
+        ToGDeviceDelete
 
     }
 }

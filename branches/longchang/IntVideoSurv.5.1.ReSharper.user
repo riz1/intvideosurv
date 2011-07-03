@@ -9,7 +9,7 @@
   <CompletionStatisticsManager>
     <ItemStatistics item="Default">
       <Item value="DecoderManagement" priority="4" />
-      <Item value="false" priority="5" />
+      <Item value="false" priority="6" />
       <Item value="case" priority="3" />
       <Item value="DisplayTypes`0" priority="0" />
       <Item value="true" priority="8" />
@@ -22,7 +22,7 @@
       <Item value="Dictionary" priority="1" />
       <Item value="int" priority="15" />
       <Item value="listDecoder" priority="2" />
-      <Item value="if" priority="8" />
+      <Item value="if" priority="9" />
       <Item value="treeList1_TreeListMenuItemClick`0" priority="0" />
       <Item value="treeListDecoder" priority="3" />
       <Item value="new" priority="9" />
@@ -30,11 +30,11 @@
       <Item value="null" priority="3" />
       <Item value="TreeList" priority="0" />
       <Item value="treelist" priority="0" />
-      <Item value="node" priority="10" />
+      <Item value="node" priority="17" />
       <Item value="TreeNode" priority="2" />
       <Item value="item" priority="11" />
       <Item value="TreeNode`0" priority="1" />
-      <Item value="else" priority="3" />
+      <Item value="else" priority="4" />
       <Item value="aNode" priority="1" />
       <Item value="System" priority="1" />
       <Item value="Windows" priority="1" />
@@ -42,7 +42,7 @@
       <Item value="ContextMenuStrip`0" priority="0" />
       <Item value="ToolStripMenuItem`0" priority="0" />
       <Item value="MessageBox`0" priority="5" />
-      <Item value="string" priority="5" />
+      <Item value="string" priority="7" />
       <Item value="typeof" priority="1" />
       <Item value="dataTable" priority="0" />
       <Item value="gridView1" priority="0" />
@@ -122,9 +122,17 @@
       <Item value="OnDragOver`0" priority="0" />
       <Item value="IDataAdapter`0" priority="1" />
       <Item value="flag" priority="1" />
+      <Item value="gcTogDeviceManagement" priority="0" />
+      <Item value="LongChang_CameraInfo`0" priority="2" />
+      <Item value="str" priority="1" />
+      <Item value="LongChang_CameraDataAccess`0" priority="1" />
+      <Item value="CameraId" priority="0" />
+      <Item value="ci" priority="0" />
+      <Item value="oCameraInfo" priority="5" />
+      <Item value="LongChang_TollGateBusiness`0" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:DevExpress.XtraEditors.GroupControl">
-      <Item value="Visible" priority="1" />
+      <Item value="Visible" priority="3" />
       <Item value="Dock" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Windows.Forms.DockStyle">
@@ -152,7 +160,7 @@
       <Item value="FocusedNode" priority="3" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.KeyValuePair`2">
-      <Item value="Value" priority="10" />
+      <Item value="Value" priority="19" />
       <Item value="Key" priority="5" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.TreeNode">
@@ -179,7 +187,7 @@
       <Item value="InplaceType" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Int32">
-      <Item value="Parse`0" priority="2" />
+      <Item value="Parse`0" priority="3" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:CameraViewer.Forms.AddXtraForm">
       <Item value="ShowDialog`0" priority="0" />
@@ -256,29 +264,48 @@
     <ItemStatistics item="Qualified:System.Data.DataRowCollection">
       <Item value="Count" priority="0" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:@CameraViewer.Forms.DisplayTypes">
+      <Item value="ToGDeviceManagement" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Business.LongChang_CameraBusiness">
+      <Item value="GetAllCameraInfo`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Entity.LongChang_CameraInfo">
+      <Item value="CameraId" priority="2" />
+      <Item value="IP" priority="1" />
+      <Item value="Port" priority="1" />
+      <Item value="UserName" priority="1" />
+      <Item value="PassWord" priority="0" />
+      <Item value="Type" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@IntVideoSurv.Entity.OperateLogTypeId">
+      <Item value="ToGDeviceDelete" priority="0" />
+      <Item value="ToGDeviceAdd" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@IntVideoSurv.Entity.OperateLogTypeName">
+      <Item value="ToGDeviceAdd" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Business.LongChang_TollGateBusiness">
+      <Item value="GetAllTollGateInfo`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:IntVideoSurv.Entity.LongChang_TollGateInfo">
+      <Item value="tollGateID" priority="0" />
+      <Item value="tollNum" priority="0" />
+      <Item value="tollName" priority="0" />
+      <Item value="tollShort" priority="0" />
+      <Item value="tollPosition" priority="0" />
+      <Item value="departmentNum" priority="0" />
+      <Item value="administrationDivsion" priority="0" />
+      <Item value="tollType" priority="0" />
+      <Item value="cameraNum" priority="0" />
+      <Item value="roadNum" priority="0" />
+      <Item value="roadName" priority="0" />
+    </ItemStatistics>
   </CompletionStatisticsManager>
   <RecentFiles>
     <RecentFiles>
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Controls/f:DeviceMaintain.cs" caret="330" fromTop="5" />
-      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLog.cs" caret="1105" fromTop="16" />
-      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeName.cs" caret="1899" fromTop="22" />
-      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeId.cs" caret="1008" fromTop="21" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:GroupDataAccess.cs" caret="981" fromTop="27" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:UserBusiness.cs" caret="925" fromTop="2" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:UserDataAccess.cs" caret="938" fromTop="0" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmUser.cs" caret="3007" fromTop="3" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmGroup.cs" caret="2187" fromTop="6" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:frmMain_Win.cs" caret="0" fromTop="0" />
-      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:DeviceDataAccess.cs" caret="0" fromTop="0" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Controls/f:CameraView.cs" caret="640" fromTop="0" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:GroupBusiness.cs" caret="2959" fromTop="0" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Properties/f:Settings.Designer.cs" caret="977" fromTop="22" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.Designer.cs" caret="133672" fromTop="11" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.Designer.cs" caret="6664" fromTop="25" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:CameraBusiness.cs" caret="3790" fromTop="10" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:GroupInfo.cs" caret="1813" fromTop="58" />
       <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:CameraDataAccess.cs" caret="6075" fromTop="171" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="6087" fromTop="0" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInDecoder.cs" caret="2929" fromTop="25" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:DecoderInfo.cs" caret="0" fromTop="0" />
       <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:RecognizerInfo.cs" caret="804" fromTop="11" />
@@ -289,38 +316,56 @@
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Program.cs" caret="220" fromTop="12" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Multiplexer.cs" caret="39639" fromTop="804" />
       <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="12609" fromTop="7" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:UserBusiness.cs" caret="2157" fromTop="7" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:UserDataAccess.cs" caret="2790" fromTop="5" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeId.cs" caret="1519" fromTop="19" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmUser.cs" caret="425" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/f:Util.cs" caret="146" fromTop="5" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddRecognizer.cs" caret="5619" fromTop="13" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:AddCameraInVirtualGroup.cs" caret="844" fromTop="1" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:LongChang_VehMonBusiness.cs" caret="1878" fromTop="6" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="3912" fromTop="39" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:LongChang_CameraBusiness.cs" caret="5337" fromTop="4" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmAddToGDevice.cs" caret="1113" fromTop="11" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_VehMonDataAccess.cs" caret="4567" fromTop="85" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:OperateLogTypeName.cs" caret="2347" fromTop="16" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:LongChang_TollGateBusiness.cs" caret="884" fromTop="5" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:LongChang_TollGateInfo.cs" caret="2212" fromTop="4" />
+      <File id="CF5403F2-AFCE-4B5D-AD21-C78347DFA4B8/f:LongChang_CameraInfo.cs" caret="3191" fromTop="16" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="85781" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.designer.cs" caret="0" fromTop="0" />
     </RecentFiles>
     <RecentEdits>
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="15194" fromTop="14" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="15715" fromTop="15" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="16041" fromTop="16" />
-      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:RecognizerBusiness.cs" caret="14897" fromTop="8" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="317" fromTop="6" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="487" fromTop="12" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2182" fromTop="4" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2329" fromTop="8" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2479" fromTop="8" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2505" fromTop="10" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="2664" fromTop="9" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="9" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="14" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6866" fromTop="5" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5716" fromTop="12" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="6843" fromTop="16" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="5592" fromTop="2" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="613" fromTop="2" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="3726" fromTop="13" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="781" fromTop="6" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1309" fromTop="15" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="1850" fromTop="16" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="22052" fromTop="25" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21220" fromTop="4" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21482" fromTop="15" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="21220" fromTop="6" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4648" fromTop="9" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4927" fromTop="15" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="4648" fromTop="4" />
-      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmDrawing.cs" caret="12609" fromTop="7" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmAddToGDevice.cs" caret="1731" fromTop="17" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmAddToGDevice.cs" caret="570" fromTop="14" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmAddToGDevice.cs" caret="1377" fromTop="14" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmAddToGDevice.cs" caret="772" fromTop="6" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmAddToGDevice.cs" caret="1061" fromTop="13" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:LongChang_CameraBusiness.cs" caret="5913" fromTop="23" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:LongChang_CameraBusiness.cs" caret="5434" fromTop="14" />
+      <File id="901DA7E9-24CA-4953-8746-A42C69D45575/f:LongChang_CameraBusiness.cs" caret="5620" fromTop="11" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="4510" fromTop="23" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="2793" fromTop="6" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="2976" fromTop="11" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="3806" fromTop="19" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="3898" fromTop="17" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="3853" fromTop="11" />
+      <File id="ACD53762-AEFE-4599-A419-9C0C681157B4/f:LongChang_CameraDataAccess.cs" caret="4272" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="89152" fromTop="16" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="88617" fromTop="5" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="16999" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="20290" fromTop="19" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="20226" fromTop="18" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="86267" fromTop="23" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="85013" fromTop="15" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="84716" fromTop="3" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="85229" fromTop="14" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="86077" fromTop="21" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="86242" fromTop="21" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="2113" fromTop="19" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="86228" fromTop="19" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="5814" fromTop="2" />
+      <File id="514C1BB4-8346-4B49-84A6-15786A5CBA0D/d:Forms/f:frmSetting.cs" caret="85781" fromTop="2" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
