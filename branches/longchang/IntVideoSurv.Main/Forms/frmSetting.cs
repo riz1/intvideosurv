@@ -54,7 +54,8 @@ namespace CameraViewer.Forms
             //查询用户显示
             loadUserInfo();
             //针对隆昌，隐藏不必要的信息
-
+            showLongChangCameraInfo();
+            showLongChangTollGateInfo();
             FilterInterFaceForLongChang();
         }
 
@@ -80,6 +81,8 @@ namespace CameraViewer.Forms
                 navBarItem2.Visible = false;
                 navBarItem3.Visible = false;
                 nbLog.Visible = false;
+                nbTogDevice.Visible = false;
+                nbTollGate.Visible = false;
                 _displaytype = DisplayTypes.UserManagement;
                 DisplayRightPanel();
             }
@@ -440,7 +443,9 @@ namespace CameraViewer.Forms
             RecognizerManagement.Visible = false;
             //组管理
             gcVritualGroupManegement.Visible = false;
-
+            //
+            gcTogDeviceManagement.Visible = false;
+            groupControl_TollGate.Visible = false;
             switch (_displaytype)
             {
                 case DisplayTypes.DeviceManagement:
@@ -505,6 +510,16 @@ namespace CameraViewer.Forms
                     gcSearchManagement.Visible = true;
                     gcSearchManagement.Dock = DockStyle.Fill;
                     gridView7.OptionsView.ShowGroupPanel = false;
+                    break;
+                case DisplayTypes.ToGDeviceManagement:
+                    gcTogDeviceManagement.Visible = true;
+                    gcTogDeviceManagement.Dock = DockStyle.Fill;
+                    gridViewToGDevice.OptionsView.ShowGroupPanel = false;
+                    break;
+                case DisplayTypes.TollGateManagement:
+                    groupControl_TollGate.Visible = true;
+                    groupControl_TollGate.Dock = DockStyle.Fill;
+                    gridView_TollGate.OptionsView.ShowGroupPanel = false;
                     break;
             }
 
@@ -1996,6 +2011,88 @@ namespace CameraViewer.Forms
             frmUser.ShowDialog();
         }
 
+        void showLongChangCameraInfo()
+        {
+            Dictionary<int, LongChang_CameraInfo> listLongChangcl;
+            listLongChangcl = LongChang_CameraBusiness.Instance.GetAllCameraInfo(ref errMessage);
+
+            var dataTable = new System.Data.DataTable("LongChangCameraInfo");
+            dataTable.Columns.Add("设备编号", typeof(int));
+            dataTable.Columns.Add("设备名称", typeof(string));
+            dataTable.Columns.Add("IP地址", typeof(string));
+            dataTable.Columns.Add("端口号", typeof(int));
+            dataTable.Columns.Add("登陆用户", typeof(string));
+            dataTable.Columns.Add("登陆密码", typeof(string));
+            dataTable.Columns.Add("设备类型", typeof(string));
+            string str;
+            foreach (var node in listLongChangcl)
+            {
+                if (node.Value.Type == 1)
+                    str = "枪机";
+                else
+                    str = "球机";
+                dataTable.Rows.Add(node.Value.CameraId, node.Value.Name, node.Value.IP, node.Value.Port, node.Value.UserName, node.Value.PassWord, str);
+            }
+
+            gridControlTogDevice.DataSource = dataTable;
+            gridControlTogDevice.MainView.PopulateColumns();
+            gridViewToGDevice.Columns["设备编号"].Width = 40;
+            gridViewToGDevice.Columns["设备名称"].Width = 40;
+            gridViewToGDevice.Columns["IP地址"].Width = 40;
+            gridViewToGDevice.Columns["端口号"].Width = 40;
+            gridViewToGDevice.Columns["登陆用户"].Width = 40;
+            gridViewToGDevice.Columns["登陆密码"].Width = 40;
+            gridViewToGDevice.Columns["设备类型"].Width = 40;
+        }
+        void showLongChangTollGateInfo()
+        {
+            Dictionary<string, LongChang_TollGateInfo> listLongChangtl;
+            listLongChangtl = LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref errMessage);
+
+            var dataTable = new System.Data.DataTable("LongChangTollGateInfo");
+            dataTable.Columns.Add("卡口编号", typeof(string));
+            dataTable.Columns.Add("卡口名称", typeof(string));
+            dataTable.Columns.Add("卡口简称", typeof(string));
+            dataTable.Columns.Add("卡口位置", typeof(string));
+            dataTable.Columns.Add("管辖单位编号", typeof(string));
+            dataTable.Columns.Add("行政区划", typeof(string));
+            dataTable.Columns.Add("卡口类型", typeof(string));
+            dataTable.Columns.Add("摄像机编号", typeof(int));
+            dataTable.Columns.Add("道路编号", typeof(string));
+            dataTable.Columns.Add("道路名称", typeof(string));
+
+            string str;
+            foreach (var node in listLongChangtl)
+            {
+                dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
+                    node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType, node.Value.cameraNum, node.Value.roadNum, node.Value.roadName);
+            }
+
+            gridControl_TollGateManagement.DataSource = dataTable;
+            gridControl_TollGateManagement.MainView.PopulateColumns();
+            gridView_TollGate.Columns["卡口编号"].Width = 30;
+            gridView_TollGate.Columns["卡口名称"].Width = 30;
+            gridView_TollGate.Columns["卡口简称"].Width = 30;
+            gridView_TollGate.Columns["卡口位置"].Width = 30;
+            gridView_TollGate.Columns["管辖单位编号"].Width = 30;
+            gridView_TollGate.Columns["行政区划"].Width = 30;
+            gridView_TollGate.Columns["卡口类型"].Width = 30;
+            gridView_TollGate.Columns["摄像机编号"].Width = 30;
+            gridView_TollGate.Columns["道路编号"].Width = 30;
+            gridView_TollGate.Columns["道路名称"].Width = 30;
+        }
+
+        private void nbTogDevice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            _displaytype = DisplayTypes.ToGDeviceManagement;
+            DisplayRightPanel();
+        }
+
+        private void nbTollGate_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            _displaytype = DisplayTypes.TollGateManagement;
+            DisplayRightPanel();
+        }
     }
     public enum DisplayTypes
     {
@@ -2011,7 +2108,8 @@ namespace CameraViewer.Forms
         DecoderManagement = 1024,
         RecognizerManagement = 2048,
         VirtualGroupManagement = 4096,
-        SearchManagement = 8192
-
+        SearchManagement = 8192,
+        ToGDeviceManagement=3,
+        TollGateManagement=5
     }
 }
