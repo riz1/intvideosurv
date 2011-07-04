@@ -2182,7 +2182,7 @@ namespace CameraViewer.Forms
                                                        });
                     
                 }
-                showLongChangCameraInfo();
+                showLongChangTollGateInfo();
 
             }
             catch (Exception ex)

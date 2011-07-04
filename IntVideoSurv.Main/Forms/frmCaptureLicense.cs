@@ -627,6 +627,12 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 XtraMessageBox.Show("录入的车牌号不正确!");
                 return;
             }
+            if (_airnoixCamera == null)
+            {
+                MessageBox.Show("此摄像头不存在");
+                return;
+            }
+
             LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
             LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
             LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();
@@ -638,7 +644,11 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             {
                 Directory.CreateDirectory(captureFileName);
             }
-
+            if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
+            {
+                MessageBox.Show("没有对应的卡口信息");
+                return;
+            }
             vehmon.plateNumberTypeName = cbeVehType.Text;
             vehmon.plateNumber = textEdit1.Text;
             vehmon.illegalReason = cbeInvalidType.Text;
@@ -646,8 +656,9 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.adminDivisionName = cbeCaptureDepartment.Text;
             vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
             //vehmon.vehInfoNum = 0;//CLXXBH_SEQ.NEXTVAL
-            vehmon.tollNum = 1000;
-            vehmon.tollName = "测试路口";
+
+            vehmon.tollNum = int.Parse(tollgate.tollNum);
+            vehmon.tollName = tollgate.tollName;
             vehmon.plateColorNum = 0;
             vehmon.plateColor = "";
             vehmon.imageCount = 3;
@@ -665,17 +676,6 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.vehicleTypeName = "";
             vehmon.plateNumberType = "A";
             vehmon.countTime = 0;
-
-            if (_airnoixCamera == null)
-            {
-                MessageBox.Show("此摄像头不存在");
-                return;
-            }
-            if ((tollgate=LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
-            {
-                MessageBox.Show("没有对应的卡口信息");
-                return;
-            }
 
             vehmon.roadName = tollgate.roadName;
             vehmon.redLightTime = Convert.ToDateTime(teCaptureTime.Text);

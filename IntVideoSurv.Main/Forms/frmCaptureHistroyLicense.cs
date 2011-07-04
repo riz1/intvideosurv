@@ -435,7 +435,11 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             {
                 Directory.CreateDirectory(captureFileName);
             }
-
+            if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _selectedCamera.CameraId)) == null)
+            {
+                MessageBox.Show("没有对应的卡口信息");
+                return;
+            }
             vehmon.plateNumberTypeName = cbeVehType.Text;
             vehmon.plateNumber = textEdit1.Text;
             vehmon.illegalReason = cbeInvalidType.Text;
@@ -443,8 +447,8 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.adminDivisionName = cbeCaptureDepartment.Text;
             vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
             vehmon.vehInfoNum = 0;
-            vehmon.tollNum = 0;
-            vehmon.tollName = "成都市西门车站营门口路11190号";
+            vehmon.tollNum = int.Parse(tollgate.tollNum);
+            vehmon.tollName = tollgate.tollName;
             vehmon.plateColorNum = 0;
             vehmon.plateColor = "";
             vehmon.imageCount = 3;
@@ -466,11 +470,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 MessageBox.Show("此摄像头不存在");
                 return;
             }
-            if ((tollgate=LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _selectedCamera.CameraId)) == null)
-            {
-                MessageBox.Show("没有对应的卡口信息");
-                return;
-            }
+
 
             vehmon.roadName = tollgate.roadName;
             vehmon.redLightTime = Convert.ToDateTime(teCaptureTime.Text);
