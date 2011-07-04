@@ -834,6 +834,7 @@ namespace CameraViewer
             this.barStaticItem7.Id = 57;
             this.barStaticItem7.Name = "barStaticItem7";
             this.barStaticItem7.TextAlignment = System.Drawing.StringAlignment.Near;
+            this.barStaticItem7.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // barAndDockingController1
             // 
