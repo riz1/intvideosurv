@@ -102,6 +102,7 @@
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -116,6 +117,8 @@
             this.gcTime = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gcVideoFile = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gcCameraTag = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.cbeFrameInterval = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -163,6 +166,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEditSelectedPicture
@@ -193,7 +197,7 @@
             this.simpleButtonCurrent.Name = "simpleButtonCurrent";
             this.simpleButtonCurrent.Size = new System.Drawing.Size(71, 108);
             this.simpleButtonCurrent.TabIndex = 2;
-            this.simpleButtonCurrent.Text = "中(S)";
+            this.simpleButtonCurrent.Text = "中(&S)";
             this.simpleButtonCurrent.Click += new System.EventHandler(this.simpleButtonCurrent_Click);
             // 
             // simpleButtonLast
@@ -866,6 +870,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.labelControl6);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl3);
@@ -876,6 +881,15 @@
             this.groupControl1.Size = new System.Drawing.Size(348, 88);
             this.groupControl1.TabIndex = 16;
             this.groupControl1.Text = "号牌信息";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.labelControl4.Location = new System.Drawing.Point(194, 38);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(7, 14);
+            this.labelControl4.TabIndex = 4;
+            this.labelControl4.Text = "*";
             // 
             // labelControl6
             // 
@@ -1013,6 +1027,33 @@
             this.gcCameraTag.FieldName = "CameraTag";
             this.gcCameraTag.Name = "gcCameraTag";
             // 
+            // cbeFrameInterval
+            // 
+            this.cbeFrameInterval.EditValue = "1";
+            this.cbeFrameInterval.Location = new System.Drawing.Point(356, 317);
+            this.cbeFrameInterval.Name = "cbeFrameInterval";
+            this.cbeFrameInterval.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbeFrameInterval.Properties.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.cbeFrameInterval.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbeFrameInterval.Size = new System.Drawing.Size(41, 21);
+            this.cbeFrameInterval.TabIndex = 4;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelControl7.Location = new System.Drawing.Point(301, 320);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(48, 14);
+            this.labelControl7.TabIndex = 4;
+            this.labelControl7.Text = "取帧间隔";
+            // 
             // frmCaptureHistroyLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1020,8 +1061,10 @@
             this.ClientSize = new System.Drawing.Size(1217, 705);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.labelControl7);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
+            this.Controls.Add(this.cbeFrameInterval);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.panelControlVideo);
@@ -1095,6 +1138,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1188,6 +1232,9 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcTime;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcVideoFile;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcCameraTag;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.ComboBoxEdit cbeFrameInterval;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
 
     }
 }

@@ -161,16 +161,5 @@ namespace CameraViewer.Tools
             }
 
         }
-
-
-
-
-    }
-    public class FileInfoCompare : IComparer
-    {
-        public int Compare(object f1, object f2)
-        {
-            return (f1 as FileInfo).CreationTime > (f2 as FileInfo).CreationTime ? 1 : 0;
-        }
     }
 }

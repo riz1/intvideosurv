@@ -70,6 +70,16 @@ namespace CameraViewer
 
         public MainForm()
         {
+            string errMsg = "";
+            bool isExisted = DbExistedBusiness.Instance.IsExisted(ref errMsg);
+            if (!isExisted)
+            {
+                XtraMessageBox.Show("请确保数据库服务器已启动，且数据库连接参数正确!");
+                Process.GetCurrentProcess().Kill();
+            }  
+
+
+
 #if DEBUG
             while (Login(_inputUsername, _inputPassword, PromoteInfo) != true)
             {

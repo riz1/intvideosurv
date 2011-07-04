@@ -166,10 +166,12 @@ namespace CameraViewer.Forms
         private int Change_Frame = 1200;//第一个视频播放的帧数
         private int Start_Frame = 5000;
         private ArrayList alTempFiles = new ArrayList();
+        private int frameInterval = 2;
         private void simpleButtonPrevious_Click(object sender, EventArgs e)
         {
             try
             {
+                frameInterval = int.Parse(cbeFrameInterval.Text);
                 treeListPicturesBefore.Nodes.Clear();
                 Image[] images = GetImages();
                 treeListPicturesBefore.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
@@ -186,6 +188,7 @@ namespace CameraViewer.Forms
         {
             try
             {
+                frameInterval = int.Parse(cbeFrameInterval.Text);
                 treeListPicturesCurrent.Nodes.Clear();
                 Image[] images = GetImages();
                 treeListPicturesCurrent.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
@@ -201,6 +204,7 @@ namespace CameraViewer.Forms
         {
             try
             {
+                frameInterval = int.Parse(cbeFrameInterval.Text);
                 treeListPicturesAfter.Nodes.Clear();
                 Image[] images = GetImages();
                 treeListPicturesAfter.AppendNode(new[] { images[0], images[1], images[2], images[3], images[4] }, -1);
@@ -218,25 +222,20 @@ namespace CameraViewer.Forms
 
             int ret = AirnoixPlayer.Avdec_Pause(intPtr);
             int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-            if (currentPos >= 9)
+            if (currentPos >= PicNum * (frameInterval) / 2)
             {
-                for (int i = 0; i < 9; i++)
-                {
-                    AirnoixPlayer.Avdec_StepFrame(intPtr, false);                    
-                }
-
-            }
-            if (_totalFrames - currentPos <= PicNum)
-            {
-                for (int i = 0; i < 3*(_totalFrames - currentPos); i++)
+                for (int i = 0; i < PicNum * (frameInterval) / 2; i++)
                 {
                     AirnoixPlayer.Avdec_StepFrame(intPtr, false);
                 }
+
             }
-            while (frameWidth == 0 || frameHeight == 0)
+            if (_totalFrames - currentPos <= PicNum * (frameInterval) / 2)
             {
-                frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
-                frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
+                for (int i = 0; i < PicNum * (frameInterval) / 2; i++)
+                {
+                    AirnoixPlayer.Avdec_StepFrame(intPtr, false);
+                }
             }
             Image[] images = new Image[PicNum];
             for (int i = 0; i < PicNum; i++)
@@ -244,7 +243,7 @@ namespace CameraViewer.Forms
                 string fmt = string.Format("JPG {0:0000}{1:0000}{2:0000}", frameWidth>0?frameWidth:1280, frameHeight>0?frameHeight:720, 24);
                 string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
                 ret = AirnoixPlayer.Avdec_Play(intPtr);
-                Thread.Sleep(80);
+                Thread.Sleep(40 * frameInterval);
                 ret = AirnoixPlayer.Avdec_Pause(intPtr);
                 ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
                 
@@ -370,7 +369,13 @@ namespace CameraViewer.Forms
             int mum;
             int count;
             AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
-            if ( state == AirnoixPlayerState.PLAY_STATE_STOP)
+            if (state == AirnoixPlayerState.PLAY_STATE_PLAY)
+            {
+               int ret =AirnoixPlayer.Avdec_Pause(intPtr);
+               ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+               ret = AirnoixPlayer.Avdec_Play(intPtr);
+            }
+            else if ( state == AirnoixPlayerState.PLAY_STATE_STOP)
             {
                 AirnoixPlayer.Avdec_Play(intPtr);
                 AirnoixPlayer.Avdec_Pause(intPtr);

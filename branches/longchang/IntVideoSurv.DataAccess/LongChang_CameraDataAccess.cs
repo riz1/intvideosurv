@@ -12,7 +12,7 @@ namespace IntVideoSurv.DataAccess
     {
         public static DataSet GetAllCamInfo(Database db)
         {
-            string cmdText = string.Format("select * from TOG_DEVICE order by sbbh");
+            string cmdText = string.Format("select * from TOG_DEVICE where (TOG_DEVICE.sblx = 1 or TOG_DEVICE.sblx = 2) order by sbbh");
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
