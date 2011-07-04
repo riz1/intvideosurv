@@ -112,6 +112,8 @@
             this.cbeVehType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
             this.listBoxVideoFiles = new DevExpress.XtraEditors.ListBoxControl();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.cbeFrameInterval = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
@@ -158,6 +160,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEditSelectedPicture
@@ -188,7 +191,7 @@
             this.simpleButtonCurrent.Name = "simpleButtonCurrent";
             this.simpleButtonCurrent.Size = new System.Drawing.Size(71, 108);
             this.simpleButtonCurrent.TabIndex = 2;
-            this.simpleButtonCurrent.Text = "中(S)";
+            this.simpleButtonCurrent.Text = "中(&S)";
             this.simpleButtonCurrent.Click += new System.EventHandler(this.simpleButtonCurrent_Click);
             // 
             // simpleButtonLast
@@ -962,11 +965,40 @@
             this.listBoxVideoFiles.TabIndex = 19;
             this.listBoxVideoFiles.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             // 
+            // labelControl8
+            // 
+            this.labelControl8.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelControl8.Location = new System.Drawing.Point(288, 319);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(48, 14);
+            this.labelControl8.TabIndex = 21;
+            this.labelControl8.Text = "取帧间隔";
+            // 
+            // cbeFrameInterval
+            // 
+            this.cbeFrameInterval.EditValue = "2";
+            this.cbeFrameInterval.Location = new System.Drawing.Point(343, 316);
+            this.cbeFrameInterval.Name = "cbeFrameInterval";
+            this.cbeFrameInterval.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbeFrameInterval.Properties.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.cbeFrameInterval.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbeFrameInterval.Size = new System.Drawing.Size(41, 21);
+            this.cbeFrameInterval.TabIndex = 20;
+            // 
             // frmCaptureLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 689);
+            this.Controls.Add(this.labelControl8);
+            this.Controls.Add(this.cbeFrameInterval);
             this.Controls.Add(this.listBoxVideoFiles);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupControl4);
@@ -1043,6 +1075,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1132,6 +1165,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.ListBoxControl listBoxVideoFiles;
         private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl8;
+        private DevExpress.XtraEditors.ComboBoxEdit cbeFrameInterval;
 
     }
 }

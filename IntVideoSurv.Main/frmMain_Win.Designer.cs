@@ -872,8 +872,9 @@ namespace CameraViewer
             // 
             this.dockManager1.Controller = this.barAndDockingController1;
             this.dockManager1.Form = this;
+            this.dockManager1.HiddenPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
+            this.dockPanelPtzControl});
             this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
-            this.dockPanelPtzControl,
             this.dockPanelResult,
             this.dockPanel1,
             this.dockPanelAlarm});
@@ -888,16 +889,16 @@ namespace CameraViewer
             // 
             this.dockPanelPtzControl.Controls.Add(this.controlContainer1);
             this.dockPanelPtzControl.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
-            this.dockPanelPtzControl.FloatLocation = new System.Drawing.Point(1157, 258);
+            this.dockPanelPtzControl.FloatLocation = new System.Drawing.Point(1214, 405);
             this.dockPanelPtzControl.FloatSize = new System.Drawing.Size(140, 393);
             this.dockPanelPtzControl.ID = new System.Guid("81e2c162-0411-4e09-a61a-918052f10543");
-            this.dockPanelPtzControl.Location = new System.Drawing.Point(0, 0);
+            this.dockPanelPtzControl.Location = new System.Drawing.Point(-32768, -32768);
             this.dockPanelPtzControl.Name = "dockPanelPtzControl";
             this.dockPanelPtzControl.OriginalSize = new System.Drawing.Size(144, 200);
-            this.dockPanelPtzControl.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right;
             this.dockPanelPtzControl.SavedIndex = 0;
             this.dockPanelPtzControl.Size = new System.Drawing.Size(140, 393);
             this.dockPanelPtzControl.Text = "Çò»ú¿ØÖÆ";
+            this.dockPanelPtzControl.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
             // 
             // controlContainer1
             // 
