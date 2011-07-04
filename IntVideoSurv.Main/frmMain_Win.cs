@@ -3060,5 +3060,24 @@ namespace CameraViewer
             fchl.Show();
 
         }
+
+        private void timerForReconnect_Tick(object sender, EventArgs e)
+        {
+            for (int row = 0; row < 2; row++)
+            {
+                for (int col = 0; col < 2; col++)
+                {
+                    CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(row, col);
+                    if (cameraWindow.AirnoixCamera ==null)
+                    {
+                        continue;
+                    }
+                    if (cameraWindow.AirnoixCamera.IsAlive==false)
+                    {
+                        cameraWindow.AirnoixCamera.Start();
+                    }
+                }
+            }
+        }
     }
 }

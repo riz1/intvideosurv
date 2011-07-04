@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace CameraViewer.Player
 {
@@ -21,10 +22,11 @@ namespace CameraViewer.Player
         private AirnoixClient.StreamReadCallback _streamReadCallback;
         private AirnoixClient.MessageCallback _messageCallback;
 
-
+        public uint LastStateCode{get; set; }
         public bool Started { get; set; }
         public int Id { get; set; }
         public int Type { get; set; }
+        public bool IsAlive{ get; set; }
         private string _userName;
         public string UserName
         {
@@ -71,7 +73,6 @@ namespace CameraViewer.Player
         public AirnoixCamera(IntPtr hWnd)
         {
             _camHandle = AirnoixClient.MP4_ClientInit(hWnd, 0xa0000, 0x200, 0);
-
             _messageCallback = MessageCallback;
             _streamReadCallback = StreamReadCallback;
 
@@ -91,6 +92,7 @@ namespace CameraViewer.Player
 
         public void Start()
         {
+
             AirnoixClient.MP4_ClientConnectEx(_camHandle, Ip, (uint)Port, 0, (uint)StreamId, 0);
             Started = true;
         }
@@ -134,7 +136,9 @@ namespace CameraViewer.Player
 
         public void MessageCallback(System.IntPtr hClient, uint dwCode, System.IntPtr context)
         {
-             int x = AirnoixClient.MP4_ClientSetErrorMessage(_camHandle, _camHandle, 100);
+             Debug.WriteLine(DateTime.Now +"\t"+Ip+"\tCall Back ="+string.Format("{0:x}",dwCode));
+             LastStateCode = dwCode;
+             IsAlive = (LastStateCode == 0x30 || LastStateCode == 0x40) ? true : false;
         }
 
         private bool _isRecording = false;
