@@ -3063,6 +3063,7 @@ namespace CameraViewer
 
         private void timerForReconnect_Tick(object sender, EventArgs e)
         {
+            int aliveCamera = 0;
             for (int row = 0; row < 2; row++)
             {
                 for (int col = 0; col < 2; col++)
@@ -3072,12 +3073,17 @@ namespace CameraViewer
                     {
                         continue;
                     }
-                    if (cameraWindow.AirnoixCamera.IsAlive==false)
+                    if (cameraWindow.AirnoixCamera.IsAlive)
+                    {
+                        aliveCamera++;
+                    }
+                    else
                     {
                         cameraWindow.AirnoixCamera.Start();
                     }
                 }
             }
+            barStaticItemCameraNo.Caption = aliveCamera +"/"+ _listAllLongChang_Cam.Count;
         }
     }
 }
