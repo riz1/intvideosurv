@@ -194,9 +194,17 @@ namespace CameraViewer
 		    {
                 Font drawFont = new Font("Arial", 8);
                 SolidBrush drawBrush = new SolidBrush(Color.White);
-
-                g.DrawString("连接中 ...", drawFont, drawBrush, new PointF(3, 3));
-
+		        string str2Show = "连接中 ...";
+                if (_airnoixCamera==null)
+		        {
+		            str2Show = "未关联";
+                    g.DrawString(str2Show, drawFont, drawBrush, new PointF(3, 3));
+		        }
+                else if (_airnoixCamera.IsAlive == false)
+                {
+                    str2Show = "连接中 ..."; 
+                    g.DrawString(str2Show, drawFont, drawBrush, new PointF(3, 3));
+                }
                 drawBrush.Dispose();
                 drawFont.Dispose();
             }

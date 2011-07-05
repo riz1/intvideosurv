@@ -16,17 +16,18 @@ namespace CameraViewer.Forms
         {
             InitializeComponent();
         }
+        public bool LogoutOK = false;
 
         private void sbOK_Click(object sender, EventArgs e)
         {
             if (tePassword.Text == MainForm.CurrentUser.Password)
             {
-                sbOK.DialogResult = DialogResult.OK;
-                return;
+                LogoutOK = true;
             }
             else
             {
                 XtraMessageBox.Show("密码错误!","提示");
+                LogoutOK = false;
 
             }              
         }

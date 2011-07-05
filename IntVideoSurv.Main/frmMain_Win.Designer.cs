@@ -40,8 +40,10 @@ namespace CameraViewer
             this.barSubItemMenuView = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItemResultView = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemAlarmView = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItemMenuQuery = new DevExpress.XtraBars.BarSubItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
+            this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barButtonItemSystemSetting = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
@@ -264,6 +266,7 @@ namespace CameraViewer
             this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem6 = new DevExpress.XtraBars.BarStaticItem();
+            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.bandedGridColumn16 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn24 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -280,6 +283,9 @@ namespace CameraViewer
             this.timerForDeleteTempFiles = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerForReconnect = new System.Windows.Forms.Timer(this.components);
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem22 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem23 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -443,9 +449,15 @@ namespace CameraViewer
             this.barButtonItem21,
             this.barButtonItemPlayTwoFiles,
             this.barStaticItem7,
-            this.bbiHistroyVideoCondition});
+            this.bbiHistroyVideoCondition,
+            this.barButtonItem3,
+            this.barSubItem2,
+            this.barSubItem4,
+            this.barButtonItem5,
+            this.barButtonItem22,
+            this.barButtonItem23});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 59;
+            this.barManager1.MaxItemId = 66;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.barManager1.StatusBar = this.bar4;
@@ -460,6 +472,7 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemMenuSystem),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemMenuView),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemMenuQuery),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1)});
             this.barMenu.OptionsBar.DrawDragBorder = false;
             this.barMenu.OptionsBar.MultiLine = true;
@@ -512,6 +525,12 @@ namespace CameraViewer
             this.barButtonItemAlarmView.Name = "barButtonItemAlarmView";
             this.barButtonItemAlarmView.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemResultView_ItemClick);
             // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "barButtonItem3";
+            this.barButtonItem3.Id = 59;
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
             // barSubItemMenuQuery
             // 
             this.barSubItemMenuQuery.Caption = "查询(&Q)";
@@ -523,6 +542,16 @@ namespace CameraViewer
             this.barSubItem1.Caption = "帮助(&H)";
             this.barSubItem1.Id = 13;
             this.barSubItem1.Name = "barSubItem1";
+            // 
+            // barSubItem2
+            // 
+            this.barSubItem2.Caption = "分屏(&P)";
+            this.barSubItem2.Id = 61;
+            this.barSubItem2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem22),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem23)});
+            this.barSubItem2.Name = "barSubItem2";
             // 
             // bar3
             // 
@@ -2835,6 +2864,12 @@ namespace CameraViewer
             this.barStaticItem6.Name = "barStaticItem6";
             this.barStaticItem6.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
+            // barSubItem4
+            // 
+            this.barSubItem4.Caption = "barSubItem4";
+            this.barSubItem4.Id = 62;
+            this.barSubItem4.Name = "barSubItem4";
+            // 
             // repositoryItemPictureEdit1
             // 
             this.repositoryItemPictureEdit1.Name = "repositoryItemPictureEdit1";
@@ -2947,6 +2982,27 @@ namespace CameraViewer
             this.timerForReconnect.Enabled = true;
             this.timerForReconnect.Interval = 30000;
             this.timerForReconnect.Tick += new System.EventHandler(this.timerForReconnect_Tick);
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "1分屏";
+            this.barButtonItem5.Id = 63;
+            this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick_2);
+            // 
+            // barButtonItem22
+            // 
+            this.barButtonItem22.Caption = "4分屏";
+            this.barButtonItem22.Id = 64;
+            this.barButtonItem22.Name = "barButtonItem22";
+            this.barButtonItem22.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem22_ItemClick);
+            // 
+            // barButtonItem23
+            // 
+            this.barButtonItem23.Caption = "9分屏";
+            this.barButtonItem23.Id = 65;
+            this.barButtonItem23.Name = "barButtonItem23";
+            this.barButtonItem23.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem23_ItemClick);
             // 
             // MainForm
             // 
@@ -3326,6 +3382,12 @@ namespace CameraViewer
         private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraBars.BarButtonItem bbiHistroyVideoCondition;
         private Timer timerForReconnect;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarSubItem barSubItem2;
+        private DevExpress.XtraBars.BarSubItem barSubItem4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem22;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem23;
         
     }
 }
