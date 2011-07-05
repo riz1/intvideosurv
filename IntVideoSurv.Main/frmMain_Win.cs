@@ -478,10 +478,10 @@ namespace CameraViewer
         {
             try
             {
-                if (!(XtraMessageBox.Show(this, "你确信要退出系统吗?", "请注意", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
+                frmLogout frmLogout = new frmLogout();
+                if ( frmLogout.ShowDialog()!=DialogResult.OK)
                 {
                     e.Cancel = true;
-
                     return;
                 }
 
