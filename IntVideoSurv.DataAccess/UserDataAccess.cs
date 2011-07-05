@@ -135,7 +135,7 @@ namespace IntVideoSurv.DataAccess
 
         public static DataSet GetUserInfo(Database db, string username)
         {
-            string cmdText = string.Format("select * from IVS_UserInfo where username=\'{0}\'", username);
+            string cmdText = string.Format("select * from IVS_UserInfo where username='{0}'", username);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);
@@ -188,6 +188,7 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
+
     }
 }
 

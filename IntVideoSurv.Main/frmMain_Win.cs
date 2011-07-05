@@ -478,12 +478,11 @@ namespace CameraViewer
         {
             try
             {
-                frmLogout frmLogout = new frmLogout();
-                if ((frmLogout.ShowDialog()!=DialogResult.OK)||(frmLogout.LogoutOK==false))
+                if (!(XtraMessageBox.Show(this, "你确信要退出系统吗?", "请注意", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
                 {
                     e.Cancel = true;
-                    return;
 
+                    return;
                 }
 
                 SystemLogBusiness.Instance.Insert(ref _errMessage, new SystemLog
@@ -3097,33 +3096,10 @@ namespace CameraViewer
             barStaticItemCameraNo.Caption = aliveCamera +"/"+ _listAllLongChang_Cam.Count;
         }
 
-        private void barButtonItem5_ItemClick_2(object sender, ItemClickEventArgs e)
+        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
-            int iRow = 1, iCol = 1;
-            Util.GetRowCol(1, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.Refresh();
+            SearchForm frmsearch = new SearchForm();
+            frmsearch.ShowDialog(this);
         }
-
-        private void barButtonItem22_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            int iRow = 2, iCol = 2;
-            Util.GetRowCol(4, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.Refresh();
-        }
-
-        private void barButtonItem23_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            int iRow = 3, iCol = 3;
-            Util.GetRowCol(9, ref iRow, ref iCol);
-            mainMultiplexer.Rows = iRow;
-            mainMultiplexer.Cols = iCol;
-            mainMultiplexer.Refresh();
-        }
-
-
     }
 }
