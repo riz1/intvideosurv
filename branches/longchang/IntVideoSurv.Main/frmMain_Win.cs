@@ -479,10 +479,11 @@ namespace CameraViewer
             try
             {
                 frmLogout frmLogout = new frmLogout();
-                if ( frmLogout.ShowDialog()!=DialogResult.OK)
+                if ((frmLogout.ShowDialog()!=DialogResult.OK)||(frmLogout.LogoutOK==false))
                 {
                     e.Cancel = true;
                     return;
+
                 }
 
                 SystemLogBusiness.Instance.Insert(ref _errMessage, new SystemLog
@@ -3095,5 +3096,34 @@ namespace CameraViewer
             }
             barStaticItemCameraNo.Caption = aliveCamera +"/"+ _listAllLongChang_Cam.Count;
         }
+
+        private void barButtonItem5_ItemClick_2(object sender, ItemClickEventArgs e)
+        {
+            int iRow = 1, iCol = 1;
+            Util.GetRowCol(1, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+        private void barButtonItem22_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int iRow = 2, iCol = 2;
+            Util.GetRowCol(4, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+        private void barButtonItem23_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int iRow = 3, iCol = 3;
+            Util.GetRowCol(9, ref iRow, ref iCol);
+            mainMultiplexer.Rows = iRow;
+            mainMultiplexer.Cols = iCol;
+            mainMultiplexer.Refresh();
+        }
+
+
     }
 }
