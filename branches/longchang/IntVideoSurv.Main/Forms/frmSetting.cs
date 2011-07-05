@@ -69,6 +69,7 @@ namespace CameraViewer.Forms
                 navBarItem3.Visible = false;
                 nbLog.Visible = false;
                 nbCode.Visible = false;
+                nbSearch.Visible = false;
                 _displaytype = DisplayTypes.UserManagement;
                 DisplayRightPanel();
             }
@@ -83,7 +84,15 @@ namespace CameraViewer.Forms
                 nbLog.Visible = false;
                 nbTogDevice.Visible = false;
                 nbTollGate.Visible = false;
+                nbSearch.Visible = false;
                 _displaytype = DisplayTypes.SkinManagement;
+                //
+                var listSkinName = (from SkinContainer skin in SkinManager.Default.Skins select skin.SkinName).ToList();
+                listSkinName.Sort();
+                cbeChangeSkin.Properties.Items.Clear();
+                cbeChangeSkin.Properties.Items.AddRange(listSkinName);
+                cbeChangeSkin.EditValue = Properties.Settings.Default.DefaultSkinName;
+                //
                 DisplayRightPanel();
             }
             
@@ -1958,9 +1967,10 @@ namespace CameraViewer.Forms
             DateTime dt = DateTime.Now;
             teStartTime.EditValue = dt.Year.ToString() + "/" + dt.Month.ToString() + "/" + "01" + " " + "00:00:00";
             teEndTime.EditValue = dt.Year.ToString() + "/" + dt.Month.ToString() + "/" + dt.Day.ToString() + " " + dt.Hour.ToString() + ":" + dt.Minute.ToString() + ":" + dt.Second.ToString();
-            comboBoxEditUser.Text = "admin";
+           // comboBoxEditUser.Text = "admin";
             if (MainForm.CurrentUser.UserTypeId == 1)//管理员
             {
+                comboBoxEditUser.Text = "admin";
                 listuser = UserBusiness.Instance.GetAllUserInfo(ref errMessage);
                 foreach (var v in listuser)
                 {
@@ -1972,7 +1982,9 @@ namespace CameraViewer.Forms
             else if (MainForm.CurrentUser.UserTypeId == 2)//操作员
             {
                 gcUserManagement.Visible = false;
-                comboBoxEditUser.Properties.Items.Add(MainForm.CurrentUser.UserName);
+                comboBoxEditUser.Text = MainForm.CurrentUser.UserName;
+                //comboBoxEditUser.Properties.Items.Add(MainForm.CurrentUser.UserName);
+                comboBoxEditUser.Enabled = false;
                 comboBoxEditUser.Properties.Tag = MainForm.CurrentUser.UserId.ToString();
             }
         }
@@ -2014,8 +2026,8 @@ namespace CameraViewer.Forms
         private void nbCode_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             _displaytype = DisplayTypes.CodeManagement;
-            textBoxName.Text = MainForm.CurrentUser.UserName;
-            textBoxName.Enabled = false;
+            textEditName.Text = MainForm.CurrentUser.UserName;
+            textEditName.Enabled = false;
             DisplayRightPanel();
         }
 
@@ -2104,19 +2116,19 @@ namespace CameraViewer.Forms
 
         private void simpleButtonOK_Click(object sender, EventArgs e)
         {
-            if (textBoxFormerCode.Text!=MainForm.CurrentUser.Password.ToString())
+            if (textEditFormerCode.Text != MainForm.CurrentUser.Password.ToString())
             {
                 MessageBox.Show("原密码不对");
                 return;
             } 
             else
             {
-                if (textBoxNowCode.Text!=textBoxNowCodeFirm.Text)
+                if (textEditNowCode.Text != textEditNowCodeFirm.Text)
                 {
                     MessageBox.Show("新密码不匹配");
                     return;
                 }
-                string code = textBoxNowCode.Text;
+                string code = textEditNowCode.Text;
                 UserBusiness.Instance.UpdatePassword(ref errMessage, MainForm.CurrentUser.UserId, code);
                 MessageBox.Show("修改密码成功");
             }
@@ -2199,6 +2211,16 @@ namespace CameraViewer.Forms
             frmch.Gid = Gid;
             frmch.ShowDialog(this);
             BuildVirtualGroupTree();
+        }
+
+        private void panelControl3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void simpleButtonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
     public enum DisplayTypes

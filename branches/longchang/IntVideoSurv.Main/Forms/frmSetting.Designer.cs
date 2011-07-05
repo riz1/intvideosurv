@@ -157,25 +157,6 @@ namespace CameraViewer.Forms
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.treeViewMonitor = new System.Windows.Forms.TreeView();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.gcCodeManagement = new DevExpress.XtraEditors.GroupControl();
-            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButtonOK = new DevExpress.XtraEditors.SimpleButton();
-            this.textBoxNowCodeFirm = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBoxNowCode = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBoxFormerCode = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.gcVritualGroupManegement = new DevExpress.XtraEditors.GroupControl();
-            this.splitContainerControl9 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.treeListVirtualGroup = new DevExpress.XtraTreeList.TreeList();
-            this.treeListColumn9 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn10 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.gridControlShowVirtualGroup = new DevExpress.XtraGrid.GridControl();
-            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcSearchManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl10 = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControlSearch = new DevExpress.XtraGrid.GridControl();
@@ -192,17 +173,33 @@ namespace CameraViewer.Forms
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.teStartTime = new DevExpress.XtraEditors.TimeEdit();
             this.teEndTime = new DevExpress.XtraEditors.TimeEdit();
-            this.groupControl_TollGate = new DevExpress.XtraEditors.GroupControl();
-            this.splitContainerControl12 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.gridControl_TollGateManagement = new DevExpress.XtraGrid.GridControl();
-            this.gridView_TollGate = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.TollGate_Delete = new System.Windows.Forms.Button();
+            this.gcCodeManagement = new DevExpress.XtraEditors.GroupControl();
+            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.textEditNowCodeFirm = new DevExpress.XtraEditors.TextEdit();
+            this.textEditNowCode = new DevExpress.XtraEditors.TextEdit();
+            this.textEditFormerCode = new DevExpress.XtraEditors.TextEdit();
+            this.textEditName = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonOK = new DevExpress.XtraEditors.SimpleButton();
             this.gcTogDeviceManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl11 = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControlTogDevice = new DevExpress.XtraGrid.GridControl();
             this.gridViewToGDevice = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView8 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.button_Delete = new System.Windows.Forms.Button();
+            this.groupControl_TollGate = new DevExpress.XtraEditors.GroupControl();
+            this.splitContainerControl12 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gridControl_TollGateManagement = new DevExpress.XtraGrid.GridControl();
+            this.gridView_TollGate = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.TollGate_Delete = new System.Windows.Forms.Button();
+            this.gcSkin = new DevExpress.XtraEditors.GroupControl();
+            this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.cbeChangeSkin = new DevExpress.XtraEditors.ComboBoxEdit();
             this.DecoderManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeListShowDecoder = new DevExpress.XtraTreeList.TreeList();
@@ -211,6 +208,13 @@ namespace CameraViewer.Forms
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcVritualGroupManegement = new DevExpress.XtraEditors.GroupControl();
+            this.splitContainerControl9 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.treeListVirtualGroup = new DevExpress.XtraTreeList.TreeList();
+            this.treeListColumn9 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn10 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.gridControlShowVirtualGroup = new DevExpress.XtraGrid.GridControl();
+            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.RecognizerManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl8 = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeListShowRecognizer = new DevExpress.XtraTreeList.TreeList();
@@ -218,10 +222,6 @@ namespace CameraViewer.Forms
             this.treeListColumn8 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.gridControlShowRecognizer = new DevExpress.XtraGrid.GridControl();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gcSkin = new DevExpress.XtraEditors.GroupControl();
-            this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
-            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
-            this.cbeChangeSkin = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gcDisplayChannelManagement = new DevExpress.XtraEditors.GroupControl();
             this.dgvDisplayChannel = new System.Windows.Forms.DataGridView();
             this.DisplayChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -345,17 +345,6 @@ namespace CameraViewer.Forms
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcCodeManagement)).BeginInit();
-            this.gcCodeManagement.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcVritualGroupManegement)).BeginInit();
-            this.gcVritualGroupManegement.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).BeginInit();
-            this.splitContainerControl9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.treeListVirtualGroup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlShowVirtualGroup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSearchManagement)).BeginInit();
             this.gcSearchManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl10)).BeginInit();
@@ -365,12 +354,14 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl_TollGate)).BeginInit();
-            this.groupControl_TollGate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl12)).BeginInit();
-            this.splitContainerControl12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl_TollGateManagement)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView_TollGate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcCodeManagement)).BeginInit();
+            this.gcCodeManagement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
+            this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditNowCodeFirm.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditNowCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditFormerCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTogDeviceManagement)).BeginInit();
             this.gcTogDeviceManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl11)).BeginInit();
@@ -378,6 +369,17 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridControlTogDevice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewToGDevice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl_TollGate)).BeginInit();
+            this.groupControl_TollGate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl12)).BeginInit();
+            this.splitContainerControl12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_TollGateManagement)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_TollGate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSkin)).BeginInit();
+            this.gcSkin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
+            this.panelControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeChangeSkin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecoderManagement)).BeginInit();
             this.DecoderManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).BeginInit();
@@ -386,6 +388,13 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcVritualGroupManegement)).BeginInit();
+            this.gcVritualGroupManegement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).BeginInit();
+            this.splitContainerControl9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.treeListVirtualGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlShowVirtualGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecognizerManagement)).BeginInit();
             this.RecognizerManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl8)).BeginInit();
@@ -393,11 +402,6 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.treeListShowRecognizer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlShowRecognizer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSkin)).BeginInit();
-            this.gcSkin.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
-            this.panelControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeChangeSkin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDisplayChannelManagement)).BeginInit();
             this.gcDisplayChannelManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDisplayChannel)).BeginInit();
@@ -1672,16 +1676,16 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Name = "splitContainerControl2";
             this.splitContainerControl2.Panel1.Controls.Add(this.navBarControl1);
             this.splitContainerControl2.Panel1.Text = "Panel1";
-            this.splitContainerControl2.Panel2.Controls.Add(this.gcCodeManagement);
-            this.splitContainerControl2.Panel2.Controls.Add(this.gcVritualGroupManegement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcSearchManagement);
-            this.splitContainerControl2.Panel2.Controls.Add(this.groupControl_TollGate);
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcCodeManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcTogDeviceManagement);
+            this.splitContainerControl2.Panel2.Controls.Add(this.groupControl_TollGate);
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcSkin);
             this.splitContainerControl2.Panel2.Controls.Add(this.DecoderManagement);
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcVritualGroupManegement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcUserManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcDeviceManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.RecognizerManagement);
-            this.splitContainerControl2.Panel2.Controls.Add(this.gcSkin);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcDisplayChannelManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcSynGroupManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcLogManagement);
@@ -1694,201 +1698,12 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Text = "splitContainerControl2";
             this.splitContainerControl2.Resize += new System.EventHandler(this.splitContainerControl2_Resize);
             // 
-            // gcCodeManagement
-            // 
-            this.gcCodeManagement.Controls.Add(this.panelControl3);
-            this.gcCodeManagement.Location = new System.Drawing.Point(749, 152);
-            this.gcCodeManagement.Name = "gcCodeManagement";
-            this.gcCodeManagement.Size = new System.Drawing.Size(262, 203);
-            this.gcCodeManagement.TabIndex = 38;
-            this.gcCodeManagement.Text = "密码管理";
-            // 
-            // panelControl3
-            // 
-            this.panelControl3.Controls.Add(this.simpleButtonCancel);
-            this.panelControl3.Controls.Add(this.simpleButtonOK);
-            this.panelControl3.Controls.Add(this.textBoxNowCodeFirm);
-            this.panelControl3.Controls.Add(this.label7);
-            this.panelControl3.Controls.Add(this.textBoxNowCode);
-            this.panelControl3.Controls.Add(this.label6);
-            this.panelControl3.Controls.Add(this.textBoxFormerCode);
-            this.panelControl3.Controls.Add(this.label5);
-            this.panelControl3.Controls.Add(this.textBoxName);
-            this.panelControl3.Controls.Add(this.label4);
-            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(2, 23);
-            this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(258, 178);
-            this.panelControl3.TabIndex = 0;
-            // 
-            // simpleButtonCancel
-            // 
-            this.simpleButtonCancel.Location = new System.Drawing.Point(161, 140);
-            this.simpleButtonCancel.Name = "simpleButtonCancel";
-            this.simpleButtonCancel.Size = new System.Drawing.Size(74, 23);
-            this.simpleButtonCancel.TabIndex = 2;
-            this.simpleButtonCancel.Text = "取消";
-            // 
-            // simpleButtonOK
-            // 
-            this.simpleButtonOK.Location = new System.Drawing.Point(61, 140);
-            this.simpleButtonOK.Name = "simpleButtonOK";
-            this.simpleButtonOK.Size = new System.Drawing.Size(80, 23);
-            this.simpleButtonOK.TabIndex = 2;
-            this.simpleButtonOK.Text = "确定";
-            this.simpleButtonOK.Click += new System.EventHandler(this.simpleButtonOK_Click);
-            // 
-            // textBoxNowCodeFirm
-            // 
-            this.textBoxNowCodeFirm.Location = new System.Drawing.Point(123, 94);
-            this.textBoxNowCodeFirm.Name = "textBoxNowCodeFirm";
-            this.textBoxNowCodeFirm.PasswordChar = '*';
-            this.textBoxNowCodeFirm.Size = new System.Drawing.Size(112, 22);
-            this.textBoxNowCodeFirm.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(61, 95);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 14);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "确认密码：";
-            // 
-            // textBoxNowCode
-            // 
-            this.textBoxNowCode.Location = new System.Drawing.Point(123, 66);
-            this.textBoxNowCode.Name = "textBoxNowCode";
-            this.textBoxNowCode.PasswordChar = '*';
-            this.textBoxNowCode.Size = new System.Drawing.Size(112, 22);
-            this.textBoxNowCode.TabIndex = 1;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(61, 67);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 14);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "密码：";
-            // 
-            // textBoxFormerCode
-            // 
-            this.textBoxFormerCode.Location = new System.Drawing.Point(123, 40);
-            this.textBoxFormerCode.Name = "textBoxFormerCode";
-            this.textBoxFormerCode.PasswordChar = '*';
-            this.textBoxFormerCode.Size = new System.Drawing.Size(112, 22);
-            this.textBoxFormerCode.TabIndex = 1;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(61, 41);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 14);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "原密码：";
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Location = new System.Drawing.Point(123, 13);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(112, 22);
-            this.textBoxName.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(61, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 14);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "用户名：";
-            // 
-            // gcVritualGroupManegement
-            // 
-            this.gcVritualGroupManegement.Controls.Add(this.splitContainerControl9);
-            this.gcVritualGroupManegement.Location = new System.Drawing.Point(446, 279);
-            this.gcVritualGroupManegement.Name = "gcVritualGroupManegement";
-            this.gcVritualGroupManegement.Size = new System.Drawing.Size(340, 143);
-            this.gcVritualGroupManegement.TabIndex = 36;
-            this.gcVritualGroupManegement.Text = "组管理";
-            this.gcVritualGroupManegement.Paint += new System.Windows.Forms.PaintEventHandler(this.gcVritualGroupManegement_Paint);
-            // 
-            // splitContainerControl9
-            // 
-            this.splitContainerControl9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl9.Location = new System.Drawing.Point(2, 23);
-            this.splitContainerControl9.Name = "splitContainerControl9";
-            this.splitContainerControl9.Panel1.Controls.Add(this.treeListVirtualGroup);
-            this.splitContainerControl9.Panel1.Text = "Panel1";
-            this.splitContainerControl9.Panel2.Controls.Add(this.gridControlShowVirtualGroup);
-            this.splitContainerControl9.Panel2.Text = "Panel2";
-            this.splitContainerControl9.Size = new System.Drawing.Size(336, 118);
-            this.splitContainerControl9.SplitterPosition = 242;
-            this.splitContainerControl9.TabIndex = 0;
-            this.splitContainerControl9.Text = "splitContainerControl9";
-            // 
-            // treeListVirtualGroup
-            // 
-            this.treeListVirtualGroup.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.treeListColumn9,
-            this.treeListColumn10});
-            this.treeListVirtualGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeListVirtualGroup.Location = new System.Drawing.Point(0, 0);
-            this.treeListVirtualGroup.Name = "treeListVirtualGroup";
-            this.treeListVirtualGroup.OptionsSelection.InvertSelection = true;
-            this.treeListVirtualGroup.OptionsSelection.UseIndicatorForSelection = true;
-            this.treeListVirtualGroup.OptionsView.ShowColumns = false;
-            this.treeListVirtualGroup.OptionsView.ShowHorzLines = false;
-            this.treeListVirtualGroup.OptionsView.ShowIndicator = false;
-            this.treeListVirtualGroup.Size = new System.Drawing.Size(242, 118);
-            this.treeListVirtualGroup.TabIndex = 0;
-            this.treeListVirtualGroup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListVirtualGroup_MouseUp);
-            // 
-            // treeListColumn9
-            // 
-            this.treeListColumn9.Caption = "treeListColumn9";
-            this.treeListColumn9.FieldName = "组管理";
-            this.treeListColumn9.Name = "treeListColumn9";
-            this.treeListColumn9.OptionsColumn.AllowEdit = false;
-            this.treeListColumn9.Visible = true;
-            this.treeListColumn9.VisibleIndex = 0;
-            // 
-            // treeListColumn10
-            // 
-            this.treeListColumn10.Caption = "treeListColumn10";
-            this.treeListColumn10.FieldName = "Tag";
-            this.treeListColumn10.Name = "treeListColumn10";
-            this.treeListColumn10.Visible = true;
-            this.treeListColumn10.VisibleIndex = 1;
-            // 
-            // gridControlShowVirtualGroup
-            // 
-            this.gridControlShowVirtualGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlShowVirtualGroup.Location = new System.Drawing.Point(0, 0);
-            this.gridControlShowVirtualGroup.MainView = this.gridView6;
-            this.gridControlShowVirtualGroup.MenuManager = this.barManager1;
-            this.gridControlShowVirtualGroup.Name = "gridControlShowVirtualGroup";
-            this.gridControlShowVirtualGroup.Size = new System.Drawing.Size(89, 118);
-            this.gridControlShowVirtualGroup.TabIndex = 0;
-            this.gridControlShowVirtualGroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView6});
-            // 
-            // gridView6
-            // 
-            this.gridView6.GridControl = this.gridControlShowVirtualGroup;
-            this.gridView6.Name = "gridView6";
-            this.gridView6.OptionsBehavior.Editable = false;
-            this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView6.OptionsView.ShowGroupPanel = false;
-            // 
             // gcSearchManagement
             // 
             this.gcSearchManagement.Controls.Add(this.splitContainerControl10);
-            this.gcSearchManagement.Location = new System.Drawing.Point(345, 19);
+            this.gcSearchManagement.Location = new System.Drawing.Point(166, 35);
             this.gcSearchManagement.Name = "gcSearchManagement";
-            this.gcSearchManagement.Size = new System.Drawing.Size(283, 220);
+            this.gcSearchManagement.Size = new System.Drawing.Size(845, 274);
             this.gcSearchManagement.TabIndex = 37;
             this.gcSearchManagement.Text = "查询管理";
             // 
@@ -1909,7 +1724,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl10.Panel2.Controls.Add(this.teStartTime);
             this.splitContainerControl10.Panel2.Controls.Add(this.teEndTime);
             this.splitContainerControl10.Panel2.Text = "Panel2";
-            this.splitContainerControl10.Size = new System.Drawing.Size(279, 195);
+            this.splitContainerControl10.Size = new System.Drawing.Size(841, 249);
             this.splitContainerControl10.SplitterPosition = 149;
             this.splitContainerControl10.TabIndex = 0;
             this.splitContainerControl10.Text = "splitContainerControl10";
@@ -1921,7 +1736,7 @@ namespace CameraViewer.Forms
             this.gridControlSearch.MainView = this.gridView7;
             this.gridControlSearch.MenuManager = this.barManager1;
             this.gridControlSearch.Name = "gridControlSearch";
-            this.gridControlSearch.Size = new System.Drawing.Size(279, 149);
+            this.gridControlSearch.Size = new System.Drawing.Size(841, 149);
             this.gridControlSearch.TabIndex = 0;
             this.gridControlSearch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView7});
@@ -2044,66 +1859,119 @@ namespace CameraViewer.Forms
             this.teEndTime.Size = new System.Drawing.Size(138, 21);
             this.teEndTime.TabIndex = 43;
             // 
-            // groupControl_TollGate
+            // gcCodeManagement
             // 
-            this.groupControl_TollGate.Controls.Add(this.splitContainerControl12);
-            this.groupControl_TollGate.Location = new System.Drawing.Point(623, 7);
-            this.groupControl_TollGate.Name = "groupControl_TollGate";
-            this.groupControl_TollGate.Size = new System.Drawing.Size(253, 134);
-            this.groupControl_TollGate.TabIndex = 9;
-            this.groupControl_TollGate.Text = "卡口管理";
+            this.gcCodeManagement.Controls.Add(this.panelControl3);
+            this.gcCodeManagement.Location = new System.Drawing.Point(591, 114);
+            this.gcCodeManagement.Name = "gcCodeManagement";
+            this.gcCodeManagement.Size = new System.Drawing.Size(234, 125);
+            this.gcCodeManagement.TabIndex = 38;
+            this.gcCodeManagement.Text = "密码管理";
             // 
-            // splitContainerControl12
+            // panelControl3
             // 
-            this.splitContainerControl12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl12.Horizontal = false;
-            this.splitContainerControl12.Location = new System.Drawing.Point(2, 23);
-            this.splitContainerControl12.Name = "splitContainerControl12";
-            this.splitContainerControl12.Panel1.Controls.Add(this.gridControl_TollGateManagement);
-            this.splitContainerControl12.Panel1.Text = "Panel1";
-            this.splitContainerControl12.Panel2.Controls.Add(this.TollGate_Delete);
-            this.splitContainerControl12.Panel2.Text = "Panel2";
-            this.splitContainerControl12.Size = new System.Drawing.Size(249, 109);
-            this.splitContainerControl12.SplitterPosition = 181;
-            this.splitContainerControl12.TabIndex = 0;
-            this.splitContainerControl12.Text = "splitContainerControl12";
+            this.panelControl3.Controls.Add(this.textEditNowCodeFirm);
+            this.panelControl3.Controls.Add(this.textEditNowCode);
+            this.panelControl3.Controls.Add(this.textEditFormerCode);
+            this.panelControl3.Controls.Add(this.textEditName);
+            this.panelControl3.Controls.Add(this.labelControl15);
+            this.panelControl3.Controls.Add(this.labelControl14);
+            this.panelControl3.Controls.Add(this.labelControl13);
+            this.panelControl3.Controls.Add(this.labelControl10);
+            this.panelControl3.Controls.Add(this.simpleButtonCancel);
+            this.panelControl3.Controls.Add(this.simpleButtonOK);
+            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl3.Location = new System.Drawing.Point(2, 23);
+            this.panelControl3.Name = "panelControl3";
+            this.panelControl3.Size = new System.Drawing.Size(230, 100);
+            this.panelControl3.TabIndex = 0;
+            this.panelControl3.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl3_Paint);
             // 
-            // gridControl_TollGateManagement
+            // textEditNowCodeFirm
             // 
-            this.gridControl_TollGateManagement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl_TollGateManagement.Location = new System.Drawing.Point(0, 0);
-            this.gridControl_TollGateManagement.MainView = this.gridView_TollGate;
-            this.gridControl_TollGateManagement.MenuManager = this.barManager1;
-            this.gridControl_TollGateManagement.Name = "gridControl_TollGateManagement";
-            this.gridControl_TollGateManagement.Size = new System.Drawing.Size(249, 104);
-            this.gridControl_TollGateManagement.TabIndex = 0;
-            this.gridControl_TollGateManagement.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView_TollGate});
+            this.textEditNowCodeFirm.Location = new System.Drawing.Point(148, 107);
+            this.textEditNowCodeFirm.Name = "textEditNowCodeFirm";
+            this.textEditNowCodeFirm.Size = new System.Drawing.Size(129, 21);
+            this.textEditNowCodeFirm.TabIndex = 4;
             // 
-            // gridView_TollGate
+            // textEditNowCode
             // 
-            this.gridView_TollGate.GridControl = this.gridControl_TollGateManagement;
-            this.gridView_TollGate.Name = "gridView_TollGate";
-            this.gridView_TollGate.OptionsBehavior.Editable = false;
-            this.gridView_TollGate.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView_TollGate.OptionsView.ShowGroupPanel = false;
+            this.textEditNowCode.Location = new System.Drawing.Point(148, 73);
+            this.textEditNowCode.Name = "textEditNowCode";
+            this.textEditNowCode.Size = new System.Drawing.Size(129, 21);
+            this.textEditNowCode.TabIndex = 4;
             // 
-            // TollGate_Delete
+            // textEditFormerCode
             // 
-            this.TollGate_Delete.Location = new System.Drawing.Point(285, 18);
-            this.TollGate_Delete.Name = "TollGate_Delete";
-            this.TollGate_Delete.Size = new System.Drawing.Size(75, 29);
-            this.TollGate_Delete.TabIndex = 0;
-            this.TollGate_Delete.Text = "删除";
-            this.TollGate_Delete.UseVisualStyleBackColor = true;
-            this.TollGate_Delete.Click += new System.EventHandler(this.TollGate_Delete_Click);
+            this.textEditFormerCode.Location = new System.Drawing.Point(148, 46);
+            this.textEditFormerCode.Name = "textEditFormerCode";
+            this.textEditFormerCode.Size = new System.Drawing.Size(129, 21);
+            this.textEditFormerCode.TabIndex = 4;
+            // 
+            // textEditName
+            // 
+            this.textEditName.Location = new System.Drawing.Point(148, 12);
+            this.textEditName.MenuManager = this.barManager1;
+            this.textEditName.Name = "textEditName";
+            this.textEditName.Size = new System.Drawing.Size(129, 21);
+            this.textEditName.TabIndex = 4;
+            // 
+            // labelControl15
+            // 
+            this.labelControl15.Location = new System.Drawing.Point(69, 113);
+            this.labelControl15.Name = "labelControl15";
+            this.labelControl15.Size = new System.Drawing.Size(60, 14);
+            this.labelControl15.TabIndex = 3;
+            this.labelControl15.Text = "确认密码：";
+            // 
+            // labelControl14
+            // 
+            this.labelControl14.Location = new System.Drawing.Point(69, 79);
+            this.labelControl14.Name = "labelControl14";
+            this.labelControl14.Size = new System.Drawing.Size(48, 14);
+            this.labelControl14.TabIndex = 3;
+            this.labelControl14.Text = "新密码：";
+            // 
+            // labelControl13
+            // 
+            this.labelControl13.Location = new System.Drawing.Point(69, 46);
+            this.labelControl13.Name = "labelControl13";
+            this.labelControl13.Size = new System.Drawing.Size(48, 14);
+            this.labelControl13.TabIndex = 3;
+            this.labelControl13.Text = "原密码：";
+            // 
+            // labelControl10
+            // 
+            this.labelControl10.Location = new System.Drawing.Point(73, 15);
+            this.labelControl10.Name = "labelControl10";
+            this.labelControl10.Size = new System.Drawing.Size(48, 14);
+            this.labelControl10.TabIndex = 3;
+            this.labelControl10.Text = "用户名：";
+            // 
+            // simpleButtonCancel
+            // 
+            this.simpleButtonCancel.Location = new System.Drawing.Point(161, 140);
+            this.simpleButtonCancel.Name = "simpleButtonCancel";
+            this.simpleButtonCancel.Size = new System.Drawing.Size(74, 23);
+            this.simpleButtonCancel.TabIndex = 2;
+            this.simpleButtonCancel.Text = "取消";
+            this.simpleButtonCancel.Click += new System.EventHandler(this.simpleButtonCancel_Click);
+            // 
+            // simpleButtonOK
+            // 
+            this.simpleButtonOK.Location = new System.Drawing.Point(61, 140);
+            this.simpleButtonOK.Name = "simpleButtonOK";
+            this.simpleButtonOK.Size = new System.Drawing.Size(80, 23);
+            this.simpleButtonOK.TabIndex = 2;
+            this.simpleButtonOK.Text = "确定";
+            this.simpleButtonOK.Click += new System.EventHandler(this.simpleButtonOK_Click);
             // 
             // gcTogDeviceManagement
             // 
             this.gcTogDeviceManagement.Controls.Add(this.splitContainerControl11);
             this.gcTogDeviceManagement.Location = new System.Drawing.Point(444, 50);
             this.gcTogDeviceManagement.Name = "gcTogDeviceManagement";
-            this.gcTogDeviceManagement.Size = new System.Drawing.Size(291, 118);
+            this.gcTogDeviceManagement.Size = new System.Drawing.Size(137, 83);
             this.gcTogDeviceManagement.TabIndex = 9;
             this.gcTogDeviceManagement.Text = "摄像头管理";
             // 
@@ -2117,7 +1985,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl11.Panel1.Text = "Panel1";
             this.splitContainerControl11.Panel2.Controls.Add(this.button_Delete);
             this.splitContainerControl11.Panel2.Text = "Panel2";
-            this.splitContainerControl11.Size = new System.Drawing.Size(287, 93);
+            this.splitContainerControl11.Size = new System.Drawing.Size(133, 58);
             this.splitContainerControl11.SplitterPosition = 136;
             this.splitContainerControl11.TabIndex = 0;
             this.splitContainerControl11.Text = "splitContainerControl11";
@@ -2129,7 +1997,7 @@ namespace CameraViewer.Forms
             this.gridControlTogDevice.MainView = this.gridViewToGDevice;
             this.gridControlTogDevice.MenuManager = this.barManager1;
             this.gridControlTogDevice.Name = "gridControlTogDevice";
-            this.gridControlTogDevice.Size = new System.Drawing.Size(287, 88);
+            this.gridControlTogDevice.Size = new System.Drawing.Size(133, 53);
             this.gridControlTogDevice.TabIndex = 0;
             this.gridControlTogDevice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewToGDevice,
@@ -2156,14 +2024,108 @@ namespace CameraViewer.Forms
             this.button_Delete.TabIndex = 0;
             this.button_Delete.Text = "删除";
             this.button_Delete.UseVisualStyleBackColor = true;
+            this.button_Delete.Visible = false;
             this.button_Delete.Click += new System.EventHandler(this.button_Delete_Click);
+            // 
+            // groupControl_TollGate
+            // 
+            this.groupControl_TollGate.Controls.Add(this.splitContainerControl12);
+            this.groupControl_TollGate.Location = new System.Drawing.Point(597, 12);
+            this.groupControl_TollGate.Name = "groupControl_TollGate";
+            this.groupControl_TollGate.Size = new System.Drawing.Size(150, 117);
+            this.groupControl_TollGate.TabIndex = 9;
+            this.groupControl_TollGate.Text = "卡口管理";
+            // 
+            // splitContainerControl12
+            // 
+            this.splitContainerControl12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl12.Horizontal = false;
+            this.splitContainerControl12.Location = new System.Drawing.Point(2, 23);
+            this.splitContainerControl12.Name = "splitContainerControl12";
+            this.splitContainerControl12.Panel1.Controls.Add(this.gridControl_TollGateManagement);
+            this.splitContainerControl12.Panel1.Text = "Panel1";
+            this.splitContainerControl12.Panel2.Controls.Add(this.TollGate_Delete);
+            this.splitContainerControl12.Panel2.Text = "Panel2";
+            this.splitContainerControl12.Size = new System.Drawing.Size(146, 92);
+            this.splitContainerControl12.SplitterPosition = 181;
+            this.splitContainerControl12.TabIndex = 0;
+            this.splitContainerControl12.Text = "splitContainerControl12";
+            // 
+            // gridControl_TollGateManagement
+            // 
+            this.gridControl_TollGateManagement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl_TollGateManagement.Location = new System.Drawing.Point(0, 0);
+            this.gridControl_TollGateManagement.MainView = this.gridView_TollGate;
+            this.gridControl_TollGateManagement.MenuManager = this.barManager1;
+            this.gridControl_TollGateManagement.Name = "gridControl_TollGateManagement";
+            this.gridControl_TollGateManagement.Size = new System.Drawing.Size(146, 87);
+            this.gridControl_TollGateManagement.TabIndex = 0;
+            this.gridControl_TollGateManagement.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView_TollGate});
+            // 
+            // gridView_TollGate
+            // 
+            this.gridView_TollGate.GridControl = this.gridControl_TollGateManagement;
+            this.gridView_TollGate.Name = "gridView_TollGate";
+            this.gridView_TollGate.OptionsBehavior.Editable = false;
+            this.gridView_TollGate.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView_TollGate.OptionsView.ShowGroupPanel = false;
+            // 
+            // TollGate_Delete
+            // 
+            this.TollGate_Delete.Location = new System.Drawing.Point(285, 18);
+            this.TollGate_Delete.Name = "TollGate_Delete";
+            this.TollGate_Delete.Size = new System.Drawing.Size(75, 29);
+            this.TollGate_Delete.TabIndex = 0;
+            this.TollGate_Delete.Text = "删除";
+            this.TollGate_Delete.UseVisualStyleBackColor = true;
+            this.TollGate_Delete.Visible = false;
+            this.TollGate_Delete.Click += new System.EventHandler(this.TollGate_Delete_Click);
+            // 
+            // gcSkin
+            // 
+            this.gcSkin.Controls.Add(this.panelControl5);
+            this.gcSkin.Location = new System.Drawing.Point(94, 94);
+            this.gcSkin.Name = "gcSkin";
+            this.gcSkin.Size = new System.Drawing.Size(137, 145);
+            this.gcSkin.TabIndex = 33;
+            this.gcSkin.Text = "皮肤管理";
+            // 
+            // panelControl5
+            // 
+            this.panelControl5.Controls.Add(this.labelControl7);
+            this.panelControl5.Controls.Add(this.cbeChangeSkin);
+            this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl5.Location = new System.Drawing.Point(2, 23);
+            this.panelControl5.Name = "panelControl5";
+            this.panelControl5.Size = new System.Drawing.Size(133, 120);
+            this.panelControl5.TabIndex = 3;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(207, 116);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(84, 14);
+            this.labelControl7.TabIndex = 3;
+            this.labelControl7.Text = "选择皮肤名称：";
+            // 
+            // cbeChangeSkin
+            // 
+            this.cbeChangeSkin.Location = new System.Drawing.Point(205, 136);
+            this.cbeChangeSkin.Name = "cbeChangeSkin";
+            this.cbeChangeSkin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbeChangeSkin.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbeChangeSkin.Size = new System.Drawing.Size(123, 21);
+            this.cbeChangeSkin.TabIndex = 2;
+            this.cbeChangeSkin.SelectedIndexChanged += new System.EventHandler(this.cbeChangeSkin_SelectedIndexChanged);
             // 
             // DecoderManagement
             // 
             this.DecoderManagement.Controls.Add(this.splitContainerControl7);
-            this.DecoderManagement.Location = new System.Drawing.Point(407, 315);
+            this.DecoderManagement.Location = new System.Drawing.Point(825, 147);
             this.DecoderManagement.Name = "DecoderManagement";
-            this.DecoderManagement.Size = new System.Drawing.Size(249, 155);
+            this.DecoderManagement.Size = new System.Drawing.Size(171, 94);
             this.DecoderManagement.TabIndex = 34;
             this.DecoderManagement.Text = "解码器管理";
             // 
@@ -2176,7 +2138,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.gridControl1);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(245, 130);
+            this.splitContainerControl7.Size = new System.Drawing.Size(167, 69);
             this.splitContainerControl7.SplitterPosition = 225;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
@@ -2196,7 +2158,7 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.OptionsView.ShowHorzLines = false;
             this.treeListShowDecoder.OptionsView.ShowIndicator = false;
             this.treeListShowDecoder.OptionsView.ShowVertLines = false;
-            this.treeListShowDecoder.Size = new System.Drawing.Size(225, 130);
+            this.treeListShowDecoder.Size = new System.Drawing.Size(162, 69);
             this.treeListShowDecoder.TabIndex = 0;
             this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
             this.treeListShowDecoder.Click += new System.EventHandler(this.ShowDecoderAndCameraDataInGridView);
@@ -2225,7 +2187,7 @@ namespace CameraViewer.Forms
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(15, 130);
+            this.gridControl1.Size = new System.Drawing.Size(0, 0);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
@@ -2242,6 +2204,84 @@ namespace CameraViewer.Forms
             // 
             this.gridView2.GridControl = this.gridControl1;
             this.gridView2.Name = "gridView2";
+            // 
+            // gcVritualGroupManegement
+            // 
+            this.gcVritualGroupManegement.Controls.Add(this.splitContainerControl9);
+            this.gcVritualGroupManegement.Location = new System.Drawing.Point(549, 216);
+            this.gcVritualGroupManegement.Name = "gcVritualGroupManegement";
+            this.gcVritualGroupManegement.Size = new System.Drawing.Size(127, 53);
+            this.gcVritualGroupManegement.TabIndex = 36;
+            this.gcVritualGroupManegement.Text = "组管理";
+            this.gcVritualGroupManegement.Paint += new System.Windows.Forms.PaintEventHandler(this.gcVritualGroupManegement_Paint);
+            // 
+            // splitContainerControl9
+            // 
+            this.splitContainerControl9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl9.Location = new System.Drawing.Point(2, 23);
+            this.splitContainerControl9.Name = "splitContainerControl9";
+            this.splitContainerControl9.Panel1.Controls.Add(this.treeListVirtualGroup);
+            this.splitContainerControl9.Panel1.Text = "Panel1";
+            this.splitContainerControl9.Panel2.Controls.Add(this.gridControlShowVirtualGroup);
+            this.splitContainerControl9.Panel2.Text = "Panel2";
+            this.splitContainerControl9.Size = new System.Drawing.Size(123, 28);
+            this.splitContainerControl9.SplitterPosition = 242;
+            this.splitContainerControl9.TabIndex = 0;
+            this.splitContainerControl9.Text = "splitContainerControl9";
+            // 
+            // treeListVirtualGroup
+            // 
+            this.treeListVirtualGroup.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumn9,
+            this.treeListColumn10});
+            this.treeListVirtualGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeListVirtualGroup.Location = new System.Drawing.Point(0, 0);
+            this.treeListVirtualGroup.Name = "treeListVirtualGroup";
+            this.treeListVirtualGroup.OptionsSelection.InvertSelection = true;
+            this.treeListVirtualGroup.OptionsSelection.UseIndicatorForSelection = true;
+            this.treeListVirtualGroup.OptionsView.ShowColumns = false;
+            this.treeListVirtualGroup.OptionsView.ShowHorzLines = false;
+            this.treeListVirtualGroup.OptionsView.ShowIndicator = false;
+            this.treeListVirtualGroup.Size = new System.Drawing.Size(118, 28);
+            this.treeListVirtualGroup.TabIndex = 0;
+            this.treeListVirtualGroup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListVirtualGroup_MouseUp);
+            // 
+            // treeListColumn9
+            // 
+            this.treeListColumn9.Caption = "treeListColumn9";
+            this.treeListColumn9.FieldName = "组管理";
+            this.treeListColumn9.Name = "treeListColumn9";
+            this.treeListColumn9.OptionsColumn.AllowEdit = false;
+            this.treeListColumn9.Visible = true;
+            this.treeListColumn9.VisibleIndex = 0;
+            // 
+            // treeListColumn10
+            // 
+            this.treeListColumn10.Caption = "treeListColumn10";
+            this.treeListColumn10.FieldName = "Tag";
+            this.treeListColumn10.Name = "treeListColumn10";
+            this.treeListColumn10.Visible = true;
+            this.treeListColumn10.VisibleIndex = 1;
+            // 
+            // gridControlShowVirtualGroup
+            // 
+            this.gridControlShowVirtualGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlShowVirtualGroup.Location = new System.Drawing.Point(0, 0);
+            this.gridControlShowVirtualGroup.MainView = this.gridView6;
+            this.gridControlShowVirtualGroup.MenuManager = this.barManager1;
+            this.gridControlShowVirtualGroup.Name = "gridControlShowVirtualGroup";
+            this.gridControlShowVirtualGroup.Size = new System.Drawing.Size(0, 0);
+            this.gridControlShowVirtualGroup.TabIndex = 0;
+            this.gridControlShowVirtualGroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView6});
+            // 
+            // gridView6
+            // 
+            this.gridView6.GridControl = this.gridControlShowVirtualGroup;
+            this.gridView6.Name = "gridView6";
+            this.gridView6.OptionsBehavior.Editable = false;
+            this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView6.OptionsView.ShowGroupPanel = false;
             // 
             // RecognizerManagement
             // 
@@ -2318,44 +2358,6 @@ namespace CameraViewer.Forms
             this.gridView5.Name = "gridView5";
             this.gridView5.OptionsBehavior.Editable = false;
             this.gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
-            // 
-            // gcSkin
-            // 
-            this.gcSkin.Controls.Add(this.panelControl5);
-            this.gcSkin.Location = new System.Drawing.Point(178, 105);
-            this.gcSkin.Name = "gcSkin";
-            this.gcSkin.Size = new System.Drawing.Size(153, 127);
-            this.gcSkin.TabIndex = 33;
-            this.gcSkin.Text = "皮肤管理";
-            // 
-            // panelControl5
-            // 
-            this.panelControl5.Controls.Add(this.labelControl7);
-            this.panelControl5.Controls.Add(this.cbeChangeSkin);
-            this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl5.Location = new System.Drawing.Point(2, 23);
-            this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(149, 102);
-            this.panelControl5.TabIndex = 3;
-            // 
-            // labelControl7
-            // 
-            this.labelControl7.Location = new System.Drawing.Point(207, 116);
-            this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(84, 14);
-            this.labelControl7.TabIndex = 3;
-            this.labelControl7.Text = "选择皮肤名称：";
-            // 
-            // cbeChangeSkin
-            // 
-            this.cbeChangeSkin.Location = new System.Drawing.Point(205, 136);
-            this.cbeChangeSkin.Name = "cbeChangeSkin";
-            this.cbeChangeSkin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbeChangeSkin.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeChangeSkin.Size = new System.Drawing.Size(123, 21);
-            this.cbeChangeSkin.TabIndex = 2;
-            this.cbeChangeSkin.SelectedIndexChanged += new System.EventHandler(this.cbeChangeSkin_SelectedIndexChanged);
             // 
             // gcDisplayChannelManagement
             // 
@@ -3001,18 +3003,6 @@ namespace CameraViewer.Forms
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gcCodeManagement)).EndInit();
-            this.gcCodeManagement.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
-            this.panelControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcVritualGroupManegement)).EndInit();
-            this.gcVritualGroupManegement.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).EndInit();
-            this.splitContainerControl9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.treeListVirtualGroup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlShowVirtualGroup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSearchManagement)).EndInit();
             this.gcSearchManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl10)).EndInit();
@@ -3022,12 +3012,15 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl_TollGate)).EndInit();
-            this.groupControl_TollGate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl12)).EndInit();
-            this.splitContainerControl12.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl_TollGateManagement)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView_TollGate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcCodeManagement)).EndInit();
+            this.gcCodeManagement.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
+            this.panelControl3.ResumeLayout(false);
+            this.panelControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditNowCodeFirm.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditNowCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditFormerCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTogDeviceManagement)).EndInit();
             this.gcTogDeviceManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl11)).EndInit();
@@ -3035,6 +3028,18 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridControlTogDevice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewToGDevice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl_TollGate)).EndInit();
+            this.groupControl_TollGate.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl12)).EndInit();
+            this.splitContainerControl12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl_TollGateManagement)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_TollGate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcSkin)).EndInit();
+            this.gcSkin.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
+            this.panelControl5.ResumeLayout(false);
+            this.panelControl5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbeChangeSkin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecoderManagement)).EndInit();
             this.DecoderManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).EndInit();
@@ -3043,6 +3048,13 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcVritualGroupManegement)).EndInit();
+            this.gcVritualGroupManegement.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).EndInit();
+            this.splitContainerControl9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.treeListVirtualGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlShowVirtualGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecognizerManagement)).EndInit();
             this.RecognizerManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl8)).EndInit();
@@ -3050,12 +3062,6 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.treeListShowRecognizer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlShowRecognizer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcSkin)).EndInit();
-            this.gcSkin.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
-            this.panelControl5.ResumeLayout(false);
-            this.panelControl5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeChangeSkin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDisplayChannelManagement)).EndInit();
             this.gcDisplayChannelManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDisplayChannel)).EndInit();
@@ -3353,18 +3359,18 @@ namespace CameraViewer.Forms
         private DevExpress.XtraBars.BarButtonItem barButtonItem10editgroup;
         private DevExpress.XtraEditors.GroupControl gcCodeManagement;
         private DevExpress.XtraEditors.PanelControl panelControl3;
-        private System.Windows.Forms.TextBox textBoxNowCodeFirm;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBoxNowCode;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxFormerCode;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
         private DevExpress.XtraEditors.SimpleButton simpleButtonOK;
         private System.Windows.Forms.Button button_Delete;
         private System.Windows.Forms.Button TollGate_Delete;
         private DevExpress.XtraBars.BarButtonItem barButtonItem10;
+        private DevExpress.XtraEditors.LabelControl labelControl15;
+        private DevExpress.XtraEditors.LabelControl labelControl14;
+        private DevExpress.XtraEditors.LabelControl labelControl13;
+        private DevExpress.XtraEditors.LabelControl labelControl10;
+        private DevExpress.XtraEditors.TextEdit textEditNowCodeFirm;
+        private DevExpress.XtraEditors.TextEdit textEditNowCode;
+        private DevExpress.XtraEditors.TextEdit textEditFormerCode;
+        private DevExpress.XtraEditors.TextEdit textEditName;
     }
 }
