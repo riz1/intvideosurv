@@ -30,11 +30,9 @@ namespace CameraViewer.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetting));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
             this.nbDevice = new DevExpress.XtraNavBar.NavBarItem();
@@ -51,6 +49,7 @@ namespace CameraViewer.Forms
             this.nbTollGate = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem6 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem7 = new DevExpress.XtraNavBar.NavBarItem();
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.gcDeviceManagement = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeListDevice = new DevExpress.XtraTreeList.TreeList();
@@ -287,6 +286,7 @@ namespace CameraViewer.Forms
             this.popupMenuAddCameraInVirtualGroup = new DevExpress.XtraBars.PopupMenu(this.components);
             this.popupMenuDeleteCameraInVritualGroup = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeviceManagement)).BeginInit();
             this.gcDeviceManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -473,36 +473,6 @@ namespace CameraViewer.Forms
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Main menu";
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Magenta;
-            this.imageList1.Images.SetKeyName(0, "");
-            this.imageList1.Images.SetKeyName(1, "");
-            this.imageList1.Images.SetKeyName(2, "");
-            this.imageList1.Images.SetKeyName(3, "");
-            this.imageList1.Images.SetKeyName(4, "");
-            this.imageList1.Images.SetKeyName(5, "");
-            this.imageList1.Images.SetKeyName(6, "");
-            this.imageList1.Images.SetKeyName(7, "");
-            this.imageList1.Images.SetKeyName(8, "");
-            this.imageList1.Images.SetKeyName(9, "videocamera.ico");
-            // 
-            // imageList2
-            // 
-            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
-            this.imageList2.TransparentColor = System.Drawing.Color.Magenta;
-            this.imageList2.Images.SetKeyName(0, "");
-            this.imageList2.Images.SetKeyName(1, "");
-            this.imageList2.Images.SetKeyName(2, "");
-            this.imageList2.Images.SetKeyName(3, "");
-            this.imageList2.Images.SetKeyName(4, "");
-            this.imageList2.Images.SetKeyName(5, "");
-            this.imageList2.Images.SetKeyName(6, "");
-            this.imageList2.Images.SetKeyName(7, "");
-            this.imageList2.Images.SetKeyName(8, "");
-            this.imageList2.Images.SetKeyName(9, "videocamera.ico");
-            // 
             // navBarControl1
             // 
             this.navBarControl1.ActiveGroup = this.navBarGroup1;
@@ -525,12 +495,11 @@ namespace CameraViewer.Forms
             this.nbCode,
             this.nbTogDevice,
             this.nbTollGate});
-            this.navBarControl1.LargeImages = this.imageList1;
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 140;
-            this.navBarControl1.Size = new System.Drawing.Size(128, 424);
-            this.navBarControl1.SmallImages = this.imageList2;
+            this.navBarControl1.Size = new System.Drawing.Size(128, 520);
+            this.navBarControl1.SmallImages = this.imageCollection1;
             this.navBarControl1.StoreDefaultPaintStyleName = true;
             this.navBarControl1.TabIndex = 30;
             this.navBarControl1.Text = "navBarControl1";
@@ -558,110 +527,114 @@ namespace CameraViewer.Forms
             // nbDevice
             // 
             this.nbDevice.Caption = "设备管理";
-            this.nbDevice.LargeImageIndex = 9;
             this.nbDevice.Name = "nbDevice";
-            this.nbDevice.SmallImageIndex = 0;
+            this.nbDevice.SmallImageIndex = 2;
             this.nbDevice.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbDevice_LinkClicked);
             // 
             // nbUser
             // 
             this.nbUser.Caption = "用户管理";
-            this.nbUser.LargeImageIndex = 1;
             this.nbUser.Name = "nbUser";
-            this.nbUser.SmallImageIndex = 1;
+            this.nbUser.SmallImageIndex = 7;
             this.nbUser.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbUser_LinkClicked);
             // 
             // nbLog
             // 
             this.nbLog.Caption = "日志管理";
-            this.nbLog.LargeImageIndex = 2;
             this.nbLog.Name = "nbLog";
-            this.nbLog.SmallImageIndex = 2;
+            this.nbLog.SmallImageIndex = 3;
             this.nbLog.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbLog_LinkClicked);
             // 
             // nbMap
             // 
             this.nbMap.Caption = "地图管理";
-            this.nbMap.LargeImageIndex = 6;
             this.nbMap.Name = "nbMap";
-            this.nbMap.SmallImageIndex = 6;
+            this.nbMap.SmallImageIndex = 4;
             this.nbMap.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbMap_LinkClicked);
             // 
             // navBarItem1
             // 
             this.navBarItem1.Caption = "皮肤管理";
-            this.navBarItem1.LargeImageIndex = 7;
             this.navBarItem1.Name = "navBarItem1";
-            this.navBarItem1.SmallImageIndex = 7;
+            this.navBarItem1.SmallImageIndex = 6;
             this.navBarItem1.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem1_LinkClicked);
             // 
             // navBarItem2
             // 
             this.navBarItem2.Caption = "解码器管理";
-            this.navBarItem2.LargeImageIndex = 7;
             this.navBarItem2.Name = "navBarItem2";
-            this.navBarItem2.SmallImageIndex = 7;
+            this.navBarItem2.SmallImageIndex = 0;
             this.navBarItem2.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbdecoder_click);
             // 
             // navBarItem3
             // 
             this.navBarItem3.Caption = "识别器管理";
-            this.navBarItem3.LargeImageIndex = 4;
             this.navBarItem3.Name = "navBarItem3";
-            this.navBarItem3.SmallImageIndex = 4;
+            this.navBarItem3.SmallImageIndex = 11;
             this.navBarItem3.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbRecognizer_link);
             // 
             // nbVirtualGroup
             // 
             this.nbVirtualGroup.Caption = "组管理";
-            this.nbVirtualGroup.LargeImageIndex = 6;
             this.nbVirtualGroup.Name = "nbVirtualGroup";
-            this.nbVirtualGroup.SmallImageIndex = 6;
+            this.nbVirtualGroup.SmallImageIndex = 8;
             this.nbVirtualGroup.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbVirtualGroup_LinkClicked);
             // 
             // nbSearch
             // 
             this.nbSearch.Caption = "查询管理";
-            this.nbSearch.LargeImageIndex = 4;
             this.nbSearch.Name = "nbSearch";
-            this.nbSearch.SmallImageIndex = 4;
+            this.nbSearch.SmallImageIndex = 10;
             this.nbSearch.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbSearch_LinkClicked);
             // 
             // nbCode
             // 
             this.nbCode.Caption = "密码管理";
-            this.nbCode.LargeImageIndex = 7;
             this.nbCode.Name = "nbCode";
-            this.nbCode.SmallImageIndex = 7;
+            this.nbCode.SmallImageIndex = 9;
             this.nbCode.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbCode_LinkClicked);
             // 
             // nbTogDevice
             // 
             this.nbTogDevice.Caption = "摄像头管理";
             this.nbTogDevice.Name = "nbTogDevice";
-            this.nbTogDevice.SmallImageIndex = 9;
+            this.nbTogDevice.SmallImageIndex = 1;
             this.nbTogDevice.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbTogDevice_LinkClicked);
             // 
             // nbTollGate
             // 
             this.nbTollGate.Caption = "卡口管理";
             this.nbTollGate.Name = "nbTollGate";
-            this.nbTollGate.SmallImageIndex = 4;
+            this.nbTollGate.SmallImageIndex = 12;
             this.nbTollGate.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbTollGate_LinkClicked);
             // 
             // navBarItem6
             // 
             this.navBarItem6.Caption = "Calendar";
-            this.navBarItem6.LargeImageIndex = 7;
             this.navBarItem6.Name = "navBarItem6";
-            this.navBarItem6.SmallImageIndex = 7;
             // 
             // navBarItem7
             // 
             this.navBarItem7.Caption = "Task";
-            this.navBarItem7.LargeImageIndex = 8;
             this.navBarItem7.Name = "navBarItem7";
-            this.navBarItem7.SmallImageIndex = 8;
+            // 
+            // imageCollection1
+            // 
+            this.imageCollection1.ImageSize = new System.Drawing.Size(24, 24);
+            this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
+            this.imageCollection1.Images.SetKeyName(0, "card.png");
+            this.imageCollection1.Images.SetKeyName(1, "CCTV.png");
+            this.imageCollection1.Images.SetKeyName(2, "device.png");
+            this.imageCollection1.Images.SetKeyName(3, "log.png");
+            this.imageCollection1.Images.SetKeyName(4, "Maps.png");
+            this.imageCollection1.Images.SetKeyName(5, "MSN.png");
+            this.imageCollection1.Images.SetKeyName(6, "theme.png");
+            this.imageCollection1.Images.SetKeyName(7, "user.png");
+            this.imageCollection1.Images.SetKeyName(8, "usergroup.png");
+            this.imageCollection1.Images.SetKeyName(9, "user-password.png");
+            this.imageCollection1.Images.SetKeyName(10, "zoom.png");
+            this.imageCollection1.Images.SetKeyName(11, "recognizer.png");
+            this.imageCollection1.Images.SetKeyName(12, "1309917976_compass.png");
             // 
             // gcDeviceManagement
             // 
@@ -791,7 +764,7 @@ namespace CameraViewer.Forms
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 424);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 520);
             this.barDockControlBottom.Size = new System.Drawing.Size(1156, 0);
             // 
             // barDockControlLeft
@@ -799,14 +772,14 @@ namespace CameraViewer.Forms
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 424);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 520);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1156, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 424);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 520);
             // 
             // barButtonItem1AddDecoder
             // 
@@ -1692,7 +1665,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Panel2.Controls.Add(this.gcProgSwitchManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcGroupSwitchManagement);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(1156, 424);
+            this.splitContainerControl2.Size = new System.Drawing.Size(1156, 520);
             this.splitContainerControl2.SplitterPosition = 128;
             this.splitContainerControl2.TabIndex = 32;
             this.splitContainerControl2.Text = "splitContainerControl2";
@@ -2731,9 +2704,9 @@ namespace CameraViewer.Forms
             // 
             // Tick
             // 
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Tick.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Tick.DefaultCellStyle = dataGridViewCellStyle2;
             this.Tick.HeaderText = "时间间隔(秒)";
             this.Tick.Name = "Tick";
             // 
@@ -2933,7 +2906,7 @@ namespace CameraViewer.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 424);
+            this.ClientSize = new System.Drawing.Size(1156, 520);
             this.Controls.Add(this.splitContainerControl2);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -2942,8 +2915,9 @@ namespace CameraViewer.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSetting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "系统配置";
+            this.Text = "系统设置";
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeviceManagement)).EndInit();
             this.gcDeviceManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
@@ -3119,8 +3093,6 @@ namespace CameraViewer.Forms
 
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.Bar bar1;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ImageList imageList2;
         private DevExpress.XtraNavBar.NavBarControl navBarControl1;
         private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
         private DevExpress.XtraNavBar.NavBarItem nbDevice;
@@ -3372,5 +3344,6 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.TextEdit textEditNowCode;
         private DevExpress.XtraEditors.TextEdit textEditFormerCode;
         private DevExpress.XtraEditors.TextEdit textEditName;
+        private DevExpress.Utils.ImageCollection imageCollection1;
     }
 }
