@@ -19,6 +19,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraTreeList.Nodes;
 using IntVideoSurv.Business;
 using IntVideoSurv.DataAccess;
 using IntVideoSurv.Entity;
@@ -617,7 +618,6 @@ namespace CameraViewer
             //******************************隆昌************************//
             MakeLongChangInterface();
             _listAllLongChang_Cam = LongChang_CameraBusiness.Instance.GetCamInfoByDeviceUserId(ref _errMessage, CurrentUser.UserId);
-            cameraView1.ListLongChangCamera = _listAllLongChang_Cam;
             barStaticItemCameraNo.Caption = _listAllLongChang_Cam.Count.ToString();
             LoadAllCameraInLongChang();
 
@@ -654,7 +654,7 @@ namespace CameraViewer
 
             dockPanelPtzControl.Visible = false;
             barStaticItemCurrentUser.Caption = CurrentUser.UserName;
-            barSubItemMenuView.Visibility = BarItemVisibility.Never;
+            barSubItemMenuView.Visibility = BarItemVisibility.Always;
             barButtonItemResultView.Visibility = BarItemVisibility.Never;
             barButtonItemAlarmView.Visibility = BarItemVisibility.Never;
             //barSubItemMenuQuery.Visibility = BarItemVisibility.Never;
@@ -875,6 +875,15 @@ namespace CameraViewer
             if (_listAllLongChang_Cam == null)
             {
                 return;
+            }
+
+            //先载入左边列表
+            treeListCamera.Nodes.Clear();
+            foreach (var VARIABLE in _listAllLongChang_Cam)
+            {
+                TreeListNode treeListNode = treeListCamera.AppendNode(new[] {VARIABLE.Value.Name, VARIABLE.Key + ";C"},
+                                                                      -1,0);
+                treeListNode.Tag = VARIABLE.Value;
             }
 
             int iRow = Properties.Settings.Default.Rows;
@@ -3090,9 +3099,9 @@ namespace CameraViewer
         private void timerForReconnect_Tick(object sender, EventArgs e)
         {
             int aliveCamera = 0;
-            for (int row = 0; row < 2; row++)
+            for (int row = 0; row < mainMultiplexer.Rows; row++)
             {
-                for (int col = 0; col < 2; col++)
+                for (int col = 0; col < mainMultiplexer.Cols; col++)
                 {
                     CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(row, col);
                     if (cameraWindow.AirnoixCamera ==null)
@@ -3147,9 +3156,67 @@ namespace CameraViewer
 
         private void barButtonItem13_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            dockPanelNavigator.Visible = !dockPanelNavigator.Visible;
+            dockPanelCamera.Visible = !dockPanelCamera.Visible;
         }
 
+        private void treeListCamera_DoubleClick(object sender, EventArgs e)
+        {
+            CameraWindow cameraWindow = mainMultiplexer.GetCurrentCameraWindow();
+            //未选中CameraWindow，退出
+            if (cameraWindow==null)
+            {
+                return;
+            }
 
+
+            AirnoixCamera airnoixCameraNew;
+            LongChang_CameraInfo selectedCamera = (LongChang_CameraInfo) treeListCamera.FocusedNode.Tag;
+
+            for (int i = 0; i < mainMultiplexer.Rows; i++)
+            {
+                bool isfound = false;
+                for (int j = 0; j < mainMultiplexer.Cols; j++)
+                {
+                    if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera!=null)
+                    {
+                        if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera.Id == selectedCamera.CameraId)
+                        {
+                            mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera.Stop();
+                            mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera = null;
+                            mainMultiplexer.GetCameraWindow(i, j).Refresh();
+                            isfound = true;
+                            break;                            
+                        }
+
+                    }
+                }
+                if (isfound)
+                {
+                    break;
+                }
+            }
+            
+            //如果原来已有摄像头，则停止
+            if (cameraWindow.AirnoixCamera!=null)
+            {
+                cameraWindow.AirnoixCamera.Stop();
+                cameraWindow.AirnoixCamera = null;
+                cameraWindow.Refresh();
+            }
+            //开始连接摄像头
+            airnoixCameraNew = new AirnoixCamera(cameraWindow.Handle);
+            airnoixCameraNew.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
+            airnoixCameraNew.Ip = selectedCamera.IP;
+            airnoixCameraNew.Port = selectedCamera.Port;
+            airnoixCameraNew.UserName = selectedCamera.UserName;
+            airnoixCameraNew.Password = selectedCamera.PassWord;
+            airnoixCameraNew.Id = selectedCamera.CameraId;
+            airnoixCameraNew.SaveTo = "c:\\";
+            airnoixCameraNew.Type = selectedCamera.Type;
+            cameraWindow.AirnoixCamera = airnoixCameraNew;
+            cameraWindow.Refresh();
+            airnoixCameraNew.Start();
+
+        }
     }
 }
