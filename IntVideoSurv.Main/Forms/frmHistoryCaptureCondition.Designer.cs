@@ -102,6 +102,7 @@
             // 
             // sbOK
             // 
+            this.sbOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.sbOK.Location = new System.Drawing.Point(41, 128);
             this.sbOK.Name = "sbOK";
             this.sbOK.Size = new System.Drawing.Size(75, 23);

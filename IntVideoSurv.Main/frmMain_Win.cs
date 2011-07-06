@@ -360,7 +360,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD1.Appearance.ForeColor = Color.Black;
-                        barButtonD1.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD1.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D2:
@@ -372,7 +372,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD2.Appearance.ForeColor = Color.Black;
-                        barButtonD2.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD2.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D3:
@@ -384,7 +384,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD3.Appearance.ForeColor = Color.Black;
-                        barButtonD3.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD3.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D4:
@@ -396,7 +396,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD4.Appearance.ForeColor = Color.Black;
-                        barButtonD4.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD4.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D5:
@@ -408,7 +408,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD5.Appearance.ForeColor = Color.Black;
-                        barButtonD5.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD5.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D6:
@@ -420,7 +420,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD6.Appearance.ForeColor = Color.Black;
-                        barButtonD6.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD6.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D7:
@@ -432,7 +432,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD7.Appearance.ForeColor = Color.Black;
-                        barButtonD7.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD7.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D8:
@@ -444,7 +444,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD8.Appearance.ForeColor = Color.Black;
-                        barButtonD8.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD8.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
                 case Keys.D9:
@@ -456,7 +456,7 @@ namespace CameraViewer
                     else
                     {
                         barButtonD9.Appearance.ForeColor = Color.Black;
-                        barButtonD9.Appearance.Font = new Font("Tahoma", 9);
+                        barButtonD9.Appearance.Font = new Font("Tahoma", 11);
                     }
                     break;
             }
@@ -486,19 +486,27 @@ namespace CameraViewer
 
                 }
 
-                SystemLogBusiness.Instance.Insert(ref _errMessage, new SystemLog
-                {
-                    HappenTime = DateTime.Now,
-                    SystemTypeId = 3,
-                    SystemTypeName = "用户退出成功",
-                    Content = "用户退出成功",
-                    SyeUserName = CurrentUser.UserName,
-                    ClientUserId = CurrentUser.UserId,
-                    ClientUserName = CurrentUser.UserName
 
-                });
+                Properties.Settings.Default.Rows = mainMultiplexer.Rows;
+                Properties.Settings.Default.Cols = mainMultiplexer.Cols;
+                Properties.Settings.Default.Save();
+                SystemLogBusiness.Instance.Insert(ref _errMessage, new SystemLog
+                 {
+                     HappenTime = DateTime.Now,
+                     SystemTypeId = 3,
+                     SystemTypeName = "用户退出成功",
+                     Content = "用户退出成功",
+                     SyeUserName = CurrentUser.UserName,
+                     ClientUserId = CurrentUser.UserId,
+                     ClientUserName = CurrentUser.UserName
+
+                 }); 
                 CloseAll();
-                _outputTv.Close();
+                if (_outputTv!=null)
+                {
+                   _outputTv.Close(); 
+                }
+
                 ChannelServices.UnregisterChannel(chan1);
                 HikStreamMediaServerSDK.FiniStreamServerLib();
             }
@@ -652,7 +660,7 @@ namespace CameraViewer
             barButtonItem10.Visibility = BarItemVisibility.Never;
             barButtonItem11.Visibility = BarItemVisibility.Never;
             barButtonItem12.Visibility = BarItemVisibility.Never;
-            barButtonItem13.Visibility = BarItemVisibility.Never;
+            //barButtonItemQueryData.Visibility = BarItemVisibility.Never;
             barButtonItem14.Visibility = BarItemVisibility.Never;
             barButtonItem15.Visibility = BarItemVisibility.Never;
             barButtonItem16.Visibility = BarItemVisibility.Never;
@@ -866,15 +874,15 @@ namespace CameraViewer
                 return;
             }
 
-            int iRow = 3;
-            int iCol = 3;
+            int iRow = Properties.Settings.Default.Rows;
+            int iCol = Properties.Settings.Default.Cols;
             int iCount = 0;
             mainMultiplexer.CloseAll();
             mainMultiplexer.CamerasVisible = true;
             mainMultiplexer.CellWidth = 320;
             mainMultiplexer.CellHeight = 240;
             mainMultiplexer.FitToWindow = true;
-            mainMultiplexer.SetRowCol(3,3);
+            mainMultiplexer.SetRowCol(iRow, iCol);
  
             iCount = 0;
 
@@ -899,6 +907,13 @@ namespace CameraViewer
 
                 //
                 iCount = iCount + 1;
+                if (iCount > iRow*iCol)
+                {
+                    if (XtraMessageBox.Show(this, "当前分屏不能容纳所有摄像头，请修改分屏再登录!", "登录", MessageBoxButtons.OK, MessageBoxIcon.Information)==System.Windows.Forms.DialogResult.OK)
+                    {
+                        break;
+                    }
+                }
             }
             mainMultiplexer.Rows = iRow;
             mainMultiplexer.Cols = iCol;
@@ -1453,8 +1468,8 @@ namespace CameraViewer
 
         private void barButtonItem13_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            long date = DateTime.Now.Ticks;
-            DateTime theDate = new DateTime(date);
+            SearchForm frmsearch = new SearchForm();
+            frmsearch.ShowDialog(this);
 
         }
 
@@ -3064,11 +3079,15 @@ namespace CameraViewer
             UseWaitCursor = true;
             frmHistoryCaptureCondition frmhcc= new frmHistoryCaptureCondition();
             UseWaitCursor = false;
-            frmhcc.ShowDialog();
-            UseWaitCursor = true;
-            frmCaptureHistroyLicense fchl = new frmCaptureHistroyLicense(frmhcc);
-            UseWaitCursor = false;
-            fchl.Show();
+            if (frmhcc.ShowDialog()==DialogResult.OK)
+            {
+                UseWaitCursor = true;
+                frmCaptureHistroyLicense fchl = new frmCaptureHistroyLicense(frmhcc);
+                UseWaitCursor = false;
+                fchl.Show();                
+            }
+
+
 
         }
 
