@@ -177,6 +177,7 @@ namespace CameraViewer.Controls
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageCameraList,
             this.xtraTabPageDecoderList});
+            this.xtraTabControl2.Visible = false;
             this.xtraTabControl2.SelectedPageChanging += new DevExpress.XtraTab.TabPageChangingEventHandler(this.xtraTabControl2_SelectedPageChanging);
             // 
             // xtraTabPageCameraList

@@ -617,6 +617,7 @@ namespace CameraViewer
             //******************************隆昌************************//
             MakeLongChangInterface();
             _listAllLongChang_Cam = LongChang_CameraBusiness.Instance.GetCamInfoByDeviceUserId(ref _errMessage, CurrentUser.UserId);
+            cameraView1.ListLongChangCamera = _listAllLongChang_Cam;
             barStaticItemCameraNo.Caption = _listAllLongChang_Cam.Count.ToString();
             LoadAllCameraInLongChang();
 
@@ -636,9 +637,9 @@ namespace CameraViewer
 
         private void MakeLongChangInterface()
         {
-            dockPanel1.Visible = dockPanelResult.Visible = dockPanelAlarm.Visible = false;
-            int iRow = 3, iCol = 3;
-            Util.GetRowCol(9, ref iRow, ref iCol);
+            dockPanelNavigator.Visible = false;
+            dockPanelResult.Visible = dockPanelAlarm.Visible = false;
+            int iRow = Properties.Settings.Default.Rows, iCol = Properties.Settings.Default.Cols; ;
             mainMultiplexer.SetRowCol(iRow, iCol);
             mainMultiplexer.Refresh();
             _listNumKeyStatus.Add(Keys.D1, false);
@@ -654,6 +655,8 @@ namespace CameraViewer
             dockPanelPtzControl.Visible = false;
             barStaticItemCurrentUser.Caption = CurrentUser.UserName;
             barSubItemMenuView.Visibility = BarItemVisibility.Never;
+            barButtonItemResultView.Visibility = BarItemVisibility.Never;
+            barButtonItemAlarmView.Visibility = BarItemVisibility.Never;
             //barSubItemMenuQuery.Visibility = BarItemVisibility.Never;
             barButtonItem8.Visibility = BarItemVisibility.Never;
             barButtonItem9.Visibility = BarItemVisibility.Never;
@@ -907,13 +910,6 @@ namespace CameraViewer
 
                 //
                 iCount = iCount + 1;
-                if (iCount > iRow*iCol)
-                {
-                    if (XtraMessageBox.Show(this, "当前分屏不能容纳所有摄像头，请修改分屏再登录!", "登录", MessageBoxButtons.OK, MessageBoxIcon.Information)==System.Windows.Forms.DialogResult.OK)
-                    {
-                        break;
-                    }
-                }
             }
             mainMultiplexer.Rows = iRow;
             mainMultiplexer.Cols = iCol;
@@ -3147,6 +3143,11 @@ namespace CameraViewer
         {
             SearchForm frmsearch = new SearchForm();
             frmsearch.ShowDialog(this);
+        }
+
+        private void barButtonItem13_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            dockPanelNavigator.Visible = !dockPanelNavigator.Visible;
         }
 
 

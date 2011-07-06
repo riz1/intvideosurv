@@ -30,7 +30,7 @@ namespace CameraViewer.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetting));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
@@ -2704,9 +2704,9 @@ namespace CameraViewer.Forms
             // 
             // Tick
             // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Tick.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Tick.DefaultCellStyle = dataGridViewCellStyle1;
             this.Tick.HeaderText = " ±º‰º‰∏Ù(√Î)";
             this.Tick.Name = "Tick";
             // 
