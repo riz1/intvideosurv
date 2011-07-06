@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddVirtualGroup));
             this.textEditVirtualGroup = new DevExpress.XtraEditors.TextEdit();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButtonGroupcancle = new DevExpress.XtraEditors.SimpleButton();
@@ -78,6 +79,7 @@
             this.Controls.Add(this.simpleButtonGroupOK);
             this.Controls.Add(this.textEditVirtualGroup);
             this.Controls.Add(this.labelControl12);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddVirtualGroup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加组";
