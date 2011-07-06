@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddRecognizer));
             this.simpleButtoncancle = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonOk = new DevExpress.XtraEditors.SimpleButton();
             this.textEditmax = new DevExpress.XtraEditors.TextEdit();
@@ -166,6 +167,7 @@
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddRecognizer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "新增识别器";
