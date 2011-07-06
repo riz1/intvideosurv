@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
             this.gridControlSearch = new DevExpress.XtraGrid.GridControl();
             this.gridView7 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnIilegalReason = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -61,6 +63,7 @@
             // gridView7
             // 
             this.gridView7.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnID,
             this.gridColumnName,
             this.gridColumnIilegalReason,
             this.gridColumnTime,
@@ -71,33 +74,40 @@
             this.gridView7.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView7.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumnID
+            // 
+            this.gridColumnID.Caption = "编号";
+            this.gridColumnID.Name = "gridColumnID";
+            this.gridColumnID.Visible = true;
+            this.gridColumnID.VisibleIndex = 0;
+            // 
             // gridColumnName
             // 
             this.gridColumnName.Caption = "用户名";
             this.gridColumnName.Name = "gridColumnName";
             this.gridColumnName.Visible = true;
-            this.gridColumnName.VisibleIndex = 0;
+            this.gridColumnName.VisibleIndex = 1;
             // 
             // gridColumnIilegalReason
             // 
             this.gridColumnIilegalReason.Caption = "抓拍违法行为";
             this.gridColumnIilegalReason.Name = "gridColumnIilegalReason";
             this.gridColumnIilegalReason.Visible = true;
-            this.gridColumnIilegalReason.VisibleIndex = 1;
+            this.gridColumnIilegalReason.VisibleIndex = 2;
             // 
             // gridColumnTime
             // 
             this.gridColumnTime.Caption = "时间";
             this.gridColumnTime.Name = "gridColumnTime";
             this.gridColumnTime.Visible = true;
-            this.gridColumnTime.VisibleIndex = 2;
+            this.gridColumnTime.VisibleIndex = 3;
             // 
             // gridColumnPosition
             // 
             this.gridColumnPosition.Caption = "地点";
             this.gridColumnPosition.Name = "gridColumnPosition";
             this.gridColumnPosition.Visible = true;
-            this.gridColumnPosition.VisibleIndex = 3;
+            this.gridColumnPosition.VisibleIndex = 4;
             // 
             // simpleButtonSearch
             // 
@@ -179,7 +189,9 @@
             this.Controls.Add(this.teStartTime);
             this.Controls.Add(this.teEndTime);
             this.Controls.Add(this.gridControlSearch);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "查询窗口";
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView7)).EndInit();
@@ -206,5 +218,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.TimeEdit teStartTime;
         private DevExpress.XtraEditors.TimeEdit teEndTime;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnID;
     }
 }
