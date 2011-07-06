@@ -25,6 +25,7 @@ namespace CameraViewer.Controls
         }
         Dictionary<int, GroupInfo> _listGroup;
         Dictionary<int, DecoderInfo> _listDecoder;
+        Dictionary<int, LongChang_CameraInfo> _listLongChangCamera;
 
         public delegate void TouchCamera(string tag);
         public event TouchCamera DoubleDevCam;
@@ -60,7 +61,15 @@ namespace CameraViewer.Controls
             }
 
         }
+        public Dictionary<int, LongChang_CameraInfo> ListLongChangCamera
+        {
+            set
+            {
+                _listLongChangCamera = value;
+                BuildLongChangCameraTree();
+            }
 
+        }
 
         private void BuildDecoderTree()
         {
@@ -210,6 +219,27 @@ namespace CameraViewer.Controls
                 }
             }
 
+        }
+        private void BuildLongChangCameraTree()
+        {
+            Cursor currentCursor = Cursor.Current;
+            TreeNode node;
+            try
+            {
+                    tlCamera.Nodes.Clear();
+                    foreach (KeyValuePair<int, LongChang_CameraInfo> item in _listLongChangCamera)
+                    {
+                        TreeListNode treeListNodeCamera = tlCamera.AppendNode(new[] { item.Value.Name, item.Key + ";C" }, -1, 2, 3, 1, CheckState.Checked);
+                        treeListNodeCamera.Tag = item.Key + ";C";
+                    }
+                    tlCamera.ExpandAll();
+                    Cursor.Current = currentCursor;
+                
+            }
+            catch (System.Exception e)
+            {
+
+            }
         }
 
     }

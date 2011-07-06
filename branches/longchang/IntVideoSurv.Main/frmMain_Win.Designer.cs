@@ -40,6 +40,7 @@ namespace CameraViewer
             this.barSubItemMenuView = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItemResultView = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemAlarmView = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItemMenuQuery = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem24 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
@@ -116,7 +117,7 @@ namespace CameraViewer
             this.up = new System.Windows.Forms.Button();
             this.dockPanelResult = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanelNavigator = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -296,7 +297,7 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.cbePreset.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPtzSpeed.Properties)).BeginInit();
             this.dockPanelResult.SuspendLayout();
-            this.dockPanel1.SuspendLayout();
+            this.dockPanelNavigator.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -460,9 +461,10 @@ namespace CameraViewer
             this.barButtonItem5,
             this.barButtonItem22,
             this.barButtonItem23,
-            this.barButtonItem24});
+            this.barButtonItem24,
+            this.barButtonItem13});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 67;
+            this.barManager1.MaxItemId = 68;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.barManager1.StatusBar = this.bar4;
@@ -521,11 +523,14 @@ namespace CameraViewer
             this.barSubItemMenuView.Id = 10;
             this.barSubItemMenuView.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemResultView),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAlarmView)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAlarmView),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem13)});
             this.barSubItemMenuView.Name = "barSubItemMenuView";
             // 
             // barButtonItemResultView
             // 
+            this.barButtonItemResultView.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.barButtonItemResultView.Appearance.Options.UseFont = true;
             this.barButtonItemResultView.Caption = "结果视图";
             this.barButtonItemResultView.Id = 17;
             this.barButtonItemResultView.Name = "barButtonItemResultView";
@@ -533,10 +538,22 @@ namespace CameraViewer
             // 
             // barButtonItemAlarmView
             // 
+            this.barButtonItemAlarmView.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.barButtonItemAlarmView.Appearance.Options.UseFont = true;
             this.barButtonItemAlarmView.Caption = "报警视图";
             this.barButtonItemAlarmView.Id = 18;
             this.barButtonItemAlarmView.Name = "barButtonItemAlarmView";
             this.barButtonItemAlarmView.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemResultView_ItemClick);
+            // 
+            // barButtonItem13
+            // 
+            this.barButtonItem13.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.barButtonItem13.Appearance.Options.UseFont = true;
+            this.barButtonItem13.Caption = "导航视图";
+            this.barButtonItem13.Id = 67;
+            this.barButtonItem13.ImageIndex = 8;
+            this.barButtonItem13.Name = "barButtonItem13";
+            this.barButtonItem13.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem13_ItemClick_1);
             // 
             // barSubItemMenuQuery
             // 
@@ -959,7 +976,7 @@ namespace CameraViewer
             this.dockPanelPtzControl});
             this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockPanelResult,
-            this.dockPanel1,
+            this.dockPanelNavigator,
             this.dockPanelAlarm});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
@@ -1254,20 +1271,20 @@ namespace CameraViewer
             this.dockPanel2_Container.Size = new System.Drawing.Size(185, 633);
             this.dockPanel2_Container.TabIndex = 0;
             // 
-            // dockPanel1
+            // dockPanelNavigator
             // 
-            this.dockPanel1.Controls.Add(this.dockPanel1_Container);
-            this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
-            this.dockPanel1.ID = new System.Guid("e603f316-2b99-4234-84b6-2fcc0438bb24");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 64);
-            this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Options.AllowFloating = false;
-            this.dockPanel1.Options.FloatOnDblClick = false;
-            this.dockPanel1.Options.ShowAutoHideButton = false;
-            this.dockPanel1.Options.ShowCloseButton = false;
-            this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(200, 660);
-            this.dockPanel1.Text = "导航";
+            this.dockPanelNavigator.Controls.Add(this.dockPanel1_Container);
+            this.dockPanelNavigator.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
+            this.dockPanelNavigator.ID = new System.Guid("e603f316-2b99-4234-84b6-2fcc0438bb24");
+            this.dockPanelNavigator.Location = new System.Drawing.Point(0, 64);
+            this.dockPanelNavigator.Name = "dockPanelNavigator";
+            this.dockPanelNavigator.Options.AllowFloating = false;
+            this.dockPanelNavigator.Options.FloatOnDblClick = false;
+            this.dockPanelNavigator.Options.ShowAutoHideButton = false;
+            this.dockPanelNavigator.Options.ShowCloseButton = false;
+            this.dockPanelNavigator.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanelNavigator.Size = new System.Drawing.Size(200, 660);
+            this.dockPanelNavigator.Text = "导航";
             // 
             // dockPanel1_Container
             // 
@@ -2878,6 +2895,7 @@ namespace CameraViewer
             this.imageCollectionForButton.Images.SetKeyName(5, "search.png");
             this.imageCollectionForButton.Images.SetKeyName(6, "system.png");
             this.imageCollectionForButton.Images.SetKeyName(7, "video.png");
+            this.imageCollectionForButton.Images.SetKeyName(8, "Navigator.png");
             // 
             // barButtonItem1
             // 
@@ -3063,7 +3081,7 @@ namespace CameraViewer
             this.ClientSize = new System.Drawing.Size(1251, 752);
             this.Controls.Add(this.mainMultiplexer);
             this.Controls.Add(this.dockPanelAlarm);
-            this.Controls.Add(this.dockPanel1);
+            this.Controls.Add(this.dockPanelNavigator);
             this.Controls.Add(this.dockPanelResult);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -3088,7 +3106,7 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.cbePreset.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPtzSpeed.Properties)).EndInit();
             this.dockPanelResult.ResumeLayout(false);
-            this.dockPanel1.ResumeLayout(false);
+            this.dockPanelNavigator.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
@@ -3206,7 +3224,7 @@ namespace CameraViewer
         private DevExpress.XtraBars.Docking.DockManager dockManager1;
         private DevExpress.XtraBars.Docking.DockPanel dockPanelAlarm;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel3_Container;
-        private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanelNavigator;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
         private DevExpress.XtraBars.Docking.DockPanel dockPanelResult;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel2_Container;
@@ -3443,6 +3461,7 @@ namespace CameraViewer
         private DevExpress.XtraBars.BarButtonItem barButtonItem23;
         private DevExpress.XtraBars.BarButtonItem barButtonItem24;
         private DevExpress.Utils.ImageCollection imageCollectionForButton;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem13;
         
     }
 }
