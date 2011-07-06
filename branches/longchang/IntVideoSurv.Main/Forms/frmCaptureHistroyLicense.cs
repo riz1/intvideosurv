@@ -505,18 +505,22 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             try
             {
                 ////拷贝视频文件
-                //if (videoFile != null && File.Exists(videoFile))
-                //{
-                //    File.Copy(videoFile, vehmon.vedioName);
-                //}
-                //if (videoFile1 != null && File.Exists(videoFile1) && (videoFile != videoFile1))
-                //{
-                //    File.Copy(videoFile1, vehmon.vedioName1);
-                //}
-                //if (videoFile2 != null && File.Exists(videoFile2)&& (videoFile2 != videoFile1)&& (videoFile2 != videoFile))
-                //{
-                //    File.Copy(videoFile2, vehmon.vedioName2);
-                //}
+                if (Properties.Settings.Default.IsSaveVideo)
+                {
+                    if (videoFile != null && File.Exists(videoFile))
+                    {
+                        File.Copy(videoFile, vehmon.vedioName);
+                    }
+                    if (videoFile1 != null && File.Exists(videoFile1) && (videoFile != videoFile1))
+                    {
+                        File.Copy(videoFile1, vehmon.vedioName1);
+                    }
+                    if (videoFile2 != null && File.Exists(videoFile2) && (videoFile2 != videoFile1) &&
+                        (videoFile2 != videoFile))
+                    {
+                        File.Copy(videoFile2, vehmon.vedioName2);
+                    }
+                }
                 //XtraMessageBox.Show("保存成功!");
             }
             catch (Exception)
