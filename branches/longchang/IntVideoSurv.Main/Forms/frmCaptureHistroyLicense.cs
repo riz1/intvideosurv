@@ -186,6 +186,7 @@ namespace CameraViewer.Forms
                     return;
                 }
                 pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
+                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
 
             }
             catch (Exception)
@@ -205,6 +206,7 @@ namespace CameraViewer.Forms
                     return;
                 }
                 pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) as Image;
+                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
             }
             catch (Exception)
             {
@@ -223,6 +225,7 @@ namespace CameraViewer.Forms
                     return;
                 }
                 pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) as Image;
+                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
             }
             catch (Exception)
             {
