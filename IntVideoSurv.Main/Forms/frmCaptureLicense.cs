@@ -92,6 +92,7 @@ namespace CameraViewer.Forms
             trackBar1.Maximum = _totalFrames;
             timerForUpdatingTrack.Start();
 
+
         }
 
         private void PlayReletedFile2()
@@ -268,6 +269,7 @@ namespace CameraViewer.Forms
                     return;
                 }
                 pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
+                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
             }
             catch (Exception)
             {
@@ -286,6 +288,7 @@ namespace CameraViewer.Forms
                     return;
                 }
                 pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) as Image;
+                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
             }
             catch (Exception)
             {
@@ -304,6 +307,7 @@ namespace CameraViewer.Forms
                     return;
                 }
                 pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) as Image;
+                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
             }
             catch (Exception)
             {
@@ -313,15 +317,6 @@ namespace CameraViewer.Forms
 
         }
 
-        private void pictureEditSelectedPicture_DoubleClick(object sender, EventArgs e)
-        {
-            if (pictureEditSelectedPicture.Image!=null)
-            {
-                frmFullsizePicture ffp = new frmFullsizePicture(pictureEditSelectedPicture.Image);
-                ffp.Show();                
-            }
-
-        }
 
         private bool isTimerChanged;
         private bool isfirstvideo=true;
@@ -811,11 +806,21 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                     return;
                 }
                 pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
+                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
             }
             catch (Exception)
             {
 
                 ;
+            }
+        }
+
+        private void pictureEditSelectedPicture_DoubleClick_1(object sender, EventArgs e)
+        {
+            if (pictureEditSelectedPicture.Image != null)
+            {
+                frmFullsizePicture ffp = new frmFullsizePicture(pictureEditSelectedPicture.Image);
+                ffp.Show();
             }
         }
     }

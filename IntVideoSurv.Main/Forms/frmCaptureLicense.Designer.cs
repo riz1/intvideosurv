@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCaptureLicense));
-            this.pictureEditSelectedPicture = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonPrevious = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonCurrent = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonLast = new DevExpress.XtraEditors.SimpleButton();
@@ -114,7 +113,7 @@
             this.listBoxVideoFiles = new DevExpress.XtraEditors.ListBoxControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.cbeFrameInterval = new DevExpress.XtraEditors.ComboBoxEdit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).BeginInit();
+            this.pictureEditSelectedPicture = new IntVideoSurv.Control.ScalablePictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit2)).BeginInit();
@@ -162,15 +161,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureEditSelectedPicture
-            // 
-            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(616, 2);
-            this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
-            this.pictureEditSelectedPicture.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(512, 288);
-            this.pictureEditSelectedPicture.TabIndex = 0;
-            this.pictureEditSelectedPicture.DoubleClick += new System.EventHandler(this.pictureEditSelectedPicture_DoubleClick);
             // 
             // simpleButtonPrevious
             // 
@@ -992,11 +982,21 @@
             this.cbeFrameInterval.Size = new System.Drawing.Size(41, 21);
             this.cbeFrameInterval.TabIndex = 20;
             // 
+            // pictureEditSelectedPicture
+            // 
+            this.pictureEditSelectedPicture.Image = null;
+            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(616, 2);
+            this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
+            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(512, 319);
+            this.pictureEditSelectedPicture.TabIndex = 22;
+            this.pictureEditSelectedPicture.DoubleClick += new System.EventHandler(this.pictureEditSelectedPicture_DoubleClick_1);
+            // 
             // frmCaptureLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 689);
+            this.Controls.Add(this.pictureEditSelectedPicture);
             this.Controls.Add(this.labelControl8);
             this.Controls.Add(this.cbeFrameInterval);
             this.Controls.Add(this.listBoxVideoFiles);
@@ -1016,7 +1016,6 @@
             this.Controls.Add(this.simpleButtonLast);
             this.Controls.Add(this.simpleButtonCurrent);
             this.Controls.Add(this.simpleButtonPrevious);
-            this.Controls.Add(this.pictureEditSelectedPicture);
             this.Controls.Add(this.trackBar1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -1025,7 +1024,6 @@
             this.Text = "证据截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureLicense_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCaptureLicense_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEditSelectedPicture.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit2)).EndInit();
@@ -1083,7 +1081,6 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.PictureEdit pictureEditSelectedPicture;
         private DevExpress.XtraEditors.SimpleButton simpleButtonPrevious;
         private DevExpress.XtraEditors.SimpleButton simpleButtonCurrent;
         private DevExpress.XtraEditors.SimpleButton simpleButtonLast;
@@ -1167,6 +1164,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.ComboBoxEdit cbeFrameInterval;
+        private IntVideoSurv.Control.ScalablePictureBox pictureEditSelectedPicture;
 
     }
 }
