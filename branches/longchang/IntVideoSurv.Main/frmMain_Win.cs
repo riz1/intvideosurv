@@ -3218,5 +3218,13 @@ namespace CameraViewer
             airnoixCameraNew.Start();
 
         }
+
+        private void barSubItemAll_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DataSet ds = new DataSet();
+            ds = LongChang_UserVehMonBusiness.Instance.GetAllQueryInfo(ref _errMessage);
+            frmAllQueryInfo faqi = new frmAllQueryInfo(ds);
+            faqi.ShowDialog(this);
+        }
     }
 }

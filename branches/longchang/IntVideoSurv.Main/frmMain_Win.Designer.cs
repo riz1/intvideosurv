@@ -48,6 +48,7 @@ namespace CameraViewer
             this.barButtonItem22 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem23 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
+            this.barSubItemAll = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barButtonItemSystemSetting = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
@@ -120,7 +121,7 @@ namespace CameraViewer
             this.treeListCamera = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.imageCollectionForButton = new DevExpress.Utils.ImageCollection(this.components);
+            this.imageCollectionForCamera = new DevExpress.Utils.ImageCollection(this.components);
             this.dockPanelResult = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.dockPanelNavigator = new DevExpress.XtraBars.Docking.DockPanel();
@@ -268,6 +269,7 @@ namespace CameraViewer
             this.checkedComboBoxEditFaceCamera = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.radioGroupFace = new DevExpress.XtraEditors.RadioGroup();
+            this.imageCollectionForButton = new DevExpress.Utils.ImageCollection(this.components);
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
@@ -294,7 +296,6 @@ namespace CameraViewer
             this.timerForDeleteTempFiles = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerForReconnect = new System.Windows.Forms.Timer(this.components);
-            this.imageCollectionForCamera = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -305,7 +306,7 @@ namespace CameraViewer
             this.dockPanelCamera.SuspendLayout();
             this.controlContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListCamera)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForCamera)).BeginInit();
             this.dockPanelResult.SuspendLayout();
             this.dockPanelNavigator.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
@@ -392,9 +393,9 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeFace.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditFaceCamera.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroupFace.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             this.cmIcon.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForCamera)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -472,9 +473,10 @@ namespace CameraViewer
             this.barButtonItem22,
             this.barButtonItem23,
             this.barButtonItem24,
-            this.barButtonItem13});
+            this.barButtonItem13,
+            this.barSubItemAll});
             this.barManager1.MainMenu = this.barMenu;
-            this.barManager1.MaxItemId = 68;
+            this.barManager1.MaxItemId = 69;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.barManager1.StatusBar = this.bar4;
@@ -492,7 +494,8 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemMenuView),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemMenuQuery),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemAll)});
             this.barMenu.OptionsBar.DrawDragBorder = false;
             this.barMenu.OptionsBar.MultiLine = true;
             this.barMenu.OptionsBar.UseWholeRow = true;
@@ -628,6 +631,13 @@ namespace CameraViewer
             this.barSubItem1.Caption = "∞Ô÷˙(&H)";
             this.barSubItem1.Id = 13;
             this.barSubItem1.Name = "barSubItem1";
+            // 
+            // barSubItemAll
+            // 
+            this.barSubItemAll.Caption = "ª„◊‹(A)";
+            this.barSubItemAll.Id = 68;
+            this.barSubItemAll.Name = "barSubItemAll";
+            this.barSubItemAll.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemAll_ItemClick);
             // 
             // bar3
             // 
@@ -1314,20 +1324,11 @@ namespace CameraViewer
             this.treeListColumn2.FieldName = "treeListColumn2";
             this.treeListColumn2.Name = "treeListColumn2";
             // 
-            // imageCollectionForButton
+            // imageCollectionForCamera
             // 
-            this.imageCollectionForButton.ImageSize = new System.Drawing.Size(24, 24);
-            this.imageCollectionForButton.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollectionForButton.ImageStream")));
-            this.imageCollectionForButton.Images.SetKeyName(0, "exit.png");
-            this.imageCollectionForButton.Images.SetKeyName(1, "1.jpg");
-            this.imageCollectionForButton.Images.SetKeyName(2, "2.jpg");
-            this.imageCollectionForButton.Images.SetKeyName(3, "3.jpg");
-            this.imageCollectionForButton.Images.SetKeyName(4, "exit.png");
-            this.imageCollectionForButton.Images.SetKeyName(5, "search.png");
-            this.imageCollectionForButton.Images.SetKeyName(6, "system.png");
-            this.imageCollectionForButton.Images.SetKeyName(7, "video.png");
-            this.imageCollectionForButton.Images.SetKeyName(8, "Navigator.png");
-            this.imageCollectionForButton.Images.SetKeyName(9, "CCTV.png");
+            this.imageCollectionForCamera.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageCollectionForCamera.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollectionForCamera.ImageStream")));
+            this.imageCollectionForCamera.Images.SetKeyName(0, "CCTV.png");
             // 
             // dockPanelResult
             // 
@@ -2959,6 +2960,21 @@ namespace CameraViewer
             this.radioGroupFace.TabIndex = 0;
             this.radioGroupFace.SelectedIndexChanged += new System.EventHandler(this.radioGroupFace_SelectedIndexChanged);
             // 
+            // imageCollectionForButton
+            // 
+            this.imageCollectionForButton.ImageSize = new System.Drawing.Size(24, 24);
+            this.imageCollectionForButton.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollectionForButton.ImageStream")));
+            this.imageCollectionForButton.Images.SetKeyName(0, "exit.png");
+            this.imageCollectionForButton.Images.SetKeyName(1, "1.jpg");
+            this.imageCollectionForButton.Images.SetKeyName(2, "2.jpg");
+            this.imageCollectionForButton.Images.SetKeyName(3, "3.jpg");
+            this.imageCollectionForButton.Images.SetKeyName(4, "exit.png");
+            this.imageCollectionForButton.Images.SetKeyName(5, "search.png");
+            this.imageCollectionForButton.Images.SetKeyName(6, "system.png");
+            this.imageCollectionForButton.Images.SetKeyName(7, "video.png");
+            this.imageCollectionForButton.Images.SetKeyName(8, "Navigator.png");
+            this.imageCollectionForButton.Images.SetKeyName(9, "CCTV.png");
+            // 
             // barButtonItem1
             // 
             this.barButtonItem1.Caption = "œµÕ≥≈‰÷√(&S)";
@@ -3136,12 +3152,6 @@ namespace CameraViewer
             this.timerForReconnect.Interval = 30000;
             this.timerForReconnect.Tick += new System.EventHandler(this.timerForReconnect_Tick);
             // 
-            // imageCollectionForCamera
-            // 
-            this.imageCollectionForCamera.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageCollectionForCamera.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollectionForCamera.ImageStream")));
-            this.imageCollectionForCamera.Images.SetKeyName(0, "CCTV.png");
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -3177,7 +3187,7 @@ namespace CameraViewer
             this.dockPanelCamera.ResumeLayout(false);
             this.controlContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeListCamera)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForCamera)).EndInit();
             this.dockPanelResult.ResumeLayout(false);
             this.dockPanelNavigator.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
@@ -3267,9 +3277,9 @@ namespace CameraViewer
             ((System.ComponentModel.ISupportInitialize)(this.teEndTimeFace.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEditFaceCamera.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroupFace.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             this.cmIcon.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imageCollectionForCamera)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3541,6 +3551,7 @@ namespace CameraViewer
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
         private DevExpress.Utils.ImageCollection imageCollectionForCamera;
+        private DevExpress.XtraBars.BarButtonItem barSubItemAll;
         
     }
 }
