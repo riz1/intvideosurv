@@ -117,6 +117,54 @@ namespace IntVideoSurv.Business
             }
 
         }
+        public DataSet GetAllQueryInfo(ref string errMessage)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = LongChang_UserVehMonDataAccess.GetAllQueryInfo(db);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return new DataSet();
+            }
+        }
+        public DataSet GetUserQueryInfoByUserId(ref string errMessage,string userid)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = LongChang_UserVehMonDataAccess.GetUserQueryInfoByUserId(db,userid);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return new DataSet();
+            }
+        }
+        public DataSet GetRecordDetail(ref string errMessage, string userid, string ileagalreason, string roadname, DateTime dt)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                DataSet ds = LongChang_UserVehMonDataAccess.GetRecordDetail(db, userid,ileagalreason,roadname,dt);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return new DataSet();
+            }
+        }
 
     }
 }

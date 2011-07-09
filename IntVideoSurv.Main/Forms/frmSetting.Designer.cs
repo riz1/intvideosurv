@@ -1031,7 +1031,7 @@ namespace CameraViewer.Forms
             this.gcUserManagement.Controls.Add(this.splitContainerControl6);
             this.gcUserManagement.Location = new System.Drawing.Point(246, 22);
             this.gcUserManagement.Name = "gcUserManagement";
-            this.gcUserManagement.Size = new System.Drawing.Size(155, 78);
+            this.gcUserManagement.Size = new System.Drawing.Size(278, 80);
             this.gcUserManagement.TabIndex = 8;
             this.gcUserManagement.Text = "用户管理";
             // 
@@ -1047,7 +1047,7 @@ namespace CameraViewer.Forms
             this.splitContainerControl6.Panel2.Controls.Add(this.buttonUserDelete);
             this.splitContainerControl6.Panel2.Controls.Add(this.buttonUserAdd);
             this.splitContainerControl6.Panel2.Text = "Panel2";
-            this.splitContainerControl6.Size = new System.Drawing.Size(151, 53);
+            this.splitContainerControl6.Size = new System.Drawing.Size(274, 55);
             this.splitContainerControl6.SplitterPosition = 181;
             this.splitContainerControl6.TabIndex = 0;
             this.splitContainerControl6.Text = "splitContainerControl6";
@@ -1060,7 +1060,7 @@ namespace CameraViewer.Forms
             this.gridControlUserData.MainView = this.gridView3;
             this.gridControlUserData.MenuManager = this.barManager1;
             this.gridControlUserData.Name = "gridControlUserData";
-            this.gridControlUserData.Size = new System.Drawing.Size(151, 48);
+            this.gridControlUserData.Size = new System.Drawing.Size(274, 50);
             this.gridControlUserData.TabIndex = 0;
             this.gridControlUserData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -1649,13 +1649,13 @@ namespace CameraViewer.Forms
             this.splitContainerControl2.Name = "splitContainerControl2";
             this.splitContainerControl2.Panel1.Controls.Add(this.navBarControl1);
             this.splitContainerControl2.Panel1.Text = "Panel1";
+            this.splitContainerControl2.Panel2.Controls.Add(this.gcUserManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcCodeManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcTogDeviceManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.groupControl_TollGate);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcSkin);
             this.splitContainerControl2.Panel2.Controls.Add(this.DecoderManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcVritualGroupManegement);
-            this.splitContainerControl2.Panel2.Controls.Add(this.gcUserManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcDeviceManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.RecognizerManagement);
             this.splitContainerControl2.Panel2.Controls.Add(this.gcDisplayChannelManagement);
