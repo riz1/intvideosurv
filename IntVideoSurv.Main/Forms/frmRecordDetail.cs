@@ -29,7 +29,7 @@ namespace CameraViewer.Forms
             labelControlDepartmentName.Text = ds.Tables[0].Rows[0][7].ToString();
             labelControlPlateNum.Text = ds.Tables[0].Rows[0][8].ToString();
             DateTime dt = DateTime.Parse(ds.Tables[0].Rows[0][5].ToString());
-            string path = @"D:\CapturePicture\" + dt.ToString(@"yyyy\\MM\\dd") + @"\";
+            string path = Properties.Settings.Default.CapturePictureFilePath + @"\" + dt.ToString(@"yyyy\\MM\\dd") + @"\";
             pictureEdit1.Image = Image.FromFile(path+ds.Tables[0].Rows[0][9].ToString());
             pictureEdit2.Image = Image.FromFile(path+ds.Tables[0].Rows[0][10].ToString());
             pictureEdit3.Image = Image.FromFile(path+ds.Tables[0].Rows[0][11].ToString());
