@@ -674,7 +674,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.vehicleColor = "";
             vehmon.vehicleType = 0;
             vehmon.vehicleTypeName = "";
-            vehmon.plateNumberType = "A";
+            vehmon.plateNumberType = "A";//
             vehmon.countTime = 0;
 
             vehmon.roadName = tollgate.roadName;

@@ -40,7 +40,7 @@ namespace IntVideoSurv.Business
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     oTollGate = new LongChang_TollGateInfo(ds.Tables[0].Rows[i]);
-                    list.Add(oTollGate.tollGateID, oTollGate);
+                    list.Add(oTollGate.tollNum, oTollGate);
 
 
                 }
@@ -127,6 +127,37 @@ namespace IntVideoSurv.Business
             }
 
         }
+        //卡口父编号
+        public Dictionary<string, LongChang_TollGateInfo> GetTollGateInfoByKaKouFBH(ref string errMessage, string fId)
+        {
+      
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            Dictionary<string, LongChang_TollGateInfo> listtollGate = new Dictionary<string, LongChang_TollGateInfo>();
+            try
+            {
+
+                DataSet ds = LongChang_TollGateDataAccess.GetTollGateInfoByKKFBh(db, fId);
+
+                LongChang_TollGateInfo oTollGate;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    oTollGate = new LongChang_TollGateInfo(ds.Tables[0].Rows[i]);
+                    listtollGate.Add(oTollGate.tollNum, oTollGate);
+
+
+                }
+                return listtollGate;
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return new Dictionary<string, LongChang_TollGateInfo>();
+            }
+
+        }
         public int Delete(ref string errMessage, string TollId)
         {
             Database db = DatabaseFactory.CreateDatabase();
@@ -144,6 +175,22 @@ namespace IntVideoSurv.Business
                 return -1;
             }
 
+        }
+        public string Insert(ref string errMessage, LongChang_TollGateInfo oTollGateInfo)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return LongChang_TollGateDataAccess.Insert(db, oTollGateInfo);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return "";
+            }
         }
     }
 }

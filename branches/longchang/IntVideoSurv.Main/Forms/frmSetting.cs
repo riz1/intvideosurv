@@ -55,7 +55,8 @@ namespace CameraViewer.Forms
             loadUserInfo();
             //针对隆昌，隐藏不必要的信息
             showLongChangCameraInfo();
-            showLongChangTollGateInfo();
+            //showLongChangTollGateInfo();
+            BuildTollGateTree();
             FilterInterFaceForLongChang();
         }
 
@@ -455,6 +456,7 @@ namespace CameraViewer.Forms
             //
             gcTogDeviceManagement.Visible = false;
             groupControl_TollGate.Visible = false;
+            gCTollGateManagement.Visible = false;
             gcCodeManagement.Visible = false;
             switch (_displaytype)
             {
@@ -527,9 +529,9 @@ namespace CameraViewer.Forms
                     gridViewToGDevice.OptionsView.ShowGroupPanel = false;
                     break;
                 case DisplayTypes.TollGateManagement:
-                    groupControl_TollGate.Visible = true;
-                    groupControl_TollGate.Dock = DockStyle.Fill;
-                    gridView_TollGate.OptionsView.ShowGroupPanel = false;
+                    gCTollGateManagement.Visible = true;
+                    gCTollGateManagement.Dock = DockStyle.Fill;
+                    gridViewTollGateManage.OptionsView.ShowGroupPanel = false;
                     break;
                 case DisplayTypes.CodeManagement:
                     gcCodeManagement.Visible = true;
@@ -1699,47 +1701,6 @@ namespace CameraViewer.Forms
 
         public void BuildVirtualGroupTree()
         {
-            /*listVirtualGroup =VirtualGroupBusiness.Instance.GetAllVirtualGroupInfo(ref errMessage);
-            Cursor currentCursor = Cursor.Current;
-            Cursor.Current = Cursors.WaitCursor;
-            TreeListNode node;
-            TreeListNode camnode;
-            
-
-            treeListVirtualGroup.Nodes.Clear();
-            TreeListNode treeListNodeRoot = treeListVirtualGroup.AppendNode(new[] { "组管理", 0 + ";A" }, -1, 0, 3, 1, CheckState.Checked);
-            treeListNodeRoot.Tag = 0 + ";A";
-            if (listVirtualGroup != null)
-            {
-
-                foreach (KeyValuePair<int, VirtualGroupInfo> item in listVirtualGroup)
-                {
-                    TreeListNode treeListNodeG = treeListVirtualGroup.AppendNode(new[] { item.Value.Name, item.Key + ";B" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
-                    treeListNodeG.Tag = item.Key + ";B";
-                    TreeListNode treeListNodeGQ = treeListVirtualGroup.AppendNode(new[] { "摄像头管理", item.Key + ";C" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
-                    treeListNodeGQ.Tag = item.Key + ";C";
-                    TreeListNode treeListNodeUQ = treeListVirtualGroup.AppendNode(new[] { "用户管理", item.Key + ";E" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
-                    treeListNodeUQ.Tag = item.Key + ";E";
-                    clist = CameraGroupBusiness.Instance.GetAllCameraInfo(ref errMessage,item.Key);
-                    listUser = UserGroupBusiness.Instance.GetAllCameraInfo(ref errMessage, item.Key);
-                    foreach(KeyValuePair<int, CameraInfo> itemcamera in clist)
-                    {
-                       // TreeListNode treeListNodeC = treeListVirtualGroup.AppendNode(new[] { itemcamera.Value.Name, itemcamera.Key + ";D" }, treeListNodeGQ.Id, 1, 3, 1, CheckState.Checked);
-                        //treeListNodeC.Tag = itemcamera.Key + ";D";
-                        DeviceInfo di = DecoderBusiness.Instance.GetDeviceInfoByCameraId(ref errMessage, itemcamera.Value.CameraId);
-                        TreeListNode treeListNodeC = treeListVirtualGroup.AppendNode(new[] { di.Name + ":" + itemcamera.Value.Name, itemcamera.Key + ";D" }, treeListNodeGQ.Id, 1, 3, 1, CheckState.Checked);
-                        treeListNodeC.Tag = itemcamera.Key + ";D";
-                    }
-                    foreach (KeyValuePair<int, UserInfo> itemuser in listUser)
-                    {
-                        TreeListNode treeListNodeU = treeListVirtualGroup.AppendNode(new[] { itemuser.Value.UserName, itemuser.Key + ";F" }, treeListNodeUQ.Id, 1, 3, 1, CheckState.Checked);
-                        treeListNodeU.Tag = itemuser.Key + ";F";
-                    }
-                }
-            }
-            treeListVirtualGroup.Columns[1].Visible = false;
-            treeListVirtualGroup.ExpandAll();
-            Cursor.Current = currentCursor;*/
             listVirtualGroup = VirtualGroupBusiness.Instance.GetAllVirtualGroupInfo(ref errMessage);
             Cursor currentCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
@@ -1779,6 +1740,60 @@ namespace CameraViewer.Forms
             }
             treeListVirtualGroup.Columns[1].Visible = false;
             treeListVirtualGroup.ExpandAll();
+            Cursor.Current = currentCursor;
+
+        }
+        //
+        public void BuildTollGateTree()
+        {
+            Dictionary<string, LongChang_TollGateInfo> ListTollGate = new Dictionary<string, LongChang_TollGateInfo>();
+            ListTollGate = LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref errMessage);
+            Cursor currentCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            TreeListNode node;
+            TreeListNode camnode;
+
+
+            treeListTollGate.Nodes.Clear();
+            TreeListNode treeListNodeRoot = treeListTollGate.AppendNode(new[] { "卡口管理", 0 + ";R" }, -1, 0, 3, 1, CheckState.Checked);
+            treeListNodeRoot.Tag = 0 + ";A";
+            if (treeListTollGate!= null)
+            {
+
+                foreach (KeyValuePair<string, LongChang_TollGateInfo> item in ListTollGate)
+                {
+                    if(item.Value.tollParentNum=="moniroot")
+                    {
+                        TreeListNode treeListNodeG = treeListTollGate.AppendNode(new[] { item.Value.tollName, item.Key + ";K" }, treeListNodeRoot.Id, 1, 3, 1, CheckState.Checked);
+                       treeListNodeG.Tag = item.Key + ";K"; 
+                       Dictionary<string, LongChang_TollGateInfo> ListDirection=new Dictionary<string, LongChang_TollGateInfo>();
+                       Dictionary<string, LongChang_TollGateInfo> ListRoad = new Dictionary<string, LongChang_TollGateInfo>();
+                       ListDirection = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouFBH(ref errMessage,item.Value.tollNum);
+                       //方向
+                       if (ListDirection != null)
+                       {
+                          foreach (KeyValuePair<string, LongChang_TollGateInfo> itemd in ListDirection)
+                          {
+                              TreeListNode treeListNodeD = treeListTollGate.AppendNode(new[] { itemd.Value.tollName, itemd.Key + ";D" }, treeListNodeG.Id, 1, 3, 1, CheckState.Checked);
+                              treeListNodeD.Tag = itemd.Key + ";D"; 
+                              //车道
+                              ListRoad = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouFBH(ref errMessage, itemd.Value.tollNum);
+                              if (ListRoad!= null)
+                              {
+                                  foreach (KeyValuePair<string, LongChang_TollGateInfo> itemr in ListRoad)
+                                  {
+                                      TreeListNode treeListNodeR = treeListTollGate.AppendNode(new[] { itemr.Value.tollName, itemr.Key + ";R" }, treeListNodeD.Id, 1, 3, 1, CheckState.Checked);
+                                      treeListNodeR.Tag = itemr.Key + ";R";
+                                  }
+                              }
+                          }
+                      }
+                    }
+
+                }
+            }
+            treeListTollGate.Columns[1].Visible = false;
+            treeListTollGate.ExpandAll();
             Cursor.Current = currentCursor;
 
         }
@@ -1915,8 +1930,7 @@ namespace CameraViewer.Forms
         //修改组
         private void barButtonItemEditVirtualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           // ChangeVirtualGroup frmcv = new ChangeVirtualGroup();
-           // frmcv.Show();
+
         }
         //组中添加摄像头
         private void barButtonItemAddCameraInVritualGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -2084,22 +2098,78 @@ namespace CameraViewer.Forms
             string str;
             foreach (var node in listLongChangtl)
             {
-                dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
-                    node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType, node.Value.cameraNum, node.Value.roadNum, node.Value.roadName);
+                if (node.Value.tollParentNum =="moniroot")
+                    dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
+                       node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType, node.Value.cameraNum, node.Value.roadNum, node.Value.roadName);
             }
 
-            gridControl_TollGateManagement.DataSource = dataTable;
-            gridControl_TollGateManagement.MainView.PopulateColumns();
-            gridView_TollGate.Columns["卡口编号"].Width = 30;
-            gridView_TollGate.Columns["卡口名称"].Width = 30;
-            gridView_TollGate.Columns["卡口简称"].Width = 30;
-            gridView_TollGate.Columns["卡口位置"].Width = 30;
-            gridView_TollGate.Columns["管辖单位编号"].Width = 30;
-            gridView_TollGate.Columns["行政区划"].Width = 30;
-            gridView_TollGate.Columns["卡口类型"].Width = 30;
-            gridView_TollGate.Columns["摄像机编号"].Width = 30;
-            gridView_TollGate.Columns["道路编号"].Width = 30;
-            gridView_TollGate.Columns["道路名称"].Width = 30;
+            gridControlTollGate.DataSource = dataTable;
+            gridControlTollGate.MainView.PopulateColumns();
+            gridViewTollGateManage.Columns["卡口编号"].Width = 30;
+            gridViewTollGateManage.Columns["卡口名称"].Width = 30;
+            gridViewTollGateManage.Columns["卡口简称"].Width = 30;
+            gridViewTollGateManage.Columns["卡口位置"].Width = 30;
+            gridViewTollGateManage.Columns["管辖单位编号"].Width = 30;
+            gridViewTollGateManage.Columns["行政区划"].Width = 30;
+            gridViewTollGateManage.Columns["卡口类型"].Width = 30;
+            gridViewTollGateManage.Columns["摄像机编号"].Width = 30;
+            gridViewTollGateManage.Columns["道路编号"].Width = 30;
+            gridViewTollGateManage.Columns["道路名称"].Width = 30;
+
+        }
+        //显示方向
+        void showLongChangDirection(string str)
+        {
+            Dictionary<string, LongChang_TollGateInfo> listLongChangtl;
+            listLongChangtl = LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref errMessage);
+
+            var dataTable = new System.Data.DataTable("LongChangDirectionInfo");
+            dataTable.Columns.Add("卡口编号", typeof(string));
+            dataTable.Columns.Add("卡口名称", typeof(string));
+            dataTable.Columns.Add("卡口简称", typeof(string));
+            dataTable.Columns.Add("卡口父编号", typeof(int));
+
+
+            foreach (var node in listLongChangtl)
+            {
+                if (node.Value.tollParentNum ==str)
+                    dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort,
+                      node.Value.tollParentNum);
+            }
+
+            gridControlTollGate.DataSource = dataTable;
+            gridControlTollGate.MainView.PopulateColumns();
+            gridViewTollGateManage.Columns["卡口编号"].Width = 30;
+            gridViewTollGateManage.Columns["卡口名称"].Width = 30;
+            gridViewTollGateManage.Columns["卡口简称"].Width = 30;
+            gridViewTollGateManage.Columns["卡口父编号"].Width = 30;
+        }
+        void showLongChangRoad(string str)
+        {
+            Dictionary<string, LongChang_TollGateInfo> listLongChangtl;
+            listLongChangtl = LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref errMessage);
+
+            var dataTable = new System.Data.DataTable("LongChangRoadInfo");
+            dataTable.Columns.Add("卡口编号", typeof(string));
+            dataTable.Columns.Add("卡口名称", typeof(string));
+            dataTable.Columns.Add("卡口简称", typeof(string));
+            dataTable.Columns.Add("卡口父编号", typeof(string));
+            dataTable.Columns.Add("摄像机编号", typeof(string));
+
+            foreach (var node in listLongChangtl)
+            {
+                if (node.Value.tollParentNum ==str)
+                    dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort,
+                      node.Value.tollParentNum, node.Value.cameraNum);
+            }
+
+            gridControlTollGate.DataSource = dataTable;
+            gridControlTollGate.MainView.PopulateColumns();
+            gridViewTollGateManage.Columns["卡口编号"].Width = 30;
+            gridViewTollGateManage.Columns["卡口名称"].Width = 30;
+            gridViewTollGateManage.Columns["卡口简称"].Width = 30;
+            gridViewTollGateManage.Columns["卡口父编号"].Width = 30;
+            gridViewTollGateManage.Columns["摄像机编号"].Width = 30;
         }
 
         private void nbTogDevice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -2221,6 +2291,140 @@ namespace CameraViewer.Forms
         private void simpleButtonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void treeListTollGate_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                TreeListNode node = treeListTollGate.FocusedNode;
+                if ((node.Tag.ToString()).IndexOf("A") >= 0)
+                {
+                    //显示卡口
+                    showLongChangTollGateInfo();
+                }
+                else if ((node.Tag.ToString()).IndexOf("K") >= 0)
+                {
+                    //显示方向
+                    string str = node.Tag.ToString().Split(';')[0];
+                    showLongChangDirection(str);
+                }
+                else if ((node.Tag.ToString()).IndexOf("D") >= 0)
+                {
+                    //显示车道
+                    string str = node.Tag.ToString().Split(';')[0];
+                    showLongChangRoad(str);
+                }
+
+            }
+            //右键单击删除
+            if (e.Button == MouseButtons.Right)
+            {
+                TreeListNode node = treeListTollGate.FocusedNode;
+                if ((node.Tag.ToString()).IndexOf("A") >= 0)
+                {
+                    //显示卡口
+                    popupMenuKaKou.ShowPopup(Cursor.Position);
+                    
+                }
+                else if ((node.Tag.ToString()).IndexOf("K") >= 0)
+                {
+                    //显示方向
+                    string str = node.Tag.ToString().Split(';')[0];
+                    popupMenuFangXiang.ShowPopup(Cursor.Position);
+                    
+                }
+                else if ((node.Tag.ToString()).IndexOf("D") >= 0)
+                {
+                    //显示车道
+                    string str = node.Tag.ToString().Split(';')[0];
+                    popupMenuCheDao.ShowPopup(Cursor.Position);
+                }else if ((node.Tag.ToString()).IndexOf("R") >= 0)
+                {
+                    
+                    string str = node.Tag.ToString().Split(';')[0];
+                    popupMenuDeleteChd.ShowPopup(Cursor.Position);
+                }
+            }
+        }
+        //添加卡口
+        private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddKaKou frmtest=new AddKaKou(0,"");
+            frmtest.ShowDialog();
+            BuildTollGateTree();
+        }
+        //更新卡口
+        private void barButtonItem20_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+           
+            string str = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            AddKaKou frmtest = new AddKaKou(1,str);
+            frmtest.Text = "更新卡口";
+            frmtest.ShowDialog();
+            BuildTollGateTree();
+        }
+      
+        private void barButtonItem19_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+         
+        }
+         //删除卡口
+        private void barButtonItem26_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Dictionary<string, LongChang_TollGateInfo> ListDirection=new Dictionary<string, LongChang_TollGateInfo>();
+            Dictionary<string, LongChang_TollGateInfo> ListRoad = new Dictionary<string, LongChang_TollGateInfo>();
+            string str = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            
+            ListDirection = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouFBH(ref errMessage, str);
+            foreach (KeyValuePair<string, LongChang_TollGateInfo> itemd in ListDirection)
+            {
+                ListRoad=LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouFBH(ref errMessage, itemd.Value.tollNum);
+                if (ListRoad != null)
+                {
+                    foreach (KeyValuePair<string, LongChang_TollGateInfo> itemr in ListRoad)
+                    {
+                        LongChang_TollGateBusiness.Instance.Delete(ref errMessage, itemr.Value.tollNum);
+                    }
+                }
+                LongChang_TollGateBusiness.Instance.Delete(ref errMessage, itemd.Value.tollNum);
+            }
+            LongChang_TollGateBusiness.Instance.Delete(ref errMessage, str);
+            BuildTollGateTree();
+        }
+        //添加方向
+        private void barButtonItem12_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string str = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            AddDirection frmtest = new AddDirection(0,str);
+            frmtest.update = 0;
+            frmtest.ShowDialog();
+            BuildTollGateTree();
+        }
+        //删除方向
+        private void barButtonItem22_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Dictionary<string, LongChang_TollGateInfo> ListRoad=new Dictionary<string, LongChang_TollGateInfo>();
+            string str = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            LongChang_TollGateBusiness.Instance.Delete(ref errMessage, str);
+            ListRoad = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouFBH(ref errMessage, str);
+            if (ListRoad != null)
+            {
+                foreach (KeyValuePair<string, LongChang_TollGateInfo> itemr in ListRoad)
+                {
+                    LongChang_TollGateBusiness.Instance.Delete(ref errMessage, itemr.Value.tollNum);
+                }
+            }
+            BuildTollGateTree();
+        }
+        //更新方向
+        private void barButtonItem23_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string str = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            AddDirection frmtest = new AddDirection(1,str);
+            frmtest.Text = "更新方向";
+            frmtest.ShowDialog();
+            BuildTollGateTree();
         }
     }
     public enum DisplayTypes

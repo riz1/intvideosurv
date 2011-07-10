@@ -78,7 +78,8 @@ namespace CameraViewer
                 XtraMessageBox.Show("请确保数据库服务器已启动，且数据库连接参数正确!");
                 Process.GetCurrentProcess().Kill();
             }  
-
+            //
+           
 
 
 #if DEBUG
@@ -3079,12 +3080,15 @@ namespace CameraViewer
 
         }
 
+        public int i;
         private void bbiHistroyVideoCondition_ItemClick(object sender, ItemClickEventArgs e)
         {
             UseWaitCursor = true;
-            frmHistoryCaptureCondition frmhcc= new frmHistoryCaptureCondition();
+            i = 0;
+            frmHistoryCaptureCondition frmhcc = new frmHistoryCaptureCondition();
+
             UseWaitCursor = false;
-            if (frmhcc.ShowDialog()==DialogResult.OK)
+            if (frmhcc.ShowDialog() == DialogResult.OK)
             {
                 UseWaitCursor = true;
                 frmCaptureHistroyLicense fchl = new frmCaptureHistroyLicense(frmhcc);
