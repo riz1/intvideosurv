@@ -61,7 +61,9 @@ namespace IntVideoSurv.Business
             errMessage = "";
             try
             {
-                return LongChang_VehMonDataAccess.Insert(db, vehmon);
+                var id = LongChang_VehMonDataAccess.Insert(db, vehmon);
+                logger.Debug("write database successfully");
+                return id;
 
             }
             catch (Exception ex)

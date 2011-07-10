@@ -82,6 +82,9 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat(",'{0}'", oVehMon.plateNumberTypeName);
             sbField.Append(",tjrq");
             sbValue.AppendFormat(",{0}", oVehMon.countTime);//////
+            //
+            sbField.Append(",wzbj");
+            sbValue.AppendFormat(",{0}", 1);
             sbField.Append(",wzyy");
             sbValue.AppendFormat(",'{0}'", oVehMon.illegalReason);
             sbField.Append(",cdmc");
@@ -106,13 +109,14 @@ namespace IntVideoSurv.DataAccess
                 strsql = "select MVID   from   TOG_VEHMON   where  CLXXBH=(select   max(CLXXBH)   from   TOG_VEHMON)";
 
                 string id = db.ExecuteScalar(CommandType.Text, strsql).ToString();
+                
                 return id;
 
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                throw;
             }
         }
 
