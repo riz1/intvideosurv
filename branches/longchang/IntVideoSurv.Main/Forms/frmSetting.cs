@@ -57,6 +57,7 @@ namespace CameraViewer.Forms
             showLongChangCameraInfo();
             //showLongChangTollGateInfo();
             BuildTollGateTree();
+            showLongChangCameraInfo();
             FilterInterFaceForLongChang();
         }
 
@@ -454,6 +455,7 @@ namespace CameraViewer.Forms
             //组管理
             gcVritualGroupManegement.Visible = false;
             //
+            groupControlTog.Visible = false;
             gcTogDeviceManagement.Visible = false;
             groupControl_TollGate.Visible = false;
             gCTollGateManagement.Visible = false;
@@ -524,9 +526,9 @@ namespace CameraViewer.Forms
                     gridView7.OptionsView.ShowGroupPanel = false;
                     break;
                 case DisplayTypes.ToGDeviceManagement:
-                    gcTogDeviceManagement.Visible = true;
-                    gcTogDeviceManagement.Dock = DockStyle.Fill;
-                    gridViewToGDevice.OptionsView.ShowGroupPanel = false;
+                    groupControlTog.Visible = true;
+                    groupControlTog.Dock = DockStyle.Fill;
+                    gridViewTogDev.OptionsView.ShowGroupPanel = false;
                     break;
                 case DisplayTypes.TollGateManagement:
                     gCTollGateManagement.Visible = true;
@@ -2058,6 +2060,7 @@ namespace CameraViewer.Forms
             dataTable.Columns.Add("登陆用户", typeof(string));
             dataTable.Columns.Add("登陆密码", typeof(string));
             dataTable.Columns.Add("设备类型", typeof(string));
+            dataTable.Columns.Add("卡口名称", typeof(string));
             string str;
             foreach (var node in listLongChangcl)
             {
@@ -2065,24 +2068,25 @@ namespace CameraViewer.Forms
                     str = "枪机";
                 else
                     str = "球机";
-                dataTable.Rows.Add(node.Value.CameraId, node.Value.Name, node.Value.IP, node.Value.Port, node.Value.UserName, node.Value.PassWord, str);
+                dataTable.Rows.Add(node.Value.CameraId, node.Value.Name, node.Value.IP, node.Value.Port, node.Value.UserName, node.Value.PassWord, str,node.Value.TollGateName);
             }
 
-            gridControlTogDevice.DataSource = dataTable;
-            gridControlTogDevice.MainView.PopulateColumns();
-            gridViewToGDevice.Columns["设备编号"].Width = 40;
-            gridViewToGDevice.Columns["设备名称"].Width = 40;
-            gridViewToGDevice.Columns["IP地址"].Width = 40;
-            gridViewToGDevice.Columns["端口号"].Width = 40;
-            gridViewToGDevice.Columns["登陆用户"].Width = 40;
-            gridViewToGDevice.Columns["登陆密码"].Width = 40;
-            gridViewToGDevice.Columns["设备类型"].Width = 40;
+            gridControlTogDev.DataSource = dataTable;
+            gridControlTogDev.MainView.PopulateColumns();
+            gridViewTogDev.Columns["设备编号"].Width = 40;
+            gridViewTogDev.Columns["设备名称"].Width = 40;
+            gridViewTogDev.Columns["IP地址"].Width = 40;
+            gridViewTogDev.Columns["端口号"].Width = 40;
+            gridViewTogDev.Columns["登陆用户"].Width = 40;
+            gridViewTogDev.Columns["登陆密码"].Width = 40;
+            gridViewTogDev.Columns["设备类型"].Width = 40;
+            gridViewTogDev.Columns["卡口名称"].Width = 40;
         }
         void showLongChangTollGateInfo()
         {
             Dictionary<string, LongChang_TollGateInfo> listLongChangtl;
             listLongChangtl = LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref errMessage);
-
+            
             var dataTable = new System.Data.DataTable("LongChangTollGateInfo");
             dataTable.Columns.Add("卡口编号", typeof(string));
             dataTable.Columns.Add("卡口名称", typeof(string));
@@ -2091,16 +2095,26 @@ namespace CameraViewer.Forms
             dataTable.Columns.Add("管辖单位编号", typeof(string));
             dataTable.Columns.Add("行政区划", typeof(string));
             dataTable.Columns.Add("卡口类型", typeof(string));
-            dataTable.Columns.Add("摄像机编号", typeof(int));
+            dataTable.Columns.Add("摄像机名称", typeof(string));
             dataTable.Columns.Add("道路编号", typeof(string));
             dataTable.Columns.Add("道路名称", typeof(string));
-
-            string str;
+            //
+           
             foreach (var node in listLongChangtl)
             {
-                if (node.Value.tollParentNum =="moniroot")
+               LongChang_CameraInfo ocamera=new LongChang_CameraInfo();
+               ocamera= LongChang_CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,  node.Value.cameraNum);
+               
+                if(ocamera==null)                                                   
+                {
                     dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
-                       node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType, node.Value.cameraNum, node.Value.roadNum, node.Value.roadName);
+                       node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType,"", node.Value.roadNum, node.Value.roadName);
+
+                }
+                else if (node.Value.tollParentNum == "moniroot")
+                    dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
+                       node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType, ocamera.Name, node.Value.roadNum, node.Value.roadName);
+               
             }
 
             gridControlTollGate.DataSource = dataTable;
@@ -2353,6 +2367,8 @@ namespace CameraViewer.Forms
             AddKaKou frmtest=new AddKaKou(0,"");
             frmtest.ShowDialog();
             BuildTollGateTree();
+            //日志
+
         }
         //更新卡口
         private void barButtonItem20_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -2389,7 +2405,26 @@ namespace CameraViewer.Forms
                 }
                 LongChang_TollGateBusiness.Instance.Delete(ref errMessage, itemd.Value.tollNum);
             }
+            LongChang_TollGateInfo ki = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouID(ref errMessage, str);
             LongChang_TollGateBusiness.Instance.Delete(ref errMessage, str);
+           
+            if (XtraMessageBox.Show("确实要删除卡口?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+            {
+                
+                String cnt = ki.ToString();
+                OperateLogBusiness.Instance.Insert(ref errMessage,
+                                                   new OperateLog
+                                                   {
+                                                       ClientUserId = MainForm.CurrentUser.UserId,
+                                                       ClientUserName = MainForm.CurrentUser.UserName,
+                                                       Content = ki.ToString(),
+                                                       HappenTime = DateTime.Now,
+                                                       OperateTypeId = (int)(OperateLogTypeId.TollGateCheDaoUpdate),
+                                                       OperateTypeName = OperateLogTypeName.TollGateCheDaoUpdate,
+                                                       OperateUserName = MainForm.CurrentUser.UserName
+                                                   });
+
+            }
             BuildTollGateTree();
         }
         //添加方向
@@ -2406,6 +2441,7 @@ namespace CameraViewer.Forms
         {
             Dictionary<string, LongChang_TollGateInfo> ListRoad=new Dictionary<string, LongChang_TollGateInfo>();
             string str = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            LongChang_TollGateInfo ki = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouID(ref errMessage, str);
             LongChang_TollGateBusiness.Instance.Delete(ref errMessage, str);
             ListRoad = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouFBH(ref errMessage, str);
             if (ListRoad != null)
@@ -2414,6 +2450,23 @@ namespace CameraViewer.Forms
                 {
                     LongChang_TollGateBusiness.Instance.Delete(ref errMessage, itemr.Value.tollNum);
                 }
+            }
+            if (XtraMessageBox.Show("确实要删除方向?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+            {
+               
+                String cnt = ki.ToString();
+                OperateLogBusiness.Instance.Insert(ref errMessage,
+                                                   new OperateLog
+                                                   {
+                                                       ClientUserId = MainForm.CurrentUser.UserId,
+                                                       ClientUserName = MainForm.CurrentUser.UserName,
+                                                       Content = ki.ToString(),
+                                                       HappenTime = DateTime.Now,
+                                                       OperateTypeId = (int)(OperateLogTypeId.TollGateFangXiangDelete),
+                                                       OperateTypeName = OperateLogTypeName.TollGateFangXiangDelete,
+                                                       OperateUserName = MainForm.CurrentUser.UserName
+                                                   });
+
             }
             BuildTollGateTree();
         }
@@ -2425,6 +2478,113 @@ namespace CameraViewer.Forms
             frmtest.Text = "更新方向";
             frmtest.ShowDialog();
             BuildTollGateTree();
+        }
+        //添加车道
+        private void barButtonItem16_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string name = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            AddCheDao chedao = new AddCheDao(name);
+            chedao.directionNum = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            chedao.ShowDialog(this);
+            BuildTollGateTree();
+        }
+        //更新车道
+        private void barButtonItem24_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LongChang_TollGateInfo lt = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouID(ref errMessage, treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0]);
+            AddCheDao editChedao = new AddCheDao(lt);
+            editChedao.Opt = Util.Operateion.Update;
+            editChedao.Id = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+            editChedao.ShowDialog(this);
+            BuildTollGateTree();
+            showLongChangTollGateInfo();
+        }
+        //删除车道
+        private void barButtonItem25_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                if (XtraMessageBox.Show("确实要删除车道?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    string TollID = treeListTollGate.FocusedNode.Tag.ToString().Split(';')[0];
+                    LongChang_TollGateInfo ki = LongChang_TollGateBusiness.Instance.GetTollGateInfoByKaKouID(ref errMessage, TollID);
+                    LongChang_TollGateBusiness.Instance.Delete(ref errMessage, TollID);
+                    OperateLogBusiness.Instance.Insert(ref errMessage,
+                                                       new OperateLog
+                                                       {
+                                                           ClientUserId = MainForm.CurrentUser.UserId,
+                                                           ClientUserName = MainForm.CurrentUser.UserName,
+                                                           Content = ki.ToString(),
+                                                           HappenTime = DateTime.Now,
+                                                           OperateTypeId = (int)(OperateLogTypeId.TollGateCheDaoDelete),
+                                                           OperateTypeName = OperateLogTypeName.TollGateCheDaoDelete,
+                                                           OperateUserName = MainForm.CurrentUser.UserName
+                                                       });
+
+                }
+                showLongChangTollGateInfo();
+                BuildTollGateTree();
+
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+        //longchang添加摄像头
+        private void simpleButtonAddTog_Click(object sender, EventArgs e)
+        {
+            AddandUpdatelongchangCamera frmcamera = new AddandUpdatelongchangCamera();
+            frmcamera.ShowDialog();
+            showLongChangCameraInfo();
+        }
+        //longchang删除摄像头
+        private void simpleButtonDeleteTog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (XtraMessageBox.Show("确实要删除摄像头?", "提醒", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    int cameraid = Convert.ToInt32(gridViewTogDev.GetFocusedRowCellValue("设备编号").ToString());
+                    LongChang_CameraInfo ci = LongChang_CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, cameraid);
+                    String cnt = ci.ToString();
+                    LongChang_CameraBusiness.Instance.Delete(ref errMessage, cameraid);
+                    OperateLogBusiness.Instance.Insert(ref errMessage,
+                                                       new OperateLog
+                                                       {
+                                                           ClientUserId = MainForm.CurrentUser.UserId,
+                                                           ClientUserName = MainForm.CurrentUser.UserName,
+                                                           Content = ci.ToString(),
+                                                           HappenTime = DateTime.Now,
+                                                           OperateTypeId = (int)(OperateLogTypeId.ToGDeviceDelete),
+                                                           OperateTypeName = OperateLogTypeName.ToGDeviceDelete,
+                                                           OperateUserName = MainForm.CurrentUser.UserName
+                                                       });
+                    showLongChangCameraInfo();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+        //longchang更新摄像头
+        private void simpleButtonUpdateTog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LongChang_CameraInfo oLongChang_CameraInfo = new LongChang_CameraInfo();
+                oLongChang_CameraInfo=LongChang_CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, Convert.ToInt32(gridViewTogDev.GetFocusedRowCellValue("设备编号").ToString()));
+                AddandUpdatelongchangCamera frmcamera = new AddandUpdatelongchangCamera(oLongChang_CameraInfo);
+                frmcamera.ShowDialog();
+                showLongChangCameraInfo();
+                
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
     }
     public enum DisplayTypes

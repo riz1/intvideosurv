@@ -210,6 +210,12 @@
     <Compile Include="Controls\ViewGrid.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\AddandUpdatelongchangCamera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddandUpdatelongchangCamera.Designer.cs">
+      <DependentUpon>AddandUpdatelongchangCamera.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddCameraInDecoder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +227,12 @@
     </Compile>
     <Compile Include="Forms\AddCameraInVirtualGroup.Designer.cs">
       <DependentUpon>AddCameraInVirtualGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddCheDao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCheDao.designer.cs">
+      <DependentUpon>AddCheDao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AddDirection.cs">
       <SubType>Form</SubType>
@@ -267,7 +279,7 @@
     <Compile Include="Forms\frmAllQueryInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmAllQueryInfo.Designer.cs">
+    <Compile Include="Forms\frmAllQueryInfo.designer.cs">
       <DependentUpon>frmAllQueryInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCaptureHistroyLicense.cs">
@@ -363,13 +375,13 @@
     <Compile Include="Forms\frmQueryInfoByUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmQueryInfoByUser.Designer.cs">
+    <Compile Include="Forms\frmQueryInfoByUser.designer.cs">
       <DependentUpon>frmQueryInfoByUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmRecordDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmRecordDetail.Designer.cs">
+    <Compile Include="Forms\frmRecordDetail.designer.cs">
       <DependentUpon>frmRecordDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmSettingGroupSwitch.cs">
@@ -578,12 +590,20 @@
       <DependentUpon>ViewGrid.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddandUpdatelongchangCamera.resx">
+      <DependentUpon>AddandUpdatelongchangCamera.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddCameraInDecoder.resx">
       <DependentUpon>AddCameraInDecoder.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddCameraInVirtualGroup.resx">
       <DependentUpon>AddCameraInVirtualGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddCheDao.resx">
+      <DependentUpon>AddCheDao.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddDirection.resx">

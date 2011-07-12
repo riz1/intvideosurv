@@ -103,7 +103,22 @@ namespace CameraViewer.Properties {
                 this["CapturePictureFilePath"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\CapturePicture")]
+        public string FtpFilePath
+        {
+            get
+            {
+                return ((string)(this["FtpFilePath"]));
+            }
+            set
+            {
+                this["FtpFilePath"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("d:\\TempPicPath")]

@@ -133,13 +133,13 @@ namespace IntVideoSurv.Business
                 return new DataSet();
             }
         }
-        public DataSet GetUserQueryInfoByUserId(ref string errMessage,string userid)
+        public DataSet GetUserQueryInfoByUserId(ref string errMessage, string userid)
         {
             Database db = DatabaseFactory.CreateDatabase();
             errMessage = "";
             try
             {
-                DataSet ds = LongChang_UserVehMonDataAccess.GetUserQueryInfoByUserId(db,userid);
+                DataSet ds = LongChang_UserVehMonDataAccess.GetUserQueryInfoByUserId(db, userid);
                 return ds;
             }
             catch (Exception ex)
@@ -155,7 +155,7 @@ namespace IntVideoSurv.Business
             errMessage = "";
             try
             {
-                DataSet ds = LongChang_UserVehMonDataAccess.GetRecordDetail(db, userid,ileagalreason,roadname,dt);
+                DataSet ds = LongChang_UserVehMonDataAccess.GetRecordDetail(db, userid, ileagalreason, roadname, dt);
                 return ds;
             }
             catch (Exception ex)

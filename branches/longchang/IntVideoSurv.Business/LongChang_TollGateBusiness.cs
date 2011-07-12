@@ -192,5 +192,39 @@ namespace IntVideoSurv.Business
                 return "";
             }
         }
+        public int InsertCheDao(ref string errMessage, LongChang_TollGateInfo oTollGateInfo)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return LongChang_TollGateDataAccess.InsertCheDao(db, oTollGateInfo);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+        }
+        public int Update(ref string errMessage, LongChang_TollGateInfo toll)
+        {
+            Database db = DatabaseFactory.CreateDatabase();
+            errMessage = "";
+            try
+            {
+                return LongChang_TollGateDataAccess.Update(db, toll);
+
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message + ex.StackTrace;
+                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
+                return -1;
+            }
+
+
+        }
     }
 }

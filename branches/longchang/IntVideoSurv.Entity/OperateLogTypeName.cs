@@ -61,7 +61,20 @@ namespace IntVideoSurv.Entity
         public const string UserAddInVirtualGroup = "添加用户到VirtualGroup";
         public const string UserDeleteInVirtualGroup = "删除在virtualgroup中的用户";
         //
+        public const string TollGateKaKouAdd = "添加卡口";
+        public const string TollGateKaKouDelete = "删除卡口";
+        public const string TollGateKaKouUpdate = "更新卡口";
+        //添加、删除、修改车道
+        public const string TollGateCheDaoAdd = "添加车道";
+        public const string TollGateCheDaoUpdate = "更新车道";
+        public const string TollGateCheDaoDelete = "删除车道";
+        public const string TollGateFangXiangAdd = "添加方向";
+        public const string TollGateFangXiangUpdate = "更新方向";
+        public const string TollGateFangXiangDelete = "删除方向";
+        //
         public const string ToGDeviceAdd = "添加ToGDevice";
+        public const string ToGDeviceUpdate = "更新ToGDevice";
         public const string ToGDeviceDelete = "删除ToGDevice";
+
     }
 }

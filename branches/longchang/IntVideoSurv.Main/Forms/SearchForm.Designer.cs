@@ -73,6 +73,7 @@
             this.gridView7.OptionsBehavior.Editable = false;
             this.gridView7.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView7.OptionsView.ShowGroupPanel = false;
+            this.gridView7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridView7_MouseDown);
             // 
             // gridColumnID
             // 
