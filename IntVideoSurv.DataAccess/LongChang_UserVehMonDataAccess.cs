@@ -116,9 +116,9 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        public static DataSet GetRecordDetail(Database db, string userid,string ileagalreason,string roadname,DateTime dt)
+        public static DataSet GetRecordDetail(Database db, string userid, string ileagalreason, string roadname, DateTime dt)
         {
-            string cmdText = string.Format("select TOG_VEHMON.KKMC,TOG_VEHMON.FXMC,TOG_VEHMON.CDMC,TOG_VEHMON.WZYY,TOG_VEHMON.HPZLMC,TOG_VEHMON.JGSK,TOG_VEHMON.DWBH,TOG_VEHMON.DWMC,TOG_VEHMON.HPHM,TOG_VEHMON.TXMC1,TOG_VEHMON.TXMC2,TOG_VEHMON.TXMC3 from IVS_USERVEHMON,TOG_VEHMON where IVS_USERVEHMON.VEHMONID=TOG_VEHMON.MVID and IVS_USERVEHMON.USERID='{0}' and TOG_VEHMON.WZYY='{1}' and TOG_VEHMON.CDMC='{2}' and ivs_uservehmon.time = to_date('{3}','YYYY/MM/DD HH24:MI:SS')", userid,ileagalreason,roadname,dt);
+            string cmdText = string.Format("select TOG_VEHMON.KKMC,TOG_VEHMON.FXMC,TOG_VEHMON.CDMC,TOG_VEHMON.WZYY,TOG_VEHMON.HPZLMC,TOG_VEHMON.JGSK,TOG_VEHMON.DWBH,TOG_VEHMON.DWMC,TOG_VEHMON.HPHM,TOG_VEHMON.TXMC1,TOG_VEHMON.TXMC2,TOG_VEHMON.TXMC3 from IVS_USERVEHMON,TOG_VEHMON where IVS_USERVEHMON.VEHMONID=TOG_VEHMON.MVID and IVS_USERVEHMON.USERID='{0}' and TOG_VEHMON.WZYY='{1}' and TOG_VEHMON.CDMC='{2}' and ivs_uservehmon.time = to_date('{3}','YYYY/MM/DD HH24:MI:SS')", userid, ileagalreason, roadname, dt);
             try
             {
                 return db.ExecuteDataSet(CommandType.Text, cmdText);

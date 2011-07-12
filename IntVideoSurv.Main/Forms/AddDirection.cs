@@ -62,6 +62,17 @@ namespace CameraViewer.Forms
                 LongChang_TollGateBusiness.Instance.Insert(ref errMessage, temp);
                 XtraMessageBox.Show("添加方向成功");
                 this.Close();
+                OperateLogBusiness.Instance.Insert(ref errMessage,
+                                      new OperateLog
+                                      {
+                                          ClientUserId = MainForm.CurrentUser.UserId,
+                                          ClientUserName = MainForm.CurrentUser.UserName,
+                                          Content = temp.ToString(),
+                                          HappenTime = DateTime.Now,
+                                          OperateTypeId = (int)(OperateLogTypeId.TollGateFangXiangAdd),
+                                          OperateTypeName = OperateLogTypeName.TollGateFangXiangAdd,
+                                          OperateUserName = MainForm.CurrentUser.UserName
+                                      });
             }
             if(update==1)
             {
@@ -74,6 +85,17 @@ namespace CameraViewer.Forms
                 LongChang_TollGateBusiness.Instance.Insert(ref errMessage, temp);
                 XtraMessageBox.Show("更新方向成功");
                 this.Close();
+                OperateLogBusiness.Instance.Insert(ref errMessage,
+                                      new OperateLog
+                                      {
+                                          ClientUserId = MainForm.CurrentUser.UserId,
+                                          ClientUserName = MainForm.CurrentUser.UserName,
+                                          Content = temp.ToString(),
+                                          HappenTime = DateTime.Now,
+                                          OperateTypeId = (int)(OperateLogTypeId.TollGateFangXiangUpdate),
+                                          OperateTypeName = OperateLogTypeName.TollGateFangXiangUpdate,
+                                          OperateUserName = MainForm.CurrentUser.UserName
+                                      });
                 
             }
         }

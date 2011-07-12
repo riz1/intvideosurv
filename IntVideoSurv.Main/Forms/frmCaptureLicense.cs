@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using CameraViewer.Player;
@@ -91,7 +92,6 @@ namespace CameraViewer.Forms
             trackBar1.Minimum = 0;
             trackBar1.Maximum = _totalFrames;
             timerForUpdatingTrack.Start();
-
 
         }
 
@@ -698,6 +698,13 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             image1.Save(vehmon.imageName1, System.Drawing.Imaging.ImageFormat.Jpeg);
             image2.Save(vehmon.imageName2, System.Drawing.Imaging.ImageFormat.Jpeg);
             image3.Save(vehmon.imageName3, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            #region ftp上传服务
+
+            UploadFile(vehmon.imageName1);
+            UploadFile(vehmon.imageName2);
+            UploadFile(vehmon.imageName3);
+            #endregion
             AirnoixPlayer.Avdec_Stop(intPtr);
             AirnoixPlayer.Avdec_CloseFile(intPtr);
 
@@ -729,10 +736,44 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             finally
             {
                 this.Close();                
+            } 
+
+        }
+
+        private void UploadFile(string filename)
+        {
+            FileInfo fileInf = new FileInfo(filename);
+            string uri = Properties.Settings.Default.FtpFilePath + fileInf.Name;
+            FtpWebRequest reqFTP;
+            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(Properties.Settings.Default.FtpFilePath + fileInf.Name));
+            reqFTP.Credentials = new NetworkCredential("Administrator", "");
+            reqFTP.KeepAlive = false;
+            reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
+            reqFTP.UseBinary = true;
+            reqFTP.ContentLength = fileInf.Length;
+
+            int buffLength = 1024;
+
+            byte[] buff = new byte[buffLength];
+            int contentLen;
+            FileStream fs = fileInf.OpenRead();
+            try
+            {
+                Stream strm = reqFTP.GetRequestStream();
+                contentLen = fs.Read(buff, 0, buffLength);
+                while (contentLen != 0)
+                {
+                    strm.Write(buff, 0, contentLen);
+
+                    contentLen = fs.Read(buff, 0, buffLength);
+                }
+                strm.Close();
+                fs.Close();
             }
-
-            
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Upload Error");
+            }
         }
 
         private Image AddTextInImage(Image image, string addText, int fonesize, Color brushColor, int x, int y)

@@ -62,8 +62,21 @@ namespace IntVideoSurv.Entity
         UserAddInVirtualGroup = 2401,
         UserDeleteVirtualGroup,
         //
-        ToGDeviceAdd=2501,
-        ToGDeviceDelete
+        TollGateKaKouAdd = 2501,
+        TollGateKaKouDelete,
+        TollGateKaKouUpdate,
 
+        //添加、删除、更新车道
+        TollGateCheDaoDelete = 2601,
+        TollGateCheDaoAdd = 2701,
+        TollGateCheDaoUpdate = 2801,
+        //
+        TollGateFangXiangAdd = 2901,
+        TollGateFangXiangDelete,
+        TollGateFangXiangUpdate,
+        //
+        ToGDeviceAdd=3001,
+        ToGDeviceDelete,
+        ToGDeviceUpdate,
     }
 }

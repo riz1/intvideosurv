@@ -149,6 +149,66 @@ namespace IntVideoSurv.DataAccess
                 throw ex;
             }
         }
-        
+        public static int InsertCheDao(Database db, LongChang_TollGateInfo oTollGateInfo)
+        {
+
+            StringBuilder sbField = new StringBuilder();
+            StringBuilder sbValue = new StringBuilder();
+            sbField.Append("INSERT INTO  TOG_TOLLGATE(");
+            sbValue.Append("values (");
+
+            sbField.Append("tgid");
+            sbValue.AppendFormat("'{0}'", Guid.NewGuid().ToString("N"));
+            sbField.Append(",kkfbh");
+            sbValue.AppendFormat(",'{0}'", oTollGateInfo.tollParentNum);
+            sbField.Append(",kkbh");
+            sbValue.AppendFormat(",'{0}'", oTollGateInfo.tollNum);
+            sbField.Append(",kkmc");
+            sbValue.AppendFormat(",'{0}'", oTollGateInfo.tollName);
+            sbField.Append(",kkjc");
+            sbValue.AppendFormat(",'{0}'", oTollGateInfo.tollShort);
+            sbField.Append(",sxjbh)");
+            sbValue.AppendFormat(",{0})", oTollGateInfo.cameraNum);
+
+            string cmdText = sbField.ToString() + " " + sbValue.ToString();
+            string strsql;
+
+            try
+            {
+                cmdText = cmdText.Replace("\r\n", "");
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+                return -1;
+            }
+        }
+        public static int Update(Database db, LongChang_TollGateInfo toll)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("update TOG_TOLLGATE set");
+            sb.AppendFormat(" KKBH='{0}'", toll.tollNum);
+            //sb.AppendFormat(",id='{0}'", oDecoderInfo.id);
+            sb.AppendFormat(",KKMC='{0}'", toll.tollName);
+            sb.AppendFormat(",KKJC='{0}'", toll.tollShort);
+            sb.AppendFormat(",SXJBH={0}", toll.cameraNum);
+            sb.AppendFormat(" where KKBH='{0}'", toll.tollNum);
+            string cmdText = sb.ToString();
+            try
+            {
+                return db.ExecuteNonQuery(CommandType.Text, cmdText);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
     }
 }

@@ -127,7 +127,7 @@
     <value>876, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>113</value>
+    <value>141</value>
   </metadata>
   <metadata name="imageCollectionForCamera.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>588, 56</value>
@@ -142,7 +142,7 @@
         cmVhbWVyAgAAAAlJbWFnZVNpemUERGF0YQQHE1N5c3RlbS5EcmF3aW5nLlNpemUDAAAAAgIAAAAF/P//
         /xNTeXN0ZW0uRHJhd2luZy5TaXplAgAAAAV3aWR0aAZoZWlnaHQAAAgIAwAAACAAAAAgAAAACQUAAAAP
         BQAAAAwHAAACCAcAAIlQTkcNChoKAAAADUlIRFIAAAAgAAAAIAgGAAAAc3p69AAAAAFzUkdCAK7OHOkA
-        AAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7AAAAOwAFq1okJAAAGnUlEQVRYR62XfVTPVxzHTWXrYRnW
+        AAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA6+AAAOvgHqQrHAAAAGnUlEQVRYR62XfVTPVxzHTWXrYRnW
         QlTL5iGUUBGiLCLJU4lEelC/JHma1uicnBaL5HRU5GFtzZztDO1QTfujzXbMDmPMjh3HcESFzdaWh5zy
         3vvz3f3mRw+YOud17vd3v/d7P+/7+Xzu5946dGinPwAvKDqyNXkM6dPet5O55tNwcjEimLaCiNKEtLsI
         3fCDBw9e5LMFW2u2nXX425LPLylh7SPA2KV8NhPD5BXSndjTaB+2TmwdSA95x9ZcjdXD1bIYo3g2DWyj
@@ -997,7 +997,7 @@
         by8OHz4MhUIRgB/fzI/CXxI/2XIP5AZ6vd6bLnt6etDf3w+/34+RkRGkp6eLw7CW+9ebgQfWfC5vio6O
         FqdGbr7ZbEZpaSmKioqQnZ2NlJQUaDSaAPypfwO/fe33a+4gV6VWqwPAwPXd+wUH26fjD+V/ExGbhf4N
         sMXg2SqFQZkAAAAASUVORK5CYIKCBAAAiVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA
-        AXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr4AAA6+AepCscAAAAQXSURBVEhLpZV9
+        AXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAQXSURBVEhLpZV9
         bJNVFMbp2kJxikrBUJaCmBg/2ETsAuqMuk/edR1ssLrNMAtsgpMNhDmLOCbQMRBMQSHEulUJo3UhJmDU
         wIRt8ockLv6zZDEmJkv8IJowOmdwumzd43Pq7ew+CGM0+eXc997znvOe5557O23aFH4AdIo4Wn0M8qyb
         QsjxrzCQBDOS6TEY1PztJZGAw8PD8cRMEoiVzFfPM7luuGEVMeVHZRhr9Sq4hTaR/s/QPkee5vhh2rlE

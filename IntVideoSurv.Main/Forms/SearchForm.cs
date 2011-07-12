@@ -81,5 +81,30 @@ namespace CameraViewer.Forms
             gridView7.Columns["时间"].Width = 70;
             gridView7.Columns["地点"].Width = 60;
         }
+
+        private void gridView7_MouseDown(object sender, MouseEventArgs e)
+        {
+            DataSet ds = new DataSet();
+            UserInfo ui = new UserInfo();
+            string errMessage = "";
+            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo hInfo = gridView7.CalcHitInfo(new Point(e.X, e.Y));
+            if (e.Button == MouseButtons.Left && e.Clicks == 2)
+            {
+
+                if (hInfo.InRow)
+                {
+                    //取得选定行信息
+                    string userName = gridView7.GetRowCellValue(gridView7.FocusedRowHandle, "用户名").ToString();
+                    string illegalReason = gridView7.GetRowCellValue(gridView7.FocusedRowHandle, "抓拍违法行为").ToString();
+                    DateTime time = DateTime.Parse(gridView7.GetRowCellValue(gridView7.FocusedRowHandle, "时间").ToString());
+                    string place = gridView7.GetRowCellValue(gridView7.FocusedRowHandle, "地点").ToString();
+                    ui = UserBusiness.Instance.GetUserInfo(ref errMessage, userName);
+                    ds = LongChang_UserVehMonBusiness.Instance.GetRecordDetail(ref errMessage, ui.UserId.ToString(), illegalReason, place, time);
+                    frmRecordDetail frd = new frmRecordDetail(ds, userName);
+                    frd.ShowDialog(this);
+
+                }
+            }
+        }
     }
 }

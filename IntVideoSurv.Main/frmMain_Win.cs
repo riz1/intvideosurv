@@ -552,24 +552,26 @@ namespace CameraViewer
 
         #region 界面过滤
 
-        /*private void FilterInterface()
+        private void FilterInterface()
         {
             if (CurrentUser.UserTypeName != "管理员")
             {
-                if (barButtonItem1 != null)
+                barButtonItemAllUserinfo.Visibility = BarItemVisibility.Never;
+                /*if (barButtonItem1 != null)
                 {
-                    this.barButtonItemSystemSettingMenu.ItemClick -= barButtonItem5_ItemClick;
-                    this.barButtonItemSystemSettingMenu.ItemClick += this.barButtonItem1_ItemClick_UpdateUser;
+
+                    //this.barButtonItemSystemSettingMenu.ItemClick -= barButtonItem5_ItemClick;
+                    //this.barButtonItemSystemSettingMenu.ItemClick += this.barButtonItem1_ItemClick_UpdateUser;
                 }
                 if (barButtonItemSystemSetting != null)
                 {
-                    this.barButtonItemSystemSetting.ItemClick -= barButtonItem3_ItemClick_1;
-                    this.barButtonItemSystemSetting.ItemClick += this.barButtonItem1_ItemClick_UpdateUser;
-                }
+                    //this.barButtonItemSystemSetting.ItemClick -= barButtonItem3_ItemClick_1;
+                    //this.barButtonItemSystemSetting.ItemClick += this.barButtonItem1_ItemClick_UpdateUser;
+                }*/
             }
         }
 
-        private void barButtonItem1_ItemClick_UpdateUser(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        /*private void barButtonItem1_ItemClick_UpdateUser(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var frmUser = new FrmUser(CurrentUser);
             frmUser.ShowDialog();
@@ -580,7 +582,7 @@ namespace CameraViewer
         private void frmMain_Win_Load(object sender, EventArgs e)
         {
             this.Visible = false;
-            //FilterInterface();
+            FilterInterface();
             InitDataBaseType();
             Splash.Splash.Status = "获取群组信息...";
             _runningDeviceList = new Dictionary<int, HikVideoServerDeviceDriver>();
@@ -3222,8 +3224,8 @@ namespace CameraViewer
             airnoixCameraNew.Start();
 
         }
-
-        private void barSubItemAll_ItemClick(object sender, ItemClickEventArgs e)
+        //汇总，菜单
+        private void barButtonItemAllUserinfo_ItemClick(object sender, ItemClickEventArgs e)
         {
             DataSet ds = new DataSet();
             ds = LongChang_UserVehMonBusiness.Instance.GetAllQueryInfo(ref _errMessage);

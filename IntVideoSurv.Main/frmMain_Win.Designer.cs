@@ -48,7 +48,7 @@ namespace CameraViewer
             this.barButtonItem22 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem23 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
-            this.barSubItemAll = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemAllUserinfo = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barButtonItemSystemSetting = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
@@ -474,7 +474,7 @@ namespace CameraViewer
             this.barButtonItem23,
             this.barButtonItem24,
             this.barButtonItem13,
-            this.barSubItemAll});
+            this.barButtonItemAllUserinfo});
             this.barManager1.MainMenu = this.barMenu;
             this.barManager1.MaxItemId = 69;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -495,7 +495,7 @@ namespace CameraViewer
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemMenuQuery),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemAll)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAllUserinfo)});
             this.barMenu.OptionsBar.DrawDragBorder = false;
             this.barMenu.OptionsBar.MultiLine = true;
             this.barMenu.OptionsBar.UseWholeRow = true;
@@ -632,12 +632,12 @@ namespace CameraViewer
             this.barSubItem1.Id = 13;
             this.barSubItem1.Name = "barSubItem1";
             // 
-            // barSubItemAll
+            // barButtonItemAllUserinfo
             // 
-            this.barSubItemAll.Caption = "Лузм(A)";
-            this.barSubItemAll.Id = 68;
-            this.barSubItemAll.Name = "barSubItemAll";
-            this.barSubItemAll.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemAll_ItemClick);
+            this.barButtonItemAllUserinfo.Caption = "Лузм(A)";
+            this.barButtonItemAllUserinfo.Id = 68;
+            this.barButtonItemAllUserinfo.Name = "barButtonItemAllUserinfo";
+            this.barButtonItemAllUserinfo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemAllUserinfo_ItemClick);
             // 
             // bar3
             // 
@@ -3551,7 +3551,7 @@ namespace CameraViewer
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
         private DevExpress.Utils.ImageCollection imageCollectionForCamera;
-        private DevExpress.XtraBars.BarButtonItem barSubItemAll;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAllUserinfo;
         
     }
 }

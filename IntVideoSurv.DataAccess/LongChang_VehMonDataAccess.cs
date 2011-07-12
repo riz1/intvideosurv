@@ -106,7 +106,7 @@ namespace IntVideoSurv.DataAccess
                 cmdText = cmdText.Replace("\r\n", "");
                 db.ExecuteNonQuery(CommandType.Text, cmdText);
 
-                strsql = "select MVID   from   TOG_VEHMON   where  CLXXBH=(select   max(CLXXBH)   from   TOG_VEHMON)";
+                strsql = "select MVID   from   TOG_VEHMON   where  clxxbh=(select   max(clxxbh)   from   TOG_VEHMON)";
 
                 string id = db.ExecuteScalar(CommandType.Text, strsql).ToString();
                 

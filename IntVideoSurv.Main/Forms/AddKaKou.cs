@@ -79,6 +79,17 @@ namespace CameraViewer.Forms
                 LongChang_TollGateBusiness.Instance.Insert(ref errMessage, temp);
                 XtraMessageBox.Show("添加卡口成功");
                 this.Close();
+                OperateLogBusiness.Instance.Insert(ref errMessage,
+                                                   new OperateLog
+                                                   {
+                                                       ClientUserId = MainForm.CurrentUser.UserId,
+                                                       ClientUserName = MainForm.CurrentUser.UserName,
+                                                       Content = temp.ToString(),
+                                                       HappenTime = DateTime.Now,
+                                                       OperateTypeId = (int)(OperateLogTypeId.TollGateKaKouAdd),
+                                                       OperateTypeName = OperateLogTypeName.TollGateKaKouAdd,
+                                                       OperateUserName = MainForm.CurrentUser.UserName
+                                                   });
             }
             if (update==1)
             {
@@ -101,6 +112,17 @@ namespace CameraViewer.Forms
                 LongChang_TollGateBusiness.Instance.Insert(ref errMessage, temp);
                 XtraMessageBox.Show("更新卡口成功");
                 this.Close();
+                OperateLogBusiness.Instance.Insert(ref errMessage,
+                                   new OperateLog
+                                   {
+                                       ClientUserId = MainForm.CurrentUser.UserId,
+                                       ClientUserName = MainForm.CurrentUser.UserName,
+                                       Content = temp.ToString(),
+                                       HappenTime = DateTime.Now,
+                                       OperateTypeId = (int)(OperateLogTypeId.TollGateKaKouUpdate),
+                                       OperateTypeName = OperateLogTypeName.TollGateKaKouUpdate,
+                                       OperateUserName = MainForm.CurrentUser.UserName
+                                   });
             }
 
         }
