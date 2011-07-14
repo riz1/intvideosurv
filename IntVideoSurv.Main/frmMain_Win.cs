@@ -2922,6 +2922,17 @@ namespace CameraViewer
         }
         private void sbSaveGlobalCameraPosition_Click(object sender, EventArgs e)
         {
+            ptzControType = PtzControlType.PTZ_SET_PRESET;
+            int positionIndex = 99;
+            bool isConcertSuccessful = int.TryParse(cbePreset.Text, out positionIndex);
+            if (!isConcertSuccessful)
+            {
+                positionIndex = 99;
+            }
+            int ret = AironixControl.TMCC_PtzPreset(ptzHandle, (uint)ptzControType, (uint)positionIndex, ptzSpeed);
+        }
+        private void goToPreset_Click(object sender, EventArgs e)
+        {
             ptzControType = PtzControlType.PTZ_GOTO_PRESET;
             int positionIndex = 99;
             bool isConcertSuccessful = int.TryParse(cbePreset.Text, out positionIndex);
@@ -3232,5 +3243,7 @@ namespace CameraViewer
             frmAllQueryInfo faqi = new frmAllQueryInfo(ds);
             faqi.ShowDialog(this);
         }
+
+        
     }
 }

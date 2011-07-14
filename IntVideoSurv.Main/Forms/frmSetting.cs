@@ -2104,14 +2104,14 @@ namespace CameraViewer.Forms
             {
                LongChang_CameraInfo ocamera=new LongChang_CameraInfo();
                ocamera= LongChang_CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage,  node.Value.cameraNum);
-               
-                if(ocamera==null)                                                   
+
+               if (ocamera == null && node.Value.tollParentNum == "moniroot")                                                   
                 {
                     dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
                        node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType,"", node.Value.roadNum, node.Value.roadName);
 
                 }
-                else if (node.Value.tollParentNum == "moniroot")
+                else if (ocamera != null && node.Value.tollParentNum == "moniroot")
                     dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort, node.Value.tollPosition,
                        node.Value.departmentNum, node.Value.administrationDivsion, node.Value.tollType, ocamera.Name, node.Value.roadNum, node.Value.roadName);
                
@@ -2126,7 +2126,7 @@ namespace CameraViewer.Forms
             gridViewTollGateManage.Columns["管辖单位编号"].Width = 30;
             gridViewTollGateManage.Columns["行政区划"].Width = 30;
             gridViewTollGateManage.Columns["卡口类型"].Width = 30;
-            gridViewTollGateManage.Columns["摄像机编号"].Width = 30;
+            gridViewTollGateManage.Columns["摄像机名称"].Width = 30;
             gridViewTollGateManage.Columns["道路编号"].Width = 30;
             gridViewTollGateManage.Columns["道路名称"].Width = 30;
 
@@ -2168,13 +2168,18 @@ namespace CameraViewer.Forms
             dataTable.Columns.Add("卡口名称", typeof(string));
             dataTable.Columns.Add("卡口简称", typeof(string));
             dataTable.Columns.Add("卡口父编号", typeof(string));
-            dataTable.Columns.Add("摄像机编号", typeof(string));
+            dataTable.Columns.Add("摄像机名称", typeof(string));
 
             foreach (var node in listLongChangtl)
             {
-                if (node.Value.tollParentNum ==str)
+                LongChang_CameraInfo ocamera = new LongChang_CameraInfo();
+                ocamera = LongChang_CameraBusiness.Instance.GetCameraInfoByCameraId(ref errMessage, node.Value.cameraNum);
+                if (ocamera == null && node.Value.tollParentNum == str)
                     dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort,
-                      node.Value.tollParentNum, node.Value.cameraNum);
+                                          node.Value.tollParentNum,"");
+                else if (node.Value.tollParentNum == str && ocamera != null)
+                    dataTable.Rows.Add(node.Value.tollNum, node.Value.tollName, node.Value.tollShort,
+                      node.Value.tollParentNum, ocamera.Name);
             }
 
             gridControlTollGate.DataSource = dataTable;
@@ -2183,7 +2188,7 @@ namespace CameraViewer.Forms
             gridViewTollGateManage.Columns["卡口名称"].Width = 30;
             gridViewTollGateManage.Columns["卡口简称"].Width = 30;
             gridViewTollGateManage.Columns["卡口父编号"].Width = 30;
-            gridViewTollGateManage.Columns["摄像机编号"].Width = 30;
+            gridViewTollGateManage.Columns["摄像机名称"].Width = 30;
         }
 
         private void nbTogDevice_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)

@@ -262,39 +262,33 @@ namespace CameraViewer.Forms
 
         private void treeListPicturesBefore_MouseClick(object sender, MouseEventArgs e)
         {
-            try
-            {
-                if (treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) == null)
-                {
-                    return;
-                }
-                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
-                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
-            }
-            catch (Exception)
-            {
-
-                ;
-            }
 
         }
 
         private void treeListPicturesCurrent_MouseClick(object sender, MouseEventArgs e)
         {
-            try
+
+            var treeList = sender as DevExpress.XtraTreeList.TreeList;
+            if (treeList != null)
             {
-                if (treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) == null)
+                //我添加的一句代码
+                if (treeList.FocusedNode == null) return;
+                if (treeList.FocusedNode.GetValue(treeList.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
                 }
-                pictureEditSelectedPicture.Image = treeListPicturesCurrent.FocusedNode.GetValue(treeListPicturesCurrent.FocusedColumn.AbsoluteIndex) as Image;
-                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
-            }
-            catch (Exception)
-            {
+
+                var img = treeList.FocusedNode.GetValue(treeList.FocusedColumn.AbsoluteIndex) as Image;
+                if (img != null)
+                {
+                    pictureEditSelectedPicture.Image = new Bitmap(img);
+                    this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
+                }
                 
-                ;
             }
+               
+           
+            
 
         }
 
@@ -302,6 +296,8 @@ namespace CameraViewer.Forms
         {
             try
             {
+                //我添加的一句代码
+                if (treeListPicturesAfter.FocusedNode == null) return;
                 if (treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) == null)
                 {
                     return;
@@ -840,20 +836,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
         private void treeListPicturesBefore_FocusedColumnChanged(object sender, DevExpress.XtraTreeList.FocusedColumnChangedEventArgs e)
         {
-            try
-            {
-                if (treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) == null)
-                {
-                    return;
-                }
-                pictureEditSelectedPicture.Image = treeListPicturesBefore.FocusedNode.GetValue(treeListPicturesBefore.FocusedColumn.AbsoluteIndex) as Image;
-                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
-            }
-            catch (Exception)
-            {
 
-                ;
-            }
         }
 
         private void pictureEditSelectedPicture_DoubleClick_1(object sender, EventArgs e)

@@ -96,6 +96,7 @@ namespace CameraViewer
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanelPtzControl = new DevExpress.XtraBars.Docking.DockPanel();
             this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.goToPreset = new DevExpress.XtraEditors.SimpleButton();
             this.sbDeleteGlobalCameraPosition = new DevExpress.XtraEditors.SimpleButton();
             this.sbSaveGlobalCameraPosition = new DevExpress.XtraEditors.SimpleButton();
             this.sbDeleteAllGlobalCameraPosition = new DevExpress.XtraEditors.SimpleButton();
@@ -1010,7 +1011,7 @@ namespace CameraViewer
             // 
             this.dockPanelPtzControl.Controls.Add(this.controlContainer1);
             this.dockPanelPtzControl.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
-            this.dockPanelPtzControl.FloatLocation = new System.Drawing.Point(1214, 405);
+            this.dockPanelPtzControl.FloatLocation = new System.Drawing.Point(576, 177);
             this.dockPanelPtzControl.FloatSize = new System.Drawing.Size(140, 393);
             this.dockPanelPtzControl.ID = new System.Guid("81e2c162-0411-4e09-a61a-918052f10543");
             this.dockPanelPtzControl.Location = new System.Drawing.Point(-32768, -32768);
@@ -1023,6 +1024,7 @@ namespace CameraViewer
             // 
             // controlContainer1
             // 
+            this.controlContainer1.Controls.Add(this.goToPreset);
             this.controlContainer1.Controls.Add(this.sbDeleteGlobalCameraPosition);
             this.controlContainer1.Controls.Add(this.sbSaveGlobalCameraPosition);
             this.controlContainer1.Controls.Add(this.sbDeleteAllGlobalCameraPosition);
@@ -1048,27 +1050,35 @@ namespace CameraViewer
             this.controlContainer1.Size = new System.Drawing.Size(134, 368);
             this.controlContainer1.TabIndex = 0;
             // 
+            // goToPreset
+            // 
+            this.goToPreset.Location = new System.Drawing.Point(68, 302);
+            this.goToPreset.Name = "goToPreset";
+            this.goToPreset.Size = new System.Drawing.Size(59, 23);
+            this.goToPreset.TabIndex = 23;
+            this.goToPreset.Text = "µ÷ÓÃ";
+            // 
             // sbDeleteGlobalCameraPosition
             // 
-            this.sbDeleteGlobalCameraPosition.Location = new System.Drawing.Point(70, 302);
+            this.sbDeleteGlobalCameraPosition.Location = new System.Drawing.Point(3, 331);
             this.sbDeleteGlobalCameraPosition.Name = "sbDeleteGlobalCameraPosition";
-            this.sbDeleteGlobalCameraPosition.Size = new System.Drawing.Size(37, 23);
+            this.sbDeleteGlobalCameraPosition.Size = new System.Drawing.Size(59, 23);
             this.sbDeleteGlobalCameraPosition.TabIndex = 22;
             this.sbDeleteGlobalCameraPosition.Text = "É¾³ý";
             this.sbDeleteGlobalCameraPosition.Click += new System.EventHandler(this.sbDeleteGlobalCameraPosition_Click);
             // 
             // sbSaveGlobalCameraPosition
             // 
-            this.sbSaveGlobalCameraPosition.Location = new System.Drawing.Point(29, 302);
+            this.sbSaveGlobalCameraPosition.Location = new System.Drawing.Point(3, 302);
             this.sbSaveGlobalCameraPosition.Name = "sbSaveGlobalCameraPosition";
-            this.sbSaveGlobalCameraPosition.Size = new System.Drawing.Size(37, 23);
+            this.sbSaveGlobalCameraPosition.Size = new System.Drawing.Size(59, 23);
             this.sbSaveGlobalCameraPosition.TabIndex = 22;
             this.sbSaveGlobalCameraPosition.Text = "±£´æ";
             this.sbSaveGlobalCameraPosition.Click += new System.EventHandler(this.sbSaveGlobalCameraPosition_Click);
             // 
             // sbDeleteAllGlobalCameraPosition
             // 
-            this.sbDeleteAllGlobalCameraPosition.Location = new System.Drawing.Point(39, 331);
+            this.sbDeleteAllGlobalCameraPosition.Location = new System.Drawing.Point(68, 331);
             this.sbDeleteAllGlobalCameraPosition.Name = "sbDeleteAllGlobalCameraPosition";
             this.sbDeleteAllGlobalCameraPosition.Size = new System.Drawing.Size(59, 23);
             this.sbDeleteAllGlobalCameraPosition.TabIndex = 22;
@@ -3552,6 +3562,7 @@ namespace CameraViewer
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
         private DevExpress.Utils.ImageCollection imageCollectionForCamera;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAllUserinfo;
+        private DevExpress.XtraEditors.SimpleButton goToPreset;
         
     }
 }
