@@ -56,7 +56,7 @@ namespace CameraViewer.Tools
                 DateTime date= new DateTime(beginTime.Year,beginTime.Month,beginTime.Day);
                 for (; date<=endTime; date=date.AddHours(24))
                 {
-                    foreach (DirectoryInfo d in Dir.GetDirectories(date.ToString("yyyy-MM-dd"))) //查找子目录
+                    foreach (var d in Dir.GetDirectories(date.ToString("yyyy-MM-dd"))) //查找子目录
                     {
                         DatePath.Add(d.FullName);
                     }                   

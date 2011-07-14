@@ -71,6 +71,7 @@ namespace CameraViewer.Forms
                              PassWord = textEditPassword.Text,
                              Type = comboBoxEditCType.Text == "枪机" ? 1 : 2,
                              TollGateName = comboBoxEditKaKou.Text
+                             //TollGateName = comboBoxEditKaKou.EditValue.ToString()
             };
 
             switch (mymode)

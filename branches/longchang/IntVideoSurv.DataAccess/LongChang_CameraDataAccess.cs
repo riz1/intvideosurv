@@ -110,6 +110,8 @@ namespace IntVideoSurv.DataAccess
             sbValue.AppendFormat(",'{0}'", oCameraInfo.UserName);
             sbField.Append(",dlmm");
             sbValue.AppendFormat(",'{0}'", oCameraInfo.PassWord);
+            sbField.Append(",kkmc");
+            sbValue.AppendFormat(",'{0}'", oCameraInfo.TollGateName);
             sbField.Append(",sblx)");
             sbValue.AppendFormat(",'{0}')", oCameraInfo.Type.ToString());
            

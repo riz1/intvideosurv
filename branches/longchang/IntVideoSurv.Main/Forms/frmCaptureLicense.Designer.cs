@@ -228,8 +228,7 @@
             this.treeListPicturesBefore.RowHeight = 96;
             this.treeListPicturesBefore.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesBefore.TabIndex = 6;
-            this.treeListPicturesBefore.FocusedColumnChanged += new DevExpress.XtraTreeList.FocusedColumnChangedEventHandler(this.treeListPicturesBefore_FocusedColumnChanged);
-            this.treeListPicturesBefore.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesBefore_MouseClick);
+            this.treeListPicturesBefore.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesCurrent_MouseClick);
             // 
             // treeListColumn1
             // 
@@ -507,7 +506,7 @@
             this.treeListPicturesAfter.RowHeight = 96;
             this.treeListPicturesAfter.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesAfter.TabIndex = 6;
-            this.treeListPicturesAfter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesAfter_MouseClick);
+            this.treeListPicturesAfter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesCurrent_MouseClick);
             // 
             // treeListColumn15
             // 
