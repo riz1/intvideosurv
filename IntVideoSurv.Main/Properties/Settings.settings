@@ -20,9 +20,6 @@
     <Setting Name="DecoderPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">9999</Value>
     </Setting>
-    <Setting Name="CapturePictureFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">d:\CapturePicture</Value>
-    </Setting>
     <Setting Name="TempPicPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">d:\TempPicPath</Value>
     </Setting>
@@ -52,6 +49,12 @@
     </Setting>
     <Setting Name="IsSaveVideo" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CapturePictureFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">d:\kise\togate\vehimg</Value>
+    </Setting>
+    <Setting Name="FtpFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ftp://192.168.1.100/aa/</Value>
     </Setting>
   </Settings>
 </SettingsFile>
