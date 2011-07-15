@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntVideoSurv.Main", "IntVideoSurv.Main\IntVideoSurv.Main.csproj", "{514C1BB4-8346-4B49-84A6-15786A5CBA0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntVideoSurv.VideoSource", "IntVideoSurv.VideoSource\IntVideoSurv.VideoSource.csproj", "{41A3C64D-F40A-421C-A8FC-5BF46EE5247C}"
