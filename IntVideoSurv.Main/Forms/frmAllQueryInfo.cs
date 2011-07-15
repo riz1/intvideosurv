@@ -29,8 +29,15 @@ namespace CameraViewer.Forms
             datatable.Columns.Add("抓拍违法记录数", typeof(string));
             for (i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                ui = UserBusiness.Instance.GetUserInfo(ref errMessage, int.Parse(ds.Tables[0].Rows[i][0].ToString()));
-                datatable.Rows.Add(i + 1, ui.UserName, ds.Tables[0].Rows[i][1].ToString());
+                var id = 0;
+                if (int.TryParse(ds.Tables[0].Rows[i][0].ToString(), out id))
+                {
+                    ui = UserBusiness.Instance.GetUserInfo(ref errMessage, id);
+                    if (ui != null)
+                    {
+                        datatable.Rows.Add(i + 1, ui.UserName, ds.Tables[0].Rows[i][1].ToString());
+                    }
+                }
             }
             gridControlShowAllQueryInfo.DataSource = datatable;
             gridControlShowAllQueryInfo.MainView.PopulateColumns();

@@ -82,7 +82,7 @@ namespace CameraViewer
            
 
 
-#if DEBUG
+#if !DEBUG
             while (Login(_inputUsername, _inputPassword, PromoteInfo) != true)
             {
                 PromoteInfo = "请输入正确的用户名和密码!";
@@ -480,6 +480,7 @@ namespace CameraViewer
         {
             try
             {
+#if !DEBUG
                 frmLogout frmLogout = new frmLogout();
                 if ((frmLogout.ShowDialog()!=DialogResult.OK)||(frmLogout.LogoutOK==false))
                 {
@@ -487,8 +488,7 @@ namespace CameraViewer
                     return;
 
                 }
-
-
+#endif
                 Properties.Settings.Default.Rows = mainMultiplexer.Rows;
                 Properties.Settings.Default.Cols = mainMultiplexer.Cols;
                 Properties.Settings.Default.Save();

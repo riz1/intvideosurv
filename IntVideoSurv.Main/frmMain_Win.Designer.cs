@@ -972,22 +972,22 @@ namespace CameraViewer
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 724);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1251, 28);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 729);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1251, 23);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 64);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 660);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 665);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1251, 64);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 660);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 665);
             // 
             // dockManager1
             // 
@@ -1292,7 +1292,7 @@ namespace CameraViewer
             this.dockPanelCamera.Location = new System.Drawing.Point(0, 64);
             this.dockPanelCamera.Name = "dockPanelCamera";
             this.dockPanelCamera.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanelCamera.Size = new System.Drawing.Size(200, 660);
+            this.dockPanelCamera.Size = new System.Drawing.Size(200, 665);
             this.dockPanelCamera.Text = "摄像头";
             // 
             // controlContainer2
@@ -1300,7 +1300,7 @@ namespace CameraViewer
             this.controlContainer2.Controls.Add(this.treeListCamera);
             this.controlContainer2.Location = new System.Drawing.Point(4, 23);
             this.controlContainer2.Name = "controlContainer2";
-            this.controlContainer2.Size = new System.Drawing.Size(192, 633);
+            this.controlContainer2.Size = new System.Drawing.Size(192, 638);
             this.controlContainer2.TabIndex = 0;
             // 
             // treeListCamera
@@ -1315,7 +1315,7 @@ namespace CameraViewer
             this.treeListCamera.OptionsView.ShowColumns = false;
             this.treeListCamera.OptionsView.ShowIndicator = false;
             this.treeListCamera.SelectImageList = this.imageCollectionForCamera;
-            this.treeListCamera.Size = new System.Drawing.Size(192, 633);
+            this.treeListCamera.Size = new System.Drawing.Size(192, 638);
             this.treeListCamera.TabIndex = 0;
             this.treeListCamera.DoubleClick += new System.EventHandler(this.treeListCamera_DoubleClick);
             // 
@@ -1348,14 +1348,14 @@ namespace CameraViewer
             this.dockPanelResult.Location = new System.Drawing.Point(1058, 64);
             this.dockPanelResult.Name = "dockPanelResult";
             this.dockPanelResult.OriginalSize = new System.Drawing.Size(193, 200);
-            this.dockPanelResult.Size = new System.Drawing.Size(193, 660);
+            this.dockPanelResult.Size = new System.Drawing.Size(193, 665);
             this.dockPanelResult.Text = "报警";
             // 
             // dockPanel2_Container
             // 
             this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(185, 633);
+            this.dockPanel2_Container.Size = new System.Drawing.Size(185, 638);
             this.dockPanel2_Container.TabIndex = 0;
             // 
             // dockPanelNavigator
@@ -1363,14 +1363,14 @@ namespace CameraViewer
             this.dockPanelNavigator.Controls.Add(this.dockPanel1_Container);
             this.dockPanelNavigator.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanelNavigator.ID = new System.Guid("e603f316-2b99-4234-84b6-2fcc0438bb24");
-            this.dockPanelNavigator.Location = new System.Drawing.Point(200, 64);
+            this.dockPanelNavigator.Location = new System.Drawing.Point(0, 64);
             this.dockPanelNavigator.Name = "dockPanelNavigator";
             this.dockPanelNavigator.Options.AllowFloating = false;
             this.dockPanelNavigator.Options.FloatOnDblClick = false;
             this.dockPanelNavigator.Options.ShowAutoHideButton = false;
             this.dockPanelNavigator.Options.ShowCloseButton = false;
             this.dockPanelNavigator.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanelNavigator.Size = new System.Drawing.Size(200, 660);
+            this.dockPanelNavigator.Size = new System.Drawing.Size(200, 665);
             this.dockPanelNavigator.Text = "导航";
             // 
             // dockPanel1_Container
@@ -1378,7 +1378,7 @@ namespace CameraViewer
             this.dockPanel1_Container.Controls.Add(this.splitContainerControl1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 633);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 638);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // splitContainerControl1
@@ -1392,12 +1392,12 @@ namespace CameraViewer
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.layoutControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(192, 633);
+            this.splitContainerControl1.Size = new System.Drawing.Size(192, 638);
             this.splitContainerControl1.SplitterPosition = 603;
             this.splitContainerControl1.TabIndex = 0;
             this.splitContainerControl1.Text = "splitContainerControl1";
-            this.splitContainerControl1.Resize += new System.EventHandler(this.splitContainerControl1_Resize);
             this.splitContainerControl1.SplitterPositionChanged += new System.EventHandler(this.splitContainerControl1_SplitterPositionChanged);
+            this.splitContainerControl1.Resize += new System.EventHandler(this.splitContainerControl1_Resize);
             // 
             // splitContainerControl2
             // 
@@ -1444,7 +1444,7 @@ namespace CameraViewer
             this.layoutControl2.Location = new System.Drawing.Point(0, 0);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(188, 21);
+            this.layoutControl2.Size = new System.Drawing.Size(188, 26);
             this.layoutControl2.TabIndex = 1;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -1452,7 +1452,7 @@ namespace CameraViewer
             // 
             this.simpleButton1.Location = new System.Drawing.Point(2, 2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(28, 22);
+            this.simpleButton1.Size = new System.Drawing.Size(31, 22);
             this.simpleButton1.StyleController = this.layoutControl2;
             this.simpleButton1.TabIndex = 0;
             this.simpleButton1.Text = "1";
@@ -1460,9 +1460,9 @@ namespace CameraViewer
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(34, 2);
+            this.simpleButton2.Location = new System.Drawing.Point(37, 2);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(28, 22);
+            this.simpleButton2.Size = new System.Drawing.Size(31, 22);
             this.simpleButton2.StyleController = this.layoutControl2;
             this.simpleButton2.TabIndex = 0;
             this.simpleButton2.Text = "4";
@@ -1470,9 +1470,9 @@ namespace CameraViewer
             // 
             // simpleButton3
             // 
-            this.simpleButton3.Location = new System.Drawing.Point(66, 2);
+            this.simpleButton3.Location = new System.Drawing.Point(72, 2);
             this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(28, 22);
+            this.simpleButton3.Size = new System.Drawing.Size(31, 22);
             this.simpleButton3.StyleController = this.layoutControl2;
             this.simpleButton3.TabIndex = 0;
             this.simpleButton3.Text = "9";
@@ -1480,9 +1480,9 @@ namespace CameraViewer
             // 
             // simpleButton4
             // 
-            this.simpleButton4.Location = new System.Drawing.Point(98, 2);
+            this.simpleButton4.Location = new System.Drawing.Point(107, 2);
             this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(34, 22);
+            this.simpleButton4.Size = new System.Drawing.Size(38, 22);
             this.simpleButton4.StyleController = this.layoutControl2;
             this.simpleButton4.TabIndex = 0;
             this.simpleButton4.Text = "16";
@@ -1490,9 +1490,9 @@ namespace CameraViewer
             // 
             // simpleButton5
             // 
-            this.simpleButton5.Location = new System.Drawing.Point(136, 2);
+            this.simpleButton5.Location = new System.Drawing.Point(149, 2);
             this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(33, 22);
+            this.simpleButton5.Size = new System.Drawing.Size(37, 22);
             this.simpleButton5.StyleController = this.layoutControl2;
             this.simpleButton5.TabIndex = 0;
             this.simpleButton5.Text = "25";
@@ -1512,7 +1512,7 @@ namespace CameraViewer
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(171, 26);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(188, 26);
             this.layoutControlGroup2.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Text = "layoutControlGroup2";
             this.layoutControlGroup2.TextVisible = false;
@@ -1521,9 +1521,9 @@ namespace CameraViewer
             // 
             this.layoutControlItem4.Control = this.simpleButton5;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(134, 0);
+            this.layoutControlItem4.Location = new System.Drawing.Point(147, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(37, 26);
+            this.layoutControlItem4.Size = new System.Drawing.Size(41, 26);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -1533,9 +1533,9 @@ namespace CameraViewer
             // 
             this.layoutControlItem5.Control = this.simpleButton4;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(96, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(105, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(38, 26);
+            this.layoutControlItem5.Size = new System.Drawing.Size(42, 26);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -1545,9 +1545,9 @@ namespace CameraViewer
             // 
             this.layoutControlItem6.Control = this.simpleButton3;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(64, 0);
+            this.layoutControlItem6.Location = new System.Drawing.Point(70, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(32, 26);
+            this.layoutControlItem6.Size = new System.Drawing.Size(35, 26);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
@@ -1557,9 +1557,9 @@ namespace CameraViewer
             // 
             this.layoutControlItem7.Control = this.simpleButton2;
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
-            this.layoutControlItem7.Location = new System.Drawing.Point(32, 0);
+            this.layoutControlItem7.Location = new System.Drawing.Point(35, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(32, 26);
+            this.layoutControlItem7.Size = new System.Drawing.Size(35, 26);
             this.layoutControlItem7.Text = "layoutControlItem7";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextToControlDistance = 0;
@@ -1571,7 +1571,7 @@ namespace CameraViewer
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(32, 26);
+            this.layoutControlItem8.Size = new System.Drawing.Size(35, 26);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
@@ -1582,7 +1582,7 @@ namespace CameraViewer
             this.dockPanelAlarm.Controls.Add(this.dockPanel3_Container);
             this.dockPanelAlarm.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
             this.dockPanelAlarm.ID = new System.Guid("a9616fb8-8c7a-42f6-8822-ac9022a24a64");
-            this.dockPanelAlarm.Location = new System.Drawing.Point(400, 411);
+            this.dockPanelAlarm.Location = new System.Drawing.Point(400, 416);
             this.dockPanelAlarm.Name = "dockPanelAlarm";
             this.dockPanelAlarm.OriginalSize = new System.Drawing.Size(200, 313);
             this.dockPanelAlarm.Size = new System.Drawing.Size(658, 313);
@@ -2189,9 +2189,9 @@ namespace CameraViewer
             this.advBandedGridViewVehicle.OptionsBehavior.ReadOnly = true;
             this.advBandedGridViewVehicle.OptionsView.ShowBands = false;
             this.advBandedGridViewVehicle.OptionsView.ShowGroupPanel = false;
-            this.advBandedGridViewVehicle.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.advBandedGridView1_SelectionChanged);
             this.advBandedGridViewVehicle.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.advBandedGridView1_RowClick);
             this.advBandedGridViewVehicle.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.advBandedGridView1_CustomDrawRowIndicator);
+            this.advBandedGridViewVehicle.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.advBandedGridView1_SelectionChanged);
             // 
             // gridBand3
             // 
@@ -2653,9 +2653,9 @@ namespace CameraViewer
             this.advBandedGridViewFace.OptionsBehavior.ReadOnly = true;
             this.advBandedGridViewFace.OptionsView.ShowBands = false;
             this.advBandedGridViewFace.OptionsView.ShowGroupPanel = false;
-            this.advBandedGridViewFace.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.advBandedGridViewFace_SelectionChanged);
             this.advBandedGridViewFace.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.advBandedGridViewFace_RowClick);
             this.advBandedGridViewFace.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.advBandedGridViewFace_CustomDrawRowIndicator);
+            this.advBandedGridViewFace.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.advBandedGridViewFace_SelectionChanged);
             // 
             // gridBand1
             // 
@@ -3086,7 +3086,7 @@ namespace CameraViewer
             this.mainMultiplexer.Location = new System.Drawing.Point(400, 64);
             this.mainMultiplexer.Name = "mainMultiplexer";
             this.mainMultiplexer.Rows = 4;
-            this.mainMultiplexer.Size = new System.Drawing.Size(658, 347);
+            this.mainMultiplexer.Size = new System.Drawing.Size(658, 352);
             this.mainMultiplexer.TabIndex = 5;
             this.mainMultiplexer.DoubleCamera += new CameraViewer.Multiplexer.MyCurrentCamera(this.multiplexer1_DoubleCamera);
             this.mainMultiplexer.SelectCameraWindow += new CameraViewer.Multiplexer.SelectCameraWindowEventHandler(this.mainMultiplexer_SelectCameraWindow);
@@ -3168,10 +3168,10 @@ namespace CameraViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 752);
             this.Controls.Add(this.mainMultiplexer);
+            this.Controls.Add(this.dockPanelCamera);
             this.Controls.Add(this.dockPanelAlarm);
             this.Controls.Add(this.dockPanelNavigator);
             this.Controls.Add(this.dockPanelResult);
-            this.Controls.Add(this.dockPanelCamera);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
@@ -3183,8 +3183,8 @@ namespace CameraViewer
             this.Name = "MainForm";
             this.Text = "交通违法抓拍系统V1.0 Build110620";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmMain_Win_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_Win_FormClosing);
+            this.Load += new System.EventHandler(this.frmMain_Win_Load);
             this.Resize += new System.EventHandler(this.frmMain_Win_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).EndInit();
