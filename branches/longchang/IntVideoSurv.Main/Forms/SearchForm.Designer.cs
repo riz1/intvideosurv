@@ -43,6 +43,7 @@
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.teStartTime = new DevExpress.XtraEditors.TimeEdit();
             this.teEndTime = new DevExpress.XtraEditors.TimeEdit();
+            this.simpleButtonOutPort = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditUser.Properties)).BeginInit();
@@ -112,9 +113,9 @@
             // 
             // simpleButtonSearch
             // 
-            this.simpleButtonSearch.Location = new System.Drawing.Point(690, 255);
+            this.simpleButtonSearch.Location = new System.Drawing.Point(686, 253);
             this.simpleButtonSearch.Name = "simpleButtonSearch";
-            this.simpleButtonSearch.Size = new System.Drawing.Size(90, 27);
+            this.simpleButtonSearch.Size = new System.Drawing.Size(83, 27);
             this.simpleButtonSearch.TabIndex = 52;
             this.simpleButtonSearch.Text = "查询";
             this.simpleButtonSearch.Click += new System.EventHandler(this.simpleButtonSearch_Click);
@@ -177,11 +178,21 @@
             this.teEndTime.Size = new System.Drawing.Size(138, 21);
             this.teEndTime.TabIndex = 50;
             // 
+            // simpleButtonOutPort
+            // 
+            this.simpleButtonOutPort.Location = new System.Drawing.Point(793, 253);
+            this.simpleButtonOutPort.Name = "simpleButtonOutPort";
+            this.simpleButtonOutPort.Size = new System.Drawing.Size(83, 27);
+            this.simpleButtonOutPort.TabIndex = 52;
+            this.simpleButtonOutPort.Text = "导出";
+            this.simpleButtonOutPort.Click += new System.EventHandler(this.simpleButtonOutPort_Click);
+            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 298);
+            this.Controls.Add(this.simpleButtonOutPort);
             this.Controls.Add(this.simpleButtonSearch);
             this.Controls.Add(this.comboBoxEditUser);
             this.Controls.Add(this.labelControl8);
@@ -220,5 +231,6 @@
         private DevExpress.XtraEditors.TimeEdit teStartTime;
         private DevExpress.XtraEditors.TimeEdit teEndTime;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnID;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonOutPort;
     }
 }
