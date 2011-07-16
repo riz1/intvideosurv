@@ -1,4 +1,6 @@
-﻿namespace CameraViewer.Forms
+﻿using CameraViewer.Model;
+
+namespace CameraViewer.Forms
 {
     partial class frmCaptureLicense
     {
@@ -98,17 +100,19 @@
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.cbeCaptureDepartment = new DevExpress.XtraEditors.ComboBoxEdit();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.cbeInvalidType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.punishReason = new DevExpress.XtraEditors.LookUpEdit();
+            this.punishReasonsCollection = new DevExpress.Xpo.XPCollection();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpEditLprType = new DevExpress.XtraEditors.LookUpEdit();
+            this.lprTypeCollection = new DevExpress.Xpo.XPCollection();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.cbeVehType = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.textEditPlateNumber = new DevExpress.XtraEditors.TextEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
             this.listBoxVideoFiles = new DevExpress.XtraEditors.ListBoxControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
@@ -153,11 +157,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbeCaptureDepartment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeInvalidType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punishReason.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punishReasonsCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLprType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lprTypeCollection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPlateNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).BeginInit();
             this.SuspendLayout();
@@ -630,7 +636,7 @@
             // 
             this.trackBar1.Location = new System.Drawing.Point(2, 296);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(515, 45);
+            this.trackBar1.Size = new System.Drawing.Size(515, 42);
             this.trackBar1.TabIndex = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -820,25 +826,15 @@
             // 
             // groupControl2
             // 
-            this.groupControl2.Controls.Add(this.cbeInvalidType);
             this.groupControl2.Controls.Add(this.labelControl7);
             this.groupControl2.Controls.Add(this.labelControl9);
             this.groupControl2.Controls.Add(this.labelControl2);
+            this.groupControl2.Controls.Add(this.punishReason);
             this.groupControl2.Location = new System.Drawing.Point(856, 436);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(271, 77);
             this.groupControl2.TabIndex = 15;
             this.groupControl2.Text = "违法原因";
-            // 
-            // cbeInvalidType
-            // 
-            this.cbeInvalidType.Location = new System.Drawing.Point(60, 36);
-            this.cbeInvalidType.Name = "cbeInvalidType";
-            this.cbeInvalidType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbeInvalidType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeInvalidType.Size = new System.Drawing.Size(177, 21);
-            this.cbeInvalidType.TabIndex = 6;
             // 
             // labelControl7
             // 
@@ -867,19 +863,58 @@
             this.labelControl2.TabIndex = 4;
             this.labelControl2.Text = "*";
             // 
+            // punishReason
+            // 
+            this.punishReason.Location = new System.Drawing.Point(60, 36);
+            this.punishReason.Name = "punishReason";
+            this.punishReason.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.punishReason.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("WZYY", "违章原因", 45, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            this.punishReason.Properties.DataSource = this.punishReasonsCollection;
+            this.punishReason.Properties.DisplayMember = "WZYY";
+            this.punishReason.Properties.NullText = "请选择违章原因";
+            this.punishReason.Properties.PopupSizeable = false;
+            this.punishReason.Properties.ValueMember = "WZYYBH";
+            this.punishReason.Size = new System.Drawing.Size(177, 21);
+            this.punishReason.TabIndex = 6;
+            // 
+            // punishReasonsCollection
+            // 
+            this.punishReasonsCollection.ObjectType = typeof(CameraViewer.Model.PunishReason);
+            // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.lookUpEditLprType);
             this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.labelControl6);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl3);
-            this.groupControl1.Controls.Add(this.textEdit1);
-            this.groupControl1.Controls.Add(this.cbeVehType);
+            this.groupControl1.Controls.Add(this.textEditPlateNumber);
             this.groupControl1.Location = new System.Drawing.Point(856, 347);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(271, 88);
             this.groupControl1.TabIndex = 16;
             this.groupControl1.Text = "号牌信息";
+            // 
+            // lookUpEditLprType
+            // 
+            this.lookUpEditLprType.Location = new System.Drawing.Point(59, 32);
+            this.lookUpEditLprType.Name = "lookUpEditLprType";
+            this.lookUpEditLprType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditLprType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("HPMC", "号牌类型", 41, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            this.lookUpEditLprType.Properties.DataSource = this.lprTypeCollection;
+            this.lookUpEditLprType.Properties.DisplayMember = "HPMC";
+            this.lookUpEditLprType.Properties.NullText = "请选择号牌种类";
+            this.lookUpEditLprType.Properties.ValueMember = "This";
+            this.lookUpEditLprType.Size = new System.Drawing.Size(129, 21);
+            this.lookUpEditLprType.TabIndex = 6;
+            // 
+            // lprTypeCollection
+            // 
+            this.lprTypeCollection.ObjectType = typeof(CameraViewer.Model.LprType);
             // 
             // labelControl4
             // 
@@ -917,23 +952,13 @@
             this.labelControl3.TabIndex = 3;
             this.labelControl3.Text = "号牌号码";
             // 
-            // textEdit1
+            // textEditPlateNumber
             // 
-            this.textEdit1.EditValue = "川K";
-            this.textEdit1.Location = new System.Drawing.Point(60, 62);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(128, 21);
-            this.textEdit1.TabIndex = 5;
-            // 
-            // cbeVehType
-            // 
-            this.cbeVehType.Location = new System.Drawing.Point(60, 35);
-            this.cbeVehType.Name = "cbeVehType";
-            this.cbeVehType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbeVehType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeVehType.Size = new System.Drawing.Size(127, 21);
-            this.cbeVehType.TabIndex = 4;
+            this.textEditPlateNumber.EditValue = "川K";
+            this.textEditPlateNumber.Location = new System.Drawing.Point(60, 62);
+            this.textEditPlateNumber.Name = "textEditPlateNumber";
+            this.textEditPlateNumber.Size = new System.Drawing.Size(128, 21);
+            this.textEditPlateNumber.TabIndex = 5;
             // 
             // buttonSave
             // 
@@ -1065,12 +1090,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeInvalidType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punishReason.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punishReasonsCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbeVehType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLprType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lprTypeCollection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPlateNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).EndInit();
             this.ResumeLayout(false);
@@ -1148,15 +1175,13 @@
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.ComboBoxEdit cbeCaptureDepartment;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraEditors.ComboBoxEdit cbeInvalidType;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.ComboBoxEdit cbeVehType;
+        private DevExpress.XtraEditors.TextEdit textEditPlateNumber;
         private DevExpress.XtraEditors.SimpleButton buttonSave;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.ListBoxControl listBoxVideoFiles;
@@ -1164,6 +1189,10 @@
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.ComboBoxEdit cbeFrameInterval;
         private IntVideoSurv.Control.ScalablePictureBox pictureEditSelectedPicture;
+        private DevExpress.Xpo.XPCollection lprTypeCollection;
+        private DevExpress.XtraEditors.LookUpEdit lookUpEditLprType;
+        private DevExpress.XtraEditors.LookUpEdit punishReason;
+        private DevExpress.Xpo.XPCollection punishReasonsCollection;
 
     }
 }

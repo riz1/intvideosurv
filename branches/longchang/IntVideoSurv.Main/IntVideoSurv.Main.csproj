@@ -104,6 +104,9 @@
     <Reference Include="DevExpress.Utils.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.Xpo.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v10.2.Linq, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v10.2.Providers, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -488,6 +491,12 @@
     <Compile Include="JustForTest.Designer.cs">
       <DependentUpon>JustForTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\PunishReason.cs" />
+    <Compile Include="Model\Camera.cs" />
+    <Compile Include="Model\IRepository.cs" />
+    <Compile Include="Model\LprType.cs" />
+    <Compile Include="Model\OracleProvider.cs" />
+    <Compile Include="Model\TollGate.cs" />
     <Compile Include="Multiplayer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -517,6 +526,7 @@
     </Compile>
     <Compile Include="ProtocolDataBuilder.cs" />
     <Compile Include="ProtocolDataItem.cs" />
+    <Compile Include="Region.cs" />
     <Compile Include="Remoting\SMUserService.cs" />
     <Compile Include="AppSettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -560,6 +570,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="Model\VehMon.cs" />
     <Compile Include="Win32.cs">
       <SubType>Code</SubType>
     </Compile>

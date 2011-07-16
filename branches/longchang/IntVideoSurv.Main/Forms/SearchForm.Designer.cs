@@ -185,7 +185,6 @@
             this.simpleButtonOutPort.Size = new System.Drawing.Size(83, 27);
             this.simpleButtonOutPort.TabIndex = 52;
             this.simpleButtonOutPort.Text = "导出";
-            this.simpleButtonOutPort.Click += new System.EventHandler(this.simpleButtonOutPort_Click);
             // 
             // SearchForm
             // 
