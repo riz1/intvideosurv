@@ -226,7 +226,7 @@ namespace CameraViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ftp://192.168.1.100/aa/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ftp://192.168.1.124/aa/")]
         public string FtpFilePath {
             get {
                 return ((string)(this["FtpFilePath"]));

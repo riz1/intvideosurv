@@ -1363,7 +1363,7 @@ namespace CameraViewer
             this.dockPanelNavigator.Controls.Add(this.dockPanel1_Container);
             this.dockPanelNavigator.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanelNavigator.ID = new System.Guid("e603f316-2b99-4234-84b6-2fcc0438bb24");
-            this.dockPanelNavigator.Location = new System.Drawing.Point(0, 64);
+            this.dockPanelNavigator.Location = new System.Drawing.Point(200, 64);
             this.dockPanelNavigator.Name = "dockPanelNavigator";
             this.dockPanelNavigator.Options.AllowFloating = false;
             this.dockPanelNavigator.Options.FloatOnDblClick = false;
@@ -3168,10 +3168,10 @@ namespace CameraViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 752);
             this.Controls.Add(this.mainMultiplexer);
-            this.Controls.Add(this.dockPanelCamera);
             this.Controls.Add(this.dockPanelAlarm);
             this.Controls.Add(this.dockPanelNavigator);
             this.Controls.Add(this.dockPanelResult);
+            this.Controls.Add(this.dockPanelCamera);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);

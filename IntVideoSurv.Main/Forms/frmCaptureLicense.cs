@@ -521,15 +521,6 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
         private void LoadBaseInfo()
         {
-            cbeVehType.Properties.Items.Clear();
-            foreach (var v in _listLongChang_VehTypeInfo)
-            {
-                cbeVehType.Properties.Items.Add(v.Value.VehicleType);
-            }
-            if (cbeVehType.Properties.Items.Count > 0)
-            {
-                cbeVehType.EditValue = cbeVehType.Properties.Items[0];
-            }
 
             cbeRegion.Properties.Items.Clear();
             foreach (var v in _listLongChang_RegionInfo)
@@ -550,16 +541,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             {
                 cbeCaptureDepartment.EditValue = cbeCaptureDepartment.Properties.Items[0];
             }
-
-            cbeInvalidType.Properties.Items.Clear();
-            foreach (var v in _listLongChang_InvalidTypeInfo)
-            {
-                cbeInvalidType.Properties.Items.Add(v.Value.InvalidName);
-            }
-            if (cbeInvalidType.Properties.Items.Count > 0)
-            {
-                cbeInvalidType.EditValue = cbeInvalidType.Properties.Items[0];
-            }
+           
             if (_airnoixCamera==null)
             {
                 return;
@@ -603,7 +585,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
 
             if (_airnoixCamera == null) return;
-            teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == null
+            teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == default(DateTime)
                                  ? DateTime.Now
                                  : _airnoixCamera.BeginCaptureTime;
         }
@@ -618,7 +600,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 XtraMessageBox.Show("三张照片未完全生成!");
                 return;
             }
-            if (textEdit1.Text.Length < 7)
+            if (textEditPlateNumber.Text.Length < 7)
             {
                 XtraMessageBox.Show("录入的车牌号不正确!");
                 return;
@@ -628,6 +610,36 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 MessageBox.Show("此摄像头不存在");
                 return;
             }
+
+            var camera = Model.Repository.Instance.GetCamera(_airnoixCamera.Id.ToString());
+            if (camera == null)
+            {
+                MessageBox.Show("没有对应的卡口信息");
+                return;
+            }
+
+            var record = new Model.TogVehmon();
+            //地点信息
+            record.KKBH = camera.KaKouNo;
+            record.KKMC = camera.KakouName;
+            record.FXBH = camera.DirectionNo;
+            record.FXMC = camera.DirectionName;
+            record.CDBH = camera.LaneNo;
+            record.CDMC = camera.LaneName;
+            //事件
+            record.WZYY = (string) punishReason.EditValue;
+            //时间
+            record.JGSK = _airnoixCamera.BeginCaptureTime != default(DateTime) ? _airnoixCamera.BeginCaptureTime : DateTime.Now;
+            record.Save();
+            //车牌信息
+            record.HPHM = (string) textEditPlateNumber.EditValue;
+            var lprType = (Model.LprType) lookUpEditLprType.EditValue;
+            record.HPZL = lprType.HPZLDM;
+            record.HPZLMC = lprType.HPMC;
+
+            record.Save();
+            return;
+            
 
             LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
             LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
@@ -645,9 +657,9 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 MessageBox.Show("没有对应的卡口信息");
                 return;
             }
-            vehmon.plateNumberTypeName = cbeVehType.Text;
-            vehmon.plateNumber = textEdit1.Text;
-            vehmon.illegalReason = cbeInvalidType.Text;
+            vehmon.plateNumberTypeName = "";
+            vehmon.plateNumber = textEditPlateNumber.Text;
+            vehmon.illegalReason = punishReason.Text;
             reason = LongChang_InvalidTypeBusiness.Instance.GetInvalidTypeInfoByWzyy(ref errMessage, vehmon.illegalReason);
             vehmon.adminDivisionName = cbeCaptureDepartment.Text;
             vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
@@ -676,14 +688,22 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             vehmon.roadName = tollgate.roadName;
             vehmon.redLightTime = Convert.ToDateTime(teCaptureTime.Text);
             //写入vehmon信息
-            string i;
-            i = LongChang_VehMonBusiness.Instance.Insert(ref errMessage, vehmon);
+            //string i;
+            //i = LongChang_VehMonBusiness.Instance.Insert(ref errMessage, vehmon);
+            //if (i == string.Empty)
+            //{
+            //    MessageBox.Show("save error");
+            //}
             
             //写入uservehmon信息
-            uservehmon.VehMonId = i;
+            uservehmon.VehMonId = "1";
             uservehmon.UserId = MainForm.CurrentUser.UserId;
             uservehmon.TheTime = DateTime.Now;
-            LongChang_UserVehMonBusiness.Instance.Insert(ref errMessage, uservehmon);
+            //var res = LongChang_UserVehMonBusiness.Instance.Insert(ref errMessage, uservehmon);
+            //if (res == -1)
+            //{
+            //    MessageBox.Show("Save error");
+            //}
             //将三张图片写入到磁盘中
             Image image1 = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
             Image image2 = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
@@ -742,7 +762,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             string uri = Properties.Settings.Default.FtpFilePath + fileInf.Name;
             FtpWebRequest reqFTP;
             reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(Properties.Settings.Default.FtpFilePath + fileInf.Name));
-            reqFTP.Credentials = new NetworkCredential("Administrator", "");
+            reqFTP.Credentials = new NetworkCredential("kise", "12345");
             reqFTP.KeepAlive = false;
             reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
             reqFTP.UseBinary = true;

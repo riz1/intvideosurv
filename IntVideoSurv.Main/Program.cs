@@ -20,6 +20,9 @@ namespace CameraViewer
             System.Threading.Mutex instance = new System.Threading.Mutex(true, "ArresterSerialPort", out createdNew); //同步基元变量
             if (createdNew)
             {
+                var conn = DevExpress.Xpo.DB.OracleConnectionProvider.GetConnectionString("ora_remote", "longchang", "111");
+                DevExpress.Xpo.Session.DefaultSession.ConnectionString = conn;
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new MainForm());
