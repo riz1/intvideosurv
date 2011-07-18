@@ -13,6 +13,7 @@ using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
 using log4net;
 using CameraViewer.Tools;
+using System.Threading.Tasks;
 
 namespace CameraViewer.Forms
 {
@@ -22,6 +23,10 @@ namespace CameraViewer.Forms
 
         private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const int PicNum = 5;
+        private DateTime _captureTime;
+        private Model.Camera _cameraSpec;
+
+
         public frmCaptureLicense()
         {
             InitializeComponent();
@@ -51,7 +56,7 @@ namespace CameraViewer.Forms
             ThirdVideoState = 3
         }
         private PlayState play_state;
-        private RelatedFile _relatedFile; 
+        private RelatedFile _relatedFile;
 
         public frmCaptureLicense(AirnoixCamera airnoixCamera)
         {
@@ -76,7 +81,7 @@ namespace CameraViewer.Forms
             {
                 listBoxVideoFiles.Items.Add("1");
             }
-            if(_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
+            if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
             {
                 listBoxVideoFiles.Items.Add("2");
             }
@@ -145,7 +150,7 @@ namespace CameraViewer.Forms
         private int GetFrames(string videofile)
         {
             IntPtr memoryHandle = new IntPtr(0x4321);
-            IntPtr memoryIntPtr = AirnoixPlayer.Avdec_Init(memoryHandle,0, 512, 0);
+            IntPtr memoryIntPtr = AirnoixPlayer.Avdec_Init(memoryHandle, 0, 512, 0);
             int ret = AirnoixPlayer.Avdec_SetFile(memoryIntPtr, videofile, null, true);
             Thread.Sleep(40);
             ret = AirnoixPlayer.Avdec_Pause(memoryIntPtr);
@@ -241,13 +246,13 @@ namespace CameraViewer.Forms
             Image[] images = new Image[PicNum];
             for (int i = 0; i < PicNum; i++)
             {
-                string fmt = string.Format("JPG {0:0000}{1:0000}{2:0000}", frameWidth>0?frameWidth:1280, frameHeight>0?frameHeight:720, 24);
+                string fmt = string.Format("JPG {0:0000}{1:0000}{2:0000}", frameWidth > 0 ? frameWidth : 1280, frameHeight > 0 ? frameHeight : 720, 24);
                 string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
                 ret = AirnoixPlayer.Avdec_Play(intPtr);
                 Thread.Sleep(40 * frameInterval);
                 ret = AirnoixPlayer.Avdec_Pause(intPtr);
                 ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
-                
+
                 images[i] = Image.FromFile(filename);
                 alTempFiles.Add(filename);
                 //ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
@@ -284,11 +289,11 @@ namespace CameraViewer.Forms
                     pictureEditSelectedPicture.Image = new Bitmap(img);
                     this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
                 }
-                
+
             }
-               
-           
-            
+
+
+
 
         }
 
@@ -307,7 +312,7 @@ namespace CameraViewer.Forms
             }
             catch (Exception)
             {
-                
+
                 ;
             }
 
@@ -315,7 +320,7 @@ namespace CameraViewer.Forms
 
 
         private bool isTimerChanged;
-        private bool isfirstvideo=true;
+        private bool isfirstvideo = true;
         private bool first;
         private int tmpcount;
         private int changecount;
@@ -330,14 +335,14 @@ namespace CameraViewer.Forms
 
 
                 int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-                if (currentPos > _totalFrames || _totalFrames==0)
+                if (currentPos > _totalFrames || _totalFrames == 0)
                 {
                     _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
                     trackBar1.Maximum = _totalFrames;
                 }
-                if (currentPos>trackBar1.Maximum)
+                if (currentPos > trackBar1.Maximum)
                 {
-                    trackBar1.Value = trackBar1.Maximum;                    
+                    trackBar1.Value = trackBar1.Maximum;
                 }
                 else
                 {
@@ -348,8 +353,8 @@ namespace CameraViewer.Forms
             }
             catch (Exception ex)
             {
-                
-                Debug.WriteLine("Error:"+ex.ToString());
+
+                Debug.WriteLine("Error:" + ex.ToString());
             }
 
 
@@ -362,11 +367,11 @@ namespace CameraViewer.Forms
             AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
             if (state == AirnoixPlayerState.PLAY_STATE_PLAY)
             {
-               int ret =AirnoixPlayer.Avdec_Pause(intPtr);
-               ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
-               ret = AirnoixPlayer.Avdec_Play(intPtr);
+                int ret = AirnoixPlayer.Avdec_Pause(intPtr);
+                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
+                ret = AirnoixPlayer.Avdec_Play(intPtr);
             }
-            else if ( state == AirnoixPlayerState.PLAY_STATE_STOP)
+            else if (state == AirnoixPlayerState.PLAY_STATE_STOP)
             {
                 AirnoixPlayer.Avdec_Play(intPtr);
                 AirnoixPlayer.Avdec_Pause(intPtr);
@@ -395,7 +400,7 @@ namespace CameraViewer.Forms
         private void buttonPlay_Click(object sender, EventArgs e)
         {
             //第一次播放
-            if (StartPlay==true)
+            if (StartPlay == true)
             {
                 FirstPlay(Start_Frame);//从Start_Frame帧开始播放
                 StartPlay = false;
@@ -424,13 +429,13 @@ namespace CameraViewer.Forms
             IsEnd = false;
             isfirstvideo = true;
             StartPlay = true;
-            
+
         }
-        private  int GetTotalFrames()
+        private int GetTotalFrames()
         {
             int Maximum;
             int count;
-            
+
             Maximum = 0;
             Maximum += Change_Frame;//十五秒对应的帧数
             int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
@@ -459,7 +464,7 @@ namespace CameraViewer.Forms
             }
             catch (Exception ex)
             {
-            	
+
             }
 
         }
@@ -474,7 +479,7 @@ namespace CameraViewer.Forms
             Thread.Sleep(1000);
             ret = AirnoixPlayer.Avdec_Play(intPtr);
             ret = AirnoixPlayer.Avdec_Pause(intPtr);
-            
+
             if (trackBar1.Maximum > 0)
             {
                 Thread.Sleep(2500);
@@ -498,7 +503,7 @@ namespace CameraViewer.Forms
 
 
         #region 抓拍证据(从CaptureLicense控件移植过来)
-        
+
         private static string staticErrMessage = "";
         private static Dictionary<string, LongChang_LptColorInfo> _listLongChang_LptColorInfo =
     LongChang_LptColorBusiness.Instance.GetAllLptColorInfo(ref staticErrMessage);
@@ -541,8 +546,8 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             {
                 cbeCaptureDepartment.EditValue = cbeCaptureDepartment.Properties.Items[0];
             }
-           
-            if (_airnoixCamera==null)
+
+            if (_airnoixCamera == null)
             {
                 return;
             }
@@ -552,7 +557,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 bool isexisted = false;
                 foreach (var VARIABLE in comboBoxEditRoadName.Properties.Items)
                 {
-                    if (VARIABLE.ToString()==v.Value.roadName)
+                    if (VARIABLE.ToString() == v.Value.roadName)
                     {
                         isexisted = true;
                         break;
@@ -560,7 +565,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 }
                 if (!isexisted)
                 {
-                    comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);  
+                    comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);
                 }
 
             }
@@ -580,7 +585,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
             }
             else
             {
-                comboBoxEditRoadName.Text = tollgate.roadName;                
+                comboBoxEditRoadName.Text = tollgate.roadName;
             }
 
 
@@ -592,9 +597,9 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
         #endregion
         private string errMessage = "";
-        private void buttonSave_Click(object sender, EventArgs e)
+        private async void buttonSave_Click(object sender, EventArgs e)
         {
-            
+
             if (treeListPicturesBefore.FocusedNode == null || treeListPicturesCurrent.FocusedNode == null || treeListPicturesAfter.FocusedNode == null)
             {
                 XtraMessageBox.Show("三张照片未完全生成!");
@@ -618,183 +623,99 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 return;
             }
 
-            var record = new Model.TogVehmon();
-            //地点信息
-            record.KKBH = camera.KaKouNo;
-            record.KKMC = camera.KakouName;
-            record.FXBH = camera.DirectionNo;
-            record.FXMC = camera.DirectionName;
-            record.CDBH = camera.LaneNo;
-            record.CDMC = camera.LaneName;
-            //事件
-            record.WZYY = (string) punishReason.EditValue;
-            //时间
-            record.JGSK = _airnoixCamera.BeginCaptureTime != default(DateTime) ? _airnoixCamera.BeginCaptureTime : DateTime.Now;
-            record.Save();
-            //车牌信息
-            record.HPHM = (string) textEditPlateNumber.EditValue;
-            var lprType = (Model.LprType) lookUpEditLprType.EditValue;
-            record.HPZL = lprType.HPZLDM;
-            record.HPZLMC = lprType.HPMC;
+            _cameraSpec = camera;
+            _captureTime = _airnoixCamera.BeginCaptureTime != default(DateTime) ? _airnoixCamera.BeginCaptureTime : DateTime.Now;
 
-            record.Save();
-            return;
-            
-
-            LongChang_VehMonInfo vehmon = new LongChang_VehMonInfo();
-            LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
-            LongChang_InvalidTypeInfo reason = new LongChang_InvalidTypeInfo();
-            LongChang_UserVehMonInfo uservehmon = new LongChang_UserVehMonInfo();
-            string captureFileName = Properties.Settings.Default.CapturePictureFilePath
-                                     + @"\" + _airnoixCamera.BeginCaptureTime.ToString(@"yyyy\\MM\\dd")
-                                     + @"\";
-            if (!Directory.Exists(captureFileName))
-            {
-                Directory.CreateDirectory(captureFileName);
-            }
-            if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
-            {
-                MessageBox.Show("没有对应的卡口信息");
-                return;
-            }
-            vehmon.plateNumberTypeName = "";
-            vehmon.plateNumber = textEditPlateNumber.Text;
-            vehmon.illegalReason = punishReason.Text;
-            reason = LongChang_InvalidTypeBusiness.Instance.GetInvalidTypeInfoByWzyy(ref errMessage, vehmon.illegalReason);
-            vehmon.adminDivisionName = cbeCaptureDepartment.Text;
-            vehmon.adminDivisionNumber = int.Parse(cbeRegion.Text);
-            //vehmon.vehInfoNum = 0;//CLXXBH_SEQ.NEXTVAL
-
-            vehmon.tollNum = int.Parse(tollgate.tollNum);
-            vehmon.tollName = tollgate.tollName;
-            vehmon.plateColorNum = 0;
-            vehmon.plateColor = "";
-            vehmon.imageCount = 3;
-            vehmon.imageName1 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_1.jpg";
-            vehmon.imageName2 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_2.jpg";
-            vehmon.imageName3 = captureFileName + _airnoixCamera.BeginCaptureTime.ToString("HHmmss") +"_" + vehmon.plateNumber + "_3.jpg";
-            vehmon.imageName4 = "";
-            vehmon.vedioName = captureFileName + Path.GetFileName(_airnoixCamera.VideoPath);
-            vehmon.vedioName1 = _relatedFile.RelatedFile1 != null
-                                    ? captureFileName + Path.GetFileName(_relatedFile.RelatedFile1)
-                                    : null;
-            vehmon.vedioName2 = _relatedFile.RelatedFile2 != null ? captureFileName + Path.GetFileName(_relatedFile.RelatedFile2) : null;;
-            vehmon.vehicleColor = "";
-            vehmon.vehicleType = 0;
-            vehmon.vehicleTypeName = "";
-            vehmon.plateNumberType = "A";//
-            vehmon.countTime = 0;
-
-            vehmon.roadName = tollgate.roadName;
-            vehmon.redLightTime = Convert.ToDateTime(teCaptureTime.Text);
-            //写入vehmon信息
-            //string i;
-            //i = LongChang_VehMonBusiness.Instance.Insert(ref errMessage, vehmon);
-            //if (i == string.Empty)
-            //{
-            //    MessageBox.Show("save error");
-            //}
-            
-            //写入uservehmon信息
-            uservehmon.VehMonId = "1";
-            uservehmon.UserId = MainForm.CurrentUser.UserId;
-            uservehmon.TheTime = DateTime.Now;
-            //var res = LongChang_UserVehMonBusiness.Instance.Insert(ref errMessage, uservehmon);
-            //if (res == -1)
-            //{
-            //    MessageBox.Show("Save error");
-            //}
-            //将三张图片写入到磁盘中
-            Image image1 = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
-            Image image2 = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
-            Image image3 = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
-            image1 = AddTextInImage(image1, vehmon.tollName, 18, Color.White, 8, 46);
-            image2 = AddTextInImage(image2, vehmon.tollName, 18, Color.White, 8, 46);
-            image3 = AddTextInImage(image3, vehmon.tollName, 18, Color.White, 8, 46);
-            image1.Save(vehmon.imageName1, System.Drawing.Imaging.ImageFormat.Jpeg);
-            image2.Save(vehmon.imageName2, System.Drawing.Imaging.ImageFormat.Jpeg);
-            image3.Save(vehmon.imageName3, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-            #region ftp上传服务
-
-            UploadFile(vehmon.imageName1);
-            UploadFile(vehmon.imageName2);
-            UploadFile(vehmon.imageName3);
-            #endregion
-            AirnoixPlayer.Avdec_Stop(intPtr);
-            AirnoixPlayer.Avdec_CloseFile(intPtr);
+            this.UseWaitCursor = true;
 
             try
             {
-                if (Properties.Settings.Default.IsSaveVideo)
-                {
-                    //拷贝视频文件
-                    if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
-                    {
-                        File.Copy(_relatedFile.RelatedFile1, vehmon.vedioName1);
-                    }
-                    if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
-                    {
-                        File.Copy(_relatedFile.RelatedFile2, vehmon.vedioName2);
-                    }
-                    if (_airnoixCamera.VideoPath != null && File.Exists(_airnoixCamera.VideoPath))
-                    {
-                        File.Copy(_airnoixCamera.VideoPath, vehmon.vedioName);
-                    }                    
-                }
+                await UploadImages();
+                SaveCaptureRecord();
 
-                XtraMessageBox.Show("保存成功!");
+                AirnoixPlayer.Avdec_Stop(intPtr);
+                AirnoixPlayer.Avdec_CloseFile(intPtr);
+
+                MessageBox.Show(this, "保存成功。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
-            catch (Exception)
+            catch (System.Net.WebException ex)
             {
-                XtraMessageBox.Show("违章记录保存成功，视频文件拷贝失败!");;
+                MessageBox.Show(this, "保存记录时发生错误\r\n\r\n" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                this.Close();                
-            } 
-
+                this.UseWaitCursor = false;
+            }
         }
 
-        private void UploadFile(string filename)
+        private async Task UploadImages()
         {
-            FileInfo fileInf = new FileInfo(filename);
-            string uri = Properties.Settings.Default.FtpFilePath + fileInf.Name;
-            FtpWebRequest reqFTP;
-            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(Properties.Settings.Default.FtpFilePath + fileInf.Name));
-            reqFTP.Credentials = new NetworkCredential("kise", "12345");
-            reqFTP.KeepAlive = false;
-            reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
-            reqFTP.UseBinary = true;
-            reqFTP.ContentLength = fileInf.Length;
+            var images = GetImageArray();
+            await UploadImagesAsync(images);
+            //image1 = AddTextInImage(image1, vehmon.tollName, 18, Color.White, 8, 46);
+            //image2 = AddTextInImage(image2, vehmon.tollName, 18, Color.White, 8, 46);
+            //image3 = AddTextInImage(image3, vehmon.tollName, 18, Color.White, 8, 46);
+        }
 
-            int buffLength = 1024;
+        private void SaveCaptureRecord()
+        {
+            var images = GetImageArray();
+            var record = new Model.TogVehmon();
+            //地点信息
+            record.KKBH = _cameraSpec.KaKouNo;
+            record.KKMC = _cameraSpec.KakouName;
+            record.FXBH = _cameraSpec.DirectionNo;
+            record.FXMC = _cameraSpec.DirectionName;
+            record.CDBH = _cameraSpec.LaneNo;
+            record.CDMC = _cameraSpec.LaneName;
+            //事件
+            record.WZYY = (string)punishReason.EditValue;
+            //时间
+            record.JGSK = _captureTime;
+            record.TJRQ = Model.TimeConverter.ToTongJiRiQi(_captureTime);
+            //车牌信息
+            record.HPHM = (string)textEditPlateNumber.EditValue;
+            var lprType = (Model.LprType)lookUpEditLprType.EditValue;
+            record.HPZL = lprType.HPZLDM;
+            record.HPZLMC = lprType.HPMC;
+            //图片
+            record.TXMC1 = Path.GetFileName(images[0].Item2);
+            record.TXMC2 = Path.GetFileName(images[1].Item2);
+            record.TXMC3 = Path.GetFileName(images[2].Item2);
 
-            byte[] buff = new byte[buffLength];
-            int contentLen;
-            FileStream fs = fileInf.OpenRead();
-            try
+            record.Save();
+        }
+
+        private Tuple<Image, string>[] GetImageArray()
+        {
+            //图片
+            var image1 = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
+            var image2 = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
+            var image3 = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
+            var image1Path = GetRelativeImagePath(_captureTime, _cameraSpec, 1);
+            var image2Path = GetRelativeImagePath(_captureTime, _cameraSpec, 2);
+            var image3Path = GetRelativeImagePath(_captureTime, _cameraSpec, 3);
+
+            return new[]
+                       {
+                           new Tuple<Image, string>(image1, image1Path),
+                           new Tuple<Image, string>(image2, image2Path),
+                           new Tuple<Image, string>(image3, image3Path)
+                       };
+        }
+
+        private async Task UploadImagesAsync(IEnumerable<Tuple<Image, string>> images)
+        {
+            foreach (var tuple in images)
             {
-                Stream strm = reqFTP.GetRequestStream();
-                contentLen = fs.Read(buff, 0, buffLength);
-                while (contentLen != 0)
-                {
-                    strm.Write(buff, 0, contentLen);
-
-                    contentLen = fs.Read(buff, 0, buffLength);
-                }
-                strm.Close();
-                fs.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Upload Error");
+                await new FtpService().UploadImageAsync(tuple.Item1, tuple.Item2);
             }
         }
+
 
         private Image AddTextInImage(Image image, string addText, int fonesize, Color brushColor, int x, int y)
         {
-
             Graphics g = Graphics.FromImage(image);
             g.DrawImage(image, 0, 0, image.Width, image.Height);
             Font f = new Font("Verdana", fonesize);
@@ -840,7 +761,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
         private void frmCaptureLicense_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Alt&&e.KeyCode==Keys.A)
+            if (e.Alt && e.KeyCode == Keys.A)
             {
                 simpleButtonPrevious_Click(sender, null);
             }
@@ -866,6 +787,16 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                 frmFullsizePicture ffp = new frmFullsizePicture(pictureEditSelectedPicture.Image);
                 ffp.Show();
             }
+        }
+
+        private string GetRelativeImagePath(DateTime captureTime, Model.Camera captureFrom, int index)
+        {
+            return string.Format("{0:d4}/{1:d2}/{2:d2}/{3}-{4:d4}{5:d2}{6:d2}{7:d2}{8:d2}{9:d2}-{10}.jpg",
+                                 captureTime.Year, captureTime.Month, captureTime.Day,
+                                 captureFrom.LaneNo,
+                                 captureTime.Year, captureTime.Month, captureTime.Day, captureTime.Hour,
+                                 captureTime.Minute, captureTime.Second,
+                                 index);
         }
     }
 }

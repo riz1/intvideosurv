@@ -17,6 +17,10 @@ namespace CameraViewer
             DevExpress.Skins.SkinManager.EnableFormSkins();
             DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle(Properties.Settings.Default.DefaultSkinName);
 
+            FtpService.HostIp = Properties.Settings.Default.FtpServer;
+            FtpService.UserName = Properties.Settings.Default.FtpUserName;
+            FtpService.Password = Properties.Settings.Default.FtpPassword;
+
             System.Threading.Mutex instance = new System.Threading.Mutex(true, "ArresterSerialPort", out createdNew); //同步基元变量
             if (createdNew)
             {

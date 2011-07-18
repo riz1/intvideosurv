@@ -88,6 +88,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AsyncCtpLibrary">
+      <HintPath>..\..\..\..\Microsoft Visual Studio Async CTP\Samples\AsyncCtpLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Com.SS.Framework.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RefDll\Com.SS.Framework.Entity.dll</HintPath>
@@ -482,6 +485,7 @@
     <Compile Include="Forms\frmSetting.designer.cs">
       <DependentUpon>frmSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="FtpService.cs" />
     <Compile Include="IWizardPage.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -491,6 +495,8 @@
     <Compile Include="JustForTest.Designer.cs">
       <DependentUpon>JustForTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Converter.cs" />
+    <Compile Include="Model\Department.cs" />
     <Compile Include="Model\PunishReason.cs" />
     <Compile Include="Model\Camera.cs" />
     <Compile Include="Model\IRepository.cs" />

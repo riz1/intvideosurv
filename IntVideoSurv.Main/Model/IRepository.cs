@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DevExpress.Xpo;
 
 namespace CameraViewer.Model
 {
     public class Repository
     {
         private Dictionary<string, Camera> _cameras = new Dictionary<string, Camera>();
+        private DevExpress.Xpo.XPCollection<Department> _departments;
         private static Repository _instance;
 
         public Camera GetCamera(string cameraId)
@@ -43,6 +45,16 @@ namespace CameraViewer.Model
             }
 
             return null;
+        }
+
+        public Department GetDepartment(string departmentId)
+        {
+            if (_departments == null)
+            {
+                _departments = new XPCollection<Department>();
+            }
+
+            return _departments.FirstOrDefault(d => d.XZQHDM == departmentId);
         }
 
         public static Repository Instance
