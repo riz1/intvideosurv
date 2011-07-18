@@ -114,10 +114,10 @@ namespace CameraViewer.Forms
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.textEditPlateNumber = new DevExpress.XtraEditors.TextEdit();
             this.buttonSave = new DevExpress.XtraEditors.SimpleButton();
-            this.listBoxVideoFiles = new DevExpress.XtraEditors.ListBoxControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.cbeFrameInterval = new DevExpress.XtraEditors.ComboBoxEdit();
             this.pictureEditSelectedPicture = new IntVideoSurv.Control.ScalablePictureBox();
+            this.videoListContainer = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit2)).BeginInit();
@@ -164,8 +164,8 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLprType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lprTypeCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPlateNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.videoListContainer)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButtonPrevious
@@ -624,7 +624,7 @@ namespace CameraViewer.Forms
             // 
             this.panelControlVideo.Location = new System.Drawing.Point(5, 2);
             this.panelControlVideo.Name = "panelControlVideo";
-            this.panelControlVideo.Size = new System.Drawing.Size(512, 288);
+            this.panelControlVideo.Size = new System.Drawing.Size(452, 288);
             this.panelControlVideo.TabIndex = 7;
             // 
             // timerForUpdatingTrack
@@ -636,7 +636,7 @@ namespace CameraViewer.Forms
             // 
             this.trackBar1.Location = new System.Drawing.Point(2, 296);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(515, 42);
+            this.trackBar1.Size = new System.Drawing.Size(455, 42);
             this.trackBar1.TabIndex = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -971,14 +971,6 @@ namespace CameraViewer.Forms
             this.buttonSave.Text = "保存(&F)";
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // listBoxVideoFiles
-            // 
-            this.listBoxVideoFiles.Location = new System.Drawing.Point(523, 2);
-            this.listBoxVideoFiles.Name = "listBoxVideoFiles";
-            this.listBoxVideoFiles.Size = new System.Drawing.Size(87, 288);
-            this.listBoxVideoFiles.TabIndex = 19;
-            this.listBoxVideoFiles.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
-            // 
             // labelControl8
             // 
             this.labelControl8.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -1009,21 +1001,28 @@ namespace CameraViewer.Forms
             // pictureEditSelectedPicture
             // 
             this.pictureEditSelectedPicture.Image = null;
-            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(616, 2);
+            this.pictureEditSelectedPicture.Location = new System.Drawing.Point(682, 2);
             this.pictureEditSelectedPicture.Name = "pictureEditSelectedPicture";
-            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(512, 319);
+            this.pictureEditSelectedPicture.Size = new System.Drawing.Size(446, 319);
             this.pictureEditSelectedPicture.TabIndex = 22;
             this.pictureEditSelectedPicture.DoubleClick += new System.EventHandler(this.pictureEditSelectedPicture_DoubleClick_1);
+            // 
+            // videoListContainer
+            // 
+            this.videoListContainer.Location = new System.Drawing.Point(463, 4);
+            this.videoListContainer.Name = "videoListContainer";
+            this.videoListContainer.Size = new System.Drawing.Size(210, 285);
+            this.videoListContainer.TabIndex = 23;
             // 
             // frmCaptureLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 689);
+            this.Controls.Add(this.videoListContainer);
             this.Controls.Add(this.pictureEditSelectedPicture);
             this.Controls.Add(this.labelControl8);
             this.Controls.Add(this.cbeFrameInterval);
-            this.Controls.Add(this.listBoxVideoFiles);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
@@ -1047,6 +1046,7 @@ namespace CameraViewer.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "证据截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureLicense_FormClosed);
+            this.Load += new System.EventHandler(this.frmCaptureLicense_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCaptureLicense_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).EndInit();
@@ -1098,8 +1098,8 @@ namespace CameraViewer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLprType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lprTypeCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPlateNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxVideoFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbeFrameInterval.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.videoListContainer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1184,7 +1184,6 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.TextEdit textEditPlateNumber;
         private DevExpress.XtraEditors.SimpleButton buttonSave;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.ListBoxControl listBoxVideoFiles;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.ComboBoxEdit cbeFrameInterval;
@@ -1193,6 +1192,7 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.LookUpEdit lookUpEditLprType;
         private DevExpress.XtraEditors.LookUpEdit punishReason;
         private DevExpress.Xpo.XPCollection punishReasonsCollection;
+        private DevExpress.XtraEditors.PanelControl videoListContainer;
 
     }
 }
