@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -19,13 +20,12 @@ namespace CameraViewer.Forms
 {
     public partial class frmCaptureLicense : XtraForm
     {
-
-
         private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const int PicNum = 5;
         private DateTime _captureTime;
         private Model.Camera _cameraSpec;
 
+        private IList<HistroyVideoFile> _videoFiles = new BindingList<HistroyVideoFile>();
 
         public frmCaptureLicense()
         {
@@ -49,6 +49,30 @@ namespace CameraViewer.Forms
             StartPlay = true;
 
         }
+
+        protected virtual void InitializeVideoList()
+        {
+            var listbox = new ListBoxControl();
+            listbox.Dock = DockStyle.Fill;
+            listbox.DoubleClick += this.listBoxControl1_DoubleClick;
+            this.videoListContainer.Controls.Add(listbox);
+
+            //获取所有相关的视频文件
+            _relatedFile = new RelatedFile(_airnoixCamera.Ip, 1, _airnoixCamera.BeginCaptureTime, Properties.Settings.Default.PreVideoSeconds);
+
+            listbox.Items.Clear();
+            if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
+            {
+                listbox.Items.Add("1");
+            }
+            if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
+            {
+                listbox.Items.Add("2");
+            }
+            listbox.Items.Add("3");
+
+        }
+
         private enum PlayState
         {
             FirstVideoState = 1,
@@ -59,10 +83,10 @@ namespace CameraViewer.Forms
         private RelatedFile _relatedFile;
 
         public frmCaptureLicense(AirnoixCamera airnoixCamera)
+            : this()
         {
-            InitializeComponent();
             _airnoixCamera = airnoixCamera;
-            LoadBaseInfo();
+
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
@@ -71,33 +95,19 @@ namespace CameraViewer.Forms
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
-            //获取所有相关的视频文件
-            _relatedFile = new RelatedFile(_airnoixCamera.Ip, 1, _airnoixCamera.BeginCaptureTime, Properties.Settings.Default.PreVideoSeconds);
-
-            //_relatedFile = new RelatedFile();
-
-            listBoxVideoFiles.Items.Clear();
-            if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
-            {
-                listBoxVideoFiles.Items.Add("1");
-            }
-            if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
-            {
-                listBoxVideoFiles.Items.Add("2");
-            }
-            listBoxVideoFiles.Items.Add("3");
-
+            
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             int ret = 0;
             if (File.Exists(_airnoixCamera.VideoPath))
             {
-                listBoxVideoFiles.SelectedIndex = listBoxVideoFiles.Items.Count - 1;
+                //listBoxVideoFiles.SelectedIndex = listBoxVideoFiles.Items.Count - 1;
                 PlayMyVideoFile();
             }
+
+
             trackBar1.Minimum = 0;
             trackBar1.Maximum = _totalFrames;
             timerForUpdatingTrack.Start();
-
         }
 
         private void PlayReletedFile2()
@@ -265,11 +275,6 @@ namespace CameraViewer.Forms
             return images;
         }
 
-        private void treeListPicturesBefore_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void treeListPicturesCurrent_MouseClick(object sender, MouseEventArgs e)
         {
 
@@ -291,31 +296,6 @@ namespace CameraViewer.Forms
                 }
 
             }
-
-
-
-
-        }
-
-        private void treeListPicturesAfter_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                //我添加的一句代码
-                if (treeListPicturesAfter.FocusedNode == null) return;
-                if (treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) == null)
-                {
-                    return;
-                }
-                pictureEditSelectedPicture.Image = treeListPicturesAfter.FocusedNode.GetValue(treeListPicturesAfter.FocusedColumn.AbsoluteIndex) as Image;
-                this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
-            }
-            catch (Exception)
-            {
-
-                ;
-            }
-
         }
 
 
@@ -745,7 +725,8 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
 
         private void listBoxControl1_DoubleClick(object sender, EventArgs e)
         {
-            switch ((string)(listBoxVideoFiles.Items[listBoxVideoFiles.SelectedIndex]))
+            var lb = (sender as ListBoxControl);
+            switch ((string)( lb.Items[lb.SelectedIndex]))
             {
                 case "1":
                     PlayReletedFile1();
@@ -797,6 +778,11 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
                                  captureTime.Year, captureTime.Month, captureTime.Day, captureTime.Hour,
                                  captureTime.Minute, captureTime.Second,
                                  index);
+        }
+
+        private void frmCaptureLicense_Load(object sender, EventArgs e)
+        {
+            InitializeVideoList();
         }
     }
 }
