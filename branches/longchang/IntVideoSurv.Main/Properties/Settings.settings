@@ -53,8 +53,14 @@
     <Setting Name="CapturePictureFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">d:\kise\togate\vehimg</Value>
     </Setting>
-    <Setting Name="FtpFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ftp://192.168.1.124/aa/</Value>
+    <Setting Name="FtpServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.1.101</Value>
+    </Setting>
+    <Setting Name="FtpUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">longchang</Value>
+    </Setting>
+    <Setting Name="FtpPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">longchang</Value>
     </Setting>
   </Settings>
 </SettingsFile>

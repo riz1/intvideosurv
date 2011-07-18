@@ -76,7 +76,7 @@ namespace CameraViewer.Forms
             {
                 FileStream outputStream = new FileStream(filePath + @"\" + filename, FileMode.Create);
 
-                reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(Properties.Settings.Default.FtpFilePath + filename));
+                reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(Properties.Settings.Default.FtpServer + filename));
 
                 reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
 

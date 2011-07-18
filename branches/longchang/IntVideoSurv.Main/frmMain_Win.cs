@@ -2647,7 +2647,7 @@ namespace CameraViewer
         private void barButtonItem15_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmCaptureLicense fcl = new frmCaptureLicense();
-            fcl.ShowDialog();
+            fcl.ShowDialog(this);
 
         }
 
@@ -3040,7 +3040,7 @@ namespace CameraViewer
                 {
                     careCameraWindows.AirnoixCamera.StopRecord();
                     frmCaptureLicense fcl = new frmCaptureLicense(careCameraWindows.AirnoixCamera);
-                    fcl.Show();
+                    fcl.ShowDialog(this);
                     //½áÊøÂ¼Ïñ
                 }
                 ChangeButtonState(key);

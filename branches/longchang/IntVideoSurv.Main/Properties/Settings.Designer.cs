@@ -226,13 +226,37 @@ namespace CameraViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ftp://192.168.1.124/aa/")]
-        public string FtpFilePath {
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.101")]
+        public string FtpServer {
             get {
-                return ((string)(this["FtpFilePath"]));
+                return ((string)(this["FtpServer"]));
             }
             set {
-                this["FtpFilePath"] = value;
+                this["FtpServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("longchang")]
+        public string FtpUserName {
+            get {
+                return ((string)(this["FtpUserName"]));
+            }
+            set {
+                this["FtpUserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("longchang")]
+        public string FtpPassword {
+            get {
+                return ((string)(this["FtpPassword"]));
+            }
+            set {
+                this["FtpPassword"] = value;
             }
         }
     }
