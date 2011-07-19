@@ -848,7 +848,7 @@ namespace CameraViewer.Forms
             // labelControl9
             // 
             this.labelControl9.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelControl9.Location = new System.Drawing.Point(5, 35);
+            this.labelControl9.Location = new System.Drawing.Point(5, 39);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(48, 14);
             this.labelControl9.TabIndex = 3;

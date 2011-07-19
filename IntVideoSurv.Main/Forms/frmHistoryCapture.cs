@@ -99,6 +99,12 @@ namespace CameraViewer.Forms
                     {
                         PlayVideoFile(dataRow.FileName);
                     }
+
+                    if (dataRow.Camera != null)
+                    {
+                        var spec = Model.Repository.Instance.GetCamera(dataRow.Camera.CameraId.ToString());
+                        CameraSpec = spec;
+                    }
                 }
             }
         }

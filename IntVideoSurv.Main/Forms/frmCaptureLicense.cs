@@ -30,6 +30,18 @@ namespace CameraViewer.Forms
         private IList<HistroyVideoFile> _videoFiles = new BindingList<HistroyVideoFile>();
         private string _videoFilePath;
 
+
+        private Model.Camera _cameraSpec1;
+        public Model.Camera CameraSpec
+        {
+            get { return _cameraSpec1; }
+            set
+            {
+                _cameraSpec1 = value;
+                UpdateLocationInfo();
+            }
+        }
+
         public frmCaptureLicense()
         {
             InitializeComponent();
@@ -92,7 +104,13 @@ namespace CameraViewer.Forms
         public frmCaptureLicense(AirnoixCamera airnoixCamera)
             : this()
         {
+            if (airnoixCamera == null) throw new ArgumentNullException("airnoixCamera");
             _airnoixCamera = airnoixCamera;
+
+            if (!DesignMode)
+            {
+                CameraSpec = Model.Repository.Instance.GetCamera(_airnoixCamera.Id.ToString());
+            }
 
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
@@ -255,11 +273,16 @@ namespace CameraViewer.Forms
             var images = timer.Select(t =>
                                           {
                                               var guid = Guid.NewGuid().ToString();
-                                              AirnoixPlayer.Avdec_CapturePicture(intPtr, guid, "BMP");
-                                              var img = AForge.Imaging.Image.FromFile(guid);
-                                              File.Delete(guid);
-                                              return (Image)img;
-                                          });
+                                              var res = AirnoixPlayer.Avdec_CapturePicture(intPtr, guid, "BMP");
+                                              if (File.Exists(guid))
+                                              {
+                                                  var img = AForge.Imaging.Image.FromFile(guid);
+                                                  File.Delete(guid);
+                                                  return (Image)img;
+                                              }
+
+                                              return null;
+                                          }).Where(i=>i!=null);
 
             return images;
         }
@@ -281,7 +304,6 @@ namespace CameraViewer.Forms
                 if (img != null)
                 {
                     pictureEditSelectedPicture.Image = new Bitmap(img);
-                    this.ActiveControl = this.pictureEditSelectedPicture.PictureBox;
                 }
 
             }
@@ -317,8 +339,6 @@ namespace CameraViewer.Forms
                 {
                     trackBar1.Value = currentPos;
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -412,7 +432,7 @@ namespace CameraViewer.Forms
             Thread.Sleep(1000);
             ret = AirnoixPlayer.Avdec_Play(intPtr);
             Thread.Sleep(1000);
-            Maximum += AirnoixPlayer.Avdec_GetTotalFrames(intPtr); ;
+            Maximum += AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
             AirnoixPlayer.Avdec_CloseFile(intPtr);
             return Maximum;
         }
@@ -579,7 +599,7 @@ namespace CameraViewer.Forms
                 XtraMessageBox.Show("录入的车牌号不正确!");
                 return;
             }
-            if (_airnoixCamera == null)
+            if (CameraSpec == null)
             {
                 MessageBox.Show("此摄像头不存在");
                 return;
@@ -772,6 +792,24 @@ namespace CameraViewer.Forms
         private void frmCaptureLicense_Load(object sender, EventArgs e)
         {
             InitializeVideoList();
+        }
+
+        private void UpdateLocationInfo()
+        {
+            if (CameraSpec != null)
+            {
+                var dept = Model.Repository.Instance.GetDepartment(CameraSpec.RegionNo);
+                if (dept != null)
+                {
+                    cbeRegion.EditValue = dept.XZQH;
+                }
+
+                var tolGate = Model.Repository.Instance.GetTollGate(CameraSpec.LaneNo);
+                if (tolGate != null)
+                {
+                    comboBoxEditRoadName.EditValue = tolGate.KKMC;
+                }
+            }
         }
     }
 }

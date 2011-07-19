@@ -2,7 +2,7 @@
 
 namespace CameraViewer.Model
 {
-
+    [Persistent("TOG_TOLLGATE")]
     public class TogTollgate : XPLiteObject
     {
         string fTGID;
