@@ -60,20 +60,6 @@ namespace CameraViewer.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap _1 {
-            get {
-                object obj = ResourceManager.GetObject("1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap AR3 {
-            get {
-                object obj = ResourceManager.GetObject("AR3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap btn {
             get {
                 object obj = ResourceManager.GetObject("btn", resourceCulture);
@@ -124,23 +110,9 @@ namespace CameraViewer.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap logo_2 {
-            get {
-                object obj = ResourceManager.GetObject("logo_2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap mainpage {
             get {
                 object obj = ResourceManager.GetObject("mainpage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap mainpage_2 {
-            get {
-                object obj = ResourceManager.GetObject("mainpage_2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

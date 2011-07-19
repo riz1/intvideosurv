@@ -36,8 +36,6 @@ namespace CameraViewer.Forms
             this.simpleButtonCurrent = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonLast = new DevExpress.XtraEditors.SimpleButton();
             this.treeListPicturesBefore = new DevExpress.XtraTreeList.TreeList();
-            this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.repositoryItemPictureEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -46,12 +44,12 @@ namespace CameraViewer.Forms
             this.repositoryItemPictureEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.repositoryItemPictureEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit6 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit7 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListPicturesCurrent = new DevExpress.XtraTreeList.TreeList();
-            this.treeListColumn8 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.repositoryItemPictureEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn9 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit10 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn10 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -60,12 +58,12 @@ namespace CameraViewer.Forms
             this.repositoryItemPictureEdit12 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn12 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit13 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.treeListColumn8 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.repositoryItemPictureEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit16 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit14 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit15 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListPicturesAfter = new DevExpress.XtraTreeList.TreeList();
-            this.treeListColumn15 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.repositoryItemPictureEdit17 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn16 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit18 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn17 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -74,6 +72,8 @@ namespace CameraViewer.Forms
             this.repositoryItemPictureEdit20 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.treeListColumn19 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.repositoryItemPictureEdit21 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.treeListColumn15 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.repositoryItemPictureEdit17 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit24 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit22 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemPictureEdit23 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
@@ -119,29 +119,29 @@ namespace CameraViewer.Forms
             this.pictureEditSelectedPicture = new IntVideoSurv.Control.ScalablePictureBox();
             this.videoListContainer = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesCurrent)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesAfter)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit24)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit23)).BeginInit();
@@ -188,7 +188,7 @@ namespace CameraViewer.Forms
             this.simpleButtonCurrent.Size = new System.Drawing.Size(71, 108);
             this.simpleButtonCurrent.TabIndex = 2;
             this.simpleButtonCurrent.Text = "中(&S)";
-            this.simpleButtonCurrent.Click += new System.EventHandler(this.simpleButtonCurrent_Click);
+            this.simpleButtonCurrent.Click += new System.EventHandler(this.simpleButtonPrevious_Click);
             // 
             // simpleButtonLast
             // 
@@ -199,7 +199,7 @@ namespace CameraViewer.Forms
             this.simpleButtonLast.Size = new System.Drawing.Size(71, 108);
             this.simpleButtonLast.TabIndex = 3;
             this.simpleButtonLast.Text = "后(&D)";
-            this.simpleButtonLast.Click += new System.EventHandler(this.simpleButtonLast_Click);
+            this.simpleButtonLast.Click += new System.EventHandler(this.simpleButtonPrevious_Click);
             // 
             // treeListPicturesBefore
             // 
@@ -208,11 +208,11 @@ namespace CameraViewer.Forms
             this.treeListPicturesBefore.Appearance.FocusedCell.Options.UseBackColor = true;
             this.treeListPicturesBefore.Appearance.FocusedCell.Options.UseBorderColor = true;
             this.treeListPicturesBefore.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.treeListColumn1,
             this.treeListColumn2,
             this.treeListColumn3,
             this.treeListColumn4,
-            this.treeListColumn5});
+            this.treeListColumn5,
+            this.treeListColumn1});
             this.treeListPicturesBefore.Location = new System.Drawing.Point(78, 347);
             this.treeListPicturesBefore.Name = "treeListPicturesBefore";
             this.treeListPicturesBefore.OptionsBehavior.Editable = false;
@@ -235,24 +235,6 @@ namespace CameraViewer.Forms
             this.treeListPicturesBefore.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesBefore.TabIndex = 6;
             this.treeListPicturesBefore.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesCurrent_MouseClick);
-            // 
-            // treeListColumn1
-            // 
-            this.treeListColumn1.Caption = "treeListColumn1";
-            this.treeListColumn1.ColumnEdit = this.repositoryItemPictureEdit8;
-            this.treeListColumn1.FieldName = "treeListColumn1";
-            this.treeListColumn1.Name = "treeListColumn1";
-            this.treeListColumn1.OptionsColumn.AllowEdit = false;
-            this.treeListColumn1.OptionsColumn.FixedWidth = true;
-            this.treeListColumn1.OptionsColumn.ReadOnly = true;
-            this.treeListColumn1.Visible = true;
-            this.treeListColumn1.VisibleIndex = 4;
-            this.treeListColumn1.Width = 40;
-            // 
-            // repositoryItemPictureEdit8
-            // 
-            this.repositoryItemPictureEdit8.Name = "repositoryItemPictureEdit8";
-            this.repositoryItemPictureEdit8.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             // 
             // treeListColumn2
             // 
@@ -326,6 +308,24 @@ namespace CameraViewer.Forms
             this.repositoryItemPictureEdit5.Name = "repositoryItemPictureEdit5";
             this.repositoryItemPictureEdit5.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             // 
+            // treeListColumn1
+            // 
+            this.treeListColumn1.Caption = "treeListColumn1";
+            this.treeListColumn1.ColumnEdit = this.repositoryItemPictureEdit8;
+            this.treeListColumn1.FieldName = "treeListColumn1";
+            this.treeListColumn1.Name = "treeListColumn1";
+            this.treeListColumn1.OptionsColumn.AllowEdit = false;
+            this.treeListColumn1.OptionsColumn.FixedWidth = true;
+            this.treeListColumn1.OptionsColumn.ReadOnly = true;
+            this.treeListColumn1.Visible = true;
+            this.treeListColumn1.VisibleIndex = 4;
+            this.treeListColumn1.Width = 40;
+            // 
+            // repositoryItemPictureEdit8
+            // 
+            this.repositoryItemPictureEdit8.Name = "repositoryItemPictureEdit8";
+            this.repositoryItemPictureEdit8.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            // 
             // repositoryItemPictureEdit1
             // 
             this.repositoryItemPictureEdit1.CustomHeight = 80;
@@ -347,11 +347,11 @@ namespace CameraViewer.Forms
             this.treeListPicturesCurrent.Appearance.FocusedCell.BackColor = System.Drawing.Color.Red;
             this.treeListPicturesCurrent.Appearance.FocusedCell.Options.UseBackColor = true;
             this.treeListPicturesCurrent.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.treeListColumn8,
             this.treeListColumn9,
             this.treeListColumn10,
             this.treeListColumn11,
-            this.treeListColumn12});
+            this.treeListColumn12,
+            this.treeListColumn8});
             this.treeListPicturesCurrent.Location = new System.Drawing.Point(78, 463);
             this.treeListPicturesCurrent.Name = "treeListPicturesCurrent";
             this.treeListPicturesCurrent.OptionsBehavior.Editable = false;
@@ -374,24 +374,6 @@ namespace CameraViewer.Forms
             this.treeListPicturesCurrent.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesCurrent.TabIndex = 6;
             this.treeListPicturesCurrent.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesCurrent_MouseClick);
-            // 
-            // treeListColumn8
-            // 
-            this.treeListColumn8.Caption = "treeListColumn1";
-            this.treeListColumn8.ColumnEdit = this.repositoryItemPictureEdit9;
-            this.treeListColumn8.FieldName = "treeListColumn1";
-            this.treeListColumn8.Name = "treeListColumn8";
-            this.treeListColumn8.OptionsColumn.AllowEdit = false;
-            this.treeListColumn8.OptionsColumn.FixedWidth = true;
-            this.treeListColumn8.OptionsColumn.ReadOnly = true;
-            this.treeListColumn8.Visible = true;
-            this.treeListColumn8.VisibleIndex = 4;
-            this.treeListColumn8.Width = 40;
-            // 
-            // repositoryItemPictureEdit9
-            // 
-            this.repositoryItemPictureEdit9.Name = "repositoryItemPictureEdit9";
-            this.repositoryItemPictureEdit9.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             // 
             // treeListColumn9
             // 
@@ -465,6 +447,24 @@ namespace CameraViewer.Forms
             this.repositoryItemPictureEdit13.Name = "repositoryItemPictureEdit13";
             this.repositoryItemPictureEdit13.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             // 
+            // treeListColumn8
+            // 
+            this.treeListColumn8.Caption = "treeListColumn1";
+            this.treeListColumn8.ColumnEdit = this.repositoryItemPictureEdit9;
+            this.treeListColumn8.FieldName = "treeListColumn1";
+            this.treeListColumn8.Name = "treeListColumn8";
+            this.treeListColumn8.OptionsColumn.AllowEdit = false;
+            this.treeListColumn8.OptionsColumn.FixedWidth = true;
+            this.treeListColumn8.OptionsColumn.ReadOnly = true;
+            this.treeListColumn8.Visible = true;
+            this.treeListColumn8.VisibleIndex = 4;
+            this.treeListColumn8.Width = 40;
+            // 
+            // repositoryItemPictureEdit9
+            // 
+            this.repositoryItemPictureEdit9.Name = "repositoryItemPictureEdit9";
+            this.repositoryItemPictureEdit9.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            // 
             // repositoryItemPictureEdit16
             // 
             this.repositoryItemPictureEdit16.CustomHeight = 80;
@@ -486,11 +486,11 @@ namespace CameraViewer.Forms
             this.treeListPicturesAfter.Appearance.FocusedCell.BackColor = System.Drawing.Color.Red;
             this.treeListPicturesAfter.Appearance.FocusedCell.Options.UseBackColor = true;
             this.treeListPicturesAfter.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.treeListColumn15,
             this.treeListColumn16,
             this.treeListColumn17,
             this.treeListColumn18,
-            this.treeListColumn19});
+            this.treeListColumn19,
+            this.treeListColumn15});
             this.treeListPicturesAfter.Location = new System.Drawing.Point(78, 580);
             this.treeListPicturesAfter.Name = "treeListPicturesAfter";
             this.treeListPicturesAfter.OptionsBehavior.Editable = false;
@@ -513,24 +513,6 @@ namespace CameraViewer.Forms
             this.treeListPicturesAfter.Size = new System.Drawing.Size(772, 108);
             this.treeListPicturesAfter.TabIndex = 6;
             this.treeListPicturesAfter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListPicturesCurrent_MouseClick);
-            // 
-            // treeListColumn15
-            // 
-            this.treeListColumn15.Caption = "treeListColumn1";
-            this.treeListColumn15.ColumnEdit = this.repositoryItemPictureEdit17;
-            this.treeListColumn15.FieldName = "treeListColumn1";
-            this.treeListColumn15.Name = "treeListColumn15";
-            this.treeListColumn15.OptionsColumn.AllowEdit = false;
-            this.treeListColumn15.OptionsColumn.FixedWidth = true;
-            this.treeListColumn15.OptionsColumn.ReadOnly = true;
-            this.treeListColumn15.Visible = true;
-            this.treeListColumn15.VisibleIndex = 4;
-            this.treeListColumn15.Width = 40;
-            // 
-            // repositoryItemPictureEdit17
-            // 
-            this.repositoryItemPictureEdit17.Name = "repositoryItemPictureEdit17";
-            this.repositoryItemPictureEdit17.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             // 
             // treeListColumn16
             // 
@@ -604,6 +586,24 @@ namespace CameraViewer.Forms
             this.repositoryItemPictureEdit21.Name = "repositoryItemPictureEdit21";
             this.repositoryItemPictureEdit21.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             // 
+            // treeListColumn15
+            // 
+            this.treeListColumn15.Caption = "treeListColumn1";
+            this.treeListColumn15.ColumnEdit = this.repositoryItemPictureEdit17;
+            this.treeListColumn15.FieldName = "treeListColumn1";
+            this.treeListColumn15.Name = "treeListColumn15";
+            this.treeListColumn15.OptionsColumn.AllowEdit = false;
+            this.treeListColumn15.OptionsColumn.FixedWidth = true;
+            this.treeListColumn15.OptionsColumn.ReadOnly = true;
+            this.treeListColumn15.Visible = true;
+            this.treeListColumn15.VisibleIndex = 4;
+            this.treeListColumn15.Width = 40;
+            // 
+            // repositoryItemPictureEdit17
+            // 
+            this.repositoryItemPictureEdit17.Name = "repositoryItemPictureEdit17";
+            this.repositoryItemPictureEdit17.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            // 
             // repositoryItemPictureEdit24
             // 
             this.repositoryItemPictureEdit24.CustomHeight = 80;
@@ -634,7 +634,7 @@ namespace CameraViewer.Forms
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(2, 296);
+            this.trackBar1.Location = new System.Drawing.Point(2, 294);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(455, 42);
             this.trackBar1.TabIndex = 8;
@@ -976,24 +976,24 @@ namespace CameraViewer.Forms
             this.labelControl8.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
             this.labelControl8.Location = new System.Drawing.Point(288, 319);
             this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(48, 14);
+            this.labelControl8.Size = new System.Drawing.Size(70, 14);
             this.labelControl8.TabIndex = 21;
-            this.labelControl8.Text = "取帧间隔";
+            this.labelControl8.Text = "取帧间隔(秒)";
             // 
             // cbeFrameInterval
             // 
-            this.cbeFrameInterval.EditValue = "2";
-            this.cbeFrameInterval.Location = new System.Drawing.Point(343, 316);
+            this.cbeFrameInterval.EditValue = "1";
+            this.cbeFrameInterval.Location = new System.Drawing.Point(364, 316);
             this.cbeFrameInterval.Name = "cbeFrameInterval";
             this.cbeFrameInterval.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbeFrameInterval.Properties.Items.AddRange(new object[] {
-            "0",
+            "0.5",
             "1",
+            "1.5",
             "2",
-            "3",
-            "4",
-            "5"});
+            "2.5",
+            "3"});
             this.cbeFrameInterval.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbeFrameInterval.Size = new System.Drawing.Size(41, 21);
             this.cbeFrameInterval.TabIndex = 20;
@@ -1049,29 +1049,29 @@ namespace CameraViewer.Forms
             this.Load += new System.EventHandler(this.frmCaptureLicense_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCaptureLicense_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesCurrent)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesAfter)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit24)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit22)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit23)).EndInit();

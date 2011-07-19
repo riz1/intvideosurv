@@ -88,6 +88,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge.Imaging">
+      <HintPath>..\..\Damany\Library\AForge\AForge.Imaging.dll</HintPath>
+    </Reference>
     <Reference Include="AsyncCtpLibrary">
       <HintPath>..\..\..\..\Microsoft Visual Studio Async CTP\Samples\AsyncCtpLibrary.dll</HintPath>
     </Reference>
@@ -172,6 +175,9 @@
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
+    <Reference Include="System.Reactive, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Providers, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Windows.Forms, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
@@ -911,7 +917,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\1.BMP" />
     <None Include="Resources\AR3.bmp" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -920,6 +925,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Down1.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Busy.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
