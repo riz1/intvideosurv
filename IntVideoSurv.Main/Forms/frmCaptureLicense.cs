@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using CameraViewer.Player;
 using DevExpress.XtraEditors;
 using IntVideoSurv.Entity;
-using IntVideoSurv.Business;
+//using IntVideoSurv.Business;
 using log4net;
 using CameraViewer.Tools;
 using System.Threading.Tasks;
@@ -26,11 +26,12 @@ namespace CameraViewer.Forms
         private Model.Camera _cameraSpec;
 
         private IList<HistroyVideoFile> _videoFiles = new BindingList<HistroyVideoFile>();
+        private string _videoFilePath;
 
         public frmCaptureLicense()
         {
             InitializeComponent();
-            LoadBaseInfo();
+            // LoadBaseInfo();
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
@@ -58,18 +59,22 @@ namespace CameraViewer.Forms
             this.videoListContainer.Controls.Add(listbox);
 
             //获取所有相关的视频文件
-            _relatedFile = new RelatedFile(_airnoixCamera.Ip, 1, _airnoixCamera.BeginCaptureTime, Properties.Settings.Default.PreVideoSeconds);
+            if (!DesignMode)
+            {
+                _relatedFile = new RelatedFile(_airnoixCamera.Ip, 1, _airnoixCamera.BeginCaptureTime, Properties.Settings.Default.PreVideoSeconds);
 
-            listbox.Items.Clear();
-            if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
-            {
-                listbox.Items.Add("1");
+                listbox.Items.Clear();
+                if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
+                {
+                    listbox.Items.Add("1");
+                }
+                if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
+                {
+                    listbox.Items.Add("2");
+                }
+                listbox.Items.Add("3");
             }
-            if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
-            {
-                listbox.Items.Add("2");
-            }
-            listbox.Items.Add("3");
+
 
         }
 
@@ -95,12 +100,13 @@ namespace CameraViewer.Forms
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
-            
+
             intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             int ret = 0;
             if (File.Exists(_airnoixCamera.VideoPath))
             {
                 //listBoxVideoFiles.SelectedIndex = listBoxVideoFiles.Items.Count - 1;
+                _videoFilePath = _airnoixCamera.VideoPath;
                 PlayMyVideoFile();
             }
 
@@ -141,20 +147,29 @@ namespace CameraViewer.Forms
             trackBar1.Maximum = _totalFrames;
         }
 
+        public void PlayVideoFile(string videoFilePath)
+        {
+            _videoFilePath = videoFilePath;
+            PlayMyVideoFile();
+        }
+
         private bool video1FrameValid;
         private bool video2FrameValid;
         private void PlayMyVideoFile()
         {
             int ret;
             ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _airnoixCamera.VideoPath, null, false);
+            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _videoFilePath, null, false);
             play_state = PlayState.ThirdVideoState;
             Thread.Sleep(40);
             frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
             frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            trackBar1.Maximum = _totalFrames;
             ret = AirnoixPlayer.Avdec_Play(intPtr);
+
+            trackBar1.Minimum = 0;
+            trackBar1.Maximum = _totalFrames;
+            timerForUpdatingTrack.Start();
         }
 
         private int GetFrames(string videofile)
@@ -484,96 +499,96 @@ namespace CameraViewer.Forms
 
         #region 抓拍证据(从CaptureLicense控件移植过来)
 
-        private static string staticErrMessage = "";
-        private static Dictionary<string, LongChang_LptColorInfo> _listLongChang_LptColorInfo =
-    LongChang_LptColorBusiness.Instance.GetAllLptColorInfo(ref staticErrMessage);
-        private static Dictionary<string, LongChang_LptTypeInfo> _listLongChang_LptTypeInfo =
-            LongChang_LptTypeBusiness.Instance.GetAllLptTypeInfo(ref staticErrMessage);
-        private static Dictionary<string, LongChang_TollGateInfo> _listLongChang_TollGateInfo =
-    LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref staticErrMessage);
-        private static Dictionary<string, LongChang_VehColorInfo> _listLongChang_VehColorInfo =
-    LongChang_VehColorBusiness.Instance.GetAllVehColorInfo(ref staticErrMessage);
-        private static Dictionary<string, LongChang_VehTypeInfo> _listLongChang_VehTypeInfo =
-    LongChang_VehTypeBusiness.Instance.GetAllVehTypeInfo(ref staticErrMessage);
+        //        private static string staticErrMessage = "";
+        //        private static Dictionary<string, LongChang_LptColorInfo> _listLongChang_LptColorInfo =
+        //    LongChang_LptColorBusiness.Instance.GetAllLptColorInfo(ref staticErrMessage);
+        //        private static Dictionary<string, LongChang_LptTypeInfo> _listLongChang_LptTypeInfo =
+        //            LongChang_LptTypeBusiness.Instance.GetAllLptTypeInfo(ref staticErrMessage);
+        //        private static Dictionary<string, LongChang_TollGateInfo> _listLongChang_TollGateInfo =
+        //    LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref staticErrMessage);
+        //        private static Dictionary<string, LongChang_VehColorInfo> _listLongChang_VehColorInfo =
+        //    LongChang_VehColorBusiness.Instance.GetAllVehColorInfo(ref staticErrMessage);
+        //        private static Dictionary<string, LongChang_VehTypeInfo> _listLongChang_VehTypeInfo =
+        //    LongChang_VehTypeBusiness.Instance.GetAllVehTypeInfo(ref staticErrMessage);
 
-        private static Dictionary<string, LongChang_RegionInfo> _listLongChang_RegionInfo =
-LongChang_RegionBusiness.Instance.GetAllRegionInfo(ref staticErrMessage);
-        private static Dictionary<string, LongChang_CaptureDepartmentInfo> _listLongChang_CaptureDepartmentInfo =
-LongChang_CaptureDepartmentBusiness.Instance.GetAllCaptureDepartmentInfo(ref staticErrMessage);
-        private static Dictionary<string, LongChang_InvalidTypeInfo> _listLongChang_InvalidTypeInfo =
-LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessage);
-
-
-        private void LoadBaseInfo()
-        {
-
-            cbeRegion.Properties.Items.Clear();
-            foreach (var v in _listLongChang_RegionInfo)
-            {
-                cbeRegion.Properties.Items.Add(v.Value.RegionName);
-            }
-            if (cbeRegion.Properties.Items.Count > 0)
-            {
-                cbeRegion.EditValue = cbeRegion.Properties.Items[0];
-            }
-
-            cbeCaptureDepartment.Properties.Items.Clear();
-            foreach (var v in _listLongChang_CaptureDepartmentInfo)
-            {
-                cbeCaptureDepartment.Properties.Items.Add(v.Value.CaptureDepartmentName);
-            }
-            if (cbeCaptureDepartment.Properties.Items.Count > 0)
-            {
-                cbeCaptureDepartment.EditValue = cbeCaptureDepartment.Properties.Items[0];
-            }
-
-            if (_airnoixCamera == null)
-            {
-                return;
-            }
-            comboBoxEditRoadName.Properties.Items.Clear();
-            foreach (var v in _listLongChang_TollGateInfo)
-            {
-                bool isexisted = false;
-                foreach (var VARIABLE in comboBoxEditRoadName.Properties.Items)
-                {
-                    if (VARIABLE.ToString() == v.Value.roadName)
-                    {
-                        isexisted = true;
-                        break;
-                    }
-                }
-                if (!isexisted)
-                {
-                    comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);
-                }
-
-            }
-            if (comboBoxEditRoadName.Properties.Items.Count > 0)
-            {
-                comboBoxEditRoadName.EditValue = comboBoxEditRoadName.Properties.Items[0];
-            }
-            LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
-            if (_airnoixCamera == null)
-            {
-                MessageBox.Show("此摄像头不存在");
-                return;
-            }
-            if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
-            {
-                comboBoxEditRoadName.Text = "未知";
-            }
-            else
-            {
-                comboBoxEditRoadName.Text = tollgate.roadName;
-            }
+        //        private static Dictionary<string, LongChang_RegionInfo> _listLongChang_RegionInfo =
+        //LongChang_RegionBusiness.Instance.GetAllRegionInfo(ref staticErrMessage);
+        //        private static Dictionary<string, LongChang_CaptureDepartmentInfo> _listLongChang_CaptureDepartmentInfo =
+        //LongChang_CaptureDepartmentBusiness.Instance.GetAllCaptureDepartmentInfo(ref staticErrMessage);
+        //        private static Dictionary<string, LongChang_InvalidTypeInfo> _listLongChang_InvalidTypeInfo =
+        //LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessage);
 
 
-            if (_airnoixCamera == null) return;
-            teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == default(DateTime)
-                                 ? DateTime.Now
-                                 : _airnoixCamera.BeginCaptureTime;
-        }
+        //private void LoadBaseInfo()
+        //{
+
+        //    cbeRegion.Properties.Items.Clear();
+        //    foreach (var v in _listLongChang_RegionInfo)
+        //    {
+        //        cbeRegion.Properties.Items.Add(v.Value.RegionName);
+        //    }
+        //    if (cbeRegion.Properties.Items.Count > 0)
+        //    {
+        //        cbeRegion.EditValue = cbeRegion.Properties.Items[0];
+        //    }
+
+        //    cbeCaptureDepartment.Properties.Items.Clear();
+        //    foreach (var v in _listLongChang_CaptureDepartmentInfo)
+        //    {
+        //        cbeCaptureDepartment.Properties.Items.Add(v.Value.CaptureDepartmentName);
+        //    }
+        //    if (cbeCaptureDepartment.Properties.Items.Count > 0)
+        //    {
+        //        cbeCaptureDepartment.EditValue = cbeCaptureDepartment.Properties.Items[0];
+        //    }
+
+        //    if (_airnoixCamera == null)
+        //    {
+        //        return;
+        //    }
+        //    comboBoxEditRoadName.Properties.Items.Clear();
+        //    foreach (var v in _listLongChang_TollGateInfo)
+        //    {
+        //        bool isexisted = false;
+        //        foreach (var VARIABLE in comboBoxEditRoadName.Properties.Items)
+        //        {
+        //            if (VARIABLE.ToString() == v.Value.roadName)
+        //            {
+        //                isexisted = true;
+        //                break;
+        //            }
+        //        }
+        //        if (!isexisted)
+        //        {
+        //            comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);
+        //        }
+
+        //    }
+        //    if (comboBoxEditRoadName.Properties.Items.Count > 0)
+        //    {
+        //        comboBoxEditRoadName.EditValue = comboBoxEditRoadName.Properties.Items[0];
+        //    }
+        //    LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
+        //    if (_airnoixCamera == null)
+        //    {
+        //        MessageBox.Show("此摄像头不存在");
+        //        return;
+        //    }
+        //    if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
+        //    {
+        //        comboBoxEditRoadName.Text = "未知";
+        //    }
+        //    else
+        //    {
+        //        comboBoxEditRoadName.Text = tollgate.roadName;
+        //    }
+
+
+        //    if (_airnoixCamera == null) return;
+        //    teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == default(DateTime)
+        //                         ? DateTime.Now
+        //                         : _airnoixCamera.BeginCaptureTime;
+        //}
 
         #endregion
         private string errMessage = "";
@@ -726,7 +741,7 @@ LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessag
         private void listBoxControl1_DoubleClick(object sender, EventArgs e)
         {
             var lb = (sender as ListBoxControl);
-            switch ((string)( lb.Items[lb.SelectedIndex]))
+            switch ((string)(lb.Items[lb.SelectedIndex]))
             {
                 case "1":
                     PlayReletedFile1();

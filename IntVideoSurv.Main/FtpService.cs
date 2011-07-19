@@ -45,8 +45,8 @@ namespace CameraViewer
             req.ContentLength = sourceStream.Length;
 
             sourceStream.Seek(0, SeekOrigin.Begin);
-            Stream strm = req.GetRequestStream();
-            sourceStream.CopyTo(strm);
+            Stream strm = await req.GetRequestStreamAsync();
+            await sourceStream.CopyToAsync(strm);
             strm.Close();
         }
 

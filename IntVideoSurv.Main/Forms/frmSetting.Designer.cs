@@ -728,8 +728,8 @@ namespace CameraViewer.Forms
             this.treeListDevice.OptionsView.ShowIndicator = false;
             this.treeListDevice.Size = new System.Drawing.Size(146, 124);
             this.treeListDevice.TabIndex = 0;
-            this.treeListDevice.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TreeListDeviceRightClick);
             this.treeListDevice.Click += new System.EventHandler(this.treeListDevice_Click);
+            this.treeListDevice.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TreeListDeviceRightClick);
             // 
             // treeListColumn5
             // 
@@ -1585,8 +1585,8 @@ namespace CameraViewer.Forms
             this.tvMap.OptionsView.ShowVertLines = false;
             this.tvMap.Size = new System.Drawing.Size(182, 39);
             this.tvMap.TabIndex = 0;
-            this.tvMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tvMap_MouseUp);
             this.tvMap.DoubleClick += new System.EventHandler(this.tvMap_DoubleClick_1);
+            this.tvMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tvMap_MouseUp);
             // 
             // treeListColumn3
             // 
@@ -2542,8 +2542,8 @@ namespace CameraViewer.Forms
             this.treeListShowDecoder.OptionsView.ShowVertLines = false;
             this.treeListShowDecoder.Size = new System.Drawing.Size(162, 69);
             this.treeListShowDecoder.TabIndex = 0;
-            this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
             this.treeListShowDecoder.Click += new System.EventHandler(this.ShowDecoderAndCameraDataInGridView);
+            this.treeListShowDecoder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeListShowDecoder_MouseUp);
             // 
             // treeListColumn1
             // 

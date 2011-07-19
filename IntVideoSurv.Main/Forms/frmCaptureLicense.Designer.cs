@@ -1192,7 +1192,7 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.LookUpEdit lookUpEditLprType;
         private DevExpress.XtraEditors.LookUpEdit punishReason;
         private DevExpress.Xpo.XPCollection punishReasonsCollection;
-        private DevExpress.XtraEditors.PanelControl videoListContainer;
+        protected DevExpress.XtraEditors.PanelControl videoListContainer;
 
     }
 }

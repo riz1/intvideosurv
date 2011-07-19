@@ -3098,15 +3098,18 @@ namespace CameraViewer
         {
             UseWaitCursor = true;
             i = 0;
+
             frmHistoryCaptureCondition frmhcc = new frmHistoryCaptureCondition();
 
             UseWaitCursor = false;
-            if (frmhcc.ShowDialog() == DialogResult.OK)
+            if (frmhcc.ShowDialog(this) == DialogResult.OK)
             {
                 UseWaitCursor = true;
-                frmCaptureHistroyLicense fchl = new frmCaptureHistroyLicense(frmhcc);
+                var fchl = new frmHistoryCapture(frmhcc.ListSelectedCameras.Values);
+                fchl.BeginTime = frmhcc.BeginTime;
+                fchl.EndTime = frmhcc.EndTime;
                 UseWaitCursor = false;
-                fchl.Show();                
+                fchl.ShowDialog(this);
             }
 
 

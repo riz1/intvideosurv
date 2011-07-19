@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Com.SS.Framework.Entity;
@@ -51,6 +52,7 @@ namespace IntVideoSurv.Entity
         [ColumnMapping()]
         public int CameraId { get; set; }
         [ColumnMapping()]
+        [DisplayName("摄像头名称")]
         public string Name { get; set; }
         [ColumnMapping()]
         public int ChannelNo { get; set; }
