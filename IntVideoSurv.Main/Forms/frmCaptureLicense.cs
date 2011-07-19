@@ -251,10 +251,9 @@ namespace CameraViewer.Forms
 
         private IObservable<Image> GetImages(double interval)
         {
-            var timer = Observable.Interval(TimeSpan.FromSeconds(interval)).Take(5);
+            var timer = Observable.Interval(TimeSpan.FromSeconds(interval), System.Reactive.Concurrency.Scheduler.ThreadPool).Take(5);
             var images = timer.Select(t =>
                                           {
-                                              System.Diagnostics.Debug.WriteLine(t);
                                               var guid = Guid.NewGuid().ToString();
                                               AirnoixPlayer.Avdec_CapturePicture(intPtr, guid, "BMP");
                                               var img = AForge.Imaging.Image.FromFile(guid);
@@ -263,46 +262,6 @@ namespace CameraViewer.Forms
                                           });
 
             return images;
-
-            //_previousState = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
-
-            //int ret = AirnoixPlayer.Avdec_Pause(intPtr);
-            //int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-            //if (currentPos >= PicNum * (frameInterval) / 2)
-            //{
-            //    for (int i = 0; i < PicNum * (frameInterval) / 2; i++)
-            //    {
-            //        AirnoixPlayer.Avdec_StepFrame(intPtr, false);
-            //    }
-
-            //}
-            //if (_totalFrames - currentPos <= PicNum * (frameInterval) / 2)
-            //{
-            //    for (int i = 0; i < PicNum * (frameInterval) / 2; i++)
-            //    {
-            //        AirnoixPlayer.Avdec_StepFrame(intPtr, false);
-            //    }
-            //}
-            //Image[] images = new Image[PicNum];
-            //for (int i = 0; i < PicNum; i++)
-            //{
-            //    string fmt = string.Format("JPG {0:0000}{1:0000}{2:0000}", frameWidth > 0 ? frameWidth : 1280, frameHeight > 0 ? frameHeight : 720, 24);
-            //    string filename = Properties.Settings.Default.CapturePictureTempPath + "\\" + Guid.NewGuid() + ".bmp";
-            //    ret = AirnoixPlayer.Avdec_Play(intPtr);
-            //    Thread.Sleep(40 * frameInterval);
-            //    ret = AirnoixPlayer.Avdec_Pause(intPtr);
-            //    ret = AirnoixPlayer.Avdec_CapturePicture(intPtr, filename, fmt);
-
-            //    images[i] = Image.FromFile(filename);
-            //    alTempFiles.Add(filename);
-            //    //ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
-
-            //}
-            //if (_previousState == AirnoixPlayerState.PLAY_STATE_PLAY)
-            //{
-            //    ret = AirnoixPlayer.Avdec_Play(intPtr);
-            //}
-            //return images;
         }
 
         private void treeListPicturesCurrent_MouseClick(object sender, MouseEventArgs e)
