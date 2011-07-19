@@ -982,12 +982,13 @@ namespace CameraViewer.Forms
             // 
             // cbeFrameInterval
             // 
-            this.cbeFrameInterval.EditValue = "1";
+            this.cbeFrameInterval.EditValue = "0.5";
             this.cbeFrameInterval.Location = new System.Drawing.Point(364, 316);
             this.cbeFrameInterval.Name = "cbeFrameInterval";
             this.cbeFrameInterval.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbeFrameInterval.Properties.Items.AddRange(new object[] {
+            "0.25",
             "0.5",
             "1",
             "1.5",
@@ -995,7 +996,7 @@ namespace CameraViewer.Forms
             "2.5",
             "3"});
             this.cbeFrameInterval.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeFrameInterval.Size = new System.Drawing.Size(41, 21);
+            this.cbeFrameInterval.Size = new System.Drawing.Size(52, 21);
             this.cbeFrameInterval.TabIndex = 20;
             // 
             // pictureEditSelectedPicture
