@@ -639,7 +639,8 @@ namespace CameraViewer.Forms
             this.trackBar1.Size = new System.Drawing.Size(455, 42);
             this.trackBar1.TabIndex = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
+            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
             // 
             // buttonPlay
             // 
@@ -1048,7 +1049,6 @@ namespace CameraViewer.Forms
             this.Text = "证据截图";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCaptureLicense_FormClosed);
             this.Load += new System.EventHandler(this.frmCaptureLicense_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCaptureLicense_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit3)).EndInit();

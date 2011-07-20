@@ -34,7 +34,7 @@ namespace CameraViewer.Forms
             _selectedCameras = selectedCameras;
         }
 
-        protected override void InitializeVideoList()
+        protected override async void InitializeVideoList()
         {
             var gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridView.OptionsBehavior.Editable = false;
@@ -77,9 +77,16 @@ namespace CameraViewer.Forms
                 {
                     foreach (var camera in _selectedCameras)
                     {
-                        var relatedHistroyVideoFile = new RelatedHistroyVideoFile(camera, 1, BeginTime, EndTime);
+                        RelatedHistroyVideoFile file = null;
 
-                        grid.DataSource = relatedHistroyVideoFile.ListHistroyVideoFile;
+                        LongChang_CameraInfo camera1 = camera;
+
+                        await System.Threading.Tasks.TaskEx.Run( ()=>file = new RelatedHistroyVideoFile(camera1, 1, BeginTime, EndTime) );
+
+                        if (file != null)
+                        {
+                            grid.DataSource = file.ListHistroyVideoFile;
+                        }
                     }
                 }
             }

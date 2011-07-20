@@ -51,7 +51,7 @@ namespace CameraViewer.Forms
             }
         }
 
-     
+
 
         public frmCaptureLicense()
         {
@@ -65,11 +65,8 @@ namespace CameraViewer.Forms
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
-            intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
-            //int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
+            _playerHandle = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
 
-            frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
-            frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             trackBar1.Minimum = 0;
             trackBar1.Maximum = GetTotalFrames();
             StartPlay = true;
@@ -134,32 +131,28 @@ namespace CameraViewer.Forms
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
 
-            intPtr = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
+            _playerHandle = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             int ret = 0;
             if (File.Exists(_airnoixCamera.VideoPath))
             {
                 //listBoxVideoFiles.SelectedIndex = listBoxVideoFiles.Items.Count - 1;
                 _videoFilePath = _airnoixCamera.VideoPath;
-                PlayMyVideoFile();
+                SetCurrentVideoFile();
+                Play();
             }
-
-
-            trackBar1.Minimum = 0;
-            trackBar1.Maximum = _totalFrames;
-            timerForUpdatingTrack.Start();
         }
 
         private void PlayReletedFile2()
         {
             int ret;
             video2FrameValid = false;
-            ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile2, null, true);
-            ret = AirnoixPlayer.Avdec_Pause(intPtr);
+            ret = AirnoixPlayer.Avdec_CloseFile(_playerHandle);
+            ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, _relatedFile.RelatedFile2, null, true);
+            ret = AirnoixPlayer.Avdec_Pause(_playerHandle);
             Thread.Sleep(40);
-            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(_playerHandle);
 
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
             play_state = PlayState.SecondVideoState;
             trackBar1.Maximum = _totalFrames;
 
@@ -169,13 +162,13 @@ namespace CameraViewer.Forms
 
             int ret;
             video1FrameValid = false;
-            ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _relatedFile.RelatedFile1, null, false);
-            ret = AirnoixPlayer.Avdec_Pause(intPtr);
+            ret = AirnoixPlayer.Avdec_CloseFile(_playerHandle);
+            ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, _relatedFile.RelatedFile1, null, false);
+            ret = AirnoixPlayer.Avdec_Pause(_playerHandle);
             Thread.Sleep(40);
-            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
+            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(_playerHandle);
 
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
             play_state = PlayState.FirstVideoState;
             trackBar1.Maximum = _totalFrames;
         }
@@ -183,27 +176,72 @@ namespace CameraViewer.Forms
         public void PlayVideoFile(string videoFilePath)
         {
             _videoFilePath = videoFilePath;
-            PlayMyVideoFile();
+            SetCurrentVideoFile();
+            Play();
         }
 
         private bool video1FrameValid;
         private bool video2FrameValid;
-        private void PlayMyVideoFile()
+
+
+        public void SetCurrentVideoFile()
         {
-            int ret;
-            ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, _videoFilePath, null, false);
+            AirnoixPlayer.Avdec_CloseFile(_playerHandle);
+            AirnoixPlayer.Avdec_SetFile(_playerHandle, _videoFilePath, null, false);
+
             play_state = PlayState.ThirdVideoState;
             Thread.Sleep(40);
-            frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
-            frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
-            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
 
             trackBar1.Minimum = 0;
-            trackBar1.Maximum = _totalFrames;
+            trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(_playerHandle);
+            trackBar1.Value = 0;
+
             trackBar1.Enabled = true;
-            timerForUpdatingTrack.Start();
+        }
+
+        private void UpdatePlayerPosition()
+        {
+            if (_playerHandle != IntPtr.Zero)
+            {
+                var pos = AirnoixPlayer.Avdec_GetCurrentPosition(_playerHandle);
+                trackBar1.Value = pos;
+            }
+
+        }
+
+        public void Play()
+        {
+            if (_playerHandle != IntPtr.Zero)
+            {
+                AirnoixPlayer.Avdec_Play(_playerHandle);
+                timerForUpdatingTrack.Start();
+            }
+        }
+
+        public void Pause()
+        {
+            if (_playerHandle != IntPtr.Zero)
+            {
+                AirnoixPlayer.Avdec_Pause(_playerHandle);
+                timerForUpdatingTrack.Stop();
+            }
+        }
+
+        public void Stop()
+        {
+            if (_playerHandle != IntPtr.Zero)
+            {
+                AirnoixPlayer.Avdec_Stop(_playerHandle);
+                timerForUpdatingTrack.Stop();
+            }
+        }
+
+        public void SetPosition(int position)
+        {
+            if (_playerHandle != IntPtr.Zero)
+            {
+                AirnoixPlayer.Avdec_SetCurrentPosition(_playerHandle, position);
+            }
         }
 
         private int GetFrames(string videofile)
@@ -213,8 +251,6 @@ namespace CameraViewer.Forms
             int ret = AirnoixPlayer.Avdec_SetFile(memoryIntPtr, videofile, null, true);
             Thread.Sleep(40);
             ret = AirnoixPlayer.Avdec_Pause(memoryIntPtr);
-            frameWidth = AirnoixPlayer.Avdec_GetImageWidth(intPtr);
-            frameHeight = AirnoixPlayer.Avdec_GetImageHeight(intPtr);
             int frames = AirnoixPlayer.Avdec_GetTotalFrames(memoryIntPtr);
             ret = AirnoixPlayer.Avdec_CloseFile(memoryIntPtr);
             ret = AirnoixPlayer.Avdec_Done(memoryIntPtr);
@@ -222,9 +258,7 @@ namespace CameraViewer.Forms
         }
 
         private AirnoixCamera _airnoixCamera;
-        private IntPtr intPtr;
-        private int frameWidth;
-        private int frameHeight;
+        private IntPtr _playerHandle;
         private AirnoixPlayerState _previousState;
         private int maunulSteps = 0;
         private int _totalFrames;
@@ -286,7 +320,7 @@ namespace CameraViewer.Forms
             var images = timer.Select(t =>
                                           {
                                               var guid = Guid.NewGuid().ToString();
-                                              var res = AirnoixPlayer.Avdec_CapturePicture(intPtr, guid, "BMP");
+                                              var res = AirnoixPlayer.Avdec_CapturePicture(_playerHandle, guid, "BMP");
                                               if (File.Exists(guid))
                                               {
                                                   var img = AForge.Imaging.Image.FromFile(guid);
@@ -295,7 +329,7 @@ namespace CameraViewer.Forms
                                               }
 
                                               return null;
-                                          }).SkipWhile(i=>i==null);
+                                          }).SkipWhile(i => i == null);
 
             return images;
         }
@@ -333,67 +367,12 @@ namespace CameraViewer.Forms
         private bool IsEnd;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            try
-            {
-                int ret = 0;
-
-
-                int currentPos = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-                if (currentPos > _totalFrames || _totalFrames == 0)
-                {
-                    _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-                    trackBar1.Maximum = _totalFrames;
-                }
-                if (currentPos > trackBar1.Maximum)
-                {
-                    trackBar1.Value = trackBar1.Maximum;
-                }
-                else
-                {
-                    trackBar1.Value = currentPos;
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Debug.WriteLine("Error:" + ex.ToString());
-            }
-
-
-        }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            int mum;
-            int count;
-            AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
-            if (state == AirnoixPlayerState.PLAY_STATE_PLAY)
-            {
-                int ret = AirnoixPlayer.Avdec_Pause(intPtr);
-                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
-                ret = AirnoixPlayer.Avdec_Play(intPtr);
-            }
-            else if (state == AirnoixPlayerState.PLAY_STATE_STOP)
-            {
-                AirnoixPlayer.Avdec_Play(intPtr);
-                AirnoixPlayer.Avdec_Pause(intPtr);
-            }
-            if ((state == AirnoixPlayerState.PLAY_STATE_PAUSE))
-            {
-                int ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, trackBar1.Value);
-                mum = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
-                count = trackBar1.Value - mum;
-                while (count > 0)
-                {
-                    ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
-                    count--;
-                }
-            }
+                UpdatePlayerPosition();
         }
 
         private void frmCaptureLicense_FormClosed(object sender, FormClosedEventArgs e)
         {
-            int ret = AirnoixPlayer.Avdec_Done(intPtr);
+            int ret = AirnoixPlayer.Avdec_Done(_playerHandle);
             //删除临时BMP文件
             DeleteTempBmp();
         }
@@ -401,37 +380,27 @@ namespace CameraViewer.Forms
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            //第一次播放
-            if (StartPlay == true)
-            {
-                FirstPlay(Start_Frame);//从Start_Frame帧开始播放
-                StartPlay = false;
-            }
-            else
-            {
-                AirnoixPlayer.Avdec_Play(intPtr);
-            }
-
-
+            Play();
         }
 
         private void buttonPause_Click(object sender, EventArgs e)
         {
-            AirnoixPlayer.Avdec_Pause(intPtr);
+            Pause();
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            trackBar1.Value = trackBar1.Minimum;
-            AirnoixPlayer.Avdec_Stop(intPtr);
-            timerForUpdatingTrack.Enabled = true;
-            timer2.Enabled = true;
-            first = true;
-            FirstLoad = true;
-            IsEnd = false;
-            isfirstvideo = true;
-            StartPlay = true;
+            //trackBar1.Value = trackBar1.Minimum;
+            //AirnoixPlayer.Avdec_Stop(_playerHandle);
+            //timerForUpdatingTrack.Enabled = true;
+            //timer2.Enabled = true;
+            //first = true;
+            //FirstLoad = true;
+            //IsEnd = false;
+            //isfirstvideo = true;
+            //StartPlay = true;
 
+            Stop();
         }
         private int GetTotalFrames()
         {
@@ -440,25 +409,25 @@ namespace CameraViewer.Forms
 
             Maximum = 0;
             Maximum += Change_Frame;//十五秒对应的帧数
-            int ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.AVI", null, false);
+            int ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, @"C:\18-55-28.AVI", null, false);
 
             Thread.Sleep(1000);
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
             Thread.Sleep(1000);
-            Maximum += AirnoixPlayer.Avdec_GetTotalFrames(intPtr);
-            AirnoixPlayer.Avdec_CloseFile(intPtr);
+            Maximum += AirnoixPlayer.Avdec_GetTotalFrames(_playerHandle);
+            AirnoixPlayer.Avdec_CloseFile(_playerHandle);
             return Maximum;
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
             try
             {
-                AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(intPtr);
+                AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(_playerHandle);
                 if (trackBar1.Value >= Change_Frame && trackBar1.Value <= Change_Frame + 100 && isfirstvideo == true && state == AirnoixPlayerState.PLAY_STATE_PLAY)
                 {
                     int ret;
-                    ret = AirnoixPlayer.Avdec_CloseFile(intPtr);
-                    ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\18-55-28.avi", null, true);
+                    ret = AirnoixPlayer.Avdec_CloseFile(_playerHandle);
+                    ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, @"C:\18-55-28.avi", null, true);
                     changecount = trackBar1.Value;
                     isfirstvideo = false;
                     timer2.Enabled = false;
@@ -477,25 +446,25 @@ namespace CameraViewer.Forms
             int count;
             int mum;
             isfirstvideo = true;
-            ret = AirnoixPlayer.Avdec_SetFile(intPtr, @"C:\123.AVI", null, false);
+            ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, @"C:\123.AVI", null, false);
             Thread.Sleep(1000);
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
-            ret = AirnoixPlayer.Avdec_Pause(intPtr);
+            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
+            ret = AirnoixPlayer.Avdec_Pause(_playerHandle);
 
             if (trackBar1.Maximum > 0)
             {
                 Thread.Sleep(2500);
-                ret = AirnoixPlayer.Avdec_SetCurrentPosition(intPtr, start_frame);
-                mum = AirnoixPlayer.Avdec_GetCurrentPosition(intPtr);
+                ret = AirnoixPlayer.Avdec_SetCurrentPosition(_playerHandle, start_frame);
+                mum = AirnoixPlayer.Avdec_GetCurrentPosition(_playerHandle);
                 count = start_frame - mum;
                 while (count > 0)
                 {
-                    ret = AirnoixPlayer.Avdec_StepFrame(intPtr, true);
+                    ret = AirnoixPlayer.Avdec_StepFrame(_playerHandle, true);
                     count--;
                 }
             }
             Thread.Sleep(1000);
-            ret = AirnoixPlayer.Avdec_Play(intPtr);
+            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
             timerForUpdatingTrack.Enabled = true;
             timer2.Enabled = true;
             first = true;
@@ -504,100 +473,6 @@ namespace CameraViewer.Forms
         }
 
 
-        #region 抓拍证据(从CaptureLicense控件移植过来)
-
-        //        private static string staticErrMessage = "";
-        //        private static Dictionary<string, LongChang_LptColorInfo> _listLongChang_LptColorInfo =
-        //    LongChang_LptColorBusiness.Instance.GetAllLptColorInfo(ref staticErrMessage);
-        //        private static Dictionary<string, LongChang_LptTypeInfo> _listLongChang_LptTypeInfo =
-        //            LongChang_LptTypeBusiness.Instance.GetAllLptTypeInfo(ref staticErrMessage);
-        //        private static Dictionary<string, LongChang_TollGateInfo> _listLongChang_TollGateInfo =
-        //    LongChang_TollGateBusiness.Instance.GetAllTollGateInfo(ref staticErrMessage);
-        //        private static Dictionary<string, LongChang_VehColorInfo> _listLongChang_VehColorInfo =
-        //    LongChang_VehColorBusiness.Instance.GetAllVehColorInfo(ref staticErrMessage);
-        //        private static Dictionary<string, LongChang_VehTypeInfo> _listLongChang_VehTypeInfo =
-        //    LongChang_VehTypeBusiness.Instance.GetAllVehTypeInfo(ref staticErrMessage);
-
-        //        private static Dictionary<string, LongChang_RegionInfo> _listLongChang_RegionInfo =
-        //LongChang_RegionBusiness.Instance.GetAllRegionInfo(ref staticErrMessage);
-        //        private static Dictionary<string, LongChang_CaptureDepartmentInfo> _listLongChang_CaptureDepartmentInfo =
-        //LongChang_CaptureDepartmentBusiness.Instance.GetAllCaptureDepartmentInfo(ref staticErrMessage);
-        //        private static Dictionary<string, LongChang_InvalidTypeInfo> _listLongChang_InvalidTypeInfo =
-        //LongChang_InvalidTypeBusiness.Instance.GetAllInvalidTypeInfo(ref staticErrMessage);
-
-
-        //private void LoadBaseInfo()
-        //{
-
-        //    cbeRegion.Properties.Items.Clear();
-        //    foreach (var v in _listLongChang_RegionInfo)
-        //    {
-        //        cbeRegion.Properties.Items.Add(v.Value.RegionName);
-        //    }
-        //    if (cbeRegion.Properties.Items.Count > 0)
-        //    {
-        //        cbeRegion.EditValue = cbeRegion.Properties.Items[0];
-        //    }
-
-        //    cbeCaptureDepartment.Properties.Items.Clear();
-        //    foreach (var v in _listLongChang_CaptureDepartmentInfo)
-        //    {
-        //        cbeCaptureDepartment.Properties.Items.Add(v.Value.CaptureDepartmentName);
-        //    }
-        //    if (cbeCaptureDepartment.Properties.Items.Count > 0)
-        //    {
-        //        cbeCaptureDepartment.EditValue = cbeCaptureDepartment.Properties.Items[0];
-        //    }
-
-        //    if (_airnoixCamera == null)
-        //    {
-        //        return;
-        //    }
-        //    comboBoxEditRoadName.Properties.Items.Clear();
-        //    foreach (var v in _listLongChang_TollGateInfo)
-        //    {
-        //        bool isexisted = false;
-        //        foreach (var VARIABLE in comboBoxEditRoadName.Properties.Items)
-        //        {
-        //            if (VARIABLE.ToString() == v.Value.roadName)
-        //            {
-        //                isexisted = true;
-        //                break;
-        //            }
-        //        }
-        //        if (!isexisted)
-        //        {
-        //            comboBoxEditRoadName.Properties.Items.Add(v.Value.roadName);
-        //        }
-
-        //    }
-        //    if (comboBoxEditRoadName.Properties.Items.Count > 0)
-        //    {
-        //        comboBoxEditRoadName.EditValue = comboBoxEditRoadName.Properties.Items[0];
-        //    }
-        //    LongChang_TollGateInfo tollgate = new LongChang_TollGateInfo();
-        //    if (_airnoixCamera == null)
-        //    {
-        //        MessageBox.Show("此摄像头不存在");
-        //        return;
-        //    }
-        //    if ((tollgate = LongChang_TollGateBusiness.Instance.GetTollGateInfoByCameraId(ref errMessage, _airnoixCamera.Id)) == null)
-        //    {
-        //        comboBoxEditRoadName.Text = "未知";
-        //    }
-        //    else
-        //    {
-        //        comboBoxEditRoadName.Text = tollgate.roadName;
-        //    }
-
-
-        //    if (_airnoixCamera == null) return;
-        //    teCaptureTime.EditValue = _airnoixCamera.BeginCaptureTime == default(DateTime)
-        //                         ? DateTime.Now
-        //                         : _airnoixCamera.BeginCaptureTime;
-        //}
-
-        #endregion
         private string errMessage = "";
         private async void buttonSave_Click(object sender, EventArgs e)
         {
@@ -626,13 +501,10 @@ namespace CameraViewer.Forms
                 await UploadImages();
                 SaveCaptureRecord();
 
-                AirnoixPlayer.Avdec_Stop(intPtr);
-                AirnoixPlayer.Avdec_CloseFile(intPtr);
-
                 MessageBox.Show(this, "保存成功。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-            catch (System.Net.WebException ex)
+            catch (WebException ex)
             {
                 MessageBox.Show(this, "保存记录时发生错误\r\n\r\n" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -748,26 +620,11 @@ namespace CameraViewer.Forms
                     PlayReletedFile2();
                     break;
                 case "3":
-                    PlayMyVideoFile();
+                    // PlayMyVideoFile();
                     break;
             }
         }
 
-        private void frmCaptureLicense_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Alt && e.KeyCode == Keys.A)
-            {
-                //simpleButtonPrevious_Click(treeListPicturesBefore, null);
-            }
-            else if (e.Alt && e.KeyCode == Keys.S)
-            {
-                //simpleButtonPrevious_Click(treeListPicturesCurrent, null);
-            }
-            else if (e.Alt && e.KeyCode == Keys.D)
-            {
-                //simpleButtonPrevious_Click(treeListPicturesAfter, null);
-            }
-        }
 
         private void treeListPicturesBefore_FocusedColumnChanged(object sender, DevExpress.XtraTreeList.FocusedColumnChangedEventArgs e)
         {
@@ -824,7 +681,19 @@ namespace CameraViewer.Forms
 
         private void UpdateCaptureTime()
         {
+            
             teCaptureTime.EditValue = CaptureTime;
+        }
+
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Pause();
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            SetPosition(trackBar1.Value);
+            Play();
         }
     }
 }
