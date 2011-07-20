@@ -105,6 +105,8 @@ namespace CameraViewer.Forms
                         var spec = Model.Repository.Instance.GetCamera(dataRow.Camera.CameraId.ToString());
                         CameraSpec = spec;
                     }
+
+                    CaptureTime = dataRow.CaptureTime;
                 }
             }
         }

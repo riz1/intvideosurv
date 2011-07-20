@@ -12,6 +12,8 @@ namespace CameraViewer.Model
 
         public string RegionNo { get; set; }
 
+        public string OrgNo { get; set; }
+
         public string RoadNo { get; set; }
         public string RoadName { get; set; }
 

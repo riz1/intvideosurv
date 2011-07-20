@@ -24,23 +24,34 @@ namespace CameraViewer.Forms
     {
         private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const int PicNum = 5;
-        private DateTime _captureTime;
-        private Model.Camera _cameraSpec;
 
         private IList<HistroyVideoFile> _videoFiles = new BindingList<HistroyVideoFile>();
         private string _videoFilePath;
 
 
-        private Model.Camera _cameraSpec1;
+        private Model.Camera _cameraSpec;
         public Model.Camera CameraSpec
         {
-            get { return _cameraSpec1; }
+            get { return _cameraSpec; }
             set
             {
-                _cameraSpec1 = value;
+                _cameraSpec = value;
                 UpdateLocationInfo();
             }
         }
+
+        private DateTime _captureTime;
+        public DateTime CaptureTime
+        {
+            get { return _captureTime; }
+            set
+            {
+                _captureTime = value;
+                UpdateCaptureTime();
+            }
+        }
+
+     
 
         public frmCaptureLicense()
         {
@@ -111,6 +122,8 @@ namespace CameraViewer.Forms
             {
                 CameraSpec = Model.Repository.Instance.GetCamera(_airnoixCamera.Id.ToString());
             }
+
+            CaptureTime = _airnoixCamera.BeginCaptureTime != default(DateTime) ? _airnoixCamera.BeginCaptureTime : DateTime.Now;
 
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
@@ -282,7 +295,7 @@ namespace CameraViewer.Forms
                                               }
 
                                               return null;
-                                          }).Where(i=>i!=null);
+                                          }).SkipWhile(i=>i==null);
 
             return images;
         }
@@ -605,15 +618,6 @@ namespace CameraViewer.Forms
                 return;
             }
 
-            var camera = Model.Repository.Instance.GetCamera(_airnoixCamera.Id.ToString());
-            if (camera == null)
-            {
-                MessageBox.Show("没有对应的卡口信息");
-                return;
-            }
-
-            _cameraSpec = camera;
-            _captureTime = _airnoixCamera.BeginCaptureTime != default(DateTime) ? _airnoixCamera.BeginCaptureTime : DateTime.Now;
 
             this.UseWaitCursor = true;
 
@@ -652,17 +656,17 @@ namespace CameraViewer.Forms
             var images = GetImageArray();
             var record = new Model.TogVehmon();
             //地点信息
-            record.KKBH = _cameraSpec.KaKouNo;
-            record.KKMC = _cameraSpec.KakouName;
-            record.FXBH = _cameraSpec.DirectionNo;
-            record.FXMC = _cameraSpec.DirectionName;
-            record.CDBH = _cameraSpec.LaneNo;
-            record.CDMC = _cameraSpec.LaneName;
+            record.KKBH = CameraSpec.KaKouNo;
+            record.KKMC = CameraSpec.KakouName;
+            record.FXBH = CameraSpec.DirectionNo;
+            record.FXMC = CameraSpec.DirectionName;
+            record.CDBH = CameraSpec.LaneNo;
+            record.CDMC = CameraSpec.LaneName;
             //事件
             record.WZYY = (string)punishReason.EditValue;
             //时间
-            record.JGSK = _captureTime;
-            record.TJRQ = Model.TimeConverter.ToTongJiRiQi(_captureTime);
+            record.JGSK = CaptureTime;
+            record.TJRQ = Model.TimeConverter.ToTongJiRiQi(CaptureTime);
             //车牌信息
             record.HPHM = (string)textEditPlateNumber.EditValue;
             var lprType = (Model.LprType)lookUpEditLprType.EditValue;
@@ -682,9 +686,9 @@ namespace CameraViewer.Forms
             var image1 = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
             var image2 = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
             var image3 = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
-            var image1Path = GetRelativeImagePath(_captureTime, _cameraSpec, 1);
-            var image2Path = GetRelativeImagePath(_captureTime, _cameraSpec, 2);
-            var image3Path = GetRelativeImagePath(_captureTime, _cameraSpec, 3);
+            var image1Path = GetRelativeImagePath(CaptureTime, _cameraSpec, 1);
+            var image2Path = GetRelativeImagePath(CaptureTime, _cameraSpec, 2);
+            var image3Path = GetRelativeImagePath(CaptureTime, _cameraSpec, 3);
 
             return new[]
                        {
@@ -809,7 +813,18 @@ namespace CameraViewer.Forms
                 {
                     comboBoxEditRoadName.EditValue = tolGate.KKMC;
                 }
+
+                var org = Model.Repository.Instance.GetOrganization(CameraSpec.OrgNo);
+                if (org != null)
+                {
+                    cbeCaptureDepartment.EditValue = org.ORGNAME;
+                }
             }
+        }
+
+        private void UpdateCaptureTime()
+        {
+            teCaptureTime.EditValue = CaptureTime;
         }
     }
 }

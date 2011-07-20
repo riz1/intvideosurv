@@ -509,6 +509,7 @@
     </Compile>
     <Compile Include="Model\Converter.cs" />
     <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\PunishReason.cs" />
     <Compile Include="Model\Camera.cs" />
     <Compile Include="Model\IRepository.cs" />
