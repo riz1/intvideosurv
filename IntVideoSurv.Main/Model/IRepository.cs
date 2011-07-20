@@ -9,8 +9,9 @@ namespace CameraViewer.Model
     public class Repository
     {
         private Dictionary<string, Camera> _cameras = new Dictionary<string, Camera>();
-        private DevExpress.Xpo.XPCollection<Department> _departments;
+        private XPCollection<Department> _departments;
         private XPCollection<TogTollgate> _tollgates;
+        private XPCollection<AORG> _organizations;
         private static Repository _instance;
 
         public Camera GetCamera(string cameraId)
@@ -41,6 +42,7 @@ namespace CameraViewer.Model
                                     LaneName = res.ResultSet[0].Rows[0].Values[5].ToString(),
 
                                     RegionNo = res.ResultSet[0].Rows[0].Values[11].ToString(),
+                                    OrgNo = res.ResultSet[0].Rows[0].Values[10].ToString()
                                 };
                     _cameras.Add(cameraId, c);
                     return c;
@@ -68,6 +70,16 @@ namespace CameraViewer.Model
             }
 
             return _tollgates.FirstOrDefault(t => t.KKBH == tollgateId);
+        }
+
+        public AORG GetOrganization(string organizationId)
+        {
+            if (_organizations == null)
+            {
+                _organizations = new XPCollection<AORG>();
+            }
+
+            return _organizations.FirstOrDefault(o => o.ORGID == organizationId);
         }
 
         public static Repository Instance
