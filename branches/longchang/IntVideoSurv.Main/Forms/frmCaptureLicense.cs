@@ -11,6 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 using CameraViewer.Player;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTreeList.Nodes;
 using IntVideoSurv.Entity;
 //using IntVideoSurv.Business;
@@ -52,11 +53,9 @@ namespace CameraViewer.Forms
         }
 
 
-
         public frmCaptureLicense()
         {
             InitializeComponent();
-            // LoadBaseInfo();
             if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureTempPath);
@@ -87,9 +86,13 @@ namespace CameraViewer.Forms
         protected virtual void InitializeVideoList()
         {
             var listbox = new ListBoxControl();
+            listbox.DisplayMember = "Item1";
             listbox.Dock = DockStyle.Fill;
             listbox.DoubleClick += this.listBoxControl1_DoubleClick;
             this.videoListContainer.Controls.Add(listbox);
+
+            var videoList = new List<Tuple<string, string>>();
+            listbox.DataSource = videoList;
 
             //获取所有相关的视频文件
             if (!DesignMode)
@@ -99,16 +102,18 @@ namespace CameraViewer.Forms
                 listbox.Items.Clear();
                 if (_relatedFile.RelatedFile1 != null && File.Exists(_relatedFile.RelatedFile1))
                 {
-                    listbox.Items.Add("1");
+                    var item1 = new Tuple<string, string>("1", _relatedFile.RelatedFile1);
+                    videoList.Add(item1);
                 }
                 if (_relatedFile.RelatedFile2 != null && File.Exists(_relatedFile.RelatedFile2))
                 {
-                    listbox.Items.Add("2");
+                    var item2 = new Tuple<string, string>("2", _relatedFile.RelatedFile2);
+                    videoList.Add(item2);
                 }
-                listbox.Items.Add("3");
+
+                var item3 = new Tuple<string, string>("3", _airnoixCamera.VideoPath);
+                videoList.Add(item3);
             }
-
-
         }
 
         private enum PlayState
@@ -117,6 +122,7 @@ namespace CameraViewer.Forms
             SecondVideoState = 2,
             ThirdVideoState = 3
         }
+
         private PlayState play_state;
         private RelatedFile _relatedFile;
 
@@ -142,47 +148,16 @@ namespace CameraViewer.Forms
                 Directory.CreateDirectory(Properties.Settings.Default.CapturePictureFilePath);
             }
 
-            _playerHandle = AirnoixPlayer.Avdec_Init(panelControlVideo.Handle, 0, 512, 0);
             int ret = 0;
             if (File.Exists(_airnoixCamera.VideoPath))
             {
-                //listBoxVideoFiles.SelectedIndex = listBoxVideoFiles.Items.Count - 1;
                 _videoFilePath = _airnoixCamera.VideoPath;
                 SetCurrentVideoFile();
                 Play();
             }
         }
 
-        private void PlayReletedFile2()
-        {
-            int ret;
-            video2FrameValid = false;
-            ret = AirnoixPlayer.Avdec_CloseFile(_playerHandle);
-            ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, _relatedFile.RelatedFile2, null, true);
-            ret = AirnoixPlayer.Avdec_Pause(_playerHandle);
-            Thread.Sleep(40);
-            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(_playerHandle);
 
-            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
-            play_state = PlayState.SecondVideoState;
-            trackBar1.Maximum = _totalFrames;
-
-        }
-        private void PlayReletedFile1()
-        {
-
-            int ret;
-            video1FrameValid = false;
-            ret = AirnoixPlayer.Avdec_CloseFile(_playerHandle);
-            ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, _relatedFile.RelatedFile1, null, false);
-            ret = AirnoixPlayer.Avdec_Pause(_playerHandle);
-            Thread.Sleep(40);
-            _totalFrames = AirnoixPlayer.Avdec_GetTotalFrames(_playerHandle);
-
-            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
-            play_state = PlayState.FirstVideoState;
-            trackBar1.Maximum = _totalFrames;
-        }
 
         public void PlayVideoFile(string videoFilePath)
         {
@@ -197,11 +172,12 @@ namespace CameraViewer.Forms
 
         public void SetCurrentVideoFile()
         {
+            AirnoixPlayer.Avdec_Stop(_playerHandle);
             AirnoixPlayer.Avdec_CloseFile(_playerHandle);
-            AirnoixPlayer.Avdec_SetFile(_playerHandle, _videoFilePath, null, false);
+            AirnoixPlayer.Avdec_SetFile(_playerHandle, _videoFilePath, null, true);
 
             play_state = PlayState.ThirdVideoState;
-            Thread.Sleep(40);
+            Thread.Sleep(400);
 
             trackBar1.Minimum = 0;
             trackBar1.Maximum = AirnoixPlayer.Avdec_GetTotalFrames(_playerHandle);
@@ -215,7 +191,10 @@ namespace CameraViewer.Forms
             if (_playerHandle != IntPtr.Zero)
             {
                 var pos = AirnoixPlayer.Avdec_GetCurrentPosition(_playerHandle);
-                trackBar1.Value = pos;
+                if (pos >= trackBar1.Minimum && pos <= trackBar1.Maximum)
+                {
+                    trackBar1.Value = pos;
+                }
             }
 
         }
@@ -378,7 +357,7 @@ namespace CameraViewer.Forms
         private bool IsEnd;
         private void timer1_Tick(object sender, EventArgs e)
         {
-                UpdatePlayerPosition();
+            UpdatePlayerPosition();
         }
 
         private void frmCaptureLicense_FormClosed(object sender, FormClosedEventArgs e)
@@ -401,18 +380,9 @@ namespace CameraViewer.Forms
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            //trackBar1.Value = trackBar1.Minimum;
-            //AirnoixPlayer.Avdec_Stop(_playerHandle);
-            //timerForUpdatingTrack.Enabled = true;
-            //timer2.Enabled = true;
-            //first = true;
-            //FirstLoad = true;
-            //IsEnd = false;
-            //isfirstvideo = true;
-            //StartPlay = true;
-
             Stop();
         }
+
         private int GetTotalFrames()
         {
             int Maximum;
@@ -429,6 +399,7 @@ namespace CameraViewer.Forms
             AirnoixPlayer.Avdec_CloseFile(_playerHandle);
             return Maximum;
         }
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             try
@@ -625,24 +596,10 @@ namespace CameraViewer.Forms
         private void listBoxControl1_DoubleClick(object sender, EventArgs e)
         {
             var lb = (sender as ListBoxControl);
-            switch ((string)(lb.Items[lb.SelectedIndex]))
-            {
-                case "1":
-                    PlayReletedFile1();
-                    break;
-                case "2":
-                    PlayReletedFile2();
-                    break;
-                case "3":
-                    // PlayMyVideoFile();
-                    break;
-            }
-        }
-
-
-        private void treeListPicturesBefore_FocusedColumnChanged(object sender, DevExpress.XtraTreeList.FocusedColumnChangedEventArgs e)
-        {
-
+            var item = lb.SelectedItem as Tuple<string, string>;
+            _videoFilePath = item.Item2;
+            SetCurrentVideoFile();
+            Play();
         }
 
         private void pictureEditSelectedPicture_DoubleClick_1(object sender, EventArgs e)
@@ -695,7 +652,6 @@ namespace CameraViewer.Forms
 
         private void UpdateCaptureTime()
         {
-            
             teCaptureTime.EditValue = CaptureTime;
         }
 

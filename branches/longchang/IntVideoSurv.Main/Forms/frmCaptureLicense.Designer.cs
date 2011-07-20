@@ -1021,7 +1021,7 @@ namespace CameraViewer.Forms
             // 
             this.busyIndicator.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.busyIndicator.Appearance.BackColor = System.Drawing.Color.LightGray;
-            this.busyIndicator.Appearance.Image = ((System.Drawing.Image)(resources.GetObject("labelControl10.Appearance.Image")));
+            this.busyIndicator.Appearance.Image = ((System.Drawing.Image)(resources.GetObject("busyIndicator.Appearance.Image")));
             this.busyIndicator.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.busyIndicator.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.busyIndicator.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
@@ -1030,6 +1030,7 @@ namespace CameraViewer.Forms
             this.busyIndicator.Size = new System.Drawing.Size(232, 142);
             this.busyIndicator.TabIndex = 0;
             this.busyIndicator.Text = "请稍候...";
+            this.busyIndicator.Visible = false;
             // 
             // frmCaptureLicense
             // 
