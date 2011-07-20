@@ -402,23 +402,23 @@ namespace CameraViewer.Forms
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            try
-            {
-                AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(_playerHandle);
-                if (trackBar1.Value >= Change_Frame && trackBar1.Value <= Change_Frame + 100 && isfirstvideo == true && state == AirnoixPlayerState.PLAY_STATE_PLAY)
-                {
-                    int ret;
-                    ret = AirnoixPlayer.Avdec_CloseFile(_playerHandle);
-                    ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, @"C:\18-55-28.avi", null, true);
-                    changecount = trackBar1.Value;
-                    isfirstvideo = false;
-                    timer2.Enabled = false;
-                }
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    AirnoixPlayerState state = AirnoixPlayer.Avdec_GetCurrentState(_playerHandle);
+            //    if (trackBar1.Value >= Change_Frame && trackBar1.Value <= Change_Frame + 100 && isfirstvideo == true && state == AirnoixPlayerState.PLAY_STATE_PLAY)
+            //    {
+            //        int ret;
+            //        ret = AirnoixPlayer.Avdec_CloseFile(_playerHandle);
+            //        ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, @"C:\18-55-28.avi", null, true);
+            //        changecount = trackBar1.Value;
+            //        isfirstvideo = false;
+            //        timer2.Enabled = false;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-            }
+            //}
 
         }
         private void FirstPlay(int start_frame)
