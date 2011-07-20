@@ -118,6 +118,7 @@ namespace CameraViewer.Forms
             this.cbeFrameInterval = new DevExpress.XtraEditors.ComboBoxEdit();
             this.pictureEditSelectedPicture = new IntVideoSurv.Control.ScalablePictureBox();
             this.videoListContainer = new DevExpress.XtraEditors.PanelControl();
+            this.busyIndicator = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.treeListPicturesBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit3)).BeginInit();
@@ -1016,11 +1017,26 @@ namespace CameraViewer.Forms
             this.videoListContainer.Size = new System.Drawing.Size(210, 285);
             this.videoListContainer.TabIndex = 23;
             // 
+            // busyIndicator
+            // 
+            this.busyIndicator.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.busyIndicator.Appearance.BackColor = System.Drawing.Color.LightGray;
+            this.busyIndicator.Appearance.Image = ((System.Drawing.Image)(resources.GetObject("labelControl10.Appearance.Image")));
+            this.busyIndicator.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.busyIndicator.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.busyIndicator.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.busyIndicator.Location = new System.Drawing.Point(444, 284);
+            this.busyIndicator.Name = "busyIndicator";
+            this.busyIndicator.Size = new System.Drawing.Size(232, 142);
+            this.busyIndicator.TabIndex = 0;
+            this.busyIndicator.Text = "请稍候...";
+            // 
             // frmCaptureLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 689);
+            this.Controls.Add(this.busyIndicator);
             this.Controls.Add(this.videoListContainer);
             this.Controls.Add(this.pictureEditSelectedPicture);
             this.Controls.Add(this.labelControl8);
@@ -1194,6 +1210,7 @@ namespace CameraViewer.Forms
         private DevExpress.XtraEditors.LookUpEdit punishReason;
         private DevExpress.Xpo.XPCollection punishReasonsCollection;
         protected DevExpress.XtraEditors.PanelControl videoListContainer;
+        private DevExpress.XtraEditors.LabelControl busyIndicator;
 
     }
 }

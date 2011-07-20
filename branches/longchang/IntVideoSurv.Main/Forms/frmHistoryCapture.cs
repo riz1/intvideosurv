@@ -75,6 +75,8 @@ namespace CameraViewer.Forms
             {
                 if (_selectedCameras != null)
                 {
+                    ShowBusyMessage("正在刷新录像列表...");
+
                     foreach (var camera in _selectedCameras)
                     {
                         RelatedHistroyVideoFile file = null;
@@ -87,6 +89,8 @@ namespace CameraViewer.Forms
                         {
                             grid.DataSource = file.ListHistroyVideoFile;
                         }
+
+                        HideBusyMessage();
                     }
                 }
             }
