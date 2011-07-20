@@ -73,6 +73,17 @@ namespace CameraViewer.Forms
 
         }
 
+        protected void ShowBusyMessage(string message)
+        {
+            busyIndicator.Text = message;
+            busyIndicator.Visible = true;
+        }
+
+        protected void HideBusyMessage()
+        {
+            busyIndicator.Visible = false;
+        }
+
         protected virtual void InitializeVideoList()
         {
             var listbox = new ListBoxControl();
@@ -495,13 +506,16 @@ namespace CameraViewer.Forms
 
 
             this.UseWaitCursor = true;
+            Pause();
 
             try
             {
+                ShowBusyMessage("正在保存记录...");
                 await UploadImages();
                 SaveCaptureRecord();
-
+                HideBusyMessage();
                 MessageBox.Show(this, "保存成功。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Play();
 
             }
             catch (WebException ex)
