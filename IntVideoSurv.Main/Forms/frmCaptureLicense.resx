@@ -130,7 +130,7 @@
     <value>196, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelControl10.Appearance.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="busyIndicator.Appearance.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhEAAQAPf/AD6J8Jm66HCk687X45Oszmef7MrQ2KC+52yi7Fl1nUuQ70VUaISLlQwZLDl+3R1B
         cktRWo6hvEuO6s3W4xElQRo5ZVmBuBw9axMUFTpqq8zR2WSU1iJKgo2TnD1DS5muy8jIyS5ms2ad6EJK
