@@ -50,8 +50,8 @@ namespace CameraViewer
         string _errMessage = "";
         Dictionary<int, DeviceInfo> _listDevice;
         Dictionary<int, CameraInfo> _listCam;
-        Dictionary<int, CameraInfo> _listAllCam;
-        Dictionary<int, LongChang_CameraInfo> _listAllLongChang_Cam;
+        List<Model.TOG_DEVICE> _listAllCam;
+        List<Model.TOG_DEVICE> _listAllLongChang_Cam;
         Dictionary<string, CameraInfo> _listAllCamStr = new Dictionary<string, CameraInfo>();
         Dictionary<int, DecoderInfo> _listDecoder;
         Dictionary<int, DisplayChannelInfo> _listDisplayChannelInfo;
@@ -155,7 +155,7 @@ namespace CameraViewer
             string[] strs = tag.Split(';');
             if (strs.Length == 2)
             {
-                DispalySynCamera(int.Parse(strs[0]));
+              //  DispalySynCamera(int.Parse(strs[0]));
             }
         }
         void CameraView1DoubleDevCam(string tag)
@@ -181,93 +181,93 @@ namespace CameraViewer
             }
         }
 
-        void DispalySynCamera(int synGroupId)
-        {
-            try
-            {
+        //void DispalySynCamera(int synGroupId)
+        //{
+        //    try
+        //    {
 
-                List<SynCameraInfo> listSynCamera = SynGroupBusiness.Instance.GetAllCameraBySynGroupId(ref _errMessage, synGroupId);
-
-
-                int iRow = 1;
-                int iCol = 1;
-                int iCount = 1;
-                mainMultiplexer.CloseAll();
-                mainMultiplexer.CamerasVisible = true;
-                mainMultiplexer.CellWidth = 320;
-                mainMultiplexer.CellHeight = 240;
-                mainMultiplexer.FitToWindow = true;
-                CloseAll();
-
-                HikVideoServerDeviceDriver deviceDriver = null;
-                HikVideoServerCameraDriver cameraDriver = null;
-                HikVideoServerCameraDriver cameraDriver1 = null;
-                DeviceInfo oDevice;
-                int OutputPort = 0;
-                int i = 0;
-                int j = 0;
-                iCount = listSynCamera.Count;
-                Util.GetRowCol(iCount, ref iRow, ref iCol);
-
-                int cameraId1 = 0;
-                int cameraId2 = 0;
-                CameraInfo camera = null;
-                foreach (SynCameraInfo item in listSynCamera)
-                {
-
-                    camera = _listAllCam[item.CameraId];
-                    oDevice = _listDevice[camera.DeviceId];
-                    if (!_runningDeviceList.ContainsKey(camera.DeviceId))
-                    {
-                        deviceDriver = new HikVideoServerDeviceDriver();
-                        deviceDriver.Init(ref oDevice);
-                        _runningDeviceList.Add(camera.DeviceId, deviceDriver);
-                    }
-
-                    if (_runningDeviceList[camera.DeviceId].IsValidDevice)
-                    {
-                        oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
-                        if (!_runningCameraList.ContainsKey(camera.CameraId))
-                        {
-                            camera.ListOutputTarget = new ArrayList();
-                            cameraDriver = new HikVideoServerCameraDriver(oDevice);
-                            cameraDriver.CurrentCamera = camera;
-                            camera.TotalDSP = _outputTv.TotalDSP;
-                            _runningCameraList.Add(camera.CameraId, cameraDriver);
-                        }
-
-                    }
-                    CameraWindow camwin = mainMultiplexer.GetCameraWindow(i, j);
-                    cameraDriver1 = _runningCameraList[camera.CameraId];
-                    cameraDriver1.CurrentCamera.ListOutputTarget.Add(new DisplayHandlePair { DisplayChannelId = item.DisplayChannelId, DisplaySplitScreenNo = item.DisplaySplitScreenNo, Handle = camwin.Handle });
-                    _runningCameraList[camera.CameraId] = cameraDriver1;
-                    mainMultiplexer.SetCamera(i, j, cameraDriver);
-                    j = j + 1;
-                    if (j >= iCol)
-                    {
-                        i = i + 1;
-                        j = 0;
-                    }
-
-                }
-                foreach (KeyValuePair<int, HikVideoServerCameraDriver> item in _runningCameraList)
-                {
-                    item.Value.Start(item.Value.CurrentCamera, CardOutType.SynGroup, synGroupId);
-                }
-
-                mainMultiplexer.Rows = iRow;
-                mainMultiplexer.Cols = iCol;
-                mainMultiplexer.SingleCameraMode = false;
-                mainMultiplexer.CamerasVisible = true;
-            }
-            catch (Exception ex)
-            {
-
-            }
+        //        List<SynCameraInfo> listSynCamera = SynGroupBusiness.Instance.GetAllCameraBySynGroupId(ref _errMessage, synGroupId);
 
 
+        //        int iRow = 1;
+        //        int iCol = 1;
+        //        int iCount = 1;
+        //        mainMultiplexer.CloseAll();
+        //        mainMultiplexer.CamerasVisible = true;
+        //        mainMultiplexer.CellWidth = 320;
+        //        mainMultiplexer.CellHeight = 240;
+        //        mainMultiplexer.FitToWindow = true;
+        //        CloseAll();
 
-        }
+        //        HikVideoServerDeviceDriver deviceDriver = null;
+        //        HikVideoServerCameraDriver cameraDriver = null;
+        //        HikVideoServerCameraDriver cameraDriver1 = null;
+        //        DeviceInfo oDevice;
+        //        int OutputPort = 0;
+        //        int i = 0;
+        //        int j = 0;
+        //        iCount = listSynCamera.Count;
+        //        Util.GetRowCol(iCount, ref iRow, ref iCol);
+
+        //        int cameraId1 = 0;
+        //        int cameraId2 = 0;
+        //        CameraInfo camera = null;
+        //        foreach (SynCameraInfo item in listSynCamera)
+        //        {
+
+        //            camera = _listAllCam[item.CameraId];
+        //            oDevice = _listDevice[camera.DeviceId];
+        //            if (!_runningDeviceList.ContainsKey(camera.DeviceId))
+        //            {
+        //                deviceDriver = new HikVideoServerDeviceDriver();
+        //                deviceDriver.Init(ref oDevice);
+        //                _runningDeviceList.Add(camera.DeviceId, deviceDriver);
+        //            }
+
+        //            if (_runningDeviceList[camera.DeviceId].IsValidDevice)
+        //            {
+        //                oDevice.ServiceID = _runningDeviceList[camera.DeviceId].ServiceId;
+        //                if (!_runningCameraList.ContainsKey(camera.CameraId))
+        //                {
+        //                    camera.ListOutputTarget = new ArrayList();
+        //                    cameraDriver = new HikVideoServerCameraDriver(oDevice);
+        //                    cameraDriver.CurrentCamera = camera;
+        //                    camera.TotalDSP = _outputTv.TotalDSP;
+        //                    _runningCameraList.Add(camera.CameraId, cameraDriver);
+        //                }
+
+        //            }
+        //            CameraWindow camwin = mainMultiplexer.GetCameraWindow(i, j);
+        //            cameraDriver1 = _runningCameraList[camera.CameraId];
+        //            cameraDriver1.CurrentCamera.ListOutputTarget.Add(new DisplayHandlePair { DisplayChannelId = item.DisplayChannelId, DisplaySplitScreenNo = item.DisplaySplitScreenNo, Handle = camwin.Handle });
+        //            _runningCameraList[camera.CameraId] = cameraDriver1;
+        //            mainMultiplexer.SetCamera(i, j, cameraDriver);
+        //            j = j + 1;
+        //            if (j >= iCol)
+        //            {
+        //                i = i + 1;
+        //                j = 0;
+        //            }
+
+        //        }
+        //        foreach (KeyValuePair<int, HikVideoServerCameraDriver> item in _runningCameraList)
+        //        {
+        //            item.Value.Start(item.Value.CurrentCamera, CardOutType.SynGroup, synGroupId);
+        //        }
+
+        //        mainMultiplexer.Rows = iRow;
+        //        mainMultiplexer.Cols = iCol;
+        //        mainMultiplexer.SingleCameraMode = false;
+        //        mainMultiplexer.CamerasVisible = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+
+
+
+        //}
 
         private void CloseAll()
         {
@@ -597,7 +597,7 @@ namespace CameraViewer
             Splash.Splash.Status = "获取摄像头信息...";
             //videoOutList = new Dictionary<VideoOutputInfo, VideoOutputDriver>();
             _runningCameraList = new Dictionary<int, HikVideoServerCameraDriver>();
-            _listAllCam = CameraBusiness.Instance.GetAllCameraInfo(ref _errMessage);
+            _listAllCam = Model.Repository.Instance.GetTogCameras().ToList();
             LoadCameraInCombox();
             InitDataTable();
             InitVehicleDataTable();
@@ -620,7 +620,7 @@ namespace CameraViewer
             
             //******************************隆昌************************//
             MakeLongChangInterface();
-            _listAllLongChang_Cam = LongChang_CameraBusiness.Instance.GetCamInfoByDeviceUserId(ref _errMessage, CurrentUser.UserId);
+            _listAllLongChang_Cam = Model.Repository.Instance.GetTogCameras().ToList();
             barStaticItemCameraNo.Caption = _listAllLongChang_Cam.Count.ToString();
             LoadAllCameraInLongChang();
 
@@ -712,13 +712,13 @@ namespace CameraViewer
             {
                 foreach (var VARIABLE in _listAllCam)
                 {
-                    _listAllCamStr.Add(VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, VARIABLE.Value);
-                    checkedComboBoxEditFaceCamera.Properties.Items.Add(
-                        VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
-                    checkedComboBoxEditVehicleCamera.Properties.Items.Add(
-                        VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
-                    checkedComboBoxEditEventCamera.Properties.Items.Add(
-                        VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                    //_listAllCamStr.Add(VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, VARIABLE.Value);
+                    //checkedComboBoxEditFaceCamera.Properties.Items.Add(
+                    //    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                    //checkedComboBoxEditVehicleCamera.Properties.Items.Add(
+                    //    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
+                    //checkedComboBoxEditEventCamera.Properties.Items.Add(
+                    //    VARIABLE.Value.DeviceName + ":" + VARIABLE.Value.Name, false);
                 }
             }
             catch (System.Exception e)
@@ -882,11 +882,11 @@ namespace CameraViewer
 
             //先载入左边列表
             treeListCamera.Nodes.Clear();
-            foreach (var VARIABLE in _listAllLongChang_Cam)
+            foreach (var device in _listAllLongChang_Cam)
             {
-                TreeListNode treeListNode = treeListCamera.AppendNode(new[] {VARIABLE.Value.Name, VARIABLE.Key + ";C"},
+                TreeListNode treeListNode = treeListCamera.AppendNode(new[] {device.SBMC, device.SBBH + ";C"},
                                                                       -1,0);
-                treeListNode.Tag = VARIABLE.Value;
+                treeListNode.Tag = device;
             }
 
             int iRow = Properties.Settings.Default.Rows;
@@ -901,7 +901,7 @@ namespace CameraViewer
  
             iCount = 0;
 
-            foreach (var VARIABLE in _listAllLongChang_Cam)
+            foreach (var device in _listAllLongChang_Cam)
             {
                 int i = iCount / iRow;
                 int j = iCount % iCol;
@@ -910,13 +910,13 @@ namespace CameraViewer
                 //开始连接摄像头
                 airnoixCameraNew = new AirnoixCamera(cameraWindow.Handle);
                 airnoixCameraNew.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
-                airnoixCameraNew.Ip = VARIABLE.Value.IP;
-                airnoixCameraNew.Port = VARIABLE.Value.Port;
-                airnoixCameraNew.UserName = VARIABLE.Value.UserName;
-                airnoixCameraNew.Password = VARIABLE.Value.PassWord;
-                airnoixCameraNew.Id = VARIABLE.Key;
+                airnoixCameraNew.Ip = device.SBIP;
+                airnoixCameraNew.Port = int.Parse(device.DKH);
+                airnoixCameraNew.UserName = device.DLYH;
+                airnoixCameraNew.Password = device.DLMM;
+                airnoixCameraNew.Id = int.Parse(device.SBBH);
                 airnoixCameraNew.SaveTo = "c:\\";
-                airnoixCameraNew.Type = VARIABLE.Value.Type;
+                airnoixCameraNew.Type = int.Parse(device.SBLX);
                 cameraWindow.AirnoixCamera = airnoixCameraNew;
                 airnoixCameraNew.Start();
 

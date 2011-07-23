@@ -630,7 +630,7 @@ namespace CameraViewer.Forms
             // 
             // timerForUpdatingTrack
             // 
-            this.timerForUpdatingTrack.Interval = 20;
+            this.timerForUpdatingTrack.Interval = 1000;
             this.timerForUpdatingTrack.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // trackBar1

@@ -9,10 +9,21 @@ namespace CameraViewer.Model
     public class Repository
     {
         private Dictionary<string, Camera> _cameras = new Dictionary<string, Camera>();
+        private List<TOG_DEVICE> _togCameras;
         private XPCollection<Department> _departments;
         private XPCollection<TogTollgate> _tollgates;
         private XPCollection<AORG> _organizations;
         private static Repository _instance;
+
+        public IList<TOG_DEVICE> GetTogCameras()
+        {
+            if (_togCameras == null)
+            {
+                _togCameras = new XPCollection<TOG_DEVICE>().Where(t => t.SBLX == "1" || t.SBLX == "2").OrderBy(t=>int.Parse(t.SBBH)).ToList();
+            }
+
+            return _togCameras;
+        }
 
         public Camera GetCamera(string cameraId)
         {
