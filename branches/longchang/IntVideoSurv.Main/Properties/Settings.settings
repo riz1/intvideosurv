@@ -62,5 +62,11 @@
     <Setting Name="FtpPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">longchang</Value>
     </Setting>
+    <Setting Name="PTZDockPanelX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="PTZDockPanelY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

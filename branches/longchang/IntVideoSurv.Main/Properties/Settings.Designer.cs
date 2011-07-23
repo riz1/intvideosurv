@@ -259,5 +259,29 @@ namespace CameraViewer.Properties {
                 this["FtpPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int PTZDockPanelX {
+            get {
+                return ((int)(this["PTZDockPanelX"]));
+            }
+            set {
+                this["PTZDockPanelX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int PTZDockPanelY {
+            get {
+                return ((int)(this["PTZDockPanelY"]));
+            }
+            set {
+                this["PTZDockPanelY"] = value;
+            }
+        }
     }
 }
