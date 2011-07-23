@@ -82,34 +82,7 @@ namespace IntVideoSurv.Business
 
         }
 
-        public Dictionary<int,CameraInfo> GetAllCameraInfo(ref string errMessage)
-        {
-            Database db = DatabaseFactory.CreateDatabase();
-            errMessage = "";
-            Dictionary<int, CameraInfo> list = new Dictionary<int, CameraInfo>();
-            try
-            {
-                
-                DataSet ds = CameraDataAccess.GetAllCamInfo(db);
-                 
-                CameraInfo oCamera;
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    oCamera = new CameraInfo(ds.Tables[0].Rows[i]);
-                    list.Add(oCamera.CameraId, oCamera);
-
-                   
-                }
-                return list;
-
-            }
-            catch (Exception ex)
-            {
-                errMessage = ex.Message + ex.StackTrace;
-                logger.Error("Error Message:" + ex.Message + " Trace:" + ex.StackTrace);
-                return null;
-            }
-        }
+       
         public CameraInfo GetCameraInfoByCameraId(ref string errMessage, int CameraId)
         {
             Database db = DatabaseFactory.CreateDatabase();

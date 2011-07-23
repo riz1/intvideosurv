@@ -421,39 +421,6 @@ namespace CameraViewer.Forms
             //}
 
         }
-        private void FirstPlay(int start_frame)
-        {
-            int totalframes;
-            int ret;
-            int count;
-            int mum;
-            isfirstvideo = true;
-            ret = AirnoixPlayer.Avdec_SetFile(_playerHandle, @"C:\123.AVI", null, false);
-            Thread.Sleep(1000);
-            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
-            ret = AirnoixPlayer.Avdec_Pause(_playerHandle);
-
-            if (trackBar1.Maximum > 0)
-            {
-                Thread.Sleep(2500);
-                ret = AirnoixPlayer.Avdec_SetCurrentPosition(_playerHandle, start_frame);
-                mum = AirnoixPlayer.Avdec_GetCurrentPosition(_playerHandle);
-                count = start_frame - mum;
-                while (count > 0)
-                {
-                    ret = AirnoixPlayer.Avdec_StepFrame(_playerHandle, true);
-                    count--;
-                }
-            }
-            Thread.Sleep(1000);
-            ret = AirnoixPlayer.Avdec_Play(_playerHandle);
-            timerForUpdatingTrack.Enabled = true;
-            timer2.Enabled = true;
-            first = true;
-            FirstLoad = true;
-            IsEnd = false;
-        }
-
 
         private string errMessage = "";
         private async void buttonSave_Click(object sender, EventArgs e)
@@ -484,7 +451,6 @@ namespace CameraViewer.Forms
                 ShowBusyMessage("正在保存记录...");
                 await UploadImages();
                 SaveCaptureRecord();
-                HideBusyMessage();
                 MessageBox.Show(this, "保存成功。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Play();
 
@@ -496,6 +462,7 @@ namespace CameraViewer.Forms
             finally
             {
                 this.UseWaitCursor = false;
+                HideBusyMessage();
             }
         }
 

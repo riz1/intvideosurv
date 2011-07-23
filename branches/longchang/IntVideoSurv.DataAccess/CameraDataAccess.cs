@@ -157,21 +157,6 @@ namespace IntVideoSurv.DataAccess
 
         }
 
-
-        public static DataSet GetAllCamInfo(Database db)
-        {
-            string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from (CameraInfo inner join IVS_DeviceInfo on CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) order by CameraId");
-            try
-            {
-                return db.ExecuteDataSet(CommandType.Text, cmdText);
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
         public static DataSet GetCamInfoByCameraId(Database db, int CameraId)
         {
             string cmdText = string.Format("select IVS_CameraInfo.*,IVS_DeviceInfo.Name as DeviceName from (IVS_CameraInfo inner join IVS_DeviceInfo on IVS_CameraInfo.deviceid =  IVS_DeviceInfo.deviceid) where CameraId={0} ", CameraId);

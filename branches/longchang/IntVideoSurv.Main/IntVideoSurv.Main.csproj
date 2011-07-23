@@ -524,6 +524,7 @@
     <Compile Include="Model\IRepository.cs" />
     <Compile Include="Model\LprType.cs" />
     <Compile Include="Model\OracleProvider.cs" />
+    <Compile Include="Model\TOG_DEVICE.cs" />
     <Compile Include="Model\TollGate.cs" />
     <Compile Include="Multiplayer.cs">
       <SubType>Component</SubType>
