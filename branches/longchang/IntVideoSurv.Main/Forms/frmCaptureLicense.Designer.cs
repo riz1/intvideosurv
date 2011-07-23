@@ -637,7 +637,7 @@ namespace CameraViewer.Forms
             // 
             this.trackBar1.Location = new System.Drawing.Point(2, 294);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(455, 42);
+            this.trackBar1.Size = new System.Drawing.Size(455, 45);
             this.trackBar1.TabIndex = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
@@ -1025,7 +1025,7 @@ namespace CameraViewer.Forms
             this.busyIndicator.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.busyIndicator.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.busyIndicator.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.busyIndicator.Location = new System.Drawing.Point(444, 284);
+            this.busyIndicator.Location = new System.Drawing.Point(468, 284);
             this.busyIndicator.Name = "busyIndicator";
             this.busyIndicator.Size = new System.Drawing.Size(232, 142);
             this.busyIndicator.TabIndex = 0;

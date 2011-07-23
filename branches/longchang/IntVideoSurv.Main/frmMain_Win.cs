@@ -470,7 +470,7 @@ namespace CameraViewer
             setting.ShowDialog(this);
         }
 
-        private void multiplexer1_DoubleCamera(bool isFullScreen, CameraInfo camera)
+        private void mainMultiplexer_DoubleCamera(bool isFullScreen, CameraInfo camera)
         {
             this.FullScreen(isFullScreen);
         }
@@ -2726,7 +2726,7 @@ namespace CameraViewer
         private uint ptzSpeed = 1;
         private void mainMultiplexer_SelectCameraWindow(object sender, EventArgs e, CameraWindow CurrentCameraWindow)
         {
-            if (CurrentCameraWindow.AirnoixCamera == null)
+            if (CurrentCameraWindow.AirnoixCamera == null || CurrentCameraWindow.AirnoixCamera.IsAlive==false)
             {
                 if (dockPanelPtzControl.Visible)
                 {
@@ -2735,6 +2735,7 @@ namespace CameraViewer
                 }
                 return;
             }
+
             if (CurrentCameraWindow.AirnoixCamera.Type == 1)
             {
                 if (AironixControl.TMCC_IsConnect(ptzHandle))
