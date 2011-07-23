@@ -134,7 +134,7 @@ namespace CameraViewer
             // 
             this.label2.Location = new System.Drawing.Point(10, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 16);
+            this.label2.Size = new System.Drawing.Size(28, 14);
             this.label2.TabIndex = 2;
             this.label2.Text = "描述:";
             // 
@@ -144,7 +144,7 @@ namespace CameraViewer
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionBox.Location = new System.Drawing.Point(10, 60);
-		    this.descriptionBox.Multiline = true;
+            this.descriptionBox.Multiline = true;
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.Size = new System.Drawing.Size(300, 80);
             this.descriptionBox.TabIndex = 3;
@@ -156,7 +156,7 @@ namespace CameraViewer
             this.nameBox.BackColor = System.Drawing.SystemColors.Window;
             this.nameBox.Location = new System.Drawing.Point(60, 10);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(250, 20);
+            this.nameBox.Size = new System.Drawing.Size(250, 21);
             this.nameBox.TabIndex = 1;
             this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
@@ -164,16 +164,16 @@ namespace CameraViewer
             // 
             this.label1.Location = new System.Drawing.Point(10, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 16);
+            this.label1.Size = new System.Drawing.Size(52, 14);
             this.label1.TabIndex = 0;
             this.label1.Text = "设备名称:";
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.Location = new System.Drawing.Point(10, 153);
+            this.label3.Location = new System.Drawing.Point(10, 156);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 17);
+            this.label3.Size = new System.Drawing.Size(52, 14);
             this.label3.TabIndex = 4;
             this.label3.Text = "设备类型:";
             // 
@@ -185,7 +185,7 @@ namespace CameraViewer
             this.videoSourceCombo.Location = new System.Drawing.Point(90, 150);
             this.videoSourceCombo.MaxDropDownItems = 15;
             this.videoSourceCombo.Name = "videoSourceCombo";
-            this.videoSourceCombo.Size = new System.Drawing.Size(220, 21);
+            this.videoSourceCombo.Size = new System.Drawing.Size(220, 20);
             this.videoSourceCombo.TabIndex = 5;
             this.videoSourceCombo.SelectedIndexChanged += new System.EventHandler(this.videoSourceCombo_SelectedIndexChanged);
             // 

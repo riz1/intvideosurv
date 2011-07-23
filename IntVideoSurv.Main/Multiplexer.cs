@@ -885,7 +885,7 @@ namespace CameraViewer
                         {
                             camWindows[i, j].Visible = true;
                             camWindows[i, j].Location = new Point(startX, startY);
-                            camWindows[i, j].Size = new Size(width-2, height-2);
+                            camWindows[i, j].Size = new Size(ClientRectangle.Width, ClientRectangle.Height);
                         }
                         else
                         {
