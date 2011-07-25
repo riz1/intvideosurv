@@ -70,6 +70,8 @@ namespace CameraViewer
         private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private GetTransPacket _getTransPacket;
+        private CancellationTokenSource _cts;
+        private object _lock = new object();
 
         public MainForm()
         {
@@ -113,20 +115,23 @@ namespace CameraViewer
             threadForRecognizer.Start();
 
             //×¢²áÈÈ¼ü
-            RegisterHotKey(this.Handle, 201, (int)MyKeys.Alt, (int)Keys.D1); //×¢²áÈÈ¼üAlt+1       
-            RegisterHotKey(this.Handle, 202, (int)MyKeys.Alt, (int)Keys.D2); //×¢²áÈÈ¼üAlt+1            
-            RegisterHotKey(this.Handle, 203, (int)MyKeys.Alt, (int)Keys.D3); //×¢²áÈÈ¼üAlt+1
-            RegisterHotKey(this.Handle, 204, (int)MyKeys.Alt, (int)Keys.D4); //×¢²áÈÈ¼üAlt+1
-            RegisterHotKey(this.Handle, 205, (int)MyKeys.Alt, (int)Keys.D5); //×¢²áÈÈ¼üAlt+1
-            RegisterHotKey(this.Handle, 206, (int)MyKeys.Alt, (int)Keys.D6); //×¢²áÈÈ¼üAlt+1
-            RegisterHotKey(this.Handle, 207, (int)MyKeys.Alt, (int)Keys.D7); //×¢²áÈÈ¼üAlt+1
-            RegisterHotKey(this.Handle, 208, (int)MyKeys.Alt, (int)Keys.D8); //×¢²áÈÈ¼üAlt+1
-            RegisterHotKey(this.Handle, 209, (int)MyKeys.Alt, (int)Keys.D9); //×¢²áÈÈ¼üAlt+1
+            RegisterHotKey(this.Handle, 201, (int)MyKeys.Ctrl, (int)Keys.D1); //×¢²áÈÈ¼üAlt+1       
+            RegisterHotKey(this.Handle, 202, (int)MyKeys.Ctrl, (int)Keys.D2); //×¢²áÈÈ¼üAlt+1            
+            RegisterHotKey(this.Handle, 203, (int)MyKeys.Ctrl, (int)Keys.D3); //×¢²áÈÈ¼üAlt+1
+            RegisterHotKey(this.Handle, 204, (int)MyKeys.Ctrl, (int)Keys.D4); //×¢²áÈÈ¼üAlt+1
+            RegisterHotKey(this.Handle, 205, (int)MyKeys.Ctrl, (int)Keys.D5); //×¢²áÈÈ¼üAlt+1
+            RegisterHotKey(this.Handle, 206, (int)MyKeys.Ctrl, (int)Keys.D6); //×¢²áÈÈ¼üAlt+1
+            RegisterHotKey(this.Handle, 207, (int)MyKeys.Ctrl, (int)Keys.D7); //×¢²áÈÈ¼üAlt+1
+            RegisterHotKey(this.Handle, 208, (int)MyKeys.Ctrl, (int)Keys.D8); //×¢²áÈÈ¼üAlt+1
+            RegisterHotKey(this.Handle, 209, (int)MyKeys.Ctrl, (int)Keys.D9); //×¢²áÈÈ¼üAlt+1
 
             if (!Directory.Exists(Properties.Settings.Default.RecordTempVideoPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.RecordTempVideoPath);
             }
+
+
+
 
         }
         private void BeginRemotingService()
@@ -2758,39 +2763,60 @@ namespace CameraViewer
                 AironixControl.TMCC_PtzClose(ptzHandle);
             }
 
-            if (CurrentCameraWindow.AirnoixCamera.Type == 2)
+            if (_cts != null)
+            {
+                _cts.Cancel();
+            }
+
+            _cts = new CancellationTokenSource();
+
+            if (CurrentCameraWindow.AirnoixCamera != null && CurrentCameraWindow.AirnoixCamera.Type == 2)
             {
                 int opened;
-                var connected = await ConnectToCameraAsync(CurrentCameraWindow);
 
-                dockPanelPtzControl.Tag = CurrentCameraWindow.AirnoixCamera;
-                dockPanelPtzControl.Enabled = connected;
+                try
+                {
+                    var connected = await ConnectToCameraAsync(CurrentCameraWindow, _cts.Token);
+
+                    dockPanelPtzControl.Tag = CurrentCameraWindow.AirnoixCamera;
+                    dockPanelPtzControl.Enabled = connected;
+                }
+                catch (TaskCanceledException)
+                {
+                    
+                    
+                }
+                
             }
 
             _currentcCameraWindow = CurrentCameraWindow;
         }
 
-        private Task<bool> ConnectToCameraAsync(CameraWindow CurrentCameraWindow)
+        private Task<bool> ConnectToCameraAsync(CameraWindow CurrentCameraWindow, CancellationToken cancellationToken)
         {
              return TaskEx.Run(() =>
                                   {
-                                      tmConnectInfo_t connectInfo = new tmConnectInfo_t();
-                                      connectInfo.pIp = CurrentCameraWindow.AirnoixCamera.Ip;
-                                      connectInfo.iPort = CurrentCameraWindow.AirnoixCamera.Port;
-                                      connectInfo.dwSize = 236;
-                                      connectInfo.iUserLevel = 5;
-                                      connectInfo.szUser = CurrentCameraWindow.AirnoixCamera.UserName;
-                                      connectInfo.szPass = CurrentCameraWindow.AirnoixCamera.Password;
-                                      connectInfo.pUserContext = "";
-                                      var connected = AironixControl.TMCC_Connect(ptzHandle, ref connectInfo, true);
-                                      if (connected != 0)
+                                      lock (_lock)
                                       {
-                                          return false;
-                                      }
+                                          tmConnectInfo_t connectInfo = new tmConnectInfo_t();
+                                          connectInfo.pIp = CurrentCameraWindow.AirnoixCamera.Ip;
+                                          connectInfo.iPort = CurrentCameraWindow.AirnoixCamera.Port;
+                                          connectInfo.dwSize = 236;
+                                          connectInfo.iUserLevel = 5;
+                                          connectInfo.szUser = CurrentCameraWindow.AirnoixCamera.UserName;
+                                          connectInfo.szPass = CurrentCameraWindow.AirnoixCamera.Password;
+                                          connectInfo.pUserContext = "";
+                                          var connected = AironixControl.TMCC_Connect(ptzHandle, ref connectInfo, true);
+                                          if (connected != 0)
+                                          {
+                                              return false;
+                                          }
 
-                                      var opened = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
-                                      return opened == 0;
-                                  });
+                                          var opened = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
+                                          return opened == 0; 
+                                      }
+                                      
+                                  }, cancellationToken);
 
         }
 
