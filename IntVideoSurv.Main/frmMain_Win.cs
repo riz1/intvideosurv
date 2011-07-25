@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CameraViewer.NetWorking;
 using CameraViewer.Remoting;
@@ -62,6 +63,7 @@ namespace CameraViewer
         Dictionary<int, AlarmInfo> _listAlarm;
         Dictionary<int, MapInfo> _listMap;
         OutputTVDeviceDriver _outputTv;
+
         TcpChannel chan1;
         private CameraWindow _currentcCameraWindow;
 
@@ -77,9 +79,9 @@ namespace CameraViewer
             {
                 XtraMessageBox.Show("请确保数据库服务器已启动，且数据库连接参数正确!");
                 Process.GetCurrentProcess().Kill();
-            }  
+            }
             //
-           
+
 
 
 #if !DEBUG
@@ -155,7 +157,7 @@ namespace CameraViewer
             string[] strs = tag.Split(';');
             if (strs.Length == 2)
             {
-              //  DispalySynCamera(int.Parse(strs[0]));
+                //  DispalySynCamera(int.Parse(strs[0]));
             }
         }
         void CameraView1DoubleDevCam(string tag)
@@ -334,7 +336,7 @@ namespace CameraViewer
             this.Close();
             AironixControl.TMCC_PtzClose(ptzHandle);
             AironixControl.TMCC_Done(ptzHandle);
-            for (int i = 201; i <=209; i++)
+            for (int i = 201; i <= 209; i++)
             {
                 UnregisterHotKey(this.Handle, i); //注销热键                
             }
@@ -357,7 +359,7 @@ namespace CameraViewer
                     if (_listNumKeyStatus[key])
                     {
                         barButtonD1.Appearance.ForeColor = Color.Red;
-                        barButtonD1.Appearance.Font = new Font("Tahoma",12);
+                        barButtonD1.Appearance.Font = new Font("Tahoma", 12);
                     }
                     else
                     {
@@ -502,11 +504,11 @@ namespace CameraViewer
                      ClientUserId = CurrentUser.UserId,
                      ClientUserName = CurrentUser.UserName
 
-                 }); 
+                 });
                 CloseAll();
-                if (_outputTv!=null)
+                if (_outputTv != null)
                 {
-                   _outputTv.Close(); 
+                    _outputTv.Close();
                 }
 
                 ChannelServices.UnregisterChannel(chan1);
@@ -616,8 +618,8 @@ namespace CameraViewer
             Splash.Splash.Close();
             //HikVideoServerCameraDriver.InitDecodeCard();
             splitContainerControl1.SplitterPosition = splitContainerControl1.Height - 46;
-            
-            
+
+
             //******************************隆昌************************//
             MakeLongChangInterface();
             _listAllLongChang_Cam = Model.Repository.Instance.GetTogCameras().ToList();
@@ -625,7 +627,7 @@ namespace CameraViewer
             LoadAllCameraInLongChang();
 
             //******************************隆昌************************//
-            
+
             DateTime dtNow = DateTime.Now;
             teStartTimeFace.EditValue = dtNow.AddDays(-1);
             teStartTimeVehicle.EditValue = dtNow.AddDays(-1);
@@ -723,7 +725,7 @@ namespace CameraViewer
             }
             catch (System.Exception e)
             {
-            	
+
             }
 
             checkedComboBoxEditUserSelection.Properties.Items.Add("无", true);
@@ -731,7 +733,7 @@ namespace CameraViewer
             checkedComboBoxEditUserSelection.Properties.Items.Add("跨线", false);
             checkedComboBoxEditUserSelection.Properties.Items.Add("逆行", false);
             checkedComboBoxEditUserSelection.Properties.Items.Add("变道", false);
-            
+
         }
 
         private void InitDisplayRegion()
@@ -884,8 +886,8 @@ namespace CameraViewer
             treeListCamera.Nodes.Clear();
             foreach (var device in _listAllLongChang_Cam)
             {
-                TreeListNode treeListNode = treeListCamera.AppendNode(new[] {device.SBMC, device.SBBH + ";C"},
-                                                                      -1,0);
+                TreeListNode treeListNode = treeListCamera.AppendNode(new[] { device.SBMC, device.SBBH + ";C" },
+                                                                      -1, 0);
                 treeListNode.Tag = device;
             }
 
@@ -898,7 +900,7 @@ namespace CameraViewer
             mainMultiplexer.CellHeight = 240;
             mainMultiplexer.FitToWindow = true;
             mainMultiplexer.SetRowCol(iRow, iCol);
- 
+
             iCount = 0;
 
             foreach (var device in _listAllLongChang_Cam)
@@ -1639,15 +1641,15 @@ namespace CameraViewer
                 XtraMessageBox.Show("起始时间不能大于结束时间！");
                 return "";
             }
-            if (DataBaseParas.DBType ==MyDBType.SqlServer)
+            if (DataBaseParas.DBType == MyDBType.SqlServer)
             {
                 str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeFace.EditValue + "') and convert(DateTime,'" + teEndTimeFace.EditValue + "'))";
-             
+
             }
             else
             {
                 str += " and (CapturePicture.DateTime between to_date('" + teStartTimeFace.EditValue + "','YYYY/MM/DD HH24:mi:ss' ) and to_date('" + teEndTimeFace.EditValue + "','YYYY/MM/DD HH24:mi:ss' ))";
-               
+
             }
 
             return str;
@@ -2007,7 +2009,7 @@ namespace CameraViewer
             else
             {
                 //platenumber有没有记录
-                if (VehicleBusiness.Instance.GetVehicleCountByPlateNumber(ref _errMessage,textEditPlateNumber.Text) == true)
+                if (VehicleBusiness.Instance.GetVehicleCountByPlateNumber(ref _errMessage, textEditPlateNumber.Text) == true)
                 {
                     str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeVehicle.EditValue + "') and convert(DateTime,'" + teEndTimeVehicle.EditValue + "'))";
                     str += " and (Vehicle.platenumber = " + textEditPlateNumber.Text + ")";
@@ -2017,7 +2019,7 @@ namespace CameraViewer
                     XtraMessageBox.Show("没有对应的车牌号码！");
                     return "";
                 }
-                
+
             }
 
             return str;
@@ -2027,7 +2029,7 @@ namespace CameraViewer
         {
             string errMessage = "";
             string faceQueryCondition = GenerateVehicleQueryCondition();
-            if (faceQueryCondition=="")
+            if (faceQueryCondition == "")
             {
                 return;
             }
@@ -2037,11 +2039,22 @@ namespace CameraViewer
             //Dictionary<int, Face> listFace = new Dictionary<int, Face>();
             //listFace.Add(1, new Face() { CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, FaceID = 101, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" }, FacePath = @"c:\b.jpg", score = 0.333f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\16\23.264" } });
             //listFace.Add(2, new Face() { CameraInfo = new CameraInfo() { CameraId = 2, Name = "abc", DeviceName = "world" }, FaceID = 102, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now.AddDays(-100), FilePath = @"c:\b.jpg" }, FacePath = @"c:\b.jpg", score = 0.555f, VideoInfo = new VideoInfo() { FilePath = @"D:\VideoOutput\68\2011\05\01\14\16.264" } });
-            if (listVehicle==null)
+            if (listVehicle == null)
             {
                 listVehicle = new Dictionary<int, Vehicle>();
-                listVehicle.Add(1, new Vehicle() { accident = true, CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" }, CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" },confidence = 35,linechange = false,PictureID = 1,platecolor = "000255000",
-                platenumber = "川A12345",REctId=1,speed = 50});
+                listVehicle.Add(1, new Vehicle()
+                {
+                    accident = true,
+                    CameraInfo = new CameraInfo() { CameraId = 1, Name = "test", DeviceName = "hello" },
+                    CapturePicture = new CapturePicture() { CameraID = 1, Datetime = DateTime.Now, FilePath = @"c:\a.jpg" },
+                    confidence = 35,
+                    linechange = false,
+                    PictureID = 1,
+                    platecolor = "000255000",
+                    platenumber = "川A12345",
+                    REctId = 1,
+                    speed = 50
+                });
                 listVehicle.Add(2, new Vehicle()
                 {
                     accident = true,
@@ -2122,7 +2135,7 @@ namespace CameraViewer
             dataTableVehicle.Columns.Add("vehiclecolor", typeof(string));
             dataTableVehicle.Columns.Add("车辆对象", typeof(Vehicle));
         }
-       
+
         private Vehicle _selectedVehicle;
         private void advBandedGridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
@@ -2369,7 +2382,7 @@ namespace CameraViewer
             str += " and (CapturePicture.[DateTime] between convert(DateTime,'" + teStartTimeEvent.EditValue + "') and convert(DateTime,'" + teEndTimeEvent.EditValue + "'))";
 
             string[] userSelections = checkedComboBoxEditUserSelection.Text.Split(',');
-            foreach(var selection in userSelections)
+            foreach (var selection in userSelections)
             {
                 string changeselectCamera = selection.Trim();
                 if (selection == "无")
@@ -2460,10 +2473,10 @@ namespace CameraViewer
                         }
                     }
                 }
-      
+
             }
         }
-        
+
         private void FillGridControlEventDetail(Dictionary<int, Event> listevent)
         {
             dataTableEvent.Rows.Clear();
@@ -2669,8 +2682,8 @@ namespace CameraViewer
             //ret = AirnoixClient.MP4_ClientSetConnectUser(intPtr, "system", "system");
             //ret = AirnoixClient.MP4_ClientConnectEx(intPtr, "192.168.1.6", 6002, 0, 0, 0);
 
-            airnoixCamera = new AirnoixCamera(cameraWindow.Handle);   
-            airnoixCamera.DisplayPos = new Rectangle(0,0,cameraWindow.Width,cameraWindow.Height);
+            airnoixCamera = new AirnoixCamera(cameraWindow.Handle);
+            airnoixCamera.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
             airnoixCamera.Ip = "192.168.1.6";
             airnoixCamera.Port = 6002;
             airnoixCamera.UserName = "system";
@@ -2694,19 +2707,19 @@ namespace CameraViewer
 
         private void barButtonItem20_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            RelatedFile relatedFile = new RelatedFile("192.168.1.6",1,DateTime.Now,15);
+            RelatedFile relatedFile = new RelatedFile("192.168.1.6", 1, DateTime.Now, 15);
         }
 
         private IntPtr retIntPtr;
         private void barButtonItem21_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Debug.WriteLine("Before Init\t"+DateTime.Now.ToString());
-            IntPtr myIntPtr = mainMultiplexer.GetCameraWindow(0,2).Handle;
+            Debug.WriteLine("Before Init\t" + DateTime.Now.ToString());
+            IntPtr myIntPtr = mainMultiplexer.GetCameraWindow(0, 2).Handle;
             retIntPtr = AirnoixPlayer.Avdec_Init(myIntPtr, 0, 512, 0);
             int ret = AirnoixPlayer.Avdec_SetFile(retIntPtr, @"Y:\data(Server@ASIPCAM(192.168.1.6))\2011-06-30\ch01ch\19-48-05_N(16).mkv", null, false);
             Thread.Sleep(40);
             int frames = AirnoixPlayer.Avdec_GetTotalFrames(retIntPtr);
-            ret = AirnoixPlayer.Avdec_SetCurrentPosition(retIntPtr,600);
+            ret = AirnoixPlayer.Avdec_SetCurrentPosition(retIntPtr, 600);
             ret = AirnoixPlayer.Avdec_Play(retIntPtr);
             Debug.WriteLine("Before Init\t" + DateTime.Now.ToString() + "\tFrames=" + frames);
             //ret = AirnoixPlayer.Avdec_Done(retIntPtr);
@@ -2722,51 +2735,62 @@ namespace CameraViewer
 
 
         #region 球机控制
-        private IntPtr ptzHandle = AironixControl.TMCC_Init(0);
+        private IntPtr ptzHandle = IntPtr.Zero;
         private uint ptzSpeed = 1;
-        private void mainMultiplexer_SelectCameraWindow(object sender, EventArgs e, CameraWindow CurrentCameraWindow)
+        private async void mainMultiplexer_SelectCameraWindow(object sender, EventArgs e, CameraWindow CurrentCameraWindow)
         {
-            if (CurrentCameraWindow.AirnoixCamera == null || CurrentCameraWindow.AirnoixCamera.IsAlive==false)
+
+            if (object.ReferenceEquals(CurrentCameraWindow, _currentcCameraWindow))
             {
-                if (dockPanelPtzControl.Enabled)
-                {
-                    AironixControl.TMCC_Done(ptzHandle);
-                    dockPanelPtzControl.Enabled = false;
-                }
                 return;
             }
 
-            if (CurrentCameraWindow.AirnoixCamera.Type == 1)
-            {
-                if (AironixControl.TMCC_IsConnect(ptzHandle))
-                {
-                    int iret = AironixControl.TMCC_PtzClose(ptzHandle);
-                    iret = AironixControl.TMCC_DisConnect(ptzHandle);
-                    iret = AironixControl.TMCC_Done(ptzHandle);
-                }
-                
-                dockPanelPtzControl.Enabled  = false;
-            }
-            else if (CurrentCameraWindow.AirnoixCamera.Type == 2)
+            dockPanelPtzControl.Enabled = false;
+
+            if (ptzHandle == IntPtr.Zero)
             {
                 ptzHandle = AironixControl.TMCC_Init(0);
-                tmConnectInfo_t connectInfo = new tmConnectInfo_t();
-                connectInfo.pIp = CurrentCameraWindow.AirnoixCamera.Ip;
-                connectInfo.iPort = CurrentCameraWindow.AirnoixCamera.Port;
-                connectInfo.dwSize = 236;
-                connectInfo.iUserLevel = 5;
-                connectInfo.szUser = CurrentCameraWindow.AirnoixCamera.UserName;
-                connectInfo.szPass = CurrentCameraWindow.AirnoixCamera.Password;
-                connectInfo.pUserContext = "";
-                int iret = AironixControl.TMCC_Connect(ptzHandle, ref connectInfo, true);
-                if (iret!=0) return;
-                iret = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
-                if (iret != 0) return;
-                dockPanelPtzControl.Tag = CurrentCameraWindow.AirnoixCamera;
-                dockPanelPtzControl.Enabled = true;
-
             }
 
+            if (AironixControl.TMCC_IsConnect(ptzHandle))
+            {
+                AironixControl.TMCC_DisConnect(ptzHandle);
+                AironixControl.TMCC_PtzClose(ptzHandle);
+            }
+
+            if (CurrentCameraWindow.AirnoixCamera.Type == 2)
+            {
+                int opened;
+                var connected = await ConnectToCameraAsync(CurrentCameraWindow);
+
+                dockPanelPtzControl.Tag = CurrentCameraWindow.AirnoixCamera;
+                dockPanelPtzControl.Enabled = connected;
+            }
+
+            _currentcCameraWindow = CurrentCameraWindow;
+        }
+
+        private Task<bool> ConnectToCameraAsync(CameraWindow CurrentCameraWindow)
+        {
+             return TaskEx.Run(() =>
+                                  {
+                                      tmConnectInfo_t connectInfo = new tmConnectInfo_t();
+                                      connectInfo.pIp = CurrentCameraWindow.AirnoixCamera.Ip;
+                                      connectInfo.iPort = CurrentCameraWindow.AirnoixCamera.Port;
+                                      connectInfo.dwSize = 236;
+                                      connectInfo.iUserLevel = 5;
+                                      connectInfo.szUser = CurrentCameraWindow.AirnoixCamera.UserName;
+                                      connectInfo.szPass = CurrentCameraWindow.AirnoixCamera.Password;
+                                      connectInfo.pUserContext = "";
+                                      var connected = AironixControl.TMCC_Connect(ptzHandle, ref connectInfo, true);
+                                      if (connected != 0)
+                                      {
+                                          return false;
+                                      }
+
+                                      var opened = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
+                                      return opened == 0;
+                                  });
 
         }
 
@@ -2775,7 +2799,7 @@ namespace CameraViewer
         private void PtzControl(bool start)
         {
             uint.TryParse(textEditPtzSpeed.Text, out ptzSpeed);
-            AironixControl.TMCC_PtzControl(ptzHandle, (uint)ptzControType, start? (uint)1:(uint)0, ptzSpeed);
+            AironixControl.TMCC_PtzControl(ptzHandle, (uint)ptzControType, start ? (uint)1 : (uint)0, ptzSpeed);
         }
 
         private void sbZoomAdd_Click(object sender, EventArgs e)
@@ -2917,7 +2941,7 @@ namespace CameraViewer
             }
             for (uint i = 0; i < 16; i++)
             {
-                int ret = AironixControl.TMCC_PtzPreset(ptzHandle, (uint)ptzControType, i+1, ptzSpeed);                
+                int ret = AironixControl.TMCC_PtzPreset(ptzHandle, (uint)ptzControType, i + 1, ptzSpeed);
             }
 
         }
@@ -2957,22 +2981,22 @@ namespace CameraViewer
         }
         #endregion
 
-        [DllImport("user32.dll", EntryPoint = "RegisterHotKey")]       
-        public static extern bool RegisterHotKey       
-             (       
+        [DllImport("user32.dll", EntryPoint = "RegisterHotKey")]
+        public static extern bool RegisterHotKey
+             (
                 IntPtr hWnd,        //要注册热键的窗口句柄       
                 int id,             //热键编号       
                 int fsModifiers,    //特殊键如：Ctrl，Alt，Shift，Window       
                 int vk              //一般键如：A B C F1，F2 等       
-             );       
-      
-        [DllImportAttribute("user32.dll", EntryPoint = "UnregisterHotKey")]       
-        public static extern bool UnregisterHotKey       
-             (       
+             );
+
+        [DllImportAttribute("user32.dll", EntryPoint = "UnregisterHotKey")]
+        public static extern bool UnregisterHotKey
+             (
                  IntPtr hWnd,        //注册热键的窗口句柄       
                 int id              //热键编号上面注册热键的编号       
              );
-        const int WM_HOTKEY = 0x312;   
+        const int WM_HOTKEY = 0x312;
         private enum MyKeys
         {
             None = 0,
@@ -2983,7 +3007,7 @@ namespace CameraViewer
         }
         protected override void WndProc(ref Message m)
         {
-            Keys key= Keys.D1;
+            Keys key = Keys.D1;
             if (m.Msg == WM_HOTKEY)
             {
                 switch (m.WParam.ToInt32())
@@ -3025,7 +3049,7 @@ namespace CameraViewer
                         key = Keys.D9;
                         break;
                 }
-                if (careCameraWindows.AirnoixCamera==null)
+                if (careCameraWindows.AirnoixCamera == null)
                 {
                     return;
                 }
@@ -3047,18 +3071,18 @@ namespace CameraViewer
                 ChangeButtonState(key);
 
             }
-        
+
             base.WndProc(ref m);
         }
 
         private void timerForDeleteTempFiles_Tick(object sender, EventArgs e)
         {
             DirectoryInfo Dir = new DirectoryInfo(Properties.Settings.Default.CapturePictureTempPath);
-            
+
             //删除临时的图片文件
             foreach (FileInfo fileInfo in Dir.GetFiles("*.bmp"))//查找文件
             {
-                if(fileInfo.LastAccessTime.AddSeconds(345600)<DateTime.Now)
+                if (fileInfo.LastAccessTime.AddSeconds(345600) < DateTime.Now)
                 {
                     try
                     {
@@ -3066,15 +3090,15 @@ namespace CameraViewer
                     }
                     catch (Exception ex)
                     {
-                       logger.Error(ex.ToString());
+                        logger.Error(ex.ToString());
                     }
                 }
             }
             //删除临时的视频文件
             Dir = new DirectoryInfo(Properties.Settings.Default.RecordTempVideoPath);
-            foreach (FileInfo fileInfo in Dir.GetFiles("*.avi").Union(Dir.GetFiles("*.mkv")) )//查找文件
+            foreach (FileInfo fileInfo in Dir.GetFiles("*.avi").Union(Dir.GetFiles("*.mkv")))//查找文件
             {
-                if(fileInfo.LastAccessTime.AddSeconds(1000)<DateTime.Now)
+                if (fileInfo.LastAccessTime.AddSeconds(1000) < DateTime.Now)
                 {
                     try
                     {
@@ -3082,7 +3106,7 @@ namespace CameraViewer
                     }
                     catch (Exception ex)
                     {
-                       logger.Error(ex.ToString());
+                        logger.Error(ex.ToString());
                     }
                 }
             }
@@ -3125,7 +3149,7 @@ namespace CameraViewer
                 for (int col = 0; col < mainMultiplexer.Cols; col++)
                 {
                     CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(row, col);
-                    if (cameraWindow.AirnoixCamera ==null)
+                    if (cameraWindow.AirnoixCamera == null)
                     {
                         continue;
                     }
@@ -3139,7 +3163,7 @@ namespace CameraViewer
                     }
                 }
             }
-            barStaticItemCameraNo.Caption = aliveCamera +"/"+ _listAllLongChang_Cam.Count;
+            barStaticItemCameraNo.Caption = aliveCamera + "/" + _listAllLongChang_Cam.Count;
         }
 
         private void barButtonItem5_ItemClick_2(object sender, ItemClickEventArgs e)
@@ -3184,21 +3208,21 @@ namespace CameraViewer
         {
             CameraWindow cameraWindow = mainMultiplexer.GetCurrentCameraWindow();
             //未选中CameraWindow，退出
-            if (cameraWindow==null)
+            if (cameraWindow == null)
             {
                 return;
             }
 
 
             AirnoixCamera airnoixCameraNew;
-            var selectedCamera = (Model.TOG_DEVICE) treeListCamera.FocusedNode.Tag;
+            var selectedCamera = (Model.TOG_DEVICE)treeListCamera.FocusedNode.Tag;
 
             for (int i = 0; i < mainMultiplexer.Rows; i++)
             {
                 bool isfound = false;
                 for (int j = 0; j < mainMultiplexer.Cols; j++)
                 {
-                    if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera!=null)
+                    if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera != null)
                     {
                         if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera.Id == int.Parse(selectedCamera.SBBH))
                         {
@@ -3206,7 +3230,7 @@ namespace CameraViewer
                             mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera = null;
                             mainMultiplexer.GetCameraWindow(i, j).Refresh();
                             isfound = true;
-                            break;                            
+                            break;
                         }
 
                     }
@@ -3216,9 +3240,9 @@ namespace CameraViewer
                     break;
                 }
             }
-            
+
             //如果原来已有摄像头，则停止
-            if (cameraWindow.AirnoixCamera!=null)
+            if (cameraWindow.AirnoixCamera != null)
             {
                 cameraWindow.AirnoixCamera.Stop();
                 cameraWindow.AirnoixCamera = null;
@@ -3248,6 +3272,6 @@ namespace CameraViewer
             faqi.ShowDialog(this);
         }
 
-        
+
     }
 }
