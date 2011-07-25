@@ -37,17 +37,21 @@ namespace CameraViewer
             }
         }
 
-        private async Task UploadStreamAsync(Stream sourceStream, string relativePath)
+        private  Task UploadStreamAsync(Stream sourceStream, string relativePath)
         {
-            MakeDir(relativePath);
-            var path = GetAbsolutePath(relativePath);
-            var req = CreateRequest(path, WebRequestMethods.Ftp.UploadFile);
-            req.ContentLength = sourceStream.Length;
+            return TaskEx.Run(() =>
+                           {
+                               MakeDir(relativePath);
+                               var path = GetAbsolutePath(relativePath);
+                               var req = CreateRequest(path, WebRequestMethods.Ftp.UploadFile);
+                               req.ContentLength = sourceStream.Length;
 
-            sourceStream.Seek(0, SeekOrigin.Begin);
-            Stream strm = await req.GetRequestStreamAsync();
-            await sourceStream.CopyToAsync(strm);
-            strm.Close();
+                               sourceStream.Seek(0, SeekOrigin.Begin);
+                               Stream strm = req.GetRequestStream();
+                               sourceStream.CopyTo(strm);
+                               strm.Close();
+                           });
+
         }
 
         private System.Net.FtpWebRequest CreateRequest(string uri, string method)
