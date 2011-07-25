@@ -655,7 +655,7 @@ namespace CameraViewer
             _listNumKeyStatus.Add(Keys.D8, false);
             _listNumKeyStatus.Add(Keys.D9, false);
 
-            dockPanelPtzControl.Visible = false;
+            dockPanelPtzControl.Enabled = false;
             barStaticItemCurrentUser.Caption = CurrentUser.UserName;
             barSubItemMenuView.Visibility = BarItemVisibility.Always;
             barButtonItemResultView.Visibility = BarItemVisibility.Never;
@@ -2728,10 +2728,10 @@ namespace CameraViewer
         {
             if (CurrentCameraWindow.AirnoixCamera == null || CurrentCameraWindow.AirnoixCamera.IsAlive==false)
             {
-                if (dockPanelPtzControl.Visible)
+                if (dockPanelPtzControl.Enabled)
                 {
                     AironixControl.TMCC_Done(ptzHandle);
-                    dockPanelPtzControl.Visible = false;
+                    dockPanelPtzControl.Enabled = false;
                 }
                 return;
             }
@@ -2745,7 +2745,7 @@ namespace CameraViewer
                     iret = AironixControl.TMCC_Done(ptzHandle);
                 }
                 
-                dockPanelPtzControl.Visible = false;
+                dockPanelPtzControl.Enabled  = false;
             }
             else if (CurrentCameraWindow.AirnoixCamera.Type == 2)
             {
@@ -2763,7 +2763,7 @@ namespace CameraViewer
                 iret = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
                 if (iret != 0) return;
                 dockPanelPtzControl.Tag = CurrentCameraWindow.AirnoixCamera;
-                dockPanelPtzControl.Visible = true;
+                dockPanelPtzControl.Enabled = true;
 
             }
 
