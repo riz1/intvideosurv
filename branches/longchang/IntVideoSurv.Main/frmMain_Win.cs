@@ -136,7 +136,7 @@ namespace CameraViewer
             var selectEvent = Observable.FromEventPattern<EventArgs<CameraWindow>>(
                 this.mainMultiplexer, "SelectCameraWindow");
 
-            var throttled = selectEvent.Throttle(TimeSpan.FromSeconds(3));
+            var throttled = selectEvent.Throttle(TimeSpan.FromSeconds(2));
 
             throttled.ObserveOn(this).Subscribe(e=>this.mainMultiplexer_SelectCameraWindow(e.EventArgs));
 
@@ -2766,8 +2766,9 @@ namespace CameraViewer
 
             if (AironixControl.TMCC_IsConnect(ptzHandle))
             {
-                AironixControl.TMCC_DisConnect(ptzHandle);
                 AironixControl.TMCC_PtzClose(ptzHandle);
+                AironixControl.TMCC_DisConnect(ptzHandle);
+                //AironixControl.TMCC_Done(ptzHandle);
             }
 
             if (_cts != null)
