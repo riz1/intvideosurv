@@ -13,6 +13,7 @@ using DevExpress.XtraEditors;
 using IntVideoSurv.Entity;
 using IntVideoSurv.Business;
 using IntVideoSurv.Business.HiK;
+using MiscUtil;
 
 namespace CameraViewer
 {
@@ -994,7 +995,7 @@ namespace CameraViewer
             this.ResumeLayout(false);
         }
 
-        public delegate void SelectCameraWindowEventHandler(object sender, EventArgs e,CameraWindow CurrentCameraWindow);
+        public delegate void SelectCameraWindowEventHandler(object sender, MiscUtil.EventArgs<CameraWindow> args);
         //事件所需的委托           
         //当颜色改变时触发事件          
         public event SelectCameraWindowEventHandler SelectCameraWindow;//定义一个ColorChanged事件          
@@ -1004,7 +1005,7 @@ namespace CameraViewer
             if (SelectCameraWindow != null)
             {
                 //判断事件是否为空                  
-                SelectCameraWindow(this, e, cameraWindow);//触发事件              
+                SelectCameraWindow(this, new EventArgs<CameraWindow>(cameraWindow));//触发事件              
             }
         } 
     }

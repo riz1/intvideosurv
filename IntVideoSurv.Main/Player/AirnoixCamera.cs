@@ -136,7 +136,6 @@ namespace CameraViewer.Player
 
         public void MessageCallback(System.IntPtr hClient, uint dwCode, System.IntPtr context)
         {
-             Debug.WriteLine(DateTime.Now +"\t"+Ip+"\tCall Back ="+string.Format("{0:x}",dwCode));
              LastStateCode = dwCode;
              IsAlive = (LastStateCode == 0x30 || LastStateCode == 0x40) ? true : false;
         }

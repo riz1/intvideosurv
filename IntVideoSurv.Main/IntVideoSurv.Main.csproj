@@ -166,6 +166,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RefDll\Microsoft.Practices.ObjectBuilder.dll</HintPath>
     </Reference>
+    <Reference Include="MiscUtil">
+      <HintPath>..\RefDll\MiscUtil.dll</HintPath>
+    </Reference>
     <Reference Include="ScalablePictureBox, Version=1.0.4205.41999, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RefDll\ScalablePictureBox.dll</HintPath>

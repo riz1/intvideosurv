@@ -28,12 +28,14 @@ using CameraViewer.Forms;
 using System.IO;
 using IntVideoSurv.Business.HiK;
 using System.Threading;
+using MiscUtil;
 using log4net;
 using System.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
 using CameraViewer.Player;
 using DevExpress.XtraBars;
 using CameraViewer.Tools;
+using System.Reactive.Linq;
 
 
 namespace CameraViewer
@@ -131,7 +133,12 @@ namespace CameraViewer
             }
 
 
+            var selectEvent = Observable.FromEventPattern<EventArgs<CameraWindow>>(
+                this.mainMultiplexer, "SelectCameraWindow");
 
+            var throttled = selectEvent.Throttle(TimeSpan.FromSeconds(3));
+
+            throttled.ObserveOn(this).Subscribe(e=>this.mainMultiplexer_SelectCameraWindow(e.EventArgs));
 
         }
         private void BeginRemotingService()
@@ -2742,10 +2749,10 @@ namespace CameraViewer
         #region 球机控制
         private IntPtr ptzHandle = IntPtr.Zero;
         private uint ptzSpeed = 1;
-        private async void mainMultiplexer_SelectCameraWindow(object sender, EventArgs e, CameraWindow CurrentCameraWindow)
+        private async void mainMultiplexer_SelectCameraWindow(EventArgs<CameraWindow> args)
         {
 
-            if (object.ReferenceEquals(CurrentCameraWindow, _currentcCameraWindow))
+            if (object.ReferenceEquals(args.Value, _currentcCameraWindow))
             {
                 return;
             }
@@ -2770,15 +2777,16 @@ namespace CameraViewer
 
             _cts = new CancellationTokenSource();
 
-            if (CurrentCameraWindow.AirnoixCamera != null && CurrentCameraWindow.AirnoixCamera.Type == 2)
+            if (args.Value.AirnoixCamera != null && args.Value.AirnoixCamera.Type == 2)
             {
                 int opened;
 
                 try
                 {
-                    var connected = await ConnectToCameraAsync(CurrentCameraWindow, _cts.Token);
+                    var connected = await ConnectToCameraAsync(args.Value, _cts.Token);
 
-                    dockPanelPtzControl.Tag = CurrentCameraWindow.AirnoixCamera;
+                    System.Diagnostics.Debug.WriteLine("connect to camera: " + args.Value.AirnoixCamera.Ip + " " + connected);
+                    dockPanelPtzControl.Tag = args.Value.AirnoixCamera;
                     dockPanelPtzControl.Enabled = connected;
                 }
                 catch (TaskCanceledException)
@@ -2789,7 +2797,7 @@ namespace CameraViewer
                 
             }
 
-            _currentcCameraWindow = CurrentCameraWindow;
+            _currentcCameraWindow = args.Value;
         }
 
         private Task<bool> ConnectToCameraAsync(CameraWindow CurrentCameraWindow, CancellationToken cancellationToken)
@@ -3084,7 +3092,7 @@ namespace CameraViewer
                 {
                     //开始录像
                     careCameraWindows.AirnoixCamera.StartRecord();
-                    mainMultiplexer_SelectCameraWindow(null, null, careCameraWindows);
+                    mainMultiplexer_SelectCameraWindow(new EventArgs<CameraWindow>(careCameraWindows));
 
                 }
                 else
