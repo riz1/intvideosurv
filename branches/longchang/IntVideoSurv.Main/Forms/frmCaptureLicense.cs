@@ -452,7 +452,7 @@ namespace CameraViewer.Forms
                 await UploadImages();
                 SaveCaptureRecord();
                 MessageBox.Show(this, "保存成功。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Play();
+                this.Close();
 
             }
             catch (WebException ex)

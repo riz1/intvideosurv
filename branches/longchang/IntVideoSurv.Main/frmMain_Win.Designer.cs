@@ -3117,7 +3117,6 @@ namespace CameraViewer
             this.mainMultiplexer.Size = new System.Drawing.Size(878, 352);
             this.mainMultiplexer.TabIndex = 5;
             this.mainMultiplexer.DoubleCamera += new CameraViewer.Multiplexer.MyCurrentCamera(this.mainMultiplexer_DoubleCamera);
-            this.mainMultiplexer.SelectCameraWindow += new CameraViewer.Multiplexer.SelectCameraWindowEventHandler(this.mainMultiplexer_SelectCameraWindow);
             // 
             // cmIcon
             // 
