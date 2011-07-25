@@ -3191,7 +3191,7 @@ namespace CameraViewer
 
 
             AirnoixCamera airnoixCameraNew;
-            LongChang_CameraInfo selectedCamera = (LongChang_CameraInfo) treeListCamera.FocusedNode.Tag;
+            var selectedCamera = (Model.TOG_DEVICE) treeListCamera.FocusedNode.Tag;
 
             for (int i = 0; i < mainMultiplexer.Rows; i++)
             {
@@ -3200,7 +3200,7 @@ namespace CameraViewer
                 {
                     if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera!=null)
                     {
-                        if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera.Id == selectedCamera.CameraId)
+                        if (mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera.Id == int.Parse(selectedCamera.SBBH))
                         {
                             mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera.Stop();
                             mainMultiplexer.GetCameraWindow(i, j).AirnoixCamera = null;
@@ -3227,13 +3227,13 @@ namespace CameraViewer
             //开始连接摄像头
             airnoixCameraNew = new AirnoixCamera(cameraWindow.Handle);
             airnoixCameraNew.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
-            airnoixCameraNew.Ip = selectedCamera.IP;
-            airnoixCameraNew.Port = selectedCamera.Port;
-            airnoixCameraNew.UserName = selectedCamera.UserName;
-            airnoixCameraNew.Password = selectedCamera.PassWord;
-            airnoixCameraNew.Id = selectedCamera.CameraId;
+            airnoixCameraNew.Ip = selectedCamera.SBIP;
+            airnoixCameraNew.Port = int.Parse(selectedCamera.DKH);
+            airnoixCameraNew.UserName = selectedCamera.DLYH;
+            airnoixCameraNew.Password = selectedCamera.DLMM;
+            airnoixCameraNew.Id = int.Parse(selectedCamera.SBBH);
             airnoixCameraNew.SaveTo = "c:\\";
-            airnoixCameraNew.Type = selectedCamera.Type;
+            airnoixCameraNew.Type = int.Parse(selectedCamera.SBLX);
             cameraWindow.AirnoixCamera = airnoixCameraNew;
             cameraWindow.Refresh();
             airnoixCameraNew.Start();
