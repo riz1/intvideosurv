@@ -21,39 +21,39 @@ using DevExpress.XtraEditors;
 
 namespace CameraViewer
 {
-	/// <summary>
-	/// Summary description for CameraWindow.
-	/// </summary>
-	public class CameraWindow : System.Windows.Forms.Control
-	{
+    /// <summary>
+    /// Summary description for CameraWindow.
+    /// </summary>
+    public class CameraWindow : System.Windows.Forms.Control
+    {
         private HikVideoServerCameraDriver camera = null;
-		private bool	autosize = false;
-		private bool	needSizeUpdate = false;
-		private bool	firstFrame = true;
+        private bool	autosize = false;
+        private bool	needSizeUpdate = false;
+        private bool	firstFrame = true;
         //private List<MyShape> ListXMLShapes = new List<MyShape>();
         private Pen arrowpen;
 
-	    private AirnoixCamera _airnoixCamera;
-	    public AirnoixCamera AirnoixCamera
-	    {
+        private AirnoixCamera _airnoixCamera;
+        public AirnoixCamera AirnoixCamera
+        {
             get { return _airnoixCamera; }
             set
             {
                 _airnoixCamera = value;
             }
-	    }
+        }
 
-		// AutoSize property
-		[DefaultValue(false)]
-		public bool AutoSize
-		{
-			get { return autosize; }
-			set
-			{
-				autosize = value;
-				UpdatePosition();
-			}
-		}
+        // AutoSize property
+        [DefaultValue(false)]
+        public bool AutoSize
+        {
+            get { return autosize; }
+            set
+            {
+                autosize = value;
+                UpdatePosition();
+            }
+        }
         bool _clickMe = false;
         public bool ClickMe
         {
@@ -67,34 +67,32 @@ namespace CameraViewer
                 this.Refresh();
             }
         }
-		// Camera property
-		[Browsable(false)]
+        // Camera property
+        [Browsable(false)]
         public HikVideoServerCameraDriver Camera
-		{
-			get { return camera; }
-			set
-			{
-				// lock
-				Monitor.Enter(this);
+        {
+            get { return camera; }
+            set
+            {
+                // lock
 
-				// detach event
-			 
-				camera = value;
-				needSizeUpdate = true;
-				firstFrame = true;
+                // detach event
+             
+                camera = value;
+                needSizeUpdate = true;
+                firstFrame = true;
 
-				// atach event
-			 
+                // atach event
+             
 
-				// unlock
-				Monitor.Exit(this);
-			}
-		}
+                // unlock
+            }
+        }
 
-	    private Image _currentImage;
-	    public Image CurrentImage
-	    {
-	        set
+        private Image _currentImage;
+        public Image CurrentImage
+        {
+            set
             {
                 _currentImage = value;
             //实际使用时才打开
@@ -104,9 +102,9 @@ namespace CameraViewer
             {
                 return _currentImage;
             }
-	    }
+        }
 
-	    private int _cameraID;
+        private int _cameraID;
         public int CameraID
         {
             set
@@ -119,8 +117,8 @@ namespace CameraViewer
             }
         }
 
-	    public Guid CurrentImageGuid
-	    {
+        public Guid CurrentImageGuid
+        {
             set
             {
                 //实际使用时关闭
@@ -130,34 +128,34 @@ namespace CameraViewer
             {
                 return _currentImageGuid;
             }	        
-	    }
-	    private Guid _currentImageGuid;
-		// Constructor
-		public CameraWindow()
-		{
-			SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer |
-				ControlStyles.ResizeRedraw | ControlStyles.UserPaint, true);
+        }
+        private Guid _currentImageGuid;
+        // Constructor
+        public CameraWindow()
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer |
+                ControlStyles.ResizeRedraw | ControlStyles.UserPaint, true);
 		    DoubleBuffered = true;
-		}
+        }
+
         private void MyDrawReversibleRectangle(Rectangle rc)
         {
-            
 
             ControlPaint.DrawReversibleFrame(rc,
                            Color.Green, FrameStyle.Dashed);
 
         }
-		// Paint control
-		protected override void OnPaint(PaintEventArgs pe)
-		{
-			if ((needSizeUpdate) || (firstFrame))
-			{
-				UpdatePosition();
-				needSizeUpdate = false;
-			}
 
-			// lock
-			Monitor.Enter(this);
+
+        
+        protected override void OnPaint(PaintEventArgs pe)
+        {
+
+            if ((needSizeUpdate) || (firstFrame))
+            {
+                UpdatePosition();
+                needSizeUpdate = false;
+            }
 
             Graphics g = pe.Graphics;
             Rectangle	rc = this.ClientRectangle;
@@ -177,29 +175,28 @@ namespace CameraViewer
             pen = new Pen(Color.Black, 1);
             if (!ClickMe)
             {
-               
                 g.DrawRectangle(pen, rc.X, rc.Y, rc.Width - 1, rc.Height - 1);
             }
-			// draw rectangle
+            // draw rectangle
             
             //有图像的话画图像
 
-		    if (_currentImage!=null)
-		    {
+            if (_currentImage!=null)
+            {
                 g.DrawImage(_currentImage, rc.X, rc.Y, rc.Width, rc.Height);
                 DrawShapes(g);//获取相应xml信息,并画图
 
-		    }
-		    else
-		    {
+            }
+            else
+            {
                 Font drawFont = new Font("Arial", 8);
                 SolidBrush drawBrush = new SolidBrush(Color.White);
-		        string str2Show = "连接中 ...";
+                string str2Show = "连接中 ...";
                 if (_airnoixCamera==null)
-		        {
-		            str2Show = "未关联";
+                {
+                    str2Show = "未关联";
                     g.DrawString(str2Show, drawFont, drawBrush, new PointF(3, 3));
-		        }
+                }
                 else if (_airnoixCamera.IsAlive == false)
                 {
                     str2Show = "连接中 ..."; 
@@ -210,54 +207,47 @@ namespace CameraViewer
             }
 
 
-			pen.Dispose();
+            pen.Dispose();
+            //base.OnPaint(pe);
 
-			// unlock
-			Monitor.Exit(this);
-
-			base.OnPaint(pe);
-
-
-		}
+        }
 
         protected override void OnSizeChanged(EventArgs e)
         {
             if ((_airnoixCamera != null) && (_airnoixCamera.IsAlive==true))
             {
-                _airnoixCamera.DisplayPos = new Rectangle(0, 0, this.Width, this.Height);
+                //_airnoixCamera.DisplayPos = new Rectangle(0, 0, this.Width, this.Height);
             }
         }
 
-		// update position and size of the control
-		public void UpdatePosition()
-		{
-			// lock
-			Monitor.Enter(this);
+        // update position and size of the control
+        public void UpdatePosition()
+        {
+            // lock
 
-			if (autosize)
-			{
-				Rectangle	rc = this.Parent.ClientRectangle;
-				int			width = 320;
-				int			height = 240;
+            if (autosize)
+            {
+                Rectangle	rc = this.Parent.ClientRectangle;
+                int			width = 320;
+                int			height = 240;
 
-			 
+             
 
-				//
-				this.SuspendLayout();
-				this.Location = new Point((rc.Width - width - 2) / 2, (rc.Height - height - 2) / 2);
-				this.Size = new Size(width + 2, height + 2);
-				this.ResumeLayout();
+                //
+                this.SuspendLayout();
+                this.Location = new Point((rc.Width - width - 2) / 2, (rc.Height - height - 2) / 2);
+                this.Size = new Size(width + 2, height + 2);
+                this.ResumeLayout();
 
-			}
-			// unlock
-			Monitor.Exit(this);
-		}
+            }
+            // unlock
+        }
 
-		// On new frame ready
-		private void camera_NewFrame(object sender, System.EventArgs e)
-		{
-			Invalidate();
-		}
+        // On new frame ready
+        private void camera_NewFrame(object sender, System.EventArgs e)
+        {
+            Invalidate();
+        }
 
         private void InitializeComponent()
         {
@@ -389,27 +379,20 @@ namespace CameraViewer
             }
             catch (Exception)
             {
-
-                ;
             }
             
         }
 
-	    private void ReConectCamera(object sender, EventArgs e)
+        private void ReConectCamera(object sender, EventArgs e)
         {
             if (_airnoixCamera != null)
             {
-                string Ip = "192.168.1.6";
-                int Port = 6002;
-                string UserName = "system";
-                string Password = "system";
-                string SaveTo = "c:\\";
                 _airnoixCamera.Dispose();
 
-                _airnoixCamera.DisplayPos = new Rectangle(0, 0, this.Width, this.Height);
+                //_airnoixCamera.DisplayPos = new Rectangle(0, 0, this.Width, this.Height);
                 _airnoixCamera.Start();
             }
         }
         
-	}
+    }
 }
