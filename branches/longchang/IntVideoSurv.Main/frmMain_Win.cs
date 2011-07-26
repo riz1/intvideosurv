@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CameraViewer.NetWorking;
 using CameraViewer.Remoting;
+using DevExpress.XtraBars.Docking;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
@@ -150,7 +151,7 @@ namespace CameraViewer
 
             var throttled = selectEvent.Throttle(TimeSpan.FromMilliseconds(500));
 
-            throttled.ObserveOn(this).Subscribe(e=>this.mainMultiplexer_SelectCameraWindow(e.EventArgs));
+            throttled.ObserveOn(this).Subscribe(e => this.mainMultiplexer_SelectCameraWindow(e.EventArgs));
 
         }
         private void BeginRemotingService()
@@ -937,7 +938,7 @@ namespace CameraViewer
                 AirnoixCamera airnoixCameraNew;
                 //开始连接摄像头
                 airnoixCameraNew = new AirnoixCamera(cameraWindow.Handle);
-                airnoixCameraNew.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
+                //var rc = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
                 airnoixCameraNew.Ip = device.SBIP;
                 airnoixCameraNew.Port = int.Parse(device.DKH);
                 airnoixCameraNew.UserName = device.DLYH;
@@ -2709,7 +2710,7 @@ namespace CameraViewer
             //ret = AirnoixClient.MP4_ClientConnectEx(intPtr, "192.168.1.6", 6002, 0, 0, 0);
 
             airnoixCamera = new AirnoixCamera(cameraWindow.Handle);
-            airnoixCamera.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
+            //airnoixCamera.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
             airnoixCamera.Ip = "192.168.1.6";
             airnoixCamera.Port = 6002;
             airnoixCamera.UserName = "system";
@@ -2806,10 +2807,10 @@ namespace CameraViewer
                 }
                 catch (TaskCanceledException)
                 {
-                    
-                    
+
+
                 }
-                
+
             }
 
             _currentcCameraWindow = args.Value;
@@ -2817,29 +2818,29 @@ namespace CameraViewer
 
         private Task<bool> ConnectToCameraAsync(CameraWindow CurrentCameraWindow, CancellationToken cancellationToken)
         {
-             return TaskEx.Run(() =>
-                                  {
-                                      lock (_lock)
-                                      {
-                                          tmConnectInfo_t connectInfo = new tmConnectInfo_t();
-                                          connectInfo.pIp = CurrentCameraWindow.AirnoixCamera.Ip;
-                                          connectInfo.iPort = CurrentCameraWindow.AirnoixCamera.Port;
-                                          connectInfo.dwSize = 236;
-                                          connectInfo.iUserLevel = 5;
-                                          connectInfo.szUser = CurrentCameraWindow.AirnoixCamera.UserName;
-                                          connectInfo.szPass = CurrentCameraWindow.AirnoixCamera.Password;
-                                          connectInfo.pUserContext = "";
-                                          var connected = AironixControl.TMCC_Connect(ptzHandle, ref connectInfo, true);
-                                          if (connected != 0)
-                                          {
-                                              return false;
-                                          }
+            return TaskEx.Run(() =>
+                                 {
+                                     lock (_lock)
+                                     {
+                                         tmConnectInfo_t connectInfo = new tmConnectInfo_t();
+                                         connectInfo.pIp = CurrentCameraWindow.AirnoixCamera.Ip;
+                                         connectInfo.iPort = CurrentCameraWindow.AirnoixCamera.Port;
+                                         connectInfo.dwSize = 236;
+                                         connectInfo.iUserLevel = 5;
+                                         connectInfo.szUser = CurrentCameraWindow.AirnoixCamera.UserName;
+                                         connectInfo.szPass = CurrentCameraWindow.AirnoixCamera.Password;
+                                         connectInfo.pUserContext = "";
+                                         var connected = AironixControl.TMCC_Connect(ptzHandle, ref connectInfo, true);
+                                         if (connected != 0)
+                                         {
+                                             return false;
+                                         }
 
-                                          var opened = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
-                                          return opened == 0; 
-                                      }
-                                      
-                                  }, cancellationToken);
+                                         var opened = AironixControl.TMCC_PtzOpen(ptzHandle, 0, false);
+                                         return opened == 0;
+                                     }
+
+                                 }, cancellationToken);
 
         }
 
@@ -3299,7 +3300,7 @@ namespace CameraViewer
             }
             //开始连接摄像头
             airnoixCameraNew = new AirnoixCamera(cameraWindow.Handle);
-            airnoixCameraNew.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
+            //airnoixCameraNew.DisplayPos = new Rectangle(0, 0, cameraWindow.Width, cameraWindow.Height);
             airnoixCameraNew.Ip = selectedCamera.SBIP;
             airnoixCameraNew.Port = int.Parse(selectedCamera.DKH);
             airnoixCameraNew.UserName = selectedCamera.DLYH;
@@ -3308,7 +3309,7 @@ namespace CameraViewer
             airnoixCameraNew.SaveTo = "c:\\";
             airnoixCameraNew.Type = int.Parse(selectedCamera.SBLX);
             cameraWindow.AirnoixCamera = airnoixCameraNew;
-            cameraWindow.Refresh();
+            //cameraWindow.Refresh();
             airnoixCameraNew.Start();
 
         }

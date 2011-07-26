@@ -98,6 +98,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RefDll\Com.SS.Framework.Entity.dll</HintPath>
     </Reference>
+    <Reference Include="Damany.Cameras, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Damany\RemoteImaging\Damany.Cameras\bin\Debug\Damany.Cameras.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v10.2, Version=10.2.3.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -225,7 +228,7 @@
       <DependentUpon>CameraView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CameraWindow.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DeviceMaintain.cs">
       <SubType>UserControl</SubType>
