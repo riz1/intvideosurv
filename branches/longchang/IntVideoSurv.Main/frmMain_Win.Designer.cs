@@ -1593,6 +1593,8 @@ namespace CameraViewer
             this.textEditPtzSpeed.MenuManager = this.barManager1;
             this.textEditPtzSpeed.Name = "textEditPtzSpeed";
             this.textEditPtzSpeed.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.textEditPtzSpeed.Properties.Mask.EditMask = "f0";
+            this.textEditPtzSpeed.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEditPtzSpeed.Size = new System.Drawing.Size(32, 21);
             this.textEditPtzSpeed.TabIndex = 14;
             // 

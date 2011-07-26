@@ -74,6 +74,7 @@ namespace CameraViewer
         private GetTransPacket _getTransPacket;
         private CancellationTokenSource _cts;
         private object _lock = new object();
+        private const string LayoutFile = "Layout.xml";
 
         public MainForm()
         {
@@ -104,6 +105,11 @@ namespace CameraViewer
             //BeginStreamMediaService();
 
             InitializeComponent();
+
+            if (File.Exists(LayoutFile))
+            {
+                this.dockManager1.RestoreFromXml(LayoutFile);
+            }
 
 
             _getTransPacket = new GetTransPacket();
@@ -494,6 +500,8 @@ namespace CameraViewer
         {
             try
             {
+
+                this.dockManager1.SaveToXml(LayoutFile);
 #if !DEBUG
                 frmLogout frmLogout = new frmLogout();
                 if ((frmLogout.ShowDialog()!=DialogResult.OK)||(frmLogout.LogoutOK==false))
