@@ -284,13 +284,9 @@ namespace CameraViewer.Forms
 
                 frameInterval = double.Parse(cbeFrameInterval.Text);
                 treeList.Nodes.Clear();
-                var node = treeList.AppendNode(new[]
+                var node = treeList.AppendNode(new object[]
                                                    { 
-                                                       repositoryItemPictureEdit8.InitialImage,
-                                                       repositoryItemPictureEdit8.InitialImage,
-                                                       repositoryItemPictureEdit8.InitialImage,
-                                                       repositoryItemPictureEdit8.InitialImage,
-                                                       repositoryItemPictureEdit8.InitialImage,
+                                                       null,null,null,null,null
                                                    }, -1);
 
                 var images = GetImages(frameInterval);

@@ -1358,7 +1358,7 @@ namespace CameraViewer
             this.downButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.downButton.Image = ((System.Drawing.Image)(resources.GetObject("downButton.Image")));
             this.downButton.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.downButton.Location = new System.Drawing.Point(71, 106);
+            this.downButton.Location = new System.Drawing.Point(71, 119);
             this.downButton.Name = "downButton";
             this.downButton.Size = new System.Drawing.Size(32, 32);
             this.downButton.TabIndex = 27;
@@ -1370,7 +1370,7 @@ namespace CameraViewer
             this.rightButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rightButton.Image = ((System.Drawing.Image)(resources.GetObject("rightButton.Image")));
             this.rightButton.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.rightButton.Location = new System.Drawing.Point(105, 73);
+            this.rightButton.Location = new System.Drawing.Point(105, 86);
             this.rightButton.Name = "rightButton";
             this.rightButton.Size = new System.Drawing.Size(32, 32);
             this.rightButton.TabIndex = 26;
@@ -1382,7 +1382,7 @@ namespace CameraViewer
             this.leftButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.leftButton.Image = ((System.Drawing.Image)(resources.GetObject("leftButton.Image")));
             this.leftButton.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.leftButton.Location = new System.Drawing.Point(35, 73);
+            this.leftButton.Location = new System.Drawing.Point(35, 86);
             this.leftButton.Name = "leftButton";
             this.leftButton.Size = new System.Drawing.Size(32, 32);
             this.leftButton.TabIndex = 25;
@@ -1394,7 +1394,7 @@ namespace CameraViewer
             this.upButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.upButton.Image = ((System.Drawing.Image)(resources.GetObject("upButton.Image")));
             this.upButton.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.upButton.Location = new System.Drawing.Point(71, 38);
+            this.upButton.Location = new System.Drawing.Point(71, 51);
             this.upButton.Name = "upButton";
             this.upButton.Size = new System.Drawing.Size(32, 32);
             this.upButton.TabIndex = 24;
@@ -1404,7 +1404,7 @@ namespace CameraViewer
             // goToPreset
             // 
             this.goToPreset.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.goToPreset.Location = new System.Drawing.Point(89, 306);
+            this.goToPreset.Location = new System.Drawing.Point(89, 319);
             this.goToPreset.Name = "goToPreset";
             this.goToPreset.Size = new System.Drawing.Size(59, 23);
             this.goToPreset.TabIndex = 23;
@@ -1414,7 +1414,7 @@ namespace CameraViewer
             // sbDeleteGlobalCameraPosition
             // 
             this.sbDeleteGlobalCameraPosition.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sbDeleteGlobalCameraPosition.Location = new System.Drawing.Point(24, 335);
+            this.sbDeleteGlobalCameraPosition.Location = new System.Drawing.Point(24, 348);
             this.sbDeleteGlobalCameraPosition.Name = "sbDeleteGlobalCameraPosition";
             this.sbDeleteGlobalCameraPosition.Size = new System.Drawing.Size(59, 23);
             this.sbDeleteGlobalCameraPosition.TabIndex = 22;
@@ -1424,7 +1424,7 @@ namespace CameraViewer
             // sbSaveGlobalCameraPosition
             // 
             this.sbSaveGlobalCameraPosition.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sbSaveGlobalCameraPosition.Location = new System.Drawing.Point(24, 306);
+            this.sbSaveGlobalCameraPosition.Location = new System.Drawing.Point(24, 319);
             this.sbSaveGlobalCameraPosition.Name = "sbSaveGlobalCameraPosition";
             this.sbSaveGlobalCameraPosition.Size = new System.Drawing.Size(59, 23);
             this.sbSaveGlobalCameraPosition.TabIndex = 22;
@@ -1434,7 +1434,7 @@ namespace CameraViewer
             // sbDeleteAllGlobalCameraPosition
             // 
             this.sbDeleteAllGlobalCameraPosition.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sbDeleteAllGlobalCameraPosition.Location = new System.Drawing.Point(89, 335);
+            this.sbDeleteAllGlobalCameraPosition.Location = new System.Drawing.Point(89, 348);
             this.sbDeleteAllGlobalCameraPosition.Name = "sbDeleteAllGlobalCameraPosition";
             this.sbDeleteAllGlobalCameraPosition.Size = new System.Drawing.Size(59, 23);
             this.sbDeleteAllGlobalCameraPosition.TabIndex = 22;
@@ -1444,7 +1444,7 @@ namespace CameraViewer
             // labelControl18
             // 
             this.labelControl18.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelControl18.Location = new System.Drawing.Point(34, 278);
+            this.labelControl18.Location = new System.Drawing.Point(34, 291);
             this.labelControl18.Name = "labelControl18";
             this.labelControl18.Size = new System.Drawing.Size(36, 14);
             this.labelControl18.TabIndex = 21;
@@ -1454,7 +1454,7 @@ namespace CameraViewer
             // 
             this.cbePreset.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbePreset.EditValue = "";
-            this.cbePreset.Location = new System.Drawing.Point(80, 275);
+            this.cbePreset.Location = new System.Drawing.Point(80, 288);
             this.cbePreset.MenuManager = this.barManager1;
             this.cbePreset.Name = "cbePreset";
             this.cbePreset.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1482,7 +1482,7 @@ namespace CameraViewer
             // labelControl17
             // 
             this.labelControl17.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelControl17.Location = new System.Drawing.Point(76, 239);
+            this.labelControl17.Location = new System.Drawing.Point(76, 252);
             this.labelControl17.Name = "labelControl17";
             this.labelControl17.Size = new System.Drawing.Size(24, 14);
             this.labelControl17.TabIndex = 19;
@@ -1493,7 +1493,7 @@ namespace CameraViewer
             this.sbFOCUSSub.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sbFOCUSSub.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.sbFOCUSSub.Appearance.Options.UseFont = true;
-            this.sbFOCUSSub.Location = new System.Drawing.Point(117, 235);
+            this.sbFOCUSSub.Location = new System.Drawing.Point(117, 248);
             this.sbFOCUSSub.Name = "sbFOCUSSub";
             this.sbFOCUSSub.Size = new System.Drawing.Size(23, 23);
             this.sbFOCUSSub.TabIndex = 18;
@@ -1504,7 +1504,7 @@ namespace CameraViewer
             // labelControl16
             // 
             this.labelControl16.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelControl16.Location = new System.Drawing.Point(76, 200);
+            this.labelControl16.Location = new System.Drawing.Point(76, 213);
             this.labelControl16.Name = "labelControl16";
             this.labelControl16.Size = new System.Drawing.Size(24, 14);
             this.labelControl16.TabIndex = 19;
@@ -1515,7 +1515,7 @@ namespace CameraViewer
             this.sbIRISSub.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sbIRISSub.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.sbIRISSub.Appearance.Options.UseFont = true;
-            this.sbIRISSub.Location = new System.Drawing.Point(117, 196);
+            this.sbIRISSub.Location = new System.Drawing.Point(117, 209);
             this.sbIRISSub.Name = "sbIRISSub";
             this.sbIRISSub.Size = new System.Drawing.Size(23, 23);
             this.sbIRISSub.TabIndex = 18;
@@ -1528,7 +1528,7 @@ namespace CameraViewer
             this.sbFOCUSAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sbFOCUSAdd.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.sbFOCUSAdd.Appearance.Options.UseFont = true;
-            this.sbFOCUSAdd.Location = new System.Drawing.Point(34, 235);
+            this.sbFOCUSAdd.Location = new System.Drawing.Point(34, 248);
             this.sbFOCUSAdd.Name = "sbFOCUSAdd";
             this.sbFOCUSAdd.Size = new System.Drawing.Size(23, 23);
             this.sbFOCUSAdd.TabIndex = 18;
@@ -1539,7 +1539,7 @@ namespace CameraViewer
             // labelControl15
             // 
             this.labelControl15.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelControl15.Location = new System.Drawing.Point(76, 161);
+            this.labelControl15.Location = new System.Drawing.Point(76, 174);
             this.labelControl15.Name = "labelControl15";
             this.labelControl15.Size = new System.Drawing.Size(24, 14);
             this.labelControl15.TabIndex = 19;
@@ -1550,7 +1550,7 @@ namespace CameraViewer
             this.sbIRISAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sbIRISAdd.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.sbIRISAdd.Appearance.Options.UseFont = true;
-            this.sbIRISAdd.Location = new System.Drawing.Point(34, 196);
+            this.sbIRISAdd.Location = new System.Drawing.Point(34, 209);
             this.sbIRISAdd.Name = "sbIRISAdd";
             this.sbIRISAdd.Size = new System.Drawing.Size(23, 23);
             this.sbIRISAdd.TabIndex = 18;
@@ -1563,7 +1563,7 @@ namespace CameraViewer
             this.sbZoomSub.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sbZoomSub.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.sbZoomSub.Appearance.Options.UseFont = true;
-            this.sbZoomSub.Location = new System.Drawing.Point(117, 157);
+            this.sbZoomSub.Location = new System.Drawing.Point(117, 170);
             this.sbZoomSub.Name = "sbZoomSub";
             this.sbZoomSub.Size = new System.Drawing.Size(23, 23);
             this.sbZoomSub.TabIndex = 18;
@@ -1576,7 +1576,7 @@ namespace CameraViewer
             this.sbZoomAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sbZoomAdd.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.sbZoomAdd.Appearance.Options.UseFont = true;
-            this.sbZoomAdd.Location = new System.Drawing.Point(34, 157);
+            this.sbZoomAdd.Location = new System.Drawing.Point(34, 170);
             this.sbZoomAdd.Name = "sbZoomAdd";
             this.sbZoomAdd.Size = new System.Drawing.Size(23, 23);
             this.sbZoomAdd.TabIndex = 18;
@@ -1589,7 +1589,7 @@ namespace CameraViewer
             // 
             this.textEditPtzSpeed.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textEditPtzSpeed.EditValue = "40";
-            this.textEditPtzSpeed.Location = new System.Drawing.Point(91, 5);
+            this.textEditPtzSpeed.Location = new System.Drawing.Point(91, 18);
             this.textEditPtzSpeed.MenuManager = this.barManager1;
             this.textEditPtzSpeed.Name = "textEditPtzSpeed";
             this.textEditPtzSpeed.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -1601,7 +1601,7 @@ namespace CameraViewer
             // labelControl14
             // 
             this.labelControl14.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelControl14.Location = new System.Drawing.Point(35, 8);
+            this.labelControl14.Location = new System.Drawing.Point(35, 21);
             this.labelControl14.Name = "labelControl14";
             this.labelControl14.Size = new System.Drawing.Size(52, 14);
             this.labelControl14.TabIndex = 0;

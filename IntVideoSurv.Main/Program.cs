@@ -8,6 +8,8 @@ namespace CameraViewer
 {
     class Program
     {
+        public static bool FullScreen;
+
         [STAThread]
         static void Main()
         {
@@ -29,11 +31,13 @@ namespace CameraViewer
             var user = iniData[db]["UserName"];
             var pwd = iniData[db]["Password"];
 
+            FullScreen = iniData["UI"]["FullScreen"] == "1";
+
             System.Threading.Mutex instance = new System.Threading.Mutex(true, "ArresterSerialPort", out createdNew); //同步基元变量
             if (createdNew)
             {
-                
-               
+
+
                 var conn = DevExpress.Xpo.DB.OracleConnectionProvider.GetConnectionString(server, user, pwd);
                 DevExpress.Xpo.Session.DefaultSession.ConnectionString = conn;
 
