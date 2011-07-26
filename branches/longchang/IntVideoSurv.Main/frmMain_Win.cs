@@ -106,6 +106,12 @@ namespace CameraViewer
 
             InitializeComponent();
 
+            if (Program.FullScreen)
+            {
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+            }
+
             if (File.Exists(LayoutFile))
             {
                 this.dockManager1.RestoreFromXml(LayoutFile);
@@ -142,7 +148,7 @@ namespace CameraViewer
             var selectEvent = Observable.FromEventPattern<EventArgs<CameraWindow>>(
                 this.mainMultiplexer, "SelectCameraWindow");
 
-            var throttled = selectEvent.Throttle(TimeSpan.FromSeconds(2));
+            var throttled = selectEvent.Throttle(TimeSpan.FromMilliseconds(500));
 
             throttled.ObserveOn(this).Subscribe(e=>this.mainMultiplexer_SelectCameraWindow(e.EventArgs));
 
