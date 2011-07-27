@@ -723,7 +723,7 @@ namespace CameraViewer
                         camWindows[i, j].Camera.Close();
                         camWindows[i, j].Camera = null;
                     }
-                    camWindows[i, j].Refresh();
+                    //camWindows[i, j].Refresh();
                 }
             }
         }
@@ -734,7 +734,7 @@ namespace CameraViewer
             if ((row >= 0) && (col >= 0) && (row < MaxRows) && (col < MaxCols))
             {
                 camWindows[row, col].Camera = camera;
-                camWindows[row, col].Refresh();
+                //camWindows[row, col].Refresh();
                 return camWindows[row, col];
             }
             return null;
@@ -749,13 +749,13 @@ namespace CameraViewer
                     if ((camWindows[i, j].Camera!=null) && (camWindows[i, j].Camera.CurrentCamera.CameraId == camera.CurrentCamera.CameraId))
                     {
                         camWindows[i, j].Camera = null;
-                        camWindows[i, j].Refresh();
+                        //camWindows[i, j].Refresh();
                     }
                 }
             }
 
             cameraWindow.Camera = camera;
-            cameraWindow.Refresh();
+            //cameraWindow.Refresh();
             return cameraWindow;
         }
 

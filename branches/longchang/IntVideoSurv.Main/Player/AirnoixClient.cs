@@ -130,7 +130,13 @@ namespace CameraViewer.Player
             int iLen,
             ref int iFrameType);
 
-
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int MP4_ClientSetConnectTurnIP(
+            IntPtr hClient,
+            [In()] 
+            [MarshalAs(UnmanagedType.LPStr)]
+            string ipPort
+            );
 
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int MP4_ClientRegisterStreamCallBack(

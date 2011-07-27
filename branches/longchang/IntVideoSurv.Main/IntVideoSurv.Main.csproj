@@ -228,7 +228,7 @@
       <DependentUpon>CameraView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CameraWindow.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DeviceMaintain.cs">
       <SubType>UserControl</SubType>
