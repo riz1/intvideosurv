@@ -180,6 +180,11 @@ namespace CameraViewer.Player
             return 0;
         }
 
+        public void SetRelayHost(string ipPort)
+        {
+            AirnoixClient.MP4_ClientSetConnectTurnIP(_camHandle, ipPort);
+        }
+
         public void Dispose()
         {
             Dispose(true);
