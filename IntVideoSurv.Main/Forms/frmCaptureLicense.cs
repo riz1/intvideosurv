@@ -307,11 +307,19 @@ namespace CameraViewer.Forms
                                           {
                                               var guid = Guid.NewGuid().ToString();
                                               var res = AirnoixPlayer.Avdec_CapturePicture(_playerHandle, guid, "BMP");
-                                              if (File.Exists(guid))
+                                              if (File.Exists(guid) && res == 0)
                                               {
-                                                  var img = AForge.Imaging.Image.FromFile(guid);
-                                                  File.Delete(guid);
-                                                  return (Image)img;
+                                                  try
+                                                  {
+                                                      var img = AForge.Imaging.Image.FromFile(guid);
+                                                      File.Delete(guid);
+                                                      return (Image)img;
+                                                  }
+                                                  catch (Exception)
+                                                  {
+                                                      return null;
+                                                  }
+
                                               }
 
                                               return null;
@@ -438,6 +446,17 @@ namespace CameraViewer.Forms
                 return;
             }
 
+            if (lookUpEditLprType.EditValue == null)
+            {
+                MessageBox.Show("请选择车牌类型");
+                return;
+            }
+
+            if (punishReason.EditValue == null)
+            {
+                MessageBox.Show("请选择违法原因");
+                return;
+            }
 
             this.UseWaitCursor = true;
             Pause();
