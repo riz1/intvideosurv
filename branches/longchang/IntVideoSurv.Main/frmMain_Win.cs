@@ -81,12 +81,12 @@ namespace CameraViewer
         public MainForm()
         {
             string errMsg = "";
-            bool isExisted = DbExistedBusiness.Instance.IsExisted(ref errMsg);
-            if (!isExisted)
-            {
-                XtraMessageBox.Show("请确保数据库服务器已启动，且数据库连接参数正确!");
-                Process.GetCurrentProcess().Kill();
-            }
+            //bool isExisted = DbExistedBusiness.Instance.IsExisted(ref errMsg);
+            //if (!isExisted)
+            //{
+            //    XtraMessageBox.Show("请确保数据库服务器已启动，且数据库连接参数正确!");
+            //    Process.GetCurrentProcess().Kill();
+            //}
             //
 
 
@@ -3185,7 +3185,7 @@ namespace CameraViewer
             if (frmhcc.ShowDialog(this) == DialogResult.OK)
             {
                 UseWaitCursor = true;
-                var fchl = new frmHistoryCapture(frmhcc.ListSelectedCameras.Values);
+                var fchl = new frmHistoryCapture(frmhcc.ListSelectedCameraIds);
                 fchl.BeginTime = frmhcc.BeginTime;
                 fchl.EndTime = frmhcc.EndTime;
                 UseWaitCursor = false;
