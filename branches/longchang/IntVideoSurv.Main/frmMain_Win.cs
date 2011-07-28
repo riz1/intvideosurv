@@ -3127,8 +3127,13 @@ namespace CameraViewer
 
         private void timerForDeleteTempFiles_Tick(object sender, EventArgs e)
         {
-            DirectoryInfo Dir = new DirectoryInfo(Properties.Settings.Default.CapturePictureTempPath);
+            if (!Directory.Exists(Properties.Settings.Default.CapturePictureTempPath))
+            {
+                return;
+            }
 
+            DirectoryInfo Dir = new DirectoryInfo(Properties.Settings.Default.CapturePictureTempPath);
+            
             //删除临时的图片文件
             foreach (FileInfo fileInfo in Dir.GetFiles("*.bmp"))//查找文件
             {
