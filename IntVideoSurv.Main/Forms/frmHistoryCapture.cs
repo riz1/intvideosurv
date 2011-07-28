@@ -17,7 +17,8 @@ namespace CameraViewer.Forms
 {
     public partial class frmHistoryCapture : frmCaptureLicense
     {
-        private readonly IEnumerable<LongChang_CameraInfo> _selectedCameras;
+        private readonly IEnumerable<Model.TOG_DEVICE> _selectedCameraIps;
+        private readonly BindingList<HistroyVideoFile> _videoFiles = new BindingList<HistroyVideoFile>();
 
         public DateTime BeginTime { get; set; }
         public DateTime EndTime { get; set; }
@@ -28,10 +29,10 @@ namespace CameraViewer.Forms
             InitializeComponent();
         }
 
-        public frmHistoryCapture(IEnumerable<LongChang_CameraInfo> selectedCameras)
+        public frmHistoryCapture(IEnumerable<Model.TOG_DEVICE> selectedCameras)
             : this()
         {
-            _selectedCameras = selectedCameras;
+            _selectedCameraIps = selectedCameras;
         }
 
         protected override async void InitializeVideoList()
@@ -42,7 +43,7 @@ namespace CameraViewer.Forms
             gridView.OptionsView.ShowGroupPanel = false;
 
             var c1 = new GridColumn();
-            c1.FieldName = "Camera.Name";
+            c1.FieldName = "Camera.SBMC";
             c1.Caption = "摄像头名称";
             c1.Visible = true;
             c1.VisibleIndex = 0;
@@ -73,25 +74,28 @@ namespace CameraViewer.Forms
 
             if (!DesignMode)
             {
-                if (_selectedCameras != null)
+                if (_selectedCameraIps != null)
                 {
                     ShowBusyMessage("正在刷新录像列表...");
+                    grid.DataSource = _videoFiles;
 
-                    foreach (var camera in _selectedCameras)
+                    foreach (var camera in _selectedCameraIps)
                     {
                         RelatedHistroyVideoFile file = null;
 
-                        LongChang_CameraInfo camera1 = camera;
+                        var c = camera;
 
-                        await System.Threading.Tasks.TaskEx.Run( ()=>file = new RelatedHistroyVideoFile(camera1, 1, BeginTime, EndTime) );
+                        await System.Threading.Tasks.TaskEx.Run( ()=>file = new RelatedHistroyVideoFile(c, 1, BeginTime, EndTime) );
 
                         if (file != null)
                         {
-                            grid.DataSource = file.ListHistroyVideoFile;
+                            file.ListHistroyVideoFile.ForEach(v=>_videoFiles.Add(v));
                         }
 
-                        HideBusyMessage();
+                        
                     }
+
+                    HideBusyMessage();
                 }
             }
 
@@ -113,7 +117,7 @@ namespace CameraViewer.Forms
 
                     if (dataRow.Camera != null)
                     {
-                        var spec = Model.Repository.Instance.GetCamera(dataRow.Camera.CameraId.ToString());
+                        var spec = Model.Repository.Instance.GetCamera(dataRow.Camera.SBBH);
                         CameraSpec = spec;
                     }
 

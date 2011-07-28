@@ -12,10 +12,9 @@ namespace CameraViewer.Tools
     {
         public List<HistroyVideoFile> ListHistroyVideoFile = new List<HistroyVideoFile>();
         public static int fps = 25;
-        public RelatedHistroyVideoFile(LongChang_CameraInfo cameraInfo,int channel,DateTime beginTime, DateTime endTime)
+        public RelatedHistroyVideoFile(Model.TOG_DEVICE camera,int channel,DateTime beginTime, DateTime endTime)
         {
             ArrayList PathList= new ArrayList();
-            string Ip = cameraInfo.IP;
             ListHistroyVideoFile.Clear();
             PathList.Clear();
             
@@ -37,7 +36,7 @@ namespace CameraViewer.Tools
                 DirectoryInfo Dir = new DirectoryInfo(path);
                 foreach(DirectoryInfo d in Dir.GetDirectories()) //查找子目录
                 {
-                    if (d.FullName.Contains(Ip))
+                    if (d.FullName.Contains(camera.SBIP))
                     {
                         IPPath.Add(d.FullName);
                     }
@@ -113,7 +112,7 @@ namespace CameraViewer.Tools
             foreach (var listVideoFile in listVideoFiles)
             {
                 HistroyVideoFile histroyVideoFile= new HistroyVideoFile();
-                histroyVideoFile.Camera = cameraInfo;
+                histroyVideoFile.Camera = camera;
                 histroyVideoFile.CaptureTime = listVideoFile.CreationTime;
                 histroyVideoFile.FileName = listVideoFile.FullName;
                 ListHistroyVideoFile.Add(histroyVideoFile);

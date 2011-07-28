@@ -41,20 +41,11 @@ namespace CameraViewer.Forms
             InitDataTable();
             dataTableHistroyFile.Rows.Clear();
             int i = 1;
-            foreach (var camera in frmhcc.ListSelectedCameras)
+            foreach (var camera in frmhcc.ListSelectedCameraIds)
             {
-                RelatedHistroyVideoFile relatedHistroyVideoFile = new RelatedHistroyVideoFile(camera.Value,1,frmhcc.BeginTime,frmhcc.EndTime);
+                RelatedHistroyVideoFile relatedHistroyVideoFile = new RelatedHistroyVideoFile(camera,1,frmhcc.BeginTime,frmhcc.EndTime);
                 
-                //加入到摄像头文件列表
-                foreach (var histroyVideoFile in relatedHistroyVideoFile.ListHistroyVideoFile)
-                {
-                    dataTableHistroyFile.Rows.Add(i++,
-                                                  camera.Value.Name,
-                                                  histroyVideoFile.CaptureTime,
-                                                  histroyVideoFile.FileName,
-                                                  camera.Value
-                        );
-                }
+               
             }
 
             gridControl1.DataSource = dataTableHistroyFile;

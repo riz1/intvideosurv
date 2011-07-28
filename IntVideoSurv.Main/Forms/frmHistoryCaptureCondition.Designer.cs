@@ -37,9 +37,11 @@
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.sbOK = new DevExpress.XtraEditors.SimpleButton();
             this.sbCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.xpCollection1 = new DevExpress.Xpo.XPCollection();
             ((System.ComponentModel.ISupportInitialize)(this.teStartTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ccbeCameras.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xpCollection1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl11
@@ -84,11 +86,14 @@
             // 
             // ccbeCameras
             // 
-            this.ccbeCameras.EditValue = "请选择摄像头";
+            this.ccbeCameras.EditValue = "";
             this.ccbeCameras.Location = new System.Drawing.Point(108, 14);
             this.ccbeCameras.Name = "ccbeCameras";
             this.ccbeCameras.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.ccbeCameras.Properties.DataSource = this.xpCollection1;
+            this.ccbeCameras.Properties.DisplayMember = "SBMC";
+            this.ccbeCameras.Properties.ValueMember = "This";
             this.ccbeCameras.Size = new System.Drawing.Size(145, 21);
             this.ccbeCameras.TabIndex = 42;
             // 
@@ -118,6 +123,11 @@
             this.sbCancel.TabIndex = 48;
             this.sbCancel.Text = "取消";
             // 
+            // xpCollection1
+            // 
+            this.xpCollection1.CriteriaString = "[SBLX] = \'1\' Or [SBLX] = \'2\'";
+            this.xpCollection1.ObjectType = typeof(CameraViewer.Model.TOG_DEVICE);
+            // 
             // frmHistoryCaptureCondition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -138,6 +148,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.teStartTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ccbeCameras.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xpCollection1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,5 +164,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl13;
         private DevExpress.XtraEditors.SimpleButton sbOK;
         private DevExpress.XtraEditors.SimpleButton sbCancel;
+        private DevExpress.Xpo.XPCollection xpCollection1;
     }
 }

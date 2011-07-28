@@ -8,7 +8,7 @@ namespace CameraViewer.Tools
 {
     public class HistroyVideoFile
     {
-        public LongChang_CameraInfo Camera { set; get; }
+        public Model.TOG_DEVICE Camera { set; get; }
         public DateTime CaptureTime { set; get; }
         public string FileName { set; get; }
     }

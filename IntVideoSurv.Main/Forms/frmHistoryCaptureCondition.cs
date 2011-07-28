@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CameraViewer.Model;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using IntVideoSurv.Business;
@@ -22,22 +24,13 @@ namespace CameraViewer.Forms
             teStartTime.EditValue = now.AddHours(-2);
             teEndTime.EditValue = now;
             string errMsg = "";
-            Dictionary<int, LongChang_CameraInfo> allCameras = LongChang_CameraBusiness.Instance.GetCamInfoByDeviceUserId(ref errMsg, MainForm.CurrentUser.UserId);
-            foreach (var VARIABLE in allCameras)
-            {
-                ccbeCameras.Properties.Items.Add(VARIABLE.Value.Name);
-                _listCamerasByName.Add(VARIABLE.Value.Name, VARIABLE.Value);
-            }
-            if (allCameras.Count>0)
-            {
-                ccbeCameras.Properties.Items[0].CheckState = CheckedListBoxItem.GetCheckState(true);
-            }
+           
         }
 
         private Dictionary<string,LongChang_CameraInfo> _listCamerasByName = new Dictionary<string, LongChang_CameraInfo>();
         public DateTime BeginTime;
         public DateTime EndTime;
-        public Dictionary<int, LongChang_CameraInfo> ListSelectedCameras = new Dictionary<int, LongChang_CameraInfo>();
+        public List<Model.TOG_DEVICE> ListSelectedCameraIds = new List<TOG_DEVICE>();
         public int flag;
         private void sbOK_Click(object sender, EventArgs e)
         {
@@ -58,20 +51,10 @@ namespace CameraViewer.Forms
             }
             BeginTime = teStartTime.Time;
             EndTime = teEndTime.Time;
-            string[] cameras = ccbeCameras.Text.Split(',');
-            ListSelectedCameras.Clear();
-            foreach (var camera in cameras)
-            {
-                foreach (var VARIABLE in _listCamerasByName)
-                {
-                    if (camera.Trim() == VARIABLE.Key)
-                    {
-                        ListSelectedCameras.Add(VARIABLE.Value.CameraId,VARIABLE.Value);
-                        break;
-                    }
-                }
-            }
+            var cameraIds = ccbeCameras.Properties.Items.GetCheckedValues();
 
+            ListSelectedCameraIds = cameraIds.OfType<Model.TOG_DEVICE>().ToList();
+           
             DialogResult = DialogResult.OK;
         }
     }
