@@ -652,7 +652,11 @@ namespace CameraViewer
             MakeLongChangInterface();
             _listAllLongChang_Cam = Model.Repository.Instance.GetTogCameras().ToList();
             barStaticItemCameraNo.Caption = _listAllLongChang_Cam.Count.ToString();
+
+
             LoadAllCameraInLongChang();
+
+
 
             //******************************隆昌************************//
 
@@ -919,6 +923,14 @@ namespace CameraViewer
                 treeListNode.Tag = device;
             }
 
+            if (Program.AutoConnectCameras)
+            {
+                ConnectToCameras();
+            }
+        }
+
+        private void ConnectToCameras()
+        {
             int iRow = Properties.Settings.Default.Rows;
             int iCol = Properties.Settings.Default.Cols;
             int iCount = 0;
@@ -933,8 +945,8 @@ namespace CameraViewer
 
             foreach (var device in _listAllLongChang_Cam)
             {
-                int i = iCount / iRow;
-                int j = iCount % iCol;
+                int i = iCount/iRow;
+                int j = iCount%iCol;
                 CameraWindow cameraWindow = mainMultiplexer.GetCameraWindow(i, j);
                 AirnoixCamera airnoixCameraNew;
                 //开始连接摄像头

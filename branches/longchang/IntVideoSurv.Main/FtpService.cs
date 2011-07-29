@@ -18,6 +18,9 @@ namespace CameraViewer
 
         public async Task UploadImageAsync(Image image, string destination)
         {
+            if (image == null) throw new ArgumentNullException("image");
+
+
             using (var stream = new MemoryStream())
             {
                 image.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -37,7 +40,7 @@ namespace CameraViewer
             }
         }
 
-        private  Task UploadStreamAsync(Stream sourceStream, string relativePath)
+        private Task UploadStreamAsync(Stream sourceStream, string relativePath)
         {
             return TaskEx.Run(() =>
                            {
