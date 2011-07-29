@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reactive.Linq;
 using System.Threading;
@@ -12,6 +13,7 @@ using System.Windows.Forms;
 using CameraViewer.Player;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using IntVideoSurv.Entity;
 //using IntVideoSurv.Business;
@@ -28,7 +30,8 @@ namespace CameraViewer.Forms
 
         private IList<HistroyVideoFile> _videoFiles = new BindingList<HistroyVideoFile>();
         private string _videoFilePath;
-
+        private IDisposable _observer;
+        private Tuple<Image, string>[] _imagesToUpload; 
 
         private Model.Camera _cameraSpec;
         public Model.Camera CameraSpec
@@ -258,30 +261,35 @@ namespace CameraViewer.Forms
         private double frameInterval = 1;
         private void simpleButtonPrevious_Click(object sender, EventArgs e)
         {
+            if (_observer != null)
+            {
+                _observer.Dispose();
+                _observer = null;
+            }
+
             if (sender == simpleButtonPrevious)
             {
-                CaptureImages(treeListPicturesBefore);
+                _observer = CaptureImages(treeListPicturesBefore);
                 return;
             }
 
             if (sender == simpleButtonCurrent)
             {
-                CaptureImages(treeListPicturesCurrent);
+                _observer = CaptureImages(treeListPicturesCurrent);
                 return;
             }
 
             if (sender == simpleButtonLast)
             {
-                CaptureImages(treeListPicturesAfter);
+                _observer = CaptureImages(treeListPicturesAfter);
                 return;
             }
         }
 
-        private void CaptureImages(DevExpress.XtraTreeList.TreeList treeList)
+        private IDisposable CaptureImages(DevExpress.XtraTreeList.TreeList treeList)
         {
             try
             {
-
                 frameInterval = double.Parse(cbeFrameInterval.Text);
                 treeList.Nodes.Clear();
                 var node = treeList.AppendNode(new object[]
@@ -289,43 +297,37 @@ namespace CameraViewer.Forms
                                                        null,null,null,null,null
                                                    }, -1);
 
-                var images = GetImages(frameInterval);
+                var timer = GetTimer(frameInterval);
                 int count = 0;
-                images.ObserveOn(this).Subscribe(bmp => { node[count++] = bmp; });
+                return timer.ObserveOn(this).Subscribe(t =>
+                                                           {
+                                                               var guid = Guid.NewGuid().ToString();
+                                                               var res = AirnoixPlayer.Avdec_CapturePicture(_playerHandle, guid, "JPEG");
+                                                               if (File.Exists(guid) && res == 0)
+                                                               {
+                                                                   try
+                                                                   {
+                                                                       var img = AForge.Imaging.Image.FromFile(guid);
+                                                                       File.Delete(guid);
+                                                                       node[count++] = img;
+                                                                   }
+                                                                   catch (Exception)
+                                                                   {
+                                                                   }
+                                                               }
+                                                           });
             }
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return;
+                return null;
             }
         }
 
-        private IObservable<Image> GetImages(double interval)
+        private IObservable<long> GetTimer(double interval)
         {
             var timer = Observable.Interval(TimeSpan.FromSeconds(interval), System.Reactive.Concurrency.Scheduler.ThreadPool).Take(5);
-            var images = timer.Select(t =>
-                                          {
-                                              var guid = Guid.NewGuid().ToString();
-                                              var res = AirnoixPlayer.Avdec_CapturePicture(_playerHandle, guid, "BMP");
-                                              if (File.Exists(guid) && res == 0)
-                                              {
-                                                  try
-                                                  {
-                                                      var img = AForge.Imaging.Image.FromFile(guid);
-                                                      File.Delete(guid);
-                                                      return (Image)img;
-                                                  }
-                                                  catch (Exception)
-                                                  {
-                                                      return null;
-                                                  }
-
-                                              }
-
-                                              return null;
-                                          }).SkipWhile(i => i == null);
-
-            return images;
+            return timer;
         }
 
         private void treeListPicturesCurrent_MouseClick(object sender, MouseEventArgs e)
@@ -429,12 +431,13 @@ namespace CameraViewer.Forms
         private string errMessage = "";
         private async void buttonSave_Click(object sender, EventArgs e)
         {
-
-            if (treeListPicturesBefore.FocusedNode == null || treeListPicturesCurrent.FocusedNode == null || treeListPicturesAfter.FocusedNode == null)
+            _imagesToUpload = GetImageArray();
+            if (HasNullValue(_imagesToUpload))
             {
                 XtraMessageBox.Show("三张照片未完全生成!");
                 return;
             }
+
             if (textEditPlateNumber.Text.Length < 7)
             {
                 XtraMessageBox.Show("录入的车牌号不正确!");
@@ -464,7 +467,7 @@ namespace CameraViewer.Forms
             try
             {
                 ShowBusyMessage("正在保存记录...");
-                await UploadImages();
+                await UploadImages(_imagesToUpload);
                 SaveCaptureRecord();
                 MessageBox.Show(this, "保存成功。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
@@ -481,9 +484,13 @@ namespace CameraViewer.Forms
             }
         }
 
-        private async Task UploadImages()
+        private bool HasNullValue(IEnumerable<Tuple<Image, string>> imagesToUpload)
         {
-            var images = GetImageArray();
+            return imagesToUpload.Any(tuple => tuple.Item1 == null);
+        }
+
+        private async Task UploadImages(IEnumerable<Tuple<Image, string>> images)
+        {
             await UploadImagesAsync(images);
             //image1 = AddTextInImage(image1, vehmon.tollName, 18, Color.White, 8, 46);
             //image2 = AddTextInImage(image2, vehmon.tollName, 18, Color.White, 8, 46);
@@ -492,7 +499,6 @@ namespace CameraViewer.Forms
 
         private void SaveCaptureRecord()
         {
-            var images = GetImageArray();
             var record = new Model.TogVehmon();
             //地点信息
             record.KKBH = CameraSpec.KaKouNo;
@@ -512,19 +518,29 @@ namespace CameraViewer.Forms
             record.HPZL = lprType.HPZLDM;
             record.HPZLMC = lprType.HPMC;
             //图片
-            record.TXMC1 = Path.GetFileName(images[0].Item2);
-            record.TXMC2 = Path.GetFileName(images[1].Item2);
-            record.TXMC3 = Path.GetFileName(images[2].Item2);
+            record.TXMC1 = Path.GetFileName(_imagesToUpload[0].Item2);
+            record.TXMC2 = Path.GetFileName(_imagesToUpload[1].Item2);
+            record.TXMC3 = Path.GetFileName(_imagesToUpload[2].Item2);
 
             record.Save();
+        }
+
+        private Image GetSelectedImage(TreeList treeList)
+        {
+            if (treeList.FocusedNode == null)
+            {
+                return null;
+            }
+
+            return treeList.FocusedNode[treeList.FocusedColumn] as Image;
         }
 
         private Tuple<Image, string>[] GetImageArray()
         {
             //图片
-            var image1 = treeListPicturesBefore.FocusedNode.GetValue(0) as Image;
-            var image2 = treeListPicturesCurrent.FocusedNode.GetValue(0) as Image;
-            var image3 = treeListPicturesAfter.FocusedNode.GetValue(0) as Image;
+            var image1 = GetSelectedImage(treeListPicturesBefore);
+            var image2 = GetSelectedImage(treeListPicturesCurrent);
+            var image3 = GetSelectedImage(treeListPicturesAfter);
             var image1Path = GetRelativeImagePath(CaptureTime, _cameraSpec, 1);
             var image2Path = GetRelativeImagePath(CaptureTime, _cameraSpec, 2);
             var image3Path = GetRelativeImagePath(CaptureTime, _cameraSpec, 3);
